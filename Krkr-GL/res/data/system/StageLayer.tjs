@@ -1,0 +1,77 @@
+
+class StageLayer extends KAGLayer
+{
+	var base;
+	var layers=[];
+	var messages=[];
+	var mirroredLayer;//镜像图层
+	var current;
+
+	function StageLayer (win,par)
+	{
+		super.KAGLayer(...);
+		enabled = true;
+		setSizeToParentSize(1,1);
+		base = new GraphicLayer(win,this);
+		base.enabled = true;
+	}
+
+	function getLayer (index)
+	{
+		if (index >= layers.count) {
+			var count = index+1 - layers.count;
+			for (var i = 0; i < count; i++) 
+			{
+				dm("create layer");
+				var lay = new GraphicLayer(window,base);
+				layers.add(lay);
+				lay.absolute = index*1000;
+				lay.visible = false;
+			};
+		};
+		return layers[index];
+	}
+
+	function getMessage (index) 
+	{
+		if (index >= messages.count) {
+			var count = index+1 - messages.count;
+			for (var i = 0; i < count; i++) 
+			{
+				dm("create message");
+				var lay = new MessageLayer(window,base);
+				messages.add(lay);
+				lay.absolute = index*1000 + 1000000;
+				lay.visible = false;
+			};
+		};
+		return messages[index];
+	}
+
+	function assign (src) 
+	{
+		if(src.class != "StageLayer")
+		{
+			throw new Exception("StageLayer只能复制StageLayer");
+		}
+		super.assign(src);
+		// for (var i = children.count - 1; i >= 0; i--) {
+		// 	invalidate children[i];
+		// };
+		children.clear();
+		messages.clear();
+		layers.clear();
+		base = new GraphicLayer(window,this);
+		base.assign(src.base);
+		for (var i = 0; i < src.layers.count; i++) {
+			var tsrc = src.layers[i];
+			var lay = cloneObject(tsrc,base);
+			layers.add(lay);
+		};
+		for (var i = 0; i < src.messages.count; i++) {
+			var tsrc = src.messages[i];
+			var lay = cloneObject(tsrc,base);
+			messages.add(lay);
+		};
+	}
+}

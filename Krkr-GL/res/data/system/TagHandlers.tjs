@@ -1,0 +1,156 @@
+
+with(kag.tagHandlers)
+{
+	.backlay = function (elm) {
+		back.assign(fore);
+		back.visible=false;
+	} incontextof kag;
+
+	.call = function (elm) {
+		kagController.callLabel(elm.storage,elm.target);
+		return -1;
+	} incontextof kag;
+	
+	.ch = function  (elm) {
+		if(elm.text != "" && elm.text != void)
+		{
+			waitStatus = 1;
+			var time = current.pushText(elm.text);
+			return time;
+		}
+	} incontextof kag;
+
+	.cm = function (elm) 
+	{
+		current.clearAll();
+	} incontextof kag;
+
+	.current = function (elm) 
+	{
+		if(isLinking)
+		{
+			throw new Exception("Link中无法使用Current指令");
+		}
+		else
+		{
+			setCurrentMessageLayer(elm);
+		}
+	} incontextof kag;
+
+	.endlink = function (elm)
+	{
+		current.endLink();
+		isLinking = false;
+	} incontextof kag;
+
+	.endmacro = function (elm)
+	{
+		return kagController.returnMacro();
+	} incontextof kag;
+
+	.endscript = function(elm)
+	{
+		//不需要做任何事情
+	} incontextof kag;
+
+	.er = function (elm) 
+	{
+		current.clear();
+	} incontextof kag;
+
+	.eval = function  (elm) {
+		if (elm.exp !== void && elm.exp != "") 
+		{
+			Scripts.eval(elm.exp);
+		}
+	} incontextof kag;
+
+	.image = function(elm)
+	{
+		var lay = getLayerFromElm(elm);
+		lay.loadImages(elm.storage);
+        lay.visible = elm.visible === void ? true : elm.visible;
+		lay.setPos(elm.left,elm.top) if (elm.left !== void || elm.top !== void);
+		lay.absolute = elm.index if elm.index !== void;
+	} incontextof kag;
+
+	.iscript = function(elm)
+	{
+		Scripts.exec(elm.exp);
+	} incontextof kag;
+
+	.jump = function (elm)
+	{
+		process(elm.storage,elm.target);
+		return -1;
+	} incontextof kag;
+
+	.laycount = function (elm) {
+		if (elm.layer !== void) {
+			fore.getLayer(elm.layer);
+			back.getLayer(elm.layer);
+		}
+		if (elm.message !== void) {
+			fore.getMessage(elm.layer);
+			back.getMessage(elm.layer);
+		}
+	} incontextof kag;
+
+	.layopt = function (elm) 
+	{
+		var lay = getLayerFromElm(elm);
+		lay.left = elm.left if elm.left !== void;
+		lay.top = elm.top if elm.top !== void;
+		lay.visible = elm.visible if elm.visible !== void;
+		lay.absolute = elm.index if elm.index !== void;
+	} incontextof kag;
+
+	.link = function  (elm) 
+	{
+		if(isLinking)
+		{
+			throw new Exception("无法进行重复的link");
+		}
+		else
+		{
+			isLinking = true;
+			current.beginLink(elm);
+		}
+	} incontextof kag;
+
+	.position = function  (elm) 
+	{
+		var lay = getMessageLayerObjectFromElm(elm);
+		lay.setPosition(elm);
+	} incontextof kag;
+
+	.r = function (elm) 
+	{
+		current.changeLine();
+	} incontextof kag;
+
+	.s = function  (elm)
+	{
+		waitClick(0);
+		return -2;
+	} incontextof kag;
+
+	.trans = function  (elm) {
+		this.beginTransition(elm.method,elm.time);
+	} incontextof kag;
+
+	.wait = function (elm) {
+		if(skipByClick)
+		{
+			return 0;
+		}
+		else
+		{
+			waitStatus = 5;
+			return elm.time;
+		}
+	} incontextof kag;
+
+}
+
+

@@ -1,0 +1,31 @@
+class AsyncTrigger extends COM
+{
+	var _handler;
+	var _object;
+	var _elm;
+	function AsyncTrigger(handler,obj,elm)
+	{
+		super.COM();
+		name = 'AsyncTrigger';
+		triggerType = global.COM.TRIGGER_UPDATE;
+		_handler = handler;
+		_object = obj;
+		_elm = elm;
+	}
+	function finalize()
+	{
+		_handler=void;
+		_object=void;
+		_elm=void;
+		super.finalize();
+	}
+
+	function trigger()
+	{
+		if(_object)
+			_handler(_elm) incontextof _object;
+		else
+			_handler(_elm);
+		invalidate this;
+	}
+}

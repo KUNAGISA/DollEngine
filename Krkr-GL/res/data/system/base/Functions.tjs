@@ -1,0 +1,29 @@
+
+function setCOM (object, comName) 
+{
+	if(typeof(global[comName]) != "undefined")
+	{
+		var com = new global[comName]();
+		object[comName] = com;
+		com.object = object;
+	}
+}
+
+function dm (arg*) 
+{
+	var str;
+	for (var i = 0; i < arg.count; i++) {
+		str += string(arg[i]);
+		if(i != arg.count-1)
+			str += '\t';
+	};
+	print(str);
+}
+
+function cloneObject(src,parent) 
+{
+	var lay = new global[src.class](src.window,parent);
+	lay.assign(src);
+	return lay;
+}
+
