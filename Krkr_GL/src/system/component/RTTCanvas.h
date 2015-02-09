@@ -30,9 +30,11 @@ public:
     PROPERTY(float, Opacity, m_opacity){m_opacity=fminf(1,fmaxf(0,v));}
     PROPERTY(SpriteFrame*, SpriteFrame, m_spriteFrame){m_spriteFrame=v;}
     PROPERTY(bool, SizeChanged, m_sizeChanged){m_sizeChanged=v;}
+    PROPERTY(bool, IsCrossFade, m_isCrossFade);
 protected:
     GLuint m_FBO;
     GLint m_lastFBO;
+    ShaderProgram* m_lastProgram;
 };
 
 #endif /* defined(__Krkr_GL__RTTCanvas__) */

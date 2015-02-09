@@ -10,3 +10,9 @@ COM.TRIGGER_NETWORK = 6;
 
 //图像缓存限制
 var gcsAuto=128;
+
+
+//动作枚举
+var ACTION_UNKNOW = 0;//未知
+var ACTION_FADETO = 2;//渐变
+var TRANS_CROSSFADE = 100;//trans渐变

@@ -94,4 +94,6 @@ type get##func(){return value;}
 #define PI 3.14159265358979323846264338327950288
 #define DEFFONT L"WenQuanYi Micro Hei"
 
+#define STRING(x) #x
+
 #endif

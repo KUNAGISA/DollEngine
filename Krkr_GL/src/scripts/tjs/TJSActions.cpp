@@ -37,9 +37,20 @@ tTJSNC_Actions::tTJSNC_Actions() : inherited(TJS_W("Actions"))
                 break;
             case 2: //ACTION_FADETO
             {
-                float time = numparams > 2 ? (*param[2]).AsReal() : 0;
+                float time = numparams > 2 ? (*param[2]).AsReal()/1000 : 0;
                 float opt = numparams > 3 ? (*param[3]).AsReal() : 255;
-                ActionManager::GetInstance()->fadeTo(obj, time, opt);
+                ActionManager::GetInstance()->fadeTo(obj, time, opt,[obj](){
+                    obj->postMsg(obj->m_tjsObject, TJS_W("ACTION_FADETO_END"), TJS::tTJSVariant());
+                });
+            }
+                break;
+            case 100://TRANS_CROSSFADE
+            {
+                float time = numparams > 2 ? (*param[2]).AsReal()/1000 : 0;
+                float opt = numparams > 3 ? (*param[3]).AsReal() : 255;
+                ActionManager::GetInstance()->fadeTo(obj, time, opt,[obj](){
+                    obj->postMsg(obj->m_tjsObject, TJS_W("TRANS_CROSSFADE_END"), TJS::tTJSVariant());
+                });
             }
                 break;
             default:

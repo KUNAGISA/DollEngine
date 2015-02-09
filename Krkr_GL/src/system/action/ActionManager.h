@@ -10,7 +10,7 @@
 #define __Krkr_GL__ActionManager__
 
 #include "COM.h"
-#include "Action.h"
+#include "ActionBase.h"
 
 class ActionManager: public COM
 {
@@ -20,15 +20,15 @@ public:
     ~ActionManager();
     void trigger();
     
-    void addAction(Action* action);
-    void removeAction(Action* action);
+    void addAction(ActionBase* action);
+    void removeAction(ActionBase* action);
     
     
 public:
     void moveTo(Object* target, float time, float x, float y);
-    void fadeTo(Object* target, float time, float opt);
+    void fadeTo(Object* target, float time, float opt,function<void()> callback);
 protected:
-    set<Action*> m_allActions;
+    set<ActionBase*> m_allActions;
 };
 
 #endif /* defined(__Krkr_GL__ActionManager__) */

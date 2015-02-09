@@ -11,23 +11,25 @@
 ;@call storage=macro.ks target=*loadfiles
 ;欢迎来到KrkrGL的世界[r]
 ;[backlay]
-[image layer=0 storage="logo" visible=true]
+;[image layer=0 storage="logo" page=fore visible=true]
+;[image layer=0 storage="bg1" page=back visible=true]
+;[trans method=crossfade time=1000]
 [iscript]
-// Actions.run(kag.fore.layers[0],2,1,0)
-// Actions.run(cp,2,1,0)
-var cp = new Object();
-cp.parent = kag.fore.base;
-var rtt = new RTTCanvas();
-cp.rtt = rtt;
-rtt.width = kag.innerWidth;
-rtt.height = kag.innerHeight;
-rtt.object = cp;
-cp.rtt.render(kag.fore.layers[0],0,0);
-cp.onPaint = function () 
-{
-	rtt.trigger();
-} incontextof cp;
-kag.fore.layers[0].visible = false;
+// // Actions.run(kag.fore.layers[0],2,1,0)
+// // Actions.run(cp,2,1,0)
+// var cp = new Object();
+// cp.parent = kag.fore.base;
+// var rtt = new RTTCanvas();
+// cp.rtt = rtt;
+// rtt.width = kag.innerWidth;
+// rtt.height = kag.innerHeight;
+// rtt.object = cp;
+// cp.rtt.render(kag.fore.layers[0],0,0);
+// cp.onPaint = function () 
+// {
+// 	rtt.trigger();
+// } incontextof cp;
+// kag.fore.layers[0].visible = false;
 [endscript]
 
-;@jump storage=menus.ks
+@jump storage=menus.ks

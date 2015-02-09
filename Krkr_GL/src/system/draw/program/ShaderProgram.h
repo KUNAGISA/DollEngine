@@ -29,7 +29,8 @@ public:
 
     enum PROGRAM_TYPE
     {
-        PROGRAM_TYPE_DEFAULT=0
+        PROGRAM_TYPE_DEFAULT=0, //正常的混合模式
+        PROGRAM_TYPE_CROSSFADE=1, //trans中使用的crossfade模式
     };
 public:
     ShaderProgram();

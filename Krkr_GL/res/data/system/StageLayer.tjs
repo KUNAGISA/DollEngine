@@ -74,4 +74,12 @@ class StageLayer extends KAGLayer
 			messages.add(lay);
 		};
 	}
+
+	function onMsgReceive(elm)
+	{
+		if (elm.name == "TRANS_CROSSFADE_END")
+		{
+			window.onTransitionFinished();
+		}
+	}
 }

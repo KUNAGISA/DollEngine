@@ -19,15 +19,34 @@ RTTCanvas::RTTCanvas()
 ,m_program(null)
 ,m_FBO(0)
 ,m_lastFBO(0)
+,m_isCrossFade(false)
 {
     setComName(L"RTTCanvas");
     m_program = PaintEngine::GetInstance()->getDefaultProgram();
+    m_lastProgram = m_program;
     setEnabled(true);
 }
 
 RTTCanvas::~RTTCanvas()
 {
     SAFF_RELEASE(m_spriteFrame);
+}
+
+void RTTCanvas::setIsCrossFade(bool v)
+{
+    if (m_isCrossFade != v)
+    {
+        m_isCrossFade = v;
+        //        if (v)
+        //        {
+        //            m_lastProgram = m_program;
+        //            m_program = PaintEngine::GetInstance()->getProgram(ShaderProgram::PROGRAM_TYPE_CROSSFADE);
+        //        }
+        //        else
+        //        {
+        //            m_program = m_lastProgram;
+        //        }
+    }
 }
 
 void RTTCanvas::render(Object *orginNode, float x, float y)

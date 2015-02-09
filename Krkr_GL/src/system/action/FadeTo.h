@@ -9,9 +9,9 @@
 #ifndef __Krkr_GL__FadeTo__
 #define __Krkr_GL__FadeTo__
 
-#include "Action.h"
+#include "ActionBase.h"
 
-class FadeTo: public Action
+class FadeTo: public ActionBase
 {
 public:
     virtual void update();

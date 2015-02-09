@@ -10,7 +10,7 @@
 #include "Krkr_GL.h"
 #include "TouchEvent.h"
 #include "COMManager.h"
-#include "Action.h"
+#include "ActionBase.h"
 #include "ActionManager.h"
 #include "FadeTo.h"
 
@@ -161,13 +161,13 @@ void Object::visit()
     }
 }
 
-void Object::addAction(Action* act)
+void Object::addAction(ActionBase* act)
 {
     act->setTarget(this);
     m_actions.insert(act);
 }
 
-void Object::removeAction(Action* act)
+void Object::removeAction(ActionBase* act)
 {
     act->setTarget(null);
     m_actions.erase(act);

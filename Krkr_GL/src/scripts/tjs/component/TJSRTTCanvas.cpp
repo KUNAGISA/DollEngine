@@ -22,4 +22,5 @@ NCB_REGISTER_CLASS_DIFFER(RTTCanvas, TJSRTTCanvas)
     NCB_PROPERTY(opacity, getOpacity, setOpacity);
     NCB_PROPERTY(width, getWidth, setWidth);
     NCB_PROPERTY(height, getHeight, setHeight);
+    NCB_PROPERTY(isCrossFade, getIsCrossFade, setIsCrossFade);
 };

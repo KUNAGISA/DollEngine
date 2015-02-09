@@ -12,7 +12,7 @@
 		B81E6AB51A6150900046E7E0 /* RTTCanvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B81E6AB31A6150900046E7E0 /* RTTCanvas.cpp */; };
 		B81E6AB91A6410200046E7E0 /* TJSRTTCanvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B81E6AB71A6410200046E7E0 /* TJSRTTCanvas.cpp */; };
 		B81E6ABD1A6AAE370046E7E0 /* ActionManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B81E6ABB1A6AAE370046E7E0 /* ActionManager.cpp */; };
-		B81E6AC01A6AB0010046E7E0 /* Action.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B81E6ABE1A6AB0010046E7E0 /* Action.cpp */; };
+		B81E6AC01A6AB0010046E7E0 /* ActionBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B81E6ABE1A6AB0010046E7E0 /* ActionBase.cpp */; };
 		B81E6AC31A6BF9EA0046E7E0 /* FadeTo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B81E6AC11A6BF9EA0046E7E0 /* FadeTo.cpp */; };
 		B81FA1491A342A5B0036E68A /* Window_MAC.mm in Sources */ = {isa = PBXBuildFile; fileRef = B81FA1481A342A5B0036E68A /* Window_MAC.mm */; };
 		B81FA14D1A342B830036E68A /* WindowDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = B81FA14C1A342B830036E68A /* WindowDelegate.mm */; };
@@ -271,8 +271,8 @@
 		B81E6AB81A6410200046E7E0 /* TJSRTTCanvas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TJSRTTCanvas.h; sourceTree = "<group>"; };
 		B81E6ABB1A6AAE370046E7E0 /* ActionManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ActionManager.cpp; sourceTree = "<group>"; };
 		B81E6ABC1A6AAE370046E7E0 /* ActionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionManager.h; sourceTree = "<group>"; };
-		B81E6ABE1A6AB0010046E7E0 /* Action.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Action.cpp; sourceTree = "<group>"; };
-		B81E6ABF1A6AB0010046E7E0 /* Action.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Action.h; sourceTree = "<group>"; };
+		B81E6ABE1A6AB0010046E7E0 /* ActionBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ActionBase.cpp; sourceTree = "<group>"; };
+		B81E6ABF1A6AB0010046E7E0 /* ActionBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionBase.h; sourceTree = "<group>"; };
 		B81E6AC11A6BF9EA0046E7E0 /* FadeTo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FadeTo.cpp; sourceTree = "<group>"; };
 		B81E6AC21A6BF9EA0046E7E0 /* FadeTo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FadeTo.h; sourceTree = "<group>"; };
 		B81FA1481A342A5B0036E68A /* Window_MAC.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Window_MAC.mm; sourceTree = "<group>"; };
@@ -298,7 +298,7 @@
 		B868191C1A334D6D00BA26C6 /* Functions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Functions.cpp; sourceTree = "<group>"; };
 		B868191F1A334D7200BA26C6 /* Functions_APPLE.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Functions_APPLE.mm; sourceTree = "<group>"; };
 		B86819231A334D7200BA26C6 /* Functions_MAC.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Functions_MAC.mm; sourceTree = "<group>"; };
-		B8729C001A29A26100B6EDEC /* Krkr_GL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Krkr_GL.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B8729C001A29A26100B6EDEC /* Krkr_GL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Krkr_GL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8729E2C1A29A37100B6EDEC /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		B8729E311A29A41F00B6EDEC /* ccGLStateCache.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ccGLStateCache.cpp; sourceTree = "<group>"; };
 		B8729E321A29A41F00B6EDEC /* ccGLStateCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ccGLStateCache.h; sourceTree = "<group>"; };
@@ -744,8 +744,8 @@
 			children = (
 				B81E6ABB1A6AAE370046E7E0 /* ActionManager.cpp */,
 				B81E6ABC1A6AAE370046E7E0 /* ActionManager.h */,
-				B81E6ABE1A6AB0010046E7E0 /* Action.cpp */,
-				B81E6ABF1A6AB0010046E7E0 /* Action.h */,
+				B81E6ABE1A6AB0010046E7E0 /* ActionBase.cpp */,
+				B81E6ABF1A6AB0010046E7E0 /* ActionBase.h */,
 				B81E6AC11A6BF9EA0046E7E0 /* FadeTo.cpp */,
 				B81E6AC21A6BF9EA0046E7E0 /* FadeTo.h */,
 			);
@@ -798,7 +798,7 @@
 				B8729E2C1A29A37100B6EDEC /* OpenGL.framework */,
 			);
 			name = Frameworks;
-			path = "Krkr_GL";
+			path = Krkr_GL;
 			sourceTree = "<group>";
 		};
 		B8729E2E1A29A41100B6EDEC /* Krkr_GL */ = {
@@ -809,7 +809,7 @@
 				B8729FA91A29A45000B6EDEC /* src */,
 				B872A0211A29A47100B6EDEC /* proj.mac */,
 			);
-			name = "Krkr_GL";
+			name = Krkr_GL;
 			sourceTree = "<group>";
 		};
 		B8729E2F1A29A41F00B6EDEC /* libs */ = {
@@ -1356,8 +1356,8 @@
 			);
 			dependencies = (
 			);
-			name = "Krkr_GL";
-			productName = "Krkr_GL";
+			name = Krkr_GL;
+			productName = Krkr_GL;
 			productReference = B8729C001A29A26100B6EDEC /* Krkr_GL.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -1548,7 +1548,7 @@
 				B8729F161A29A42000B6EDEC /* quaternion.c in Sources */,
 				B8729F4A1A29A42000B6EDEC /* regerror.c in Sources */,
 				B8729F531A29A42000B6EDEC /* regversion.c in Sources */,
-				B81E6AC01A6AB0010046E7E0 /* Action.cpp in Sources */,
+				B81E6AC01A6AB0010046E7E0 /* ActionBase.cpp in Sources */,
 				B8729F801A29A42000B6EDEC /* tjsOctPack.cpp in Sources */,
 				B8729F691A29A42000B6EDEC /* tjsConfig.cpp in Sources */,
 				B8729F3C1A29A42000B6EDEC /* iso8859_8.c in Sources */,

@@ -24,6 +24,8 @@ public:
     iTJS_METHOD_OBJECT(Object,removeChild,Object);
     iTJS_PROPERTY_OBJECT(Object, Parent, Object);
     void onPaint();
+    void postMsg(tTJSVariant v,ttstr name,tTJSVariant elm);
+    void onMsgReceive(tTJSVariant elm);
     ttstr getClass(){return m_tjsObject->ClassNames[0];}
 };
 

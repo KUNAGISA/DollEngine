@@ -18,7 +18,7 @@ ActionManager::ActionManager()
 
 ActionManager::~ActionManager()
 {
-    set<Action*> clone = m_allActions;
+    set<ActionBase*> clone = m_allActions;
     for (auto iter = clone.begin();
          iter != clone.end(); ++iter)
     {
@@ -29,7 +29,7 @@ ActionManager::~ActionManager()
 
 void ActionManager::trigger()
 {
-    vector<Action*> removed;
+    vector<ActionBase*> removed;
     for (auto action : m_allActions) {
         float t = getTime()-action->getStartTime();
         action->setPerc( t / action->getTime());
@@ -45,13 +45,13 @@ void ActionManager::trigger()
     }
 }
 
-void ActionManager::addAction(Action* action)
+void ActionManager::addAction(ActionBase* action)
 {
     action->setStartTime(getTime());
     m_allActions.insert(action);
 }
 
-void ActionManager::removeAction(Action* action)
+void ActionManager::removeAction(ActionBase* action)
 {
     m_allActions.erase(action);
 }
@@ -61,7 +61,7 @@ void ActionManager::moveTo(Object* target, float time, float x, float y)
     
 }
 
-void ActionManager::fadeTo(Object* target, float time, float opt)
+void ActionManager::fadeTo(Object* target, float time, float opt,function<void()> callback)
 {
     ASSERT(target);
     FadeTo* fade = new FadeTo();

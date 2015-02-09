@@ -6,10 +6,10 @@
 //  Copyright (c) 2015年 DollStudio. All rights reserved.
 //
 
-#include "Action.h"
+#include "ActionBase.h"
 #include "ActionManager.h"
 
-Action::Action()
+ActionBase::ActionBase()
 :m_perc(0)
 ,m_target(null)
 ,m_startTime(0)
@@ -18,7 +18,7 @@ Action::Action()
     
 }
 
-Action::~Action()
+ActionBase::~ActionBase()
 {
     ActionManager::GetInstance()->removeAction(this);
     if (getTarget())

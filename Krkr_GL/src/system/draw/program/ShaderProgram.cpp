@@ -51,27 +51,33 @@ bool ShaderProgram::bind()
     {
         return false;
     }
-    bindAttributeLocation("texture_normal",PROGRAM_TEXTURE_ATTRIBUTE);
+    bindAttributeLocation("tex_fore",PROGRAM_TEXTURE_ATTRIBUTE);
+    CHECK_GL_ERROR;
+    bindAttributeLocation("tex_back",PROGRAM_TEXTURE_ATTRIBUTE);
     CHECK_GL_ERROR;
     bindAttributeLocation("texture_fbo",PROGRAM_FBO_ATTRIBUTE);
     CHECK_GL_ERROR;
     bindAttributeLocation("matrix",PROGRAM_MATRIX_ATTRIBUTE);
     CHECK_GL_ERROR;
     
-    int index =glGetUniformLocation(m_programId,"texture_normal");
+    int index =glGetUniformLocation(m_programId,"tex_fore");
     CHECK_GL_ERROR;
-    if (index != -1) m_allUniformIndex["texture_normal"]=index;
+    if (index != -1) m_allUniformIndex["tex_fore"]=index;
     
-    index =glGetUniformLocation(m_programId,"matrix");
+    index =glGetUniformLocation(m_programId,"tex_back");
     CHECK_GL_ERROR;
-    if (index != -1) m_allUniformIndex["matrix"]=index;
+    if (index != -1) m_allUniformIndex["tex_back"]=index;
     
     index =glGetUniformLocation(m_programId, "texture_fbo");
     CHECK_GL_ERROR;
     if (index != -1) m_allUniformIndex["texture_fbo"]=index;
     
+    index =glGetUniformLocation(m_programId,"matrix");
+    CHECK_GL_ERROR;
+    if (index != -1) m_allUniformIndex["matrix"]=index;
+    
     use();
-    setUniformValue("texture_normal",0);
+    setUniformValue("tex_fore",0);
     CHECK_GL_ERROR;
     return true;
 }

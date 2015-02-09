@@ -15,7 +15,7 @@
 #include "Transform.h"
 
 class Transform;
-class Action;
+class ActionBase;
 class Object
 {
     
@@ -80,15 +80,15 @@ return 0;\
     
     
 public:
-    void addAction(Action* act);
-    void removeAction(Action* act);
+    void addAction(ActionBase* act);
+    void removeAction(ActionBase* act);
     virtual void addChild(Object* src);
     virtual void removeChild(Object* src);
 protected:
     list<Object*> m_children;
     list<Object*>::iterator m_iterInParent;
     bool m_needSortChild;
-    set<Action*> m_actions;
+    set<ActionBase*> m_actions;
 };
 
 #endif /* defined(__Krkr_GL__Object__) */

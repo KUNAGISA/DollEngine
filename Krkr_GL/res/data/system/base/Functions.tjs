@@ -22,6 +22,7 @@ function dm (arg*)
 
 function cloneObject(src,parent) 
 {
+	dm(src.class);
 	var lay = new global[src.class](src.window,parent);
 	lay.assign(src);
 	return lay;

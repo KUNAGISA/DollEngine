@@ -18,6 +18,23 @@ void TJSObject::onPaint()
     iTJSEventCall(onPaint, 0);
 }
 
+void TJSObject::postMsg(tTJSVariant v,ttstr name,tTJSVariant elm)
+{
+    TJSObject* src = iTJSGetObject(TJSObject, v.AsObjectNoAddRef());
+    tTJSDictionaryObject* params = (tTJSDictionaryObject*)TJSCreateDictionaryObject();
+    tTJSVariant ths = m_tjsObject;
+    tTJSVariant nm = name;
+    tTJSVariant param = elm;
+    iTJSProSet(params, TJS_W("object"), ths);
+    iTJSProSet(params, TJS_W("name"), nm);
+    iTJSProSet(params, TJS_W("param"), param);
+    src->onMsgReceive(params);
+}
+
+void TJSObject::onMsgReceive(tTJSVariant elm)
+{
+    iTJSEventCall(onMsgReceive, 1,&elm);
+}
 
 NCB_REGISTER_CLASS_DIFFER(Object, TJSObject)
 {

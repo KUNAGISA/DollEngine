@@ -14,12 +14,15 @@
 
 #define _Lerp(A,B) ((B-A)*getPerc()+A)
 
-class Action
+class ActionBase
 {
 public:
-    Action();
-    virtual ~Action();
-    virtual void onStop(){DM("Action End");}
+    ActionBase();
+    virtual ~ActionBase();
+    virtual void onStop(){
+        if(m_callBack)
+            m_callBack();
+    }
     virtual void update(){}
     PROPERTY(float, Perc, m_perc){
         if(v >= 1) m_perc=1;
@@ -29,6 +32,7 @@ public:
     PROPERTY(float, Time, m_time){m_time = v;}
     PROPERTY(float, StartTime, m_startTime){m_startTime=v;}
     PROPERTY(Object*, Target, m_target){m_target=v;}
+    PROPERTY(function<void()>, CallBack, m_callBack){m_callBack = v;}
 };
 
 #endif /* defined(__Krkr_GL__Action__) */

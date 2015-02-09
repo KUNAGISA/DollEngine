@@ -68,6 +68,7 @@ with(kag.tagHandlers)
 	.image = function(elm)
 	{
 		var lay = getLayerFromElm(elm);
+		dm(lay);
 		lay.loadImages(elm.storage);
         lay.visible = elm.visible === void ? true : elm.visible;
 		lay.setPos(elm.left,elm.top) if (elm.left !== void || elm.top !== void);
