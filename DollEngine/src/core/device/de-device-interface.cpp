@@ -22,4 +22,17 @@ void new_window()
         s_window_instance = new device_window();
     }
 }
-NAMESPACE_DE_END
+
+float get_inner_width()
+{
+    ASSERT(s_window_instance);
+    return s_window_instance->getInnerWidth();
+}
+
+float get_inner_height()
+{
+    ASSERT(s_window_instance);
+    return s_window_instance->getInnerHeight();
+}
+
+NAMESPACE_DE_END2

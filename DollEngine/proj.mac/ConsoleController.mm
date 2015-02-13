@@ -7,6 +7,7 @@
 //
 
 #import "ConsoleController.h"
+#include "de.h"
 //#include "StringUtils.h"
 //#include "Scripts.h"
 
@@ -96,11 +97,11 @@
 
 - (IBAction)onEnterClick:(id)sender {
     wstring code;
-    StringUtils::ConvertUtf8ToUnicode(input.stringValue.UTF8String, code);
+//    StringUtils::ConvertUtf8ToUnicode(input.stringValue.UTF8String, code);
     if (code == L"") {
         return;
     }
-    Scripts::GetInstance()->eval(code.c_str());
+//    Scripts::GetInstance()->eval(code.c_str());
     input.stringValue = @"";
 }
 

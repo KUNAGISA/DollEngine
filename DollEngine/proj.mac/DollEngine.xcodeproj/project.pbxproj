@@ -7,6 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B805ED8D1A8E17D1004540AF /* GLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = B805ED8C1A8E17D1004540AF /* GLView.mm */; };
+		B850EE2C1A8E204500860AC6 /* de-functions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B850EE221A8E204500860AC6 /* de-functions.cpp */; };
+		B850EE2D1A8E204500860AC6 /* de-gl-interface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B850EE241A8E204500860AC6 /* de-gl-interface.cpp */; };
+		B850EE2E1A8E204500860AC6 /* de-transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B850EE261A8E204500860AC6 /* de-transform.cpp */; };
+		B850EE2F1A8E204500860AC6 /* de-device-interface-mac.mm in Sources */ = {isa = PBXBuildFile; fileRef = B850EE291A8E204500860AC6 /* de-device-interface-mac.mm */; };
+		B850EE311A8E29CD00860AC6 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B850EE301A8E29CD00860AC6 /* Cocoa.framework */; };
+		B850EE3C1A8E3DD400860AC6 /* ncbind.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B850EE381A8E3DD400860AC6 /* ncbind.cpp */; };
+		B850EE411A8E3F1400860AC6 /* de-tjs-bind.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B850EE3F1A8E3F1400860AC6 /* de-tjs-bind.cpp */; };
+		B850EE441A8E40A600860AC6 /* de-tjs-window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B850EE421A8E40A600860AC6 /* de-tjs-window.cpp */; };
+		B850EE4A1A8E435600860AC6 /* de-device-interface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B850EE461A8E435600860AC6 /* de-device-interface.cpp */; };
+		B850EE4B1A8E435600860AC6 /* de-device-window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B850EE481A8E435600860AC6 /* de-device-window.cpp */; };
+		B850EE4F1A8E486300860AC6 /* de-storage-interface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B850EE4D1A8E486300860AC6 /* de-storage-interface.cpp */; };
+		B850EE511A8E48B500860AC6 /* de-storage-interface-mac.mm in Sources */ = {isa = PBXBuildFile; fileRef = B850EE501A8E48B500860AC6 /* de-storage-interface-mac.mm */; };
+		B850EE541A8E499A00860AC6 /* de-storage-searchs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B850EE521A8E499A00860AC6 /* de-storage-searchs.cpp */; };
+		B850EE571A8E4A9900860AC6 /* de-storage-file.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B850EE551A8E4A9900860AC6 /* de-storage-file.cpp */; };
 		B861AEA81A8DD663007F5B42 /* ccGLStateCache.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B861ADD81A8DD663007F5B42 /* ccGLStateCache.cpp */; };
 		B861AEA91A8DD663007F5B42 /* aabb.c in Sources */ = {isa = PBXBuildFile; fileRef = B861ADED1A8DD663007F5B42 /* aabb.c */; };
 		B861AEAA1A8DD663007F5B42 /* ChangeLog in Resources */ = {isa = PBXBuildFile; fileRef = B861ADEE1A8DD663007F5B42 /* ChangeLog */; };
@@ -113,15 +128,40 @@
 		B861AF251A8DDBBC007F5B42 /* ConsoleController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B861AF1F1A8DDBBC007F5B42 /* ConsoleController.xib */; };
 		B861AF261A8DDBBC007F5B42 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B861AF201A8DDBBC007F5B42 /* Main.storyboard */; };
 		B861AF271A8DDBBC007F5B42 /* WindowDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = B861AF221A8DDBBC007F5B42 /* WindowDelegate.mm */; };
-		B861AF2A1A8DDCE7007F5B42 /* de-device-interface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B861AF281A8DDCE7007F5B42 /* de-device-interface.cpp */; };
-		B861AF331A8DE1CC007F5B42 /* de-device-window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B861AF311A8DE1CC007F5B42 /* de-device-window.cpp */; };
-		B8B665911A8DD066002D8144 /* de-functions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8B6658F1A8DD066002D8144 /* de-functions.cpp */; };
-		B8B665A21A8DD39B002D8144 /* de-gl-interface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8B665A01A8DD39B002D8144 /* de-gl-interface.cpp */; };
 		B8B665A51A8DD591002D8144 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8B665A41A8DD591002D8144 /* OpenGL.framework */; };
 		EA0467C81A8D9D67009DC52C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EA04673D1A8D9D67009DC52C /* main.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B805ED8B1A8E17D1004540AF /* GLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLView.h; sourceTree = "<group>"; };
+		B805ED8C1A8E17D1004540AF /* GLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GLView.mm; sourceTree = "<group>"; };
+		B850EE221A8E204500860AC6 /* de-functions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "de-functions.cpp"; sourceTree = "<group>"; };
+		B850EE231A8E204500860AC6 /* de-functions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "de-functions.h"; sourceTree = "<group>"; };
+		B850EE241A8E204500860AC6 /* de-gl-interface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "de-gl-interface.cpp"; sourceTree = "<group>"; };
+		B850EE251A8E204500860AC6 /* de-gl-interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "de-gl-interface.h"; sourceTree = "<group>"; };
+		B850EE261A8E204500860AC6 /* de-transform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "de-transform.cpp"; sourceTree = "<group>"; };
+		B850EE271A8E204500860AC6 /* de-transform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "de-transform.h"; sourceTree = "<group>"; };
+		B850EE291A8E204500860AC6 /* de-device-interface-mac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "de-device-interface-mac.mm"; sourceTree = "<group>"; };
+		B850EE301A8E29CD00860AC6 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		B850EE361A8E3DD400860AC6 /* ncb_foreach.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ncb_foreach.h; sourceTree = "<group>"; };
+		B850EE371A8E3DD400860AC6 /* ncb_invoke.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ncb_invoke.hpp; sourceTree = "<group>"; };
+		B850EE381A8E3DD400860AC6 /* ncbind.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ncbind.cpp; sourceTree = "<group>"; };
+		B850EE391A8E3DD400860AC6 /* ncbind.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ncbind.hpp; sourceTree = "<group>"; };
+		B850EE3F1A8E3F1400860AC6 /* de-tjs-bind.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "de-tjs-bind.cpp"; sourceTree = "<group>"; };
+		B850EE401A8E3F1400860AC6 /* de-tjs-bind.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "de-tjs-bind.h"; sourceTree = "<group>"; };
+		B850EE421A8E40A600860AC6 /* de-tjs-window.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "de-tjs-window.cpp"; sourceTree = "<group>"; };
+		B850EE431A8E40A600860AC6 /* de-tjs-window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "de-tjs-window.h"; sourceTree = "<group>"; };
+		B850EE461A8E435600860AC6 /* de-device-interface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "de-device-interface.cpp"; sourceTree = "<group>"; };
+		B850EE471A8E435600860AC6 /* de-device-interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "de-device-interface.h"; sourceTree = "<group>"; };
+		B850EE481A8E435600860AC6 /* de-device-window.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "de-device-window.cpp"; sourceTree = "<group>"; };
+		B850EE491A8E435600860AC6 /* de-device-window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "de-device-window.h"; sourceTree = "<group>"; };
+		B850EE4D1A8E486300860AC6 /* de-storage-interface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "de-storage-interface.cpp"; sourceTree = "<group>"; };
+		B850EE4E1A8E486300860AC6 /* de-storage-interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "de-storage-interface.h"; sourceTree = "<group>"; };
+		B850EE501A8E48B500860AC6 /* de-storage-interface-mac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "de-storage-interface-mac.mm"; sourceTree = "<group>"; };
+		B850EE521A8E499A00860AC6 /* de-storage-searchs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "de-storage-searchs.cpp"; sourceTree = "<group>"; };
+		B850EE531A8E499A00860AC6 /* de-storage-searchs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "de-storage-searchs.h"; sourceTree = "<group>"; };
+		B850EE551A8E4A9900860AC6 /* de-storage-file.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "de-storage-file.cpp"; sourceTree = "<group>"; };
+		B850EE561A8E4A9900860AC6 /* de-storage-file.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "de-storage-file.h"; sourceTree = "<group>"; };
 		B861AD781A8DD663007F5B42 /* ftconfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ftconfig.h; sourceTree = "<group>"; };
 		B861AD791A8DD663007F5B42 /* ftheader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ftheader.h; sourceTree = "<group>"; };
 		B861AD7A1A8DD663007F5B42 /* ftmodule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ftmodule.h; sourceTree = "<group>"; };
@@ -389,19 +429,11 @@
 		B861AF201A8DDBBC007F5B42 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		B861AF211A8DDBBC007F5B42 /* WindowDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WindowDelegate.h; sourceTree = "<group>"; };
 		B861AF221A8DDBBC007F5B42 /* WindowDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WindowDelegate.mm; sourceTree = "<group>"; };
-		B861AF281A8DDCE7007F5B42 /* de-device-interface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "de-device-interface.cpp"; sourceTree = "<group>"; };
-		B861AF291A8DDCE7007F5B42 /* de-device-interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "de-device-interface.h"; sourceTree = "<group>"; };
-		B861AF311A8DE1CC007F5B42 /* de-device-window.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "de-device-window.cpp"; sourceTree = "<group>"; };
-		B861AF321A8DE1CC007F5B42 /* de-device-window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "de-device-window.h"; sourceTree = "<group>"; };
 		B8B665831A8DCDA0002D8144 /* Prefix-Mac.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Prefix-Mac.pch"; sourceTree = "<group>"; };
-		B8B6658F1A8DD066002D8144 /* de-functions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "de-functions.cpp"; sourceTree = "<group>"; };
-		B8B665971A8DD270002D8144 /* de-functions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "de-functions.h"; sourceTree = "<group>"; };
 		B8B665981A8DD270002D8144 /* de-includes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "de-includes.h"; sourceTree = "<group>"; };
 		B8B665991A8DD270002D8144 /* de-macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "de-macros.h"; sourceTree = "<group>"; };
 		B8B6659A1A8DD270002D8144 /* de-types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "de-types.h"; sourceTree = "<group>"; };
 		B8B6659B1A8DD27E002D8144 /* de.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = de.h; sourceTree = "<group>"; };
-		B8B665A01A8DD39B002D8144 /* de-gl-interface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "de-gl-interface.cpp"; sourceTree = "<group>"; };
-		B8B665A11A8DD39B002D8144 /* de-gl-interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "de-gl-interface.h"; sourceTree = "<group>"; };
 		B8B665A41A8DD591002D8144 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		EA0467371A8D9D67009DC52C /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		EA0467391A8D9D67009DC52C /* Info-mac.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-mac.plist"; sourceTree = "<group>"; };
@@ -414,6 +446,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B850EE311A8E29CD00860AC6 /* Cocoa.framework in Frameworks */,
 				B8B665A51A8DD591002D8144 /* OpenGL.framework in Frameworks */,
 				B861AF1B1A8DD9ED007F5B42 /* libfreetype.a in Frameworks */,
 			);
@@ -422,6 +455,50 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B850EE281A8E204500860AC6 /* proj.mac */ = {
+			isa = PBXGroup;
+			children = (
+				B850EE501A8E48B500860AC6 /* de-storage-interface-mac.mm */,
+				B850EE291A8E204500860AC6 /* de-device-interface-mac.mm */,
+			);
+			path = proj.mac;
+			sourceTree = "<group>";
+		};
+		B850EE351A8E3DD400860AC6 /* ncbind */ = {
+			isa = PBXGroup;
+			children = (
+				B850EE361A8E3DD400860AC6 /* ncb_foreach.h */,
+				B850EE371A8E3DD400860AC6 /* ncb_invoke.hpp */,
+				B850EE381A8E3DD400860AC6 /* ncbind.cpp */,
+				B850EE391A8E3DD400860AC6 /* ncbind.hpp */,
+			);
+			path = ncbind;
+			sourceTree = "<group>";
+		};
+		B850EE451A8E435600860AC6 /* device */ = {
+			isa = PBXGroup;
+			children = (
+				B850EE461A8E435600860AC6 /* de-device-interface.cpp */,
+				B850EE471A8E435600860AC6 /* de-device-interface.h */,
+				B850EE481A8E435600860AC6 /* de-device-window.cpp */,
+				B850EE491A8E435600860AC6 /* de-device-window.h */,
+			);
+			path = device;
+			sourceTree = "<group>";
+		};
+		B850EE4C1A8E485000860AC6 /* storage */ = {
+			isa = PBXGroup;
+			children = (
+				B850EE4D1A8E486300860AC6 /* de-storage-interface.cpp */,
+				B850EE4E1A8E486300860AC6 /* de-storage-interface.h */,
+				B850EE521A8E499A00860AC6 /* de-storage-searchs.cpp */,
+				B850EE531A8E499A00860AC6 /* de-storage-searchs.h */,
+				B850EE551A8E4A9900860AC6 /* de-storage-file.cpp */,
+				B850EE561A8E4A9900860AC6 /* de-storage-file.h */,
+			);
+			path = storage;
+			sourceTree = "<group>";
+		};
 		B861AD151A8DD663007F5B42 /* libs */ = {
 			isa = PBXGroup;
 			children = (
@@ -431,6 +508,7 @@
 				B861ADFD1A8DD663007F5B42 /* msg */,
 				B861AE171A8DD663007F5B42 /* onig */,
 				B861AE511A8DD663007F5B42 /* tjs2 */,
+				B850EE351A8E3DD400860AC6 /* ncbind */,
 			);
 			name = libs;
 			path = ../libs;
@@ -858,24 +936,9 @@
 			path = tjs2;
 			sourceTree = "<group>";
 		};
-		B8A46C331A8DAA63002465AB /* debug */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = debug;
-			sourceTree = "<group>";
-		};
-		B8B665921A8DD07F002D8144 /* platform */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = platform;
-			sourceTree = "<group>";
-		};
 		B8B665961A8DD270002D8144 /* includes */ = {
 			isa = PBXGroup;
 			children = (
-				B8B665971A8DD270002D8144 /* de-functions.h */,
 				B8B665981A8DD270002D8144 /* de-includes.h */,
 				B8B665991A8DD270002D8144 /* de-macros.h */,
 				B8B6659A1A8DD270002D8144 /* de-types.h */,
@@ -887,6 +950,7 @@
 		B8B665A31A8DD57C002D8144 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B850EE301A8E29CD00860AC6 /* Cocoa.framework */,
 				B8B665A41A8DD591002D8144 /* OpenGL.framework */,
 			);
 			name = Frameworks;
@@ -906,13 +970,15 @@
 			isa = PBXGroup;
 			children = (
 				EA0467371A8D9D67009DC52C /* AppDelegate.h */,
+				B861AF1C1A8DDBBC007F5B42 /* AppDelegate.mm */,
 				EA0467391A8D9D67009DC52C /* Info-mac.plist */,
 				EA04673D1A8D9D67009DC52C /* main.m */,
-				B861AF1C1A8DDBBC007F5B42 /* AppDelegate.mm */,
 				B861AF1D1A8DDBBC007F5B42 /* ConsoleController.h */,
 				B861AF1E1A8DDBBC007F5B42 /* ConsoleController.mm */,
 				B861AF1F1A8DDBBC007F5B42 /* ConsoleController.xib */,
 				B861AF201A8DDBBC007F5B42 /* Main.storyboard */,
+				B805ED8B1A8E17D1004540AF /* GLView.h */,
+				B805ED8C1A8E17D1004540AF /* GLView.mm */,
 				B861AF211A8DDBBC007F5B42 /* WindowDelegate.h */,
 				B861AF221A8DDBBC007F5B42 /* WindowDelegate.mm */,
 				B8B665831A8DCDA0002D8144 /* Prefix-Mac.pch */,
@@ -966,86 +1032,26 @@
 		EA0467441A8D9D67009DC52C /* core */ = {
 			isa = PBXGroup;
 			children = (
-				B8A46C331A8DAA63002465AB /* debug */,
-				EA0467451A8D9D67009DC52C /* data */,
-				EA0467461A8D9D67009DC52C /* device */,
-				EA0467491A8D9D67009DC52C /* event */,
-				EA04674A1A8D9D67009DC52C /* io */,
-				EA04674C1A8D9D67009DC52C /* network */,
-				EA04674D1A8D9D67009DC52C /* paint */,
-				EA0467501A8D9D67009DC52C /* script */,
-				B8B665921A8DD07F002D8144 /* platform */,
-				B8B6658F1A8DD066002D8144 /* de-functions.cpp */,
+				B850EE4C1A8E485000860AC6 /* storage */,
+				B850EE451A8E435600860AC6 /* device */,
+				B850EE221A8E204500860AC6 /* de-functions.cpp */,
+				B850EE231A8E204500860AC6 /* de-functions.h */,
+				B850EE241A8E204500860AC6 /* de-gl-interface.cpp */,
+				B850EE251A8E204500860AC6 /* de-gl-interface.h */,
+				B850EE261A8E204500860AC6 /* de-transform.cpp */,
+				B850EE271A8E204500860AC6 /* de-transform.h */,
+				B850EE281A8E204500860AC6 /* proj.mac */,
 			);
 			path = core;
-			sourceTree = "<group>";
-		};
-		EA0467451A8D9D67009DC52C /* data */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = data;
-			sourceTree = "<group>";
-		};
-		EA0467461A8D9D67009DC52C /* device */ = {
-			isa = PBXGroup;
-			children = (
-				B861AF281A8DDCE7007F5B42 /* de-device-interface.cpp */,
-				B861AF291A8DDCE7007F5B42 /* de-device-interface.h */,
-				B861AF311A8DE1CC007F5B42 /* de-device-window.cpp */,
-				B861AF321A8DE1CC007F5B42 /* de-device-window.h */,
-			);
-			path = device;
-			sourceTree = "<group>";
-		};
-		EA0467491A8D9D67009DC52C /* event */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = event;
-			sourceTree = "<group>";
-		};
-		EA04674A1A8D9D67009DC52C /* io */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = io;
-			sourceTree = "<group>";
-		};
-		EA04674C1A8D9D67009DC52C /* network */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = network;
-			sourceTree = "<group>";
-		};
-		EA04674D1A8D9D67009DC52C /* paint */ = {
-			isa = PBXGroup;
-			children = (
-				EA04674F1A8D9D67009DC52C /* shader */,
-				B8B665A01A8DD39B002D8144 /* de-gl-interface.cpp */,
-				B8B665A11A8DD39B002D8144 /* de-gl-interface.h */,
-			);
-			path = paint;
-			sourceTree = "<group>";
-		};
-		EA04674F1A8D9D67009DC52C /* shader */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = shader;
-			sourceTree = "<group>";
-		};
-		EA0467501A8D9D67009DC52C /* script */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = script;
 			sourceTree = "<group>";
 		};
 		EA0467521A8D9D67009DC52C /* tjsbind */ = {
 			isa = PBXGroup;
 			children = (
+				B850EE3F1A8E3F1400860AC6 /* de-tjs-bind.cpp */,
+				B850EE401A8E3F1400860AC6 /* de-tjs-bind.h */,
+				B850EE421A8E40A600860AC6 /* de-tjs-window.cpp */,
+				B850EE431A8E40A600860AC6 /* de-tjs-window.h */,
 			);
 			path = tjsbind;
 			sourceTree = "<group>";
@@ -1154,20 +1160,21 @@
 				B861AEE11A8DD663007F5B42 /* utf32_be.c in Sources */,
 				B861AED61A8DD663007F5B42 /* iso8859_6.c in Sources */,
 				B861AED91A8DD663007F5B42 /* iso8859_9.c in Sources */,
+				B850EE4B1A8E435600860AC6 /* de-device-window.cpp in Sources */,
 				B861AEB81A8DD663007F5B42 /* MsgLoad.cpp in Sources */,
 				B861AECE1A8DD663007F5B42 /* iso8859_13.c in Sources */,
 				B861AEB11A8DD663007F5B42 /* plane.c in Sources */,
+				B850EE511A8E48B500860AC6 /* de-storage-interface-mac.mm in Sources */,
 				B861AED21A8DD663007F5B42 /* iso8859_2.c in Sources */,
 				B861AF001A8DD663007F5B42 /* tjsDictionary.cpp in Sources */,
 				B861AEE41A8DD663007F5B42 /* regcomp.c in Sources */,
 				B861AEDA1A8DD663007F5B42 /* koi8.c in Sources */,
 				B861AF0D1A8DD663007F5B42 /* tjsNative.cpp in Sources */,
-				B861AF331A8DE1CC007F5B42 /* de-device-window.cpp in Sources */,
 				B861AF091A8DD663007F5B42 /* tjsMath.cpp in Sources */,
-				B8B665911A8DD066002D8144 /* de-functions.cpp in Sources */,
 				B861AF051A8DD663007F5B42 /* tjsInterCodeExec.cpp in Sources */,
 				B861AF181A8DD663007F5B42 /* tjsVariant.cpp in Sources */,
 				B861AF271A8DDBBC007F5B42 /* WindowDelegate.mm in Sources */,
+				B805ED8D1A8E17D1004540AF /* GLView.mm in Sources */,
 				B861AF081A8DD663007F5B42 /* tjsLex.cpp in Sources */,
 				B861AF011A8DD663007F5B42 /* tjsDisassemble.cpp in Sources */,
 				B861AF101A8DD663007F5B42 /* tjsOctPack.cpp in Sources */,
@@ -1177,7 +1184,10 @@
 				B861AEEB1A8DD663007F5B42 /* regposerr.c in Sources */,
 				B861AF191A8DD663007F5B42 /* tjsVariantString.cpp in Sources */,
 				B861AEC61A8DD663007F5B42 /* cp1251.c in Sources */,
+				B850EE3C1A8E3DD400860AC6 /* ncbind.cpp in Sources */,
+				B850EE4F1A8E486300860AC6 /* de-storage-interface.cpp in Sources */,
 				B861AEAC1A8DD663007F5B42 /* mat4stack.c in Sources */,
+				B850EE2C1A8E204500860AC6 /* de-functions.cpp in Sources */,
 				B861AF071A8DD663007F5B42 /* tjsInterface.cpp in Sources */,
 				B861AED81A8DD663007F5B42 /* iso8859_8.c in Sources */,
 				B861AF111A8DD663007F5B42 /* tjspp.tab.cpp in Sources */,
@@ -1186,6 +1196,7 @@
 				B861AED41A8DD663007F5B42 /* iso8859_4.c in Sources */,
 				B861AF0A1A8DD663007F5B42 /* tjsMessage.cpp in Sources */,
 				B861AEE31A8DD663007F5B42 /* utf8.c in Sources */,
+				B850EE571A8E4A9900860AC6 /* de-storage-file.cpp in Sources */,
 				B861AEC81A8DD663007F5B42 /* euc_kr.c in Sources */,
 				B861AEAE1A8DD663007F5B42 /* mat3.c in Sources */,
 				EA0467C81A8D9D67009DC52C /* main.m in Sources */,
@@ -1193,14 +1204,18 @@
 				B861AED71A8DD663007F5B42 /* iso8859_7.c in Sources */,
 				B861AEF41A8DD663007F5B42 /* tjs.tab.cpp in Sources */,
 				B861AEFF1A8DD663007F5B42 /* tjsDebug.cpp in Sources */,
+				B850EE2D1A8E204500860AC6 /* de-gl-interface.cpp in Sources */,
 				B861AEE61A8DD663007F5B42 /* regerror.c in Sources */,
 				B861AEE81A8DD663007F5B42 /* regext.c in Sources */,
 				B861AF121A8DD663007F5B42 /* tjsRandomGenerator.cpp in Sources */,
+				B850EE411A8E3F1400860AC6 /* de-tjs-bind.cpp in Sources */,
 				B861AED31A8DD663007F5B42 /* iso8859_3.c in Sources */,
 				B861AEF31A8DD663007F5B42 /* tjs.cpp in Sources */,
+				B850EE2E1A8E204500860AC6 /* de-transform.cpp in Sources */,
 				B861AEB61A8DD663007F5B42 /* vec3.c in Sources */,
 				B861AF161A8DD663007F5B42 /* tjsString.cpp in Sources */,
 				B861AF0C1A8DD663007F5B42 /* tjsNamespace.cpp in Sources */,
+				B850EE2F1A8E204500860AC6 /* de-device-interface-mac.mm in Sources */,
 				B861AEEA1A8DD663007F5B42 /* regparse.c in Sources */,
 				B861AEE01A8DD663007F5B42 /* utf16_le.c in Sources */,
 				B861AEDC1A8DD663007F5B42 /* mktable.c in Sources */,
@@ -1210,9 +1225,9 @@
 				B861AEE51A8DD663007F5B42 /* regenc.c in Sources */,
 				B861AEB31A8DD663007F5B42 /* ray2.c in Sources */,
 				B861AEC51A8DD663007F5B42 /* big5.c in Sources */,
-				B861AF2A1A8DDCE7007F5B42 /* de-device-interface.cpp in Sources */,
 				B861AEF91A8DD663007F5B42 /* tjsConfig.cpp in Sources */,
 				B861AEB71A8DD663007F5B42 /* vec4.c in Sources */,
+				B850EE541A8E499A00860AC6 /* de-storage-searchs.cpp in Sources */,
 				B861AEDB1A8DD663007F5B42 /* koi8_r.c in Sources */,
 				B861AEF01A8DD663007F5B42 /* st.c in Sources */,
 				B861AF241A8DDBBC007F5B42 /* ConsoleController.mm in Sources */,
@@ -1220,12 +1235,14 @@
 				B861AEB21A8DD663007F5B42 /* quaternion.c in Sources */,
 				B861AEDE1A8DD663007F5B42 /* unicode.c in Sources */,
 				B861AEF61A8DD663007F5B42 /* tjsBinarySerializer.cpp in Sources */,
+				B850EE4A1A8E435600860AC6 /* de-device-interface.cpp in Sources */,
 				B861AF041A8DD663007F5B42 /* tjsGlobalStringMap.cpp in Sources */,
 				B861AEA81A8DD663007F5B42 /* ccGLStateCache.cpp in Sources */,
 				B861AED51A8DD663007F5B42 /* iso8859_5.c in Sources */,
 				B861AEEE1A8DD663007F5B42 /* regtrav.c in Sources */,
 				B861AEDF1A8DD663007F5B42 /* utf16_be.c in Sources */,
 				B861AEFA1A8DD663007F5B42 /* tjsConstArrayData.cpp in Sources */,
+				B850EE441A8E40A600860AC6 /* de-tjs-window.cpp in Sources */,
 				B861AEAD1A8DD663007F5B42 /* matrix.c in Sources */,
 				B861AF0E1A8DD663007F5B42 /* tjsObject.cpp in Sources */,
 				B861AEF71A8DD663007F5B42 /* tjsByteCodeLoader.cpp in Sources */,
@@ -1236,7 +1253,6 @@
 				B861AEFC1A8DD663007F5B42 /* tjsdate.tab.cpp in Sources */,
 				B861AF131A8DD663007F5B42 /* tjsRegExp.cpp in Sources */,
 				B861AEC41A8DD663007F5B42 /* ascii.c in Sources */,
-				B8B665A21A8DD39B002D8144 /* de-gl-interface.cpp in Sources */,
 				B861AF031A8DD663007F5B42 /* tjsException.cpp in Sources */,
 				B861AEEC1A8DD663007F5B42 /* regposix.c in Sources */,
 				B861AECC1A8DD663007F5B42 /* iso8859_10.c in Sources */,
@@ -1342,8 +1358,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SRCROOT)/../libs/freetype2/include/mac",
-					/Users/DollStudio/Documents/Work/DollEngine/DollEngine/libs/freetype2/prebuilt/mac,
+					"$(SRCROOT)/../libs/freetype2/prebuilt/mac",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1366,8 +1381,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SRCROOT)/../libs/freetype2/include/mac",
-					/Users/DollStudio/Documents/Work/DollEngine/DollEngine/libs/freetype2/prebuilt/mac,
+					"$(SRCROOT)/../libs/freetype2/prebuilt/mac",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -31,9 +31,10 @@ public:
     PROPERTY_RO(float, LayerZoom, m_layerZoom);//根节点缩放率
     PROPERTY_CONST(wstring, Caption, m_caption){m_caption=v;}//窗口标题
     
+    void visit();
 protected:
     bool m_needReViewPort;
 };
-NAMESPACE_DE_END
+NAMESPACE_DE_END2
 
 #endif /* defined(__DollEngine__de_device_window__) */

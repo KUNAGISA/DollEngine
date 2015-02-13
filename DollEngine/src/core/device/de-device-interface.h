@@ -18,7 +18,9 @@ DE_EXTERN device_window* window();
 DE_EXTERN void new_window();
 DE_EXTERN float get_window_edge_width();
 DE_EXTERN float get_window_edge_height();
+DE_EXTERN float get_inner_width();
+DE_EXTERN float get_inner_height();
 
-NAMESPACE_DE_END
+NAMESPACE_DE_END2
 
 #endif /* defined(__DollEngine__de_device_interface__) */

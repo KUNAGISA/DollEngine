@@ -10,6 +10,12 @@
 #define DollEngine_de_h
 
 #include "de-functions.h"
+#include "de-transform.h"
 #include "de-gl-interface.h"
+#include "de-device-interface.h"
+#include "de-device-window.h"
+#include "de-storage-interface.h"
+#include "de-storage-file.h"
+#include "de-storage-searchs.h"
 
 #endif

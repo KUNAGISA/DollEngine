@@ -15,8 +15,9 @@ NAMESPACE_DE_GL
 
 DE_EXTERN bool initialize();
 DE_EXTERN void check_error();
+DE_EXTERN void reset_viewport();
 
-NAMESPACE_DE_END
+NAMESPACE_DE_END2
 
 
 #endif /* defined(__DollEngine__de_gl_interface__) */

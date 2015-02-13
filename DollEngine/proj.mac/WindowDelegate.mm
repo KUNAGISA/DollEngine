@@ -7,7 +7,8 @@
 //
 
 #import "WindowDelegate.h"
-#include "de-device-interface.h"
+#include "de.h"
+
 //#import "System.h"
 //#include "Window.h"
 
@@ -32,11 +33,11 @@ static WindowDelegate* s_instance=nil;
         frameSize.height=128;
     }
     glClear(GL_COLOR_BUFFER_BIT);
-    if (de::device::window())
+    auto window = de::device::window();
+    if (window)
     {
-        Window::GetInstance()->setSize(frameSize.width, frameSize.height);
-        Window::GetInstance()->reViewport();
-        
+        window->setSize(frameSize.width, frameSize.height);
+        de::gl::reset_viewport();
     }
     return frameSize;
 }
@@ -51,7 +52,7 @@ static WindowDelegate* s_instance=nil;
 -(void)showConsole
 {
     if (!m_control) {
-        m_control = [[ConsoleController alloc]initWithWindowNibName:@"Console"];
+        m_control = [[ConsoleController alloc]initWithWindowNibName:@"ConsoleController"];
     }
     [m_control.window orderFrontRegardless];
 }

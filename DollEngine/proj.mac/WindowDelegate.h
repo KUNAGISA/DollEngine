@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <Cocoa/Cocoa.h>
-//#import "GLView.h"
+#import "GLView.h"
 #import "ConsoleController.h"
 
 @interface WindowDelegate : NSObject<NSWindowDelegate>
@@ -16,7 +16,7 @@
     ConsoleController* m_control;
 }
 
-//@property (nonatomic, assign) GLView* glView;
+@property (nonatomic) GLView* glView;
 
 +(WindowDelegate*)getInstance;
 -(void)showConsole;

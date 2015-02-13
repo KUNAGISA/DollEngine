@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#include "de.h"
 //#include "Scripts.h"
 //#include "Storages.h"
 //#include "System.h"
@@ -22,6 +23,8 @@
     // Insert code here to initialize your application
 
     setlocale(LC_ALL, "zh_CN.UTF-8");
+    
+    de::storage::initialize();
 //    Storages::GetInstance()->addAutoPath(System::GetInstance()->getExePath());
 //    Storages::GetInstance()->setResourcePath(System::GetInstance()->getAppDataPath());
 //    Storages::GetInstance()->setDocumentPath(System::GetInstance()->getPersonalPath());
@@ -29,6 +32,7 @@
 //    System::GetInstance()->addFont(L"文泉驿微米黑.ttc");
     
     [[WindowDelegate getInstance]showConsole];
+    
     
 //    Scripts::GetInstance()->execStorage("startup.tjs");
 //    

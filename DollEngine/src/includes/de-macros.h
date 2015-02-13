@@ -12,7 +12,7 @@
 #include "de-includes.h"
 
 #pragma mark -
-#pragma mark 通用宏
+#pragma mark 通用
 
 #ifdef OS_IOS
 #define	glClearDepth				glClearDepthf
@@ -34,17 +34,15 @@
 #define CHECK_GL_ERROR de::gl::check_error()
 #define ASSERT assert
 #define DE_EXTERN extern
+#define de_string wstring
 
-#define NAMESPACE_DE_GL \
-namespace de { \
-namespace gl {
+#define INNER_W (de::device::get_inner_width()/2)
+#define INNER_H (de::device::get_inner_height()/2)
+#define PI 3.14159265358979323846264338327950288
+#define DEFFONT L"WenQuanYi Micro Hei"
 
-#define NAMESPACE_DE_DEVICE \
-namespace de { \
-namespace device {
-
-#define NAMESPACE_DE_END }\
-}
+#pragma mark -
+#pragma mark 属性与单例
 
 #define Shared(type) static type* GetInstance() \
 {\
@@ -74,5 +72,32 @@ type value;\
 public:\
 type get##func(){return value;}
 
+
+#pragma mark -
+#pragma mark 命名空间
+
+#define NAMESPACE_DE_BEGIN \
+namespace de {
+
+#define NAMESPACE_DE_GL \
+namespace de { \
+namespace gl {
+
+#define NAMESPACE_DE_DEVICE \
+namespace de { \
+namespace device {
+
+#define NAMESPACE_DE_STORAGE \
+namespace de { \
+namespace storage {
+
+#define NAMESPACE_DE_PLATFORM \
+namespace de { \
+namespace platform {
+
+#define NAMESPACE_DE_END }
+
+#define NAMESPACE_DE_END2 }\
+}
 
 #endif

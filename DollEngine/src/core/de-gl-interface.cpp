@@ -50,6 +50,11 @@ void check_error()
 //        EM(ERROR_OPENGL_UNKNOW,s_gl_error_enum);
 }
 
-NAMESPACE_DE_END
+void reset_viewport()
+{
+    
+}
+
+NAMESPACE_DE_END2
 
 
