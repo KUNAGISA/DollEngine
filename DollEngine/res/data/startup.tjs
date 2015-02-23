@@ -4,9 +4,7 @@ Scripts.execStorage("system/base/Enums.tjs");
 Scripts.execStorage("system/base/Timer.tjs");
 Scripts.execStorage("system/base/AsyncTrigger.tjs");
 Scripts.execStorage("system/base/Layer.tjs");
-Scripts.execStorage("system/base/Window.tjs");
 Scripts.execStorage("system/base/Functions.tjs");
 
 //initialize
 Scripts.execStorage("system/initialize.tjs");
-

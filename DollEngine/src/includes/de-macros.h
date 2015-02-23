@@ -15,6 +15,7 @@
 #pragma mark 通用
 
 #ifdef OS_IOS
+
 #define	glClearDepth				glClearDepthf
 #define glDeleteVertexArrays		glDeleteVertexArraysOES
 #define glGenVertexArrays			glGenVertexArraysOES
@@ -29,17 +30,30 @@
 
 #endif
 
+#ifdef UNICODE
+
+#define de_string wstring
+#define de_char wchar_t
+#define de_w(x) L##x
+
+#endif
+#define de_var TJS::tTJSVariant
+
 #define null NULL
 
 #define CHECK_GL_ERROR de::gl::check_error()
 #define ASSERT assert
 #define DE_EXTERN extern
-#define de_string wstring
+#define DM de::debug::message
+#define EM de::debug::e_message
 
 #define INNER_W (de::device::get_inner_width()/2)
 #define INNER_H (de::device::get_inner_height()/2)
 #define PI 3.14159265358979323846264338327950288
-#define DEFFONT L"WenQuanYi Micro Hei"
+#define DEFFONT de_w("WenQuanYi Micro Hei")
+
+#define DELETE_NULL(OBJ) if(OBJ){delete OBJ;OBJ=null;}
+#define DELETE_ARRAY(OBJ) if(OBJ){delete[] OBJ;OBJ=null;}
 
 #pragma mark -
 #pragma mark 属性与单例
@@ -94,6 +108,22 @@ namespace storage {
 #define NAMESPACE_DE_PLATFORM \
 namespace de { \
 namespace platform {
+
+#define NAMESPACE_DE_SCRIPT \
+namespace de { \
+namespace script {
+
+#define NAMESPACE_DE_DEBUG \
+namespace de { \
+namespace debug {
+
+#define NAMESPACE_DE_PAINTER \
+namespace de { \
+namespace painter {
+
+#define NAMESPACE_DE_FONTS \
+namespace de { \
+namespace fonts {
 
 #define NAMESPACE_DE_END }
 

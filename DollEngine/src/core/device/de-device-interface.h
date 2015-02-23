@@ -11,15 +11,19 @@
 
 #include "de-functions.h"
 #include "de-device-window.h"
+#include "de-Transform.h"
 
 NAMESPACE_DE_DEVICE
 
-DE_EXTERN device_window* window();
-DE_EXTERN void new_window();
+DE_EXTERN Window* window(Window* v=null);
+DE_EXTERN Transform* main_trans();
+DE_EXTERN void init_window();
+DE_EXTERN void reset_viewport();
 DE_EXTERN float get_window_edge_width();
 DE_EXTERN float get_window_edge_height();
 DE_EXTERN float get_inner_width();
 DE_EXTERN float get_inner_height();
+
 
 NAMESPACE_DE_END2
 

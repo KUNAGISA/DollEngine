@@ -161,6 +161,7 @@ void convert_utf8_to_wstring(const char* ch_in, wstring& ch_out)
 
 void convert_wstring_to_string(const wstring& src, string& target)
 {
+    target.clear();
     unsigned char out[7];
     for (int i=0; i<src.size(); ++i)
     {

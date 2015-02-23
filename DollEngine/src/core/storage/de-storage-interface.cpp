@@ -11,21 +11,27 @@
 
 NAMESPACE_DE_STORAGE
 
-static storage_searchs* s_searchs_instance=null;
-
-storage_searchs* searchs()
+Searchers* searchers()
 {
-    if (!s_searchs_instance) {
-        s_searchs_instance = new storage_searchs();
-    }
-    return s_searchs_instance;
+    return Searchers::GetInstance();
 }
 
 void initialize()
 {
-    searchs()->setResourcePath(get_app_path());
-    searchs()->setDocumentPath(get_data_path());
-    searchs()->setCachePath(get_cache_path());
+    searchers()->reset();
+    searchers()->setResourcePath(get_app_path());
+    searchers()->setDocumentPath(get_data_path());
+    searchers()->setCachePath(get_cache_path());
+}
+
+bool add_font(const de_string&path)
+{
+    return de::fonts::Fonts::GetInstance()->addFont(path);
+}
+
+de_string get_full_path(const de_string& path)
+{
+    return searchers()->getFullPath(path);
 }
 
 NAMESPACE_DE_END2

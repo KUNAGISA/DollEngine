@@ -10,17 +10,27 @@
 #define __DollEngine__de_storage_file__
 
 #include "de-functions.h"
+#include "de-data.h"
 
 NAMESPACE_DE_STORAGE
 
-class storage_file
+class File
 {
 public:
-    PROPERTY_CONST(de_string, FileName, m_fileName);
-    PROPERTY_CONST(de_string, FullPath, m_fullPath){m_fullPath=v;}
-    
+    File();
+    ~File();
+    bool open();
+    void close();
+    bool exist();
+    long getSize();
+    Data* getData(){return &m_data;}
+    PROPERTY_CONST(de_string, FileName, m_fileName){m_fileName=v;}
 protected:
     void updateFullPath();
+    
+    FILE* m_file;
+    string m_fullPath;
+    Data m_data;
 };
 
 NAMESPACE_DE_END2

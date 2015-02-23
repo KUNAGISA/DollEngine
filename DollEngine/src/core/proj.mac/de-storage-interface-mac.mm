@@ -12,37 +12,43 @@
 
 NAMESPACE_DE_STORAGE
 
+de_string get_exe_path()
+{
+    return get_app_path();
+}
+
 de_string get_app_path()
 {
-    static wstring s_app_path;
+    static de_string s_app_path;
     if (s_app_path.size() == 0)
     {
         NSString *defaultDBPath = [[NSBundle mainBundle] resourcePath];
         de::convert_utf8_to_wstring(defaultDBPath.UTF8String, s_app_path);
-        s_app_path.append(L"/");
+        s_app_path.append(de_w("/"));
     }
     return s_app_path;
 }
 
 de_string get_data_path()
 {
-    static wstring s_document_path;
+    static de_string s_document_path;
     if (s_document_path.size() == 0)
     {
-        NSArray *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
-                                                            NSUserDomainMask,
-                                                            YES);
-        NSString *documentDirectory = [path objectAtIndex:0];
-        de::convert_utf8_to_wstring(documentDirectory.UTF8String, s_document_path);
-        s_document_path.append(L"/");
+//        NSArray *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+//                                                            NSUserDomainMask,
+//                                                            YES);
+//        NSString *documentDirectory = [path objectAtIndex:0];
+//        de::convert_utf8_to_wstring(documentDirectory.UTF8String, s_document_path);
+//        s_document_path.append(de_w("/");
+        s_document_path = get_app_path()+de_w("data/");
     }
     return s_document_path;
 }
 
 de_string get_cache_path()
 {
-    static de_string s_cache_path=L"";
-    if(s_cache_path != L"") return s_cache_path;
+    static de_string s_cache_path=de_w("");
+    if(s_cache_path != de_w("")) return s_cache_path;
     NSString* rootPath = [[NSUserDefaults standardUserDefaults] stringForKey:@"ROOT_PATH"];
     if (rootPath == nil || [rootPath compare:@""] == NSOrderedSame)
     {
@@ -68,7 +74,7 @@ de_string get_cache_path()
     {
         de::convert_utf8_to_wstring(rootPath.UTF8String, s_cache_path);
     }
-    s_cache_path += L"/";
+    s_cache_path += de_w("/");
     return s_cache_path;
 }
 

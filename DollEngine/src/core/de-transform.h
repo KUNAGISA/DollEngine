@@ -1,5 +1,5 @@
 //
-//  de-transform.h
+//  de-Transform.h
 //  DollEngine
 //
 //  Created by DollStudio on 15/2/13.
@@ -13,15 +13,15 @@
 
 NAMESPACE_DE_BEGIN
 
-class transform
+class Transform
 {
 public:
-    transform();
+    Transform();
     
-    virtual ~transform();
+    virtual ~Transform();
     
-    void set(transform* a,transform* b);
-    void set(transform* a);
+    void set(Transform* a,Transform* b);
+    void set(Transform* a);
 public:
     void init();
     void refresh();

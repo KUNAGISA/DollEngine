@@ -51,8 +51,8 @@
 function KAGWindow_config()
 {
 // 画面宽高
-;scWidth = 1024;
-;scHeight = 768;
+;scWidth = 960;
+;scHeight = 640;
 
 
 // 是否启用存档机制（并非sf的数据保存

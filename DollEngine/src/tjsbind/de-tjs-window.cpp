@@ -10,5 +10,26 @@
 
 deTJSWindow::deTJSWindow()
 {
-    de::device::new_window();
+    de::device::window(this);
 }
+
+void deTJSWindow::initWidget()
+{
+    de::device::init_window();
+}
+
+NCB_REGISTER_CLASS_DIFFER(Window, deTJSWindow)
+{
+    TJS_FACTORY
+    NCB_METHOD(setInnerSize);
+    NCB_METHOD(setSize);
+    NCB_METHOD(setLayerSize);
+    NCB_METHOD(initWidget);
+    NCB_PROPERTY_RO(layerLeft, getLayerLeft);
+    NCB_PROPERTY_RO(layerTop, getLayerTop);
+    NCB_PROPERTY_RO(layerZoom, getLayerZoom);
+    NCB_PROPERTY(layerWidth, getLayerWidth, setLayerWidth);
+    NCB_PROPERTY(layerHeight, getLayerHeight, setLayerHeight);
+    NCB_PROPERTY(innerWidth, getInnerWidth, setInnerWidth);
+    NCB_PROPERTY(innerHeight, getInnerHeight, setInnerHeight);
+};

@@ -7,20 +7,32 @@
 //
 
 #include "de-device-interface.h"
+#include "de.h"
 
 NAMESPACE_DE_DEVICE
-static device_window* s_window_instance = null;
+static Window* s_window_instance = null;
+static Transform* s_main_trans = null;
 
-device_window* window()
+Window* window(Window*v)
 {
+    if (v) {
+        s_window_instance = v;
+    }
     return s_window_instance;
 }
 
-void new_window()
+Transform* main_trans()
 {
-    if (!s_window_instance) {
-        s_window_instance = new device_window();
+    if (!s_main_trans) {
+        s_main_trans = new Transform();
     }
+    return s_main_trans;
+}
+
+
+void reset_viewport()
+{
+    
 }
 
 float get_inner_width()

@@ -1,3 +1,4 @@
+var COM = %[];
 
 //组件事件触发类型\n\
 COM.TRIGGER_NONE = 0;

@@ -25,15 +25,11 @@
     setlocale(LC_ALL, "zh_CN.UTF-8");
     
     de::storage::initialize();
-//    Storages::GetInstance()->addAutoPath(System::GetInstance()->getExePath());
-//    Storages::GetInstance()->setResourcePath(System::GetInstance()->getAppDataPath());
-//    Storages::GetInstance()->setDocumentPath(System::GetInstance()->getPersonalPath());
-//    Storages::GetInstance()->setCachePath(get_cache_path());
-//    System::GetInstance()->addFont(L"文泉驿微米黑.ttc");
+    de::storage::add_font(de_w("文泉驿微米黑.ttc"));
     
     [[WindowDelegate getInstance]showConsole];
     
-    
+    de::script::exec_storage(de_w("startup.tjs"),null);
 //    Scripts::GetInstance()->execStorage("startup.tjs");
 //    
 //    System::GetInstance()->setTransChanged(true);

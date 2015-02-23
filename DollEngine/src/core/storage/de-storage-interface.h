@@ -10,15 +10,17 @@
 #define __DollEngine__de_storage_interface__
 
 #include "de-functions.h"
-#include "de-storage-searchs.h"
 
 NAMESPACE_DE_STORAGE
+class Searchers;
 
+DE_EXTERN de_string get_exe_path();
 DE_EXTERN de_string get_app_path();
 DE_EXTERN de_string get_data_path();
 DE_EXTERN de_string get_cache_path();
-
-DE_EXTERN storage_searchs* searchs();
+DE_EXTERN de_string get_full_path(const de_string& path);
+DE_EXTERN bool add_font(const de_string&path);
+DE_EXTERN Searchers* searchers();
 DE_EXTERN void initialize();
 
 NAMESPACE_DE_END2

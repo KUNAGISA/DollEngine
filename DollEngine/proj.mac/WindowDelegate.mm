@@ -33,7 +33,7 @@ static WindowDelegate* s_instance=nil;
         frameSize.height=128;
     }
     glClear(GL_COLOR_BUFFER_BIT);
-    auto window = de::device::window();
+    auto window = de::device::window(null);
     if (window)
     {
         window->setSize(frameSize.width, frameSize.height);

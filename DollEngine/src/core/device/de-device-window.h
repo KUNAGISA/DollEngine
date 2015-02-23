@@ -13,7 +13,7 @@
 
 
 NAMESPACE_DE_DEVICE
-class device_window
+class Window
 {
 public:
     void hideMouseCursor();//隐藏鼠标（ios中为隐藏点击时出现的小动画）
@@ -26,12 +26,14 @@ public:
     PROPERTY(float, Height, m_height);//高度
     PROPERTY(float, LayerWidth, m_layerWidth);//根节点坐标
     PROPERTY(float, LayerHeight, m_layerHeight);//根节点坐标
-    PROPERTY_RO(float, LayerLeft, m_layerLeft);//根节点坐标
-    PROPERTY_RO(float, LayerTop, m_layerTop);//根节点坐标
-    PROPERTY_RO(float, LayerZoom, m_layerZoom);//根节点缩放率
-    PROPERTY_CONST(wstring, Caption, m_caption){m_caption=v;}//窗口标题
+    PROPERTY(float, LayerLeft, m_layerLeft){m_layerLeft=v;}//根节点坐标
+    PROPERTY(float, LayerTop, m_layerTop){m_layerTop=v;}//根节点坐标
+    PROPERTY(float, LayerZoom, m_layerZoom){m_layerZoom=v;}//根节点缩放率
+    PROPERTY_CONST(de_string, Caption, m_caption){m_caption=v;}//窗口标题
     
     void visit();
+    
+    PROPERTY(void*, ID, m_id){m_id=v;}
 protected:
     bool m_needReViewPort;
 };

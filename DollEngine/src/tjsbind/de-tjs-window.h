@@ -11,11 +11,13 @@
 
 #include "de-tjs-bind.h"
 
-class deTJSWindow:public deTJSClass
+class deTJSWindow
+:public deTJSClass
+,public de::device::Window
 {
 public:
-    deTJSWindow();
-    
+    TJS_NCB(deTJSWindow);
+    void initWidget();
 };
 
 #endif /* defined(__DollEngine__de_tjs_window__) */

@@ -1,39 +1,39 @@
 //
-//  de-transform.cpp
+//  de-Transform.cpp
 //  DollEngine
 //
 //  Created by DollStudio on 15/2/13.
 //  Copyright (c) 2015年 血染的玩偶. All rights reserved.
 //
 
-#include "de-transform.h"
+#include "de-Transform.h"
 #include "de.h"
 
 NAMESPACE_DE_BEGIN
 
-transform::transform()
+Transform::Transform()
 :m_need_refresh(false)
 ,m_ignoreAnchorPoint(false)
 {
     init();
 }
 
-transform::~transform()
+Transform::~Transform()
 {
 }
 
-void transform::set(transform* a,transform* b)
+void Transform::set(Transform* a,Transform* b)
 {
     set(a);
     kmMat4Multiply(&m_matrix,&a->m_matrix,&b->m_matrix);
 }
 
-void transform::set(transform* a)
+void Transform::set(Transform* a)
 {
-    memcpy((void*)this, (void*)a, sizeof(transform));
+    memcpy((void*)this, (void*)a, sizeof(Transform));
 }
 
-void transform::init()
+void Transform::init()
 {
     m_x = 0;
     m_y = 0;
@@ -49,7 +49,7 @@ void transform::init()
     kmMat4Identity(&m_matrix);
 }
 
-void transform::refresh()
+void Transform::refresh()
 {
     if (m_need_refresh)
     {
@@ -80,7 +80,7 @@ void transform::refresh()
     }
 }
 
-bool transform::isPointInside(float x,float y)
+bool Transform::isPointInside(float x,float y)
 {
     kmMat4 t_mat;
     kmMat4Inverse(&t_mat, &m_matrix);

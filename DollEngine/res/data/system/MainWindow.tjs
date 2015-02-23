@@ -73,27 +73,28 @@ class KAGWindow extends Window
 			if typeof global.KAGWindow_config_override != "undefined";
 		setLayerSize(scWidth,scHeight);
 		setInnerSize(scWidth,scHeight);
-		kagController = new Controller(this);
+		initWidget();
+		// kagController = new Controller(this);
 
-		sysbase = new BaseLayer(this,null);
-		fore = new StageLayer(this,sysbase);
-		back = new StageLayer(this,sysbase);
-		fore.mirroredLayer = back;
-		back.mirroredLayer = fore;
-		fore.absolute = 1;
-		fore.visible = true;
-		back.visible = false;
-		back.absolute = 0;
+		// sysbase = new BaseLayer(this,null);
+		// fore = new StageLayer(this,sysbase);
+		// back = new StageLayer(this,sysbase);
+		// fore.mirroredLayer = back;
+		// back.mirroredLayer = fore;
+		// fore.absolute = 1;
+		// fore.visible = true;
+		// back.visible = false;
+		// back.absolute = 0;
 
-		fore.getLayer(numCharacterLayers-1);
-		current = fore.getMessage(numMessageLayers-1);
-		current = fore.messages[0];
-		currentNum = 0;
-		current.visible=true;
+		// fore.getLayer(numCharacterLayers-1);
+		// current = fore.getMessage(numMessageLayers-1);
+		// current = fore.messages[0];
+		// currentNum = 0;
+		// current.visible=true;
 
-		mainTouch = new TouchEvent();
-		mainTouch.onClick = onClick;
-		mainTouch.enabled = true;
+		// mainTouch = new TouchEvent();
+		// mainTouch.onClick = onClick;
+		// mainTouch.enabled = true;
 	}
 
 	function finalize () 

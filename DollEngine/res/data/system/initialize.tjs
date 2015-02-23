@@ -60,7 +60,7 @@ Scripts.execStorage("TagHandlers.tjs");
 //     });
 //     atrg.enabled=true;
 // }
-        kag.process("first.ks");
+        // kag.process("first.ks");
 
 // var layer = new Object(kag,kag.sysbase);
 // layer.addComUnit("Label");

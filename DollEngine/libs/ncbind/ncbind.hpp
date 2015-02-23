@@ -14,7 +14,12 @@ extern void TVPAddLog(const ttstr& var);
 extern iTJSDispatch2* TVPGetScriptDispatch();
 extern void TVPThrowExceptionMessage(const ttstr& var);
 extern void TVPThrowExceptionMessage(const ttstr& var1,const ttstr& var2);
+extern void TVPThrowExceptionMessage(const ttstr&, const ttstr&, tjs_int);
+extern void TVPThrowExceptionMessage(const ttstr&, const ttstr&, const ttstr&);
+extern void TVPThrowExceptionMessage(const tTJSMessageHolder&);
+
 extern void TVPExecuteExpression(const ttstr& var1,void*);
+
 
 ////////////////////////////////////////
 // ログ出力用マクロ
