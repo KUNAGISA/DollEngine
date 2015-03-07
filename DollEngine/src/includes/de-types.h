@@ -13,5 +13,14 @@
 #include "de-macros.h"
 
 
+struct DERect
+{
+    DERect():left(0),top(0),width(0),height(0){}
+    DERect(float x,float y,float w,float h):left(x),top(y),width(w),height(h){}
+    float left;
+    float top;
+    float width;
+    float height;
+};
 
 #endif

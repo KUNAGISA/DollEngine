@@ -13,17 +13,39 @@ NAMESPACE_DE_BEGIN
 
 Data::Data(encode type)
 :m_bytes(null)
+,m_size(0)
 {
     
 }
 
-Data* Data::empty()
+Data::~Data()
+{
+    DELETE_ARRAY(m_bytes);
+}
+
+Data* Data::DataWithSize(long size)
+{
+    Data* data = new Data();
+    unsigned char* bytes = new unsigned char[size];
+    memset(bytes, 0, size);
+    data->setBytes(bytes);
+    data->setSize(size);
+    return data;
+}
+
+Data* Data::Empty()
 {
     static Data* s_empty = null;
     if (!s_empty) {
         s_empty = new Data();
     }
     return s_empty;
+}
+
+void Data::clear()
+{
+    DELETE_ARRAY(m_bytes);
+    m_size = 0;
 }
 
 void Data::setBytes(unsigned char *v)

@@ -19,7 +19,7 @@ public:
     Shared(Fonts);
     Fonts();
     bool addFont(const de_string& path);
-    
+    void initDefautFont();
 private:
     map<de_string, FT_Face> m_fontFaceByName;
     map<de_string, de_string> m_fontNameByPath;

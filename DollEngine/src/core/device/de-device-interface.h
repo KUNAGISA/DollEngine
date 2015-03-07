@@ -23,6 +23,7 @@ DE_EXTERN float get_window_edge_width();
 DE_EXTERN float get_window_edge_height();
 DE_EXTERN float get_inner_width();
 DE_EXTERN float get_inner_height();
+DE_EXTERN void initialize();
 
 
 NAMESPACE_DE_END2

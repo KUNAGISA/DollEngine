@@ -7,3 +7,14 @@
 //
 
 #include "de-painter-engine.h"
+
+NAMESPACE_DE_PAINTER
+
+Engine::Engine()
+{
+    
+}
+
+
+
+NAMESPACE_DE_END2

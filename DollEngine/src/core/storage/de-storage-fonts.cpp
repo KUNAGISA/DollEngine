@@ -8,6 +8,7 @@
 
 #include "de-storage-fonts.h"
 #include "de.h"
+#include "fdv_res.h"
 
 NAMESPACE_DE_FONTS
 
@@ -52,6 +53,28 @@ bool Fonts::addFont(const de_string& path)
         return true;
     }
     return false;
+}
+
+void Fonts::initDefautFont()
+{
+    FT_Face face;
+    long length;
+    const unsigned char* data = fdv::read_file("WenQuanYiMicroHei.ttc", length);
+    FT_Error ft_err = FT_New_Memory_Face(m_fontLibrary, data, length, 0, &face);
+    if (ft_err) {
+        return;
+    }
+    ft_err = FT_Select_Charmap(face, FT_ENCODING_UNICODE);
+    if (ft_err) {
+        FT_Done_Face(face);
+        return;
+    }
+    
+    wstring familyName;
+    de::convert_utf8_to_wstring(face->family_name, familyName);
+    m_fontNameByPath[DEFFONT] = DEFFONT;
+    m_fontFaceByName[DEFFONT] = face;
+    DM("新增自定义字体:%s",face->family_name);
 }
 
 NAMESPACE_DE_END2

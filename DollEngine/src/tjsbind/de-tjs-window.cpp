@@ -11,11 +11,11 @@
 deTJSWindow::deTJSWindow()
 {
     de::device::window(this);
+    de::device::init_window();
 }
 
 void deTJSWindow::initWidget()
 {
-    de::device::init_window();
 }
 
 NCB_REGISTER_CLASS_DIFFER(Window, deTJSWindow)

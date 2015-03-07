@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B805ED8D1A8E17D1004540AF /* GLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = B805ED8C1A8E17D1004540AF /* GLView.mm */; };
+		B81CD7011AAB34C100CCFE7E /* libfdv_res.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B81CD7001AAB34C100CCFE7E /* libfdv_res.a */; };
 		B82EBCCE1A98271500819845 /* de-debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B82EBCCC1A98271500819845 /* de-debug.cpp */; };
 		B850EE2C1A8E204500860AC6 /* de-functions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B850EE221A8E204500860AC6 /* de-functions.cpp */; };
 		B850EE2D1A8E204500860AC6 /* de-gl-interface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B850EE241A8E204500860AC6 /* de-gl-interface.cpp */; };
@@ -25,7 +26,6 @@
 		B850EE571A8E4A9900860AC6 /* de-storage-file.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B850EE551A8E4A9900860AC6 /* de-storage-file.cpp */; };
 		B850EE5A1A8EDC6800860AC6 /* de-scripts-tjs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B850EE581A8EDC6800860AC6 /* de-scripts-tjs.cpp */; };
 		B85788EE1A98DE5300B81D74 /* de-storage-fonts.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B85788EC1A98DE5300B81D74 /* de-storage-fonts.cpp */; };
-		B85788F01A98E55900B81D74 /* 文泉驿微米黑.ttc in Resources */ = {isa = PBXBuildFile; fileRef = B85788EF1A98E55900B81D74 /* 文泉驿微米黑.ttc */; };
 		B85789251A98F1B500B81D74 /* data in Resources */ = {isa = PBXBuildFile; fileRef = B85789241A98F1B500B81D74 /* data */; };
 		B85789291A99BD4700B81D74 /* de-painter-interface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B85789271A99BD4700B81D74 /* de-painter-interface.cpp */; };
 		B857892C1A99C79200B81D74 /* de-tjs-script.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B857892A1A99C79200B81D74 /* de-tjs-script.cpp */; };
@@ -146,12 +146,15 @@
 		B861AF271A8DDBBC007F5B42 /* WindowDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = B861AF221A8DDBBC007F5B42 /* WindowDelegate.mm */; };
 		B86F21431A92017500DCFE57 /* de-data.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B86F21411A92017500DCFE57 /* de-data.cpp */; };
 		B8B665A51A8DD591002D8144 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8B665A41A8DD591002D8144 /* OpenGL.framework */; };
+		B8BFA72E1AAAAA1600497E13 /* de-painter-interface-mac.mm in Sources */ = {isa = PBXBuildFile; fileRef = B8BFA72D1AAAAA1600497E13 /* de-painter-interface-mac.mm */; };
 		EA0467C81A8D9D67009DC52C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EA04673D1A8D9D67009DC52C /* main.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		B805ED8B1A8E17D1004540AF /* GLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLView.h; sourceTree = "<group>"; };
 		B805ED8C1A8E17D1004540AF /* GLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GLView.mm; sourceTree = "<group>"; };
+		B81CD6B31AAB32B100CCFE7E /* fdv_res.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fdv_res.h; sourceTree = "<group>"; };
+		B81CD7001AAB34C100CCFE7E /* libfdv_res.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libfdv_res.a; sourceTree = "<group>"; };
 		B82EBCCC1A98271500819845 /* de-debug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "de-debug.cpp"; sourceTree = "<group>"; };
 		B82EBCCD1A98271500819845 /* de-debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "de-debug.h"; sourceTree = "<group>"; };
 		B850EE221A8E204500860AC6 /* de-functions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "de-functions.cpp"; sourceTree = "<group>"; };
@@ -185,7 +188,6 @@
 		B850EE591A8EDC6800860AC6 /* de-scripts-tjs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "de-scripts-tjs.h"; sourceTree = "<group>"; };
 		B85788EC1A98DE5300B81D74 /* de-storage-fonts.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "de-storage-fonts.cpp"; sourceTree = "<group>"; };
 		B85788ED1A98DE5300B81D74 /* de-storage-fonts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "de-storage-fonts.h"; sourceTree = "<group>"; };
-		B85788EF1A98E55900B81D74 /* 文泉驿微米黑.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = "文泉驿微米黑.ttc"; sourceTree = "<group>"; };
 		B85789241A98F1B500B81D74 /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = data; sourceTree = "<group>"; };
 		B85789271A99BD4700B81D74 /* de-painter-interface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "de-painter-interface.cpp"; sourceTree = "<group>"; };
 		B85789281A99BD4700B81D74 /* de-painter-interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "de-painter-interface.h"; sourceTree = "<group>"; };
@@ -484,6 +486,7 @@
 		B8B6659A1A8DD270002D8144 /* de-types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "de-types.h"; sourceTree = "<group>"; };
 		B8B6659B1A8DD27E002D8144 /* de.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = de.h; sourceTree = "<group>"; };
 		B8B665A41A8DD591002D8144 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		B8BFA72D1AAAAA1600497E13 /* de-painter-interface-mac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "de-painter-interface-mac.mm"; sourceTree = "<group>"; };
 		EA0467371A8D9D67009DC52C /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		EA0467391A8D9D67009DC52C /* Info-mac.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-mac.plist"; sourceTree = "<group>"; };
 		EA04673D1A8D9D67009DC52C /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -498,12 +501,22 @@
 				B850EE311A8E29CD00860AC6 /* Cocoa.framework in Frameworks */,
 				B8B665A51A8DD591002D8144 /* OpenGL.framework in Frameworks */,
 				B861AF1B1A8DD9ED007F5B42 /* libfreetype.a in Frameworks */,
+				B81CD7011AAB34C100CCFE7E /* libfdv_res.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B81CD6B21AAB32B100CCFE7E /* fdv_res */ = {
+			isa = PBXGroup;
+			children = (
+				B81CD6B31AAB32B100CCFE7E /* fdv_res.h */,
+				B81CD7001AAB34C100CCFE7E /* libfdv_res.a */,
+			);
+			path = fdv_res;
+			sourceTree = "<group>";
+		};
 		B82EBCCB1A9826DF00819845 /* debug */ = {
 			isa = PBXGroup;
 			children = (
@@ -518,6 +531,7 @@
 			children = (
 				B850EE501A8E48B500860AC6 /* de-storage-interface-mac.mm */,
 				B850EE291A8E204500860AC6 /* de-device-interface-mac.mm */,
+				B8BFA72D1AAAAA1600497E13 /* de-painter-interface-mac.mm */,
 			);
 			path = proj.mac;
 			sourceTree = "<group>";
@@ -547,7 +561,6 @@
 		B850EE4C1A8E485000860AC6 /* storage */ = {
 			isa = PBXGroup;
 			children = (
-				B85788EF1A98E55900B81D74 /* 文泉驿微米黑.ttc */,
 				B850EE4D1A8E486300860AC6 /* de-storage-interface.cpp */,
 				B850EE4E1A8E486300860AC6 /* de-storage-interface.h */,
 				B850EE521A8E499A00860AC6 /* de-storage-searchers.cpp */,
@@ -611,6 +624,7 @@
 		B861AD151A8DD663007F5B42 /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				B81CD6B21AAB32B100CCFE7E /* fdv_res */,
 				B861AD161A8DD663007F5B42 /* freetype2 */,
 				B861ADD71A8DD663007F5B42 /* glStateCache */,
 				B861ADDA1A8DD663007F5B42 /* kazmath */,
@@ -1202,8 +1216,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EAAA621F1A8D92F400045C45 /* Build configuration list for PBXNativeTarget "DollEngine" */;
 			buildPhases = (
-				EAAA61FE1A8D92F400045C45 /* Sources */,
 				EAAA61FF1A8D92F400045C45 /* Frameworks */,
+				EAAA61FE1A8D92F400045C45 /* Sources */,
 				EAAA62001A8D92F400045C45 /* Resources */,
 			);
 			buildRules = (
@@ -1255,7 +1269,6 @@
 				B861AF251A8DDBBC007F5B42 /* ConsoleController.xib in Resources */,
 				B861AEAA1A8DD663007F5B42 /* ChangeLog in Resources */,
 				B861AEAB1A8DD663007F5B42 /* CMakeLists.txt in Resources */,
-				B85788F01A98E55900B81D74 /* 文泉驿微米黑.ttc in Resources */,
 				B85789251A98F1B500B81D74 /* data in Resources */,
 				B861AF261A8DDBBC007F5B42 /* Main.storyboard in Resources */,
 			);
@@ -1288,6 +1301,7 @@
 				B861AED91A8DD663007F5B42 /* iso8859_9.c in Sources */,
 				B850EE4B1A8E435600860AC6 /* de-device-window.cpp in Sources */,
 				B861AEB81A8DD663007F5B42 /* MsgLoad.cpp in Sources */,
+				B8BFA72E1AAAAA1600497E13 /* de-painter-interface-mac.mm in Sources */,
 				B861AECE1A8DD663007F5B42 /* iso8859_13.c in Sources */,
 				B861AEB11A8DD663007F5B42 /* plane.c in Sources */,
 				B850EE511A8E48B500860AC6 /* de-storage-interface-mac.mm in Sources */,
@@ -1498,6 +1512,8 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../libs/freetype2/prebuilt/mac",
+					/Users/Dollstudio/DollStudio/gitProject/krGL/DollEngine/DollEngine/libs/fdv_res,
+					"$(SRCROOT)/../libs/fdv_res",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OTHER_LDFLAGS = "-lz";
@@ -1522,6 +1538,8 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../libs/freetype2/prebuilt/mac",
+					/Users/Dollstudio/DollStudio/gitProject/krGL/DollEngine/DollEngine/libs/fdv_res,
+					"$(SRCROOT)/../libs/fdv_res",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OTHER_LDFLAGS = "-lz";

@@ -24,7 +24,7 @@
 
     setlocale(LC_ALL, "zh_CN.UTF-8");
     
-    de::storage::initialize();
+    de::device::initialize();
     de::storage::add_font(de_w("文泉驿微米黑.ttc"));
     
     [[WindowDelegate getInstance]showConsole];

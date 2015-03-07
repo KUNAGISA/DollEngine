@@ -52,8 +52,21 @@
 #define PI 3.14159265358979323846264338327950288
 #define DEFFONT de_w("WenQuanYi Micro Hei")
 
-#define DELETE_NULL(OBJ) if(OBJ){delete OBJ;OBJ=null;}
+#define DELETE_OBJ(OBJ) if(OBJ){delete OBJ;OBJ=null;}
 #define DELETE_ARRAY(OBJ) if(OBJ){delete[] OBJ;OBJ=null;}
+
+#define LOAD_FILE(data,path,ret) \
+de::Data* data=null;\
+{\
+de::storage::File file;\
+file.setFileName(path);\
+if (!file.open())\
+{\
+    EM(E_STORAGE_FILE_NOT_OPEN,path.c_str());\
+    return ret;\
+}\
+data = file.getData();\
+}
 
 #pragma mark -
 #pragma mark 属性与单例

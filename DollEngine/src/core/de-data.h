@@ -24,7 +24,10 @@ public:
         unicode
     };
     Data(encode type=bin);
-    static Data* empty();
+    ~Data();
+    static Data* DataWithSize(long size);
+    static Data* Empty();
+    void clear();
     bool isEmpty(){return m_bytes==null;}
     const wchar_t* getWChar();
     

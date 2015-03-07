@@ -53,29 +53,17 @@ void initialize()
 
 void exec_storage(const de_string& filename,de_var* ret)
 {
-    de::storage::File file;
-    file.setFileName(filename);
-    if (!file.open())
-    {
-        EM(E_STORAGE_FILE_NOT_OPEN,filename.c_str());
-        return;
-    }
+    LOAD_FILE(data,filename,)
     push_script_file(filename);
-    exec(file.getData()->getWChar(),ret);
+    exec(data->getWChar(),ret);
     pop_script_file();
 }
 
 void eval_storage(const de_string& filename,de_var* ret)
 {
-    de::storage::File file;
-    file.setFileName(filename);
-    if (!file.open())
-    {
-        EM(E_STORAGE_FILE_NOT_OPEN,filename.c_str());
-        return;
-    }
+    LOAD_FILE(data,filename,)
     push_script_file(filename);
-    eval(file.getData()->getWChar(),ret);
+    eval(data->getWChar(),ret);
     pop_script_file();
 }
 

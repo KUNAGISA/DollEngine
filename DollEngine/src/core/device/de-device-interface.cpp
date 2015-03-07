@@ -13,6 +13,15 @@ NAMESPACE_DE_DEVICE
 static Window* s_window_instance = null;
 static Transform* s_main_trans = null;
 
+void initialize()
+{
+    de::storage::searchers()->reset();
+    de::storage::searchers()->setResourcePath(de::storage::get_app_path());
+    de::storage::searchers()->setDocumentPath(de::storage::get_data_path());
+    de::storage::searchers()->setCachePath(de::storage::get_cache_path());
+    de::fonts::Fonts::GetInstance()->initDefautFont();
+}
+
 Window* window(Window*v)
 {
     if (v) {

@@ -21,7 +21,6 @@ DE_EXTERN de_string get_cache_path();
 DE_EXTERN de_string get_full_path(const de_string& path);
 DE_EXTERN bool add_font(const de_string&path);
 DE_EXTERN Searchers* searchers();
-DE_EXTERN void initialize();
 
 NAMESPACE_DE_END2
 

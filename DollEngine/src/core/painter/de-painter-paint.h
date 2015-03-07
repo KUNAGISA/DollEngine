@@ -10,12 +10,12 @@
 #define __DollEngine__de_painter_paint__
 
 #include "de-functions.h"
+#include "de-transform.h"
 
 NAMESPACE_DE_PAINTER
 
 class SpriteFrame;
 class ShaderProgram;
-class Transform;
 class Paint
 {
 public:
@@ -24,14 +24,14 @@ public:
     bool colorRect(int r);
     bool loadImages(const wstring& path);
     void freeImages();
-    void trigger();
+    void onDraw();
     PROPERTY(float, ImageWidth, m_imageWidth){m_imageWidth=fmaxf(0,v);}
     PROPERTY(float, ImageHeight, m_imageHeight){m_imageHeight=fmaxf(0,v);}
     PROPERTY(float, Opacity, m_opacity){m_opacity=fminf(1,fmaxf(0,v));}
     PROPERTY(SpriteFrame*, SpriteFrame, m_spriteFrame){m_spriteFrame=v;}
     PROPERTY_CONST(wstring, GraphPath, m_graphPath){m_graphPath=v;}
     PROPERTY(ShaderProgram*, Program, m_program){m_program=v;}
-    PROPERTY(bool,Scale9, m_scale9 );
+//    PROPERTY(bool,Scale9, m_scale9 );
     PROPERTY(float, LeftInside, m_leftInside){m_leftInside=v;}
     PROPERTY(float, TopInside, m_topInside){m_topInside=v;}
     PROPERTY(float, RightInside, m_rightInside){m_rightInside=v;}

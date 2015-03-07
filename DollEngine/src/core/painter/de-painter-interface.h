@@ -12,8 +12,10 @@
 #include "de-functions.h"
 
 NAMESPACE_DE_PAINTER
+class Image;
 
 DE_EXTERN void reset_viewport();
+DE_EXTERN Image* get_image(const de_string& path);
 
 NAMESPACE_DE_END2
 

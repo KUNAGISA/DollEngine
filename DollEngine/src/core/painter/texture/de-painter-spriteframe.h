@@ -9,6 +9,16 @@
 #ifndef __DollEngine__de_painter_spriteframe__
 #define __DollEngine__de_painter_spriteframe__
 
-#include <stdio.h>
+#include "de-functions.h"
+
+NAMESPACE_DE_PAINTER
+
+class SpriteFrame
+{
+public:
+//    SpriteFrame();
+};
+
+NAMESPACE_DE_END2
 
 #endif /* defined(__DollEngine__de_painter_spriteframe__) */
