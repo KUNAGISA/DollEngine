@@ -32,7 +32,7 @@ void DrawEngine::clearGL()
 void DrawEngine::resizeGL(int width, int height)
 {
     if(isInitialized(d_ptr)) {
-//        glViewport(0,0, width, height);
+        glViewport(0,0, width, height);
     }
 }
 
@@ -129,10 +129,7 @@ void DrawEngine::draw(SpriteFrame* frame,Transform* trans,const GradientColor& c
     m_vbo.allocate(vertData.constData(), vertData.count() * sizeof(GLfloat));
     
     effect->setUniformValue("matrix", trans->getMatrix());
-    effect->enableAttributeArray(PROGRAM_VERTEX_ATTRIBUTE);
-    effect->enableAttributeArray(PROGRAM_TEXCOORD_ATTRIBUTE);
-    effect->setAttributeBuffer(PROGRAM_VERTEX_ATTRIBUTE, GL_FLOAT, 0, 3, 5 * sizeof(GLfloat));
-    effect->setAttributeBuffer(PROGRAM_TEXCOORD_ATTRIBUTE, GL_FLOAT, 3 * sizeof(GLfloat), 2, 5 * sizeof(GLfloat));
+    effect->actived();
     
     frame->getTexture()->bind();
     glDrawArrays(GL_TRIANGLE_FAN, 0, 4);

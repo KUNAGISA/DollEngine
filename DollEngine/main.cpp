@@ -4,6 +4,7 @@
 #include "DrawEngine.h"
 #include "Layer.h"
 #include "BaseCanvas.h"
+#include "MainMenu.h"
 
 using namespace DE;
 
@@ -15,9 +16,6 @@ int main(int argc, char *argv[])
     QSurfaceFormat fmt;
     fmt.setDepthBufferSize(24);
     QSurfaceFormat::setDefaultFormat(fmt);
-    
-    BaseCanvas w;
-    w.show();
     
     Device::GetInstance()->setGLInitHandler([](){
         Layer* lay = new Layer();
@@ -34,5 +32,11 @@ int main(int argc, char *argv[])
         lay2->setTop(300);
         lay2->setEnabled(true);
     });
+    MainMenu t;
+    t.show();
+    t.hide();
+    BaseCanvas w;
+    w.show();
+    
     return a.exec();
 }

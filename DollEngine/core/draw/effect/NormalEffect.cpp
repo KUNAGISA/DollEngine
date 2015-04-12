@@ -58,7 +58,6 @@ void NormalEffect::actived()
     enableAttributeArray(PROGRAM_TEXCOORD_ATTRIBUTE);
     setAttributeBuffer(PROGRAM_VERTEX_ATTRIBUTE, GL_FLOAT, 0, 3, 5 * sizeof(GLfloat));
     setAttributeBuffer(PROGRAM_TEXCOORD_ATTRIBUTE, GL_FLOAT, 3 * sizeof(GLfloat), 2, 5 * sizeof(GLfloat));
-
 }
 
 DE_END

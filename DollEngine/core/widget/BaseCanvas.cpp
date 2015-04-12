@@ -66,15 +66,6 @@ void BaseCanvas::resizeGL(int width, int height)
 {
     QOpenGLWindow::resizeGL(width, height);
     Device::GetInstance()->setWinSize(width,height);
-//    qDebug()<<"[BaseCanvas ResizeGL]\n{\n"
-//    <<"\twidth:"<<width<<"\n"
-//    <<"\theight:"<<height<<"\n"
-//    <<"\tlayerLeft:"<<Device::GetInstance()->getLayerLeft()<<"\n"
-//    <<"\tlayerTop:"<<Device::GetInstance()->getLayerTop()<<"\n"
-//    <<"\tlayerWidth:"<<Device::GetInstance()->getLayerWidth()<<"\n"
-//    <<"\tlayerHeight:"<<Device::GetInstance()->getLayerHeight()<<"\n"
-//    <<"\tlayerZoom:"<<Device::GetInstance()->getLayerZoom()<<"\n"
-//    <<"}";
     DrawEngine::GetInstance()->resizeGL(width,height);
     NEED_REDRAW;
 }

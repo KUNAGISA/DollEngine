@@ -23,7 +23,6 @@ INCLUDEPATH += widget \
 	    core/component \
 
 SOURCES += main.cpp\
-#        MainWindow.cpp \
     core/widget/BaseCanvas.cpp \
     core/CoreTypes.cpp \
     core/draw/texture/SpriteFrame.cpp \
@@ -39,10 +38,10 @@ SOURCES += main.cpp\
     core/draw/effect/NormalEffect.cpp \
     core/component/ComObject.cpp \
     core/system/Scheduler.cpp \
-    core/system/MouseEventManager.cpp
+    core/system/MouseEventManager.cpp \
+    MainMenu.cpp
 
 HEADERS  += \
-#   MainWindow.h \
     core/widget/BaseCanvas.h \
     core/Macros.h \
     core/CoreTypes.h \
@@ -59,7 +58,9 @@ HEADERS  += \
     core/draw/effect/NormalEffect.h \
     core/component/ComObject.h \
     core/system/Scheduler.h \
-    core/system/MouseEventManager.h
+    core/system/MouseEventManager.h \
+    MainMenu.h
 
-FORMS    += MainWindow.ui \
-    ProjectDirSelect.ui
+FORMS    += \
+    ProjectDirSelect.ui \
+    MainMenu.ui
