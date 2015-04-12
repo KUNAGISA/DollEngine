@@ -1,7 +1,7 @@
 #include "BaseCanvas.h"
 #include "Layer.h"
 #include "DrawEngine.h"
-#include "TouchManager.h"
+#include "MouseEventManager.h"
 
 DE_BEGIN
 
@@ -38,11 +38,11 @@ void BaseCanvas::paintGL()
     }
 }
 
-void BaseCanvas::touchUpdate()
+void BaseCanvas::refreshMouseEvent()
 {
-    TouchManager::GetInstance()->clear();
+    MouseEventManager::GetInstance()->clear();
     if(m_primaryLayer) {
-        m_primaryLayer->touchUpdate();
+        m_primaryLayer->refreshMouseEvent();
     }
 }
 
@@ -56,6 +56,26 @@ void BaseCanvas::setPrimaryLayer(Layer* lay)
         lay->removeFromParent(false);
     }
     m_primaryLayer = lay;
+}
+
+void BaseCanvas::mousePressEvent(QMouseEvent * event)
+{
+    MouseEventManager::GetInstance()->onMouseBegan(event->x(),event->y());
+}
+
+void BaseCanvas::mouseReleaseEvent(QMouseEvent *event)
+{
+    MouseEventManager::GetInstance()->onMouseEnd(event->x(),event->y());
+}
+
+void BaseCanvas::mouseMoveEvent(QMouseEvent *event)
+{
+    MouseEventManager::GetInstance()->onMouseMove(event->x(),event->y());
+}
+
+void BaseCanvas::mouseDoubleClickEvent(QMouseEvent *event)
+{
+    MouseEventManager::GetInstance()->onDoubleClick(event->x(),event->y());
 }
 
 DE_END

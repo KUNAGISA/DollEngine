@@ -1,6 +1,6 @@
 #include "Layer.h"
 #include "DrawEngine.h"
-#include "TouchManager.h"
+#include "MouseEventManager.h"
 
 DE_BEGIN
 
@@ -8,6 +8,11 @@ Layer::Layer()
     :m_parent(null)
     ,m_displayFrame(null)
     ,m_enabled(false)
+    ,m_allChildEnabled(true)
+    ,m_swallow(true)
+    ,m_effect(null)
+    ,m_needSortChildren(false)
+    ,m_zOrder(0)
 {
     m_transform = new Transform();
     m_transInWorld = new Transform();
@@ -18,7 +23,7 @@ Layer::Layer()
 Layer::~Layer()
 {
     setEnabled(false);
-    TouchManager::GetInstance()->removeTouchLayer(this);
+    MouseEventManager::GetInstance()->removeLayer(this);
     NEED_RETOUCH;
     NEED_REDRAW;
 }
@@ -68,21 +73,23 @@ void Layer::transform() {
     m_transInWorld->setHeight(getHeight());
 }
 
-void Layer::touchUpdate()
+void Layer::refreshMouseEvent()
 {
-    if(getEnabled()) {
+    if(m_allChildEnabled) {
         if(m_children.size() > 0) {
             auto iter = m_children.end();
             --iter;
             for(;true; --iter)
             {
-                (*iter)->touchUpdate();
+                (*iter)->refreshMouseEvent();
                 if(iter == m_children.begin()) {
                     break;
                 }
             }
         }
-        TouchManager::GetInstance()->addTouchLayer(this);
+    }
+    if(m_enabled) {
+        MouseEventManager::GetInstance()->addLayer(this);
     }
 }
 
@@ -149,12 +156,6 @@ void Layer::setParent(Layer* lay)
     lay->addChild(this);
 }
 
-void Layer::setEnabled(bool v)
-{
-    if(m_enabled != v) {
-        m_enabled = v;
-        NEED_RETOUCH;
-    }
-}
+
 
 DE_END

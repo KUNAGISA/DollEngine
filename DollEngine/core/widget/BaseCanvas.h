@@ -14,8 +14,12 @@ public:
     void initializeGL();
     void paintGL();
     void resizeGL(int width, int height);
-    void touchUpdate();
+    void refreshMouseEvent();
     
+    void mousePressEvent(QMouseEvent *);
+    void mouseReleaseEvent(QMouseEvent *);
+    void mouseMoveEvent(QMouseEvent *);
+    void mouseDoubleClickEvent(QMouseEvent *);
 //    void resizeEvent(QResizeEvent* e);
     
     PROPERTY(Layer*,PrimaryLayer,m_primaryLayer);

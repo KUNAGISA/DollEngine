@@ -20,6 +20,7 @@ INCLUDEPATH += widget \
 	    core/draw/texture \
 	    core/draw/effect \
 	    core/system \
+	    core/component \
 
 SOURCES += main.cpp\
         MainWindow.cpp \
@@ -36,7 +37,9 @@ SOURCES += main.cpp\
     core/widget/Layer.cpp \
     core/system/Transform.cpp \
     core/draw/effect/NormalEffect.cpp \
-    core/system/TouchManager.cpp
+    core/component/ComObject.cpp \
+    core/system/Scheduler.cpp \
+    core/system/MouseEventManager.cpp
 
 HEADERS  += MainWindow.h \
     core/widget/BaseCanvas.h \
@@ -53,7 +56,9 @@ HEADERS  += MainWindow.h \
     core/widget/Layer.h \
     core/system/Transform.h \
     core/draw/effect/NormalEffect.h \
-    core/system/TouchManager.h
+    core/component/ComObject.h \
+    core/system/Scheduler.h \
+    core/system/MouseEventManager.h
 
 FORMS    += MainWindow.ui \
     ProjectDirSelect.ui

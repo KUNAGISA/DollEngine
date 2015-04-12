@@ -16,7 +16,7 @@ public:
 public:
     void init();
     void flush();
-    bool isPointInside(float x,float y);
+    bool isPointInside(float x,float y,double& ox,double& oy);
 public:
     const QMatrix& getMatrix(){return m_matrix;}
     void setRotation(float v){m_rotationX=m_rotationY=m_rotationZ=v;m_needFlush=true;}

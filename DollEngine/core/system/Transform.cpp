@@ -1,4 +1,5 @@
 #include "Transform.h"
+#include "Device.h"
 
 DE_BEGIN
 
@@ -64,15 +65,19 @@ void Transform::flush()
     }
 }
 
-bool Transform::isPointInside(float x,float y)
+bool Transform::isPointInside(float x,float y,double& ox,double& oy)
 {
+//    x=256,y=384/2;
     bool invertible = true;
     QMatrix baseMax = m_matrix.inverted(&invertible);
     if(!invertible) {
         throw Debug::throwMsg("矩阵不可逆");
     }
-    double ox=0,oy=0;
-    baseMax.map(x,y,&ox,&oy);
+    float nx = x*2/Device::GetInstance()->getWinWidth()-1;
+    float ny = 1-y*2/Device::GetInstance()->getWinHeight();
+//    nx=0,ny=0;
+    baseMax.map(nx,ny,&ox,&oy);
+    qDebug()<<x<<y<<ox<<oy;
     if (ox >= 0 &&
         oy >= 0 &&
         ox < m_width&&

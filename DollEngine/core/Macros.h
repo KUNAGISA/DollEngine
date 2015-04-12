@@ -7,10 +7,12 @@
 #include <QString>
 #include <QSettings>
 #include <QFile>
+#include <QDir>
 #include <QMap>
 #include <QList>
 #include <QCoreApplication>
 #include <QMatrix>
+#include <QMouseEvent>
 //Qt Opengl
 #include <QOpenGLWidget>
 #include <QOpenGLFunctions>

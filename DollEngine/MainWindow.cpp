@@ -16,10 +16,18 @@ MainWindow::MainWindow(QWidget *parent) :
     QSettings set("default.config",QSettings::IniFormat);
     QString v = set.value("project_dir").toString();
     if(v != "") {
+        QDir dir(v);
+        if(!dir.exists()) {
+            qDebug()<<"工程目录未找到";
+            return;
+        }
         Device::GetInstance()->setDataPath(v);
         Device::GetInstance()->setCurrentCanvas(MainWindow::getCanvas());
         Device::GetInstance()->startup();
+        qDebug()<<geometry();
+        return;
     }
+    qDebug()<<"工程目录为空";
 }
 
 MainWindow* MainWindow::GetInstance()

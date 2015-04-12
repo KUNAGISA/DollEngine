@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
     Layer* lay = new Layer();
     w.getCanvas()->setPrimaryLayer(lay);
     lay->loadImages("/bgimage/bg1.png");
-    
+    lay->setAllChildEnabled(true);
     Layer* lay2 = new Layer();
     lay->addChild(lay2);
     lay2->loadImages("/image/configb1_1.png");
@@ -27,5 +27,6 @@ int main(int argc, char *argv[])
     lay2->setRotation(45);
     lay2->setLeft(400);
     lay2->setTop(300);
+    lay2->setEnabled(true);
     return a.exec();
 }

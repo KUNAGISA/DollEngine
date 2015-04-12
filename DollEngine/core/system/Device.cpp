@@ -7,8 +7,8 @@ Device::Device()
     :m_currentCanvas(null)
     ,m_frameInterval(60)
     ,m_mainLoopTimerId(0)
-    ,m_layerWidth(1024)
-    ,m_layerHeight(768)
+    ,m_layerWidth(512)
+    ,m_layerHeight(384)
     ,m_deviceTrans(null)
 {
     setAppPath(QCoreApplication::applicationDirPath());
@@ -27,7 +27,7 @@ void Device::mainLoop()
     {
         if(getNeedRetouch()) {
             setNeedRetouch(false);
-            m_currentCanvas->touchUpdate();
+            m_currentCanvas->refreshMouseEvent();
         }
         if(getNeedRedraw()) {
             setNeedRedraw(false);
