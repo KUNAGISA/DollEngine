@@ -9,6 +9,8 @@ MainMenu::MainMenu(QWidget *parent) :
     ui(new Ui::MainMenu)
 {
     ui->setupUi(this);
+    show();
+    hide();
 }
 
 MainMenu::~MainMenu()

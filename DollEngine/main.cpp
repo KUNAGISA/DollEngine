@@ -11,6 +11,8 @@ using namespace DE;
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+    MainMenu t; //显示菜单用
+    
     setlocale(LC_ALL, "zh_CN.UTF-8");
     
     QSurfaceFormat fmt;
@@ -32,9 +34,6 @@ int main(int argc, char *argv[])
         lay2->setTop(300);
         lay2->setEnabled(true);
     });
-    MainMenu t;
-    t.show();
-    t.hide();
     BaseCanvas w;
     w.show();
     
