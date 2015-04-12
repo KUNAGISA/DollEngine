@@ -16,7 +16,6 @@ public:
     void mainLoop();
     
     void startup();
-    
     void setCanvasSize(float w,float h);
     void setWinSize(float w,float h);
     void onResize();
@@ -26,6 +25,7 @@ public:
     PROPERTY_CONST(QString,PatchPath,m_patchPath){m_patchPath=v;}
     PROPERTY(BaseCanvas*,CurrentCanvas,m_currentCanvas){m_currentCanvas=v;}
     PROPERTY(int,FrameInterval,m_frameInterval);
+    PROPERTY(std::function<void()>, GLInitHandler, m_glInitHandler){m_glInitHandler=v;}
     
     PROPERTY(bool,NeedRedraw,m_needRedraw){m_needRedraw=v;}
     PROPERTY(bool,NeedRetouch,m_needRetouch){m_needRetouch=v;}

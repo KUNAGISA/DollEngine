@@ -8,7 +8,7 @@
 
 DE_BEGIN
 
-class DrawEngine : protected QOpenGLFunctions
+class DrawEngine : public QOpenGLFunctions
 {
 public:
     enum EFFECT_PROGRAM{
@@ -19,11 +19,13 @@ public:
     Shared(DrawEngine)
     virtual ~DrawEngine();
     
+    void setContext(QOpenGLContext* v){m_context=v;}
     void initializeGL();
     void clearGL();
     void resizeGL(int width, int height);
     
     SpriteFrame* addImage(const QString& picKey,const QString& plist="");
+    void initDefaultEffect();
     void addEffect(EFFECT_PROGRAM pm,Effect*);
     Effect* getEffect(EFFECT_PROGRAM pm);
     
@@ -37,6 +39,7 @@ protected:
     Transform* m_deviceTrans;
     QMap<EFFECT_PROGRAM,Effect*> m_allEffects;
     QOpenGLBuffer m_vbo;
+    QOpenGLContext* m_context;
 };
 
 DE_END

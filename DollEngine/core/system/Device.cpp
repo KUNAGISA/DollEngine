@@ -6,10 +6,10 @@ DE_BEGIN
 Device::Device()
     :m_currentCanvas(null)
     ,m_frameInterval(60)
-    ,m_mainLoopTimerId(0)
-    ,m_layerWidth(512)
-    ,m_layerHeight(384)
     ,m_deviceTrans(null)
+    ,m_layerWidth(1024)
+    ,m_layerHeight(768)
+    ,m_mainLoopTimerId(0)
 {
     setAppPath(QCoreApplication::applicationDirPath());
 }
@@ -55,6 +55,7 @@ void Device::setWinSize(float w, float h)
 {
     m_winWidth = w;
     m_winHeight = h;
+    onResize();
 }
 
 void Device::onResize()
@@ -105,7 +106,7 @@ void Device::setFrameInterval(int v)
     m_mainLoopTimerId = startTimer(1000.0f/m_frameInterval);
 }
 
-void Device::timerEvent(QTimerEvent*event )
+void Device::timerEvent(QTimerEvent* )
 {
     mainLoop();
 }

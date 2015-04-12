@@ -6,6 +6,7 @@
 DE_BEGIN
 
 DrawEngine::DrawEngine()
+    :m_context(null)
 {
 }
 
@@ -18,21 +19,29 @@ void DrawEngine::initializeGL()
 {
     initializeOpenGLFunctions();
     glEnable(GL_TEXTURE_2D);
-    
-    auto effect = new NormalEffect();
-    addEffect(NORMAL_EFFECT,effect);
+    initDefaultEffect();
     
 }
 
 void DrawEngine::clearGL()
 {
-    glClearColor(0,0,0,0);
-    glClear(GL_DEPTH|GL_COLOR);
+    glClearColor(1,0,0,1);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 void DrawEngine::resizeGL(int width, int height)
 {
-    glViewport(0,0, width, height);
+    if(isInitialized(d_ptr)) {
+//        glViewport(0,0, width, height);
+    }
+}
+
+void DrawEngine::initDefaultEffect()
+{
+    if (m_allEffects.size() == 0) {
+        auto effect = new NormalEffect();
+        addEffect(NORMAL_EFFECT,effect);
+    }
 }
 
 void DrawEngine::addEffect(EFFECT_PROGRAM pm,Effect* effect)
@@ -47,6 +56,7 @@ void DrawEngine::addEffect(EFFECT_PROGRAM pm,Effect* effect)
 
 Effect* DrawEngine::getEffect(EFFECT_PROGRAM pm)
 {
+    initDefaultEffect();
     return m_allEffects[pm];
 }
 

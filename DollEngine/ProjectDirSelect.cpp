@@ -3,7 +3,7 @@
 #include <QFileDialog>
 #include <QSettings>
 #include "Device.h"
-#include "MainWindow.h"
+#include "BaseCanvas.h"
 
 ProjectDirSelect::ProjectDirSelect(QWidget *parent) :
     QDialog(parent),
@@ -37,6 +37,6 @@ void ProjectDirSelect::on_buttonBox_accepted()
     QSettings set("default.config",QSettings::IniFormat);
     set.setValue("project_dir",ui->lineEdit->text());
     DE::Device::GetInstance()->setDataPath(ui->lineEdit->text());
-    DE::Device::GetInstance()->setCurrentCanvas(MainWindow::GetInstance()->getCanvas());
+    DE::Device::GetInstance()->setCurrentCanvas(DE::BaseCanvas::GetInstance());
     DE::Device::GetInstance()->startup();
 }

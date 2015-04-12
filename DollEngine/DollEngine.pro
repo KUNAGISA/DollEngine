@@ -23,7 +23,7 @@ INCLUDEPATH += widget \
 	    core/component \
 
 SOURCES += main.cpp\
-        MainWindow.cpp \
+#        MainWindow.cpp \
     core/widget/BaseCanvas.cpp \
     core/CoreTypes.cpp \
     core/draw/texture/SpriteFrame.cpp \
@@ -41,7 +41,8 @@ SOURCES += main.cpp\
     core/system/Scheduler.cpp \
     core/system/MouseEventManager.cpp
 
-HEADERS  += MainWindow.h \
+HEADERS  += \
+#   MainWindow.h \
     core/widget/BaseCanvas.h \
     core/Macros.h \
     core/CoreTypes.h \

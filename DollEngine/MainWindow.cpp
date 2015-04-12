@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    
     s_instance = this;
     QSettings set("default.config",QSettings::IniFormat);
     QString v = set.value("project_dir").toString();

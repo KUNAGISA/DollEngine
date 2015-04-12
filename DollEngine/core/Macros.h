@@ -13,8 +13,14 @@
 #include <QCoreApplication>
 #include <QMatrix>
 #include <QMouseEvent>
+#include <QWidget>
+#include <QWindow>
+#include <QMenuBar>
+#include <QMenu>
 //Qt Opengl
-#include <QOpenGLWidget>
+#include <QOpenGLWindow>
+#include <QOpenGLPaintDevice>
+#include <QOpenGLContext>
 #include <QOpenGLFunctions>
 #include <QOpenGLTexture>
 #include <QOpenGLShaderProgram>

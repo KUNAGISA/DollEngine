@@ -16,7 +16,6 @@ Layer::Layer()
 {
     m_transform = new Transform();
     m_transInWorld = new Transform();
-    m_effect = DrawEngine::GetInstance()->getEffect(DrawEngine::NORMAL_EFFECT);
     m_color.reset();
 }
 
@@ -96,6 +95,9 @@ void Layer::refreshMouseEvent()
 void Layer::onPaint()
 {
     if(m_displayFrame) {
+        if (!m_effect) {
+            m_effect = DrawEngine::GetInstance()->getEffect(DrawEngine::NORMAL_EFFECT);
+        }
         DrawEngine::GetInstance()->draw(m_displayFrame,m_transInWorld,m_color,m_effect);
     }
 }

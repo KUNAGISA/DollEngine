@@ -6,14 +6,18 @@
 DE_BEGIN
 
 class Layer;
-class BaseCanvas : public QOpenGLWidget
+class BaseCanvas : public QOpenGLWindow
 {
 public:
-    BaseCanvas(QWidget *parent = 0);
+    BaseCanvas();
+    static BaseCanvas* GetInstance();
     virtual ~BaseCanvas();
-    void initializeGL();
-    void paintGL();
-    void resizeGL(int width, int height);
+    
+    virtual void	initializeGL();
+    virtual void	paintGL();
+    virtual void	resizeGL(int w, int h);
+    
+public:
     void refreshMouseEvent();
     
     void mousePressEvent(QMouseEvent *);
