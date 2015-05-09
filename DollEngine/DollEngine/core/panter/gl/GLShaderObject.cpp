@@ -7,6 +7,7 @@
 //
 
 #include "GLShaderObject.h"
+#include "GLFunctions.h"
 
 DE_BEGIN
 

@@ -29,10 +29,8 @@ using namespace std;
 #define DE_BEGIN namespace DE {
 #define DE_END }
 
-#define NEED_REDRAW 
-//Device::GetInstance()->setNeedRedraw(true)
-#define NEED_RETOUCH 
-//Device::GetInstance()->setNeedRetouch(true)
+#define NEED_REDRAW Device::GetInstance()->setNeedRedraw(true)
+#define NEED_RETOUCH Device::GetInstance()->setNeedRetouch(true)
 
 #define Shared(type) static type* GetInstance() \
 {\
@@ -88,6 +86,6 @@ return 0;\
 
 #include <OpenGL/gl.h>
 
-#define CHECK_GL_ERROR if(glGetError()){printf("OpenGL 出错:%x",glGetError());}
+#define CHECK_GL_ERROR GL::checkError();
 
 #endif

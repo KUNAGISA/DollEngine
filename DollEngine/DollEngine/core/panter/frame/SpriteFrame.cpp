@@ -37,11 +37,6 @@ void SpriteFrame::release()
     }
 }
 
-void SpriteFrame::onPaint()
-{
-    
-}
-
 void SpriteFrame::setTexture(GLTexture* tex)
 {
     if(m_texture) {

@@ -51,7 +51,13 @@ namespace GL {
             glBindVertexArrayAPPLE(vaoId);
         }
     }
-
+    
+    void checkError()
+    {
+        if(glGetError()){
+            printf("OpenGL 出错:%x\n",glGetError());
+        }
+    }
 }
 
 DE_END

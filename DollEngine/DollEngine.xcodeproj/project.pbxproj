@@ -47,8 +47,6 @@
 		B87FDCAE1AE35CF800491CFC /* Image-Mac.mm in Sources */ = {isa = PBXBuildFile; fileRef = B87FDCAC1AE35CF800491CFC /* Image-Mac.mm */; };
 		B87FDCBB1AE3D12100491CFC /* GLImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B87FDCB91AE3D12100491CFC /* GLImage.cpp */; };
 		B87FDCBC1AE3D12100491CFC /* GLImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B87FDCB91AE3D12100491CFC /* GLImage.cpp */; };
-		B87FDCBF1AE3D13D00491CFC /* SpriteFrame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B87FDCBD1AE3D13D00491CFC /* SpriteFrame.cpp */; };
-		B87FDCC01AE3D13D00491CFC /* SpriteFrame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B87FDCBD1AE3D13D00491CFC /* SpriteFrame.cpp */; };
 		B898541F1ADC04D0003784AA /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = B89854181ADC04D0003784AA /* AppDelegate.mm */; };
 		B89854211ADC04D0003784AA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B898541A1ADC04D0003784AA /* main.m */; };
 		B89854221ADC04D0003784AA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B898541B1ADC04D0003784AA /* Main.storyboard */; };
@@ -96,6 +94,10 @@
 		B8B81E321ADFE5CC00601559 /* BaseComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8B81E2F1ADFE5CC00601559 /* BaseComp.cpp */; };
 		B8B81E361AE0034000601559 /* AutoReleaseManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8B81E341AE0034000601559 /* AutoReleaseManager.cpp */; };
 		B8B81E371AE0034000601559 /* AutoReleaseManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8B81E341AE0034000601559 /* AutoReleaseManager.cpp */; };
+		B8BB32B71AEC578200E4DDB3 /* SpriteFrame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8BB32B51AEC578200E4DDB3 /* SpriteFrame.cpp */; };
+		B8BB32B81AEC578200E4DDB3 /* SpriteFrame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8BB32B51AEC578200E4DDB3 /* SpriteFrame.cpp */; };
+		B8BB32BB1AEC579100E4DDB3 /* Painter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8BB32B91AEC579100E4DDB3 /* Painter.cpp */; };
+		B8BB32BC1AEC579100E4DDB3 /* Painter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8BB32B91AEC579100E4DDB3 /* Painter.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -145,8 +147,7 @@
 		B87FDCAC1AE35CF800491CFC /* Image-Mac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "Image-Mac.mm"; sourceTree = "<group>"; };
 		B87FDCB91AE3D12100491CFC /* GLImage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLImage.cpp; sourceTree = "<group>"; };
 		B87FDCBA1AE3D12100491CFC /* GLImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLImage.h; sourceTree = "<group>"; };
-		B87FDCBD1AE3D13D00491CFC /* SpriteFrame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SpriteFrame.cpp; sourceTree = "<group>"; };
-		B87FDCBE1AE3D13D00491CFC /* SpriteFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpriteFrame.h; sourceTree = "<group>"; };
+		B880AE5F1AFD94F500E0F92C /* DollEnginePrefixMac.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DollEnginePrefixMac.pch; sourceTree = "<group>"; };
 		B89853E51ADC02D8003784AA /* DollEngineMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DollEngineMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B89854171ADC04D0003784AA /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B89854181ADC04D0003784AA /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
@@ -198,6 +199,10 @@
 		B8B81E301ADFE5CC00601559 /* BaseComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseComp.h; sourceTree = "<group>"; };
 		B8B81E341AE0034000601559 /* AutoReleaseManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AutoReleaseManager.cpp; sourceTree = "<group>"; };
 		B8B81E351AE0034000601559 /* AutoReleaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoReleaseManager.h; sourceTree = "<group>"; };
+		B8BB32B51AEC578200E4DDB3 /* SpriteFrame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SpriteFrame.cpp; sourceTree = "<group>"; };
+		B8BB32B61AEC578200E4DDB3 /* SpriteFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpriteFrame.h; sourceTree = "<group>"; };
+		B8BB32B91AEC579100E4DDB3 /* Painter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Painter.cpp; sourceTree = "<group>"; };
+		B8BB32BA1AEC579100E4DDB3 /* Painter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Painter.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -249,6 +254,7 @@
 		B87FDC6F1AE2E1CE00491CFC /* panter */ = {
 			isa = PBXGroup;
 			children = (
+				B8BB32B41AEC578200E4DDB3 /* frame */,
 				B87FDC811AE2E44E00491CFC /* gl */,
 				B87FDC701AE2E1CE00491CFC /* PaintEngine.cpp */,
 				B87FDC711AE2E1CE00491CFC /* PaintEngine.h */,
@@ -331,10 +337,10 @@
 		B898540C1ADC04D0003784AA /* component */ = {
 			isa = PBXGroup;
 			children = (
-				B87FDCBD1AE3D13D00491CFC /* SpriteFrame.cpp */,
-				B87FDCBE1AE3D13D00491CFC /* SpriteFrame.h */,
 				B8B81E2F1ADFE5CC00601559 /* BaseComp.cpp */,
 				B8B81E301ADFE5CC00601559 /* BaseComp.h */,
+				B8BB32B91AEC579100E4DDB3 /* Painter.cpp */,
+				B8BB32BA1AEC579100E4DDB3 /* Painter.h */,
 			);
 			path = component;
 			sourceTree = "<group>";
@@ -409,6 +415,7 @@
 				B80365A71ADE9FBC00DD4B71 /* Console-Mac.mm */,
 				B8A1D8A01AE2C00C005A6595 /* Device-Mac.mm */,
 				B87FDCAC1AE35CF800491CFC /* Image-Mac.mm */,
+				B880AE5F1AFD94F500E0F92C /* DollEnginePrefixMac.pch */,
 			);
 			path = proj.mac;
 			sourceTree = "<group>";
@@ -514,6 +521,15 @@
 				B8B81E351AE0034000601559 /* AutoReleaseManager.h */,
 			);
 			path = managers;
+			sourceTree = "<group>";
+		};
+		B8BB32B41AEC578200E4DDB3 /* frame */ = {
+			isa = PBXGroup;
+			children = (
+				B8BB32B51AEC578200E4DDB3 /* SpriteFrame.cpp */,
+				B8BB32B61AEC578200E4DDB3 /* SpriteFrame.h */,
+			);
+			path = frame;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -622,6 +638,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B8A1D8891AE2BC2C005A6595 /* mat3.c in Sources */,
+				B8BB32BC1AEC579100E4DDB3 /* Painter.cpp in Sources */,
 				B87FDC9F1AE34B4700491CFC /* IOData.cpp in Sources */,
 				B8261E031ADC06160017767B /* ViewController.m in Sources */,
 				B87FDC971AE3494000491CFC /* GLFunctions.cpp in Sources */,
@@ -630,12 +647,12 @@
 				B87FDC9B1AE34B0300491CFC /* Storages.cpp in Sources */,
 				B8B81E371AE0034000601559 /* AutoReleaseManager.cpp in Sources */,
 				B87FDCA31AE34C9B00491CFC /* Debug.cpp in Sources */,
+				B8BB32B81AEC578200E4DDB3 /* SpriteFrame.cpp in Sources */,
 				B8A1D8931AE2BC2C005A6595 /* ray2.c in Sources */,
 				B8A1D8991AE2BC2C005A6595 /* vec3.c in Sources */,
 				B8261E101ADC0CE40017767B /* Units.cpp in Sources */,
 				B8261E011ADC06160017767B /* main.m in Sources */,
 				B8261DFD1ADC06160017767B /* AppDelegate.m in Sources */,
-				B87FDCC01AE3D13D00491CFC /* SpriteFrame.cpp in Sources */,
 				B8A1D8951AE2BC2C005A6595 /* utility.c in Sources */,
 				B8A1D8911AE2BC2C005A6595 /* quaternion.c in Sources */,
 				B8A1D8971AE2BC2C005A6595 /* vec2.c in Sources */,
@@ -666,7 +683,6 @@
 			files = (
 				B8A1D8981AE2BC2C005A6595 /* vec3.c in Sources */,
 				B8A1D8961AE2BC2C005A6595 /* vec2.c in Sources */,
-				B87FDCBF1AE3D13D00491CFC /* SpriteFrame.cpp in Sources */,
 				B8A1D88E1AE2BC2C005A6595 /* plane.c in Sources */,
 				B87FDC9A1AE34B0300491CFC /* Storages.cpp in Sources */,
 				B87FDC9E1AE34B4700491CFC /* IOData.cpp in Sources */,
@@ -681,6 +697,7 @@
 				B87FDCA21AE34C9B00491CFC /* Debug.cpp in Sources */,
 				B87FDC8E1AE2E66800491CFC /* GLShaderObject.cpp in Sources */,
 				B898541F1ADC04D0003784AA /* AppDelegate.mm in Sources */,
+				B8BB32BB1AEC579100E4DDB3 /* Painter.cpp in Sources */,
 				B87FDC861AE2E44E00491CFC /* GLTexture.cpp in Sources */,
 				B8A1D8841AE2BC2C005A6595 /* mat4stack.c in Sources */,
 				B8A1D8861AE2BC2C005A6595 /* matrix.c in Sources */,
@@ -693,6 +710,7 @@
 				B87FDCA61AE3538C00491CFC /* FileInfo.cpp in Sources */,
 				B8A1D8921AE2BC2C005A6595 /* ray2.c in Sources */,
 				B8A1D8A11AE2C00C005A6595 /* Device-Mac.mm in Sources */,
+				B8BB32B71AEC578200E4DDB3 /* SpriteFrame.cpp in Sources */,
 				B87FDCBB1AE3D12100491CFC /* GLImage.cpp in Sources */,
 				B8A1D8881AE2BC2C005A6595 /* mat3.c in Sources */,
 				B8A1D89E1AE2BDED005A6595 /* Device.cpp in Sources */,
@@ -824,6 +842,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = DollEngine/proj.mac/DollEnginePrefixMac.pch;
 				INFOPLIST_FILE = "$(SRCROOT)/DollEngine/proj.mac/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -835,6 +855,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = DollEngine/proj.mac/DollEnginePrefixMac.pch;
 				INFOPLIST_FILE = "$(SRCROOT)/DollEngine/proj.mac/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";

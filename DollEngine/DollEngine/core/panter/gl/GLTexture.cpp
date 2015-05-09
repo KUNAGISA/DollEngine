@@ -37,6 +37,8 @@ bool GLTexture::initWithImage(GLImage* image)
     glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
     glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
     glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
+//    int v =GL_RGBA;
+//    v = GL_UNSIGNED_BYTE;
     glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, image->getWidth(), image->getHeight(), 0,
                  GL_RGBA, GL_UNSIGNED_BYTE, image->getData()->getBuffer() );
     setWidth(image->getWidth());
@@ -61,8 +63,9 @@ void GLTexture::release()
 void GLTexture::bind(GLenum activeId)
 {
     if (m_textureId) {
-        glActiveTexture(GL_TEXTURE0);
+        glActiveTexture(activeId);
         glBindTexture(GL_TEXTURE_2D, m_textureId);
+        CHECK_GL_ERROR;
     }
 }
 
@@ -72,6 +75,15 @@ void GLTexture::setTextureId(GLuint v)
         glDeleteTextures(1, &m_textureId);
     }
     m_textureId = v;
+}
+
+unsigned char* GLTexture::getData()
+{
+    unsigned char* data = new unsigned char[getWidth()*getHeight()*4];
+    memset(data, 0, getWidth()*getHeight()*4);
+    glReadPixels(0, 0, getWidth(), getHeight(), GL_RGBA, GL_UNSIGNED_BYTE, data);
+    CHECK_GL_ERROR;
+    return data;
 }
 
 DE_END

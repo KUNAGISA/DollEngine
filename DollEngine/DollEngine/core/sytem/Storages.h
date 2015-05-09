@@ -25,6 +25,7 @@ public:
     void addAutoPath(const string& storage);// ( 增加自动检索路径 )
     string getFullPath(const string& storage);// ( 获取统一文件路径 )
     void removeAutoPath(const string& storage);// ( 删除自动检索路径 )
+    void clearAutoPath();
 private:
     list<string> m_autoPaths;
     map<string, string> m_searchPathsCache;

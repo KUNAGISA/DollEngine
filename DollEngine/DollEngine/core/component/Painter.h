@@ -1,0 +1,40 @@
+//
+//  Painter.h
+//  DollEngine
+//
+//  Created by DollStudio on 15/4/26.
+//  Copyright (c) 2015年 DollStudio. All rights reserved.
+//
+
+#ifndef __DollEngine__Painter__
+#define __DollEngine__Painter__
+
+#include "BaseComp.h"
+#include "SpriteFrame.h"
+#include "GLTexture.h"
+#include "Transform.h"
+#include "GLProgram.h"
+
+DE_BEGIN
+
+class Painter : public BaseComp
+{
+public:
+    Painter();
+    bool loadImages(const string& path,const string& plist="");
+    void update();
+    
+    void setColor(GLubyte r,GLubyte g, GLubyte b);
+    void setColor(GLubyte r,GLubyte g, GLubyte b, GLubyte a);
+    void setColor(uint32_t color);
+    void setOpacity(GLubyte o);
+    PROPERTY(SpriteFrame*, DisplayFrame, m_displayFrame);
+    PROPERTY(GLProgram*, Program, m_program){m_program=v;}
+    PROPERTY_CONST(Color, Color, m_color){m_color=v;}
+protected:
+    Transform* m_transform;
+};
+
+DE_END
+
+#endif /* defined(__DollEngine__Painter__) */

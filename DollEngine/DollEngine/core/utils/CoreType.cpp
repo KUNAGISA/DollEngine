@@ -30,10 +30,67 @@ const Rect& Rect::Zero()
     return s_rect_zero;
 }
 
-GradientColor::GradientColor()
+Color::Color()
+:r(0xff)
+,g(0xff)
+,b(0xff)
+,a(0xff)
 {
-    begin = 0xffffffff;
-    end = begin;
+    
+}
+
+Color::Color(GLubyte r,GLubyte g,GLubyte b)
+:r(r)
+,g(g)
+,b(b)
+,a(0xff)
+{
+    
+}
+
+Color::Color(GLubyte r,GLubyte g,GLubyte b,GLubyte a)
+:r(r)
+,g(g)
+,b(b)
+,a(a)
+{
+    
+}
+
+Color::Color(uint32_t color)
+{
+    set(color);
+}
+
+void Color::set(GLubyte r,GLubyte g,GLubyte b)
+{
+    this->r = r;
+    this->g = g;
+    this->b = b;
+}
+
+void Color::set(GLubyte r,GLubyte g,GLubyte b,GLubyte a)
+{
+    this->r = r;
+    this->g = g;
+    this->b = b;
+    this->a = a;
+}
+
+void Color::set(uint32_t color)
+{
+    r = color>>24;
+    g = color>>16;
+    b = color>>8;
+    a = color>>0;
+}
+
+void Color::toColorF(GLfloat* colorf)
+{
+    colorf[0] = r/255.0f;
+    colorf[1] = g/255.0f;
+    colorf[2] = b/255.0f;
+    colorf[3] = a/255.0f;
 }
 
 DE_END

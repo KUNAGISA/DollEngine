@@ -24,6 +24,8 @@ public:
     void retain();
     void release();
     void bind(GLenum activeId=GL_TEXTURE0);
+    
+    unsigned char* getData();
     PROPERTY_RO(int,RetainCount,m_retainCount)
     PROPERTY_CONST(string,CacheKey,m_cacheKey){m_cacheKey=v;}
     PROPERTY(GLuint, TextureId, m_textureId);

@@ -14,15 +14,18 @@
 
 DE_BEGIN
 
-class SpriteFrame : public BaseComp
+class SpriteFrame
 {
 public:
     SpriteFrame();
-    virtual ~SpriteFrame();
+    ~SpriteFrame();
     void retain();
     void release();
     
-    void onPaint();
+    void setWidth(float v){m_rect.width=v;}
+    float getWidth(){return m_rect.width;}
+    void setHeight(float v){m_rect.height=v;}
+    float getHeight(){return m_rect.height;}
     
     GLfloat* getGLCoord(){return m_glCoord;}
     PROPERTY(GLTexture*,Texture,m_texture);

@@ -23,7 +23,6 @@ public:
         static Device* _instance=NULL;
         if(!_instance) {
             _instance = new Device();
-            _instance->initialize();
         }
         return  _instance;
     }
@@ -31,30 +30,26 @@ public:
     
     void initialize();
     void initEnginePaths();
-    void initEngineSize();
     
 public:
     void mainLoop();
     
     void startup();
-    void setCanvasSize(float w,float h);
-    void setWinSize(float w,float h);
-    void onResize();
+    void setDeviceSize(float w,float h);
     
     PROPERTY_CONST(string,AppPath,m_appPath){m_appPath=v;}
     PROPERTY_CONST(string,DataPath,m_dataPath){m_dataPath=v;}
     PROPERTY_CONST(string,SaveDataPath,m_saveDataPath){m_saveDataPath=v;}
     PROPERTY_CONST(string,PatchPath,m_patchPath){m_patchPath=v;}
     
-    PROPERTY(Canvas*,CurrentCanvas,m_currentCanvas){m_currentCanvas=v;}
+    PROPERTY(Canvas*,CurrentCanvas,m_currentCanvas);
     PROPERTY(float,FrameInterval,m_frameInterval){m_frameInterval=v;}
     PROPERTY(std::function<void()>, GLInitCallback, m_glInitCallback){m_glInitCallback=v;}
     
     PROPERTY(bool,NeedRedraw,m_needRedraw){m_needRedraw=v;}
     PROPERTY(bool,NeedRetouch,m_needRetouch){m_needRetouch=v;}
-    PROPERTY_RO(float,WinWidth,m_winWidth)
-    PROPERTY_RO(float,WinHeight,m_winHeight) //设备大小
-    PROPERTY_RO(Transform*,DeviceTrans,m_deviceTrans)
+    PROPERTY_RO(float,DeviceWidth,m_deviceWidth)
+    PROPERTY_RO(float,DeviceHeight,m_deviceHeight) //设备大小
 //    PROPERTY_RO(float,LayerWidth,m_layerWidth)
 //    PROPERTY_RO(float,LayerHeight,m_layerHeight)
 //    PROPERTY_RO(float,LayerLeft,m_layerLeft)

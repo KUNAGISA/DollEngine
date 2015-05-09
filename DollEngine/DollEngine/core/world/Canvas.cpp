@@ -7,6 +7,8 @@
 //
 
 #include "Canvas.h"
+#include "GameObject.h"
+#include "PaintEngine.h"
 
 DE_BEGIN
 
@@ -14,35 +16,27 @@ Canvas::Canvas()
 :m_worldObject(null)
 ,m_window(null)
 ,m_visible(false)
-,m_LayerHeight(0)
-,m_LayerWidth(0)
-,m_LayerLeft(0)
-,m_LayerTop(0)
-,m_LayerZoom(0)
+,m_layerHeight(0)
+,m_layerWidth(0)
+,m_layerLeft(0)
+,m_layerTop(0)
+,m_layerZoom(0)
 //,m_winWidth(0)
 //,m_winHeight(0)
 {
-    
 }
 
-void Canvas::initializeGL()
+Canvas::~Canvas()
 {
-    glClearColor(0, 0, 0, 0);
 }
 
-void Canvas::paintGL()
+void Canvas::visit()
 {
     glClear(GL_COLOR_BUFFER_BIT);
     if (m_worldObject) {
         m_worldObject->visit();
     }
 }
-
-void Canvas::resizeGL(float width,float height)
-{
-    
-}
-
 
 void Canvas::setWorldObject(GameObject* lay)
 {

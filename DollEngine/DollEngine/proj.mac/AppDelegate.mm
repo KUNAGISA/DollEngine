@@ -7,10 +7,12 @@
 //
 
 #import "AppDelegate.h"
+#import "ViewController.h"
 #include "Canvas.h"
 #include "Console.h"
 #include "GameObject.h"
 #include "Device.h"
+#include "Painter.h"
 
 using namespace DE;
 
@@ -22,14 +24,22 @@ using namespace DE;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     
+    Device::GetInstance()->initEnginePaths();
+    Device::GetInstance()->setDeviceSize(512, 384);
     
-    Device::GetInstance();
+    [[ViewController GetInstance] setWindowSize:Device::GetInstance()->getDeviceWidth() height:Device::GetInstance()->getDeviceHeight()];
+    
     DE::Canvas* canvas = new DE::Canvas();
+    canvas->setLayerWidth(1024);
+    canvas->setLayerHeight(768);
     canvas->setVisible(true);
     
     GameObject* lay = new GameObject();
     canvas->setWorldObject(lay);
     
+    Painter* paint = new Painter();
+    lay->addComponent(paint);
+    paint->loadImages("bgimage/bg1.png");
     
 }
 

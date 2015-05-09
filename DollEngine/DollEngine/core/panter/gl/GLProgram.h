@@ -65,7 +65,7 @@ public:
     PROPERTY_RO(GLuint, ProgramId, m_programId)
     
     virtual bool init(){return false;}
-    virtual void actived(SpriteFrame*,Transform*,GradientColor*){}
+    virtual void actived(SpriteFrame*,Transform*,Color*,bool isFlipY=false){}
 private:
     vector<GLShaderObject*> m_shaders;
     map<const char*, GLint> m_allUniformIndex;

@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #include "Device.h"
+#include "Storages.h"
 
 DE_BEGIN
 
@@ -39,6 +40,8 @@ void Device::initEnginePaths()
         m_dataPath = rootPath.UTF8String;
     }
     
+    m_dataPath += "/";
+    
     //App path
     m_appPath = [[NSBundle mainBundle] bundlePath].UTF8String;
     m_appPath += "/";
@@ -49,14 +52,7 @@ void Device::initEnginePaths()
     
     //Patch path
     m_patchPath = m_saveDataPath;
-}
-
-void Device::initEngineSize()
-{
-    ViewController* ctlr = [ViewController GetInstance];
-    NSWindow* curWindow = ctlr.view.window;
-    m_winWidth = curWindow.frame.size.width;
-    m_winHeight = curWindow.frame.size.height;
+    
 }
 
 DE_END

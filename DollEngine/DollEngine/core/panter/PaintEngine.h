@@ -26,7 +26,7 @@ public:
     
     void initializeGL();
     void clearGL();
-    void resizeGL(int width, int height);
+    void resizeGL();
     
 public:
     void initPrograms();
@@ -34,12 +34,14 @@ public:
     GLProgram* getProgram(PROGRAM_TYPE pm);
     
 public:
-    SpriteFrame* addImage(const string& picKey,const string& plist="");
+    GLTexture* addTexture(const string& picKey);
+    SpriteFrame* addFrame(const string& picKey,const string& plist="");
     void removeSpriteFrameCache(SpriteFrame* frame);
     void removeTextureCache(GLTexture* frame);
     
+    PROPERTY_RO(Transform*,GlobalTrans,m_globalTrans)
 public:
-    void draw(SpriteFrame* frame,Transform* trans,GradientColor* color,GLProgram* program);
+    void paint(SpriteFrame* frame,Transform* trans,Color* color,GLProgram* program);
 protected:
     map<string,string > m_allPlist;
     map<string,SpriteFrame*> m_allSpriteFrames;

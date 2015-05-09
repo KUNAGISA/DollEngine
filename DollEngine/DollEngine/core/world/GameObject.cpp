@@ -9,6 +9,8 @@
 #include "GameObject.h"
 #include "Device.h"
 #include "Canvas.h"
+#include "Painter.h"
+#include "PaintEngine.h"
 
 DE_BEGIN
 
@@ -54,6 +56,7 @@ GameObject::~GameObject()
 
 void GameObject::addComponent(BaseComp* comp)
 {
+    comp->setObject(this);
     switch (comp->getType()) {
         case COMP_UNKNOW:
             m_unknowComp.push_back(comp);
@@ -75,12 +78,37 @@ void GameObject::addComponent(BaseComp* comp)
 void GameObject::visit()
 {
     sortChildren();
-    
-}
-
-void GameObject::onPaint()
-{
-    
+    transform();
+    if (m_children.size() > 0) {
+        auto iter = m_children.begin();
+        for (; iter != m_children.end(); ++iter) {
+            if ((*iter)->getZ() < 0) {
+                (*iter)->visit();
+            }
+            else {
+                break;
+            }
+        }
+        if (m_paintComp.size() > 0) {
+            for(BaseComp* comp: m_paintComp) {
+                if (comp->getEnabled()) {
+                    comp->update();
+                }
+            }
+        }
+        for (; iter != m_children.end(); ++iter) {
+            (*iter)->visit();
+        }
+    }
+    else {
+        if (m_paintComp.size() > 0) {
+            for(BaseComp* comp: m_paintComp) {
+                if (comp->getEnabled()) {
+                    comp->update();
+                }
+            }
+        }
+    }
 }
 
 void GameObject::transform()
@@ -95,7 +123,7 @@ void GameObject::transform()
     else
     {
 //        m_realyOpacity = m_opacity/255.0f;
-        m_transInWorld->copy(Device::GetInstance()->getDeviceTrans());
+        m_transInWorld->copy(PaintEngine::GetInstance()->getGlobalTrans());
         m_transInWorld->transform(m_transform);
     }
     m_transInWorld->setWidth(m_transform->getWidth());

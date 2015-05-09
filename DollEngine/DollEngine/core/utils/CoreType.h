@@ -28,15 +28,30 @@ public:
     float height;
 };
 
+class Color
+{
+public:
+    Color();
+    Color(GLubyte r,GLubyte g,GLubyte b);
+    Color(GLubyte r,GLubyte g,GLubyte b,GLubyte a);
+    Color(uint32_t color);
+    void set(GLubyte r,GLubyte g,GLubyte b);
+    void set(GLubyte r,GLubyte g,GLubyte b,GLubyte a);
+    void set(uint32_t color);
+    void toColorF(GLfloat* colorf);
+    GLubyte r;
+    GLubyte g;
+    GLubyte b;
+    GLubyte a;
+};
+
 class GradientColor
 {
 public:
-    GradientColor();
     
-    uint32_t begin;
-    uint32_t end;
+    Color begin;
+    Color end;
 };
-
 
 DE_END
 

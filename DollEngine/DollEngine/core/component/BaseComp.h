@@ -10,10 +10,10 @@
 #define __DollEngine__BaseComp__
 
 #include "Units.h"
+#include "GameObject.h"
 
 DE_BEGIN
 
-class GameObject;
 enum COMP_TYPE
 {
     COMP_UNKNOW=0,
@@ -27,9 +27,10 @@ class BaseComp
 public:
     BaseComp();
     virtual ~BaseComp();
-    
+    virtual void update(){}
     void release();
     
+    PROPERTY(bool, Enabled, m_enabled){m_enabled=v;}
     PROPERTY(GameObject*, Object, m_object){m_object=v;}
     PROPERTY(bool, IsReleased, m_isReleased){m_isReleased=v;}
     PROPERTY_RO(COMP_TYPE, Type, m_type);

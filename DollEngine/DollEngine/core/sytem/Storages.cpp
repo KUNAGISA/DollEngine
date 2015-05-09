@@ -75,11 +75,9 @@ void Storages::addAutoPath(const string& storage)
     if (storage.back() != '/')
     {
         m_autoPaths.push_front(storage+"/");
-        m_autoPaths.push_front(storage+"/");
     }
     else
     {
-        m_autoPaths.push_front(storage);
         m_autoPaths.push_front(storage);
     }
 }
@@ -104,10 +102,28 @@ string Storages::getFullPath(const string& storage)
         }
         else
         {
+            string temp_path = Device::GetInstance()->getPatchPath()+storage;
+            if (access(temp_path.c_str(),0) == 0)
+            {
+                m_searchPathsCache[storage] = temp_path;
+                return temp_path;
+            }
+            temp_path = Device::GetInstance()->getSaveDataPath()+storage;
+            if (access(temp_path.c_str(),0) == 0)
+            {
+                m_searchPathsCache[storage] = temp_path;
+                return temp_path;
+            }
+            temp_path = Device::GetInstance()->getDataPath()+storage;
+            if (access(temp_path.c_str(),0) == 0)
+            {
+                m_searchPathsCache[storage] = temp_path;
+                return temp_path;
+            }
             auto auto_iter = m_autoPaths.begin();
             for (; auto_iter != m_autoPaths.end(); ++auto_iter)
             {
-                string temp_path = Device::GetInstance()->getPatchPath()+(*auto_iter)+storage;
+                temp_path = Device::GetInstance()->getPatchPath()+(*auto_iter)+storage;
                 if (access(temp_path.c_str(),0) == 0)
                 {
                     m_searchPathsCache[storage] = temp_path;
@@ -117,7 +133,17 @@ string Storages::getFullPath(const string& storage)
             auto_iter = m_autoPaths.begin();
             for (; auto_iter != m_autoPaths.end(); ++auto_iter)
             {
-                string temp_path = Device::GetInstance()->getDataPath()+(*auto_iter)+storage;
+                temp_path = Device::GetInstance()->getSaveDataPath()+(*auto_iter)+storage;
+                if (access(temp_path.c_str(),0) == 0)
+                {
+                    m_searchPathsCache[storage] = temp_path;
+                    return temp_path;
+                }
+            }
+            auto_iter = m_autoPaths.begin();
+            for (; auto_iter != m_autoPaths.end(); ++auto_iter)
+            {
+                temp_path = Device::GetInstance()->getDataPath()+(*auto_iter)+storage;
                 if (access(temp_path.c_str(),0) == 0)
                 {
                     m_searchPathsCache[storage] = temp_path;
@@ -133,6 +159,11 @@ void Storages::removeAutoPath(const string& storage)
 {
     // ( 删除自动检索路径 )
     std::remove(m_autoPaths.begin(), m_autoPaths.end(), storage);
+}
+
+void Storages::clearAutoPath()
+{
+    m_autoPaths.clear();
 }
 
 DE_END

@@ -10,30 +10,29 @@
 #define __DollEngine__Canvas__
 
 #include "Units.h"
-#include "GameObject.h"
 #include "Transform.h"
 
 DE_BEGIN
 
+class GameObject;
 class Canvas {
     
     
 public:
     Canvas();
+    ~Canvas();
     
-    void initializeGL();
-    void paintGL();
-    void resizeGL(float width,float height);
+    void visit();
     
     
     PROPERTY(bool, Visible, m_visible);
     PROPERTY(GameObject*,WorldObject,m_worldObject);
     
-    PROPERTY_RO(float,LayerWidth,m_LayerWidth)
-    PROPERTY_RO(float,LayerHeight,m_LayerHeight) //逻辑大小
-    PROPERTY_RO(float,LayerLeft,m_LayerLeft)
-    PROPERTY_RO(float,LayerTop,m_LayerTop)
-    PROPERTY_RO(float,LayerZoom,m_LayerZoom)
+    PROPERTY(float,LayerWidth,m_layerWidth){m_layerWidth=v;}
+    PROPERTY(float,LayerHeight,m_layerHeight){m_layerHeight=v;} //逻辑大小
+    PROPERTY(float,LayerLeft,m_layerLeft){m_layerLeft=v;}
+    PROPERTY(float,LayerTop,m_layerTop){m_layerTop = v;}
+    PROPERTY(float,LayerZoom,m_layerZoom){m_layerZoom=v;}
 protected:
     void* m_window;
 };

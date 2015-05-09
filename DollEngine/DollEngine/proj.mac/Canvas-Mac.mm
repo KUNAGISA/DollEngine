@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #include "Canvas.h"
 #include "Device.h"
+#include "PaintEngine.h"
 
 DE_BEGIN
 
@@ -21,12 +22,12 @@ void Canvas::setVisible(bool v)
             NSWindow* curWindow = ctlr.view.window;
             curWindow.delegate = ctlr;
             [curWindow setReleasedWhenClosed:YES];
-//            [curWindow setContentSize:CGSizeMake(m_winWidth, m_winHeight)];
+            [curWindow setContentSize:CGSizeMake(Device::GetInstance()->getDeviceWidth(), Device::GetInstance()->getDeviceHeight())];
             [curWindow center];
             m_window = (__bridge void*)curWindow;
             
-            
-            initializeGL();
+            Device::GetInstance()->setCurrentCanvas(this);
+            PaintEngine::GetInstance()->initializeGL();
         }
     }
 }

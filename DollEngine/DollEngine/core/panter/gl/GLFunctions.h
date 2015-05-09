@@ -16,6 +16,7 @@ namespace GL {
     extern void setProjectionMatrixDirty();
     extern void blendFunc(GLenum src, GLenum dst);
     extern void bindVAO(GLuint vaoId);
+    extern void checkError();
 }
 
 DE_END

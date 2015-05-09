@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import <OpenGL/OpenGL.h>
 #include "Device.h"
+#include "PaintEngine.h"
 
 @implementation ViewController
 
@@ -31,13 +32,19 @@ static ViewController* s_instance;
 
 - (NSSize)windowWillResize:(NSWindow *)sender toSize:(NSSize)frameSize
 {
+    float menuBarHeight = [[[NSApplication sharedApplication] menu] menuBarHeight];
     if (frameSize.width <=128) {
         frameSize.width=128;
     }
-    if (frameSize.height <=128) {
-        frameSize.height=128;
+    if (frameSize.height <=128+menuBarHeight) {
+        frameSize.height=128+menuBarHeight;
     }
-    glClear(GL_COLOR_BUFFER_BIT);
+    
+    
+//    self.view.window
+    DE::Device::GetInstance()->setDeviceSize(frameSize.width, frameSize.height - menuBarHeight);
+    DE::PaintEngine::GetInstance()->resizeGL();
+    
 //    auto window = de::device::window(null);
 //    if (window)
 //    {
@@ -45,6 +52,11 @@ static ViewController* s_instance;
 //        de::gl::reset_viewport();
 //    }
     return frameSize;
+}
+
+-(void)setWindowSize:(float)w height:(float)h
+{
+//    self.view.window
 }
 
 -(BOOL)windowShouldClose:(id)sender
@@ -66,6 +78,7 @@ static ViewController* s_instance;
     
     [self drawRect:[self bounds]];
 }
+
 
 -(void)prepareOpenGL
 {

@@ -8,6 +8,7 @@
 
 #include "Device.h"
 #include "Storages.h"
+#include "Canvas.h"
 
 DE_BEGIN
 
@@ -16,7 +17,6 @@ Device::Device()
 ,m_frameInterval(60)
 ,m_mainLoopTimerId(0)
 {
-    m_deviceTrans = new Transform();
 }
 
 
@@ -33,7 +33,10 @@ void Device::initialize()
 void Device::mainLoop()
 {
     if (m_currentCanvas) {
-        m_currentCanvas->paintGL();
+        if (m_needRedraw) {
+            m_currentCanvas->visit();
+//            m_needRedraw = false;
+        }
     }
 }
 
@@ -42,19 +45,18 @@ void Device::startup()
     
 }
 
-void Device::setCanvasSize(float w,float h)
+void Device::setDeviceSize(float w,float h)
 {
-    
+    m_deviceWidth = w;
+    m_deviceHeight = h;
 }
 
-void Device::setWinSize(float w,float h)
+void Device::setCurrentCanvas(DE::Canvas *v)
 {
-    
-}
-
-void Device::onResize()
-{
-    
+    if (m_currentCanvas) {
+        delete m_currentCanvas;
+    }
+    m_currentCanvas = v;
 }
 
 DE_END

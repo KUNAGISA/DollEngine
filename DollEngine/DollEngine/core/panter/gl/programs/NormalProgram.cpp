@@ -73,66 +73,68 @@ bool NormalProgram::init()
     return true;
 }
 
-static GLfloat vertices[] = {
-    0,0,
-    0,0,
-    0,0,
-    0,0};
-
-void NormalProgram::actived(SpriteFrame* frame,Transform* trans,GradientColor* color,bool isFlipY)
+static GLfloat colors[4][4] = {
+    {1.0,1.0,1.0,1.0},
+    {1.0,1.0,1.0,1.0},
+    {1.0,1.0,1.0,1.0},
+    {1.0,1.0,1.0,1.0},
+};
+void NormalProgram::actived(SpriteFrame* frame,Transform* trans,Color* color,bool isFlipY)
 {
     Rect rect = frame->getRect();
-    if(isFlipY)
-    {
-        vertices[0]=0,          vertices[1]=rect.height,
-        vertices[2]=0,          vertices[3]=0,
-        vertices[4]=rect.width, vertices[5]=rect.height,
-        vertices[6]=rect.width, vertices[7]=0;
-    }
-    else
-    {
-        vertices[0]=0,          vertices[1]=0,
-        vertices[2]=0,          vertices[3]=rect.height,
-        vertices[4]=rect.width, vertices[5]=0,
-        vertices[6]=rect.width, vertices[7]=rect.height;
-    }
+    static GLfloat vertices[] = {
+        0,0,
+        0,rect.height,
+        rect.width,rect.height,
+        rect.width,0
+    };
+#define VE0(p) vertices[p]=0
+#define VEH(p) vertices[p]=rect.height
+#define VEW(p) vertices[p]=rect.width
     
-    static float coords[4][3] = {
-        { 1024, 768, 0 },
-        { 0, 768, 0 },
-        { 0, 0, 0 },
-        { 1024, 0, 0 }
+    VE0(0);VE0(1);//左下
+    VE0(2);VEH(3);//左上
+    VEW(4);VEH(5);//右上
+    VEW(6);VE0(7);//右下
+//    if(isFlipY)
+//    {
+//        vertices[0]=0,          vertices[1]=rect.height,    vertices[2]=0,
+//        vertices[3]=0,          vertices[4]=0,              vertices[5]=0,
+//        vertices[6]=rect.width, vertices[7]=0,              vertices[8]=0,
+//        vertices[9]=rect.width, vertices[10]=rect.height,    vertices[11]=0;
+//    }
+//    else
+//    {
+//        vertices[0]=0,          vertices[1]=0,
+//        vertices[2]=0,          vertices[3]=rect.height,
+//        vertices[4]=rect.width, vertices[5]=rect.height,
+//        vertices[6]=rect.width, vertices[7]=0;
+//    }
+    
+    static float coords[4][2] = {
+        { 0, 0 },
+        { 0, 1 },
+        { 1, 1 },
+        { 1, 0 }
     };
-    static float colors[4][4] = {
-        {1.0,1.0,1.0,1.0},
-        {1.0,1.0,1.0,1.0},
-        {1.0,1.0,1.0,1.0},
-        {1.0,1.0,1.0,1.0},
-    };
-    coords[0][0] = coords[3][0] = rect.width;
-    coords[0][1] = coords[1][1] = rect.height;
-    vector<GLfloat> vertData;
+//    coords[0][0] = coords[3][0] = rect.width;
+//  //    color->r/=2;
+//    color->g/=2;
+//    color->b/=2;
+//    color->a/=2;
+//  coords[0][1] = coords[1][1] = rect.height;
+    //    vector<GLfloat> vertData;
+    static GLubyte tcolors[4][4];
     for (int j = 0; j < 4; ++j) {
-        // vertex position
-        vertData.push_back(coords[j][0]);
-        vertData.push_back(coords[j][1]);
-        vertData.push_back(coords[j][2]);
-        // texture coordinate
-        vertData.push_back(j == 0 || j == 3);
-        vertData.push_back(j == 0 || j == 1);
-        
-        // texture color
-        vertData.push_back(colors[j][0]);
-        vertData.push_back(colors[j][1]);
-        vertData.push_back(colors[j][2]);
-        vertData.push_back(colors[j][3]);
+//        memcpy(tcolors[j], color, sizeof(GLubyte)*4);
+        color->toColorF(colors[j]);
     }
     
     enableVertexAttribs(VERTEX_ATTRIB_FLAG_POS_COLOR_TEX);
     
-    glVertexAttribPointer(PROGRAM_VERTEX_ATTRIBUTE, 2, GL_FLOAT, GL_FALSE, 0, vertices);
-    glVertexAttribPointer(PROGRAM_COLOR_ATTRIBUTE, 4, GL_FLOAT, GL_FALSE, 0, colors);
-    glVertexAttribPointer(PROGRAM_TEXCOORD_ATTRIBUTE, 2, GL_FLOAT, GL_FALSE, 0, frame->getGLCoord());
+    glVertexAttribPointer(PROGRAM_VERTEX_ATTRIBUTE, 2, GL_FLOAT, GL_TRUE, 0, vertices);
+    glVertexAttribPointer(PROGRAM_COLOR_ATTRIBUTE, 4, GL_FLOAT, GL_TRUE, 0, colors);
+    glVertexAttribPointer(PROGRAM_TEXCOORD_ATTRIBUTE, 2, GL_FLOAT, GL_TRUE, 0, coords);
     
 }
 
