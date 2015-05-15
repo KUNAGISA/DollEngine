@@ -8,7 +8,7 @@
 
 #include "Canvas.h"
 #include "GameObject.h"
-#include "PaintEngine.h"
+#include "GLCanvas.h"
 
 DE_BEGIN
 
@@ -21,13 +21,12 @@ Canvas::Canvas()
 ,m_layerLeft(0)
 ,m_layerTop(0)
 ,m_layerZoom(0)
-//,m_winWidth(0)
-//,m_winHeight(0)
 {
 }
 
 Canvas::~Canvas()
 {
+    SAFF_DELETE(m_worldObject);
 }
 
 void Canvas::visit()
@@ -45,9 +44,6 @@ void Canvas::setWorldObject(GameObject* lay)
         delete m_worldObject;
         m_worldObject = null;
     }
-//    if(lay->getParent()) {
-//        lay->removeFromParent(false);
-//    }
     m_worldObject = lay;
 }
 

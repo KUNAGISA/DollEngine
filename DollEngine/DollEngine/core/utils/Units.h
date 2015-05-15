@@ -11,6 +11,13 @@
 
 #include "CoreType.h"
 
+DE_BEGIN
 
+extern void GLCheckError();
+extern string StringWithFormat(const char* format,...);
+extern void Utf8ToUnicode(const char* src, wstring& target);
+extern void Utf8ToVector(const string& _in, vector<string>& _out);
+
+DE_END
 
 #endif /* defined(__DollEngine__Units__) */

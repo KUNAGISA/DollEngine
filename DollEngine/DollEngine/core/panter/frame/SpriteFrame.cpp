@@ -7,7 +7,7 @@
 //
 
 #include "SpriteFrame.h"
-#include "PaintEngine.h"
+#include "GLCache.h"
 
 DE_BEGIN
 SpriteFrame::SpriteFrame()
@@ -20,7 +20,7 @@ SpriteFrame::SpriteFrame()
 
 SpriteFrame::~SpriteFrame()
 {
-    PaintEngine::GetInstance()->removeSpriteFrameCache(this);
+    GLCache::GetInstance()->removeSpriteFrameCache(this);
     m_texture->release();
 }
 
@@ -59,9 +59,9 @@ void SpriteFrame::setRect(const DE::Rect &v)
         m_glCoord[2] = m_glCoord[0];
         m_glCoord[3] = (v.x+v.height)/m_texture->getHeight();
         m_glCoord[4] = (v.y+v.width)/m_texture->getWidth();
-        m_glCoord[5] = m_glCoord[1];
+        m_glCoord[5] = m_glCoord[3];
         m_glCoord[6] = m_glCoord[4];
-        m_glCoord[7] = m_glCoord[3];
+        m_glCoord[7] = m_glCoord[1];
     }
 }
 

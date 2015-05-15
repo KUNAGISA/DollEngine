@@ -42,6 +42,9 @@ string Debug::throwMsg(DEBUG_MSG error,const string& p1)
         case ERROR_FILE_EXIST_FAILD:
             return message("文件未找到:%s",p1.c_str());
             break;
+        case ERROR_ADDFONT_FAILD:
+            return message("添加字体时出错");
+            break;
         default:
             return message("未知错误");
             break;

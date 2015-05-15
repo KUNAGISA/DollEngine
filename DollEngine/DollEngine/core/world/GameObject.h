@@ -46,7 +46,7 @@ protected:
     
     list<GameObject*> m_children;
     list<GameObject*>::iterator m_iterInParent;
-    
+public:
     TRANSFORM_PROPERTY_FUNC(Left,X)
     TRANSFORM_PROPERTY_FUNC(Top,Y)
     TRANSFORM_PROPERTY_FUNC(Width,Width)

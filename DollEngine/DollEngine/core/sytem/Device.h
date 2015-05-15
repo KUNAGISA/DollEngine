@@ -34,7 +34,7 @@ public:
 public:
     void mainLoop();
     
-    void startup();
+    void startup(); //脚本入口
     void setDeviceSize(float w,float h);
     
     PROPERTY_CONST(string,AppPath,m_appPath){m_appPath=v;}
@@ -43,25 +43,16 @@ public:
     PROPERTY_CONST(string,PatchPath,m_patchPath){m_patchPath=v;}
     
     PROPERTY(Canvas*,CurrentCanvas,m_currentCanvas);
-    PROPERTY(float,FrameInterval,m_frameInterval){m_frameInterval=v;}
-    PROPERTY(std::function<void()>, GLInitCallback, m_glInitCallback){m_glInitCallback=v;}
+    
+    PROPERTY_RO(float,DeviceWidth,m_deviceWidth)
+    PROPERTY_RO(float,DeviceHeight,m_deviceHeight) //设备大小
     
     PROPERTY(bool,NeedRedraw,m_needRedraw){m_needRedraw=v;}
     PROPERTY(bool,NeedRetouch,m_needRetouch){m_needRetouch=v;}
-    PROPERTY_RO(float,DeviceWidth,m_deviceWidth)
-    PROPERTY_RO(float,DeviceHeight,m_deviceHeight) //设备大小
-//    PROPERTY_RO(float,LayerWidth,m_layerWidth)
-//    PROPERTY_RO(float,LayerHeight,m_layerHeight)
-//    PROPERTY_RO(float,LayerLeft,m_layerLeft)
-//    PROPERTY_RO(float,LayerTop,m_layerTop)
-//    PROPERTY_RO(float,LayerZoom,m_layerZoom)
-//    PROPERTY_RO(float,WinWidth,m_winWidth)
-//    PROPERTY_RO(float,WinHeight,m_winHeight)
 protected:
 //    void timerEvent(QTimerEvent*event );
     
 protected:
-    int m_mainLoopTimerId;
 };
 
 DE_END

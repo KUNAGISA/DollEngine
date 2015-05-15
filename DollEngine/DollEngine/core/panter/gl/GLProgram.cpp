@@ -115,11 +115,21 @@ void GLProgram::use()
     }
 }
 
+static GLuint s_VAO=-1;
+void GLProgram::bindVAO(GLuint vaoId)
+{
+    if (s_VAO != vaoId)
+    {
+        s_VAO = vaoId;
+        glBindVertexArrayAPPLE(vaoId);
+    }
+}
+
 static int MAX_ATTRIBUTES = 16;
 static uint32_t s_attributeFlags = 0;
 void GLProgram::enableVertexAttribs(uint32_t flags)
 {
-    GL::bindVAO(0);
+    bindVAO(0);
     
     // hardcoded!
     for(int i=0; i < MAX_ATTRIBUTES; i++) {

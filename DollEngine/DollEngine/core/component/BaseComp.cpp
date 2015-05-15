@@ -7,7 +7,7 @@
 //
 
 #include "BaseComp.h"
-#include "AutoReleaseManager.h"
+#include "AutoReleasePool.h"
 #include "GameObject.h"
 
 DE_BEGIN
@@ -25,7 +25,7 @@ BaseComp::BaseComp()
 BaseComp::~BaseComp()
 {
     if (!m_isReleased) {
-        AutoReleaseManager::GetInstance()->removeAutoRelease(this);
+        AutoReleasePool::GetInstance()->removeAutoRelease(this);
     }
 }
 
@@ -33,7 +33,7 @@ void BaseComp::release()
 {
     if (!m_isReleased) {
         m_isReleased=true;
-        AutoReleaseManager::GetInstance()->addAutoRelease(this);
+        AutoReleasePool::GetInstance()->addAutoRelease(this);
     }
 }
 

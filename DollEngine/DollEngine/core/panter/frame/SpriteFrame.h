@@ -34,6 +34,7 @@ public:
     PROPERTY_RO(int,RetainCount,m_retainCount)
 protected:
     GLfloat m_glCoord[8];
+    void* m_otherData;
 };
 DE_END
 

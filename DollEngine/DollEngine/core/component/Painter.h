@@ -21,11 +21,13 @@ class Painter : public BaseComp
 {
 public:
     Painter();
+    ~Painter();
+public:
     bool loadImages(const string& path,const string& plist="");
-    void update();
     
-    void setColor(GLubyte r,GLubyte g, GLubyte b);
-    void setColor(GLubyte r,GLubyte g, GLubyte b, GLubyte a);
+public:
+    void update();
+    void blendFunc(GLenum src,GLenum dst);
     void setColor(uint32_t color);
     void setOpacity(GLubyte o);
     PROPERTY(SpriteFrame*, DisplayFrame, m_displayFrame);
@@ -33,6 +35,7 @@ public:
     PROPERTY_CONST(Color, Color, m_color){m_color=v;}
 protected:
     Transform* m_transform;
+    
 };
 
 DE_END

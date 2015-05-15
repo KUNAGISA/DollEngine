@@ -10,7 +10,7 @@
 #include "Device.h"
 #include "Canvas.h"
 #include "Painter.h"
-#include "PaintEngine.h"
+#include "GLCanvas.h"
 
 DE_BEGIN
 
@@ -123,7 +123,7 @@ void GameObject::transform()
     else
     {
 //        m_realyOpacity = m_opacity/255.0f;
-        m_transInWorld->copy(PaintEngine::GetInstance()->getGlobalTrans());
+        m_transInWorld->copy(GLCanvas::GetInstance()->getGlobalTrans());
         m_transInWorld->transform(m_transform);
     }
     m_transInWorld->setWidth(m_transform->getWidth());

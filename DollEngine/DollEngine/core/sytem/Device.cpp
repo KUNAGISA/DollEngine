@@ -14,8 +14,6 @@ DE_BEGIN
 
 Device::Device()
 :m_currentCanvas(null)
-,m_frameInterval(60)
-,m_mainLoopTimerId(0)
 {
 }
 

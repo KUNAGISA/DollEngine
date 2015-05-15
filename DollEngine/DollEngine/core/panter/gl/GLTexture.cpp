@@ -7,8 +7,8 @@
 //
 
 #include "GLTexture.h"
-#include "PaintEngine.h"
-#include "GLFunctions.h"
+#include "GLCanvas.h"
+#include "GLCache.h"
 
 DE_BEGIN
 
@@ -23,7 +23,7 @@ GLTexture::GLTexture()
 
 GLTexture::~GLTexture()
 {
-    PaintEngine::GetInstance()->removeTextureCache(this);
+    GLCache::GetInstance()->removeTextureCache(this);
     if (m_textureId) {
         glDeleteTextures(1, &m_textureId);
     }

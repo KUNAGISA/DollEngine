@@ -16,15 +16,21 @@
 #include <set>
 #include <iostream>
 #include <stdlib.h>
+#include <stdio.h>
 #include <unistd.h>
 
 #include "kazmath.h"
+#include <ft2build.h>
+#include FT_FREETYPE_H
 
 using namespace std;
 
 
 #define null NULL
 #define PI 3.14159265358979323846264338327950288
+#define DEFFONT "WenQuanYi Micro Hei"
+#define DEFFONTSIZE 24
+#define DM Debug::message
 
 #define DE_BEGIN namespace DE {
 #define DE_END }
@@ -86,6 +92,6 @@ return 0;\
 
 #include <OpenGL/gl.h>
 
-#define CHECK_GL_ERROR GL::checkError();
+#define CHECK_GL_ERROR DE::GLCheckError();
 
 #endif
