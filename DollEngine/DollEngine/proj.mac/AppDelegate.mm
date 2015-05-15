@@ -13,6 +13,7 @@
 #include "GameObject.h"
 #include "Device.h"
 #include "Painter.h"
+#include "Label.h"
 
 using namespace DE;
 
@@ -27,8 +28,6 @@ using namespace DE;
     Device::GetInstance()->initEnginePaths();
     Device::GetInstance()->setDeviceSize(512, 384);
     
-    [[ViewController GetInstance] setWindowSize:Device::GetInstance()->getDeviceWidth() height:Device::GetInstance()->getDeviceHeight()];
-    
     DE::Canvas* canvas = new DE::Canvas();
     canvas->setLayerWidth(1024);
     canvas->setLayerHeight(768);
@@ -37,10 +36,16 @@ using namespace DE;
     GameObject* lay = new GameObject();
     canvas->setWorldObject(lay);
     
+    lay->setLeft(100);
+    lay->setTop(200);
+    
     Painter* paint = new Painter();
     lay->addComponent(paint);
     paint->loadImages("bgimage/bg1.png");
     
+    Label* label = new Label();
+    lay->addComponent(label);
+    label->setText("测测试蚊子hadfoaimesf 3roiew^345qvv√¬˚…∆˙˙®∫µµ∫˚reb");
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {

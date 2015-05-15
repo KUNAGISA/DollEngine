@@ -21,7 +21,5 @@
 
 +(ViewController*)GetInstance;
 
--(void)setWindowSize:(float)w height:(float)h;
-
 @end
 

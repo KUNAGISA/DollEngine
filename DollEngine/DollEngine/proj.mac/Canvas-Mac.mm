@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #include "Canvas.h"
 #include "Device.h"
-#include "PaintEngine.h"
+#include "GLCanvas.h"
 
 DE_BEGIN
 
@@ -27,7 +27,7 @@ void Canvas::setVisible(bool v)
             m_window = (__bridge void*)curWindow;
             
             Device::GetInstance()->setCurrentCanvas(this);
-            PaintEngine::GetInstance()->initializeGL();
+            GLCanvas::GetInstance()->initializeGL();
         }
     }
 }

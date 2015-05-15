@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import <OpenGL/OpenGL.h>
 #include "Device.h"
-#include "PaintEngine.h"
+#include "GLCanvas.h"
 
 @implementation ViewController
 
@@ -40,23 +40,10 @@ static ViewController* s_instance;
         frameSize.height=128+menuBarHeight;
     }
     
-    
-//    self.view.window
     DE::Device::GetInstance()->setDeviceSize(frameSize.width, frameSize.height - menuBarHeight);
-    DE::PaintEngine::GetInstance()->resizeGL();
+    DE::GLCanvas::GetInstance()->resizeGL();
     
-//    auto window = de::device::window(null);
-//    if (window)
-//    {
-//        window->setSize(frameSize.width, frameSize.height);
-//        de::gl::reset_viewport();
-//    }
     return frameSize;
-}
-
--(void)setWindowSize:(float)w height:(float)h
-{
-//    self.view.window
 }
 
 -(BOOL)windowShouldClose:(id)sender
