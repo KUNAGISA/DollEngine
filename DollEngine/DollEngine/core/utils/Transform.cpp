@@ -89,13 +89,14 @@ bool Transform::pointInside(float x,float y,float& ox,float& oy)
     float ny = 1-y/Device::GetInstance()->getCurrentCanvas()->getLayerHeight();
     kmVec3Fill(&inpos,nx,ny,0);
     kmVec3Transform(&outpos,&inpos,&t_mat);
+    ox = outpos.x;
+    oy = outpos.y;
+    DM("point:%f,%f to %f,%f",x,y,ox,oy);
     if (outpos.x >= 0 &&
         outpos.y >= 0 &&
         outpos.x < m_width&&
         outpos.y < m_height)
     {
-        ox = outpos.x;
-        oy = outpos.y;
         return true;
     }
     return false;

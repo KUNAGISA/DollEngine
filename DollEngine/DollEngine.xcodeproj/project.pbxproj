@@ -108,6 +108,10 @@
 		B8D366011B06602500E627A7 /* WenQuanYiMicroHei.ttc in Resources */ = {isa = PBXBuildFile; fileRef = B8D365FF1B06602500E627A7 /* WenQuanYiMicroHei.ttc */; };
 		B8D366081B0663AC00E627A7 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B8D366071B0663AC00E627A7 /* libz.dylib */; };
 		B8D3660A1B0663B700E627A7 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B8D366091B0663B700E627A7 /* libz.dylib */; };
+		B8D3660D1B06D8BF00E627A7 /* InputEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D3660B1B06D8BF00E627A7 /* InputEvent.cpp */; };
+		B8D3660E1B06D8BF00E627A7 /* InputEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D3660B1B06D8BF00E627A7 /* InputEvent.cpp */; };
+		B8D366111B06E02F00E627A7 /* InputEventPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D3660F1B06E02F00E627A7 /* InputEventPool.cpp */; };
+		B8D366121B06E02F00E627A7 /* InputEventPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D3660F1B06E02F00E627A7 /* InputEventPool.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -398,6 +402,10 @@
 		B8D365FF1B06602500E627A7 /* WenQuanYiMicroHei.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = WenQuanYiMicroHei.ttc; sourceTree = "<group>"; };
 		B8D366071B0663AC00E627A7 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		B8D366091B0663B700E627A7 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/usr/lib/libz.dylib; sourceTree = DEVELOPER_DIR; };
+		B8D3660B1B06D8BF00E627A7 /* InputEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InputEvent.cpp; sourceTree = "<group>"; };
+		B8D3660C1B06D8BF00E627A7 /* InputEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputEvent.h; sourceTree = "<group>"; };
+		B8D3660F1B06E02F00E627A7 /* InputEventPool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InputEventPool.cpp; sourceTree = "<group>"; };
+		B8D366101B06E02F00E627A7 /* InputEventPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputEventPool.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -831,6 +839,8 @@
 				B8BB32BA1AEC579100E4DDB3 /* Painter.h */,
 				B825F8FD1B03ABB900B930E8 /* Label.cpp */,
 				B825F8FE1B03ABB900B930E8 /* Label.h */,
+				B8D3660B1B06D8BF00E627A7 /* InputEvent.cpp */,
+				B8D3660C1B06D8BF00E627A7 /* InputEvent.h */,
 			);
 			path = component;
 			sourceTree = "<group>";
@@ -860,6 +870,8 @@
 				B87FDC991AE34B0300491CFC /* Storages.h */,
 				B87FDCA41AE3538C00491CFC /* FileInfo.cpp */,
 				B87FDCA51AE3538C00491CFC /* FileInfo.h */,
+				B8D3660F1B06E02F00E627A7 /* InputEventPool.cpp */,
+				B8D366101B06E02F00E627A7 /* InputEventPool.h */,
 			);
 			path = sytem;
 			sourceTree = "<group>";
@@ -1147,12 +1159,14 @@
 				B8BB32BC1AEC579100E4DDB3 /* Painter.cpp in Sources */,
 				B87FDC9F1AE34B4700491CFC /* IOData.cpp in Sources */,
 				B8261E031ADC06160017767B /* ViewController.m in Sources */,
+				B8D3660E1B06D8BF00E627A7 /* InputEvent.cpp in Sources */,
 				B8A1D87F1AE2BC2C005A6595 /* aabb.c in Sources */,
 				B87FDCA71AE3538C00491CFC /* FileInfo.cpp in Sources */,
 				B87FDC9B1AE34B0300491CFC /* Storages.cpp in Sources */,
 				B87FDCA31AE34C9B00491CFC /* Debug.cpp in Sources */,
 				B8BB32B81AEC578200E4DDB3 /* SpriteFrame.cpp in Sources */,
 				B8A1D8931AE2BC2C005A6595 /* ray2.c in Sources */,
+				B8D366121B06E02F00E627A7 /* InputEventPool.cpp in Sources */,
 				B8A1D8991AE2BC2C005A6595 /* vec3.c in Sources */,
 				B8261E101ADC0CE40017767B /* Units.cpp in Sources */,
 				B8261E011ADC06160017767B /* main.m in Sources */,
@@ -1209,6 +1223,7 @@
 				B87FDC861AE2E44E00491CFC /* GLTexture.cpp in Sources */,
 				B8A1D8841AE2BC2C005A6595 /* mat4stack.c in Sources */,
 				B8A1D8861AE2BC2C005A6595 /* matrix.c in Sources */,
+				B8D366111B06E02F00E627A7 /* InputEventPool.cpp in Sources */,
 				B8D365EF1B0622DE00E627A7 /* GLCanvas.cpp in Sources */,
 				B8B81E311ADFE5CC00601559 /* BaseComp.cpp in Sources */,
 				B80365A51ADE9ED600DD4B71 /* Console.cpp in Sources */,
@@ -1221,6 +1236,7 @@
 				B8A1D8921AE2BC2C005A6595 /* ray2.c in Sources */,
 				B8A1D8A11AE2C00C005A6595 /* Device-Mac.mm in Sources */,
 				B8BB32B71AEC578200E4DDB3 /* SpriteFrame.cpp in Sources */,
+				B8D3660D1B06D8BF00E627A7 /* InputEvent.cpp in Sources */,
 				B825F9031B04CF6500B930E8 /* GLCache.cpp in Sources */,
 				B87FDCBB1AE3D12100491CFC /* GLImage.cpp in Sources */,
 				B8A1D8881AE2BC2C005A6595 /* mat3.c in Sources */,

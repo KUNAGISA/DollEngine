@@ -41,6 +41,16 @@ bool Painter::loadImages(const string& path,const string& plist)
     }
 }
 
+Size Painter::getPaintSize()
+{
+    if (m_displayFrame) {
+        return Size(m_displayFrame->getWidth(),m_displayFrame->getHeight());
+    }
+    else {
+        return Size::Zero();
+    }
+}
+
 void Painter::setDisplayFrame(DE::SpriteFrame *v)
 {
     SAFF_RELEASE(m_displayFrame);

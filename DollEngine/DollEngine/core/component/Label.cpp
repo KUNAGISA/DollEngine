@@ -24,18 +24,31 @@ Label::Label()
 
 Label::~Label()
 {
-    for (TextFrame* frame : m_allFrames) {
+    for (TextFrame* frame : m_allTextFrames) {
         SAFF_RELEASE(frame);
     }
-    m_allFrames.clear();
+    m_allTextFrames.clear();
+}
+
+
+Size Label::getPaintSize()
+{
+    if (m_allTextFrames.size() > 0) {
+        float h = m_fontSize;
+        float w = 0;
+        for (TextFrame* frame : m_allTextFrames) {
+            w += frame->getAdvance();
+        }
+        return Size(w,h);
+    }
+    else {
+        return Size::Zero();
+    }
 }
 
 void Label::update()
 {
-    if (m_textChanged) {
-        m_textChanged=false;
-        updateText();
-    }
+    updateText();
     blendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
     
     if (getObject()) {
@@ -45,7 +58,7 @@ void Label::update()
         m_transform->copy(GLCanvas::GetInstance()->getGlobalTrans());
     }
     float lastX=0;
-    for (TextFrame* frame : m_allFrames) {
+    for (TextFrame* frame : m_allTextFrames) {
         Transform orgin;
         orgin.copy(m_transform);
         Transform offst;
@@ -63,10 +76,16 @@ void Label::update()
 
 void Label::updateText()
 {
-    for (TextFrame* frame : m_allFrames) {
+    if (!m_textChanged) {
+        return;
+    }
+    
+    m_textChanged=false;
+    
+    for (TextFrame* frame : m_allTextFrames) {
         SAFF_RELEASE(frame);
     }
-    m_allFrames.clear();
+    m_allTextFrames.clear();
     vector<string> strs;
     Utf8ToVector(m_text,strs);
     for (auto iter = strs.begin();
@@ -74,10 +93,9 @@ void Label::updateText()
         TextFrame* frame = GLCache::GetInstance()->addText(*iter, m_fontName, m_fontSize);
         if (frame) {
             frame->retain();
-            m_allFrames.push_back(frame);
+            m_allTextFrames.push_back(frame);
         }
     }
-    
 }
 
 DE_END

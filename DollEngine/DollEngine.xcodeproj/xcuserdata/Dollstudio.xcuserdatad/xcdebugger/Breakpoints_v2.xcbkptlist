@@ -125,5 +125,51 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DollEngine/core/component/BaseComp.h"
+            timestampString = "453560483.253177"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "class BaseComp"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "DE::BaseComp::getEnabled()"
+                  moduleName = "DollEngineMac"
+                  urlString = "file:///Users/Dollstudio/DollStudio/gitProject/krGL/DollEngine/DollEngine/DollEngine/core/component/BaseComp.h"
+                  timestampString = "453560485.73237"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "33"
+                  endingLineNumber = "33"
+                  offsetFromSymbolStart = "12">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "DE::BaseComp::setEnabled(bool)"
+                  moduleName = "DollEngineMac"
+                  urlString = "file:///Users/Dollstudio/DollStudio/gitProject/krGL/DollEngine/DollEngine/DollEngine/core/component/BaseComp.h"
+                  timestampString = "453560485.733249"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "33"
+                  endingLineNumber = "33"
+                  offsetFromSymbolStart = "20">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

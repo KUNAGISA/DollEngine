@@ -10,6 +10,7 @@
 #define __DollEngine__Units__
 
 #include "CoreType.h"
+#include "Debug.h"
 
 DE_BEGIN
 

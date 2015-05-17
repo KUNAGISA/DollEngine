@@ -11,6 +11,7 @@
 #include "Canvas.h"
 #include "Painter.h"
 #include "GLCanvas.h"
+#include "InputEventPool.h"
 
 DE_BEGIN
 
@@ -21,6 +22,7 @@ GameObject::GameObject()
 ,m_iterInParent(s_iterEnd.end())
 ,m_needSortChildren(false)
 ,m_z(0)
+,m_enabled(true)
 {
     m_transInWorld = new Transform();
     m_transform = new Transform();
@@ -72,6 +74,15 @@ void GameObject::addComponent(BaseComp* comp)
             break;
         default:
             break;
+    }
+}
+
+void GameObject::setSizeToPaintSize()
+{
+    if (m_paintComp.size() > 0) {
+        Size size = ((Painter*)m_paintComp[0])->getPaintSize();
+        setWidth(size.width);
+        setHeight(size.height);
     }
 }
 
@@ -130,13 +141,28 @@ void GameObject::transform()
     m_transInWorld->setHeight(m_transform->getHeight());
 }
 
+void GameObject::updateInputEvent()
+{
+    if (getEnabled()) {
+        for (BaseComp* comp : m_touchComp) {
+            InputEventPool::GetInstance()->addTouch(dynamic_cast<InputEvent*>(comp));
+        }
+        for (GameObject* child : m_children) {
+            child->updateInputEvent();
+        }
+    }
+}
+
 void GameObject::addChild(GameObject* lay)
 {
     if (lay->getParent()) {
         lay->removeFromParent(false);
     }
     lay->setParent(this);
-    int lastZ = m_children.back()->getZ();
+    int lastZ=0;
+    if (m_children.size() > 0) {
+        lastZ = m_children.back()->getZ();
+    }
     m_children.push_back(lay);
     if (lastZ != lay->getZ()) {
         m_needSortChildren=true;

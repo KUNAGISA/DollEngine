@@ -87,7 +87,10 @@ void GLCanvas::resizeGL()
             //            m_globalTrans->setScaleY(1/deviceHeight);
             m_globalTrans->flush();
             
+            Device::GetInstance()->getCurrentCanvas()->setLayerLeft(layerX);
+            Device::GetInstance()->getCurrentCanvas()->setLayerTop(layerY);
             
+            Device::GetInstance()->getCurrentCanvas()->setLayerZoom(layerZoom);
 #ifdef OS_MAC
             glViewport(0,0,deviceWidth,deviceHeight);
             glOrtho(-1, 1, -1, 1, -1, 1);

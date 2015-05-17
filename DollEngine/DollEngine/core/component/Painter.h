@@ -24,7 +24,7 @@ public:
     ~Painter();
 public:
     bool loadImages(const string& path,const string& plist="");
-    
+    virtual Size getPaintSize();
 public:
     void update();
     void blendFunc(GLenum src,GLenum dst);
@@ -33,6 +33,8 @@ public:
     PROPERTY(SpriteFrame*, DisplayFrame, m_displayFrame);
     PROPERTY(GLProgram*, Program, m_program){m_program=v;}
     PROPERTY_CONST(Color, Color, m_color){m_color=v;}
+    PROPERTY_RO(float, Width, m_width);
+    PROPERTY_RO(float, Height, m_height);
 protected:
     Transform* m_transform;
     

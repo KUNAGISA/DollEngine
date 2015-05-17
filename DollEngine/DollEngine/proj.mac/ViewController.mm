@@ -10,6 +10,7 @@
 #import <OpenGL/OpenGL.h>
 #include "Device.h"
 #include "GLCanvas.h"
+#include "InputEventPool.h"
 
 @implementation ViewController
 
@@ -128,24 +129,22 @@ static ViewController* s_instance;
 {
     NSPoint event_location = [theEvent locationInWindow];
     NSPoint local_point = [self convertPoint:event_location fromView:nil];
-    //    if(COMManager::GetInstance()->touchBegan(local_point.x, self.frame.size.height - local_point.y))
-    //    {
-    //        _touchValid = YES;
-    //    }
+    Device
+    DE::InputEventPool::GetInstance()->onMouseDown(local_point.x, self.frame.size.height - local_point.y);
 }
 
 -(void)mouseMoved:(NSEvent *)theEvent
 {
     NSPoint event_location = [theEvent locationInWindow];
     NSPoint local_point = [self convertPoint:event_location fromView:nil];
-    //    COMManager::GetInstance()->touchMoved(local_point.x, self.frame.size.height -local_point.y);
+    DE::InputEventPool::GetInstance()->onMouseMove(local_point.x, self.frame.size.height - local_point.y);
 }
 
 -(void)mouseUp:(NSEvent *)theEvent
 {
     NSPoint event_location = [theEvent locationInWindow];
     NSPoint local_point = [self convertPoint:event_location fromView:nil];
-    //    COMManager::GetInstance()->touchEnded(local_point.x, self.frame.size.height -local_point.y);
+    DE::InputEventPool::GetInstance()->onMouseUp(local_point.x, self.frame.size.height - local_point.y);
 }
 
 

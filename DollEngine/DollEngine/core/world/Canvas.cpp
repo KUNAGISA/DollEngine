@@ -37,6 +37,11 @@ void Canvas::visit()
     }
 }
 
+void Canvas::updateInputEvent()
+{
+    m_worldObject->updateInputEvent();
+}
+
 void Canvas::setWorldObject(GameObject* lay)
 {
     SAFF_DELETE(m_worldObject);

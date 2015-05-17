@@ -23,7 +23,7 @@ public:
     ~Canvas();
     
     void visit();
-    
+    void updateInputEvent();
     
     PROPERTY(bool, Visible, m_visible);
     PROPERTY(GameObject*,WorldObject,m_worldObject);

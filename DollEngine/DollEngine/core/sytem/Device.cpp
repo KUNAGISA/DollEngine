@@ -9,6 +9,7 @@
 #include "Device.h"
 #include "Storages.h"
 #include "Canvas.h"
+#include "InputEventPool.h"
 
 DE_BEGIN
 
@@ -34,6 +35,11 @@ void Device::mainLoop()
         if (m_needRedraw) {
             m_currentCanvas->visit();
 //            m_needRedraw = false;
+        }
+        if (m_needRetouch) {
+            InputEventPool::GetInstance()->clearTouches();
+            m_currentCanvas->updateInputEvent();
+            m_needRetouch=false;
         }
     }
 }

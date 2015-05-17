@@ -21,20 +21,24 @@ public:
     Label();
     ~Label();
     
+    virtual Size getPaintSize();
 public:
     PROPERTY_CONST(string, FontName, m_fontName){
         if(m_fontName!=v){
             m_fontName=v;m_textChanged=true;
+            NEED_REDRAW;
         }
     }
     PROPERTY(int, FontSize, m_fontSize){
         if(m_fontSize!=v){
             m_fontSize=v;m_textChanged=true;
+            NEED_REDRAW;
         }
     }
     PROPERTY_CONST(string, Text, m_text){
         if(m_text!=v){
             m_text=v;m_textChanged=true;
+            NEED_REDRAW;
         }
     }
 public:
@@ -43,7 +47,7 @@ public:
     
 protected:
     bool m_textChanged;
-    vector<TextFrame*> m_allFrames;
+    vector<TextFrame*> m_allTextFrames;
 };
 
 DE_END

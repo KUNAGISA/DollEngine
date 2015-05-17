@@ -14,6 +14,7 @@
 #include "Device.h"
 #include "Painter.h"
 #include "Label.h"
+#include "InputEvent.h"
 
 using namespace DE;
 
@@ -36,16 +37,36 @@ using namespace DE;
     GameObject* lay = new GameObject();
     canvas->setWorldObject(lay);
     
-    lay->setLeft(100);
-    lay->setTop(200);
+//    lay->setLeft(100);
+//    lay->setTop(200);
     
     Painter* paint = new Painter();
     lay->addComponent(paint);
     paint->loadImages("bgimage/bg1.png");
+    lay->setSizeToPaintSize();
     
-    Label* label = new Label();
-    lay->addComponent(label);
-    label->setText("测测试蚊子hadfoaimesf 3roiew^345qvv√¬˚…∆˙˙®∫µµ∫˚reb");
+    GameObject* lay2 = new GameObject();
+    lay->addChild(lay2);
+    
+    Painter* paint2 = new Painter();
+    lay2->addComponent(paint2);
+    paint2->loadImages("image/configb4_1.png");
+    lay2->setSizeToPaintSize();
+//    
+//    Label* label = new Label();
+//    lay2->addComponent(label);
+//    label->setText("测试文字hadfoaimesf 3roiew^345qvv√¬˚…∆˙˙®∫µµ∫˚reb");
+//    label->setFontSize(48);
+//    label->updateText();
+//    lay2->setLeft(200);
+//    lay2->setTop(50);
+////    lay2->setRotation(45);
+////    lay2->setScaleX(0.5);
+////    lay2->setScaleY(2);
+//    lay2->setSizeToPaintSize();
+    
+    InputEvent* event = new InputEvent();
+    lay2->addComponent(event);
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {

@@ -30,6 +30,24 @@ const Rect& Rect::Zero()
     return s_rect_zero;
 }
 
+static Size s_size_zero = Size(0,0);
+
+Size::Size(float w,float h)
+{
+    set(w,h);
+}
+
+void Size::set(float w,float h)
+{
+    this->width = w;
+    this->height = h;
+}
+
+const Size& Size::Zero()
+{
+    return s_size_zero;
+}
+
 Color::Color()
 :r(0xff)
 ,g(0xff)

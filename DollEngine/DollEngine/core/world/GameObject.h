@@ -24,8 +24,10 @@ public:
     virtual ~GameObject();
     
     void addComponent(BaseComp* comp);
+    void setSizeToPaintSize();
     void visit();
     void transform();
+    void updateInputEvent();
     
     void addChild(GameObject* lay);
     void removeChild(GameObject* lay,bool isRelease);
@@ -33,6 +35,7 @@ public:
     void sortChildren();
     
     PROPERTY(int, Z, m_z){m_z=v;}
+    PROPERTY(bool, Enabled, m_enabled){m_enabled=v;NEED_RETOUCH;}
     PROPERTY(GameObject*,Parent,m_parent){m_parent=v;}
     
     PROPERTY_RO(Transform*, TransInWorld, m_transInWorld);

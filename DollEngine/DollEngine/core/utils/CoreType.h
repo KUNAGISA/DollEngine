@@ -56,6 +56,18 @@ public:
     float height;
 };
 
+class Size
+{
+public:
+    Size():width(0),height(0){}
+    Size(float w,float h);
+    void set(float w,float h);
+    static const Size& Zero();
+    
+    float width;
+    float height;
+};
+
 class Color
 {
 public:

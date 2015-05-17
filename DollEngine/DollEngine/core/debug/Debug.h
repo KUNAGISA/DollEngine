@@ -9,7 +9,7 @@
 #ifndef __DollEngine__Debug__
 #define __DollEngine__Debug__
 
-#include "Units.h"
+#include "CoreType.h"
 
 DE_BEGIN
 
