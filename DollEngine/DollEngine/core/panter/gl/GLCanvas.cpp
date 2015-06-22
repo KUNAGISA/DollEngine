@@ -81,10 +81,6 @@ void GLCanvas::resizeGL()
             m_globalTrans->setY(-layerY*2/deviceHeight+1);
             m_globalTrans->setScaleX(2/deviceWidth * layerZoom);
             m_globalTrans->setScaleY(-2/deviceHeight * layerZoom);
-            //            m_globalTrans->setX(0);
-            //            m_globalTrans->setY(0);
-            //            m_globalTrans->setScaleX(1/deviceWidth);
-            //            m_globalTrans->setScaleY(1/deviceHeight);
             m_globalTrans->flush();
             
             Device::GetInstance()->getCurrentCanvas()->setLayerLeft(layerX);
@@ -97,6 +93,7 @@ void GLCanvas::resizeGL()
             glMatrixMode(GL_PROJECTION);
             glLoadIdentity();
 #endif
+            NEED_REDRAW;
         }
     }
 }

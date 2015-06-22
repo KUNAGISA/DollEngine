@@ -25,9 +25,9 @@ public:
     PROPERTY(bool, Moved, m_moved){m_moved=v;}
     PROPERTY(list<InputEvent*>::iterator, IterInPool, m_iterInPool){m_iterInPool=v;}
 public:
-    virtual void onMouseDown(float x,float y ){DM("down:%f,%f",x,y);}
-    virtual void onMouseUp(float x,float y ){DM("up:%f,%f",x,y);}
-    virtual void onMouseMove(float x,float y ){DM("move:%f,%f",x,y);}
+    virtual void onTouchDown(float x,float y ){DM("down:%f,%f",x,y);}
+    virtual void onTouchUp(float x,float y ){DM("up:%f,%f",x,y);}
+    virtual void onTouchMove(float x,float y ){DM("move:%f,%f",x,y);}
     virtual void onClick(float x,float y){DM("click:%f,%f",x,y);}
     virtual void onMouseEnter(){}
     virtual void onMouseLeave(){}

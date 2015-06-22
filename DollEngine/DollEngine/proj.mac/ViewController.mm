@@ -94,6 +94,15 @@ static ViewController* s_instance;
      NSDefaultRunLoopMode];
 }
 
+- (void)viewDidMoveToWindow
+{
+    int options=NSTrackingMouseEnteredAndExited|NSTrackingActiveAlways|NSTrackingInVisibleRect|NSTrackingEnabledDuringMouseDrag;//
+    
+    NSTrackingArea *ta;
+    ta=[[NSTrackingArea alloc] initWithRect:NSZeroRect options:options owner:self userInfo:nil];
+    [self addTrackingArea:ta];
+    //NSLog(@"viewDidMoveToWindow");
+}
 
 -(void) lockOpenGLContext
 {
@@ -129,22 +138,21 @@ static ViewController* s_instance;
 {
     NSPoint event_location = [theEvent locationInWindow];
     NSPoint local_point = [self convertPoint:event_location fromView:nil];
-    Device
-    DE::InputEventPool::GetInstance()->onMouseDown(local_point.x, self.frame.size.height - local_point.y);
+    DE::InputEventPool::GetInstance()->onTouchDown(local_point.x,self.frame.size.height -local_point.y);
 }
 
--(void)mouseMoved:(NSEvent *)theEvent
+-(void)mouseDragged:(NSEvent *)theEvent
 {
     NSPoint event_location = [theEvent locationInWindow];
     NSPoint local_point = [self convertPoint:event_location fromView:nil];
-    DE::InputEventPool::GetInstance()->onMouseMove(local_point.x, self.frame.size.height - local_point.y);
+    DE::InputEventPool::GetInstance()->onTouchMove(local_point.x, self.frame.size.height - local_point.y);
 }
 
 -(void)mouseUp:(NSEvent *)theEvent
 {
     NSPoint event_location = [theEvent locationInWindow];
     NSPoint local_point = [self convertPoint:event_location fromView:nil];
-    DE::InputEventPool::GetInstance()->onMouseUp(local_point.x, self.frame.size.height - local_point.y);
+    DE::InputEventPool::GetInstance()->onTouchUp(local_point.x, self.frame.size.height - local_point.y);
 }
 
 

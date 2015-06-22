@@ -24,9 +24,9 @@ public:
     void clearTouches();
     void addTouch(InputEvent* event);
     void removeTouch(InputEvent* event);
-    bool onMouseDown(float x,float y );
-    void onMouseUp(float x,float y );
-    void onMouseMove(float x,float y );
+    bool onTouchDown(float x,float y );
+    void onTouchUp(float x,float y );
+    void onTouchMove(float x,float y );
 private:
     list<InputEvent*> m_allInputs;
     vector<InputEvent*> m_validTouches;

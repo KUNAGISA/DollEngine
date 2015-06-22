@@ -27,7 +27,7 @@ using namespace DE;
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     
     Device::GetInstance()->initEnginePaths();
-    Device::GetInstance()->setDeviceSize(512, 384);
+    Device::GetInstance()->setDeviceSize(1024, 768);
     
     DE::Canvas* canvas = new DE::Canvas();
     canvas->setLayerWidth(1024);
@@ -58,11 +58,11 @@ using namespace DE;
 //    label->setText("测试文字hadfoaimesf 3roiew^345qvv√¬˚…∆˙˙®∫µµ∫˚reb");
 //    label->setFontSize(48);
 //    label->updateText();
-//    lay2->setLeft(200);
-//    lay2->setTop(50);
-////    lay2->setRotation(45);
-////    lay2->setScaleX(0.5);
-////    lay2->setScaleY(2);
+    lay2->setLeft(200);
+    lay2->setTop(50);
+    lay2->setRotation(45);
+    lay2->setScaleX(0.5);
+    lay2->setScaleY(2);
 //    lay2->setSizeToPaintSize();
     
     InputEvent* event = new InputEvent();

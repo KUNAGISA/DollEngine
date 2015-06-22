@@ -22,6 +22,7 @@ void Canvas::setVisible(bool v)
             NSWindow* curWindow = ctlr.view.window;
             curWindow.delegate = ctlr;
             [curWindow setReleasedWhenClosed:YES];
+            
             [curWindow setContentSize:CGSizeMake(Device::GetInstance()->getDeviceWidth(), Device::GetInstance()->getDeviceHeight())];
             [curWindow center];
             m_window = (__bridge void*)curWindow;

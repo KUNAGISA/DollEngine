@@ -85,13 +85,12 @@ bool Transform::pointInside(float x,float y,float& ox,float& oy)
     kmMat4Inverse(&t_mat, &m_matrix);
     kmVec3 outpos;
     kmVec3 inpos;
-    float nx = x/Device::GetInstance()->getCurrentCanvas()->getLayerWidth()-1;
-    float ny = 1-y/Device::GetInstance()->getCurrentCanvas()->getLayerHeight();
+    float nx = x*2/Device::GetInstance()->getCurrentCanvas()->getLayerWidth()-1;
+    float ny = -y*2/Device::GetInstance()->getCurrentCanvas()->getLayerHeight()+1;
     kmVec3Fill(&inpos,nx,ny,0);
     kmVec3Transform(&outpos,&inpos,&t_mat);
     ox = outpos.x;
     oy = outpos.y;
-    DM("point:%f,%f to %f,%f",x,y,ox,oy);
     if (outpos.x >= 0 &&
         outpos.y >= 0 &&
         outpos.x < m_width&&

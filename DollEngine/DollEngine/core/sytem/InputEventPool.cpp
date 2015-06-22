@@ -7,6 +7,8 @@
 //
 
 #include "InputEventPool.h"
+#include "Device.h"
+#include "Canvas.h"
 
 DE_BEGIN
 
@@ -42,8 +44,12 @@ void InputEventPool::removeTouch(InputEvent* event)
     event->setIterInPool(InputIterEnd());
 }
 
-bool InputEventPool::onMouseDown(float x,float y )
+bool InputEventPool::onTouchDown(float x,float y )
 {
+    Device* device = Device::GetInstance();
+    Canvas* canvas = device->getCurrentCanvas();
+    x /= device->getDeviceWidth()/canvas->getLayerWidth();
+    y /= device->getDeviceHeight()/canvas->getLayerHeight();
     list<InputEvent*> all_event = m_allInputs;
     m_validTouches.clear();
     for (auto iter = all_event.begin();
@@ -55,7 +61,7 @@ bool InputEventPool::onMouseDown(float x,float y )
         float ox,oy;
         if (obj->getEnabled() && !obj->getIgnore() && obj->pointInside(x,y,ox,oy))
         {
-            obj->onMouseDown(ox, oy);
+            obj->onTouchDown(ox, oy);
             if (!obj->getIgnore())
             {
                 obj->setFocus(true);
@@ -74,8 +80,12 @@ bool InputEventPool::onMouseDown(float x,float y )
     return m_validTouches.size() > 0 ? true : false;
 }
 
-void InputEventPool::onMouseUp(float x,float y )
+void InputEventPool::onTouchUp(float x,float y )
 {
+    Device* device = Device::GetInstance();
+    Canvas* canvas = device->getCurrentCanvas();
+    x /= device->getDeviceWidth()/canvas->getLayerWidth();
+    y /= device->getDeviceHeight()/canvas->getLayerHeight();
     for (auto iter = m_validTouches.begin();
          iter != m_validTouches.end(); ++iter)
     {
@@ -84,19 +94,23 @@ void InputEventPool::onMouseUp(float x,float y )
         float ox,oy;
         bool pointInside = obj->pointInside(x, y,ox,oy);
         if (pointInside) {
-            obj->onMouseUp(ox, oy);
+            obj->onTouchUp(ox, oy);
             if (!obj->getMoved()) {
                 obj->onClick(ox, oy);
             }
         }
         else {
-            obj->onMouseUp(ox, oy);
+            obj->onTouchUp(ox, oy);
         }
     }
 }
 
-void InputEventPool::onMouseMove(float x,float y )
+void InputEventPool::onTouchMove(float x,float y )
 {
+    Device* device = Device::GetInstance();
+    Canvas* canvas = device->getCurrentCanvas();
+    x /= device->getDeviceWidth()/canvas->getLayerWidth();
+    y /= device->getDeviceHeight()/canvas->getLayerHeight();
     for (auto iter = m_validTouches.begin();
          iter != m_validTouches.end(); ++iter)
     {
@@ -112,7 +126,7 @@ void InputEventPool::onMouseMove(float x,float y )
             obj->onMouseEnter();
         }
         obj->setMoved(true);
-        obj->onMouseMove(ox, oy);
+        obj->onTouchMove(ox, oy);
     }
 }
 

@@ -68,7 +68,7 @@ public:
 //    
 //public:
 //    bool onMouseBegan(float x,float y){qDebug()<<"began"<<x<<y<<this;return true;}
-//    void onMouseMove(float x,float y){qDebug()<<"move"<<x<<y<<this;}
+//    void onTouchMove(float x,float y){qDebug()<<"move"<<x<<y<<this;}
 //    void onMouseEnd(float x,float y){qDebug()<<"end"<<x<<y<<this;}
 //    void onClick(float x,float y){qDebug()<<"click"<<x<<y<<this;}
 //    void onDoubleClick(float x,float y){qDebug()<<"doubleclick"<<x<<y<<this;}
