@@ -260,6 +260,12 @@
 		B8AEF0B11B35998400490A8D /* MsgLoad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEF09F1B35998400490A8D /* MsgLoad.cpp */; };
 		B8AEF0C41B35A4EE00490A8D /* TjsBind.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEF0C21B35A4EE00490A8D /* TjsBind.cpp */; };
 		B8AEF0C51B35A4EE00490A8D /* TjsBind.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEF0C21B35A4EE00490A8D /* TjsBind.cpp */; };
+		B8AEF0CC1B395B6900490A8D /* TjsScript.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEF0C61B395B6900490A8D /* TjsScript.cpp */; };
+		B8AEF0CD1B395B6900490A8D /* TjsScript.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEF0C61B395B6900490A8D /* TjsScript.cpp */; };
+		B8AEF0CE1B395B6900490A8D /* TjsStorage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEF0C81B395B6900490A8D /* TjsStorage.cpp */; };
+		B8AEF0CF1B395B6900490A8D /* TjsStorage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEF0C81B395B6900490A8D /* TjsStorage.cpp */; };
+		B8AEF0D01B395B6900490A8D /* TjsSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEF0CA1B395B6900490A8D /* TjsSystem.cpp */; };
+		B8AEF0D11B395B6900490A8D /* TjsSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEF0CA1B395B6900490A8D /* TjsSystem.cpp */; };
 		B8B81E2B1ADFE3B600601559 /* Canvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8B81E271ADFE3B600601559 /* Canvas.cpp */; };
 		B8B81E2C1ADFE3B600601559 /* Canvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8B81E271ADFE3B600601559 /* Canvas.cpp */; };
 		B8B81E2D1ADFE3B600601559 /* GameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8B81E291ADFE3B600601559 /* GameObject.cpp */; };
@@ -704,6 +710,12 @@
 		B8AEF0A21B35998400490A8D /* string_table_resource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = string_table_resource.h; sourceTree = "<group>"; };
 		B8AEF0C21B35A4EE00490A8D /* TjsBind.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TjsBind.cpp; sourceTree = "<group>"; };
 		B8AEF0C31B35A4EE00490A8D /* TjsBind.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsBind.h; sourceTree = "<group>"; };
+		B8AEF0C61B395B6900490A8D /* TjsScript.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TjsScript.cpp; sourceTree = "<group>"; };
+		B8AEF0C71B395B6900490A8D /* TjsScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsScript.h; sourceTree = "<group>"; };
+		B8AEF0C81B395B6900490A8D /* TjsStorage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TjsStorage.cpp; sourceTree = "<group>"; };
+		B8AEF0C91B395B6900490A8D /* TjsStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsStorage.h; sourceTree = "<group>"; };
+		B8AEF0CA1B395B6900490A8D /* TjsSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TjsSystem.cpp; sourceTree = "<group>"; };
+		B8AEF0CB1B395B6900490A8D /* TjsSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsSystem.h; sourceTree = "<group>"; };
 		B8B81E271ADFE3B600601559 /* Canvas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Canvas.cpp; sourceTree = "<group>"; };
 		B8B81E281ADFE3B600601559 /* Canvas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Canvas.h; sourceTree = "<group>"; };
 		B8B81E291ADFE3B600601559 /* GameObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameObject.cpp; sourceTree = "<group>"; };
@@ -1257,6 +1269,12 @@
 		B898541E1ADC04D0003784AA /* tjsbind */ = {
 			isa = PBXGroup;
 			children = (
+				B8AEF0C61B395B6900490A8D /* TjsScript.cpp */,
+				B8AEF0C71B395B6900490A8D /* TjsScript.h */,
+				B8AEF0C81B395B6900490A8D /* TjsStorage.cpp */,
+				B8AEF0C91B395B6900490A8D /* TjsStorage.h */,
+				B8AEF0CA1B395B6900490A8D /* TjsSystem.cpp */,
+				B8AEF0CB1B395B6900490A8D /* TjsSystem.h */,
 				B8AEF0C21B35A4EE00490A8D /* TjsBind.cpp */,
 				B8AEF0C31B35A4EE00490A8D /* TjsBind.h */,
 			);
@@ -1678,6 +1696,7 @@
 				B8A1D8891AE2BC2C005A6595 /* mat3.c in Sources */,
 				B8AEF0461B35997800490A8D /* regtrav.c in Sources */,
 				B8BB32BC1AEC579100E4DDB3 /* Painter.cpp in Sources */,
+				B8AEF0CF1B395B6900490A8D /* TjsStorage.cpp in Sources */,
 				B8AEF08E1B35997800490A8D /* tjsRandomGenerator.cpp in Sources */,
 				B8AEF0621B35997800490A8D /* tjsdate.tab.cpp in Sources */,
 				B87FDC9F1AE34B4700491CFC /* IOData.cpp in Sources */,
@@ -1719,6 +1738,7 @@
 				B8AEF0061B35997800490A8D /* iso8859_13.c in Sources */,
 				B8AEF0C51B35A4EE00490A8D /* TjsBind.cpp in Sources */,
 				B8D366121B06E02F00E627A7 /* InputEventPool.cpp in Sources */,
+				B8AEF0D11B395B6900490A8D /* TjsSystem.cpp in Sources */,
 				B8AEF0241B35997800490A8D /* sjis.c in Sources */,
 				B8AEF0501B35997800490A8D /* tjs.cpp in Sources */,
 				B8AEEFFE1B35997800490A8D /* gb18030.c in Sources */,
@@ -1732,6 +1752,7 @@
 				B8A1D8951AE2BC2C005A6595 /* utility.c in Sources */,
 				B8AEF0941B35997800490A8D /* tjsScriptCache.cpp in Sources */,
 				B8AEF0841B35997800490A8D /* tjsNative.cpp in Sources */,
+				B8AEF0CD1B395B6900490A8D /* TjsScript.cpp in Sources */,
 				B8A1D8911AE2BC2C005A6595 /* quaternion.c in Sources */,
 				B8AEF06E1B35997800490A8D /* tjsError.cpp in Sources */,
 				B8AEF03A1B35997800490A8D /* regext.c in Sources */,
@@ -1852,6 +1873,7 @@
 				B8AEF05F1B35997800490A8D /* tjsDate.cpp in Sources */,
 				B87FDC8E1AE2E66800491CFC /* GLShaderObject.cpp in Sources */,
 				B898541F1ADC04D0003784AA /* AppDelegate.mm in Sources */,
+				B8AEF0CC1B395B6900490A8D /* TjsScript.cpp in Sources */,
 				B8BB32BB1AEC579100E4DDB3 /* Painter.cpp in Sources */,
 				B8AEF0611B35997800490A8D /* tjsdate.tab.cpp in Sources */,
 				B8AEF0791B35997800490A8D /* tjsLex.cpp in Sources */,
@@ -1864,6 +1886,7 @@
 				B8A1D8841AE2BC2C005A6595 /* mat4stack.c in Sources */,
 				B8AEF0711B35997800490A8D /* tjsGlobalStringMap.cpp in Sources */,
 				B8AEF0951B35997800490A8D /* tjsString.cpp in Sources */,
+				B8AEF0D01B395B6900490A8D /* TjsSystem.cpp in Sources */,
 				B8AEF0B01B35998400490A8D /* MsgLoad.cpp in Sources */,
 				B8A1D8861AE2BC2C005A6595 /* matrix.c in Sources */,
 				B8AEF05D1B35997800490A8D /* tjsConstArrayData.cpp in Sources */,
@@ -1886,6 +1909,7 @@
 				B8D365FD1B06550300E627A7 /* TextFrame.cpp in Sources */,
 				B87FDCA61AE3538C00491CFC /* FileInfo.cpp in Sources */,
 				B825F8FF1B03ABB900B930E8 /* Label.cpp in Sources */,
+				B8AEF0CE1B395B6900490A8D /* TjsStorage.cpp in Sources */,
 				B8D365F31B0622ED00E627A7 /* NormalProgram.cpp in Sources */,
 				B8A1D8921AE2BC2C005A6595 /* ray2.c in Sources */,
 				B8AEF0691B35997800490A8D /* tjsDictionary.cpp in Sources */,

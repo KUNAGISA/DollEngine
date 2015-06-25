@@ -16,8 +16,11 @@ DE_BEGIN
 
 extern void GLCheckError();
 extern string StringWithFormat(const char* format,...);
-extern void Utf8ToUnicode(const char* src, wstring& target);
+extern void Utf8ToUnicode(char* src, wstring& target);
+extern void UnicodeToUtf8(const wstring& src, string& target);
 extern void Utf8ToVector(const string& _in, vector<string>& _out);
+extern unsigned char* WCharToChar(int& src, unsigned char*target);
+extern void CharToWChar(const char* src,wchar_t* target);
 
 DE_END
 

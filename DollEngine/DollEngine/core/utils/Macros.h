@@ -31,6 +31,7 @@ using namespace std;
 #define DEFFONT "WenQuanYi Micro Hei"
 #define DEFFONTSIZE 24
 #define DM Debug::message
+#define ASSERT assert
 
 #define DE_BEGIN namespace DE {
 #define DE_END }

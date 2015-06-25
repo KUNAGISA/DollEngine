@@ -22,12 +22,10 @@ public:
     void initWithSize(size_t size);
     void clearBuffer();
     unsigned short getUShort(int idx);
-    void convertTostring();
+    void convertToUnicode(wstring&target);
     
     PROPERTY(unsigned char*, Buffer, m_buffer);
-    PROPERTY(wchar_t*, WBuffer, m_wBuffer);
     PROPERTY(size_t, Size, m_size){m_size=v;}
-    PROPERTY(size_t, WSize, m_wSize){m_wSize=v;}
 };
 
 

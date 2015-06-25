@@ -10,18 +10,21 @@
 #define __DollEngine__TjsEngine__
 
 #include "ScriptEngine.h"
+namespace TJS{
+class tTJS;
+}
 
 DE_BEGIN
+
 
 class TjsEngine : public ScriptEngine
 {
 public:
     TjsEngine();
     Shared(TjsEngine)
-    virtual bool eval(const string& code);
-    virtual bool evalStorage(const string& filePath);
-    virtual bool exec(const string& code);
-    virtual bool execStorage(const string& filePath);
+    static TJS::tTJS* Global();
+    virtual bool eval(const wstring& code,void* ret);
+    virtual bool exec(const wstring& code,void* ret);
 };
 
 DE_END

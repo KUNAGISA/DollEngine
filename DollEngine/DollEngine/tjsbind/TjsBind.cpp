@@ -7,6 +7,7 @@
 //
 
 #include "TjsBind.h"
+#include "TjsEngine.h"
 
 using namespace DE;
 
@@ -17,7 +18,7 @@ void TVPAddLog(const ttstr& var)
 
 iTJSDispatch2* TVPGetScriptDispatch()
 {
-    return (iTJSDispatch2*)de::script::script_global();
+    return (iTJSDispatch2*)DE::TjsEngine::GetInstance()->Global();
 }
 
 void TVPThrowExceptionMessage(const ttstr& var)
@@ -46,17 +47,6 @@ void TVPThrowExceptionMessage(const tTJSMessageHolder&)
 }
 
 void TVPExecuteExpression(const ttstr& var1,void*)
-{
-    
-}
-
-deTJSClass::deTJSClass()
-:_self(null)
-{
-    
-}
-
-deTJSClass::~deTJSClass()
 {
     
 }

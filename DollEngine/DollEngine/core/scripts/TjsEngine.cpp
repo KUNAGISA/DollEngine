@@ -7,11 +7,18 @@
 //
 
 #include "TjsEngine.h"
-#include "tjs.h"
-#include "ncbind.hpp"
+#include "TjsBind.h"
+#include "TjsSystem.h"
+#include "TjsStorage.h"
+#include "TjsScript.h"
 
 DE_BEGIN
-static tTJS* s_tjs = null;
+static TJS::tTJS* s_tjs = null;
+
+TJS::tTJS* TjsEngine::Global()
+{
+    return s_tjs;
+}
 
 TjsEngine::TjsEngine()
 {
@@ -22,9 +29,9 @@ TjsEngine::TjsEngine()
         tTJSVariant val;
         iTJSDispatch2 *dsp;
         iTJSDispatch2* global = s_tjs->GetGlobalNoAddRef () ;
-//        TJS_REGIST_CLASS(System)
-//        TJS_REGIST_CLASS(Storages)
-//        TJS_REGIST_CLASS(Scripts)
+        TJS_REGIST_CLASS(System)
+        TJS_REGIST_CLASS(Storages)
+        TJS_REGIST_CLASS(Scripts)
         
         TVPLoadMessage();
         //        REGIST_TJS_FUNCTION(TJSPrint,"print")
@@ -36,23 +43,13 @@ TjsEngine::TjsEngine()
     }
 }
 
-bool TjsEngine::eval(const string& code)
+bool TjsEngine::eval(const wstring& code,void* ret)
 {
     
     return true;
 }
 
-bool TjsEngine::evalStorage(const string& filePath)
-{
-    return true;
-}
-
-bool TjsEngine::exec(const string& code)
-{
-    return true;
-}
-
-bool TjsEngine::execStorage(const string& filePath)
+bool TjsEngine::exec(const wstring& code,void* ret)
 {
     return true;
 }

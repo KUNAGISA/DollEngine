@@ -16,10 +16,8 @@ DE_BEGIN
 class ScriptEngine
 {
 public:
-    virtual bool eval(const string& code)=0;
-    virtual bool evalStorage(const string& filePath)=0;
-    virtual bool exec(const string& code)=0;
-    virtual bool execStorage(const string& filePath)=0;
+    virtual bool eval(const wstring& code,void* ret)=0;
+    virtual bool exec(const wstring& code,void* ret)=0;
 };
 
 DE_END

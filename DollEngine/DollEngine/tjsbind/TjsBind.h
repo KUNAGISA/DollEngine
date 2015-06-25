@@ -6,11 +6,18 @@
 //  Copyright (c) 2015年 血染的玩偶. All rights reserved.
 //
 
-#ifndef __DollEngine__de_tjs_bind__
-#define __DollEngine__de_tjs_bind__
+#ifndef __DollEngine__TjsBind__
+#define __DollEngine__TjsBind__
 
 #include "Units.h"
 #include "ncbind.hpp"
+#include "tjs.h"
+#include "tjsNative.h"
+#include "tjsError.h"
+#include "tjsString.h"
+#include "tjsVariant.h"
+#include "tjsDebug.h"
+#include "tjsScriptBlock.h"
 
 
 #define TJS_CATCH \
@@ -111,15 +118,15 @@ CLASS()
 Factory(&deTJSFactory::factory<ClassT>);\
 NCB_PROPERTY_RO(class, getClass);
 
-class deTJSClass
+class TjsClass
 {
 public:
-    deTJSClass();
-    virtual ~deTJSClass();
+    TjsClass():_self(null){}
+    virtual ~TjsClass(){}
     tTJSCustomObject* _self;
 };
 
-class deTJSFactory {
+class TjsFactory {
 public:
     template <typename TYPE>
     static tjs_error factory(TYPE **result, tjs_int numparams, tTJSVariant **params, iTJSDispatch2 *objthis)
@@ -134,4 +141,4 @@ public:
 };
 
 
-#endif /* defined(__DollEngine__de_tjs_bind__) */
+#endif /* defined(__DollEngine__TjsBind__) */

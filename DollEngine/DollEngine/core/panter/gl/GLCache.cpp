@@ -65,7 +65,7 @@ TextFrame* GLCache::addText(const string& text,const string& fontName,int fontSi
             face = getFont(DEFFONT);
         }
         wstring str;
-        Utf8ToUnicode(text.c_str(),str);
+        Utf8ToUnicode((char*)text.c_str(),str);
         unsigned short charcode = str[0];
         FT_UInt graphIdx = FT_Get_Char_Index(face, (FT_ULong)charcode);
         if (graphIdx == 0)

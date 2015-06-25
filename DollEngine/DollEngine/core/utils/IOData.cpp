@@ -14,15 +14,12 @@ DE_BEGIN
 IOData::IOData()
 :m_buffer(null)
 ,m_size(0)
-,m_wBuffer(null)
-,m_wSize(0)
 {
 }
 
 IOData::~IOData()
 {
     SAFF_DELETE_ARRAY(m_buffer);
-    SAFF_DELETE_ARRAY(m_wBuffer);
 }
 
 void IOData::clear()
@@ -51,12 +48,6 @@ void IOData::setBuffer(unsigned char *v)
     m_buffer = v;
 }
 
-void IOData::setWBuffer(wchar_t *v)
-{
-    SAFF_DELETE_ARRAY(m_wBuffer);
-    m_wBuffer = v;
-}
-
 unsigned short IOData::getUShort(int idx)
 {
     unsigned short ret;
@@ -65,22 +56,9 @@ unsigned short IOData::getUShort(int idx)
     return ret;
 }
 
-void IOData::convertTostring()
+void IOData::convertToUnicode(wstring&target)
 {
-//    wchar_t* dchar = new wchar_t[m_size+1];
-//    unsigned char* buffer = m_buffer;
-//    for (int i=0; i<m_size; ++i)
-//    {
-//        buffer = StringUtils::ConvertUtf8ToUnicode(buffer,dchar[i]);
-//        if (buffer - m_buffer >= m_size)
-//        {
-//            dchar[i+1] = '\0';
-//            setWSize(i);
-//            break;
-//        }
-//    }
-//    SAFF_DELETE_ARRAY(m_buffer);
-//    setWBuffer(dchar);
+    Utf8ToUnicode((char*)m_buffer, target);
 }
 
 DE_END
