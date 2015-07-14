@@ -8,13 +8,9 @@
 
 #import "AppDelegate.h"
 #import "ViewController.h"
-#include "Canvas.h"
 #include "Console.h"
-#include "GameObject.h"
-#include "Device.h"
-#include "Painter.h"
-#include "Label.h"
-#include "InputEvent.h"
+#include "Application.h"
+#include "TjsEngine.h"
 
 using namespace DE;
 
@@ -26,47 +22,50 @@ using namespace DE;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     
-    Device::GetInstance()->initEnginePaths();
-    Device::GetInstance()->setDeviceSize(1024, 768);
-    
-    DE::Canvas* canvas = new DE::Canvas();
-    canvas->setLayerWidth(1024);
-    canvas->setLayerHeight(768);
-    canvas->setVisible(true);
-    
-    GameObject* lay = new GameObject();
-    canvas->setWorldObject(lay);
-    
-//    lay->setLeft(100);
-//    lay->setTop(200);
-    
-    Painter* paint = new Painter();
-    lay->addComponent(paint);
-    paint->loadImages("bgimage/bg1.png");
-    lay->setSizeToPaintSize();
-    
-    GameObject* lay2 = new GameObject();
-    lay->addChild(lay2);
-    
-    Painter* paint2 = new Painter();
-    lay2->addComponent(paint2);
-    paint2->loadImages("image/configb4_1.png");
-    lay2->setSizeToPaintSize();
+    new TjsEngine();
+    DEApplication->startup();
+//    Device::GetInstance()->initEnginePaths();
+//    Device::GetInstance()->setDeviceSize(1024, 768);
 //    
-//    Label* label = new Label();
-//    lay2->addComponent(label);
-//    label->setText("测试文字hadfoaimesf 3roiew^345qvv√¬˚…∆˙˙®∫µµ∫˚reb");
-//    label->setFontSize(48);
-//    label->updateText();
-    lay2->setLeft(200);
-    lay2->setTop(50);
-    lay2->setRotation(45);
-    lay2->setScaleX(0.5);
-    lay2->setScaleY(2);
+//    DE::Canvas* canvas = new DE::Canvas();
+//    canvas->setLayerWidth(1024);
+//    canvas->setLayerHeight(768);
+//    canvas->setVisible(true);
+//    
+//    GameObject* lay = new GameObject();
+//    canvas->setWorldObject(lay);
+//    
+////    lay->setLeft(100);
+////    lay->setTop(200);
+//    
+//    Painter* paint = new Painter();
+//    lay->addComponent(paint);
+//    paint->loadImages("bgimage/bg1.png");
+//    lay->setSizeToPaintSize();
+//    
+//    GameObject* lay2 = new GameObject();
+//    lay->addChild(lay2);
+//    
+//    Painter* paint2 = new Painter();
+//    lay2->addComponent(paint2);
+//    paint2->loadImages("image/configb4_1.png");
 //    lay2->setSizeToPaintSize();
-    
-    InputEvent* event = new InputEvent();
-    lay2->addComponent(event);
+////    
+////    Label* label = new Label();
+////    lay2->addComponent(label);
+////    label->setText("测试文字hadfoaimesf 3roiew^345qvv√¬˚…∆˙˙®∫µµ∫˚reb");
+////    label->setFontSize(48);
+////    label->updateText();
+//    lay2->setLeft(200);
+//    lay2->setTop(50);
+//    lay2->setRotation(45);
+//    lay2->setScaleX(0.5);
+//    lay2->setScaleY(2);
+////    lay2->setSizeToPaintSize();
+//    
+//    TouchListener* event = new TouchListener();
+//    lay2->addComponent(event);
+
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
@@ -90,7 +89,7 @@ using namespace DE;
         NSString* path = [[panel.URLs objectAtIndex:0] path];
         [[NSUserDefaults standardUserDefaults]setValue:path forKey:@"DATA_PATH"];
         [[NSUserDefaults standardUserDefaults]synchronize];
-        DE::Device::GetInstance()->initEnginePaths();
+        DEApplication->initEnginePaths();
         [panel close];
     }
 }

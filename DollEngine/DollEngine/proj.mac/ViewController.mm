@@ -8,9 +8,19 @@
 
 #import "ViewController.h"
 #import <OpenGL/OpenGL.h>
-#include "Device.h"
+#include "Application.h"
 #include "GLCanvas.h"
-#include "InputEventPool.h"
+#include "CompManager.h"
+
+@implementation WindowController
+
+-(void)windowDidLoad {
+    [super windowDidLoad];
+    [[NSApplication sharedApplication] hide:nil];
+}
+
+@end
+
 
 @implementation ViewController
 
@@ -41,7 +51,7 @@ static ViewController* s_instance;
         frameSize.height=128+menuBarHeight;
     }
     
-    DE::Device::GetInstance()->setDeviceSize(frameSize.width, frameSize.height - menuBarHeight);
+    DEApplication->setDeviceSize(frameSize.width, frameSize.height - menuBarHeight);
     DE::GLCanvas::GetInstance()->resizeGL();
     
     return frameSize;
@@ -63,7 +73,6 @@ static ViewController* s_instance;
 
 - (void)redraw:(NSTimer *)pTimer
 {
-    
     [self drawRect:[self bounds]];
 }
 
@@ -122,7 +131,7 @@ static ViewController* s_instance;
 - (void) drawRect:(NSRect)dirtyRect
 {
     [self lockOpenGLContext];
-    DE::Device::GetInstance()->mainLoop();
+    DEApplication->mainLoop();
     glFlush();
     //    [[self openGLContext] flushBuffer];
     [self unlockOpenGLContext];
@@ -138,21 +147,21 @@ static ViewController* s_instance;
 {
     NSPoint event_location = [theEvent locationInWindow];
     NSPoint local_point = [self convertPoint:event_location fromView:nil];
-    DE::InputEventPool::GetInstance()->onTouchDown(local_point.x,self.frame.size.height -local_point.y);
+    DE::CompManager::GetInstance()->onTouchDown(local_point.x,self.frame.size.height -local_point.y);
 }
 
 -(void)mouseDragged:(NSEvent *)theEvent
 {
     NSPoint event_location = [theEvent locationInWindow];
     NSPoint local_point = [self convertPoint:event_location fromView:nil];
-    DE::InputEventPool::GetInstance()->onTouchMove(local_point.x, self.frame.size.height - local_point.y);
+    DE::CompManager::GetInstance()->onTouchMove(local_point.x, self.frame.size.height - local_point.y);
 }
 
 -(void)mouseUp:(NSEvent *)theEvent
 {
     NSPoint event_location = [theEvent locationInWindow];
     NSPoint local_point = [self convertPoint:event_location fromView:nil];
-    DE::InputEventPool::GetInstance()->onTouchUp(local_point.x, self.frame.size.height - local_point.y);
+    DE::CompManager::GetInstance()->onTouchUp(local_point.x, self.frame.size.height - local_point.y);
 }
 
 
