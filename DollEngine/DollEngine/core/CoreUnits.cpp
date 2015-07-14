@@ -63,7 +63,7 @@ void Utf8ToVector(const string& _in, vector<string>& _out)
     }
 }
 
-void Utf8ToUnicode(char* src, wstring& target)
+void Utf8ToUnicode(const char* src, wstring& target)
 {
     target.clear();
     if (src == null) {
@@ -129,16 +129,21 @@ void Utf8ToUnicode(char* src, wstring& target)
     }
 }
 
-void UnicodeToUtf8(const wstring& src, string& target)
+void UnicodeToUtf8(const wchar_t* src, string& target)
 {
     target.clear();
+    if (src == null) {
+        return;
+    }
+    wchar_t* ch = (wchar_t*)src;
     unsigned char out[7];
-    for (int i=0; i<src.size(); ++i)
+    while (*ch != L'\0')
     {
         memset(out, 0, 7);
-        int t = src[i];
+        int t = (int)*ch;
         WCharToChar(t,out);
         target.append((const char*)out);
+        ++ch;
     }
 }
 

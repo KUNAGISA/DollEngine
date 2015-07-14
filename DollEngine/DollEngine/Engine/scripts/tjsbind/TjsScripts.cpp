@@ -47,7 +47,7 @@ tTJSNC_Scripts::tTJSNC_Scripts() : inherited(TJS_W("Scripts"))
     {
         wstring fullpath = (*param[0]).GetString();
         string path;
-        DE::UnicodeToUtf8(fullpath,path);
+        DE::UnicodeToUtf8(fullpath.c_str(),path);
         DE::IOData* data = DE::Storages::GetInstance()->GetFileData(path);
         wstring code;
         data->convertToUnicode(code);
@@ -60,7 +60,7 @@ tTJSNC_Scripts::tTJSNC_Scripts() : inherited(TJS_W("Scripts"))
     {
         wstring fullpath = (*param[0]).GetString();
         string path;
-        DE::UnicodeToUtf8(fullpath,path);
+        DE::UnicodeToUtf8(fullpath.c_str(),path);
         DE::IOData* data = DE::Storages::GetInstance()->GetFileData(path);
         wstring code;
         data->convertToUnicode(code);

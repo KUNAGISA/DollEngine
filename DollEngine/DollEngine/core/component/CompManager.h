@@ -24,6 +24,7 @@ public:
 public:
     void addTouchComp(Component* comp);
     void removeTouchComp(Component* comp);
+    void clearTouches();
     
     bool onTouchDown(float x,float y );
     void onTouchUp(float x,float y );

@@ -29,7 +29,7 @@ using namespace std;
 #define PI 3.14159265358979323846264338327950288
 #define DEFFONT "WenQuanYi Micro Hei"
 #define DEFFONTSIZE 24
-#define DM Debug::message
+#define DM DE::Debug::message
 #define ASSERT assert
 
 #define DE_BEGIN namespace DE {

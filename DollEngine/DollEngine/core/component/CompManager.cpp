@@ -32,6 +32,14 @@ void CompManager::removeTouchComp(Component* comp)
     comp->setCompIter(Component::EndIter());
 }
 
+void CompManager::clearTouches()
+{
+    for (Component* comp : m_touchComps) {
+        comp->setCompIter(Component::EndIter());
+    }
+    m_touchComps.clear();
+}
+
 void CompManager::addReleaseComp(DE::Component *comp)
 {
     m_releasePools.insert(comp);

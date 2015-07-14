@@ -8,7 +8,7 @@
 
 #include "TjsEngine.h"
 #include "TjsBind.h"
-#include "TjsSystem.h"
+#include "TjsApplication.h"
 #include "TjsStorages.h"
 #include "TjsScripts.h"
 
@@ -37,12 +37,12 @@ TjsEngine::TjsEngine()
         tTJSVariant val;
         iTJSDispatch2 *dsp;
         iTJSDispatch2* global = s_tjs->GetGlobalNoAddRef () ;
-        TJS_REGIST_CLASS(System)
+        TJS_REGIST_CLASS(Application)
         TJS_REGIST_CLASS(Storages)
         TJS_REGIST_CLASS(Scripts)
         
         TVPLoadMessage();
-        //        REGIST_TJS_FUNCTION(TJSPrint,"print")
+        TJS_REGIST_FUNCTION(TJSPrint,"print")
         //        REGIST_TJS_FUNCTION(TJSConsoleShow,"__console_show")
         
         // AutoRegisterで登録されたクラス等を登録する

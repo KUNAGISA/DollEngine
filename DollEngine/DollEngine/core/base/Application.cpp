@@ -9,19 +9,20 @@
 #include "Application.h"
 #include "GameObject.h"
 #include "Storages.h"
+#include "CompManager.h"
 #include "ScriptEngine.h"
 
 DE_BEGIN
 
 Application::Application()
-//:m_currentCanvas(null)
+:m_world(null)
 {
 }
 
 
 Application::~Application()
 {
-    
+    SAFF_DELETE(m_world);
 }
 
 void Application::initialize()
@@ -31,17 +32,17 @@ void Application::initialize()
 
 void Application::mainLoop()
 {
-//    if (m_currentCanvas) {
-//        if (m_needRedraw) {
-//            m_currentCanvas->visit();
-//            //            m_needRedraw = false;
-//        }
-//        if (m_needRetouch) {
-//            TouchListenerPool::GetInstance()->clearTouches();
-//            m_currentCanvas->updateTouchListener();
-//            m_needRetouch=false;
-//        }
-//    }
+    if (m_world) {
+        if (m_needRedraw) {
+            m_world->visit();
+            m_needRedraw = false;
+        }
+        if (m_needRetouch) {
+            CompManager::GetInstance()->clearTouches();
+            m_world->updateTouchListener();
+            m_needRetouch=false;
+        }
+    }
 }
 
 void Application::startup()
