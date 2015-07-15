@@ -8,7 +8,7 @@
 
 #include "TjsApplication.h"
 #include "Application.h"
-
+#include "TjsGameObject.h"
 
 tjs_uint32 tTJSNC_Application::ClassID = -1;
 tTJSNC_Application::tTJSNC_Application() : inherited(TJS_W("Application"))
@@ -93,6 +93,27 @@ tTJSNC_Application::tTJSNC_Application() : inherited(TJS_W("Application"))
         TJS_DENY_NATIVE_PROP_SETTER
     }
     TJS_END_NATIVE_STATIC_PROP_DECL(patchPath)
+    
+    
+    TJS_BEGIN_NATIVE_PROP_DECL(world)
+    {
+        TJS_BEGIN_NATIVE_PROP_GETTER
+        {
+            DE::GameObject* obj = DEApplication->getWorld();
+            *result = TJS_GET_ADAPTOR(TjsGameObject, obj);
+            return TJS_S_OK;
+        }
+        TJS_END_NATIVE_PROP_GETTER
+        TJS_BEGIN_NATIVE_PROP_SETTER
+        {
+            iTJSDispatch2* dis =(*param).AsObjectNoAddRef();
+            TjsGameObject* obj = TJS_GET_OBJECT(TjsGameObject,dis);
+            DEApplication->setWorld(obj);
+            return TJS_S_OK;
+        }
+        TJS_END_NATIVE_PROP_SETTER
+    }
+    TJS_END_NATIVE_STATIC_PROP_DECL(world)
     
 //    TJS_NATIVE_PROP(graphicCacheLimit,
 //                    System::GetInstance()->getGraphicCacheLimit(),

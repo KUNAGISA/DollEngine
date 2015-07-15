@@ -52,6 +52,9 @@ GameObject::~GameObject()
     m_updateComps.clear();
     SAFF_DELETE(m_transform);
     SAFF_DELETE(m_transInWorld);
+    if (!m_parent) {
+        DEApplication->setWorld(null);
+    }
 }
 
 void GameObject::addComponent(DE::Component *comp)

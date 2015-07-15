@@ -6,65 +6,11 @@
 //  Copyright (c) 2015年 DollStudio. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "DEOpenGLView.h"
 #import <OpenGL/OpenGL.h>
 #include "Application.h"
 #include "GLCanvas.h"
 #include "CompManager.h"
-
-@implementation WindowController
-
--(void)windowDidLoad {
-    [super windowDidLoad];
-    [[NSApplication sharedApplication] hide:nil];
-}
-
-@end
-
-
-@implementation ViewController
-
-static ViewController* s_instance;
-+(ViewController*)GetInstance
-{
-    return s_instance;
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    s_instance = self;
-}
-
-- (void)setRepresentedObject:(id)representedObject {
-    [super setRepresentedObject:representedObject];
-
-    // Update the view, if already loaded.
-}
-
-- (NSSize)windowWillResize:(NSWindow *)sender toSize:(NSSize)frameSize
-{
-    float menuBarHeight = [[[NSApplication sharedApplication] menu] menuBarHeight];
-    if (frameSize.width <=128) {
-        frameSize.width=128;
-    }
-    if (frameSize.height <=128+menuBarHeight) {
-        frameSize.height=128+menuBarHeight;
-    }
-    
-    DEApplication->setDeviceSize(frameSize.width, frameSize.height - menuBarHeight);
-    DE::GLCanvas::GetInstance()->resizeGL();
-    
-    return frameSize;
-}
-
--(BOOL)windowShouldClose:(id)sender
-{
-    [_glView onClose];
-    [[NSApplication sharedApplication]terminate:sender];
-    return YES;
-}
-
-@end
 
 @implementation DEOpenGLView
 {

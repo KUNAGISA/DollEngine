@@ -48,7 +48,7 @@ void Application::mainLoop()
 void Application::startup()
 {
     initialize();
-    string fullpath = Storages::GetInstance()->getFullPath("data/startup.tjs");
+    string fullpath = Storages::GetInstance()->getFullPath("data/Startup.tjs");
     IOData* data = Storages::GetFileString(fullpath);
     wstring code;
     data->convertToUnicode(code);
@@ -56,7 +56,10 @@ void Application::startup()
         DM("请初始化脚本引擎！");
     }
     else {
+        ScriptEngine::GetInstance()->pushFile("【GLOBAL】");
+        ScriptEngine::GetInstance()->pushFile(fullpath);
         ScriptEngine::GetInstance()->exec(code, null);
+        ScriptEngine::GetInstance()->popFile();
     }
 }
 
@@ -68,6 +71,10 @@ void Application::setDeviceSize(float w,float h)
 
 void Application::setWorld(DE::GameObject *v)
 {
+    if (!v) {
+        m_world = v;
+        return;
+    }
     if (m_world) {
         delete m_world;
     }

@@ -14,16 +14,3 @@
 
 @end
 
-@interface WindowController : NSWindowController
-
-@end
-
-@interface ViewController : NSViewController<NSWindowDelegate>
-{
-    DEOpenGLView* _glView;
-}
-
-+(ViewController*)GetInstance;
-
-@end
-

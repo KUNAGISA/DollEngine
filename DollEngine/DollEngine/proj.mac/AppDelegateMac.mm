@@ -6,24 +6,27 @@
 //  Copyright (c) 2015年 DollStudio. All rights reserved.
 //
 
-#import "AppDelegate.h"
-#import "ViewController.h"
+#import "AppDelegateMac.h"
 #include "Console.h"
 #include "Application.h"
 #include "TjsEngine.h"
+#include "Window.h"
 
 using namespace DE;
 
-@interface AppDelegate ()
+@interface AppDelegateMac ()
 
 @end
 
-@implementation AppDelegate
+@implementation AppDelegateMac
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     
     new TjsEngine();
     DEApplication->startup();
+    
+//    Window* window = new Window();
+//    window->initialize(1024, 768);
 //    Device::GetInstance()->initEnginePaths();
 //    Device::GetInstance()->setDeviceSize(1024, 768);
 //    

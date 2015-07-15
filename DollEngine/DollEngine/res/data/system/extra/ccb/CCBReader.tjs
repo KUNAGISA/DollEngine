@@ -1,0 +1,20 @@
+
+class _CCBReader
+{
+	function _CCBReader () 
+	{
+	}
+
+	function nodeWithFile (path) 
+	{
+		var data = Scripts.evalStorage(path);
+		return nodeWithData(data);
+	}
+
+	function nodeWithData (data) 
+	{
+		
+	}
+}
+
+var CCBReader = new _CCBReader();

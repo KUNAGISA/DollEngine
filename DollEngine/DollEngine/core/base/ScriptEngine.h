@@ -22,6 +22,21 @@ public:
     }
     virtual bool eval(const wstring& code,void* ret){return false;}
     virtual bool exec(const wstring& code,void* ret){return false;}
+    virtual void catchError(void* error){}
+    
+    string topFile(){return m_fileStack.top();}
+    void pushFile(const string& path)
+    {
+        m_fileStack.push(path);
+    }
+    
+    void popFile()
+    {
+        m_fileStack.pop();
+    }
+
+protected:
+    stack<string> m_fileStack;
 };
 
 DE_END

@@ -29,8 +29,8 @@ public:
     virtual ~Debug();
     
     static char* message(const char* format,...);
-    static string throwMsg(DEBUG_MSG error,const string& p1="");
-    static string throwMsg(const string& v){return v;}
+    static void throwMsg(DEBUG_MSG error,const string& p1="");
+    static void throwMsg(const string& v);
 };
 
 DE_END

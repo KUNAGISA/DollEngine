@@ -105,7 +105,7 @@ string FontCache::addFont(const string& path)
 {
     FileInfo file(path);
     if (!file.exist()) {
-        throw Debug::throwMsg(ERROR_FILE_EXIST_FAILD,path);
+        Debug::throwMsg(ERROR_FILE_EXIST_FAILD,path);
     }
     auto iter = m_allFontPaths.find(file.absolutePath());
     if (iter == m_allFontPaths.end())
@@ -113,12 +113,12 @@ string FontCache::addFont(const string& path)
         FT_Face face;
         FT_Error ft_err = FT_New_Face(m_fontLibrary, file.absolutePath().c_str(), 0, &face);
         if (ft_err) {
-            throw Debug::throwMsg(ERROR_ADDFONT_FAILD);
+            Debug::throwMsg(ERROR_ADDFONT_FAILD);
         }
         ft_err = FT_Select_Charmap(face, FT_ENCODING_UNICODE);
         if (ft_err) {
             FT_Done_Face(face);
-            throw Debug::throwMsg(ERROR_ADDFONT_FAILD);
+            Debug::throwMsg(ERROR_ADDFONT_FAILD);
         }
         m_allFontPaths[file.absolutePath()] = face->family_name;
         auto iter2 = m_allFonts.find(face->family_name);
@@ -152,7 +152,7 @@ void FontCache::removeFont(const string& fontName)
 
 string FontCache::GetKeyByFont(const string& str,const string& fontName,int fontSize,int outlineSize)
 {
-    return StringWithFormat("%s_%s_%d_%d"
+    return Utf8WithFormat("%s_%s_%d_%d"
                             ,str.c_str()
                             ,fontName.c_str()
                             ,fontSize

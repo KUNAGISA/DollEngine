@@ -13,7 +13,9 @@ using namespace DE;
 
 void TVPAddLog(const ttstr& var)
 {
-    DM("%ls",var.AsStdString().c_str());
+    string log;
+    UnicodeToUtf8(var.c_str(), log);
+    printf("%s\n",log.c_str());
 }
 
 iTJSDispatch2* TVPGetScriptDispatch()

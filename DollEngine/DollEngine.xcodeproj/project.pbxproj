@@ -11,7 +11,7 @@
 		B80365A11ADE9E9400DD4B71 /* ConsoleController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B803659F1ADE9E9400DD4B71 /* ConsoleController.xib */; };
 		B80365A81ADE9FBC00DD4B71 /* Console-Mac.mm in Sources */ = {isa = PBXBuildFile; fileRef = B80365A71ADE9FBC00DD4B71 /* Console-Mac.mm */; };
 		B8261DF21ADC05F70017767B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8261DF11ADC05F70017767B /* Images.xcassets */; };
-		B8261DFD1ADC06160017767B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B8261DF51ADC06160017767B /* AppDelegate.m */; };
+		B8261DFD1ADC06160017767B /* AppDelegateIOS.m in Sources */ = {isa = PBXBuildFile; fileRef = B8261DF51ADC06160017767B /* AppDelegateIOS.m */; };
 		B8261DFE1ADC06160017767B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8261DF61ADC06160017767B /* Images.xcassets */; };
 		B8261E001ADC06160017767B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8261DF81ADC06160017767B /* LaunchScreen.xib */; };
 		B8261E011ADC06160017767B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B8261DF91ADC06160017767B /* main.m */; };
@@ -119,10 +119,9 @@
 		B89345C51B554C5A0065A3A3 /* TouchListener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B89345C01B554C5A0065A3A3 /* TouchListener.cpp */; };
 		B89345C61B554C5A0065A3A3 /* Painter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B89345C21B554C5A0065A3A3 /* Painter.cpp */; };
 		B89345C71B554C5A0065A3A3 /* Painter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B89345C21B554C5A0065A3A3 /* Painter.cpp */; };
-		B898541F1ADC04D0003784AA /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = B89854181ADC04D0003784AA /* AppDelegate.mm */; };
+		B898541F1ADC04D0003784AA /* AppDelegateMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = B89854181ADC04D0003784AA /* AppDelegateMac.mm */; };
 		B89854211ADC04D0003784AA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B898541A1ADC04D0003784AA /* main.m */; };
-		B89854221ADC04D0003784AA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B898541B1ADC04D0003784AA /* Main.storyboard */; };
-		B89854231ADC04D0003784AA /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B898541D1ADC04D0003784AA /* ViewController.mm */; };
+		B89854231ADC04D0003784AA /* DEOpenGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = B898541D1ADC04D0003784AA /* DEOpenGLView.mm */; };
 		B8A1D8A41AE2CB23005A6595 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8A1D8A31AE2CB23005A6595 /* OpenGL.framework */; };
 		B8AEEFEB1B35997800490A8D /* ncbind.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF581B35997800490A8D /* ncbind.cpp */; };
 		B8AEEFEC1B35997800490A8D /* ncbind.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF581B35997800490A8D /* ncbind.cpp */; };
@@ -296,6 +295,13 @@
 		B8AEF0B11B35998400490A8D /* MsgLoad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEF09F1B35998400490A8D /* MsgLoad.cpp */; };
 		B8D366081B0663AC00E627A7 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B8D366071B0663AC00E627A7 /* libz.dylib */; };
 		B8D3660A1B0663B700E627A7 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B8D366091B0663B700E627A7 /* libz.dylib */; };
+		B8EE2D101B55FCB8001EB825 /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D0E1B55FCB8001EB825 /* Window.cpp */; };
+		B8EE2D111B55FCB8001EB825 /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D0E1B55FCB8001EB825 /* Window.cpp */; };
+		B8EE2D131B55FE01001EB825 /* Window-MAC.mm in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D121B55FE01001EB825 /* Window-MAC.mm */; };
+		B8EE2D171B5605A4001EB825 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8EE2D161B5605A4001EB825 /* MainMenu.xib */; };
+		B8EE2D1E1B5617B2001EB825 /* TjsWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D1C1B5617B2001EB825 /* TjsWindow.cpp */; };
+		B8EE2D261B56351C001EB825 /* TjsGameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D241B56351C001EB825 /* TjsGameObject.cpp */; };
+		B8EE2D271B56351C001EB825 /* TjsGameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D241B56351C001EB825 /* TjsGameObject.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -305,8 +311,8 @@
 		B80365A71ADE9FBC00DD4B71 /* Console-Mac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "Console-Mac.mm"; sourceTree = "<group>"; };
 		B8261DCB1ADC05430017767B /* DollEngineIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DollEngineIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8261DF11ADC05F70017767B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		B8261DF41ADC06160017767B /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		B8261DF51ADC06160017767B /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		B8261DF41ADC06160017767B /* AppDelegateIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegateIOS.h; sourceTree = "<group>"; };
+		B8261DF51ADC06160017767B /* AppDelegateIOS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegateIOS.m; sourceTree = "<group>"; };
 		B8261DF61ADC06160017767B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		B8261DF71ADC06160017767B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B8261DF81ADC06160017767B /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
@@ -591,13 +597,12 @@
 		B89345C21B554C5A0065A3A3 /* Painter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Painter.cpp; sourceTree = "<group>"; };
 		B89345C31B554C5A0065A3A3 /* Painter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Painter.h; sourceTree = "<group>"; };
 		B89853E51ADC02D8003784AA /* DollEngineMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DollEngineMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		B89854171ADC04D0003784AA /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		B89854181ADC04D0003784AA /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
+		B89854171ADC04D0003784AA /* AppDelegateMac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegateMac.h; sourceTree = "<group>"; };
+		B89854181ADC04D0003784AA /* AppDelegateMac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegateMac.mm; sourceTree = "<group>"; };
 		B89854191ADC04D0003784AA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B898541A1ADC04D0003784AA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		B898541B1ADC04D0003784AA /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		B898541C1ADC04D0003784AA /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		B898541D1ADC04D0003784AA /* ViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
+		B898541C1ADC04D0003784AA /* DEOpenGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEOpenGLView.h; sourceTree = "<group>"; };
+		B898541D1ADC04D0003784AA /* DEOpenGLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DEOpenGLView.mm; sourceTree = "<group>"; };
 		B8A1D8A31AE2CB23005A6595 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		B8AEEF561B35997800490A8D /* ncb_foreach.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ncb_foreach.h; sourceTree = "<group>"; };
 		B8AEEF571B35997800490A8D /* ncb_invoke.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ncb_invoke.hpp; sourceTree = "<group>"; };
@@ -745,6 +750,14 @@
 		B8AEF0A21B35998400490A8D /* string_table_resource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = string_table_resource.h; sourceTree = "<group>"; };
 		B8D366071B0663AC00E627A7 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		B8D366091B0663B700E627A7 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/usr/lib/libz.dylib; sourceTree = DEVELOPER_DIR; };
+		B8EE2D0E1B55FCB8001EB825 /* Window.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Window.cpp; sourceTree = "<group>"; };
+		B8EE2D0F1B55FCB8001EB825 /* Window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Window.h; sourceTree = "<group>"; };
+		B8EE2D121B55FE01001EB825 /* Window-MAC.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "Window-MAC.mm"; sourceTree = "<group>"; };
+		B8EE2D161B5605A4001EB825 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
+		B8EE2D1C1B5617B2001EB825 /* TjsWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TjsWindow.cpp; sourceTree = "<group>"; };
+		B8EE2D1D1B5617B2001EB825 /* TjsWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsWindow.h; sourceTree = "<group>"; };
+		B8EE2D241B56351C001EB825 /* TjsGameObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TjsGameObject.cpp; sourceTree = "<group>"; };
+		B8EE2D251B56351C001EB825 /* TjsGameObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsGameObject.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -773,8 +786,8 @@
 		B8261DF31ADC06160017767B /* proj.ios */ = {
 			isa = PBXGroup;
 			children = (
-				B8261DF41ADC06160017767B /* AppDelegate.h */,
-				B8261DF51ADC06160017767B /* AppDelegate.m */,
+				B8261DF41ADC06160017767B /* AppDelegateIOS.h */,
+				B8261DF51ADC06160017767B /* AppDelegateIOS.m */,
 				B8261DF61ADC06160017767B /* Images.xcassets */,
 				B8261DF71ADC06160017767B /* Info.plist */,
 				B8261DF81ADC06160017767B /* LaunchScreen.xib */,
@@ -825,6 +838,10 @@
 				B83B5EF01B554F0F004B43AC /* TjsStorages.h */,
 				B83B5EF11B554F0F004B43AC /* TjsApplication.cpp */,
 				B83B5EF21B554F0F004B43AC /* TjsApplication.h */,
+				B8EE2D1C1B5617B2001EB825 /* TjsWindow.cpp */,
+				B8EE2D1D1B5617B2001EB825 /* TjsWindow.h */,
+				B8EE2D241B56351C001EB825 /* TjsGameObject.cpp */,
+				B8EE2D251B56351C001EB825 /* TjsGameObject.h */,
 			);
 			path = tjsbind;
 			sourceTree = "<group>";
@@ -834,6 +851,8 @@
 			children = (
 				B83B5EF81B554F0F004B43AC /* Console.cpp */,
 				B83B5EF91B554F0F004B43AC /* Console.h */,
+				B8EE2D0E1B55FCB8001EB825 /* Window.cpp */,
+				B8EE2D0F1B55FCB8001EB825 /* Window.h */,
 			);
 			path = widget;
 			sourceTree = "<group>";
@@ -1376,18 +1395,19 @@
 			isa = PBXGroup;
 			children = (
 				B8261DF11ADC05F70017767B /* Images.xcassets */,
-				B89854171ADC04D0003784AA /* AppDelegate.h */,
-				B89854181ADC04D0003784AA /* AppDelegate.mm */,
+				B89854171ADC04D0003784AA /* AppDelegateMac.h */,
+				B89854181ADC04D0003784AA /* AppDelegateMac.mm */,
 				B89854191ADC04D0003784AA /* Info.plist */,
 				B898541A1ADC04D0003784AA /* main.m */,
-				B898541B1ADC04D0003784AA /* Main.storyboard */,
-				B898541C1ADC04D0003784AA /* ViewController.h */,
-				B898541D1ADC04D0003784AA /* ViewController.mm */,
+				B898541C1ADC04D0003784AA /* DEOpenGLView.h */,
+				B898541D1ADC04D0003784AA /* DEOpenGLView.mm */,
 				B803659D1ADE9E9400DD4B71 /* ConsoleController.h */,
 				B803659E1ADE9E9400DD4B71 /* ConsoleController.m */,
 				B803659F1ADE9E9400DD4B71 /* ConsoleController.xib */,
 				B80365A71ADE9FBC00DD4B71 /* Console-Mac.mm */,
 				B880AE5F1AFD94F500E0F92C /* DollEnginePrefixMac.pch */,
+				B8EE2D121B55FE01001EB825 /* Window-MAC.mm */,
+				B8EE2D161B5605A4001EB825 /* MainMenu.xib */,
 			);
 			path = proj.mac;
 			sourceTree = "<group>";
@@ -1617,6 +1637,7 @@
 				B89853E21ADC02D8003784AA /* Frameworks */,
 				B89853E11ADC02D8003784AA /* Sources */,
 				B89853E31ADC02D8003784AA /* Resources */,
+				B8EE2D231B5631E2001EB825 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1687,12 +1708,28 @@
 				B8261DF21ADC05F70017767B /* Images.xcassets in Resources */,
 				B89345A61B5546CB0065A3A3 /* CMakeLists.txt in Resources */,
 				B80365A11ADE9E9400DD4B71 /* ConsoleController.xib in Resources */,
-				B89854221ADC04D0003784AA /* Main.storyboard in Resources */,
 				B893449A1B5546BA0065A3A3 /* WenQuanYiMicroHei.ttc in Resources */,
+				B8EE2D171B5605A4001EB825 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B8EE2D231B5631E2001EB825 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "find ${SRCROOT}/DollEngine/res/data/ -name \"*\" -exec touch -cm {} \\;";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B8261DC71ADC05430017767B /* Sources */ = {
@@ -1765,7 +1802,7 @@
 				B8AEF00E1B35997800490A8D /* iso8859_2.c in Sources */,
 				B893447F1B5546BA0065A3A3 /* FontCache.cpp in Sources */,
 				B8261E011ADC06160017767B /* main.m in Sources */,
-				B8261DFD1ADC06160017767B /* AppDelegate.m in Sources */,
+				B8261DFD1ADC06160017767B /* AppDelegateIOS.m in Sources */,
 				B8AEF09A1B35997800490A8D /* tjsVariant.cpp in Sources */,
 				B8AEF0941B35997800490A8D /* tjsScriptCache.cpp in Sources */,
 				B8AEF0841B35997800490A8D /* tjsNative.cpp in Sources */,
@@ -1775,6 +1812,7 @@
 				B8AEF0201B35997800490A8D /* koi8_r.c in Sources */,
 				B893448D1B5546BA0065A3A3 /* FileInfo.cpp in Sources */,
 				B8AEF0821B35997800490A8D /* tjsNamespace.cpp in Sources */,
+				B8EE2D111B55FCB8001EB825 /* Window.cpp in Sources */,
 				B8AEF0181B35997800490A8D /* iso8859_7.c in Sources */,
 				B89345B71B5546CC0065A3A3 /* ray2.c in Sources */,
 				B8AEF02C1B35997800490A8D /* utf32_be.c in Sources */,
@@ -1806,6 +1844,7 @@
 				B8AEF0641B35997800490A8D /* tjsDateParser.cpp in Sources */,
 				B8AEF05E1B35997800490A8D /* tjsConstArrayData.cpp in Sources */,
 				B8AEF05C1B35997800490A8D /* tjsConfig.cpp in Sources */,
+				B8EE2D271B56351C001EB825 /* TjsGameObject.cpp in Sources */,
 				B8AEEFFA1B35997800490A8D /* euc_kr.c in Sources */,
 				B8AEF0981B35997800490A8D /* tjsUtils.cpp in Sources */,
 				B8AEF06C1B35997800490A8D /* tjsDisassemble.cpp in Sources */,
@@ -1851,6 +1890,7 @@
 				B8AEF0291B35997800490A8D /* utf16_le.c in Sources */,
 				B8AEF0071B35997800490A8D /* iso8859_14.c in Sources */,
 				B8AEF0971B35997800490A8D /* tjsUtils.cpp in Sources */,
+				B8EE2D131B55FE01001EB825 /* Window-MAC.mm in Sources */,
 				B8AEF0831B35997800490A8D /* tjsNative.cpp in Sources */,
 				B89344981B5546BA0065A3A3 /* Transform.cpp in Sources */,
 				B8AEF0431B35997800490A8D /* regsyntax.c in Sources */,
@@ -1862,7 +1902,7 @@
 				B83B5F001B554F0F004B43AC /* TjsScripts.cpp in Sources */,
 				B8AEF0371B35997800490A8D /* regexec.c in Sources */,
 				B83B5EFC1B554F0F004B43AC /* NormalProgram.cpp in Sources */,
-				B89854231ADC04D0003784AA /* ViewController.mm in Sources */,
+				B89854231ADC04D0003784AA /* DEOpenGLView.mm in Sources */,
 				B89344961B5546BA0065A3A3 /* TextFrame.cpp in Sources */,
 				B8AEF08B1B35997800490A8D /* tjspp.tab.cpp in Sources */,
 				B8AEF0811B35997800490A8D /* tjsNamespace.cpp in Sources */,
@@ -1881,7 +1921,7 @@
 				B89344A41B5546BA0065A3A3 /* GLProgram.cpp in Sources */,
 				B8AEEFF11B35997800490A8D /* ascii.c in Sources */,
 				B8AEF05F1B35997800490A8D /* tjsDate.cpp in Sources */,
-				B898541F1ADC04D0003784AA /* AppDelegate.mm in Sources */,
+				B898541F1ADC04D0003784AA /* AppDelegateMac.mm in Sources */,
 				B89345B61B5546CC0065A3A3 /* ray2.c in Sources */,
 				B8AEF0611B35997800490A8D /* tjsdate.tab.cpp in Sources */,
 				B8AEF0791B35997800490A8D /* tjsLex.cpp in Sources */,
@@ -1915,6 +1955,7 @@
 				B893447E1B5546BA0065A3A3 /* FontCache.cpp in Sources */,
 				B8AEEFF31B35997800490A8D /* big5.c in Sources */,
 				B89345AC1B5546CC0065A3A3 /* mat3.c in Sources */,
+				B8EE2D261B56351C001EB825 /* TjsGameObject.cpp in Sources */,
 				B89344901B5546BA0065A3A3 /* ImageData.cpp in Sources */,
 				B8AEF0691B35997800490A8D /* tjsDictionary.cpp in Sources */,
 				B8AEEFF71B35997800490A8D /* euc_jp.c in Sources */,
@@ -1934,9 +1975,11 @@
 				B8AEF04F1B35997800490A8D /* tjs.cpp in Sources */,
 				B89344801B5546BA0065A3A3 /* GameObject.cpp in Sources */,
 				B8AEEFF91B35997800490A8D /* euc_kr.c in Sources */,
+				B8EE2D101B55FCB8001EB825 /* Window.cpp in Sources */,
 				B8AEF00F1B35997800490A8D /* iso8859_3.c in Sources */,
 				B89344A21B5546BA0065A3A3 /* GLPainter.cpp in Sources */,
 				B8AEF06B1B35997800490A8D /* tjsDisassemble.cpp in Sources */,
+				B8EE2D1E1B5617B2001EB825 /* TjsWindow.cpp in Sources */,
 				B8AEF0531B35997800490A8D /* tjsArray.cpp in Sources */,
 				B8AEF0891B35997800490A8D /* tjsOctPack.cpp in Sources */,
 				B8AEF0091B35997800490A8D /* iso8859_15.c in Sources */,

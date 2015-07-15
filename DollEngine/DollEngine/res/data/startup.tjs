@@ -1,4 +1,2 @@
-print(Application.appPath);
-print(Application.dataPath);
-print(Application.saveDataPath);
-print(Application.patchPath);
+
+Scripts.execStorage("data/system/Initialize.tjs");

@@ -902,7 +902,19 @@ public:
 		//case tvtObject:		return (bool)Object.Object;
 		case tvtObject:		return Object.Object != NULL;
 		//case tvtString:		return (bool)AsInteger();
-		case tvtString:		return AsInteger() != 0;
+            case tvtString:{
+                tjs_char* str = String->LongString?String->LongString:String->ShortString;
+                if (!str ||
+                    String->GetLength()==0 ||
+                    wcscmp(str, L"0")==0 ||
+                    wcscmp(str, L"false")==0||
+                    wcscmp(str, L"null")==0||
+                    wcscmp(str, L"void")==0) {
+                    return false;
+                }
+                return true;
+            }
+                break;
 		case tvtOctet:		return 0!=Octet;
 		case tvtInteger:	return 0!=Integer;
 		case tvtReal:		TJSSetFPUE(); return 0!=Real;

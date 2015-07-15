@@ -19,7 +19,7 @@ void GLCheckError()
 
 static const int kMaxFormatLen = 16*1024;
 static char s_sff[kMaxFormatLen+1];
-string StringWithFormat(const char* format,...)
+string Utf8WithFormat(const char* format,...)
 {
     va_list args;
     memset(s_sff, 0, sizeof(s_sff));
@@ -28,6 +28,18 @@ string StringWithFormat(const char* format,...)
     va_end(args);
     return s_sff;
 }
+
+static wchar_t s_wsff[kMaxFormatLen+1];
+wstring UnicodeWithFormat(const wchar_t* format,...)
+{
+    va_list args;
+    memset(s_wsff, 0, sizeof(s_wsff));
+    va_start(args, format);
+    vswprintf(s_wsff, kMaxFormatLen, format, args);
+    va_end(args);
+    return s_wsff;
+}
+
 
 //定义查找表，长度256，表中的数值表示以此为起始字节的utf8字符长度
 unsigned int utf8_len_for_table[256] =

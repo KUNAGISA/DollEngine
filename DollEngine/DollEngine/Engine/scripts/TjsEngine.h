@@ -26,12 +26,7 @@ public:
     static TJS::tTJS* Global();
     virtual bool eval(const wstring& code,void* ret);
     virtual bool exec(const wstring& code,void* ret);
-    
-    wstring topFile(){return m_fileStack.top();}
-    void pushFile(const wstring& path);
-    void popFile();
-protected:
-    stack<wstring> m_fileStack;
+    virtual void catchError(void* error);
 };
 
 DE_END

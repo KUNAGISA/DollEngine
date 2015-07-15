@@ -79,7 +79,7 @@ GLTexture* GLCache::addTexture(const string& picKey)
 {
     FileInfo file(picKey);
     if (!file.exist()) {
-        throw Debug::throwMsg(ERROR_FILE_EXIST_FAILD,picKey);
+        Debug::throwMsg(ERROR_FILE_EXIST_FAILD,picKey);
     }
     auto iter2 = m_allTextures.find(file.absolutePath());
     GLTexture* tex=null;
@@ -94,7 +94,7 @@ GLTexture* GLCache::addTexture(const string& picKey)
             tex->initWithImage(&image);
         }
         else {
-            throw Debug::throwMsg(ERROR_IMAGE_LOAD_FAILD,picKey);
+            Debug::throwMsg(ERROR_IMAGE_LOAD_FAILD,picKey);
             return null;
         }
         m_allTextures[file.absolutePath()] = tex;
@@ -109,7 +109,7 @@ SpriteFrame* GLCache::addFrame(const string& picKey,const string& plist)
     if (plist == "") {
         FileInfo file(picKey);
         if (!file.exist()) {
-            throw Debug::throwMsg(ERROR_FILE_EXIST_FAILD,picKey);
+            Debug::throwMsg(ERROR_FILE_EXIST_FAILD,picKey);
         }
         auto iter = m_allSpriteFrames.find(file.absolutePath());
         if (iter != m_allSpriteFrames.end()) {
@@ -132,7 +132,7 @@ SpriteFrame* GLCache::addFrame(const string& picKey,const string& plist)
         return frame;
     }
     else {
-        throw Debug::throwMsg("暂时不支持Plist格式");
+        Debug::throwMsg("暂时不支持Plist格式");
         return null;
     }
 }

@@ -20,38 +20,7 @@
 #include "tjsScriptBlock.h"
 
 
-#define TJS_CATCH \
-catch ( TJS::eTJSScriptError &e ) \
-{ \
-tjs_int l = e.GetSourceLine(); \
-TJS::ttstr tr = e.GetMessage(); \
-tTJSScriptBlock* block = e.GetBlockNoAddRef(); \
-\
-int lineLength=0; \
-tjs_char* src = block->GetLine(l-1, &lineLength); \
-ttstr source(src,lineLength); \
-ttstr tra = e.GetTrace(); \
-wstring stack; \
-tjs_char* ch = (tjs_char*)tra.c_str(); \
-while (*ch != 0) \
-{ \
-if (*ch == L'<' && \
-*(ch+1) == L'-' && \
-*(ch+2) == L'-') \
-{ \
-ch+=3; \
-stack += L"\n<--"; \
-} \
-else \
-{ \
-stack += *ch; \
-++ch; \
-} \
-} \
-DM("【ERROR--】\n%ls\n(#%d)%ls\n(%ls)\n%ls\n【--ERROR】", \
-DE::TjsEngine::GetSelf()->topFile().c_str(),\
-l,source.c_str(),tr.c_str(),stack.c_str()); \
-}
+#define TJS_CATCH catch ( TJS::eTJSScriptError &e ){ DE::ScriptEngine::GetInstance()->catchError(&e);}
 
 
 #define TJS_NATIVE_CLASS_H(classname) \
@@ -122,25 +91,27 @@ TJS_END_NATIVE_STATIC_PROP_DECL(name)
 
 
 #define TJS_NCB(CLASS) \
-virtual ~CLASS(){ \
+class Tjs##CLASS : public DE::CLASS\
+{\
+public:\
+tTJSCustomObject* _self;\
+virtual ~Tjs##CLASS(){ \
 }\
 ttstr getClass()\
 {\
 return _self->ClassNames[0];\
 }\
-CLASS()
+Tjs##CLASS():_self(null)
+
 
 #define TJS_FACTORY \
-Factory(&deTJSFactory::factory<ClassT>);\
+Factory(&TjsFactory::factory<ClassT>);\
 NCB_PROPERTY_RO(class, getClass);
 
-class TjsClass
-{
-public:
-    TjsClass():_self(null){}
-    virtual ~TjsClass(){}
-    tTJSCustomObject* _self;
-};
+
+#define TJS_GET_ADAPTOR(TYPE,NODE) (ncbInstanceAdaptor<TYPE>::CreateAdaptor((TYPE*)NODE))
+
+#define TJS_GET_OBJECT(TYPE,NODE) (ncbInstanceAdaptor<TYPE>::GetNativeInstance(NODE));
 
 class TjsFactory {
 public:

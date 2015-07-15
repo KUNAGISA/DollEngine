@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface AppDelegate : NSObject <NSApplicationDelegate>
+@interface AppDelegateMac : NSObject <NSApplicationDelegate>
 
 -(IBAction)on_console_click:(id)sender;
 -(IBAction)openDocument:(id)sender;

@@ -1,0 +1,7 @@
+class GameWorld extends GameObject
+{
+	function GameWorld () 
+	{
+		super.GameObject();
+	}
+}

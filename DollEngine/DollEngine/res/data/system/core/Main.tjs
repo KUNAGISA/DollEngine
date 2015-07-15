@@ -1,0 +1,27 @@
+
+class Main extends Window
+{
+	function Main () 
+	{
+		super.Window();
+		initialize(1024,768);
+		this.world = new GameWorld();
+	}
+
+
+	var _world=void;
+	property world
+	{
+		setter(v){
+			if (_world)
+			{
+				invalidate _world;
+			}
+			_world = v;
+			Application.world = v;
+		}
+		getter{
+			return _world;
+		}
+	}
+}

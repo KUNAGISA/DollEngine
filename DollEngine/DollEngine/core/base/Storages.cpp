@@ -19,12 +19,13 @@ IOData* Storages::GetFileData(const string& fullpath)
 {
     if (fullpath.size() == 0)
     {
-        throw "文件未找到:"+fullpath;
+        Debug::throwMsg("文件未找到:"+fullpath);
         return null;
     }
     
     FILE * fp = fopen(fullpath.c_str(), "rb");
     if (!fp) {
+        Debug::throwMsg("文件打开失败:"+fullpath);
         return null;
     }
     
@@ -45,11 +46,12 @@ IOData* Storages::GetFileString(const string& fullpath)
 {
     if (fullpath.size() == 0)
     {
-        throw "文件未找到:"+fullpath;
+        Debug::throwMsg("文件未找到:"+fullpath);
         return null;
     }
     FILE *fp = fopen(fullpath.c_str(), "rb");
     if (!fp) {
+        Debug::throwMsg("文件打开失败:"+fullpath);
         return null;
     }
     
@@ -71,6 +73,7 @@ IOData* Storages::GetFileString(const string& fullpath)
 void Storages::addAutoPath(const string& storage)
 {
     // ( 增加自动检索路径 )
+    DM("增加自动检索路径:%s",storage.c_str());
     if (storage.back() != '/')
     {
         m_autoPaths.push_front(storage+"/");

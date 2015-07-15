@@ -6,13 +6,13 @@
 //  Copyright (c) 2015年 DollStudio. All rights reserved.
 //
 
-#import "AppDelegate.h"
+#import "AppDelegateIOS.h"
 
-@interface AppDelegate ()
+@interface AppDelegateIOS ()
 
 @end
 
-@implementation AppDelegate
+@implementation AppDelegateIOS
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {

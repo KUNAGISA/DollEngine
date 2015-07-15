@@ -48,9 +48,11 @@ tTJSNC_Scripts::tTJSNC_Scripts() : inherited(TJS_W("Scripts"))
         wstring fullpath = (*param[0]).GetString();
         string path;
         DE::UnicodeToUtf8(fullpath.c_str(),path);
-        DE::IOData* data = DE::Storages::GetInstance()->GetFileData(path);
+        path = DE::Storages::GetInstance()->getFullPath(path);
+        DE::IOData* data = DE::Storages::GetInstance()->GetFileString(path);
         wstring code;
         data->convertToUnicode(code);
+        SAFF_DELETE(data);
         DE::TjsEngine::GetInstance()->exec(code, result);
         return TJS_S_OK;
     }
@@ -61,9 +63,11 @@ tTJSNC_Scripts::tTJSNC_Scripts() : inherited(TJS_W("Scripts"))
         wstring fullpath = (*param[0]).GetString();
         string path;
         DE::UnicodeToUtf8(fullpath.c_str(),path);
-        DE::IOData* data = DE::Storages::GetInstance()->GetFileData(path);
+        path = DE::Storages::GetInstance()->getFullPath(path);
+        DE::IOData* data = DE::Storages::GetInstance()->GetFileString(path);
         wstring code;
         data->convertToUnicode(code);
+        SAFF_DELETE(data);
         DE::TjsEngine::GetInstance()->eval(code, result);
         return TJS_S_OK;
     }
