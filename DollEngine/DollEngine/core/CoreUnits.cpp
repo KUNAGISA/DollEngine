@@ -7,6 +7,7 @@
 //
 
 #include "CoreUnits.h"
+#include <sys/time.h>
 
 DE_BEGIN
 
@@ -279,6 +280,13 @@ void CharToWChar(const char* src,wchar_t* target)
         ch+=len;
         target++;
     }
+}
+
+int64_t GetMilliSeconds()
+{
+    struct timeval tv;
+    gettimeofday(&tv,NULL);
+    return tv.tv_sec * 1000 + tv.tv_usec / 1000;
 }
 
 DE_END

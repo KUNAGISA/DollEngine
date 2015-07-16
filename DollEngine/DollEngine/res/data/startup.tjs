@@ -1,2 +1,14 @@
-
+var seed = 0;
+function rd()
+{
+    seed=(0x1fffffff*seed+49)% 0xfffffffe -1;
+    return seed;
+}
+printTime();
+var a=0;
+for(var i=0;i<1000000;++i)
+{
+a=rd();
+}
+printTime();
 Scripts.execStorage("data/system/Initialize.tjs");

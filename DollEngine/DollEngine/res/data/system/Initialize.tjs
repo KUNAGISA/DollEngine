@@ -33,4 +33,4 @@ var dm = print;
     };
 }
 
-var de = new MainWindow();
+var de = new Main();

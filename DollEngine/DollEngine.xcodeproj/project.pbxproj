@@ -337,6 +337,7 @@
 		B83B5EF81B554F0F004B43AC /* Console.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Console.cpp; sourceTree = "<group>"; };
 		B83B5EF91B554F0F004B43AC /* Console.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Console.h; sourceTree = "<group>"; };
 		B83B5F0E1B555618004B43AC /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = data; sourceTree = "<group>"; };
+		B863446E1B574E62008FF1C0 /* DollEngineMac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = DollEngineMac.entitlements; sourceTree = "<group>"; };
 		B880AE5F1AFD94F500E0F92C /* DollEnginePrefixMac.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DollEnginePrefixMac.pch; sourceTree = "<group>"; };
 		B89344361B5546BA0065A3A3 /* Application-Mac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "Application-Mac.mm"; sourceTree = "<group>"; };
 		B89344371B5546BA0065A3A3 /* Application.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Application.cpp; sourceTree = "<group>"; };
@@ -1350,6 +1351,7 @@
 		B89853DC1ADC02D8003784AA = {
 			isa = PBXGroup;
 			children = (
+				B863446E1B574E62008FF1C0 /* DollEngineMac.entitlements */,
 				B8D365FA1B06350F00E627A7 /* Frameworks */,
 				B89853E71ADC02D8003784AA /* DollEngine */,
 				B89853E61ADC02D8003784AA /* Products */,
@@ -1662,6 +1664,11 @@
 					};
 					B89853E41ADC02D8003784AA = {
 						CreatedOnToolsVersion = 6.1;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -2158,6 +2165,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = DollEngineMac.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = DollEngine/proj.mac/DollEnginePrefixMac.pch;
@@ -2180,6 +2188,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = DollEngineMac.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = DollEngine/proj.mac/DollEnginePrefixMac.pch;

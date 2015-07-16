@@ -22,6 +22,7 @@ extern void UnicodeToUtf8(const wchar_t* src, string& target);
 extern void Utf8ToVector(const string& _in, vector<string>& _out);
 extern unsigned char* WCharToChar(int& src, unsigned char*target);
 extern void CharToWChar(const char* src,wchar_t* target);
+extern int64_t GetMilliSeconds();
 
 DE_END
 

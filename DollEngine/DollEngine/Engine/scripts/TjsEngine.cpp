@@ -71,6 +71,7 @@ TjsEngine::TjsEngine()
         
         TVPLoadMessage();
         TJS_REGIST_FUNCTION(TJSPrint,"print")
+        TJS_REGIST_FUNCTION(TJSPrintTime, "printTime")
         //        REGIST_TJS_FUNCTION(TJSConsoleShow,"__console_show")
         
         // AutoRegisterで登録されたクラス等を登録する

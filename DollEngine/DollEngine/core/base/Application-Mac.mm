@@ -19,10 +19,12 @@ void Application::initEnginePaths()
     {
         NSOpenPanel* panel = [NSOpenPanel openPanel];
         [panel setTitle:@"选择 data 目录"];
+        panel.directoryURL = [NSURL URLWithString:NSHomeDirectory()];
         panel.allowsMultipleSelection = NO;
         panel.canChooseDirectories = YES;
         panel.canChooseFiles = NO;
-        if ([panel runModal] == NSFileHandlingPanelOKButton)
+        NSInteger ret = [panel runModal];
+        if (ret == NSFileHandlingPanelOKButton)
         {
             NSString* path = [[panel.URLs objectAtIndex:0] path];
             [[NSUserDefaults standardUserDefaults]setValue:path forKey:@"DATA_PATH"];

@@ -154,4 +154,9 @@ if(str)
 return TJS_S_OK ;
 TJS_NATIVE_FUNCTION_END
 
+TJS_NATIVE_FUNCTION_BEGIN(TJSPrintTime)
+printf("%lld\n",DE::GetMilliSeconds());
+return TJS_S_OK ;
+TJS_NATIVE_FUNCTION_END
+
 #endif /* defined(__DollEngine__TjsBind__) */
