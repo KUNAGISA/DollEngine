@@ -2,15 +2,38 @@
 var dm = print;
 var em = throwMsg;
 
+function Iterator (dict) 
+{
+    var iter = new DictIterator();
+    iter.begin(dict);
+    return iter;
+}
+
+function foreach (dict, func) 
+{
+    var iter = new DictIterator();
+    iter.begin(dict);
+    while(iter.next()) {
+        func(iter.key,iter.value);
+    }
+}
+
 var DEConfig = Scripts.jsonStorage("Config.json");
 
 {
-    var count = DEConfig.autoPaths.count;
+    var count = DEConfig.scripts.count;
     for (var i = 0; i < count; i++) {
-        var file = DEConfig.autoPaths[i];
+        var file = DEConfig.scripts[i];
         dm("LOAD %s",file);
         Scripts.execStorage(file);
     };
+    count = DEConfig.autoPaths.count;
+    for (var i = 0; i < count; i++) {
+        var path = DEConfig.autoPaths[i];
+        Storages.addAutoPath(path);
+    };
 }
 
-var de = new Main();
+var kag = new Main();
+
+kag.proccess("first.ks");

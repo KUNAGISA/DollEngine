@@ -225,6 +225,8 @@
 		B8AEF09C1B35997800490A8D /* tjsVariantString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFE91B35997800490A8D /* tjsVariantString.cpp */; };
 		B8AEF0B01B35998400490A8D /* MsgLoad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEF09F1B35998400490A8D /* MsgLoad.cpp */; };
 		B8AEF0B11B35998400490A8D /* MsgLoad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEF09F1B35998400490A8D /* MsgLoad.cpp */; };
+		B8B5F4491B5E08860051E564 /* TjsDictIterator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8B5F4471B5E08860051E564 /* TjsDictIterator.cpp */; };
+		B8B5F44A1B5E08860051E564 /* TjsDictIterator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8B5F4471B5E08860051E564 /* TjsDictIterator.cpp */; };
 		B8D366081B0663AC00E627A7 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B8D366071B0663AC00E627A7 /* libz.dylib */; };
 		B8D3660A1B0663B700E627A7 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B8D366091B0663B700E627A7 /* libz.dylib */; };
 		B8EE2D171B5605A4001EB825 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8EE2D161B5605A4001EB825 /* MainMenu.xib */; };
@@ -696,6 +698,8 @@
 		B8AEF0A01B35998400490A8D /* string_table_en.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = string_table_en.h; sourceTree = "<group>"; };
 		B8AEF0A11B35998400490A8D /* string_table_jp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = string_table_jp.h; sourceTree = "<group>"; };
 		B8AEF0A21B35998400490A8D /* string_table_resource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = string_table_resource.h; sourceTree = "<group>"; };
+		B8B5F4471B5E08860051E564 /* TjsDictIterator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TjsDictIterator.cpp; sourceTree = "<group>"; };
+		B8B5F4481B5E08860051E564 /* TjsDictIterator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsDictIterator.h; sourceTree = "<group>"; };
 		B8D366071B0663AC00E627A7 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		B8D366091B0663B700E627A7 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/usr/lib/libz.dylib; sourceTree = DEVELOPER_DIR; };
 		B8EE2D161B5605A4001EB825 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
@@ -1600,6 +1604,8 @@
 		B8EE2D971B5B7B3B001EB825 /* tjsbind */ = {
 			isa = PBXGroup;
 			children = (
+				B8B5F4471B5E08860051E564 /* TjsDictIterator.cpp */,
+				B8B5F4481B5E08860051E564 /* TjsDictIterator.h */,
 				B8EE2DFA1B5BDA25001EB825 /* TjsKAGParser.cpp */,
 				B8EE2DFB1B5BDA25001EB825 /* TjsKAGParser.h */,
 				B8EE2D981B5B7B3B001EB825 /* TjsApplication.cpp */,
@@ -1882,6 +1888,7 @@
 				B8AEEFFA1B35997800490A8D /* euc_kr.c in Sources */,
 				B8AEF0981B35997800490A8D /* tjsUtils.cpp in Sources */,
 				B8AEF06C1B35997800490A8D /* tjsDisassemble.cpp in Sources */,
+				B8B5F44A1B5E08860051E564 /* TjsDictIterator.cpp in Sources */,
 				B8AEF00C1B35997800490A8D /* iso8859_16.c in Sources */,
 				B8AEF0481B35997800490A8D /* regversion.c in Sources */,
 				B8AEF0901B35997800490A8D /* tjsRegExp.cpp in Sources */,
@@ -2044,6 +2051,7 @@
 				B89345A81B5546CB0065A3A3 /* mat4stack.c in Sources */,
 				B8EE2DBB1B5B7B3B001EB825 /* KAGParser.cpp in Sources */,
 				B8AEF0631B35997800490A8D /* tjsDateParser.cpp in Sources */,
+				B8B5F4491B5E08860051E564 /* TjsDictIterator.cpp in Sources */,
 				B8AEF0011B35997800490A8D /* iso8859_10.c in Sources */,
 				B8EE2DCD1B5B7B3B001EB825 /* IOData.cpp in Sources */,
 				B8AEF0171B35997800490A8D /* iso8859_7.c in Sources */,

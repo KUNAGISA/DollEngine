@@ -1,5 +1,5 @@
 {
-	"autoPaths" : [
+	"scripts" : [
 		"system/action/ActionInstant.tjs",
 		"system/action/ActionInterval.tjs",
 		"system/action/ActionSpeed.tjs",
@@ -27,7 +27,12 @@
 		"system/ui/Sprite.tjs",
 		"system/ui/Tab.tjs"
 	],
-	"width" : 1024,
-	"height" : 640,
+	"autoPaths" :[
+		"scenario"
+	],
+	"device" :{
+		"width" : 1024,
+		"height" : 640
+	},
     "test" : 92233720368547758
 }

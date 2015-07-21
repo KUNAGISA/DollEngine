@@ -7,7 +7,7 @@ class _CCBReader
 
 	function nodeWithFile (path) 
 	{
-		var data = Scripts.evalStorage(path);
+		var data = Scripts.jsonStorage(path);
 		return nodeWithData(data);
 	}
 

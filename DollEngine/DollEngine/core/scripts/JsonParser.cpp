@@ -129,7 +129,7 @@ wchar_t* JsonParser::dictWithString(wchar_t* str,tTJSVariant& _out)
             return null;
         }
         if (*str == '}') {
-            _out = obj;
+            _out.SetObject(obj,obj);
             return str+1;
         }
         if (*str == ',') {
