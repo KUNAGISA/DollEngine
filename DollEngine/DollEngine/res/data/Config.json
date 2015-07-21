@@ -1,0 +1,33 @@
+{
+	"autoPaths" : [
+		"system/action/ActionInstant.tjs",
+		"system/action/ActionInterval.tjs",
+		"system/action/ActionSpeed.tjs",
+		"system/core/HttpClient.tjs",
+		"system/core/Main.tjs",
+		"system/core/TagHandlers.tjs",
+		"system/extra/ccb/CCBAnimation.tjs",
+		"system/extra/ccb/CCBCreator.tjs",
+		"system/extra/ccb/CCBReader.tjs",
+		"system/layer/GameWorld.tjs",
+		"system/layer/GraphicLayer.tjs",
+		"system/layer/MessageLayer.tjs",
+		"system/ui/Button.tjs",
+		"system/ui/CheckBox.tjs",
+		"system/ui/EditBox.tjs",
+		"system/ui/Label.tjs",
+		"system/ui/Layout.tjs",
+		"system/ui/Node.tjs",
+		"system/ui/Page.tjs",
+		"system/ui/Particle.tjs",
+		"system/ui/ProgressBar.tjs",
+		"system/ui/RadioButton.tjs",
+		"system/ui/ScrollArea.tjs",
+		"system/ui/Slider.tjs",
+		"system/ui/Sprite.tjs",
+		"system/ui/Tab.tjs"
+	],
+	"width" : 1024,
+	"height" : 640,
+    "test" : 92233720368547758
+}

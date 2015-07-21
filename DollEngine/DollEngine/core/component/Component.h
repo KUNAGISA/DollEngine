@@ -39,6 +39,7 @@ public:
     PROPERTY(bool, Enabled, m_enabled){m_enabled=v;}
     PROPERTY(GameObject*, Object, m_object){m_object=v;}
     PROPERTY(bool, IsReleased, m_isReleased){m_isReleased=v;}
+    PROPERTY(float, Time, m_time){m_time=v;}
     PROPERTY_RO(COMP_TYPE, Type, m_type);
     PROPERTY(CompIter, CompIter, m_compIter){m_compIter=v;}
     PROPERTY_CONST(string, CompName, m_compName){m_compName=v;}

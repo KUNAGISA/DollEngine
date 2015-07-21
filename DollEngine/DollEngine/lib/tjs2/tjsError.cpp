@@ -176,13 +176,17 @@ void TJS_eTJSScriptError(const tjs_char *msg, tTJSScriptBlock *block, tjs_int sr
 void TJS_eTJSScriptError(const ttstr &msg, tTJSInterCodeContext *context, tjs_int codepos)
 {
 	TJSReportExceptionSource(msg, context, codepos);
-	throw eTJSScriptError(msg, context->GetBlock(), context->CodePosToSrcPos(codepos));
+    eTJSScriptError err(msg, context->GetBlock(), context->CodePosToSrcPos(codepos));
+    err.SourceName = context->GetShortDescription();
+    throw err;
 }
 //---------------------------------------------------------------------------
 void TJS_eTJSScriptError(const tjs_char *msg, tTJSInterCodeContext *context, tjs_int codepos)
 {
-	TJSReportExceptionSource(msg, context, codepos);
-	throw eTJSScriptError(msg, context->GetBlock(), context->CodePosToSrcPos(codepos));
+    TJSReportExceptionSource(msg, context, codepos);
+    eTJSScriptError err(msg, context->GetBlock(), context->CodePosToSrcPos(codepos));
+    err.SourceName = context->GetShortDescription();
+    throw err;
 }
 //---------------------------------------------------------------------------
 void TJS_eTJSScriptException(const ttstr &msg, tTJSScriptBlock *block,
@@ -203,14 +207,18 @@ void TJS_eTJSScriptException(const ttstr &msg, tTJSInterCodeContext *context,
 	tjs_int codepos, tTJSVariant &val)
 {
 	TJSReportExceptionSource(msg, context, codepos);
-	throw eTJSScriptException(msg, context->GetBlock(), context->CodePosToSrcPos(codepos), val);
+    eTJSScriptException err(msg, context->GetBlock(), context->CodePosToSrcPos(codepos), val);
+    err.SourceName = context->GetShortDescription();
+    throw err;
 }
 //---------------------------------------------------------------------------
 void TJS_eTJSScriptException(const tjs_char *msg, tTJSInterCodeContext *context,
 	tjs_int codepos, tTJSVariant &val)
 {
 	TJSReportExceptionSource(msg, context, codepos);
-	throw eTJSScriptException(msg, context->GetBlock(), context->CodePosToSrcPos(codepos), val);
+	eTJSScriptException err(msg, context->GetBlock(), context->CodePosToSrcPos(codepos), val);
+    err.SourceName = context->GetShortDescription();
+    throw err;
 }
 //---------------------------------------------------------------------------
 void TJS_eTJSCompileError(const ttstr & msg, tTJSScriptBlock *block, tjs_int srcpos)

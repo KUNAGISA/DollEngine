@@ -18,26 +18,13 @@ using namespace DE;
 
 @end
 
-long long seed = 0;
-long long rd()
-{
-    seed=(0x1fffffff*seed+49)% 0xfffffffe -1;
-    return seed;
-}
-
 @implementation AppDelegateMac
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     
     new TjsEngine();
     DEApplication->startup();
-    int c=0;
-    printf("--%lld\n",DE::GetMilliSeconds());
-    for(int i=0;i<1000000;++i)
-    {
-        c=rd();
-    }
-    printf("--%lld\n",DE::GetMilliSeconds());
+    
     
 //    Window* window = new Window();
 //    window->initialize(1024, 768);

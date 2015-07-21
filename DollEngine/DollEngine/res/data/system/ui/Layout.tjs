@@ -1,0 +1,89 @@
+
+class Layout
+{
+	function Layout (node) 
+	{
+		/**
+			type = f自由 v竖向 h横向 g网格
+		*/
+		this._node._layout = this;
+	}
+
+	var _lockLeft=void;
+	//注释
+	property lockLeft{
+	    setter(v) {
+	    	//setter
+	    	this._lockLeft = v;
+		}
+		getter {
+	    	//getter
+			return this._lockLeft;
+		}
+	}
+
+	var _lockTop=void;
+	//注释
+	property lockTop{
+	    setter(v) {
+	    	//setter
+	    	this._lockTop = v;
+		}
+		getter {
+	    	//getter
+			return this._lockTop;
+		}
+	}
+
+	var _lockTop=void;
+	//注释
+	property lockTop{
+	    setter(v) {
+	    	//setter
+	    	this._lockTop = v;
+		}
+		getter {
+	    	//getter
+			return this._lockTop;
+		}
+	}
+
+	var _lockBottom=void;
+	//注释
+	property lockBottom{
+	    setter(v) {
+	    	//setter
+	    	this._lockBottom = v;
+		}
+		getter {
+	    	//getter
+			return this._lockBottom;
+		}
+	}
+
+	var _lockWidth=void;
+	//注释
+	property lockWidth{
+	    setter(v) {
+	    	//setter
+	    	this._lockWidth = v;
+		}
+		getter {
+	    	//getter
+			return this._lockWidth;
+		}
+	}
+
+	var _lockHeight=void;
+	//注释
+	property lockHeight{
+	    setter(v) {
+	    	//setter
+	    	this._lockHeight = v;
+		}
+		getter {
+	    	//getter
+			return this._lockHeight;
+		}
+	}
+}

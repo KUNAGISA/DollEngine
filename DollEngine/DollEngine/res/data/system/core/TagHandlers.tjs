@@ -1,0 +1,61 @@
+
+class TagHandlers extends KAGParser
+{
+	var _owner; //函数所调用的对象，通常是Main对象
+
+	function TagHandlers (object) 
+	{
+		super.KAGParser();
+		this._owner = object;
+	}
+
+	function onExecute (name, params)
+	{
+		var time = 0;
+		if(this[name])
+		{
+			time = (this[name] incontextof this._owner)(params);
+			if(time == void) time = 0;
+		}
+		else
+		{
+			if(callMacro(name))
+			{
+				time = -1;
+				macroParams.add(params);
+			}
+			else
+			{
+				dm("未找到指令"+name);
+			}
+		}
+        return time;
+	}
+
+	function returnMacro ()
+	{
+		macroParams.erase(macroParams.count-1);
+		returnCall();
+		return -1;
+	}
+
+	function getMacroParams () 
+	{
+		if (macroParams.count == 0) {
+			em("macro参数为空，一定是哪里有问题了");
+		}
+		return macroParams[-1];
+	}
+
+	function onScenarioEnded () 
+	{
+		_owner.waitClick(0);
+	}
+
+
+	function image (elm) 
+	{
+		var node = new Sprite(this.current);
+		node.setParams(elm);
+	}
+}

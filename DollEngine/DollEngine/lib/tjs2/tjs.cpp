@@ -30,6 +30,7 @@
 #include "tjsByteCodeLoader.h"
 #include "tjsBinarySerializer.h"
 #include "tjsRegExp.h"
+#include "ncbind.hpp"
 
 namespace TJS
 {
@@ -291,6 +292,7 @@ void tTJS::SetConsoleOutput(iTJSConsoleOutput* console)
 	// set a console output callback routine
 	ConsoleOutput = console;
 }
+    
 //---------------------------------------------------------------------------
 void tTJS::OutputToConsole(const tjs_char *msg) const
 {
@@ -305,7 +307,7 @@ void tTJS::OutputExceptionToConsole(const tjs_char *msg) const
 	if(ConsoleOutput)
 	{
 		ConsoleOutput->Print(msg);
-	}
+    }
 }
 //---------------------------------------------------------------------------
 void tTJS::OutputToConsoleWithCentering(const tjs_char *msg, tjs_uint width) const

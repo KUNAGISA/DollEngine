@@ -1,35 +1,15 @@
 
 var dm = print;
+var em = throwMsg;
+
+var DEConfig = Scripts.jsonStorage("Config.json");
 
 {
-    var paths = [
-    	'scenario',
-    	'system',
-        'system/action',
-        'system/core',
-        'system/extra',
-        'system/extra/ccb',
-        'system/layer',
-    	'system/ui',
-    ];
-    for (var i = 0; i < paths.count; i++) {
-    	if (paths[i])
-    	{
-	    	Storages.addAutoPath('data/'+paths[i]);
-    	}
-    };
-
-
-    var files = [
-    	'Main.tjs',
-    	'GameWorld.tjs',
-    ];
-    
-    for (var i = 0; i < files.count; i++) {
-    	if(files[i])
-    	{
-    		Scripts.execStorage(files[i]);
-    	}
+    var count = DEConfig.autoPaths.count;
+    for (var i = 0; i < count; i++) {
+        var file = DEConfig.autoPaths[i];
+        dm("LOAD %s",file);
+        Scripts.execStorage(file);
     };
 }
 

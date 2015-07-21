@@ -10,6 +10,7 @@
 #define __DollEngine__TjsBind__
 
 #include "CoreUnits.h"
+#include "TjsEngine.h"
 #include "ncbind.hpp"
 #include "tjs.h"
 #include "tjsNative.h"
@@ -19,9 +20,19 @@
 #include "tjsDebug.h"
 #include "tjsScriptBlock.h"
 
+using namespace DE;
+
 
 #define TJS_CATCH catch ( TJS::eTJSScriptError &e ){ DE::ScriptEngine::GetInstance()->catchError(&e);}
 
+
+#define TJS_EVENT_CALL(NAME,NUM,...) \
+static ttstr eventName(TJS_W(#NAME));\
+tTJSVariant* param[] = {__VA_ARGS__};\
+tTJSVariant result;\
+try{\
+_self->FuncCall(0, eventName.c_str(), eventName.GetHint(), &result, NUM, param, _self);\
+}TJS_CATCH
 
 #define TJS_NATIVE_CLASS_H(classname) \
 class tTJSNC_##classname : public tTJSNativeClass \
@@ -37,7 +48,7 @@ tTJSNativeInstance* CreateNativeInstance();\
 
 #define TJS_NATIVE_FUNCTION_BEGIN(name) class name : public tTJSNativeFunction\
 {\
-public :\
+protected :\
 tjs_error Process(tTJSVariant *result, tjs_int numparams,tTJSVariant **param, iTJSDispatch2 *objthis){
 
 #define TJS_NATIVE_FUNCTION_END }};
@@ -109,9 +120,27 @@ Factory(&TjsFactory::factory<ClassT>);\
 NCB_PROPERTY_RO(class, getClass);
 
 
+#define TJS_PRO_SET(obj,key,var) obj->PropSet(TJS_MEMBERENSURE,key,NULL,&var,obj)
+#define TJS_PRO_SET_BY_NUM(obj,index,var) obj->PropSetByNum(TJS_MEMBERENSURE,index,&var,obj)
+
 #define TJS_GET_ADAPTOR(TYPE,NODE) (ncbInstanceAdaptor<TYPE>::CreateAdaptor((TYPE*)NODE))
 
 #define TJS_GET_OBJECT(TYPE,NODE) (ncbInstanceAdaptor<TYPE>::GetNativeInstance(NODE));
+
+#define TJS_GET_ARRAY_NI(obj,ni) \
+tTJSArrayNI *ni; \
+if(TJS_FAILED(obj->NativeInstanceSupport(TJS_NIS_GETINSTANCE,TJSGetArrayClassID(),(iTJSNativeInstance**)&ni))){TJS_eTJSError(TJSSpecifyArray);}
+
+
+#define iTJSCreateDictionary(ret) \
+iTJSDispatch2 *ret = TJSCreateDictionaryObject();\
+tTJSVariant ret##_var = tTJSVariant(ret, ret);\
+ret->Release();
+
+#define iTJSCreateArray(ret) \
+iTJSDispatch2 *ret = TJSCreateArrayObject();\
+tTJSVariant ret##_var = tTJSVariant(ret, ret);\
+ret->Release();
 
 class TjsFactory {
 public:
@@ -127,36 +156,5 @@ public:
     }
 };
 
-
-TJS_NATIVE_FUNCTION_BEGIN(TJSPrint)
-if ( numparams <1 ) return TJS_E_BADPARAMCOUNT ;
-tTJSVariant* str = param[0];
-if(str)
-{
-    if(str->Type() == tvtVoid)
-    {
-        DM("[TJS]:(void)");
-        return TJS_S_OK;
-    }
-    ttstr str_s = *str;
-    auto ptr = str_s.AsVariantStringNoAddRef();
-    if(ptr)
-    {
-        DM("[TJS]:%ls",str_s.AsStdString().c_str());
-        return TJS_S_OK;
-    }
-    else
-    {
-        DM("[TJS]:(null)");
-        return TJS_S_OK;
-    }
-}
-return TJS_S_OK ;
-TJS_NATIVE_FUNCTION_END
-
-TJS_NATIVE_FUNCTION_BEGIN(TJSPrintTime)
-printf("%lld\n",DE::GetMilliSeconds());
-return TJS_S_OK ;
-TJS_NATIVE_FUNCTION_END
 
 #endif /* defined(__DollEngine__TjsBind__) */

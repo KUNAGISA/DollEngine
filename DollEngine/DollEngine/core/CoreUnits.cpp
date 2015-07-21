@@ -14,7 +14,7 @@ DE_BEGIN
 void GLCheckError()
 {
     if(glGetError()){
-        printf("OpenGL 出错:%x\n",glGetError());
+        DM("OpenGL 出错:%x\n",glGetError());
     }
 }
 

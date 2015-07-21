@@ -233,6 +233,8 @@ class eTJSScriptError : public eTJSError
 	ttstr Trace;
 
 public:
+    ttstr SourceName;
+    
 	tTJSScriptBlock * GetBlockNoAddRef() { return Block.Block; }
 
 	tjs_int GetPosition() const { return Position; }
@@ -251,7 +253,7 @@ public:
 		tTJSScriptBlock *block, tjs_int pos);
 
 	eTJSScriptError(const eTJSScriptError &ref) :
-		eTJSError(ref), Block(ref.Block), Position(ref.Position), Trace(ref.Trace) {;}
+		eTJSError(ref), Block(ref.Block), Position(ref.Position), Trace(ref.Trace), SourceName(ref.SourceName) {;}
 };
 //---------------------------------------------------------------------------
 void TJS_eTJSScriptError(const ttstr &msg, tTJSScriptBlock *block, tjs_int srcpos);

@@ -1,10 +1,13 @@
 
 class Main extends Window
 {
+	var tags; //KAGParser
 	function Main () 
 	{
 		super.Window();
-		initialize(1024,768);
+		initialize(DEConfig.width,DEConfig.height);
+
+		this.tags = new TagHandlers(this);
 		this.world = new GameWorld();
 	}
 

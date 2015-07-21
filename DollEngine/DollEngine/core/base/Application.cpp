@@ -48,7 +48,7 @@ void Application::mainLoop()
 void Application::startup()
 {
     initialize();
-    string fullpath = Storages::GetInstance()->getFullPath("data/Startup.tjs");
+    string fullpath = Storages::GetInstance()->getFullPath("Startup.tjs");
     IOData* data = Storages::GetFileString(fullpath);
     wstring code;
     data->convertToUnicode(code);

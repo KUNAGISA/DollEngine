@@ -15,6 +15,36 @@
 
 DE_BEGIN
 
+
+TJS_NATIVE_FUNCTION_BEGIN(TJSPrint)
+if ( numparams <1 ) return TJS_E_BADPARAMCOUNT ;
+tTJSVariantString *res;
+res = TJSFormatString(param[0]->AsString()->operator const wchar_t *(), numparams-1, &param[1]);
+DM("【TJS】: %ls",(const tjs_char*)*res);
+if(res) res->Release();
+return TJS_S_OK ;
+TJS_NATIVE_FUNCTION_END
+
+TJS_NATIVE_FUNCTION_BEGIN(TJSPrintTime)
+DM("%lld\n",DE::GetMilliSeconds());
+return TJS_S_OK ;
+TJS_NATIVE_FUNCTION_END
+
+
+TJS_NATIVE_FUNCTION_BEGIN(TJSThrow)
+if ( numparams <1 ) return TJS_E_BADPARAMCOUNT ;
+tTJSVariantString *res;
+res = TJSFormatString(param[0]->GetString(), numparams, &param[1]);
+if(res) {
+    TJS_eTJSError(*res);
+}
+else {
+    TJS_eTJSError(L"");
+}
+return TJS_S_OK;
+TJS_NATIVE_FUNCTION_END
+
+
 void Debug::throwMsg(DEBUG_MSG error,const string& p1)
 {
     wstring msg;
@@ -30,6 +60,44 @@ void Debug::throwMsg(DEBUG_MSG error,const string& p1)
             break;
         default:
             msg = UnicodeWithFormat(L"未知错误");
+            break;
+    }
+    TJS_eTJSError(msg);
+}
+
+void Debug::throwMsg(DEBUG_MSG error,int p1,const wstring& p2)
+{
+    wstring msg;
+    switch (error) {
+        case ERROR_KAG_UNKONW:
+            msg = UnicodeWithFormat(L"(#%d)KAG解析发生未知错误",p1);
+            break;
+        case ERROR_KAG_LABELKEY_NULL:
+            msg = UnicodeWithFormat(L"(#%d)标签的名字不能为空",p1);
+            break;
+        case ERROR_KAG_VALUE_STRING_ENDED:
+            msg = UnicodeWithFormat(L"(#%d)字符串没有结尾，可能缺少 \" 或 \' ，请检查",p1);
+            break;
+        case ERROR_KAG_TAG_ENDED:
+            msg = UnicodeWithFormat(L"(#%d)Tag没有结尾，可能缺少 ] ，请检查",p1);
+            break;
+        case ERROR_KAG_LABEL_FIND_FAIL:
+            msg = UnicodeWithFormat(L"(#%d)未找到名为%ls的标签",p1,p2.c_str());
+            break;
+        case ERROR_KAG_TAG_FIND_FAIL:
+            msg = UnicodeWithFormat(L"(#%d)未找到名为%ls的指令",p1);
+            break;
+        case ERROR_KAG_TOO_MANY_RETURN:
+            msg = UnicodeWithFormat(L"(#%d)过多的Return指令，与Call指令无法形成对应",p1);
+            break;
+        case ERROR_KAG_MACRONAME_EMPTY:
+            msg = UnicodeWithFormat(L"(#%d)Macro的name属性为空",p1);
+            break;
+        case ERROR_KAG_MACRO_NESTING:
+            msg = UnicodeWithFormat(L"(#%d)Macro不可嵌套",p1);
+            break;
+        default:
+            msg = UnicodeWithFormat(L"(#%d)KAG发生未知错误",p1);
             break;
     }
     TJS_eTJSError(msg);
@@ -61,7 +129,7 @@ TjsEngine::TjsEngine()
     if (!s_tjs)
     {
         s_tjs = new tTJS();
-        
+        TJSEnableDebugMode=true;
         tTJSVariant val;
         iTJSDispatch2 *dsp;
         iTJSDispatch2* global = s_tjs->GetGlobalNoAddRef () ;
@@ -70,6 +138,7 @@ TjsEngine::TjsEngine()
         TJS_REGIST_CLASS(Scripts)
         
         TVPLoadMessage();
+        TJS_REGIST_FUNCTION(TJSThrow, "throwMsg");
         TJS_REGIST_FUNCTION(TJSPrint,"print")
         TJS_REGIST_FUNCTION(TJSPrintTime, "printTime")
         //        REGIST_TJS_FUNCTION(TJSConsoleShow,"__console_show")
@@ -84,39 +153,37 @@ void TjsEngine::catchError(void* error)
 {
     TJS::eTJSScriptError& e = *(TJS::eTJSScriptError*)error;
     TJS::ttstr message;
-    message += L"\n【ERROR】\n==>FILE: ";
+    message += L"\n【ERROR】";
     wstring curFile;
     Utf8ToUnicode(DE::TjsEngine::GetSelf()->topFile().c_str(), curFile);
     message += curFile;
-    message += L"\n\n==>LINE:";
+    message += L"\n==>LINE:";
     message += UnicodeWithFormat(L"%d",e.GetSourceLine());
     message += L" ";
     int lineLength=0;
     tTJSScriptBlock* block = e.GetBlockNoAddRef();
     tjs_char* src = block->GetLine(e.GetSourceLine()-1, &lineLength);
     ttstr linecode(src,lineLength);
+    message += e.SourceName;
+    message += "\n";
     message += linecode;
-    message += L"\n\n==>MSG: ";
+    message += L"\n==>MSG: ";
     message += e.GetMessage();
-    message += L"\n\n==>STACK: ";
-    ttstr tra = e.GetTrace();
-    tjs_char* ch = (tjs_char*)tra.c_str();
-    while (*ch != 0)
-    {
-        if (*ch == L'<' &&
-            *(ch+1) == L'-' &&
-            *(ch+2) == L'-')
-        {
-            ch+=3;
-            message += L"\n<--";
+    message += L"\n==>STACK:\n";
+    wstring tra = e.GetTrace().AsStdString();
+    size_t idx = tra.find(L"(");
+    while (idx!=wstring::npos) {
+        size_t idx2 = tra.find(L" <-- anonymous@",idx);
+        wstring sub = tra.substr(idx,idx2-idx);
+        message += L"[trace]";
+        message += sub;
+        message += L"\n";
+        if (idx2 == wstring::npos) {
+            break;
         }
-        else
-        {
-            message += *ch;
-            ++ch;
-        }
+        idx = tra.find(L"(",idx2);
     }
-    message += L"\n【ERROR】\n";
+    message += L"【ERROR】\n";
     TVPAddLog(message);
 }
 

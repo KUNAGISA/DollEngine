@@ -15,7 +15,7 @@ void TVPAddLog(const ttstr& var)
 {
     string log;
     UnicodeToUtf8(var.c_str(), log);
-    printf("%s\n",log.c_str());
+    DM("%s\n",log.c_str());
 }
 
 iTJSDispatch2* TVPGetScriptDispatch()

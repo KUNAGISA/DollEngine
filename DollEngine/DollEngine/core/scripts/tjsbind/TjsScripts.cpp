@@ -9,6 +9,7 @@
 #include "TjsScripts.h"
 #include "TjsEngine.h"
 #include "Storages.h"
+#include "JsonParser.h"
 
 tjs_uint32 tTJSNC_Scripts::ClassID = -1;
 tTJSNC_Scripts::tTJSNC_Scripts() : inherited(TJS_W("Scripts"))
@@ -45,33 +46,60 @@ tTJSNC_Scripts::tTJSNC_Scripts() : inherited(TJS_W("Scripts"))
     //----------------------------------------------------------------------
     TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/execStorage)
     {
-        wstring fullpath = (*param[0]).GetString();
-        string path;
-        DE::UnicodeToUtf8(fullpath.c_str(),path);
-        path = DE::Storages::GetInstance()->getFullPath(path);
-        DE::IOData* data = DE::Storages::GetInstance()->GetFileString(path);
+        wstring path = (*param[0]).GetString();
+        string fullpath;
+        DE::UnicodeToUtf8(path.c_str(),fullpath);
+        fullpath = DE::Storages::GetInstance()->getFullPath(fullpath);
+        DE::IOData* data = DE::Storages::GetInstance()->GetFileString(fullpath);
         wstring code;
         data->convertToUnicode(code);
         SAFF_DELETE(data);
-        DE::TjsEngine::GetInstance()->exec(code, result);
+        TjsEngine::GetSelf()->pushFile(fullpath);
+        DE::TjsEngine::GetSelf()->exec(code, result);
+        TjsEngine::GetSelf()->popFile();
         return TJS_S_OK;
     }
     TJS_END_NATIVE_STATIC_METHOD_DECL(/*func. name*/execStorage)
     //----------------------------------------------------------------------
     TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/evalStorage)
     {
-        wstring fullpath = (*param[0]).GetString();
-        string path;
-        DE::UnicodeToUtf8(fullpath.c_str(),path);
-        path = DE::Storages::GetInstance()->getFullPath(path);
-        DE::IOData* data = DE::Storages::GetInstance()->GetFileString(path);
+        wstring path = (*param[0]).GetString();
+        string fullpath;
+        DE::UnicodeToUtf8(path.c_str(),fullpath);
+        fullpath = DE::Storages::GetInstance()->getFullPath(fullpath);
+        DE::IOData* data = DE::Storages::GetInstance()->GetFileString(fullpath);
         wstring code;
         data->convertToUnicode(code);
         SAFF_DELETE(data);
+        TjsEngine::GetSelf()->pushFile(fullpath);
         DE::TjsEngine::GetInstance()->eval(code, result);
+        TjsEngine::GetSelf()->popFile();
         return TJS_S_OK;
     }
     TJS_END_NATIVE_STATIC_METHOD_DECL(/*func. name*/evalStorage)
+    //----------------------------------------------------------------------
+    TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/jsonStorage)
+    {
+        wstring path = (*param[0]).GetString();
+        string fullpath;
+        DE::UnicodeToUtf8(path.c_str(),fullpath);
+        fullpath = DE::Storages::GetInstance()->getFullPath(fullpath);
+        DE::IOData* data = DE::Storages::GetInstance()->GetFileString(fullpath);
+        wstring code;
+        data->convertToUnicode(code);
+        SAFF_DELETE(data);
+        *result = JsonParser::GetInstance()->FromJsonString(code.c_str());
+        return TJS_S_OK;
+    }
+    TJS_END_NATIVE_STATIC_METHOD_DECL(/*func. name*/jsonStorage)
+    //----------------------------------------------------------------------
+    TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/json)
+    {
+        const wchar_t* code = (*param[0]).GetString();
+        *result = JsonParser::GetInstance()->FromJsonString(code);
+        return TJS_S_OK;
+    }
+    TJS_END_NATIVE_STATIC_METHOD_DECL(/*func. name*/json)
     
     //--property
     

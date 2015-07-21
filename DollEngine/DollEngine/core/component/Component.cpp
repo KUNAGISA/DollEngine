@@ -25,6 +25,7 @@ Component::Component()
 ,m_object(null)
 ,m_enabled(true)
 ,m_compIter(Component::EndIter())
+,m_time(0)
 {
     
 }

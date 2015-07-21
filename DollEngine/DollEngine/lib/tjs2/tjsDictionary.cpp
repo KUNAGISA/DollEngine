@@ -650,6 +650,7 @@ tTJSDictionaryObject::tTJSDictionaryObject(tjs_int hashbits) : tTJSCustomObject(
 //---------------------------------------------------------------------------
 tTJSDictionaryObject::~tTJSDictionaryObject()
 {
+    printf("delete 0x%x",this);
 }
 //---------------------------------------------------------------------------
 tjs_error TJS_INTF_METHOD
