@@ -92,7 +92,31 @@ return 0;\
 #pragma mark -
 #pragma mark GL相关
 
+#ifdef OS_IOS
+#include <OpenGLES/ES2/gl.h>
+#include <OpenGLES/ES2/glext.h>
+
+#define	glClearDepth glClearDepthf
+#define glDeleteVertexArrays glDeleteVertexArraysOES
+#define glGenVertexArrays glGenVertexArraysOES
+#define glBindVertexArray glBindVertexArrayOES
+#define glMapBuffer glMapBufferOES
+#define glUnmapBuffer glUnmapBufferOES
+
+#define GL_DEPTH24_STENCIL8 GL_DEPTH24_STENCIL8_OES
+#define GL_WRITE_ONLY GL_WRITE_ONLY_OES
+
+#elif defined(OS_MAC)
 #include <OpenGL/gl.h>
+
+#define glDeleteVertexArrays glDeleteVertexArraysAPPLE
+#define glGenVertexArrays  glGenVertexArraysAPPLE
+#define glBindVertexArray glBindVertexArrayAPPLE
+#define glClearDepthf glClearDepth
+#define glDepthRangef glDepthRange
+#define glReleaseShaderCompiler(xxx)
+
+#endif
 
 #define CHECK_GL_ERROR DE::GLCheckError();
 

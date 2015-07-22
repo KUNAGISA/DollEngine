@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		B80365A01ADE9E9400DD4B71 /* ConsoleController.m in Sources */ = {isa = PBXBuildFile; fileRef = B803659E1ADE9E9400DD4B71 /* ConsoleController.m */; };
 		B80365A11ADE9E9400DD4B71 /* ConsoleController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B803659F1ADE9E9400DD4B71 /* ConsoleController.xib */; };
-		B80365A81ADE9FBC00DD4B71 /* Console-Mac.mm in Sources */ = {isa = PBXBuildFile; fileRef = B80365A71ADE9FBC00DD4B71 /* Console-Mac.mm */; };
 		B8261DF21ADC05F70017767B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8261DF11ADC05F70017767B /* Images.xcassets */; };
 		B8261DFD1ADC06160017767B /* AppDelegateIOS.m in Sources */ = {isa = PBXBuildFile; fileRef = B8261DF51ADC06160017767B /* AppDelegateIOS.m */; };
 		B8261DFE1ADC06160017767B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8261DF61ADC06160017767B /* Images.xcassets */; };
@@ -36,7 +35,6 @@
 		B89345AE1B5546CC0065A3A3 /* mat4.c in Sources */ = {isa = PBXBuildFile; fileRef = B89345951B5546CB0065A3A3 /* mat4.c */; };
 		B89345AF1B5546CC0065A3A3 /* mat4.c in Sources */ = {isa = PBXBuildFile; fileRef = B89345951B5546CB0065A3A3 /* mat4.c */; };
 		B89345B01B5546CC0065A3A3 /* neon_matrix_impl.c in Sources */ = {isa = PBXBuildFile; fileRef = B89345961B5546CB0065A3A3 /* neon_matrix_impl.c */; };
-		B89345B11B5546CC0065A3A3 /* neon_matrix_impl.c in Sources */ = {isa = PBXBuildFile; fileRef = B89345961B5546CB0065A3A3 /* neon_matrix_impl.c */; };
 		B89345B21B5546CC0065A3A3 /* plane.c in Sources */ = {isa = PBXBuildFile; fileRef = B89345971B5546CB0065A3A3 /* plane.c */; };
 		B89345B31B5546CC0065A3A3 /* plane.c in Sources */ = {isa = PBXBuildFile; fileRef = B89345971B5546CB0065A3A3 /* plane.c */; };
 		B89345B41B5546CC0065A3A3 /* quaternion.c in Sources */ = {isa = PBXBuildFile; fileRef = B89345981B5546CB0065A3A3 /* quaternion.c */; };
@@ -54,6 +52,11 @@
 		B898541F1ADC04D0003784AA /* AppDelegateMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = B89854181ADC04D0003784AA /* AppDelegateMac.mm */; };
 		B89854211ADC04D0003784AA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B898541A1ADC04D0003784AA /* main.m */; };
 		B89854231ADC04D0003784AA /* DEOpenGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = B898541D1ADC04D0003784AA /* DEOpenGLView.mm */; };
+		B89F267F1B5E87B40081CA6C /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B89F267E1B5E87B40081CA6C /* OpenGLES.framework */; };
+		B89F26801B5E88040081CA6C /* ImageData-Mac.mm in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D771B5B7B3B001EB825 /* ImageData-Mac.mm */; };
+		B89F26821B5E8B3B0081CA6C /* Application-iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = B89F26811B5E8B3B0081CA6C /* Application-iOS.mm */; };
+		B89F26841B5E8BA00081CA6C /* Window-iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = B89F26831B5E8BA00081CA6C /* Window-iOS.mm */; };
+		B89F26851B5E8DD60081CA6C /* neon_matrix_impl.c in Sources */ = {isa = PBXBuildFile; fileRef = B89345961B5546CB0065A3A3 /* neon_matrix_impl.c */; };
 		B8A1D8A41AE2CB23005A6595 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8A1D8A31AE2CB23005A6595 /* OpenGL.framework */; };
 		B8AEEFEB1B35997800490A8D /* ncbind.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF581B35997800490A8D /* ncbind.cpp */; };
 		B8AEEFEC1B35997800490A8D /* ncbind.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF581B35997800490A8D /* ncbind.cpp */; };
@@ -231,7 +234,6 @@
 		B8D3660A1B0663B700E627A7 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B8D366091B0663B700E627A7 /* libz.dylib */; };
 		B8EE2D171B5605A4001EB825 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8EE2D161B5605A4001EB825 /* MainMenu.xib */; };
 		B8EE2DAB1B5B7B3B001EB825 /* Application-Mac.mm in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D561B5B7B3B001EB825 /* Application-Mac.mm */; };
-		B8EE2DAC1B5B7B3B001EB825 /* Application-Mac.mm in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D561B5B7B3B001EB825 /* Application-Mac.mm */; };
 		B8EE2DAD1B5B7B3B001EB825 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D571B5B7B3B001EB825 /* Application.cpp */; };
 		B8EE2DAE1B5B7B3B001EB825 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D571B5B7B3B001EB825 /* Application.cpp */; };
 		B8EE2DAF1B5B7B3B001EB825 /* FontCache.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D591B5B7B3B001EB825 /* FontCache.cpp */; };
@@ -260,8 +262,6 @@
 		B8EE2DC61B5B7B3B001EB825 /* CoreUnits.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D721B5B7B3B001EB825 /* CoreUnits.cpp */; };
 		B8EE2DC71B5B7B3B001EB825 /* FileInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D751B5B7B3B001EB825 /* FileInfo.cpp */; };
 		B8EE2DC81B5B7B3B001EB825 /* FileInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D751B5B7B3B001EB825 /* FileInfo.cpp */; };
-		B8EE2DC91B5B7B3B001EB825 /* ImageData-Mac.mm in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D771B5B7B3B001EB825 /* ImageData-Mac.mm */; };
-		B8EE2DCA1B5B7B3B001EB825 /* ImageData-Mac.mm in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D771B5B7B3B001EB825 /* ImageData-Mac.mm */; };
 		B8EE2DCB1B5B7B3B001EB825 /* ImageData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D781B5B7B3B001EB825 /* ImageData.cpp */; };
 		B8EE2DCC1B5B7B3B001EB825 /* ImageData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D781B5B7B3B001EB825 /* ImageData.cpp */; };
 		B8EE2DCD1B5B7B3B001EB825 /* IOData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D7A1B5B7B3B001EB825 /* IOData.cpp */; };
@@ -304,8 +304,6 @@
 		B8EE2DF21B5B7B3B001EB825 /* TjsWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2DA21B5B7B3B001EB825 /* TjsWindow.cpp */; };
 		B8EE2DF31B5B7B3B001EB825 /* TjsEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2DA41B5B7B3B001EB825 /* TjsEngine.cpp */; };
 		B8EE2DF41B5B7B3B001EB825 /* TjsEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2DA41B5B7B3B001EB825 /* TjsEngine.cpp */; };
-		B8EE2DF51B5B7B3B001EB825 /* Console.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2DA71B5B7B3B001EB825 /* Console.cpp */; };
-		B8EE2DF61B5B7B3B001EB825 /* Console.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2DA71B5B7B3B001EB825 /* Console.cpp */; };
 		B8EE2DF71B5B7B3B001EB825 /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2DA91B5B7B3B001EB825 /* Window.cpp */; };
 		B8EE2DF81B5B7B3B001EB825 /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2DA91B5B7B3B001EB825 /* Window.cpp */; };
 		B8EE2DFC1B5BDA25001EB825 /* TjsKAGParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2DFA1B5BDA25001EB825 /* TjsKAGParser.cpp */; };
@@ -316,15 +314,13 @@
 		B8EE2E241B5D7F91001EB825 /* savedata in Resources */ = {isa = PBXBuildFile; fileRef = B8EE2E221B5D7F91001EB825 /* savedata */; };
 		B8EE2E261B5D7FDD001EB825 /* patch in Resources */ = {isa = PBXBuildFile; fileRef = B8EE2E251B5D7FDD001EB825 /* patch */; };
 		B8EE2E271B5D7FDD001EB825 /* patch in Resources */ = {isa = PBXBuildFile; fileRef = B8EE2E251B5D7FDD001EB825 /* patch */; };
-		B8EE2E291B5D8119001EB825 /* Window-MAC.mm in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2E281B5D8119001EB825 /* Window-MAC.mm */; };
-		B8EE2E2A1B5D8119001EB825 /* Window-MAC.mm in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2E281B5D8119001EB825 /* Window-MAC.mm */; };
+		B8EE2E291B5D8119001EB825 /* Window-Mac.mm in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2E281B5D8119001EB825 /* Window-Mac.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		B803659D1ADE9E9400DD4B71 /* ConsoleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsoleController.h; sourceTree = "<group>"; };
 		B803659E1ADE9E9400DD4B71 /* ConsoleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConsoleController.m; sourceTree = "<group>"; };
 		B803659F1ADE9E9400DD4B71 /* ConsoleController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConsoleController.xib; sourceTree = "<group>"; };
-		B80365A71ADE9FBC00DD4B71 /* Console-Mac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "Console-Mac.mm"; sourceTree = "<group>"; };
 		B8261DCB1ADC05430017767B /* DollEngineIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DollEngineIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8261DF11ADC05F70017767B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		B8261DF41ADC06160017767B /* AppDelegateIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegateIOS.h; sourceTree = "<group>"; };
@@ -553,6 +549,10 @@
 		B898541A1ADC04D0003784AA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B898541C1ADC04D0003784AA /* DEOpenGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEOpenGLView.h; sourceTree = "<group>"; };
 		B898541D1ADC04D0003784AA /* DEOpenGLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DEOpenGLView.mm; sourceTree = "<group>"; };
+		B89F267D1B5E86C30081CA6C /* DollEnginePrefixiOS.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DollEnginePrefixiOS.pch; sourceTree = "<group>"; };
+		B89F267E1B5E87B40081CA6C /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/System/Library/Frameworks/OpenGLES.framework; sourceTree = DEVELOPER_DIR; };
+		B89F26811B5E8B3B0081CA6C /* Application-iOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "Application-iOS.mm"; sourceTree = "<group>"; };
+		B89F26831B5E8BA00081CA6C /* Window-iOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "Window-iOS.mm"; sourceTree = "<group>"; };
 		B8A1D8A31AE2CB23005A6595 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		B8AEEF561B35997800490A8D /* ncb_foreach.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ncb_foreach.h; sourceTree = "<group>"; };
 		B8AEEF571B35997800490A8D /* ncb_invoke.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ncb_invoke.hpp; sourceTree = "<group>"; };
@@ -775,8 +775,6 @@
 		B8EE2DA31B5B7B3B001EB825 /* TjsWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsWindow.h; sourceTree = "<group>"; };
 		B8EE2DA41B5B7B3B001EB825 /* TjsEngine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TjsEngine.cpp; sourceTree = "<group>"; };
 		B8EE2DA51B5B7B3B001EB825 /* TjsEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsEngine.h; sourceTree = "<group>"; };
-		B8EE2DA71B5B7B3B001EB825 /* Console.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Console.cpp; sourceTree = "<group>"; };
-		B8EE2DA81B5B7B3B001EB825 /* Console.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Console.h; sourceTree = "<group>"; };
 		B8EE2DA91B5B7B3B001EB825 /* Window.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Window.cpp; sourceTree = "<group>"; };
 		B8EE2DAA1B5B7B3B001EB825 /* Window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Window.h; sourceTree = "<group>"; };
 		B8EE2DF91B5B7B76001EB825 /* ScriptEngine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScriptEngine.h; sourceTree = "<group>"; };
@@ -786,7 +784,7 @@
 		B8EE2DFF1B5CDDC8001EB825 /* JsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JsonParser.h; sourceTree = "<group>"; };
 		B8EE2E221B5D7F91001EB825 /* savedata */ = {isa = PBXFileReference; lastKnownFileType = folder; path = savedata; sourceTree = "<group>"; };
 		B8EE2E251B5D7FDD001EB825 /* patch */ = {isa = PBXFileReference; lastKnownFileType = folder; path = patch; sourceTree = "<group>"; };
-		B8EE2E281B5D8119001EB825 /* Window-MAC.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "Window-MAC.mm"; sourceTree = "<group>"; };
+		B8EE2E281B5D8119001EB825 /* Window-Mac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "Window-Mac.mm"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -794,6 +792,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B89F267F1B5E87B40081CA6C /* OpenGLES.framework in Frameworks */,
 				B8D3660A1B0663B700E627A7 /* libz.dylib in Frameworks */,
 				B893459F1B5546CB0065A3A3 /* libfreetype.a in Frameworks */,
 			);
@@ -824,6 +823,7 @@
 				B8261DFA1ADC06160017767B /* Main.storyboard */,
 				B8261DFB1ADC06160017767B /* ViewController.h */,
 				B8261DFC1ADC06160017767B /* ViewController.m */,
+				B89F267D1B5E86C30081CA6C /* DollEnginePrefixiOS.pch */,
 			);
 			path = proj.ios;
 			sourceTree = "<group>";
@@ -1268,7 +1268,6 @@
 				B803659D1ADE9E9400DD4B71 /* ConsoleController.h */,
 				B803659E1ADE9E9400DD4B71 /* ConsoleController.m */,
 				B803659F1ADE9E9400DD4B71 /* ConsoleController.xib */,
-				B80365A71ADE9FBC00DD4B71 /* Console-Mac.mm */,
 				B880AE5F1AFD94F500E0F92C /* DollEnginePrefixMac.pch */,
 				B8EE2D161B5605A4001EB825 /* MainMenu.xib */,
 			);
@@ -1466,6 +1465,7 @@
 		B8D365FA1B06350F00E627A7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B89F267E1B5E87B40081CA6C /* OpenGLES.framework */,
 				B8D366091B0663B700E627A7 /* libz.dylib */,
 				B8D366071B0663AC00E627A7 /* libz.dylib */,
 				B8A1D8A31AE2CB23005A6595 /* OpenGL.framework */,
@@ -1496,6 +1496,7 @@
 			isa = PBXGroup;
 			children = (
 				B8EE2D561B5B7B3B001EB825 /* Application-Mac.mm */,
+				B89F26811B5E8B3B0081CA6C /* Application-iOS.mm */,
 				B8EE2D571B5B7B3B001EB825 /* Application.cpp */,
 				B8EE2D581B5B7B3B001EB825 /* Application.h */,
 				B8EE2D591B5B7B3B001EB825 /* FontCache.cpp */,
@@ -1627,9 +1628,8 @@
 		B8EE2DA61B5B7B3B001EB825 /* widget */ = {
 			isa = PBXGroup;
 			children = (
-				B8EE2DA71B5B7B3B001EB825 /* Console.cpp */,
-				B8EE2DA81B5B7B3B001EB825 /* Console.h */,
-				B8EE2E281B5D8119001EB825 /* Window-MAC.mm */,
+				B8EE2E281B5D8119001EB825 /* Window-Mac.mm */,
+				B89F26831B5E8BA00081CA6C /* Window-iOS.mm */,
 				B8EE2DA91B5B7B3B001EB825 /* Window.cpp */,
 				B8EE2DAA1B5B7B3B001EB825 /* Window.h */,
 			);
@@ -1643,8 +1643,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B8261DEF1ADC05430017767B /* Build configuration list for PBXNativeTarget "DollEngineIOS" */;
 			buildPhases = (
-				B8261DC71ADC05430017767B /* Sources */,
 				B8261DC81ADC05430017767B /* Frameworks */,
+				B8261DC71ADC05430017767B /* Sources */,
 				B8261DC91ADC05430017767B /* Resources */,
 			);
 			buildRules = (
@@ -1774,11 +1774,8 @@
 				B8AEF0461B35997800490A8D /* regtrav.c in Sources */,
 				B8AEF08E1B35997800490A8D /* tjsRandomGenerator.cpp in Sources */,
 				B8EE2DE21B5B7B3B001EB825 /* GLTexture.cpp in Sources */,
-				B8EE2DF61B5B7B3B001EB825 /* Console.cpp in Sources */,
 				B8EE2DD01B5B7B3B001EB825 /* SpriteFrame.cpp in Sources */,
 				B8AEF0621B35997800490A8D /* tjsdate.tab.cpp in Sources */,
-				B8EE2DCA1B5B7B3B001EB825 /* ImageData-Mac.mm in Sources */,
-				B8EE2E2A1B5D8119001EB825 /* Window-MAC.mm in Sources */,
 				B89345AB1B5546CB0065A3A3 /* matrix.c in Sources */,
 				B89345BD1B5546CC0065A3A3 /* vec3.c in Sources */,
 				B89345AF1B5546CC0065A3A3 /* mat4.c in Sources */,
@@ -1811,12 +1808,13 @@
 				B8AEF0701B35997800490A8D /* tjsException.cpp in Sources */,
 				B8EE2DC41B5B7B3B001EB825 /* CoreType.cpp in Sources */,
 				B8AEF0681B35997800490A8D /* tjsDebug.cpp in Sources */,
+				B89F26841B5E8BA00081CA6C /* Window-iOS.mm in Sources */,
 				B8AEF07A1B35997800490A8D /* tjsLex.cpp in Sources */,
+				B89F26851B5E8DD60081CA6C /* neon_matrix_impl.c in Sources */,
 				B8AEF0001B35997800490A8D /* iso8859_1.c in Sources */,
 				B8AEF0721B35997800490A8D /* tjsGlobalStringMap.cpp in Sources */,
 				B89345A91B5546CB0065A3A3 /* mat4stack.c in Sources */,
 				B8AEF0101B35997800490A8D /* iso8859_3.c in Sources */,
-				B89345B11B5546CC0065A3A3 /* neon_matrix_impl.c in Sources */,
 				B8AEF0601B35997800490A8D /* tjsDate.cpp in Sources */,
 				B8AEF0521B35997800490A8D /* tjs.tab.cpp in Sources */,
 				B8EE2DBA1B5B7B3B001EB825 /* KAGData.cpp in Sources */,
@@ -1832,6 +1830,7 @@
 				B89345BB1B5546CC0065A3A3 /* vec2.c in Sources */,
 				B8EE2DF21B5B7B3B001EB825 /* TjsWindow.cpp in Sources */,
 				B8AEF0241B35997800490A8D /* sjis.c in Sources */,
+				B89F26821B5E8B3B0081CA6C /* Application-iOS.mm in Sources */,
 				B8AEF0501B35997800490A8D /* tjs.cpp in Sources */,
 				B8AEEFFE1B35997800490A8D /* gb18030.c in Sources */,
 				B8AEF00E1B35997800490A8D /* iso8859_2.c in Sources */,
@@ -1853,7 +1852,6 @@
 				B89345B71B5546CC0065A3A3 /* ray2.c in Sources */,
 				B8AEF02C1B35997800490A8D /* utf32_be.c in Sources */,
 				B8AEF0441B35997800490A8D /* regsyntax.c in Sources */,
-				B8EE2DAC1B5B7B3B001EB825 /* Application-Mac.mm in Sources */,
 				B8AEEFF61B35997800490A8D /* cp1251.c in Sources */,
 				B8EE2DBC1B5B7B3B001EB825 /* KAGParser.cpp in Sources */,
 				B8AEF0561B35997800490A8D /* tjsBinarySerializer.cpp in Sources */,
@@ -1924,7 +1922,6 @@
 				B8AEF0051B35997800490A8D /* iso8859_13.c in Sources */,
 				B8AEF0871B35997800490A8D /* tjsObjectExtendable.cpp in Sources */,
 				B89345AA1B5546CB0065A3A3 /* matrix.c in Sources */,
-				B8EE2DC91B5B7B3B001EB825 /* ImageData-Mac.mm in Sources */,
 				B89345BA1B5546CC0065A3A3 /* vec2.c in Sources */,
 				B8AEF0211B35997800490A8D /* mktable.c in Sources */,
 				B8AEEFF51B35997800490A8D /* cp1251.c in Sources */,
@@ -1960,12 +1957,11 @@
 				B8AEF0911B35997800490A8D /* tjsScriptBlock.cpp in Sources */,
 				B8EE2E001B5CDDC8001EB825 /* JsonParser.cpp in Sources */,
 				B8AEF0231B35997800490A8D /* sjis.c in Sources */,
-				B80365A81ADE9FBC00DD4B71 /* Console-Mac.mm in Sources */,
 				B8AEEFFF1B35997800490A8D /* iso8859_1.c in Sources */,
 				B8AEEFFB1B35997800490A8D /* euc_tw.c in Sources */,
 				B8AEEFF11B35997800490A8D /* ascii.c in Sources */,
 				B8EE2DE11B5B7B3B001EB825 /* GLTexture.cpp in Sources */,
-				B8EE2E291B5D8119001EB825 /* Window-MAC.mm in Sources */,
+				B8EE2E291B5D8119001EB825 /* Window-Mac.mm in Sources */,
 				B8AEF05F1B35997800490A8D /* tjsDate.cpp in Sources */,
 				B898541F1ADC04D0003784AA /* AppDelegateMac.mm in Sources */,
 				B89345B61B5546CC0065A3A3 /* ray2.c in Sources */,
@@ -1980,6 +1976,7 @@
 				B89345A21B5546CB0065A3A3 /* aabb.c in Sources */,
 				B8AEF0711B35997800490A8D /* tjsGlobalStringMap.cpp in Sources */,
 				B8AEF0951B35997800490A8D /* tjsString.cpp in Sources */,
+				B89F26801B5E88040081CA6C /* ImageData-Mac.mm in Sources */,
 				B8AEF0B01B35998400490A8D /* MsgLoad.cpp in Sources */,
 				B8AEF05D1B35997800490A8D /* tjsConstArrayData.cpp in Sources */,
 				B8AEF09B1B35997800490A8D /* tjsVariantString.cpp in Sources */,
@@ -2063,7 +2060,6 @@
 				B8AEEFFD1B35997800490A8D /* gb18030.c in Sources */,
 				B8AEEFEB1B35997800490A8D /* ncbind.cpp in Sources */,
 				B8AEF08D1B35997800490A8D /* tjsRandomGenerator.cpp in Sources */,
-				B8EE2DF51B5B7B3B001EB825 /* Console.cpp in Sources */,
 				B8EE2DB71B5B7B3B001EB825 /* Component.cpp in Sources */,
 				B8AEF07B1B35997800490A8D /* tjsMath.cpp in Sources */,
 			);
@@ -2077,6 +2073,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PREFIX_HEADER = DollEngine/proj.ios/DollEnginePrefixiOS.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -2084,7 +2081,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(SRCROOT)/../libs/freetype2/include/ios",
+					"$(PROJECT_DIR)/DollEngine/lib/freetype2/include/ios",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/DollEngine/proj.ios/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
@@ -2093,7 +2090,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/DollEngine/lib/fdv_res",
 					"$(PROJECT_DIR)/DollEngine/lib/freetype2/prebuilt/ios",
-					"$(PROJECT_DIR)/DollEngine/lib/freetype2/prebuilt/mac",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -2105,10 +2101,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PREFIX_HEADER = DollEngine/proj.ios/DollEnginePrefixiOS.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(SRCROOT)/../libs/freetype2/include/ios",
+					"$(PROJECT_DIR)/DollEngine/lib/freetype2/include/ios",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/DollEngine/proj.ios/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
@@ -2117,7 +2114,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/DollEngine/lib/fdv_res",
 					"$(PROJECT_DIR)/DollEngine/lib/freetype2/prebuilt/ios",
-					"$(PROJECT_DIR)/DollEngine/lib/freetype2/prebuilt/mac",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;

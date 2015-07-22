@@ -121,7 +121,7 @@ void GLProgram::bindVAO(GLuint vaoId)
     if (s_VAO != vaoId)
     {
         s_VAO = vaoId;
-        glBindVertexArrayAPPLE(vaoId);
+        glBindVertexArray(vaoId);
     }
 }
 

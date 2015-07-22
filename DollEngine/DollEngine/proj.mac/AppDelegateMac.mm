@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegateMac.h"
-#include "Console.h"
 #include "Application.h"
 #include "TjsEngine.h"
 #include "Window.h"
@@ -78,7 +77,7 @@ using namespace DE;
 
 -(IBAction)on_console_click:(id)sender
 {   
-    DE::Console::GetInstance()->setVisible(!DE::Console::GetInstance()->getVisible());
+//    DE::Console::GetInstance()->setVisible(!DE::Console::GetInstance()->getVisible());
 }
 
 -(IBAction)openDocument:(id)sender
