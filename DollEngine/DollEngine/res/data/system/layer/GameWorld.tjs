@@ -1,7 +1,7 @@
-class GameWorld extends GameObject
+class GameWorld extends UILayer
 {
 	function GameWorld () 
 	{
-		super.GameObject();
+		super.UILayer();
 	}
 }

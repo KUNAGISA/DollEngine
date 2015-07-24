@@ -1,36 +1,14 @@
 
 class Node extends GameObject
 {
-	var layout=void;//布局
-	function Node (main,par) 
+	var name;//名称
+	function Node () 
 	{
 		super.GameObject();
-		if (par) {
-			par.addChild(this);
-		}
-		else {
-			main.world.addChild(this);
-		}
 	}
 
 	function finalize () 
 	{
-		if (this.layout) {
-			invalidate this.layout;
-		}
 		super.finalize();
-	}
-
-	var _layout=void;
-	//布局
-	property layout{
-	    setter(v) {
-	    	//setter
-	    	this._layout = v;
-		}
-		getter {
-	    	//getter
-			return this._layout;
-		}
 	}
 }

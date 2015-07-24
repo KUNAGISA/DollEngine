@@ -1,0 +1,51 @@
+
+/***********字典操作************/
+
+function foreach (dict, func) 
+{
+    var iter = new DictIterator();
+    iter.begin(dict);
+    while(iter.next()) {
+        func(iter.key,iter.value);
+    }
+}
+
+function merger (dst, src) 
+{
+    foreach(src, function (key,value) 
+    {
+        this[key] = value;
+    } incontextof dst);
+}
+
+function clone (db) 
+{
+    if (typeof db == "Object") {
+        if (db instanceof 'Array') {
+            var arr = [];
+            arr.assignStruct(db);
+            return arr;
+        }
+        else if(db instanceof 'Dictionary') {
+            var dict = %[];
+            (Dictionary.assignStruct incontextof dict)(db);
+            return dict;
+        }
+        else if(db instanceof 'Date') {
+            var tstr = "%d/%d/%d %d:%d:%d";
+            tstr.sprintf(db.getYear(),db.getMonth(),db.getDate(),db.getHours(),db.getMinutes(),db.getSeconds());
+            return new Date(tstr);
+        }
+        else {
+            if (typeof db.clone != 'undefined') {
+                return db.clone();
+            }
+        }
+    }
+    else if(typeof db == 'undefined') {
+        return void;
+    }
+    else {
+        return db;
+    }
+}

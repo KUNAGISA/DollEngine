@@ -1,0 +1,108 @@
+
+class App extends Window
+{
+	var tags; //KAGParser
+	var back = %[];
+	function App () 
+	{
+		super.Window();
+		if(global.App.mainApp) {
+			em("不可重复创建App");
+		}
+		global.App.mainApp = this;
+		initialize(DEConfig.device.width,DEConfig.device.height);
+
+		this.tags = new TagHandlers(this);
+		this.world = new GameWorld();
+	}
+
+	function getLayerByElm (elm) 
+	{
+		var page=elm.page,layer=elm.layer;
+		if (page == 'back') {
+			if (layer == 'base' ||
+				layer == 'world') {
+				if(!back.world)
+					back.world = %[];
+				merger(back.world,elm);
+			}
+			else {
+				if(!back[layer])
+					back[layer] = %[];
+				merger(back[layer],elm);
+			}
+			return void;
+		}
+		else {
+			if (layer == 'base' ||
+				layer == 'world') {
+				return this.world;
+			}
+			var lay;
+			if (typeof world.names[layer] == 'undefined') {
+				var zorder=0;
+				if(layer.indexOf('message') == 0)
+				{
+					if(layer == 'message')
+						zorder=1000000;
+					else
+						zorder=1000000+1000*layer.substr(7);
+				}
+				else {
+					if (layer!='0'&&+layer==0) {
+						zorder = 0;
+					}
+					else
+						zorder=1000*layer;
+				}
+			}
+			else {
+				lay = this.world.names[layer];
+			}
+			return lay;
+		}
+	}
+
+	function getMessageByIndex (idx) 
+	{
+		// body...
+	}
+
+	function getLayerByName (name) 
+	{
+		// body...
+	}
+
+	function getLayerByIndex (idx) 
+	{
+		// body...
+	}
+
+	function proccess (file, label) 
+	{
+		this.tags.jumpTo(file,label);
+	}
+
+	function waitClick (time) 
+	{
+		
+	}
+
+	var _world=void;
+	property world
+	{
+		setter(v){
+			if (_world)
+			{
+				invalidate _world;
+			}
+			_world = v;
+			Application.world = v;
+		}
+		getter{
+			return _world;
+		}
+	}
+}
+
+App.mainApp = void;

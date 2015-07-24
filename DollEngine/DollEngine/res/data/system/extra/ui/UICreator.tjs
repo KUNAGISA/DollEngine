@@ -1,0 +1,132 @@
+
+class UICreator
+{
+	function getPosByType (node, posArr) 
+	{
+        var par_width,par_height;
+        if(node.parent)
+        {
+            par_width = node.parent.width;
+            par_height = node.parent.height;
+        }
+        else
+        {
+            par_width = App.mainApp.width;
+            par_height = App.mainApp.height;
+        }
+        var posTypeOrgin=posArr[2],posTypeX=posArr[3],posTypeY=posArr[4];
+        if(posArr.count < 3) {
+            posTypeOrgin = node.posType.orgin;
+            posTypeX = node.posType.x;
+            posTypeY = node.posType.y;
+        }
+        else {
+            node.posType = %[
+                orgin : posArr[2],
+                x : posArr[3],
+                y : posArr[4]
+            ];
+        }
+        var x=posArr[0],y=posArr[1];
+        if(posTypeX == 2)
+        {
+            x = par_width*x;
+        }
+        if(posTypeY == 2)
+        {
+            y = par_height*y;
+        }
+        if(posTypeOrgin == 1)
+        {
+            y = par_height-y;
+        }
+        else if(posTypeOrgin == 2)
+        {
+            x = par_width-x;
+            y = par_height-y;
+        }
+        else if(posTypeOrgin == 3)
+        {
+            x = par_width-x;
+        }
+        return [x,y];
+	}
+
+	function getSizeByType (node,sizeArr) 
+	{
+		var par_width,par_height;
+        if(node.parent)
+        {
+            par_width = node.parent.width;
+            par_height = node.parent.height;
+        }
+        else
+        {
+            par_width = App.mainApp.width;
+            par_height = App.mainApp.height;
+        }
+        var w=sizeArr[0],h=sizeArr[1];
+        if(sizeArr[2] == 2)
+        {
+            w = par_width*w;
+        }
+        if(sizeArr[3] == 2)
+        {
+            h = par_height*h;
+        }
+        return [w,h];
+	}
+
+	function setNodeProperties (node,properties,owner, isccb) 
+	{
+		if (data.name && !isccb) {
+			if (owner.names) {
+				owner.names[data.name] = node;
+			}
+		}
+		node._name = data.name;
+
+		if (typeof data.visible == 'undefined') {
+			node.visible = true;
+		}
+		else {
+			node.visible = data.visible;
+		}
+
+		if (data.position) {
+			var pos = getPosByType(node,data.position);
+			node.setPos(pos*);
+		}
+		if (data.contentSize) {
+			var size = getSizeByType(node,data.contentSize);
+			node.setSize(size*);
+		}
+
+		if (data.anchorPoint) {
+			node.setAnchorPoint(data.anchorPoint*);
+		}
+
+        if(data.ignoreAnchorPointForPosition) {
+            node.ignoreAnchorPointForPosition = data.ignoreAnchorPointForPosition;
+        }
+
+        if (data.scale) {
+        	node.scaleX = data.scale[0];
+        	node.scaleY = data.scale[1];
+        }
+
+        if (data.opacity) {
+        	node.opacity = data.opacity*255;
+        }
+        if (data.rotation) {
+        	node.rotation = data.rotation;
+        }
+
+        if (data.color) {
+        	node.setColorF(data.color*);
+        }
+	}
+
+	
+
+}

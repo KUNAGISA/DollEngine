@@ -1,17 +1,19 @@
 {
 	"scripts" : [
+		"system/core/Functions.tjs",
+		"system/core/App.tjs",
+		"system/core/HttpClient.tjs",
+		"system/core/TagHandlers.tjs",
 		"system/action/ActionInstant.tjs",
 		"system/action/ActionInterval.tjs",
 		"system/action/ActionSpeed.tjs",
-		"system/core/HttpClient.tjs",
-		"system/core/Main.tjs",
-		"system/core/TagHandlers.tjs",
-		"system/extra/ccb/CCBAnimation.tjs",
-		"system/extra/ccb/CCBCreator.tjs",
-		"system/extra/ccb/CCBReader.tjs",
+		"system/extra/ui/UIAnimation.tjs",
+		"system/extra/ui/UICreator.tjs",
+		"system/extra/ui/UIReader.tjs",
 		"system/layer/GameWorld.tjs",
 		"system/layer/GraphicLayer.tjs",
 		"system/layer/MessageLayer.tjs",
+		"system/layer/UILayer.tjs",
 		"system/ui/Button.tjs",
 		"system/ui/CheckBox.tjs",
 		"system/ui/EditBox.tjs",
@@ -28,7 +30,8 @@
 		"system/ui/Tab.tjs"
 	],
 	"autoPaths" :[
-		"scenario"
+		"scenario",
+		"uicfg"
 	],
 	"device" :{
 		"width" : 1024,

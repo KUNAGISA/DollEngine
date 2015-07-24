@@ -2,11 +2,9 @@
 class _UIReader
 {
 	var uiCreator;
-	var uiAnimation;
 	function _CCBReader () 
 	{
 		this.uiCreator = new UICreator();
-		this.uiAnimation = new UIAnimation();
 	}
 
 	function readJsonFile (path,parent) 
@@ -79,23 +77,37 @@ class _UIReader
 				}
 			}
 		}
-		uiCreator.setNodeProperties(orginNode,data.properties,owner);
+		uiCreator.setNodeProperties(orginNode,data.properties,owner,false);
 		return orginNode;
 	}
 
 	function readChild (children, parent, owner) 
 	{
-
+		for (var i = 0; i < children.count; i++) {
+			var data = children[i];
+			var node = this.createNode(owner, data, false, parent, i);
+			this.readAnimationConfig(data.animatedProperties,node,owner.animation);
+		};
 	}
 
 	function readAnimation (data) 
 	{
-		// body...
+		var manager = new UIAnimation();
+		for (var i = data.sequences.count - 1; i >= 0; i--) {
+			manager.parse(data.sequences[i]);
+		};
+		return manager;
 	}
 
 	function readAnimationConfig (properties, node, manager) 
 	{
-		// body...
+		if (properties == void) {
+			return;
+		}
+		foreach(properties,function (key, value) 
+		{
+			manager.parseProperties(node,key,value);
+		});
 	}
 }
 

@@ -1,0 +1,29 @@
+class UILayer extends GameObject
+{
+	var names = %[];
+	var data = void;//初始化时传入的参数
+	function UILayer (path) 
+	{
+		super.GameObject();
+	}
+
+	function initialize (data) 
+	{
+		//所有UI创建结束以后执行一次
+	}
+
+	function refresh () 
+	{
+		//每当需要刷新的时候会被调用一次
+	}
+
+	function playShow () 
+	{
+		//播放显示动画
+	}
+
+	function playHide () 
+	{
+		//播放关闭动画
+	}
+}

@@ -51,22 +51,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DollEngine/lib/tjs2/tjsDictionary.cpp"
-            timestampString = "459140095.578497"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "653"
-            endingLineNumber = "653"
-            landmarkName = "tTJSDictionaryObject::~tTJSDictionaryObject()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "DollEngine/lib/tjs2/tjsVariant.h"
             timestampString = "459140212.372478"
             startingColumnNumber = "9223372036854775807"
@@ -74,22 +58,6 @@
             startingLineNumber = "339"
             endingLineNumber = "339"
             landmarkName = "Invalidate(tjs_uint32 flag, const tjs_char *membername, tjs_uint32 *hint, iTJSDispatch2 *objthis)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DollEngine/lib/tjs2/tjsDictionary.cpp"
-            timestampString = "459141201.602322"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "256"
-            endingLineNumber = "256"
-            landmarkName = "tTJSDictionaryNI::Invalidate()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

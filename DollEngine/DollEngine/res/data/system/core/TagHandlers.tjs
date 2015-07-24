@@ -1,8 +1,8 @@
 
 class TagHandlers extends KAGParser
 {
-	var _owner; //函数所调用的对象，通常是Main对象
-
+	var _owner; //函数所调用的对象，通常是App对象
+	var curFile;
 	function TagHandlers (object) 
 	{
 		super.KAGParser();
@@ -12,6 +12,12 @@ class TagHandlers extends KAGParser
 	function onExecute (name, params)
 	{
 		var time = 0;
+		if (name == 'jumpTo'||
+			name == 'returnMacro'||
+			name == 'getMacroParams'||
+			name == 'onScenarioEnded') {
+			dm("%s指令被TagHandlers类占用",name);
+		}
 		if(this[name])
 		{
 			time = (this[name] incontextof this._owner)(params);
@@ -30,6 +36,18 @@ class TagHandlers extends KAGParser
 			}
 		}
         return time;
+	}
+
+	function jumpTo (file, label) 
+	{
+		if (!file) {
+			file = curFile;
+		}
+		if (!label) {
+			label = "_def_";
+		}
+		curFile = file;
+		super.jumpTo(file,label);
 	}
 
 	function returnMacro ()
@@ -52,10 +70,60 @@ class TagHandlers extends KAGParser
 		_owner.waitClick(0);
 	}
 
+	/*******TAG部分*******/
+
+	//系统操作
+	function dm (elm) 
+	{
+		var str;
+		if (elm.exp) {
+			str = Scripts.eval(elm.exp);
+		}
+		dm(str);
+	}
+
+	
+	//创建界面@ui storage=xx layer=xx page=xx visible=xx name=xx data=xx
+	function ui (elm) 
+	{
+		var par = getLayerByElm(elm.layer,elm.page);
+		if (!par) {
+			return;
+		}
+		var uipath = Storages.getFullPath(elm.storage);
+		if (!uipath) {
+			dm("[loadui]ui配置文件%s未找到",uipath);
+			return;
+		}
+		var lay = UIReader.readJsonFile(uipath,par);
+
+		if (typeof elm['visible'] == 'undefined') {
+			lay.visible = true;
+		}
+		else {
+			lay.visible = elm.visible;
+		}
+		if (elm.name && par.names) {
+			par.names[elm.name] = lay;
+			lay.name = elm.name;
+		}
+		if (elm.data) {
+			var data = Scripts.eval(elm.data);
+			lay.initialize(data);
+		}
+		else {
+			lay.initialize();
+		}
+		lay.refresh();
+		if (elm.anim) {
+			lay.playShow();
+		}
+	}
 
 	function image (elm) 
 	{
 		var node = new Sprite(this.current);
 		node.setParams(elm);
 	}
+
 }
