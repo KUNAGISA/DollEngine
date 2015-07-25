@@ -18,8 +18,8 @@ class App extends Window
 
 	function getLayerByElm (elm) 
 	{
-		var page=elm.page,layer=elm.layer;
-		if (page == 'back') {
+		var p=elm.page,layer=elm.layer;
+		if (p == 'back') {
 			if (layer == 'base' ||
 				layer == 'world') {
 				if(!back.world)

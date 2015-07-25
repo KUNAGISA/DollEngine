@@ -77,7 +77,7 @@ class UICreator
         return [w,h];
 	}
 
-	function setNodeProperties (node,properties,owner, isccb) 
+	function setNodeProperties (node,data,owner, isccb) 
 	{
 		if (data.name && !isccb) {
 			if (owner.names) {

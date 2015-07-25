@@ -86,7 +86,7 @@ class TagHandlers extends KAGParser
 	//创建界面@ui storage=xx layer=xx page=xx visible=xx name=xx data=xx
 	function ui (elm) 
 	{
-		var par = getLayerByElm(elm.layer,elm.page);
+		var par = getLayerByElm(elm);
 		if (!par) {
 			return;
 		}

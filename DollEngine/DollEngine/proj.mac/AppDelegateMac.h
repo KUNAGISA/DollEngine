@@ -10,7 +10,8 @@
 
 @interface AppDelegateMac : NSObject <NSApplicationDelegate>
 
--(IBAction)on_console_click:(id)sender;
+-(IBAction)onConsoleClick:(id)sender;
+-(IBAction)onRelaunchClick:(id)sender;
 -(IBAction)openDocument:(id)sender;
 
 @end

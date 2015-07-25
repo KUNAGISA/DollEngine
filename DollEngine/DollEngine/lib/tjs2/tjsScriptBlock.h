@@ -104,7 +104,8 @@ public:
 	void Dump() const;
 
 private:
-	static void ConsoleOutput(const tjs_char *msg, void *data);
+    static void ConsoleOutput(const tjs_char *msg, void *data);
+    static void ConsoleExceptionOutput(const tjs_char *msg, void *data);
 
 	// for Bytecode
 	static const int BYTECODE_TAG_SIZE = 4;
@@ -123,8 +124,10 @@ private:
 	void ExportByteCode( bool outputdebug, class tTJSBinaryStream* output );
 
 public:
-	static void (*GetConsoleOutput())(const tjs_char *msg, void *data)
-		{ return ConsoleOutput; }
+    static void (*GetConsoleOutput())(const tjs_char *msg, void *data)
+    { return ConsoleOutput; }
+    static void (*GetConsoleExceptionOutput())(const tjs_char *msg, void *data)
+    { return ConsoleExceptionOutput; }
 
 	void SetText(tTJSVariant *result, const tjs_char *text, iTJSDispatch2 * context,
 		bool isexpression);

@@ -201,6 +201,12 @@ void tTJSScriptBlock::ConsoleOutput(const tjs_char *msg, void *data)
 	tTJSScriptBlock *blk = (tTJSScriptBlock*)data;
 	blk->Owner->OutputToConsole(msg);
 }
+    
+void tTJSScriptBlock::ConsoleExceptionOutput(const tjs_char *msg, void *data)
+{
+    tTJSScriptBlock *blk = (tTJSScriptBlock*)data;
+    blk->Owner->OutputExceptionToConsole(msg);
+}
 //---------------------------------------------------------------------------
 #ifdef TJS_DEBUG_PROFILE_TIME
 tjs_uint parsetime = 0;

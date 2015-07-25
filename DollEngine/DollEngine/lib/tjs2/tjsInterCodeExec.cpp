@@ -949,11 +949,13 @@ void tTJSInterCodeContext::DisplayExceptionGeneratedCode(tjs_int codepos,
 		TJS_W(", VM ip = ") + ttstr(codepos) + TJS_W(" ===="));
 	tjs_int info_len = info.GetLen();
 
-	tjs->OutputToConsole(info.c_str());
-	tjs->OutputToConsole(TJS_W("-- Disassembled VM code --"));
-	DisassenbleSrcLine(codepos);
+	tjs->OutputExceptionToConsole(info.c_str());
+	tjs->OutputExceptionToConsole(TJS_W("-- Disassembled VM code --"));
+    
+    tjs_int start = FindSrcLineStartCodePos(codepos);
+    Disassemble(tTJSScriptBlock::GetConsoleExceptionOutput(), Block,start, codepos + 1);
 
-	tjs->OutputToConsole(TJS_W("-- Register dump --"));
+	tjs->OutputExceptionToConsole(TJS_W("-- Register dump --"));
 
 	const tTJSVariant *ra_start = ra - (MaxVariableCount + VariableReserveCount);
 	tjs_int ra_count = MaxVariableCount + VariableReserveCount + 1 + MaxFrameCount;
@@ -964,7 +966,7 @@ void tTJSInterCodeContext::DisplayExceptionGeneratedCode(tjs_int codepos,
 			+ TJS_W("=") + TJSVariantToReadableString(ra_start[i]);
 		if(line.GetLen() + reg_info.GetLen() + 2 > info_len)
 		{
-			tjs->OutputToConsole(line.c_str());
+			tjs->OutputExceptionToConsole(line.c_str());
 			line = reg_info;
 		}
 		else
@@ -976,7 +978,7 @@ void tTJSInterCodeContext::DisplayExceptionGeneratedCode(tjs_int codepos,
 
 	if(!line.IsEmpty())
 	{
-		tjs->OutputToConsole(line.c_str());
+		tjs->OutputExceptionToConsole(line.c_str());
 	}
 
 	tjs->OutputToConsoleSeparator(TJS_W("-"), info_len);

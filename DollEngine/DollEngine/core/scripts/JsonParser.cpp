@@ -69,6 +69,9 @@ wchar_t* JsonParser::arrayWithString(wchar_t* str,tTJSVariant& _out)
             Debug::throwMsg("JSON语法错误");
             return null;
         }
+        if (*str == ']') {
+            return str+1;
+        }
         str = valueWithString(str, value);
         if (!str) {
             Debug::throwMsg("JSON语法错误");
@@ -106,6 +109,9 @@ wchar_t* JsonParser::dictWithString(wchar_t* str,tTJSVariant& _out)
         if (!str) {
             Debug::throwMsg("JSON语法错误");
             return null;
+        }
+        if (*str == '}') {
+            return str+1;
         }
         if (*str != '\"') {
             Debug::throwMsg("JSON语法错误");
@@ -153,7 +159,37 @@ wchar_t* JsonParser::valueWithString(wchar_t* str,tTJSVariant& _out)
         Debug::throwMsg("JSON语法错误");
         return null;
     }
+    if (str2[0]=='f'&&
+        str2[1]=='a'&&
+        str2[2]=='l'&&
+        str2[3]=='s'&&
+        str2[4]=='e') {
+        _out = false;
+        return str2+5;
+    }
+    if (str2[0]=='t'&&
+        str2[1]=='r'&&
+        str2[2]=='u'&&
+        str2[3]=='e') {
+        _out = true;
+        return str2+4;
+    }
+    if (str2[0]=='n'&&
+        str2[1]=='u'&&
+        str2[2]=='l'&&
+        str2[3]=='l') {
+        return str2+4;
+    }
+    if (str2[0]=='N'&&
+        str2[1]=='U'&&
+        str2[2]=='L'&&
+        str2[3]=='L') {
+        return str2+4;
+    }
     if (ch <= '9' && ch >= '0') {
+        return nunberWithString(str2,_out);
+    }
+    if (ch == '-') {
         return nunberWithString(str2,_out);
     }
     if (ch == '\"') {
@@ -165,6 +201,8 @@ wchar_t* JsonParser::valueWithString(wchar_t* str,tTJSVariant& _out)
     if (ch == '[') {
         return arrayWithString(str2+1, _out);
     }
+    
+    
     Debug::throwMsg("JSON语法错误");
     return null;
     
@@ -212,9 +250,23 @@ wchar_t* JsonParser::stringWithString(wchar_t* str,tTJSVariant& _out)
 wchar_t* JsonParser::nunberWithString(wchar_t* str,tTJSVariant& _out)
 {
     wstring wstr;
+    int dcount = 0;
+    int ccount = 0;
     while (*str != L'\0') {
         wchar_t& ch = *str;
         if (ch <= '9' && ch >= '0') {
+            wstr.push_back(ch);
+            ++str;
+            continue;
+        }
+        else if (ch == '.' && dcount==0) {
+            dcount++;
+            wstr.push_back(ch);
+            ++str;
+            continue;
+        }
+        else if (ch == '-' && ccount==0) {
+            ccount++;
             wstr.push_back(ch);
             ++str;
             continue;

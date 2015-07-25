@@ -643,6 +643,17 @@
                                     <action selector="arrangeInFront:" target="-1" id="DRN-fu-gQh"/>
                                 </connections>
                             </menuItem>
+                            <menuItem isSeparatorItem="YES" id="51J-MO-q9B"/>
+                            <menuItem title="Relaunch" keyEquivalent="r" id="4Bc-h3-wJy">
+                                <connections>
+                                    <action selector="onRelaunchClick:" target="zmj-yN-95O" id="PkX-1k-LMr"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Console" keyEquivalent="d" id="PcG-AJ-KHT">
+                                <connections>
+                                    <action selector="onConsoleClick:" target="zmj-yN-95O" id="S8d-DW-17S"/>
+                                </connections>
+                            </menuItem>
                         </items>
                     </menu>
                 </menuItem>

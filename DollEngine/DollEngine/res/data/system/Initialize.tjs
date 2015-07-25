@@ -18,6 +18,11 @@ var DEConfig = Scripts.jsonStorage("Config.json");
     };
 }
 
+var tf=%[];
+var f=%[];
+var sf=%[];
+
 var app = new App();
+
 
 app.proccess("first.ks");

@@ -7,8 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B80365A01ADE9E9400DD4B71 /* ConsoleController.m in Sources */ = {isa = PBXBuildFile; fileRef = B803659E1ADE9E9400DD4B71 /* ConsoleController.m */; };
+		B80365A01ADE9E9400DD4B71 /* ConsoleController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B803659E1ADE9E9400DD4B71 /* ConsoleController.mm */; };
 		B80365A11ADE9E9400DD4B71 /* ConsoleController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B803659F1ADE9E9400DD4B71 /* ConsoleController.xib */; };
+		B81C2D351B634F3100DF97E8 /* TjsConsole.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B81C2D331B634F3100DF97E8 /* TjsConsole.cpp */; };
+		B81C2D361B634F3100DF97E8 /* TjsConsole.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B81C2D331B634F3100DF97E8 /* TjsConsole.cpp */; };
+		B81C2D381B634FAE00DF97E8 /* TjsConsole-Mac.mm in Sources */ = {isa = PBXBuildFile; fileRef = B81C2D371B634FAE00DF97E8 /* TjsConsole-Mac.mm */; };
+		B81C2D391B634FAE00DF97E8 /* TjsConsole-Mac.mm in Sources */ = {isa = PBXBuildFile; fileRef = B81C2D371B634FAE00DF97E8 /* TjsConsole-Mac.mm */; };
+		B81C2D3B1B6383FB00DF97E8 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B81C2D3A1B6383FB00DF97E8 /* WebKit.framework */; };
 		B8261DF21ADC05F70017767B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8261DF11ADC05F70017767B /* Images.xcassets */; };
 		B8261DFD1ADC06160017767B /* AppDelegateIOS.m in Sources */ = {isa = PBXBuildFile; fileRef = B8261DF51ADC06160017767B /* AppDelegateIOS.m */; };
 		B8261DFE1ADC06160017767B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8261DF61ADC06160017767B /* Images.xcassets */; };
@@ -319,8 +324,12 @@
 
 /* Begin PBXFileReference section */
 		B803659D1ADE9E9400DD4B71 /* ConsoleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsoleController.h; sourceTree = "<group>"; };
-		B803659E1ADE9E9400DD4B71 /* ConsoleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConsoleController.m; sourceTree = "<group>"; };
+		B803659E1ADE9E9400DD4B71 /* ConsoleController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ConsoleController.mm; sourceTree = "<group>"; };
 		B803659F1ADE9E9400DD4B71 /* ConsoleController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConsoleController.xib; sourceTree = "<group>"; };
+		B81C2D331B634F3100DF97E8 /* TjsConsole.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TjsConsole.cpp; sourceTree = "<group>"; };
+		B81C2D341B634F3100DF97E8 /* TjsConsole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsConsole.h; sourceTree = "<group>"; };
+		B81C2D371B634FAE00DF97E8 /* TjsConsole-Mac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "TjsConsole-Mac.mm"; sourceTree = "<group>"; };
+		B81C2D3A1B6383FB00DF97E8 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		B8261DCB1ADC05430017767B /* DollEngineIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DollEngineIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8261DF11ADC05F70017767B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		B8261DF41ADC06160017767B /* AppDelegateIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegateIOS.h; sourceTree = "<group>"; };
@@ -802,6 +811,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B81C2D3B1B6383FB00DF97E8 /* WebKit.framework in Frameworks */,
 				B8D366081B0663AC00E627A7 /* libz.dylib in Frameworks */,
 				B8A1D8A41AE2CB23005A6595 /* OpenGL.framework in Frameworks */,
 				B89345A01B5546CB0065A3A3 /* libfreetype.a in Frameworks */,
@@ -1266,7 +1276,7 @@
 				B898541C1ADC04D0003784AA /* DEOpenGLView.h */,
 				B898541D1ADC04D0003784AA /* DEOpenGLView.mm */,
 				B803659D1ADE9E9400DD4B71 /* ConsoleController.h */,
-				B803659E1ADE9E9400DD4B71 /* ConsoleController.m */,
+				B803659E1ADE9E9400DD4B71 /* ConsoleController.mm */,
 				B803659F1ADE9E9400DD4B71 /* ConsoleController.xib */,
 				B880AE5F1AFD94F500E0F92C /* DollEnginePrefixMac.pch */,
 				B8EE2D161B5605A4001EB825 /* MainMenu.xib */,
@@ -1465,6 +1475,7 @@
 		B8D365FA1B06350F00E627A7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B81C2D3A1B6383FB00DF97E8 /* WebKit.framework */,
 				B89F267E1B5E87B40081CA6C /* OpenGLES.framework */,
 				B8D366091B0663B700E627A7 /* libz.dylib */,
 				B8D366071B0663AC00E627A7 /* libz.dylib */,
@@ -1598,6 +1609,9 @@
 				B8EE2DF91B5B7B76001EB825 /* ScriptEngine.h */,
 				B8EE2DFE1B5CDDC8001EB825 /* JsonParser.cpp */,
 				B8EE2DFF1B5CDDC8001EB825 /* JsonParser.h */,
+				B81C2D331B634F3100DF97E8 /* TjsConsole.cpp */,
+				B81C2D341B634F3100DF97E8 /* TjsConsole.h */,
+				B81C2D371B634FAE00DF97E8 /* TjsConsole-Mac.mm */,
 			);
 			path = scripts;
 			sourceTree = "<group>";
@@ -1866,6 +1880,7 @@
 				B8EE2DE01B5B7B3B001EB825 /* GLShaderObject.cpp in Sources */,
 				B8AEF0261B35997800490A8D /* unicode.c in Sources */,
 				B8AEF0761B35997800490A8D /* tjsInterCodeGen.cpp in Sources */,
+				B81C2D361B634F3100DF97E8 /* TjsConsole.cpp in Sources */,
 				B8EE2DEA1B5B7B3B001EB825 /* TjsBind.cpp in Sources */,
 				B8AEF0421B35997800490A8D /* regposix.c in Sources */,
 				B8AEF03C1B35997800490A8D /* reggnu.c in Sources */,
@@ -1878,6 +1893,7 @@
 				B8EE2DD41B5B7B3B001EB825 /* Transform.cpp in Sources */,
 				B8AEF0281B35997800490A8D /* utf16_be.c in Sources */,
 				B8AEF07C1B35997800490A8D /* tjsMath.cpp in Sources */,
+				B81C2D391B634FAE00DF97E8 /* TjsConsole-Mac.mm in Sources */,
 				B8EE2DB61B5B7B3B001EB825 /* CompManager.cpp in Sources */,
 				B8EE2DD81B5B7B3B001EB825 /* Debug.cpp in Sources */,
 				B8AEF0641B35997800490A8D /* tjsDateParser.cpp in Sources */,
@@ -1925,6 +1941,7 @@
 				B89345BA1B5546CC0065A3A3 /* vec2.c in Sources */,
 				B8AEF0211B35997800490A8D /* mktable.c in Sources */,
 				B8AEEFF51B35997800490A8D /* cp1251.c in Sources */,
+				B81C2D381B634FAE00DF97E8 /* TjsConsole-Mac.mm in Sources */,
 				B89345B81B5546CC0065A3A3 /* utility.c in Sources */,
 				B8AEF0291B35997800490A8D /* utf16_le.c in Sources */,
 				B8EE2DB11B5B7B3B001EB825 /* GameObject.cpp in Sources */,
@@ -1970,6 +1987,7 @@
 				B8AEF01F1B35997800490A8D /* koi8_r.c in Sources */,
 				B8EE2DD31B5B7B3B001EB825 /* Transform.cpp in Sources */,
 				B8AEF0491B35997800490A8D /* st.c in Sources */,
+				B81C2D351B634F3100DF97E8 /* TjsConsole.cpp in Sources */,
 				B8AEF0031B35997800490A8D /* iso8859_11.c in Sources */,
 				B8AEF01B1B35997800490A8D /* iso8859_9.c in Sources */,
 				B8AEF06F1B35997800490A8D /* tjsException.cpp in Sources */,
@@ -2037,7 +2055,7 @@
 				B8AEF08F1B35997800490A8D /* tjsRegExp.cpp in Sources */,
 				B8AEF0351B35997800490A8D /* regerror.c in Sources */,
 				B8AEF0551B35997800490A8D /* tjsBinarySerializer.cpp in Sources */,
-				B80365A01ADE9E9400DD4B71 /* ConsoleController.m in Sources */,
+				B80365A01ADE9E9400DD4B71 /* ConsoleController.mm in Sources */,
 				B8AEF03F1B35997800490A8D /* regposerr.c in Sources */,
 				B8EE2DDB1B5B7B3B001EB825 /* GLCanvas.cpp in Sources */,
 				B89345BC1B5546CC0065A3A3 /* vec3.c in Sources */,

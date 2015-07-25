@@ -13,9 +13,7 @@ using namespace DE;
 
 void TVPAddLog(const ttstr& var)
 {
-    string log;
-    UnicodeToUtf8(var.c_str(), log);
-    DM("%s\n",log.c_str());
+    TjsEngine::Global()->OutputToConsole(var.c_str());
 }
 
 iTJSDispatch2* TVPGetScriptDispatch()

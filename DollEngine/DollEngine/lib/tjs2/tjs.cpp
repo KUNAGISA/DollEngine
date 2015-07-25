@@ -306,7 +306,7 @@ void tTJS::OutputExceptionToConsole(const tjs_char *msg) const
 {
 	if(ConsoleOutput)
 	{
-		ConsoleOutput->Print(msg);
+		ConsoleOutput->ExceptionPrint(msg);
     }
 }
 //---------------------------------------------------------------------------

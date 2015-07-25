@@ -10,6 +10,7 @@
 #include "Application.h"
 #include "TjsEngine.h"
 #include "Window.h"
+#include "TjsConsole.h"
 
 using namespace DE;
 
@@ -22,6 +23,7 @@ using namespace DE;
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     
     new TjsEngine();
+    DE::TjsConsole::GetInstance()->setVisible(false);
     DEApplication->startup();
     
     
@@ -78,6 +80,23 @@ using namespace DE;
 -(IBAction)on_console_click:(id)sender
 {   
 //    DE::Console::GetInstance()->setVisible(!DE::Console::GetInstance()->getVisible());
+}
+
+-(IBAction)onConsoleClick:(id)sender
+{
+    bool v = DE::TjsConsole::GetInstance()->getVisible();
+    DE::TjsConsole::GetInstance()->setVisible(!v);
+}
+
+-(IBAction)onRelaunchClick:(id)sender
+{
+    NSURL *url = [NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
+    NSMutableDictionary *configuration = [NSMutableDictionary dictionaryWithObject:@{} forKey:NSWorkspaceLaunchConfigurationArguments];
+    NSError *error;
+    [[NSWorkspace sharedWorkspace] launchApplicationAtURL:url
+                                                  options:NSWorkspaceLaunchNewInstance
+                                            configuration:configuration error:&error];
+    [[NSApplication sharedApplication] terminate:self];
 }
 
 -(IBAction)openDocument:(id)sender

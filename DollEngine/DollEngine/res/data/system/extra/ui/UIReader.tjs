@@ -2,7 +2,7 @@
 class _UIReader
 {
 	var uiCreator;
-	function _CCBReader () 
+	function _UIReader () 
 	{
 		this.uiCreator = new UICreator();
 	}
@@ -32,7 +32,9 @@ class _UIReader
 			var properties = %[];
 			for (var i = data.properties.count - 1; i >= 0; i--) {
 				var tmpData = data.properties[i];
-				var name = tmpData.name.replace("|","_");
+				// var reg = new RegExp("[|]","g");
+				// var name = reg.replace(tmpData.name,"_");
+				var name = tmpData.name.replace(/|/,"_");
 				properties[name] = tmpData.value;
 			};
 			data.properties = properties;
@@ -42,7 +44,7 @@ class _UIReader
 			var customProperties = %[];
 			for (var i = data.customProperties.count - 1; i >= 0; i--) {
 				var tmpData = data.customProperties[i];
-				var name = tmpData.name.replace("|","_");
+				var name = tmpData.name.replace(/|/,"_");
 				customProperties[name] = tmpData.value;
 			};
 			data.customProperties = customProperties;
@@ -53,8 +55,11 @@ class _UIReader
 		else {
 			if (data.customClass != "") {
 				if (isRoot) {
-					if (global[data.customClass]) {
+					if (typeof global[data.customClass] != 'undefined') {
 						orginNode = new global[data.customClass]();
+					}
+					else {
+						orginNode = new UILayer();
 					}
 				}
 				else {

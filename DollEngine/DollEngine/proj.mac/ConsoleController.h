@@ -7,9 +7,20 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <WebKit/WebKit.h>
 
-@interface ConsoleController : NSWindowController
+@interface ConsoleController : NSWindowController<NSTextFieldDelegate,NSTableViewDataSource,NSTableViewDelegate>
+{
+//    IBOutlet WebView* output;
+    IBOutlet NSTextView* output;
+//    IBOutlet NSTextView* output;
+    IBOutlet NSTextField* input;
+}
 
 +(ConsoleController*)GetInstance;
+
+-(void)pushString:(NSString*)text;
+
+-(void)setVisible:(BOOL)v;
 
 @end
