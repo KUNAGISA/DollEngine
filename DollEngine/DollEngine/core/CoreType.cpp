@@ -80,6 +80,11 @@ Color::Color(GLubyte r,GLubyte g,GLubyte b,GLubyte a)
     
 }
 
+Color::Color(int r,int g,int b,int a)
+{
+    set(r, g, b, a);
+}
+
 Color::Color(uint32_t color)
 {
     set(color);
@@ -100,12 +105,37 @@ void Color::set(GLubyte r,GLubyte g,GLubyte b,GLubyte a)
     this->a = a;
 }
 
+void Color::set(int r,int g,int b,int a)
+{
+    if(r>255) this->r = 0xff;
+    else this->r = r;
+
+    if(g>255) this->g = 0xff;
+    else this->g = g;
+
+    if(b>255) this->b = 0xff;
+    else this->b = b;
+
+    if(a>255) this->a = 0xff;
+    else this->a = a;
+
+}
+
 void Color::set(uint32_t color)
 {
     r = color>>24;
     g = color>>16;
     b = color>>8;
     a = color>>0;
+}
+
+void Color::toInt32(uint32_t& color)
+{
+    color = 0;
+    color |= r<<24;
+    color |= g<<16;
+    color |= b<<8;
+    color |= a<<0;
 }
 
 void Color::toColorF(GLfloat* colorf)
@@ -118,12 +148,12 @@ void Color::toColorF(GLfloat* colorf)
 
 
 GradientColor::GradientColor()
-:end(0xffffffff),horizontal(false)
+:end(0xffffffff),vector(0)
 {
 }
 
 GradientColor::GradientColor(const Color& start, const Color& e)
-:Color(start),end(e),horizontal(false)
+:Color(start),end(e),vector(0)
 {
 }
 

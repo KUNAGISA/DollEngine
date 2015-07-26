@@ -35,9 +35,9 @@
 		"uicfg"
 	],
 	"device" :{
-		"width" : 640,
-		"height" : 1136,
-		"scale" : 0.75
+		"width" : 320,
+		"height" : 568,
+		"scale" : 1
 	},
     "test" : 92233720368547758
 }

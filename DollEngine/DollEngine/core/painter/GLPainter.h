@@ -24,6 +24,7 @@ struct PaintConfig
     SpriteFrame* frame;
     Transform* trans;
     Color* color;
+    int gradVector;//渐变方向
     Color* end;
     GLProgram* program;
     float width;

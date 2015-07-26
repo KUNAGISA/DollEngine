@@ -92,8 +92,29 @@ void NormalProgram::actived(PaintConfig& config)
     
     GLfloat colors[4][4];
     memset(colors, 1.0f, 16);
-    for (int j = 0; j < 4; ++j) {
-        config.color->toColorF(colors[j]);
+    if (config.end) {
+        int idx[4];
+        if(config.gradVector == 1){
+            idx[0]=1;idx[1]=2;idx[2]=3;idx[3]=0;
+        }
+        else if(config.gradVector == 2){
+            idx[0]=0;idx[1]=1;idx[2]=2;idx[3]=3;
+        }
+        else if(config.gradVector == 3){
+            idx[0]=2;idx[1]=3;idx[2]=0;idx[3]=1;
+        }
+        else {
+            idx[0]=3;idx[1]=0;idx[2]=1;idx[3]=2;
+        }
+        config.color->toColorF(colors[idx[0]]);
+        config.color->toColorF(colors[idx[1]]);
+        config.end->toColorF(colors[idx[2]]);
+        config.end->toColorF(colors[idx[3]]);
+    }
+    else {
+        for (int j = 0; j < 4; ++j) {
+            config.color->toColorF(colors[j]);
+        }
     }
     enableVertexAttribs(VERTEX_ATTRIB_FLAG_POS_COLOR_TEX);
     

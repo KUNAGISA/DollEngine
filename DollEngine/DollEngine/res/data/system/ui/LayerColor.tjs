@@ -21,7 +21,6 @@ class LayerColor extends Node
 	}
 
 	var _round=void;
-	//注释
 	property round{
 	    setter(v) {
 	    	//setter
@@ -38,11 +37,55 @@ class LayerColor extends Node
 	}
 
 	var _painter=void;
-	//注释
 	property painter{
 		getter {
 	    	//getter
 			return this._painter;
+		}
+	}
+
+	var _startColor=0;
+	property startColor{
+	    setter(v) {
+	    	//setter
+	    	this._startColor = v;
+	    	painter.setGradientColor(this._startColor,this._endColor,this._gradVector);
+		}
+		getter {
+	    	//getter
+			return this._startColor;
+		}
+	}
+
+	var _endColor=0;
+	property endColor{
+	    setter(v) {
+	    	//setter
+	    	this._endColor = v;
+	    	painter.setGradientColor(this._startColor,this._endColor,this._gradVector);
+		}
+		getter {
+	    	//getter
+			return this._endColor;
+		}
+	}
+
+	var _gradVector=0;
+	/****
+	0 Start在上，end在下
+	1 Start在下，end在上
+	2 Start在左，end在右
+	3 Start在右，end在左
+	****/
+	property gradVector{
+	    setter(v) {
+	    	//setter
+	    	this._gradVector = v;
+	    	painter.setGradientColor(this._startColor,this._endColor,this._gradVector);
+		}
+		getter {
+	    	//getter
+			return this._gradVector;
 		}
 	}
 }

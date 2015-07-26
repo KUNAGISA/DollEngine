@@ -75,10 +75,13 @@ public:
     Color(const Color& v);
     Color(GLubyte r,GLubyte g,GLubyte b);
     Color(GLubyte r,GLubyte g,GLubyte b,GLubyte a);
+    Color(int r,int g,int b,int a);
     Color(uint32_t color);
     void set(GLubyte r,GLubyte g,GLubyte b);
     void set(GLubyte r,GLubyte g,GLubyte b,GLubyte a);
+    void set(int r,int g,int b,int a);
     void set(uint32_t color);
+    void toInt32(uint32_t& color);
     void toColorF(GLfloat* colorf);
     GLubyte r;
     GLubyte g;
@@ -92,7 +95,7 @@ public:
     GradientColor();
     GradientColor(const Color& start, const Color& e);
     Color end;
-    bool horizontal;
+    int vector;
 };
 
 class FontData

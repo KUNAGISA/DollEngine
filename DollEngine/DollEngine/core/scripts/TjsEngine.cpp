@@ -31,6 +31,40 @@ if(res) res->Release();
 return TJS_S_OK ;
 TJS_NATIVE_FUNCTION_END
 
+
+TJS_NATIVE_FUNCTION_BEGIN(TJSColorBy4F)
+if ( numparams <4 ) return TJS_E_BADPARAMCOUNT ;
+Color c;
+tTJSVariant* v = param[0];
+tjs_int32 k = v->AsReal()*255;
+c.r = k;
+v = param[1];
+k = v->AsReal()*255;
+c.g = k;
+v = param[2];
+k = v->AsReal()*255;
+c.b = k;
+v = param[3];
+k = v->AsReal()*255;
+c.a = k;
+
+uint32_t r;
+c.toInt32(r);
+(*result) = (long long)r;
+return TJS_S_OK ;
+TJS_NATIVE_FUNCTION_END
+
+TJS_NATIVE_FUNCTION_BEGIN(TJSColorBy4B)
+if ( numparams <4 ) return TJS_E_BADPARAMCOUNT ;
+Color c((int)param[0]->AsInteger(),(int)param[1]->AsInteger(),(int)param[2]->AsInteger(),(int)param[3]->AsInteger());
+uint32_t r;
+c.toInt32(r);
+(*result) = (long long)r;
+return TJS_S_OK ;
+TJS_NATIVE_FUNCTION_END
+
+
+
 TJS_NATIVE_FUNCTION_BEGIN(TJSPrintTime)
 DM("%lld\n",DE::GetMilliSeconds());
 return TJS_S_OK ;
@@ -160,6 +194,8 @@ TjsEngine::TjsEngine()
         TJS_REGIST_FUNCTION(TJSThrow, "throwMsg");
         TJS_REGIST_FUNCTION(TJSPrintf,"print");
         TJS_REGIST_FUNCTION(TJSPrintTime, "printTime");
+        TJS_REGIST_FUNCTION(TJSColorBy4F,"colorBy4F");
+        TJS_REGIST_FUNCTION(TJSColorBy4B,"colorBy4B");
         //        REGIST_TJS_FUNCTION(TJSConsoleShow,"__console_show")
         
         // AutoRegisterで登録されたクラス等を登録する

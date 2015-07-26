@@ -31,18 +31,20 @@ public:
     void update();
     void updateWithFrame();
     void setColor(uint32_t color);
-    void setGradientColor(uint32_t start,uint32_t end,bool isHorizontal);
+    void setGradientColor(uint32_t start,uint32_t end,int vector);
     void setOpacity(GLubyte o);
     PROPERTY(bool, Scale9, m_scale9){m_scale9=v;NEED_REDRAW;}
-    PROPERTY(bool, ColorRect, m_colorRect){m_colorRect=v;NEED_REDRAW;}
-    PROPERTY(bool, Gradient, m_gradient){m_gradient=v;NEED_REDRAW;}
+    PROPERTY_RO(bool, ColorRect, m_colorRect);
+    PROPERTY_RO(bool, Gradient, m_gradient);
     PROPERTY(GLenum, BlendSrc, m_blendSrc){m_blendSrc=v;NEED_REDRAW;}
     PROPERTY(GLenum, BlendDst, m_blendDst){m_blendDst=v;NEED_REDRAW;}
     PROPERTY(SpriteFrame*, DisplayFrame, m_displayFrame);
     PROPERTY(GLProgram*, Program, m_program){m_program=v;NEED_REDRAW;}
-    PROPERTY(GradientColor*, Color, m_color){m_color=v;NEED_REDRAW;}
     PROPERTY(float, PaintWidth, m_paintWidth){m_paintWidth=v;NEED_REDRAW;}
     PROPERTY(float, PaintHeight, m_paintHeight){m_paintHeight=v;NEED_REDRAW;}
+    
+protected:
+    GradientColor* m_color;
 };
 
 DE_END

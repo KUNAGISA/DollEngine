@@ -49,6 +49,7 @@ class UICreator
         {
             x = par_width-x;
         }
+        y=par_height-node.height-y;
         return [x,y];
 	}
 
@@ -93,14 +94,14 @@ class UICreator
 			node.visible = data.visible;
 		}
 
+        if (data.contentSize) {
+            var size = getSizeByType(node,data.contentSize);
+            node.setSize(size*);
+        }
+
 		if (data.position) {
 			var pos = getPosByType(node,data.position);
 			node.setPos(pos*);
-		}
-		if (data.contentSize) {
-			var size = getSizeByType(node,data.contentSize);
-            dm(size*);
-			node.setSize(size*);
 		}
 
 		if (data.anchorPoint) {
@@ -131,6 +132,24 @@ class UICreator
 	function create_CCNodeGradient (owner,parent,properties,customProperties) 
     {
         var node = new LayerColor();
+        node.startColor = colorBy4F(properties.startColor*);
+        node.endColor = colorBy4F(properties.endColor*);
+        if (properties.vector[0]==0) {
+            if(properties.vector[1]>=0){
+                node.gradVector = 0;
+            }
+            else {
+                node.gradVector = 1;
+            }
+        }
+        else {
+            if(properties.vector[0]<=0){
+                node.gradVector = 2;
+            }
+            else {
+                node.gradVector = 3;
+            }
+        }
         return node;
     }
 

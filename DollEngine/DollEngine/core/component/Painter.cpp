@@ -99,11 +99,11 @@ void Painter::setColor(uint32_t color)
     NEED_REDRAW;
 }
 
-void Painter::setGradientColor(uint32_t start,uint32_t end,bool isHorizontal)
+void Painter::setGradientColor(uint32_t start,uint32_t end,int vector)
 {
     m_gradient = true;
     m_color->set(start);
-    m_color->horizontal = isHorizontal;
+    m_color->vector = vector;
     m_color->end.set(end);
     NEED_REDRAW;
 }
@@ -111,6 +111,9 @@ void Painter::setGradientColor(uint32_t start,uint32_t end,bool isHorizontal)
 void Painter::setOpacity(GLubyte o)
 {
     m_color->a = o;
+    if (m_gradient) {
+        m_color->end.a = o;
+    }
     NEED_REDRAW;
 }
 
@@ -138,6 +141,7 @@ void Painter::updateWithFrame()
     config.color = m_color;
     if (m_gradient) {
         config.end = &m_color->end;
+        config.gradVector = m_color->vector;
     }
     else {
         config.end = null;
