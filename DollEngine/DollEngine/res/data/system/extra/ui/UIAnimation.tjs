@@ -1,5 +1,57 @@
 
 class UIAnimation
 {
-	
+	var animaByName = %[];
+	var animaById = %[];
+	function UIAnimation () 
+	{
+
+	}
+
+	function getTime (name) 
+	{
+        if(typeof this.animaByName[name] != 'undefined') {
+            return this.animaByName[name].length;
+        }
+        return 0;
+	}
+
+	function parse (config) 
+	{
+		var data = %[
+            autoPlay: config.autoPlay,
+            next: config.chainedSequenceId,
+            length: config.length,
+            id: config.sequenceId,
+            name: config.name,
+            animate:[]
+		];
+        this.animaByName[config.name] = data;
+        this.animaById[config.sequenceId] = data;
+	}
+
+	function parseProperties (node, id, dict) 
+	{
+        if(typeof this.animaById[+id] == 'undefined')
+        {
+            print("解析某个Node时%s动画未找到",id);
+            return;
+        }
+        var data = this.animaById[+id];
+        var creatorHandlers = [];
+        var object = [this,creatorHandlers];
+        foreach(dict,function(key,value){
+        	var animation = this[0];
+        	if (typeof animation['action_'+key] == 'undefined') {
+        		print('动作%s的构建者未找到',key);
+        		return;
+        	}
+        	var creatorHandlers = this[1];
+        	var handler = animation['action_'+key](value);
+        	creatorHandlers.add(handler);
+        } incontextof object);
+        if (creatorHandlers.count > 0) {
+        	data.animate.add([node,creatorHandlers]);
+        }
+	}
 }

@@ -51,12 +51,13 @@ IOData* Storages::GetFileString(const string& fullpath)
     }
     FILE *fp = fopen(fullpath.c_str(), "rb");
     if (!fp) {
+        perror("fopen");
         Debug::throwMsg("文件打开失败:"+fullpath);
         return null;
     }
     
     IOData* ret = new IOData();
-    
+
     fseek(fp,0,SEEK_END);
     long size = ftell(fp);
     fseek(fp,0,SEEK_SET);

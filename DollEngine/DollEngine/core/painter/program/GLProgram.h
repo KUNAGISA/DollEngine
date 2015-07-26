@@ -13,6 +13,7 @@
 #include "GLShaderObject.h"
 #include "Transform.h"
 #include "SpriteFrame.h"
+#include "GLPainter.h"
 
 DE_BEGIN
 
@@ -40,7 +41,7 @@ public:
     PROPERTY_RO(GLuint, ProgramId, m_programId)
     
     virtual bool init(){return false;}
-    virtual void actived(SpriteFrame*,Transform*,Color*,bool isFlipY=false){}
+    virtual void actived(PaintConfig& config){}
 private:
     vector<GLShaderObject*> m_shaders;
     map<const char*, GLint> m_allUniformIndex;

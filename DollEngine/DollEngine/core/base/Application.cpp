@@ -25,41 +25,43 @@ Application::~Application()
     SAFF_DELETE(m_world);
 }
 
-void Application::initialize()
-{
-    initEnginePaths();
-}
-
 void Application::mainLoop()
 {
     if (m_world) {
         if (m_needRedraw) {
             m_world->visit();
-            m_needRedraw = false;
+//            m_needRedraw = false;
         }
         if (m_needRetouch) {
             CompManager::GetInstance()->clearTouches();
             m_world->updateTouchListener();
-            m_needRetouch=false;
+//            m_needRetouch=false;
         }
     }
 }
 
 void Application::startup()
 {
-    initialize();
+    initEnginePaths();
     string fullpath = Storages::GetInstance()->getFullPath("Startup.tjs");
-    IOData* data = Storages::GetFileString(fullpath);
-    wstring code;
-    data->convertToUnicode(code);
-    if (!ScriptEngine::GetInstance()) {
-        DM("请初始化脚本引擎！");
+    try{
+        IOData* data = Storages::GetFileString(fullpath);
+        wstring code;
+        data->convertToUnicode(code);
+        if (!ScriptEngine::GetInstance()) {
+            DM("请初始化脚本引擎！");
+        }
+        else {
+            ScriptEngine::GetInstance()->pushFile("【GLOBAL】");
+            ScriptEngine::GetInstance()->pushFile(fullpath);
+            ScriptEngine::GetInstance()->exec(code, null);
+            ScriptEngine::GetInstance()->popFile();
+        }
+        m_needRedraw=true;
+        m_needRetouch=true;
     }
-    else {
-        ScriptEngine::GetInstance()->pushFile("【GLOBAL】");
-        ScriptEngine::GetInstance()->pushFile(fullpath);
-        ScriptEngine::GetInstance()->exec(code, null);
-        ScriptEngine::GetInstance()->popFile();
+    catch(...) {
+        
     }
 }
 

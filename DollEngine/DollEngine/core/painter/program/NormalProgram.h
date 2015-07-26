@@ -18,7 +18,7 @@ public:
     NormalProgram();
     ~NormalProgram();
     bool init();
-    void actived(SpriteFrame*,Transform*,Color*,bool isFlipY=false);
+    void actived(PaintConfig& config);
     
 };
 DE_END

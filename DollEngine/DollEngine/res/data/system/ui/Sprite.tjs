@@ -1,0 +1,13 @@
+
+class Sprite extends Node
+{
+	function Sprite () 
+	{
+		super.Node();
+	}
+
+	function finalize () 
+	{
+		super.finalize();
+	}
+}

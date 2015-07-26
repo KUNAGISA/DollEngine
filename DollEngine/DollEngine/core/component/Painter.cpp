@@ -17,22 +17,30 @@ DE_BEGIN
 
 Painter::Painter()
 :m_displayFrame(null)
+,m_scale9(false)
+,m_colorRect(false)
+,m_paintHeight(0)
+,m_paintWidth(0)
+,m_blendSrc(GL_ONE)
+,m_blendDst(GL_ONE_MINUS_SRC_ALPHA)
 {
     setCompName("Painter");
     m_type = COMP_PAINT;
-    m_transform = new Transform();
+    m_color = new GradientColor();
     m_program = GLPainter::GetInstance()->getProgram("normal");
 }
 
 Painter::~Painter()
 {
     SAFF_RELEASE(m_displayFrame);
-    delete m_transform;
+    SAFF_DELETE(m_color);
 }
 
 bool Painter::loadImages(const string& path,const string& plist)
 {
     SpriteFrame* frame = GLCache::GetInstance()->addFrame(path);
+    m_colorRect = false;
+    setPaintSizeToImageSize();
     if (frame) {
         setDisplayFrame(frame);
         NEED_REDRAW;
@@ -43,13 +51,36 @@ bool Painter::loadImages(const string& path,const string& plist)
     }
 }
 
-Size Painter::getPaintSize()
+bool Painter::loadSize(int w,int h,int r)
 {
-    if (m_displayFrame) {
-        return Size(m_displayFrame->getWidth(),m_displayFrame->getHeight());
+    SpriteFrame* frame = GLCache::GetInstance()->addFrame(r);
+    m_colorRect=true;
+    m_paintWidth = w;
+    m_paintHeight = h;
+    if (frame) {
+        setDisplayFrame(frame);
+        NEED_REDRAW;
+        return true;
     }
     else {
-        return Size::Zero();
+        return false;
+    }
+}
+
+void Painter::setPaintSizeToImageSize()
+{
+    if (m_colorRect) {
+        return;
+    }
+    else {
+        if (m_displayFrame) {
+            m_paintWidth = m_displayFrame->getWidth();
+            m_paintHeight = m_displayFrame->getHeight();
+        }
+        else {
+            m_paintWidth = 0;
+            m_paintHeight = 0;
+        }
     }
 }
 
@@ -60,53 +91,64 @@ void Painter::setDisplayFrame(DE::SpriteFrame *v)
     SAFF_RETAIN(m_displayFrame);
 }
 
-static GLenum s_blendingSource = -1;
-static GLenum s_blendingDest = -1;
-void Painter::blendFunc(GLenum src,GLenum dst)
-{
-    if (src != s_blendingSource || dst != s_blendingDest)
-    {
-        s_blendingSource = src;
-        s_blendingDest = dst;
-        if (src == GL_ONE && dst == GL_ZERO)
-        {
-            glDisable(GL_BLEND);
-        }
-        else
-        {
-            glEnable(GL_BLEND);
-            glBlendFunc(src, dst);
-        }
-    }
-}
 
 void Painter::setColor(uint32_t color)
 {
-    m_color.set(color);
+    m_gradient = false;
+    m_color->set(color);
+    NEED_REDRAW;
+}
+
+void Painter::setGradientColor(uint32_t start,uint32_t end,bool isHorizontal)
+{
+    m_gradient = true;
+    m_color->set(start);
+    m_color->horizontal = isHorizontal;
+    m_color->end.set(end);
+    NEED_REDRAW;
 }
 
 void Painter::setOpacity(GLubyte o)
 {
-    m_color.a = o;
+    m_color->a = o;
+    NEED_REDRAW;
 }
 
 void Painter::update()
 {
+    if (!getObject()) {
+        return;
+    }
     if (!m_displayFrame) {
         return;
     }
-    if (getObject()) {
-        m_transform->copy(getObject()->getTransInWorld());
-        m_transform->setWidth(m_displayFrame->getWidth());
-        m_transform->setHeight(m_displayFrame->getHeight());
+    if (m_scale9) {
+        
     }
     else {
-        m_transform->copy(GLCanvas::GetInstance()->getGlobalTrans());
+        updateWithFrame();
     }
-    
-    blendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
-    
-    GLPainter::GetInstance()->paint(m_displayFrame, m_transform, &m_color, m_program);
 }
+
+void Painter::updateWithFrame()
+{
+    PaintConfig config;
+    config.frame = m_displayFrame;
+    config.trans = getObject()->getTransInWorld();
+    config.color = m_color;
+    if (m_gradient) {
+        config.end = &m_color->end;
+    }
+    else {
+        config.end = null;
+    }
+    config.program = m_program;
+    config.width = m_paintWidth;
+    config.height = m_paintHeight;
+    config.blendSrc = m_blendSrc;
+    config.blendDst = m_blendDst;
+    GLPainter::GetInstance()->paint(config);
+}
+
 
 DE_END

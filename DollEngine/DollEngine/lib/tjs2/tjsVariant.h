@@ -903,6 +903,9 @@ public:
 		case tvtObject:		return Object.Object != NULL;
 		//case tvtString:		return (bool)AsInteger();
             case tvtString:{
+                if (!String) {
+                    return false;
+                }
                 tjs_char* str = String->LongString?String->LongString:String->ShortString;
                 if (!str ||
                     String->GetLength()==0 ||

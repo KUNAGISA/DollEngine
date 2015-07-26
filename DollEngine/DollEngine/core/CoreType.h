@@ -72,6 +72,7 @@ class Color
 {
 public:
     Color();
+    Color(const Color& v);
     Color(GLubyte r,GLubyte g,GLubyte b);
     Color(GLubyte r,GLubyte g,GLubyte b,GLubyte a);
     Color(uint32_t color);
@@ -85,12 +86,13 @@ public:
     GLubyte a;
 };
 
-class GradientColor
+class GradientColor:public Color
 {
 public:
-    
-    Color begin;
+    GradientColor();
+    GradientColor(const Color& start, const Color& e);
     Color end;
+    bool horizontal;
 };
 
 class FontData

@@ -16,6 +16,9 @@ class _UIReader
 	function readJsonData (data,parent) 
 	{
 		var node = this.createNode(void,data.nodeGraph, true, parent, 0);
+		if (!node) {
+			return void;
+		}
 		var owner = node;
 		var manager = this.readAnimation(data);
 		owner.animation = manager;
@@ -32,9 +35,10 @@ class _UIReader
 			var properties = %[];
 			for (var i = data.properties.count - 1; i >= 0; i--) {
 				var tmpData = data.properties[i];
-				// var reg = new RegExp("[|]","g");
-				// var name = reg.replace(tmpData.name,"_");
-				var name = tmpData.name.replace(/|/,"_");
+				var name = tmpData.name;
+				if (name.indexOf('|')!=-1) {
+					name = name.split('|').join('_');
+				}
 				properties[name] = tmpData.value;
 			};
 			data.properties = properties;
@@ -44,7 +48,10 @@ class _UIReader
 			var customProperties = %[];
 			for (var i = data.customProperties.count - 1; i >= 0; i--) {
 				var tmpData = data.customProperties[i];
-				var name = tmpData.name.replace(/|/,"_");
+				var name = tmpData.name;
+				if (name.indexOf('|')!=-1) {
+					name = name.split('|').join('_');
+				}
 				customProperties[name] = tmpData.value;
 			};
 			data.customProperties = customProperties;
@@ -63,24 +70,27 @@ class _UIReader
 					}
 				}
 				else {
-					if (uiCreator["create_"+data.customClass]) {
+					if (typeof uiCreator["create_"+data.customClass] != 'undefined') {
 						orginNode = uiCreator["create_"+data.customClass](owner,parent,data.properties,data.customProperties);
 					}
 					else {
-						em("扩展控件类型%s未定义",data.customClass);
+						print("扩展控件类型%s未定义",data.customClass);
 						return void;
 					}
 				}
 			}
 			else {
-				if (uiCreator["create_"+data.baseClass]) {
+				if (typeof uiCreator["create_"+data.baseClass] != 'undefined') {
 					orginNode = uiCreator["create_"+data.baseClass](owner,parent,data.properties,data.customProperties);
 				}
 				else {
-					em("基础控件类型%s未定义",data.baseClass);
+					print("基础控件类型%s未定义",data.baseClass);
 					return void;
 				}
 			}
+		}
+		if (parent) {
+			parent.addChild(orginNode);
 		}
 		uiCreator.setNodeProperties(orginNode,data.properties,owner,false);
 		return orginNode;
@@ -91,7 +101,9 @@ class _UIReader
 		for (var i = 0; i < children.count; i++) {
 			var data = children[i];
 			var node = this.createNode(owner, data, false, parent, i);
-			this.readAnimationConfig(data.animatedProperties,node,owner.animation);
+			if (node) {
+				this.readAnimationConfig(data.animatedProperties,node,owner.animation);
+			}
 		};
 	}
 

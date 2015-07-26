@@ -166,7 +166,7 @@ private:
 
 public:
 	void setSticky() { _sticky = true; }
-
+    NativeClassT* getInstance(){return _instance;}
 	//--------------------------------------
 	// staticヘルパ関数
 

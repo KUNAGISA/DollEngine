@@ -12,7 +12,6 @@
 
 -(IBAction)onConsoleClick:(id)sender;
 -(IBAction)onRelaunchClick:(id)sender;
--(IBAction)openDocument:(id)sender;
 
 @end
 

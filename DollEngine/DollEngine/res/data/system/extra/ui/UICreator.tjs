@@ -84,7 +84,7 @@ class UICreator
 				owner.names[data.name] = node;
 			}
 		}
-		node._name = data.name;
+		node.name = data.name;
 
 		if (typeof data.visible == 'undefined') {
 			node.visible = true;
@@ -99,11 +99,12 @@ class UICreator
 		}
 		if (data.contentSize) {
 			var size = getSizeByType(node,data.contentSize);
+            dm(size*);
 			node.setSize(size*);
 		}
 
 		if (data.anchorPoint) {
-			node.setAnchorPoint(data.anchorPoint*);
+			node.setAnchor(data.anchorPoint*);
 		}
 
         if(data.ignoreAnchorPointForPosition) {
@@ -127,6 +128,10 @@ class UICreator
         }
 	}
 
-	
+	function create_CCNodeGradient (owner,parent,properties,customProperties) 
+    {
+        var node = new LayerColor();
+        return node;
+    }
 
 }

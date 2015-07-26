@@ -21,6 +21,7 @@ void TjsConsole::ExceptionPrint(const tjs_char *msg)
 {
     string dt;
     UnicodeToUtf8(msg, dt);
+    printf("【ERROR】%s\n",dt.c_str());
     [[ConsoleController GetInstance]pushString:[NSString stringWithFormat:@"【ERROR】%s",dt.c_str()]];
 }
 
@@ -28,6 +29,7 @@ void TjsConsole::Print(const tjs_char *msg)
 {
     string dt;
     UnicodeToUtf8(msg, dt);
+    printf("%s\n",dt.c_str());
     [[ConsoleController GetInstance]pushString:[NSString stringWithUTF8String:dt.c_str()]];
 }
 

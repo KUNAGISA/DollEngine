@@ -49,3 +49,50 @@ function clone (db)
         return db;
     }
 }
+
+function dump (db,tab=0,key=void) 
+{
+    if (key) {
+        key += " : ";
+    }
+    if (typeof db == "Object") {
+        if (db instanceof 'Array') {
+            print(" ".repeat(tab*4)+key+"[");
+            for (var i = 0; i < db.count; i++) {
+                dump(db[i],tab+1);
+            };
+            print(" ".repeat(tab*4)+"],");
+        }
+        else if(db instanceof 'Dictionary') {
+            print(" ".repeat(tab*4)+key+"%[");
+            foreach(db,function(key,value){
+                dump(value,this[0]+1,key);
+            } incontextof [tab]);
+            print(" ".repeat(tab*4)+"],");
+        }
+        else if(db instanceof 'Date') {
+            var tstr = "%d/%d/%d %d:%d:%d".sprintf(db.getYear(),db.getMonth(),db.getDate(),db.getHours(),db.getMinutes(),db.getSeconds());
+            print(" ".repeat(tab*4)+key+tstr+",");
+        }
+        else {
+            print(" ".repeat(tab*4)+key+(string)db+",");
+        }
+    }
+    else if(typeof db == 'undefined') {
+        print(" ".repeat(tab*4)+key+"void,");
+    }
+    else if(typeof db == 'String'){
+        print(" ".repeat(tab*4)+key+"\""+db+"\",");
+    }
+    else {
+        print(" ".repeat(tab*4)+key+(string)db+",");
+    }
+}
+
+/***********debug************/
+
+function dm (arr*) 
+{
+    var str = arr.join('\t');
+    print(str);
+}

@@ -137,6 +137,51 @@ SpriteFrame* GLCache::addFrame(const string& picKey,const string& plist)
     }
 }
 
+GLTexture* GLCache::addTexture(int r)
+{
+    string pickKey = Utf8WithFormat("round%d",r);
+    auto iter2 = m_allTextures.find(pickKey);
+    GLTexture* tex=null;
+    if(iter2 != m_allTextures.end()) {
+        tex = iter2->second;
+    }
+    else {
+        tex = new GLTexture();
+        ImageData* image = ImageData::createRoundRect(r);
+        tex->initWithImage(image);
+        delete image;
+        m_allTextures[pickKey] = tex;
+        tex->setCacheKey(pickKey);
+        tex->retain();
+    }
+    return tex;
+}//创建圆角矩形
+
+SpriteFrame* GLCache::addFrame(int r)
+{
+    string pickKey = Utf8WithFormat("round%d",r);
+    auto iter = m_allSpriteFrames.find(pickKey);
+    if (iter != m_allSpriteFrames.end()) {
+        return iter->second;
+    }
+    auto iter2 = m_allTextures.find(pickKey);
+    GLTexture* tex=null;
+    if(iter2 != m_allTextures.end()) {
+        tex = iter2->second;
+    }
+    else {
+        tex = addTexture(r);
+    }
+    SpriteFrame* frame = new SpriteFrame();
+    frame->setTexture(tex);
+    
+    m_allSpriteFrames[pickKey] = frame;
+    frame->setCacheKey(pickKey);
+    frame->retain();
+    return frame;
+    
+}//创建圆角矩形
+
 void GLCache::removeSpriteFrameCache(SpriteFrame* frame)
 {
     m_allSpriteFrames.erase(frame->getCacheKey());

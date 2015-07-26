@@ -2,6 +2,7 @@
 class Node extends GameObject
 {
 	var name;//名称
+	var children=[];
 	function Node () 
 	{
 		super.GameObject();
@@ -9,6 +10,33 @@ class Node extends GameObject
 
 	function finalize () 
 	{
+		children.clear();
 		super.finalize();
+	}
+
+	function addChild (obj) 
+	{
+		children.add(obj);
+		super.addChild(obj);
+	}
+
+	function setSize (w=void,h=void) 
+	{
+		width = w if w !== void;
+		height = h if h !== void;
+	}
+
+	function setPos (l,t,w=void,h=void) 
+	{
+		left = l if l !== void;
+		top = t if t !== void;
+		width = w if w !== void;
+		height = h if h !== void;
+	}
+
+	function setAnchor (x=void,y=void) 
+	{
+		anchorX = x if x !== void;
+		anchorY = y if y !== void;
 	}
 }

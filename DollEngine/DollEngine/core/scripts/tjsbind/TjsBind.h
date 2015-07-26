@@ -107,6 +107,19 @@ class Tjs##CLASS : public DE::CLASS\
 public:\
 tTJSCustomObject* _self;\
 virtual ~Tjs##CLASS(){ \
+for(tjs_int i=TJS_MAX_NATIVE_CLASS-1; i>=0; i--)\
+{\
+    if(_self->ClassIDs[i]!=-1)\
+    {\
+        if(_self->ClassInstances[i]) {\
+            ncbInstanceAdaptor<Tjs##CLASS>* d= dynamic_cast<ncbInstanceAdaptor<Tjs##CLASS>*>(_self->ClassInstances[i]);\
+            if(d){\
+                d->setSticky();\
+            }\
+        }\
+    }\
+}\
+_self->_Finalize();\
 }\
 ttstr getClass()\
 {\
@@ -114,33 +127,34 @@ return _self->ClassNames[0];\
 }\
 Tjs##CLASS():_self(null)
 
+#define TJS_NCB_COM(CLASS) TJS_NCB(CLASS){}\
+void setCompName(tTJSVariant v){\
+TJS_STRING(v,name)\
+Component::setCompName(name);\
+}\
+tTJSVariant getCompName(){\
+    wstring name;\
+    Utf8ToUnicode(m_compName.c_str(), name);\
+    return name.c_str();\
+}
+
+#define TJS_FACTORY_COM \
+TJS_FACTORY \
+NCB_PROPERTY(enabled, getEnabled, setEnabled); \
+NCB_PROPERTY(time, getTime, setTime);\
+NCB_PROPERTY(type, getType, setType);\
+NCB_PROPERTY(name, getCompName, setCompName);
 
 #define TJS_FACTORY \
 Factory(&TjsFactory::factory<ClassT>);\
 NCB_PROPERTY_RO(class, getClass);
 
+#define TJS_STRING(v,str) string str;\
+UnicodeToUtf8(v.AsStringNoAddRef()->operator const wchar_t *(), str);
 
-#define TJS_PRO_SET(obj,key,var) obj->PropSet(TJS_MEMBERENSURE,key,NULL,&var,obj)
-#define TJS_PRO_SET_BY_NUM(obj,index,var) obj->PropSetByNum(TJS_MEMBERENSURE,index,&var,obj)
-
-#define TJS_GET_ADAPTOR(TYPE,NODE) (ncbInstanceAdaptor<TYPE>::CreateAdaptor((TYPE*)NODE))
+#define TJS_GET_DISPATCH(TYPE,NODE) (ncbInstanceAdaptor<TYPE>::GetAdaptor((TYPE*)NODE))
 
 #define TJS_GET_OBJECT(TYPE,NODE) (ncbInstanceAdaptor<TYPE>::GetNativeInstance(NODE));
-
-#define TJS_GET_ARRAY_NI(obj,ni) \
-tTJSArrayNI *ni; \
-if(TJS_FAILED(obj->NativeInstanceSupport(TJS_NIS_GETINSTANCE,TJSGetArrayClassID(),(iTJSNativeInstance**)&ni))){TJS_eTJSError(TJSSpecifyArray);}
-
-
-#define iTJSCreateDictionary(ret) \
-iTJSDispatch2 *ret = TJSCreateDictionaryObject();\
-tTJSVariant ret##_var = tTJSVariant(ret, ret);\
-ret->Release();
-
-#define iTJSCreateArray(ret) \
-iTJSDispatch2 *ret = TJSCreateArrayObject();\
-tTJSVariant ret##_var = tTJSVariant(ret, ret);\
-ret->Release();
 
 class TjsFactory {
 public:

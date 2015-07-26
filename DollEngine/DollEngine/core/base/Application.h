@@ -22,9 +22,6 @@ public:
     Shared(Application)
     virtual ~Application();
     
-    void initialize();
-    void initEnginePaths();
-    
 public:
     void mainLoop();
     
@@ -44,6 +41,7 @@ public:
     PROPERTY(bool,NeedRedraw,m_needRedraw){m_needRedraw=v;}
     PROPERTY(bool,NeedRetouch,m_needRetouch){m_needRetouch=v;}
 protected:
+    void initEnginePaths();
 //    void timerEvent(QTimerEvent*event );
     
 protected:

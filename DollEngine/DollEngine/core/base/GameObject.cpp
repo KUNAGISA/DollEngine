@@ -17,10 +17,10 @@ static list<GameObject*> s_iterEnd;
 
 GameObject::GameObject()
 :m_parent(null)
-,m_iterInParent(s_iterEnd.end())
 ,m_needSortChildren(false)
 ,m_z(0)
 ,m_enabled(true)
+,m_visible(true)
 {
     m_transInWorld = new Transform();
     m_transform = new Transform();
@@ -28,6 +28,13 @@ GameObject::GameObject()
 
 GameObject::~GameObject()
 {
+    if (!m_parent) {
+        DEApplication->setWorld(null);
+    }
+    else {
+        removeFromParent(false);
+    }
+    releaseAllChild();
     for (Component* comp : m_unknowComps) {
         comp->release();
     }
@@ -52,9 +59,6 @@ GameObject::~GameObject()
     m_updateComps.clear();
     SAFF_DELETE(m_transform);
     SAFF_DELETE(m_transInWorld);
-    if (!m_parent) {
-        DEApplication->setWorld(null);
-    }
 }
 
 void GameObject::addComponent(DE::Component *comp)
@@ -80,6 +84,9 @@ void GameObject::addComponent(DE::Component *comp)
 
 void GameObject::visit()
 {
+    if (!m_visible) {
+        return;
+    }
     sortChildren();
     transform();
     if (m_children.size() > 0) {
@@ -159,8 +166,6 @@ void GameObject::addChild(GameObject* lay)
     if (lastZ != lay->getZ()) {
         m_needSortChildren=true;
     }
-    m_iterInParent = m_children.end();
-    m_iterInParent--;
     NEED_REDRAW;
 }
 
@@ -168,14 +173,35 @@ void GameObject::removeChild(GameObject* lay,bool isRelease)
 {
     if(lay->getParent() == this)
     {
-        m_children.erase(lay->m_iterInParent);
-        lay->m_iterInParent = s_iterEnd.end();
+        std::remove(m_children.begin(), m_children.end(), lay);
         lay->setParent(null);
         if (isRelease) {
             delete lay;
         }
         NEED_REDRAW;
     }
+}
+
+void GameObject::releaseAllChild()
+{
+    for (auto iter=m_children.begin();
+         iter != m_children.end(); ++iter)
+            delete *iter;
+    m_children.clear();
+}
+
+GameObject* GameObject::childAtIndex(int idx)
+{
+    if (m_children.size()>idx) {
+        int i=0;
+        for (auto iter=m_children.begin();
+             iter != m_children.end(); ++iter,++i) {
+            if (i == idx) {
+                return *iter;
+            }
+        }
+    }
+    return null;
 }
 
 void GameObject::removeFromParent(bool isRelease)
@@ -189,7 +215,7 @@ void GameObject::sortChildren()
 {
     if (m_needSortChildren) {
         m_needSortChildren = false;
-        m_children.sort([](GameObject* a,GameObject* b){
+        std::sort(m_children.begin(), m_children.end(), [](GameObject* a,GameObject* b){
             return a->getZ() < b->getZ();
         });
     }

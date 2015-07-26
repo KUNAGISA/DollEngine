@@ -58,16 +58,16 @@ static WindowDelegate* s_instance=nil;
 
 DE_BEGIN
 
-void Window::initialize(float w, float h)
+void Window::initialize(float w, float h,float s)
 {
     if (!m_deviceWindow) {
-        if (w < 120) {
+        if (w*s < 120) {
             w = 120;
         }
-        if (h < 120) {
+        if (h*s < 120) {
             h = 120;
         }
-        NSRect rc = NSMakeRect(0, 0, w, h);
+        NSRect rc = NSMakeRect(0, 0, w*s, h*s);
         NSUInteger uiStyle = NSTitledWindowMask | NSResizableWindowMask | NSClosableWindowMask;
         NSBackingStoreType storeStyle = NSBackingStoreBuffered;
         s_window = [[NSWindow alloc]initWithContentRect:rc
@@ -88,8 +88,10 @@ void Window::initialize(float w, float h)
         [s_window makeMainWindow];
         
         s_window.delegate = [WindowDelegate GetInstance];
-        
-        
+        DEApplication->setDeviceSize(w*s,h*s);
+        GLCanvas::GetInstance()->setLayerWidth(w);
+        GLCanvas::GetInstance()->setLayerHeight(h);
+        GLCanvas::GetInstance()->initializeGL();
     }
 }
 

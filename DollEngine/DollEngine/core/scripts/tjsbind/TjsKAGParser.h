@@ -12,8 +12,6 @@
 #include "TjsBind.h"
 #include "KAGParser.h"
 
-using namespace DE;
-
 TJS_NCB(KAGParser){}
 virtual void jumpTo(ttstr storage,ttstr label);
 virtual void callLabel(ttstr storage,ttstr label);

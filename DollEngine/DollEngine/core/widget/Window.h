@@ -17,7 +17,7 @@ class Window
 {
 public:
     Window();
-    void initialize(float w,float h);
+    void initialize(float w,float h,float s);
     
     
     PROPERTY(bool, Visible, m_visible){m_visible=v;}

@@ -26,6 +26,8 @@ public:
     TextFrame* addText(const string& text,const string& fontName,int fontSize);
     GLTexture* addTexture(const string& picKey);
     SpriteFrame* addFrame(const string& picKey,const string& plist="");
+    GLTexture* addTexture(int r);//创建圆角矩形
+    SpriteFrame* addFrame(int r);//创建圆角矩形
     void removeSpriteFrameCache(SpriteFrame* frame);
     void removeTextureCache(GLTexture* frame);
     

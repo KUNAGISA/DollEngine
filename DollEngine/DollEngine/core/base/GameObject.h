@@ -30,11 +30,15 @@ public:
     
     void addChild(GameObject* lay);
     void removeChild(GameObject* lay,bool isRelease);
+    void releaseAllChild();
+    GameObject* childAtIndex(int idx);
+    int childCount(){return m_children.size();};
     void removeFromParent(bool isRelease=true);
     void sortChildren();
     
     PROPERTY(int, Z, m_z){m_z=v;}
     PROPERTY(bool, Enabled, m_enabled){m_enabled=v;NEED_RETOUCH;}
+    PROPERTY(bool, Visible, m_visible){m_visible=v;NEED_REDRAW;}
     PROPERTY(GameObject*,Parent,m_parent){m_parent=v;}
     
     PROPERTY_RO(Transform*, TransInWorld, m_transInWorld);
@@ -46,8 +50,7 @@ protected:
     vector<Component*> m_paintComps;
     vector<Component*> m_touchComps;
     
-    list<GameObject*> m_children;
-    list<GameObject*>::iterator m_iterInParent;
+    vector<GameObject*> m_children;
 public:
     TRANSFORM_PROPERTY_FUNC(Left,X)
     TRANSFORM_PROPERTY_FUNC(Top,Y)

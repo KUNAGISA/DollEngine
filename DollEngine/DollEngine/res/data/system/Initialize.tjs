@@ -8,7 +8,7 @@ var DEConfig = Scripts.jsonStorage("Config.json");
     var count = DEConfig.scripts.count;
     for (var i = 0; i < count; i++) {
         var file = DEConfig.scripts[i];
-        dm("LOAD %s",file);
+        print("LOAD %s",file);
         Scripts.execStorage(file);
     };
     count = DEConfig.autoPaths.count;
@@ -23,6 +23,5 @@ var f=%[];
 var sf=%[];
 
 var app = new App();
-
 
 app.proccess("first.ks");

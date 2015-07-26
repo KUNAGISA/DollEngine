@@ -19,6 +19,19 @@ class GLProgram;
 class Transform;
 enum PROGRAM_TYPE;
 
+struct PaintConfig
+{
+    SpriteFrame* frame;
+    Transform* trans;
+    Color* color;
+    Color* end;
+    GLProgram* program;
+    float width;
+    float height;
+    GLenum blendSrc;
+    GLenum blendDst;
+};
+
 class GLPainter
 {
 public:
@@ -28,11 +41,12 @@ public:
     virtual ~GLPainter();
     
 public:
+    void blendFunc(GLenum src,GLenum dst);
     void addProgram(string pm,GLProgram*);
     GLProgram* getProgram(string pm);
     
 public:
-    void paint(SpriteFrame* frame,Transform* trans,Color* color,GLProgram* program);
+    void paint(PaintConfig& config);
 protected:
     map<string,GLProgram*> m_allPrograms;
 };

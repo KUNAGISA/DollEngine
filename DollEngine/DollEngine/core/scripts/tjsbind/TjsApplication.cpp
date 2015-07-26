@@ -99,14 +99,14 @@ tTJSNC_Application::tTJSNC_Application() : inherited(TJS_W("Application"))
     {
         TJS_BEGIN_NATIVE_PROP_GETTER
         {
-            DE::GameObject* obj = DEApplication->getWorld();
-            *result = TJS_GET_ADAPTOR(TjsGameObject, obj);
+            TjsGameObject* obj = dynamic_cast<TjsGameObject*>(DEApplication->getWorld());
+            result->SetObject(obj->_self);
             return TJS_S_OK;
         }
         TJS_END_NATIVE_PROP_GETTER
         TJS_BEGIN_NATIVE_PROP_SETTER
         {
-            iTJSDispatch2* dis =(*param).AsObjectNoAddRef();
+            iTJSDispatch2* dis =(*param).AsObject();
             TjsGameObject* obj = TJS_GET_OBJECT(TjsGameObject,dis);
             DEApplication->setWorld(obj);
             return TJS_S_OK;

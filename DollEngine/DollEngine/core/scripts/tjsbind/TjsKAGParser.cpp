@@ -67,7 +67,7 @@ int TjsKAGParser::execute(KAGTag* tag)
         {
             ret = kv.value;
         }
-        TJS_PRO_SET(params, key.GetString(), ret);
+        params->PropSet(TJS_MEMBERENSURE,key.GetString(),NULL,&ret,params);
     }
     tTJSVariant params_t = params;
     params->Release();

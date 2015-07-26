@@ -57,6 +57,11 @@ Color::Color()
     
 }
 
+Color::Color(const Color& v)
+:r(v.r),g(v.g),b(v.b),a(v.a)
+{
+}
+
 Color::Color(GLubyte r,GLubyte g,GLubyte b)
 :r(r)
 ,g(g)
@@ -109,6 +114,17 @@ void Color::toColorF(GLfloat* colorf)
     colorf[1] = g/255.0f;
     colorf[2] = b/255.0f;
     colorf[3] = a/255.0f;
+}
+
+
+GradientColor::GradientColor()
+:end(0xffffffff),horizontal(false)
+{
+}
+
+GradientColor::GradientColor(const Color& start, const Color& e)
+:Color(start),end(e),horizontal(false)
+{
 }
 
 DE_END

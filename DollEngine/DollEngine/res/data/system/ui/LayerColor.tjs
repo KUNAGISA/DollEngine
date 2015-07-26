@@ -1,0 +1,48 @@
+class LayerColor extends Node
+{
+	function LayerColor () 
+	{
+		super.Node();
+		this._painter = new Painter();
+		addCOM(painter);
+		round = 0;
+	}
+
+	function finalize () 
+	{
+		super.finalize();
+	}
+
+	function setSize (w,h) 
+	{
+		painter.paintWidth=w;
+		painter.paintHeight=h;
+		super.setSize(...);
+	}
+
+	var _round=void;
+	//注释
+	property round{
+	    setter(v) {
+	    	//setter
+	    	var pw = painter.paintWidth;
+	    	var ph = painter.paintHeight;
+			painter.loadSize(2,2,v);
+			setSize(pw,ph);
+	    	this._round = v;
+		}
+		getter {
+	    	//getter
+			return this._round;
+		}
+	}
+
+	var _painter=void;
+	//注释
+	property painter{
+		getter {
+	    	//getter
+			return this._painter;
+		}
+	}
+}

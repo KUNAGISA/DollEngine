@@ -16,7 +16,7 @@ class TagHandlers extends KAGParser
 			name == 'returnMacro'||
 			name == 'getMacroParams'||
 			name == 'onScenarioEnded') {
-			dm("%s指令被TagHandlers类占用",name);
+			print("%s指令被TagHandlers类占用",name);
 		}
 		if(this[name])
 		{
@@ -32,7 +32,7 @@ class TagHandlers extends KAGParser
 			}
 			else
 			{
-				dm("未找到指令"+name);
+				print("未找到指令"+name);
 			}
 		}
         return time;
@@ -79,7 +79,7 @@ class TagHandlers extends KAGParser
 		if (elm.exp) {
 			str = Scripts.eval(elm.exp);
 		}
-		dm(str);
+		print(str);
 	}
 
 	
@@ -92,11 +92,10 @@ class TagHandlers extends KAGParser
 		}
 		var uipath = Storages.getFullPath(elm.storage);
 		if (!uipath) {
-			dm("[loadui]ui配置文件%s未找到",uipath);
+			print("[loadui]ui配置文件%s未找到",uipath);
 			return;
 		}
 		var lay = UIReader.readJsonFile(uipath,par);
-
 		if (typeof elm['visible'] == 'undefined') {
 			lay.visible = true;
 		}
@@ -107,16 +106,19 @@ class TagHandlers extends KAGParser
 			par.names[elm.name] = lay;
 			lay.name = elm.name;
 		}
-		if (elm.data) {
-			var data = Scripts.eval(elm.data);
-			lay.initialize(data);
-		}
-		else {
-			lay.initialize();
-		}
-		lay.refresh();
-		if (elm.anim) {
-			lay.playShow();
+		f.a=lay;
+		if (typeof lay.initialize != 'undefined') {
+			if (elm.data) {
+				var data = Scripts.eval(elm.data);
+				lay.initialize(data);
+			}
+			else {
+				lay.initialize();
+			}
+			lay.refresh();
+			if (elm.anim) {
+				lay.playShow();
+			}
 		}
 	}
 

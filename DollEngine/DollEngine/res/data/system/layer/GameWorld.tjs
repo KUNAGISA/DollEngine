@@ -4,4 +4,14 @@ class GameWorld extends UILayer
 	{
 		super.UILayer();
 	}
+
+	function finalize () 
+	{
+		super.finalize();
+	}
+
+	function initialize (w,h) 
+	{
+		setSize(w,h);
+	}
 }

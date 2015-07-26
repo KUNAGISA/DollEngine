@@ -16,12 +16,17 @@
 
 DE_BEGIN
 
-
-TJS_NATIVE_FUNCTION_BEGIN(TJSPrint)
+TJS_NATIVE_FUNCTION_BEGIN(TJSPrintf)
 if ( numparams <1 ) return TJS_E_BADPARAMCOUNT ;
 tTJSVariantString *res;
 res = TJSFormatString(param[0]->AsString()->operator const wchar_t *(), numparams-1, &param[1]);
-DM("【TJS】: %ls",(const tjs_char*)*res);
+wstring dg = L"【TJS】: ";
+if(res) {
+    dg += (const tjs_char*)*res;
+}
+if(TjsEngine::Global()) {
+    TjsEngine::Global()->OutputToConsole(dg.c_str());
+}
 if(res) res->Release();
 return TJS_S_OK ;
 TJS_NATIVE_FUNCTION_END
@@ -49,11 +54,6 @@ static const int kMaxLogLen = 32*1024;
 static char logbuff[sizeof(char) * (kMaxLogLen + 1)];
 void Debug::message(const char* format,...)
 {
-    //    va_list args;
-    //    va_start(args, format);
-    //    printf(format,args);
-    //    va_end(args);
-    //    printf("\n");
     va_list args;
     memset(logbuff, 0, sizeof(logbuff));
     va_start(args, format);
@@ -62,8 +62,6 @@ void Debug::message(const char* format,...)
     wstring str;
     Utf8ToUnicode(logbuff, str);
     TjsEngine::Global()->OutputToConsole(str.c_str());
-    //
-    //    return logbuff;
 }
 
 void Debug::throwMsg(DEBUG_MSG error,const string& p1)
@@ -160,8 +158,8 @@ TjsEngine::TjsEngine()
         
         TVPLoadMessage();
         TJS_REGIST_FUNCTION(TJSThrow, "throwMsg");
-        TJS_REGIST_FUNCTION(TJSPrint,"print")
-        TJS_REGIST_FUNCTION(TJSPrintTime, "printTime")
+        TJS_REGIST_FUNCTION(TJSPrintf,"print");
+        TJS_REGIST_FUNCTION(TJSPrintTime, "printTime");
         //        REGIST_TJS_FUNCTION(TJSConsoleShow,"__console_show")
         
         // AutoRegisterで登録されたクラス等を登録する
@@ -173,37 +171,19 @@ TjsEngine::TjsEngine()
 
 void TjsEngine::catchError(void* error)
 {
-//    TJS::eTJSScriptError& e = *(TJS::eTJSScriptError*)error;
-//    TJS::ttstr message;
-//    message += L"\n【ERROR】";
-//    message += L"\n==>MSG: ";
-//    message += e.GetMessage();
-//    message += L"\n==>LINE:";
-//    message += UnicodeWithFormat(L"%d",e.GetSourceLine());
-//    message += L" ";
-//    int lineLength=0;
-//    tTJSScriptBlock* block = e.GetBlockNoAddRef();
-//    tjs_char* src = block->GetLine(e.GetSourceLine()-1, &lineLength);
-//    ttstr linecode(src,lineLength);
-//    message += e.SourceName;
-//    message += "\n";
-//    message += linecode;
-//    message += L"\n==>STACK:\n";
-//    wstring tra = e.GetTrace().AsStdString();
-//    size_t idx = tra.find(L"(");
-//    while (idx!=wstring::npos) {
-//        size_t idx2 = tra.find(L" <-- anonymous@",idx);
-//        wstring sub = tra.substr(idx,idx2-idx);
-//        message += L"[trace]";
-//        message += sub;
-//        message += L"\n";
-//        if (idx2 == wstring::npos) {
-//            break;
-//        }
-//        idx = tra.find(L"(",idx2);
-//    }
-//    message += L"【ERROR】\n";
-//    TjsEngine::Global()->OutputExceptionToConsole(message.c_str());
+    TJS::eTJSScriptError& e = *(TJS::eTJSScriptError*)error;
+    TjsEngine::Global()->OutputExceptionToConsole(L"STACK:");
+    wstring tra = e.GetTrace().AsStdString();
+    size_t idx = tra.find(L"(");
+    while (idx!=wstring::npos) {
+        size_t idx2 = tra.find(L" <-- anonymous@",idx);
+        wstring sub = tra.substr(idx,idx2-idx);
+        TjsEngine::Global()->OutputExceptionToConsole(sub.c_str());
+        if (idx2 == wstring::npos) {
+            break;
+        }
+        idx = tra.find(L"(",idx2);
+    }
 }
 
 bool TjsEngine::eval(const wstring& code,void* ret)

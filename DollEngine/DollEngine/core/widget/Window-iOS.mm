@@ -35,7 +35,7 @@ static WindowDelegate* s_instance=nil;
 
 DE_BEGIN
 
-void Window::initialize(float w, float h)
+void Window::initialize(float w, float h,float s)
 {
     if (!m_deviceWindow) {
         if (w < 120) {

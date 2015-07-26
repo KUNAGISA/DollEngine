@@ -273,7 +273,7 @@ wchar_t* JsonParser::nunberWithString(wchar_t* str,tTJSVariant& _out)
         }
         else {
             _out = wstr;
-            _out.ToInteger();
+            _out.tonumber();
             return str;
         }
     }

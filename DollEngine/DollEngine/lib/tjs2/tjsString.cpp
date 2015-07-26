@@ -179,6 +179,12 @@ tjs_int TJS_cdecl tTJSString::printf(const tjs_char *format, ...)
 		va_list param;
 		va_start(param, format);
 		r = TJS_vsnprintf(buf, size, format, param);
+        if (r == -1) {
+            va_end(param);
+            FixLen();
+            delete [] buf;
+            return r;
+        }
 		AllocBuffer(r);
 		if(r)
 		{

@@ -73,40 +73,36 @@ bool NormalProgram::init()
     return true;
 }
 
-static GLfloat colors[4][4] = {
-    {1.0,1.0,1.0,1.0},
-    {1.0,1.0,1.0,1.0},
-    {1.0,1.0,1.0,1.0},
-    {1.0,1.0,1.0,1.0},
-};
-void NormalProgram::actived(SpriteFrame* frame,Transform* trans,Color* color,bool isFlipY)
+void NormalProgram::actived(PaintConfig& config)
 {
-    Rect rect = frame->getRect();
     static GLfloat vertices[] = {
         0,0,
-        0,rect.height,
-        rect.width,rect.height,
-        rect.width,0
+        0,0,
+        0,0,
+        0,0
     };
 #define VE0(p) vertices[p]=0
-#define VEH(p) vertices[p]=rect.height
-#define VEW(p) vertices[p]=rect.width
+#define VEH(p) vertices[p]=config.height
+#define VEW(p) vertices[p]=config.width
     
     VE0(0);VE0(1);//左下
     VE0(2);VEH(3);//左上
     VEW(4);VEH(5);//右上
     VEW(6);VE0(7);//右下
     
+    GLfloat colors[4][4];
+    memset(colors, 1.0f, 16);
     for (int j = 0; j < 4; ++j) {
-        color->toColorF(colors[j]);
+        config.color->toColorF(colors[j]);
     }
-    
     enableVertexAttribs(VERTEX_ATTRIB_FLAG_POS_COLOR_TEX);
     
     glVertexAttribPointer(PROGRAM_VERTEX_ATTRIBUTE, 2, GL_FLOAT, GL_TRUE, 0, vertices);
     glVertexAttribPointer(PROGRAM_COLOR_ATTRIBUTE, 4, GL_FLOAT, GL_TRUE, 0, colors);
-    glVertexAttribPointer(PROGRAM_TEXCOORD_ATTRIBUTE, 2, GL_FLOAT, GL_TRUE, 0, frame->getGLCoord());
+    glVertexAttribPointer(PROGRAM_TEXCOORD_ATTRIBUTE, 2, GL_FLOAT, GL_TRUE, 0, config.frame->getGLCoord());
+    CHECK_GL_ERROR;
     
+    glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
 }
 
 DE_END
