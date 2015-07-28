@@ -63,7 +63,7 @@ void Transform::flush()
         
         //rotation
         kmMat4Identity(&t_mat);
-        kmMat4RotationZ(&t_mat, m_rotationZ*PI/180.0f);
+        kmMat4RotationZ(&t_mat, -m_rotationZ*PI/180.0f);
         kmMat4Multiply(&m_matrix, &m_matrix, &t_mat);
         
         //scale
@@ -76,6 +76,7 @@ void Transform::flush()
         kmMat4Translation(&t_mat,(-m_anchorX*m_width),(-m_anchorY*m_height),0);
         kmMat4Multiply(&m_matrix, &m_matrix, &t_mat);
         
+        
     }
 }
 
@@ -86,7 +87,7 @@ bool Transform::pointInside(float x,float y,float& ox,float& oy)
     kmVec3 outpos;
     kmVec3 inpos;
     float nx = x*2/GLCanvas::GetInstance()->getLayerWidth()-1;
-    float ny = -y*2/GLCanvas::GetInstance()->getLayerHeight()+1;
+    float ny = y*2/GLCanvas::GetInstance()->getLayerHeight()-1;
     kmVec3Fill(&inpos,nx,ny,0);
     kmVec3Transform(&outpos,&inpos,&t_mat);
     ox = outpos.x;

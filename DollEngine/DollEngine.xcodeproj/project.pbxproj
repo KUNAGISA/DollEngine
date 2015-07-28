@@ -21,11 +21,13 @@
 		B8261E011ADC06160017767B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B8261DF91ADC06160017767B /* main.m */; };
 		B8261E021ADC06160017767B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8261DFA1ADC06160017767B /* Main.storyboard */; };
 		B8261E031ADC06160017767B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8261DFC1ADC06160017767B /* ViewController.m */; };
+		B83411471B68307F005BEE96 /* TjsTouchListener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B83411451B68307F005BEE96 /* TjsTouchListener.cpp */; };
 		B83671C31B65117500256B62 /* TjsPainter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B83671C11B65117500256B62 /* TjsPainter.cpp */; };
 		B83671C41B65117500256B62 /* TjsPainter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B83671C11B65117500256B62 /* TjsPainter.cpp */; };
 		B83671CB1B65149E00256B62 /* TjsCOM.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B83671C91B65149E00256B62 /* TjsCOM.cpp */; };
 		B83671CC1B65149E00256B62 /* TjsCOM.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B83671C91B65149E00256B62 /* TjsCOM.cpp */; };
 		B83B5F101B555618004B43AC /* data in Resources */ = {isa = PBXBuildFile; fileRef = B83B5F0E1B555618004B43AC /* data */; };
+		B85B52B71B6745E500D05305 /* TjsCharacter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B85B52B51B6745E500D05305 /* TjsCharacter.cpp */; };
 		B893459F1B5546CB0065A3A3 /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B89345781B5546CB0065A3A3 /* libfreetype.a */; };
 		B89345A01B5546CB0065A3A3 /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B893457A1B5546CB0065A3A3 /* libfreetype.a */; };
 		B89345A21B5546CB0065A3A3 /* aabb.c in Sources */ = {isa = PBXBuildFile; fileRef = B893458E1B5546CB0065A3A3 /* aabb.c */; };
@@ -258,8 +260,8 @@
 		B8EE2DBA1B5B7B3B001EB825 /* KAGData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D651B5B7B3B001EB825 /* KAGData.cpp */; };
 		B8EE2DBB1B5B7B3B001EB825 /* KAGParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D671B5B7B3B001EB825 /* KAGParser.cpp */; };
 		B8EE2DBC1B5B7B3B001EB825 /* KAGParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D671B5B7B3B001EB825 /* KAGParser.cpp */; };
-		B8EE2DBD1B5B7B3B001EB825 /* Label.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D691B5B7B3B001EB825 /* Label.cpp */; };
-		B8EE2DBE1B5B7B3B001EB825 /* Label.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D691B5B7B3B001EB825 /* Label.cpp */; };
+		B8EE2DBD1B5B7B3B001EB825 /* Character.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D691B5B7B3B001EB825 /* Character.cpp */; };
+		B8EE2DBE1B5B7B3B001EB825 /* Character.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D691B5B7B3B001EB825 /* Character.cpp */; };
 		B8EE2DBF1B5B7B3B001EB825 /* Painter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D6B1B5B7B3B001EB825 /* Painter.cpp */; };
 		B8EE2DC01B5B7B3B001EB825 /* Painter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D6B1B5B7B3B001EB825 /* Painter.cpp */; };
 		B8EE2DC11B5B7B3B001EB825 /* TouchListener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D6D1B5B7B3B001EB825 /* TouchListener.cpp */; };
@@ -344,11 +346,15 @@
 		B8261DFA1ADC06160017767B /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		B8261DFB1ADC06160017767B /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		B8261DFC1ADC06160017767B /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		B83411451B68307F005BEE96 /* TjsTouchListener.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TjsTouchListener.cpp; sourceTree = "<group>"; };
+		B83411461B68307F005BEE96 /* TjsTouchListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsTouchListener.h; sourceTree = "<group>"; };
 		B83671C11B65117500256B62 /* TjsPainter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TjsPainter.cpp; sourceTree = "<group>"; };
 		B83671C21B65117500256B62 /* TjsPainter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsPainter.h; sourceTree = "<group>"; };
 		B83671C91B65149E00256B62 /* TjsCOM.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TjsCOM.cpp; sourceTree = "<group>"; };
 		B83671CA1B65149E00256B62 /* TjsCOM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsCOM.h; sourceTree = "<group>"; };
 		B83B5F0E1B555618004B43AC /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = data; sourceTree = "<group>"; };
+		B85B52B51B6745E500D05305 /* TjsCharacter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TjsCharacter.cpp; sourceTree = "<group>"; };
+		B85B52B61B6745E500D05305 /* TjsCharacter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsCharacter.h; sourceTree = "<group>"; };
 		B880AE5F1AFD94F500E0F92C /* DollEnginePrefixMac.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DollEnginePrefixMac.pch; sourceTree = "<group>"; };
 		B89344BF1B5546CB0065A3A3 /* ftconfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ftconfig.h; sourceTree = "<group>"; };
 		B89344C01B5546CB0065A3A3 /* ftheader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ftheader.h; sourceTree = "<group>"; };
@@ -735,8 +741,8 @@
 		B8EE2D661B5B7B3B001EB825 /* KAGData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KAGData.h; sourceTree = "<group>"; };
 		B8EE2D671B5B7B3B001EB825 /* KAGParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KAGParser.cpp; sourceTree = "<group>"; };
 		B8EE2D681B5B7B3B001EB825 /* KAGParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KAGParser.h; sourceTree = "<group>"; };
-		B8EE2D691B5B7B3B001EB825 /* Label.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Label.cpp; sourceTree = "<group>"; };
-		B8EE2D6A1B5B7B3B001EB825 /* Label.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Label.h; sourceTree = "<group>"; };
+		B8EE2D691B5B7B3B001EB825 /* Character.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Character.cpp; sourceTree = "<group>"; };
+		B8EE2D6A1B5B7B3B001EB825 /* Character.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Character.h; sourceTree = "<group>"; };
 		B8EE2D6B1B5B7B3B001EB825 /* Painter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Painter.cpp; sourceTree = "<group>"; };
 		B8EE2D6C1B5B7B3B001EB825 /* Painter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Painter.h; sourceTree = "<group>"; };
 		B8EE2D6D1B5B7B3B001EB825 /* TouchListener.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TouchListener.cpp; sourceTree = "<group>"; };
@@ -851,6 +857,10 @@
 				B83671C21B65117500256B62 /* TjsPainter.h */,
 				B83671C91B65149E00256B62 /* TjsCOM.cpp */,
 				B83671CA1B65149E00256B62 /* TjsCOM.h */,
+				B85B52B51B6745E500D05305 /* TjsCharacter.cpp */,
+				B85B52B61B6745E500D05305 /* TjsCharacter.h */,
+				B83411451B68307F005BEE96 /* TjsTouchListener.cpp */,
+				B83411461B68307F005BEE96 /* TjsTouchListener.h */,
 			);
 			path = com;
 			sourceTree = "<group>";
@@ -1547,8 +1557,8 @@
 				B8EE2D661B5B7B3B001EB825 /* KAGData.h */,
 				B8EE2D671B5B7B3B001EB825 /* KAGParser.cpp */,
 				B8EE2D681B5B7B3B001EB825 /* KAGParser.h */,
-				B8EE2D691B5B7B3B001EB825 /* Label.cpp */,
-				B8EE2D6A1B5B7B3B001EB825 /* Label.h */,
+				B8EE2D691B5B7B3B001EB825 /* Character.cpp */,
+				B8EE2D6A1B5B7B3B001EB825 /* Character.h */,
 				B8EE2D6B1B5B7B3B001EB825 /* Painter.cpp */,
 				B8EE2D6C1B5B7B3B001EB825 /* Painter.h */,
 				B8EE2D6D1B5B7B3B001EB825 /* TouchListener.cpp */,
@@ -1943,7 +1953,7 @@
 				B8AEF0581B35997800490A8D /* tjsByteCodeLoader.cpp in Sources */,
 				B8AEEFF81B35997800490A8D /* euc_jp.c in Sources */,
 				B8AEF0141B35997800490A8D /* iso8859_5.c in Sources */,
-				B8EE2DBE1B5B7B3B001EB825 /* Label.cpp in Sources */,
+				B8EE2DBE1B5B7B3B001EB825 /* Character.cpp in Sources */,
 				B89345B51B5546CC0065A3A3 /* quaternion.c in Sources */,
 				B8EE2DB21B5B7B3B001EB825 /* GameObject.cpp in Sources */,
 			);
@@ -1967,7 +1977,7 @@
 				B8AEF0071B35997800490A8D /* iso8859_14.c in Sources */,
 				B8EE2DB51B5B7B3B001EB825 /* CompManager.cpp in Sources */,
 				B8EE2DAB1B5B7B3B001EB825 /* Application-Mac.mm in Sources */,
-				B8EE2DBD1B5B7B3B001EB825 /* Label.cpp in Sources */,
+				B8EE2DBD1B5B7B3B001EB825 /* Character.cpp in Sources */,
 				B8AEF0971B35997800490A8D /* tjsUtils.cpp in Sources */,
 				B8EE2DF71B5B7B3B001EB825 /* Window.cpp in Sources */,
 				B8EE2DED1B5B7B3B001EB825 /* TjsScripts.cpp in Sources */,
@@ -2083,7 +2093,9 @@
 				B8EE2DC11B5B7B3B001EB825 /* TouchListener.cpp in Sources */,
 				B8AEF02D1B35997800490A8D /* utf32_le.c in Sources */,
 				B8AEF06D1B35997800490A8D /* tjsError.cpp in Sources */,
+				B83411471B68307F005BEE96 /* TjsTouchListener.cpp in Sources */,
 				B89345A81B5546CB0065A3A3 /* mat4stack.c in Sources */,
+				B85B52B71B6745E500D05305 /* TjsCharacter.cpp in Sources */,
 				B8EE2DBB1B5B7B3B001EB825 /* KAGParser.cpp in Sources */,
 				B8AEF0631B35997800490A8D /* tjsDateParser.cpp in Sources */,
 				B8B5F4491B5E08860051E564 /* TjsDictIterator.cpp in Sources */,

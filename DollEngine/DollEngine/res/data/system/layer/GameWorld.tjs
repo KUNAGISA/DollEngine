@@ -8,16 +8,17 @@ class GameWorld extends Node
 
 	function finalize () 
 	{
-		dm('GameWorld');
 		super.finalize();
+	}
+
+	function visit () 
+	{
+		super.visit();
+		this.onTouchUpdate();
 	}
 
 	function initialize (w,h) 
 	{
-		setSize(w,h);
-	}
-
-	function del () 
-	{
+		this.setSize(w,h);
 	}
 }

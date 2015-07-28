@@ -1,13 +1,13 @@
 //
-//  Label.h
+//  Character.h
 //  DollEngine
 //
 //  Created by DollStudio on 15/5/13.
 //  Copyright (c) 2015年 DollStudio. All rights reserved.
 //
 
-#ifndef __DollEngine__Label__
-#define __DollEngine__Label__
+#ifndef __DollEngine__Character__
+#define __DollEngine__Character__
 
 #include "Painter.h"
 #include "Application.h"
@@ -16,13 +16,13 @@ DE_BEGIN
 
 class TextFrame;
 
-class Label : public Painter
+class Character : public Painter
 {
 public:
-    Label();
-    ~Label();
+    Character();
+    ~Character();
     
-    virtual Size getPaintSize();
+    virtual void setSizeToImageSize();
 public:
     PROPERTY_CONST(string, FontName, m_fontName){
         if(m_fontName!=v){
@@ -53,4 +53,4 @@ protected:
 
 DE_END
 
-#endif /* defined(__DollEngine__Label__) */
+#endif /* defined(__DollEngine__Character__) */

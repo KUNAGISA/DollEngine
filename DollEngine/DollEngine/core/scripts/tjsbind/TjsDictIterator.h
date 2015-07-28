@@ -16,7 +16,8 @@ class TjsDictIterator
 {
 public:
     TjsDictIterator();
-    void begin(iTJSDispatch2* root);//刚刚被设置的时候,都是定位于begin的
+    ~TjsDictIterator();
+    void begin(tTJSVariant root);//刚刚被设置的时候,都是定位于begin的
     bool atEnd();
     bool next();//当移动后等于end时,return false
     ttstr key();
@@ -24,7 +25,7 @@ public:
 private:
     tTJSDictionaryObject* m_root_dict;
     tTJSDictionaryObject::tTJSSymbolData * m_root_iter;
-    tTJSDictionaryObject::tTJSSymbolData * m_line_iter;
+    tTJSDictionaryObject::tTJSSymbolData * m_next_iter;
     tTJSDictionaryObject::tTJSSymbolData * m_current_iter;
     int m_size;
 };

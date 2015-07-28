@@ -26,13 +26,13 @@ public:
     void addComponent(Component* comp);
     virtual void visit(){}
     virtual void onPaint();
+    virtual void onTouchUpdate();
     virtual void transform();
-    virtual void updateTouchListener();
     
     PROPERTY(int, Z, m_z){m_z=v;}
-    PROPERTY(bool, Enabled, m_enabled){m_enabled=v;NEED_RETOUCH;}
+    PROPERTY(bool, Enabled, m_enabled){m_enabled=v;NEED_REDRAW;}
     PROPERTY(bool, Visible, m_visible){m_visible=v;NEED_REDRAW;}
-    PROPERTY(GameObject*,Parent,m_parent){m_parent=v;}
+    PROPERTY(GameObject*,Parent,m_parent){m_parent=v;NEED_REDRAW;}
     
     PROPERTY_RO(Transform*, TransInWorld, m_transInWorld);
     PROPERTY_RO(Transform*, Transform, m_transform);
@@ -44,8 +44,8 @@ protected:
     vector<Component*> m_touchComps;
     
 public:
-    TRANSFORM_PROPERTY_FUNC(Left,X)
-    TRANSFORM_PROPERTY_FUNC(Top,Y)
+    TRANSFORM_PROPERTY_FUNC(X,X)
+    TRANSFORM_PROPERTY_FUNC(Y,Y)
     TRANSFORM_PROPERTY_FUNC(Width,Width)
     TRANSFORM_PROPERTY_FUNC(Height,Height)
     TRANSFORM_PROPERTY_FUNC(AnchorX,AnchorX)
@@ -62,7 +62,7 @@ public:
 //    
 //public:
 //    bool onMouseBegan(float x,float y){qDebug()<<"began"<<x<<y<<this;return true;}
-//    void onTouchMove(float x,float y){qDebug()<<"move"<<x<<y<<this;}
+//    void onMouseMove(float x,float y){qDebug()<<"move"<<x<<y<<this;}
 //    void onMouseEnd(float x,float y){qDebug()<<"end"<<x<<y<<this;}
 //    void onClick(float x,float y){qDebug()<<"click"<<x<<y<<this;}
 //    void onDoubleClick(float x,float y){qDebug()<<"doubleclick"<<x<<y<<this;}

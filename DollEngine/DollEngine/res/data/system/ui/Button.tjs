@@ -1,0 +1,185 @@
+
+class Button extends Control
+{
+	var executeHandler = void;
+	var imageBase = void;
+	function Button (par) 
+	{
+		super.Control(par);
+		this.imageBase = new global.Node(this);
+		this._normalImage = new Sprite(this.imageBase);
+		this._selectImage = new Sprite(this.imageBase);
+		this._disableImage = new Sprite(this.imageBase);
+		this._title = new Label(this.imageBase);
+		this._title.absolute = 1;
+	}
+
+	function onMouseDown (x,y) 
+	{
+		this._selectImage.visible=true;
+		this._normalImage.visible=false;
+		this._title.color = this._titleColorSelect;
+	}
+
+	function onMouseUp (x,y) 
+	{
+		this._selectImage.visible=false;
+		this._normalImage.visible=true;
+		this._title.color = this._titleColor;
+	}
+
+	function onClick (x,y) 
+	{
+		dm(...);
+		this.executeHandler(this,x,y) if this.executeHandler;
+	}
+
+	property disabled{
+	    setter(v) {
+	    	//setter
+	    	if (super.disabled != v) {
+	    		super.disabled = v;
+	    		this._disableImage.visible = v;
+	    		this._selectImage.visible = !v;
+	    		this._normalImage.visible = !v;
+	    		if (v) {
+	    			this._title.color = this._titleColorDisable;
+	    		}
+	    		else {
+	    			this._title.color = this._titleColor;
+	    		}
+	    	}
+		}
+		getter {
+	    	//getter
+			return super.disabled;
+		}
+	}
+
+	var _normalImage=void;
+	property normalImage{
+	    setter(v) {
+	    	//setter
+	    	if (typeof v == 'Object' &&
+	    		v instanceof 'Array') {
+		    	this._normalImage.loadImages(v[0],v[1]);
+		    	this.setSize(this._normalImage.width,this._normalImage.height);
+		    	this.imageBase.x = this.width/2;
+		    	this.imageBase.y = this.height/2;
+			}
+			else if(typeof v == 'String'){
+				this._normalImage.loadImages(v);
+			}
+		}
+		getter {
+	    	//getter
+			return this._normalImage;
+		}
+	}
+
+	var _selectImage=void;
+	property selectImage{
+	    setter(v) {
+	    	//setter
+	    	if (typeof v == 'Object' &&
+	    		v instanceof 'Array') {
+		    	this._selectImage.loadImages(v[0],v[1]);
+			}
+			else if(typeof v == 'String'){
+				this._selectImage.loadImages(v);
+			}
+		}
+		getter {
+	    	//getter
+			return this._selectImage;
+		}
+	}
+
+	var _disableImage=void;
+	property disableImage{
+	    setter(v) {
+	    	//setter
+	    	if (typeof v == 'Object' &&
+	    		v instanceof 'Array') {
+		    	this._disableImage.loadImages(v[0],v[1]);
+			}
+			else if(typeof v == 'String'){
+				this._disableImage.loadImages(v);
+			}
+		}
+		getter {
+	    	//getter
+			return this._disableImage;
+		}
+	}
+
+	var _title=void;
+	property title{
+	    setter(v) {
+	    	//setter
+	    	this._title.text = v;
+		}
+		getter {
+	    	//getter
+			return this._title.text;
+		}
+	}
+
+	property titleFontName{
+	    setter(v) {
+	    	//setter
+	    	this._title.font.fontName = v;
+		}
+		getter {
+	    	//getter
+			return this._title.font.fontName;
+		}
+	}
+
+	property titleFontSize{
+	    setter(v) {
+	    	//setter
+	    	this._title.font.fontSize = v;
+		}
+		getter {
+	    	//getter
+			return this._title.font.fontSize;
+		}
+	}
+
+	var _titleColor=void;
+	property titleColor{
+	    setter(v) {
+	    	//setter
+	    	this._titleColor = v;
+		}
+		getter {
+	    	//getter
+			return this._titleColor;
+		}
+	}
+
+	var _titleColorSelect=void;
+	property titleColorSelect{
+	    setter(v) {
+	    	//setter
+	    	this._titleColorSelect = v;
+		}
+		getter {
+	    	//getter
+			return this._titleColorSelect;
+		}
+	}
+
+	var _titleColorDisable=void;
+	property titleColorDisable{
+	    setter(v) {
+	    	//setter
+	    	this._titleColorDisable = v;
+		}
+		getter {
+	    	//getter
+			return this._titleColorDisable;
+		}
+	}
+}

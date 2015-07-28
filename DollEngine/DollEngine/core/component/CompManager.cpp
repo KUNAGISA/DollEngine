@@ -21,38 +21,17 @@ CompManager::CompManager()
 void CompManager::addTouchComp(Component* comp)
 {
     m_touchComps.push_back(comp);
-    CompIter end = m_touchComps.end();
-    --end;
-    comp->setCompIter(end);
-}
-
-void CompManager::removeTouchComp(Component* comp)
-{
-    m_touchComps.erase(comp->getCompIter());
-    comp->setCompIter(Component::EndIter());
 }
 
 void CompManager::clearTouches()
 {
-    for (Component* comp : m_touchComps) {
-        comp->setCompIter(Component::EndIter());
-    }
     m_touchComps.clear();
 }
 
 void CompManager::addReleaseComp(DE::Component *comp)
 {
     m_releasePools.insert(comp);
-    switch (comp->getType()) {
-        case COMP_TOUCH:
-        {
-            removeTouchComp(comp);
-        }
-            break;
-            
-        default:
-            break;
-    }
+    comp->setIsReleased(true);
 }
 
 void CompManager::removeReleaseComp(DE::Component *comp)
@@ -61,7 +40,7 @@ void CompManager::removeReleaseComp(DE::Component *comp)
 }
 
 
-bool CompManager::onTouchDown(float x,float y )
+bool CompManager::onMouseDown(float x,float y )
 {
     x /= DEApplication->getDeviceWidth()/GLCanvas::GetInstance()->getLayerWidth();
     y /= DEApplication->getDeviceHeight()/GLCanvas::GetInstance()->getLayerHeight();
@@ -71,7 +50,7 @@ bool CompManager::onTouchDown(float x,float y )
          iter != allTouchs.end(); ++iter)
     {
         TouchListener* obj = dynamic_cast<TouchListener*>(*iter);
-        if (!obj) {
+        if (!obj||obj->getIsReleased()) {
             continue;
         }
         obj->setMoved(false);
@@ -79,7 +58,7 @@ bool CompManager::onTouchDown(float x,float y )
         float ox,oy;
         if (obj->getEnabled() && !obj->getIgnore() && obj->pointInside(x,y,ox,oy))
         {
-            obj->onTouchDown(ox, oy);
+            obj->onMouseDown(ox, oy);
             if (!obj->getIgnore())
             {
                 obj->setFocus(true);
@@ -98,7 +77,7 @@ bool CompManager::onTouchDown(float x,float y )
     return m_validTouches.size() > 0 ? true : false;
 }
 
-void CompManager::onTouchUp(float x,float y )
+void CompManager::onMouseUp(float x,float y )
 {
     x /= DEApplication->getDeviceWidth()/GLCanvas::GetInstance()->getLayerWidth();
     y /= DEApplication->getDeviceHeight()/GLCanvas::GetInstance()->getLayerHeight();
@@ -106,22 +85,25 @@ void CompManager::onTouchUp(float x,float y )
          iter != m_validTouches.end(); ++iter)
     {
         TouchListener* obj = *iter;
+        if (obj->getIsReleased()) {
+            continue;
+        }
         obj->setFocus(false);
         float ox,oy;
         bool pointInside = obj->pointInside(x, y,ox,oy);
         if (pointInside) {
-            obj->onTouchUp(ox, oy);
+            obj->onMouseUp(ox, oy);
             if (!obj->getMoved()) {
                 obj->onClick(ox, oy);
             }
         }
         else {
-            obj->onTouchUp(ox, oy);
+            obj->onMouseUp(ox, oy);
         }
     }
 }
 
-void CompManager::onTouchMove(float x,float y )
+void CompManager::onMouseMove(float x,float y )
 {
     x /= DEApplication->getDeviceWidth()/GLCanvas::GetInstance()->getLayerWidth();
     y /= DEApplication->getDeviceHeight()/GLCanvas::GetInstance()->getLayerHeight();
@@ -129,6 +111,9 @@ void CompManager::onTouchMove(float x,float y )
          iter != m_validTouches.end(); ++iter)
     {
         TouchListener* obj = *iter;
+        if (obj->getIsReleased()) {
+            continue;
+        }
         float ox,oy;
         bool pointInside = obj->pointInside(x, y,ox,oy);
         if (!pointInside && obj->getFocus() == true) {
@@ -140,7 +125,7 @@ void CompManager::onTouchMove(float x,float y )
             obj->onMouseEnter();
         }
         obj->setMoved(true);
-        obj->onTouchMove(ox, oy);
+        obj->onMouseMove(ox, oy);
     }
 }
 

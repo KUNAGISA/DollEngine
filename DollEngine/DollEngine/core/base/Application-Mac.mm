@@ -44,12 +44,9 @@ void Application::initEnginePaths()
     if (m_dataPath.back() != '/') {
         m_dataPath.push_back('/');
     }
-//    
-//    m_dataPath = [[NSBundle mainBundle] resourcePath].UTF8String;
-//    m_dataPath += "/data/";
     
     //App path
-    m_appPath = [[NSBundle mainBundle] bundlePath].UTF8String;
+    m_appPath = [[NSBundle mainBundle] resourcePath].UTF8String;
     m_appPath += "/";
     
     //SaveData path

@@ -3,6 +3,9 @@
 
 function foreach (dict, func) 
 {
+    if (!dict) {
+        return;
+    }
     var iter = new DictIterator();
     iter.begin(dict);
     while(iter.next()) {

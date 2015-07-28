@@ -1,34 +1,27 @@
-class LayerColor extends Node
+class LayerColor extends Sprite
 {
 	function LayerColor (par) 
 	{
-		super.Node(par);
-		this._painter = new Painter();
-		addCOM(painter);
-		round = 0;
-	}
-
-	function finalize () 
-	{
-		dm('LayerColor');
-		super.finalize();
+		super.Sprite(par);
+		this.round = 0;
 	}
 
 	function setSize (w,h) 
 	{
-		painter.paintWidth=w;
-		painter.paintHeight=h;
-		super.setSize(...);
+		this._image.paintWidth=w;
+		this._image.paintHeight=h;
+		this.width = w if w !== void;
+		this.height = h if h !== void;
 	}
 
 	var _round=void;
 	property round{
 	    setter(v) {
 	    	//setter
-	    	var pw = painter.paintWidth;
-	    	var ph = painter.paintHeight;
-			painter.loadSize(2,2,v);
-			setSize(pw,ph);
+	    	var pw = this._image.paintWidth;
+	    	var ph = this._image.paintHeight;
+			this._image.loadSize(2,2,v);
+			this.setSize(pw,ph);
 	    	this._round = v;
 		}
 		getter {
@@ -37,20 +30,12 @@ class LayerColor extends Node
 		}
 	}
 
-	var _painter=void;
-	property painter{
-		getter {
-	    	//getter
-			return this._painter;
-		}
-	}
-
 	var _startColor=0;
 	property startColor{
 	    setter(v) {
 	    	//setter
 	    	this._startColor = v;
-	    	painter.setGradientColor(this._startColor,this._endColor,this._gradVector);
+	    	this._image.setGradientColor(this._startColor,this._endColor,this._gradVector);
 		}
 		getter {
 	    	//getter
@@ -63,7 +48,7 @@ class LayerColor extends Node
 	    setter(v) {
 	    	//setter
 	    	this._endColor = v;
-	    	painter.setGradientColor(this._startColor,this._endColor,this._gradVector);
+	    	this._image.setGradientColor(this._startColor,this._endColor,this._gradVector);
 		}
 		getter {
 	    	//getter
@@ -82,7 +67,7 @@ class LayerColor extends Node
 	    setter(v) {
 	    	//setter
 	    	this._gradVector = v;
-	    	painter.setGradientColor(this._startColor,this._endColor,this._gradVector);
+	    	this._image.setGradientColor(this._startColor,this._endColor,this._gradVector);
 		}
 		getter {
 	    	//getter

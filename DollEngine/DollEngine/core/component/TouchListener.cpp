@@ -22,7 +22,6 @@ TouchListener::TouchListener()
 {
     setCompName("TouchListener");
     m_type = COMP_TOUCH;
-    NEED_RETOUCH;
 }
 
 bool TouchListener::pointInside(float x,float y,float& ox,float &oy)

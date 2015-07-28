@@ -24,9 +24,9 @@ public:
     Painter();
     ~Painter();
 public:
-    bool loadImages(const string& path,const string& plist="");
+    virtual bool loadImages(const string& path,const string& plist="");
     bool loadSize(int w,int h,int r);
-    void setPaintSizeToImageSize();
+    virtual void setSizeToImageSize();
 public:
     void update();
     void updateWithFrame();
@@ -43,6 +43,8 @@ public:
     PROPERTY(float, PaintWidth, m_paintWidth){m_paintWidth=v;NEED_REDRAW;}
     PROPERTY(float, PaintHeight, m_paintHeight){m_paintHeight=v;NEED_REDRAW;}
     
+protected:
+    void flushPaintConfig(PaintConfig& config);
 protected:
     GradientColor* m_color;
 };

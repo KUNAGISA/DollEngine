@@ -1,0 +1,47 @@
+
+class Label extends Node
+{
+	function Label (par) 
+	{
+		super.Node(par);
+		this._font = new Character();
+		this.addCOM(this._font);
+		this.setAnchor(0.5,0.5);
+	}
+
+	var _text=void;
+	property text{
+	    setter(v) {
+	    	//setter
+	    	if(this._text != v){
+	    		this._font.text = v;
+	    	}
+	    	this._text = v;
+		}
+		getter {
+	    	//getter
+			return this._text;
+		}
+	}
+
+	var _color=void;
+	property color{
+	    setter(v) {
+	    	//setter
+	    	this._color = v;
+	    	this._font.setColor(v);
+		}
+		getter {
+	    	//getter
+			return this._color;
+		}
+	}
+
+	var _font=void;
+	property font{
+		getter {
+	    	//getter
+			return this._font;
+		}
+	}
+}

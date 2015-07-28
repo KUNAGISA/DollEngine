@@ -3,6 +3,7 @@ class TagHandlers extends KAGParser
 {
 	var _owner; //函数所调用的对象，通常是App对象
 	var curFile;
+	var macroParams = [];
 	function TagHandlers (object) 
 	{
 		super.KAGParser();
@@ -25,10 +26,10 @@ class TagHandlers extends KAGParser
 		}
 		else
 		{
-			if(callMacro(name))
+			if(this.callMacro(name))
 			{
 				time = -1;
-				macroParams.add(params);
+				this.macroParams.add(params);
 			}
 			else
 			{
@@ -52,22 +53,22 @@ class TagHandlers extends KAGParser
 
 	function returnMacro ()
 	{
-		macroParams.erase(macroParams.count-1);
-		returnCall();
+		this.macroParams.erase(this.macroParams.count-1);
+		this.returnCall();
 		return -1;
 	}
 
 	function getMacroParams () 
 	{
-		if (macroParams.count == 0) {
+		if (this.macroParams.count == 0) {
 			em("macro参数为空，一定是哪里有问题了");
 		}
-		return macroParams[-1];
+		return this.macroParams[-1];
 	}
 
 	function onScenarioEnded () 
 	{
-		_owner.waitClick(0);
+		this._owner.waitClick(0);
 	}
 
 	/*******TAG部分*******/
@@ -96,7 +97,7 @@ class TagHandlers extends KAGParser
 	//创建界面@ui storage=xx layer=xx page=xx visible=xx name=xx data=xx
 	function ui (elm) 
 	{
-		var par = getLayerByElm(elm);
+		var par = this.getLayerByElm(elm);
 		if (!par) {
 			return;
 		}
@@ -105,7 +106,10 @@ class TagHandlers extends KAGParser
 			print("[loadui]ui配置文件%s未找到",uipath);
 			return;
 		}
-		var lay = UIReader.readJsonFile(uipath,par);
+		if (typeof elm.hd == 'undefined') {
+			elm.hd = true;
+		}
+		var lay = UIReader.readJsonFile(uipath,par,elm.hd);
 		if (typeof elm['visible'] == 'undefined') {
 			lay.visible = true;
 		}
@@ -129,7 +133,7 @@ class TagHandlers extends KAGParser
 				lay.playShow();
 			}
 		}
-		dm("UI CREATE END");
+		print("UI %s 创建成功",elm.storage);
 	}
 
 	function image (elm) 

@@ -7,27 +7,27 @@ class _UIReader
 		this.uiCreator = new UICreator();
 	}
 
-	function readJsonFile (path,parent) 
+	function readJsonFile (path,parent,hd) 
 	{
 		var data = Scripts.jsonStorage(path);
-		return readJsonData(data,parent);
+		return this.readJsonData(data,parent,hd);
 	}
 
-	function readJsonData (data,parent) 
+	function readJsonData (data,parent,hd) 
 	{
-		var node = this.createNode(void,data.nodeGraph, true, parent, 0);
+		var node = this.createNode(void,data.nodeGraph, true, parent, 0,hd);
 		if (!node) {
 			return void;
 		}
 		var owner = node;
 		var manager = this.readAnimation(data);
 		owner.animation = manager;
-		this.readAnimationConfig(data.nodeGraph.animatedProperties, node, owner.animation);
-		this.readChild(data.nodeGraph.children, node, owner);
+		this.readAnimationConfig(data.nodeGraph.animatedProperties, node, owner.animation,hd);
+		this.readChild(data.nodeGraph.children, node, owner,hd);
 		return node;
 	}
 
-	function createNode (owner, data, isRoot, parent, zorder) 
+	function createNode (owner, data, isRoot, parent, zorder,hd) 
 	{
 		var orginNode;
 		if (typeof data.properties == "Object" &&
@@ -57,7 +57,7 @@ class _UIReader
 			data.customProperties = customProperties;
 		}
 		if (data.baseClass == "CCBFile") {
-			orginNode = uiCreator.create_CCBFile(owner,parent,data.properties,data.customProperties);
+			orginNode = this.uiCreator.create_CCBFile(owner,parent,data.properties,data.customProperties,hd);
 		}
 		else {
 			if (data.customClass != "") {
@@ -70,8 +70,8 @@ class _UIReader
 					}
 				}
 				else {
-					if (typeof uiCreator["create_"+data.customClass] != 'undefined') {
-						orginNode = uiCreator["create_"+data.customClass](owner,parent,data.properties,data.customProperties);
+					if (typeof this.uiCreator["create_"+data.customClass] != 'undefined') {
+						orginNode = this.uiCreator["create_"+data.customClass](owner,parent,data.properties,data.customProperties,hd);
 					}
 					else {
 						print("扩展控件类型%s未定义",data.customClass);
@@ -80,8 +80,8 @@ class _UIReader
 				}
 			}
 			else {
-				if (typeof uiCreator["create_"+data.baseClass] != 'undefined') {
-					orginNode = uiCreator["create_"+data.baseClass](owner,parent,data.properties,data.customProperties);
+				if (typeof this.uiCreator["create_"+data.baseClass] != 'undefined') {
+					orginNode = this.uiCreator["create_"+data.baseClass](owner,parent,data.properties,data.customProperties,hd);
 				}
 				else {
 					print("基础控件类型%s未定义",data.baseClass);
@@ -89,18 +89,19 @@ class _UIReader
 				}
 			}
 		}
-		uiCreator.setNodeProperties(orginNode,data.properties,owner,false);
+		orginNode.absolute = zorder;
+		this.uiCreator.setNodeProperties(orginNode,data.properties,owner,false,hd);
 		return orginNode;
 	}
 
-	function readChild (children, parent, owner) 
+	function readChild (children, parent, owner,hd) 
 	{
 		for (var i = 0; i < children.count; i++) {
 			var data = children[i];
-			var node = this.createNode(owner, data, false, parent, i);
+			var node = this.createNode(owner, data, false, parent, i,hd);
 			if (node) {
-				this.readAnimationConfig(data.animatedProperties,node,owner.animation);
-				this.readChild(data.children, node, owner);
+				this.readAnimationConfig(data.animatedProperties,node,owner.animation,hd);
+				this.readChild(data.children, node, owner,hd);
 			}
 		};
 	}
@@ -114,15 +115,15 @@ class _UIReader
 		return manager;
 	}
 
-	function readAnimationConfig (properties, node, manager) 
+	function readAnimationConfig (properties, node, manager,hd) 
 	{
 		if (properties == void) {
 			return;
 		}
 		foreach(properties,function (key, value) 
 		{
-			manager.parseProperties(node,key,value);
-		});
+			this[0].parseProperties(this[1],key,value);
+		}incontextof [manager,node]);
 	}
 }
 

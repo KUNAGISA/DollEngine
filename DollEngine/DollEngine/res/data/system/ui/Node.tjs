@@ -3,13 +3,14 @@ class Node extends GameObject
 {
 	var name;//名称
 	var children=[];
+	var _needSortChildren=false;
 	function Node (par=void) 
 	{
 		super.GameObject();
 		if (par == void) {
 			if(Application.world){
 				Application.world.children.add(this);
-				parent = Application.world;
+				this.parent = Application.world;
 			}
 			else {
 				Application.world = this;
@@ -17,63 +18,96 @@ class Node extends GameObject
 		}
 		else {
 			par.children.add(this);
-			parent = par;
+			this.parent = par;
 		}
 	}
 
 	function finalize () 
 	{
-		if (parent) {
-			parent.children.remove(this);
+		if (this.parent) {
+			this.parent.children.remove(this);
 		}
-		parent = void;
-		for (var i = children.count - 1; i >= 0; i--) {
-			children[i].parent = void;
-			invalidate children[i];
+		this.parent = void;
+		for (var i = this.children.count - 1; i >= 0; i--) {
+			this.children[i].parent = void;
+			invalidate this.children[i];
 		};
-		children.clear();
+		this.children.clear();
 		super.finalize();
 	}
 
 	function visit () 
 	{
-		transform();
-		if (children.count > 0) {
+		if (!this.visible) {
+			return;
+		}
+		this.transform();
+		var count = this.children.count;
+		if (count > 0) {
+			if (this._needSortChildren) {
+				this.children.sort(function (a,b) 
+				{
+					return a.absolute < b.absolute;
+				});
+			}
 			var i=0;
-			var count = children.count;
 			for (; i < count; i++) {
-				if(children[i].absolute >=0) {
+				if(this.children[i].absolute >=0) {
 					break;
 				}
-				children[i].visit();
+				this.children[i].visit();
 			};
-			onPaint();
+			this.onPaint();
 			for (; i < count; i++) {
-				children[i].visit();
+				this.children[i].visit();
 			};
 		}
 		else {
-			onPaint();
+			this.onPaint();
+		}
+	}
+
+	function onTouchUpdate () 
+	{
+		if (enabled) {
+			super.onTouchUpdate();
+			for (var i = 0; i < this.children.count; i++) {
+				this.children[i].onTouchUpdate();
+			};
 		}
 	}
 
 	function setSize (w=void,h=void) 
 	{
-		width = w if w !== void;
-		height = h if h !== void;
+		this.width = w if w !== void;
+		this.height = h if h !== void;
 	}
 
-	function setPos (l,t,w=void,h=void) 
+	function setPos (x,y,w=void,h=void) 
 	{
-		left = l if l !== void;
-		top = t if t !== void;
-		width = w if w !== void;
-		height = h if h !== void;
+		this.x = x if x !== void;
+		this.y = y if y !== void;
+		this.width = w if w !== void;
+		this.height = h if h !== void;
 	}
 
 	function setAnchor (x=void,y=void) 
 	{
-		anchorX = x if x !== void;
-		anchorY = y if y !== void;
+		this.anchorX = x if x !== void;
+		this.anchorY = y if y !== void;
+	}
+
+	property absolute{
+	    setter(v) {
+	    	//setter
+	    	if (super.absolute != v) {
+	    		super.absolute = v;
+	    		this._needSortChildren = true;
+	    	}
+		}
+		getter {
+	    	//getter
+			return super.absolute;
+		}
 	}
 }

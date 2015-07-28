@@ -39,7 +39,6 @@ class UIAnimation
         }
         var data = this.animaById[+id];
         var creatorHandlers = [];
-        var object = [this,creatorHandlers];
         foreach(dict,function(key,value){
         	var animation = this[0];
         	if (typeof animation['action_'+key] == 'undefined') {
@@ -49,7 +48,7 @@ class UIAnimation
         	var creatorHandlers = this[1];
         	var handler = animation['action_'+key](value);
         	creatorHandlers.add(handler);
-        } incontextof object);
+        } incontextof [this,creatorHandlers]);
         if (creatorHandlers.count > 0) {
         	data.animate.add([node,creatorHandlers]);
         }

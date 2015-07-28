@@ -11,6 +11,8 @@
 #include "Storages.h"
 #include "CompManager.h"
 #include "ScriptEngine.h"
+#include "FontCache.h"
+#include "GLCanvas.h"
 
 DE_BEGIN
 
@@ -29,13 +31,9 @@ void Application::mainLoop()
 {
     if (m_world) {
         if (m_needRedraw) {
+            GLCanvas::GetInstance()->clearGL();
             m_world->visit();
             m_needRedraw = false;
-        }
-        if (m_needRetouch) {
-            CompManager::GetInstance()->clearTouches();
-            m_world->updateTouchListener();
-            m_needRetouch=false;
         }
     }
 }
@@ -43,6 +41,7 @@ void Application::mainLoop()
 void Application::startup()
 {
     initEnginePaths();
+    FontCache::GetInstance()->getFont(DEFFONT);
     string fullpath = Storages::GetInstance()->getFullPath("Startup.tjs");
     try{
         IOData* data = Storages::GetFileString(fullpath);
@@ -58,7 +57,6 @@ void Application::startup()
             ScriptEngine::GetInstance()->popFile();
         }
         m_needRedraw=true;
-        m_needRetouch=true;
     }
     catch(...) {
         

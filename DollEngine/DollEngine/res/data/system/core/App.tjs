@@ -13,9 +13,9 @@ class App extends Window
 			em("不可重复创建App");
 		}
 		global.App.mainApp = this;
-		width = DEConfig.device.width;
-		height = DEConfig.device.height;
-		initialize(DEConfig.device.width,DEConfig.device.height,DEConfig.device.scale);
+		this.width = DEConfig.device.width;
+		this.height = DEConfig.device.height;
+		this.initialize(DEConfig.device.width,DEConfig.device.height,DEConfig.device.scale);
 
 		this.tags = new TagHandlers(this);
 		
@@ -34,14 +34,14 @@ class App extends Window
 		if (p == 'back') {
 			if (layer == 'base' ||
 				layer == 'world') {
-				if(!back.world)
-					back.world = %[];
-				merger(back.world,elm);
+				if(!this.back.world)
+					this.back.world = %[];
+				merger(this.back.world,elm);
 			}
 			else {
-				if(!back[layer])
-					back[layer] = %[];
-				merger(back[layer],elm);
+				if(!this.back[layer])
+					this.back[layer] = %[];
+				merger(this.back[layer],elm);
 			}
 			return void;
 		}
@@ -51,7 +51,7 @@ class App extends Window
 				return this.world;
 			}
 			var lay;
-			if (typeof world.names[layer] == 'undefined') {
+			if (typeof this.world.names[layer] == 'undefined') {
 				var zorder=0;
 				if(layer.indexOf('message') == 0)
 				{

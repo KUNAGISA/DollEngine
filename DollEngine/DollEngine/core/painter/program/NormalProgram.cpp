@@ -85,10 +85,10 @@ void NormalProgram::actived(PaintConfig& config)
 #define VEH(p) vertices[p]=config.height
 #define VEW(p) vertices[p]=config.width
     
-    VE0(0);VE0(1);//左下
-    VE0(2);VEH(3);//左上
-    VEW(4);VEH(5);//右上
-    VEW(6);VE0(7);//右下
+    VE0(0);VEH(1);//左下
+    VE0(2);VE0(3);//左上
+    VEW(4);VE0(5);//右上
+    VEW(6);VEH(7);//右下
     
     GLfloat colors[4][4];
     memset(colors, 1.0f, 16);

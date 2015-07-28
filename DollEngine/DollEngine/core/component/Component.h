@@ -23,9 +23,6 @@ enum COMP_TYPE
     COMP_TOUCH
 };
 
-class Component;
-typedef list<Component*>::iterator CompIter;
-
 class Component
 {
 public:
@@ -34,14 +31,11 @@ public:
     virtual void update(){}
     void release();
     
-    static CompIter EndIter();
-    
     PROPERTY(bool, Enabled, m_enabled){m_enabled=v;}
     PROPERTY(GameObject*, Object, m_object){m_object=v;}
     PROPERTY(bool, IsReleased, m_isReleased){m_isReleased=v;}
     PROPERTY(float, Time, m_time){m_time=v;}
     PROPERTY(int, Type, m_type){m_type=v;}
-    PROPERTY(CompIter, CompIter, m_compIter){m_compIter=v;}
     PROPERTY_CONST(string, CompName, m_compName){m_compName=v;}
 };
 

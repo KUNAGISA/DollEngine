@@ -1,7 +1,7 @@
 
 class UICreator
 {
-	function getPosByType (node, posArr) 
+	function getPosByType (node, posArr,hd) 
 	{
         var par_width,par_height;
         if(node.parent)
@@ -32,9 +32,15 @@ class UICreator
         {
             x = par_width*x;
         }
+        else {
+            x*=2 if hd;
+        }
         if(posTypeY == 2)
         {
             y = par_height*y;
+        }
+        else {
+            y*=2 if hd;
         }
         if(posTypeOrgin == 1)
         {
@@ -49,11 +55,10 @@ class UICreator
         {
             x = par_width-x;
         }
-        y=par_height-node.height-y;
         return [x,y];
 	}
 
-	function getSizeByType (node,sizeArr) 
+	function getSizeByType (node,sizeArr,hd) 
 	{
 		var par_width,par_height;
         if(node.parent)
@@ -71,16 +76,22 @@ class UICreator
         {
             w = par_width*w;
         }
+        else {
+            w*=2 if hd;
+        }
         if(sizeArr[3] == 2)
         {
             h = par_height*h;
         }
+        else {
+            h*=2 if hd;
+        }
         return [w,h];
 	}
 
-	function setNodeProperties (node,data,owner, isccb) 
+	function setNodeProperties (node,data,owner, isccbfile,hd) 
 	{
-		if (data.name && !isccb) {
+		if (data.name && !isccbfile) {
 			if (owner.names) {
 				owner.names[data.name] = node;
 			}
@@ -95,18 +106,16 @@ class UICreator
 		}
 
         if (data.anchorPoint) {
-            var ax = data.anchorPoint[0];
-            var ay = data.anchorPoint[1];
-            node.setAnchor(ax,-ay);
+            node.setAnchor(data.anchorPoint*);
         }
 
         if (data.contentSize) {
-            var size = getSizeByType(node,data.contentSize);
+            var size = getSizeByType(node,data.contentSize,hd);
             node.setSize(size*);
         }
 
 		if (data.position) {
-			var pos = getPosByType(node,data.position);
+			var pos = getPosByType(node,data.position,hd);
 			node.setPos(pos*);
 		}
 
@@ -128,9 +137,17 @@ class UICreator
         }
 
         if (data.color) {
-        	node.setColorF(data.color*);
+            if (typeof node.setColorF != 'undefined') {
+                node.setColorF(data.color*);
+            }
         }
 	}
+
+    function create_CCNode () 
+    {
+        var node = new Node();
+        return node;
+    }
 
 	function create_CCNodeGradient (owner,parent,properties,customProperties) 
     {
@@ -157,4 +174,48 @@ class UICreator
         return node;
     }
 
+
+    function create_CCLabelTTF (owner,parent,properties,customProperties,hd) 
+    {
+        var node = new Label(parent);
+        node.color = colorBy4F(properties.fontColor*);
+        node.text = properties.string[0];
+        node.font.fontName = properties.fontName;
+        node.font.fontSize = properties.fontSize[0];
+        node.font.fontSize *=2 if hd;
+        return node;
+    }
+
+    function create_CCSprite (owner,parent,properties,customProperties,hd) 
+    {
+        var node = new Sprite(parent);
+        node.loadImages(properties.spriteFrame[1],properties.spriteFrame[0]);
+        return node;
+    }
+
+    function create_CCButton (owner,parent,properties,customProperties,hd) 
+    {
+        var node = new Button(parent);
+        dump(properties);
+        var param = [
+            properties.backgroundSpriteFrame_Normal[1],
+            properties.backgroundSpriteFrame_Highlighted[1],
+            properties.backgroundSpriteFrame_Disabled[1],
+            properties.backgroundSpriteFrame_Normal[0],
+            properties.backgroundSpriteFrame_Highlighted[0],
+            properties.backgroundSpriteFrame_Disabled[0]
+        ];
+        node.normalImage = [properties.backgroundSpriteFrame_Normal[1],properties.backgroundSpriteFrame_Normal[0]];
+        node.selectImage = [properties.backgroundSpriteFrame_Highlighted[1],properties.backgroundSpriteFrame_Highlighted[0]];
+        node.disableImage = [properties.backgroundSpriteFrame_Disabled[1],properties.backgroundSpriteFrame_Disabled[0]];
+        node.title = properties.title[0];
+        node.titleFontName = properties.fontName;
+        node.titleFontSize = properties.fontSize[0];
+        node.titleFontSize *= 2 if hd;
+        node.titleColor = colorBy4B(properties.fontColor*);
+        node.titleColorSelect = colorBy4F(properties.labelColor_Highlighted*) if properties.labelColor_Highlighted;
+        node.titleColorDisable = colorBy4F(properties.labelColor_Disabled*) if properties.labelColor_Disabled;
+        node.disabled = !properties.userInteractionEnabled;
+        return node;
+    }
 }

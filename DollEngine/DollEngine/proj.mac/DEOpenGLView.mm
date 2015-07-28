@@ -93,21 +93,21 @@
 {
     NSPoint event_location = [theEvent locationInWindow];
     NSPoint local_point = [self convertPoint:event_location fromView:nil];
-    DE::CompManager::GetInstance()->onTouchDown(local_point.x,self.frame.size.height -local_point.y);
+    DE::CompManager::GetInstance()->onMouseDown(local_point.x,local_point.y);
 }
 
 -(void)mouseDragged:(NSEvent *)theEvent
 {
     NSPoint event_location = [theEvent locationInWindow];
     NSPoint local_point = [self convertPoint:event_location fromView:nil];
-    DE::CompManager::GetInstance()->onTouchMove(local_point.x, self.frame.size.height - local_point.y);
+    DE::CompManager::GetInstance()->onMouseMove(local_point.x, self.frame.size.height - local_point.y);
 }
 
 -(void)mouseUp:(NSEvent *)theEvent
 {
     NSPoint event_location = [theEvent locationInWindow];
     NSPoint local_point = [self convertPoint:event_location fromView:nil];
-    DE::CompManager::GetInstance()->onTouchUp(local_point.x, self.frame.size.height - local_point.y);
+    DE::CompManager::GetInstance()->onMouseUp(local_point.x, local_point.y);
 }
 
 

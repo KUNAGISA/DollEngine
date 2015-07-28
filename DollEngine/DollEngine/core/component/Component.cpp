@@ -12,19 +12,11 @@
 
 DE_BEGIN
 
-static list<Component*> s_endCompList;
-
-CompIter Component::EndIter()
-{
-    return s_endCompList.end();
-}
-
 Component::Component()
 :m_type(COMP_UNKNOW)
 ,m_isReleased(false)
 ,m_object(null)
 ,m_enabled(true)
-,m_compIter(Component::EndIter())
 ,m_time(0)
 {
     

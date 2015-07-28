@@ -1,0 +1,54 @@
+
+class Control extends Node
+{
+	function Control (par) 
+	{
+		super.Node(par);
+		this._touch = new Touch();
+		this.addCOM(this._touch);
+		this.enabled = true;
+		this._touch.onMouseDown = this.onMouseDown;
+		this._touch.onMouseMove = this.onMouseMove;
+		this._touch.onMouseUp = this.onMouseUp;
+		this._touch.onClick = this.onClick;
+	}
+
+	function onMouseDown (x,y) 
+	{
+		
+	}
+
+	function onMouseMove (x,y) 
+	{
+		// body...
+	}
+
+	function onMouseUp (x,y) 
+	{
+		// body...
+	}
+
+	function onClick (x,y) 
+	{
+		// body...
+	}
+
+	var _touch=void;
+	property touch{
+		getter {
+	    	//getter
+			return this._touch;
+		}
+	}
+
+	property disabled{
+	    setter(v) {
+	    	//setter
+	    	this._touch.enabled = !v;
+		}
+		getter {
+	    	//getter
+			return !this._touch.enabled;
+		}
+	}
+}

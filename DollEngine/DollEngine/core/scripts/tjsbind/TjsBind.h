@@ -152,6 +152,9 @@ NCB_PROPERTY_RO(class, getClass);
 #define TJS_STRING(v,str) string str;\
 UnicodeToUtf8(v.AsStringNoAddRef()->operator const wchar_t *(), str);
 
+#define TJS_WSTRING(v,str) wstring str;\
+Utf8ToUnicode(v.c_str(), str);
+
 #define TJS_GET_DISPATCH(TYPE,NODE) (ncbInstanceAdaptor<TYPE>::GetAdaptor((TYPE*)NODE))
 
 #define TJS_GET_OBJECT(TYPE,NODE) (ncbInstanceAdaptor<TYPE>::GetNativeInstance(NODE));

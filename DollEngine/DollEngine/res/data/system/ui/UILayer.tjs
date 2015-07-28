@@ -9,7 +9,6 @@ class UILayer extends Node
 
 	function finalize () 
 	{
-		dm('UILayer');
 		super.finalize();
 	}
 

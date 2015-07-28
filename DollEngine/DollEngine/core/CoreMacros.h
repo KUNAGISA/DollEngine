@@ -38,7 +38,6 @@ using namespace std;
 #define DEApplication DE::Application::GetInstance()
 
 #define NEED_REDRAW DEApplication->setNeedRedraw(true)
-#define NEED_RETOUCH DEApplication->setNeedRetouch(true)
 
 #define Shared(type) static type* GetInstance() \
 {\

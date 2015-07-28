@@ -100,19 +100,21 @@ void Debug::message(const char* format,...)
 
 void Debug::throwMsg(DEBUG_MSG error,const string& p1)
 {
+    wstring p2;
+    Utf8ToUnicode(p1.c_str(), p2);
     wstring msg;
     switch (error) {
         case ERROR_IMAGE_LOAD_FAILD:
-            msg = UnicodeWithFormat(L"图片资源加载失败:%s",p1.c_str());
+            msg = L"图片资源加载失败:"+p2;
             break;
         case ERROR_FILE_EXIST_FAILD:
-            msg = UnicodeWithFormat(L"文件未找到:%s",p1.c_str());
+            msg = L"文件未找到:"+p2;
             break;
         case ERROR_ADDFONT_FAILD:
-            msg = UnicodeWithFormat(L"添加字体时出错");
+            msg = L"添加字体时出错";
             break;
         default:
-            msg = UnicodeWithFormat(L"未知错误");
+            msg = L"未知错误";
             break;
     }
     TJS_eTJSError(msg);

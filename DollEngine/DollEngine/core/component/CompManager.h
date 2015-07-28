@@ -23,12 +23,11 @@ public:
     Shared(CompManager)
 public:
     void addTouchComp(Component* comp);
-    void removeTouchComp(Component* comp);
     void clearTouches();
     
-    bool onTouchDown(float x,float y );
-    void onTouchUp(float x,float y );
-    void onTouchMove(float x,float y );
+    bool onMouseDown(float x,float y );
+    void onMouseUp(float x,float y );
+    void onMouseMove(float x,float y );
     
 public:
     void addReleaseComp(Component* comp);

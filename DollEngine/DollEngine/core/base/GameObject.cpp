@@ -48,7 +48,7 @@ GameObject::~GameObject()
         comp->release();
     }
     if (m_touchComps.size() > 0) {
-        NEED_RETOUCH;
+        NEED_REDRAW;
     }
     m_touchComps.clear();
     for (Component* comp : m_updateComps) {
@@ -108,7 +108,7 @@ void GameObject::transform()
     m_transInWorld->setHeight(m_transform->getHeight());
 }
 
-void GameObject::updateTouchListener()
+void GameObject::onTouchUpdate()
 {
     if (getEnabled()) {
         for (Component* comp : m_touchComps) {

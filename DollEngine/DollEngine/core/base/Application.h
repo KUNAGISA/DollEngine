@@ -39,7 +39,6 @@ public:
     PROPERTY_RO(float,DeviceHeight,m_deviceHeight) //设备大小
     
     PROPERTY(bool,NeedRedraw,m_needRedraw){m_needRedraw=v;}
-    PROPERTY(bool,NeedRetouch,m_needRetouch){m_needRetouch=v;}
 protected:
     void initEnginePaths();
 //    void timerEvent(QTimerEvent*event );

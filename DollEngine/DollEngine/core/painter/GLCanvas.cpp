@@ -14,8 +14,8 @@ DE_BEGIN
 GLCanvas::GLCanvas()
 :m_layerHeight(0)
 ,m_layerWidth(0)
-,m_layerLeft(0)
-,m_layerTop(0)
+,m_layerX(0)
+,m_layerY(0)
 ,m_layerZoom(0)
 ,m_initialized(false)
 {
@@ -74,13 +74,13 @@ void GLCanvas::resizeGL()
         }
         
         m_globalTrans->setX(layerX*2/deviceWidth-1);
-        m_globalTrans->setY(-layerY*2/deviceHeight+1);
+        m_globalTrans->setY(layerY*2/deviceHeight-1);
         m_globalTrans->setScaleX(2/deviceWidth * layerZoom);
-        m_globalTrans->setScaleY(-2/deviceHeight * layerZoom);
+        m_globalTrans->setScaleY(2/deviceHeight * layerZoom);
         m_globalTrans->flush();
         
-        setLayerLeft(layerX);
-        setLayerTop(layerY);
+        setLayerX(layerX);
+        setLayerY(layerY);
         
         setLayerZoom(layerZoom);
 #ifdef OS_MAC

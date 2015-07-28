@@ -1,13 +1,37 @@
 
 class Sprite extends Node
 {
-	function Sprite () 
+	function Sprite (par) 
 	{
-		super.Node();
+		super.Node(par);
+		this._image = new Painter();
+		this.addCOM(this._image);
+		this.setAnchor(0.5,0.5);
 	}
 
-	function finalize () 
+	function setSize (w,h) 
 	{
-		super.finalize();
+		this.width = w if w !== void;
+		this.height = h if h !== void;
+		this._image.setSizeToImageSize();
 	}
+
+	function loadImages (path,plist=void) 
+	{
+		return this._image.loadImages(path,plist);
+	}
+
+	function setColorF (fr,fg,fb,fa) 
+	{
+		this._image.setColor(colorBy4F(...));
+	}
+
+	var _image=void;
+	property image{
+		getter {
+	    	//getter
+			return this._image;
+		}
+	}
+
 }

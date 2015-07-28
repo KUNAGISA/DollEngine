@@ -29,8 +29,8 @@ public:
     
     PROPERTY(float,LayerWidth,m_layerWidth){m_layerWidth=v;}
     PROPERTY(float,LayerHeight,m_layerHeight){m_layerHeight=v;} //逻辑大小
-    PROPERTY(float,LayerLeft,m_layerLeft){m_layerLeft=v;}
-    PROPERTY(float,LayerTop,m_layerTop){m_layerTop = v;}
+    PROPERTY(float,LayerX,m_layerX){m_layerX=v;}
+    PROPERTY(float,LayerY,m_layerY){m_layerY = v;}
     PROPERTY(float,LayerZoom,m_layerZoom){m_layerZoom=v;}
     
 protected:

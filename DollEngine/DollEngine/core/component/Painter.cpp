@@ -40,9 +40,9 @@ bool Painter::loadImages(const string& path,const string& plist)
 {
     SpriteFrame* frame = GLCache::GetInstance()->addFrame(path);
     m_colorRect = false;
-    setPaintSizeToImageSize();
     if (frame) {
         setDisplayFrame(frame);
+        setSizeToImageSize();
         NEED_REDRAW;
         return true;
     }
@@ -59,6 +59,7 @@ bool Painter::loadSize(int w,int h,int r)
     m_paintHeight = h;
     if (frame) {
         setDisplayFrame(frame);
+        setSizeToImageSize();
         NEED_REDRAW;
         return true;
     }
@@ -67,10 +68,10 @@ bool Painter::loadSize(int w,int h,int r)
     }
 }
 
-void Painter::setPaintSizeToImageSize()
+void Painter::setSizeToImageSize()
 {
     if (m_colorRect) {
-        return;
+        
     }
     else {
         if (m_displayFrame) {
@@ -81,6 +82,10 @@ void Painter::setPaintSizeToImageSize()
             m_paintWidth = 0;
             m_paintHeight = 0;
         }
+    }
+    if(getObject()){
+        getObject()->setWidth(m_paintWidth);
+        getObject()->setHeight(m_paintHeight);
     }
 }
 
@@ -136,6 +141,12 @@ void Painter::update()
 void Painter::updateWithFrame()
 {
     PaintConfig config;
+    flushPaintConfig(config);
+    GLPainter::GetInstance()->paint(config);
+}
+
+void Painter::flushPaintConfig(PaintConfig& config)
+{
     config.frame = m_displayFrame;
     config.trans = getObject()->getTransInWorld();
     config.color = m_color;
@@ -151,8 +162,6 @@ void Painter::updateWithFrame()
     config.height = m_paintHeight;
     config.blendSrc = m_blendSrc;
     config.blendDst = m_blendDst;
-    GLPainter::GetInstance()->paint(config);
 }
-
 
 DE_END

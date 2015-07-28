@@ -1,22 +1,31 @@
 #include "TjsDictIterator.h"
 
 TjsDictIterator::TjsDictIterator()
-    :m_root_dict (null)
-    ,m_root_iter(null)
-    ,m_line_iter(null)
+    :m_root_iter(null)
+    ,m_next_iter(null)
     ,m_current_iter(null)
+    ,m_root_dict(null)
     ,m_size(0)
 {
 }
 
-void TjsDictIterator::begin(iTJSDispatch2* root)
+TjsDictIterator::~TjsDictIterator()
 {
-    m_root_dict = dynamic_cast<tTJSDictionaryObject*>(root);
+    if (m_root_dict) {
+        m_root_dict->Release();
+    }
+}
+
+void TjsDictIterator::begin(tTJSVariant root)
+{
+    if (m_root_dict) {
+        m_root_dict->Release();
+    }
+    m_root_dict = dynamic_cast<tTJSDictionaryObject*>(root.AsObject());
     if(m_root_dict)
     {
         m_root_iter = m_root_dict->Symbols;
         m_size = m_root_dict->HashSize;
-        m_line_iter = m_root_iter->Next;
     }
 }
 
@@ -30,29 +39,31 @@ bool TjsDictIterator::next()
 {
     if(m_size <= 0)
         return false;
-    if(m_line_iter)
-    {
-        if(m_line_iter->SymFlags & TJS_SYMBOL_USING)
-        {
-            m_current_iter = m_line_iter;
-            m_line_iter = m_line_iter->Next;
-            return true;
-        }
-        return false;
-    }
-    if(m_root_iter->SymFlags & TJS_SYMBOL_USING)
-    {
+    if (!m_current_iter) {
         m_current_iter = m_root_iter;
-        ++m_root_iter;
-        m_line_iter = m_root_iter->Next;
-        --m_size;
+        m_next_iter = m_current_iter->Next;
+        if (!m_current_iter->SymFlags&TJS_SYMBOL_USING) {
+            return next();
+        }
+        return true;
+    }
+    if (m_next_iter) {
+        m_current_iter = m_next_iter;
+        m_next_iter = m_current_iter->Next;
         return true;
     }
     else
     {
         ++m_root_iter;
         --m_size;
-        return next();
+        if(m_size <= 0)
+            return false;
+        m_current_iter = m_root_iter;
+        m_next_iter = m_current_iter->Next;
+        if (!m_current_iter->SymFlags&TJS_SYMBOL_USING) {
+            return next();
+        }
+        return true;
     }
 }
 

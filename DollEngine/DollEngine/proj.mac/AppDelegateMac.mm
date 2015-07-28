@@ -20,12 +20,19 @@ using namespace DE;
 
 @implementation AppDelegateMac
 
+enum TEST{
+    test1 =0,
+    test2,
+    test3,
+    test4,
+    test5
+};
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     
     new TjsEngine();
     DE::TjsConsole::GetInstance()->setVisible(true);
     DEApplication->startup();
-    
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {

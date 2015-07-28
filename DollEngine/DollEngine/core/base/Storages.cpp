@@ -19,7 +19,7 @@ IOData* Storages::GetFileData(const string& fullpath)
 {
     if (fullpath.size() == 0)
     {
-        Debug::throwMsg("文件未找到:"+fullpath);
+        Debug::throwMsg(ERROR_FILE_EXIST_FAILD,fullpath);
         return null;
     }
     
@@ -46,7 +46,7 @@ IOData* Storages::GetFileString(const string& fullpath)
 {
     if (fullpath.size() == 0)
     {
-        Debug::throwMsg("文件未找到:"+fullpath);
+        Debug::throwMsg(ERROR_FILE_EXIST_FAILD,fullpath);
         return null;
     }
     FILE *fp = fopen(fullpath.c_str(), "rb");
@@ -118,6 +118,12 @@ string Storages::getFullPath(const string& storage)
                 return temp_path;
             }
             temp_path = DEApplication->getDataPath()+storage;
+            if (access(temp_path.c_str(),0) == 0)
+            {
+                m_searchPathsCache[storage] = temp_path;
+                return temp_path;
+            }
+            temp_path = DEApplication->getAppPath()+storage;
             if (access(temp_path.c_str(),0) == 0)
             {
                 m_searchPathsCache[storage] = temp_path;

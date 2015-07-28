@@ -70,11 +70,11 @@ void GLPainter::paint(PaintConfig& config)
         frame->getTexture() &&
         frame->getTexture()->getTextureId() != 0)
     {
+        blendFunc(config.blendSrc,config.blendDst);
         config.program->use();
         config.program->setUniformValue("matrix", config.trans->getMatrix());
         
         frame->getTexture()->bind(GL_TEXTURE0);
-        
         config.program->actived(config);
         
         CHECK_GL_ERROR;
