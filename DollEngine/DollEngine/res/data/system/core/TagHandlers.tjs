@@ -72,7 +72,8 @@ class TagHandlers extends KAGParser
 
 	/*******TAG部分*******/
 
-	//系统操作
+	/*******系统操作*******/
+	//打印
 	function dm (elm) 
 	{
 		var str;
@@ -82,7 +83,16 @@ class TagHandlers extends KAGParser
 		print(str);
 	}
 
-	
+	//执行表达式
+	function eval (elm) 
+	{
+		if (elm.exp) {
+			Scripts.eval(elm.exp);
+		}
+		return 0;
+	}
+
+	/*******界面控制*******/
 	//创建界面@ui storage=xx layer=xx page=xx visible=xx name=xx data=xx
 	function ui (elm) 
 	{
@@ -106,7 +116,6 @@ class TagHandlers extends KAGParser
 			par.names[elm.name] = lay;
 			lay.name = elm.name;
 		}
-		f.a=lay;
 		if (typeof lay.initialize != 'undefined') {
 			if (elm.data) {
 				var data = Scripts.eval(elm.data);
@@ -120,6 +129,7 @@ class TagHandlers extends KAGParser
 				lay.playShow();
 			}
 		}
+		dm("UI CREATE END");
 	}
 
 	function image (elm) 

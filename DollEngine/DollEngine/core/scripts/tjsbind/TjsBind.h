@@ -121,7 +121,7 @@ for(tjs_int i=TJS_MAX_NATIVE_CLASS-1; i>=0; i--)\
 }\
 _self->_Finalize();\
 }\
-ttstr getClass()\
+tTJSVariant getClass()\
 {\
 return _self->ClassNames[0];\
 }\

@@ -3,21 +3,58 @@ class Node extends GameObject
 {
 	var name;//名称
 	var children=[];
-	function Node () 
+	function Node (par=void) 
 	{
 		super.GameObject();
+		if (par == void) {
+			if(Application.world){
+				Application.world.children.add(this);
+				parent = Application.world;
+			}
+			else {
+				Application.world = this;
+			}
+		}
+		else {
+			par.children.add(this);
+			parent = par;
+		}
 	}
 
 	function finalize () 
 	{
+		if (parent) {
+			parent.children.remove(this);
+		}
+		parent = void;
+		for (var i = children.count - 1; i >= 0; i--) {
+			children[i].parent = void;
+			invalidate children[i];
+		};
 		children.clear();
 		super.finalize();
 	}
 
-	function addChild (obj) 
+	function visit () 
 	{
-		children.add(obj);
-		super.addChild(obj);
+		transform();
+		if (children.count > 0) {
+			var i=0;
+			var count = children.count;
+			for (; i < count; i++) {
+				if(children[i].absolute >=0) {
+					break;
+				}
+				children[i].visit();
+			};
+			onPaint();
+			for (; i < count; i++) {
+				children[i].visit();
+			};
+		}
+		else {
+			onPaint();
+		}
 	}
 
 	function setSize (w=void,h=void) 

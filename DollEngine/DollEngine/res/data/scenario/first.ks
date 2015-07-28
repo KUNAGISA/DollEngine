@@ -1,2 +1,3 @@
 *start
-[ui storage=start/StartScene.json layer=base page=fore ]
+[ui storage=start/StartScene.json layer=base page=fore name=StartScene]
+[eval exp='app.world.del()']

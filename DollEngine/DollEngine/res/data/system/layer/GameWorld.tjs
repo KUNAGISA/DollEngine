@@ -1,17 +1,23 @@
-class GameWorld extends UILayer
+class GameWorld extends Node
 {
+	var names=%[];
 	function GameWorld () 
 	{
-		super.UILayer();
+		super.Node(void);
 	}
 
 	function finalize () 
 	{
+		dm('GameWorld');
 		super.finalize();
 	}
 
 	function initialize (w,h) 
 	{
 		setSize(w,h);
+	}
+
+	function del () 
+	{
 	}
 }

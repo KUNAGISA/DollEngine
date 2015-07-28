@@ -89,9 +89,6 @@ class _UIReader
 				}
 			}
 		}
-		if (parent) {
-			parent.addChild(orginNode);
-		}
 		uiCreator.setNodeProperties(orginNode,data.properties,owner,false);
 		return orginNode;
 	}
@@ -103,6 +100,7 @@ class _UIReader
 			var node = this.createNode(owner, data, false, parent, i);
 			if (node) {
 				this.readAnimationConfig(data.animatedProperties,node,owner.animation);
+				this.readChild(data.children, node, owner);
 			}
 		};
 	}

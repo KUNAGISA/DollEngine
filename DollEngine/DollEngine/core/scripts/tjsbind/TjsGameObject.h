@@ -13,18 +13,27 @@
 #include "GameObject.h"
 
 TJS_NCB(GameObject){}
-void addChild(iTJSDispatch2* v) {
-    TjsGameObject* obj = TJS_GET_OBJECT(TjsGameObject, v);
-    GameObject::addChild(obj);
-}
-iTJSDispatch2* getParent() {
+tTJSVariant getParent() {
     auto obj = dynamic_cast<TjsGameObject*>(GameObject::getParent());
     if (obj) {
         return obj->_self;
     } else {
-        return null;
+        return tTJSVariant();
     }
 }
+void setParent(tTJSVariant v){
+    if (v.Type() == tvtVoid) {
+        GameObject::setParent(null);
+        return;
+    }
+    TjsGameObject* obj = TJS_GET_OBJECT(TjsGameObject, v.AsObject());
+    GameObject::setParent(obj);
+}
+
+virtual void visit(){
+    TJS_EVENT_CALL(visit, 0);
+}
+
 void addCOM(iTJSDispatch2* v);
 };
 

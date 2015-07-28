@@ -30,12 +30,12 @@ void Application::mainLoop()
     if (m_world) {
         if (m_needRedraw) {
             m_world->visit();
-//            m_needRedraw = false;
+            m_needRedraw = false;
         }
         if (m_needRetouch) {
             CompManager::GetInstance()->clearTouches();
             m_world->updateTouchListener();
-//            m_needRetouch=false;
+            m_needRetouch=false;
         }
     }
 }

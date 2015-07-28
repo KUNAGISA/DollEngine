@@ -80,9 +80,11 @@ static ConsoleController* s_instance=nil;
     [attr addAttribute:NSForegroundColorAttributeName value:fcolor range:range];
     [attr addAttribute:NSParagraphStyleAttributeName value:paragraph range:range];
     
-    NSString* str = [text substringToIndex:6];
-    if ([str compare:@"【TJS】:"] == NSOrderedSame) {
-        [attr addAttribute:NSForegroundColorAttributeName value:[NSColor colorWithRed:127/255.0f green:208/255.0f blue:97/255.0f alpha:1] range:NSMakeRange(0, 6)];
+    if(text.length >= 6){
+        NSString* str = [text substringToIndex:6];
+        if ([str compare:@"【TJS】:"] == NSOrderedSame) {
+            [attr addAttribute:NSForegroundColorAttributeName value:[NSColor colorWithRed:127/255.0f green:208/255.0f blue:97/255.0f alpha:1] range:NSMakeRange(0, 6)];
+        }
     }
     [[output textStorage]appendAttributedString:attr];
     [output scrollToEndOfDocument:nil];
@@ -111,6 +113,7 @@ static ConsoleController* s_instance=nil;
         tTJSVariant ret;
         wstring code;
         DE::Utf8ToUnicode(control.stringValue.UTF8String, code);
+
         DE::TjsEngine::GetSelf()->eval(code, &ret);
         const wchar_t* res = ret.AsStringNoAddRef()->operator const wchar_t *();
         string r;

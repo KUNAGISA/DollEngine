@@ -100,7 +100,12 @@ tTJSNC_Application::tTJSNC_Application() : inherited(TJS_W("Application"))
         TJS_BEGIN_NATIVE_PROP_GETTER
         {
             TjsGameObject* obj = dynamic_cast<TjsGameObject*>(DEApplication->getWorld());
-            result->SetObject(obj->_self);
+            if (obj) {
+                result->SetObject(obj->_self);
+            }
+            else {
+                result->Clear();
+            }
             return TJS_S_OK;
         }
         TJS_END_NATIVE_PROP_GETTER

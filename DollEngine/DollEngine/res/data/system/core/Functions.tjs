@@ -84,6 +84,9 @@ function dump (db,tab=0,key=void)
     else if(typeof db == 'String'){
         print(" ".repeat(tab*4)+key+"\""+db+"\",");
     }
+    else if(typeof db == 'void'){
+        print(" ".repeat(tab*4)+key+"void,");
+    }
     else {
         print(" ".repeat(tab*4)+key+(string)db+",");
     }

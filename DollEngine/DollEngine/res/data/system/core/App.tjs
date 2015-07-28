@@ -4,6 +4,8 @@ class App extends Window
 	var tags; //KAGParser
 	var back = %[];
 	var world;
+	var width;
+	var height;
 	function App () 
 	{
 		super.Window();
@@ -11,14 +13,14 @@ class App extends Window
 			em("不可重复创建App");
 		}
 		global.App.mainApp = this;
-		
+		width = DEConfig.device.width;
+		height = DEConfig.device.height;
 		initialize(DEConfig.device.width,DEConfig.device.height,DEConfig.device.scale);
 
 		this.tags = new TagHandlers(this);
 		
 		this.world = new GameWorld();
 		this.world.initialize(DEConfig.device.width,DEConfig.device.height);
-		Application.world = this.world;
 	}
 
 	function finalize () 

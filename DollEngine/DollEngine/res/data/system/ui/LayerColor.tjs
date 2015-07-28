@@ -1,8 +1,8 @@
 class LayerColor extends Node
 {
-	function LayerColor () 
+	function LayerColor (par) 
 	{
-		super.Node();
+		super.Node(par);
 		this._painter = new Painter();
 		addCOM(painter);
 		round = 0;
@@ -10,6 +10,7 @@ class LayerColor extends Node
 
 	function finalize () 
 	{
+		dm('LayerColor');
 		super.finalize();
 	}
 

@@ -94,6 +94,12 @@ class UICreator
 			node.visible = data.visible;
 		}
 
+        if (data.anchorPoint) {
+            var ax = data.anchorPoint[0];
+            var ay = data.anchorPoint[1];
+            node.setAnchor(ax,-ay);
+        }
+
         if (data.contentSize) {
             var size = getSizeByType(node,data.contentSize);
             node.setSize(size*);
@@ -104,9 +110,6 @@ class UICreator
 			node.setPos(pos*);
 		}
 
-		if (data.anchorPoint) {
-			node.setAnchor(data.anchorPoint*);
-		}
 
         if(data.ignoreAnchorPointForPosition) {
             node.ignoreAnchorPointForPosition = data.ignoreAnchorPointForPosition;
@@ -131,7 +134,8 @@ class UICreator
 
 	function create_CCNodeGradient (owner,parent,properties,customProperties) 
     {
-        var node = new LayerColor();
+        var node = new LayerColor(parent);
+        // dump(properties);
         node.startColor = colorBy4F(properties.startColor*);
         node.endColor = colorBy4F(properties.endColor*);
         if (properties.vector[0]==0) {

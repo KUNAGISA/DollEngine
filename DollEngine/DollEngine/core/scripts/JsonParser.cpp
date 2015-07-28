@@ -70,6 +70,7 @@ wchar_t* JsonParser::arrayWithString(wchar_t* str,tTJSVariant& _out)
             return null;
         }
         if (*str == ']') {
+            _out.SetObject(obj, obj);
             return str+1;
         }
         str = valueWithString(str, value);
@@ -111,6 +112,7 @@ wchar_t* JsonParser::dictWithString(wchar_t* str,tTJSVariant& _out)
             return null;
         }
         if (*str == '}') {
+            _out.SetObject(obj,obj);
             return str+1;
         }
         if (*str != '\"') {

@@ -27,10 +27,12 @@ void TjsGameObject::addCOM(TJS::iTJSDispatch2 *v)
 NCB_REGISTER_CLASS_DIFFER(GameObject,TjsGameObject)
 {
     TJS_FACTORY
-    NCB_METHOD(addChild);
     NCB_METHOD(addCOM);
-    NCB_PROPERTY_RO(parent, getParent);
-    NCB_PROPERTY(z,setZ,getZ);
+    NCB_METHOD(onPaint);
+    NCB_METHOD(updateTouchListener);
+    NCB_METHOD(transform);
+    NCB_PROPERTY(parent, getParent,setParent);
+    NCB_PROPERTY(absolute,getZ,setZ);
     NCB_PROPERTY(enabled,getEnabled,setEnabled);
     NCB_PROPERTY(visible,getVisible,setVisible);
     NCB_PROPERTY(left,getLeft,setLeft);

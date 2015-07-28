@@ -2,13 +2,14 @@ class UILayer extends Node
 {
 	var names = %[];
 	var data = void;//初始化时传入的参数
-	function UILayer (path) 
+	function UILayer (par) 
 	{
-		super.Node();
+		super.Node(par);
 	}
 
 	function finalize () 
 	{
+		dm('UILayer');
 		super.finalize();
 	}
 

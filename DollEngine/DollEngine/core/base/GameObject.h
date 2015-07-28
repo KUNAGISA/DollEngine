@@ -24,17 +24,10 @@ public:
     virtual ~GameObject();
     
     void addComponent(Component* comp);
-    void visit();
-    void transform();
-    void updateTouchListener();
-    
-    void addChild(GameObject* lay);
-    void removeChild(GameObject* lay,bool isRelease);
-    void releaseAllChild();
-    GameObject* childAtIndex(int idx);
-    int childCount(){return m_children.size();};
-    void removeFromParent(bool isRelease=true);
-    void sortChildren();
+    virtual void visit(){}
+    virtual void onPaint();
+    virtual void transform();
+    virtual void updateTouchListener();
     
     PROPERTY(int, Z, m_z){m_z=v;}
     PROPERTY(bool, Enabled, m_enabled){m_enabled=v;NEED_RETOUCH;}
@@ -50,7 +43,6 @@ protected:
     vector<Component*> m_paintComps;
     vector<Component*> m_touchComps;
     
-    vector<GameObject*> m_children;
 public:
     TRANSFORM_PROPERTY_FUNC(Left,X)
     TRANSFORM_PROPERTY_FUNC(Top,Y)
