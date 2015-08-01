@@ -36,13 +36,32 @@ bool GLTexture::initWithImage(ImageData* image)
     glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
     glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
     glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
-//    int v =GL_RGBA;
-//    v = GL_UNSIGNED_BYTE;
     glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, image->getWidth(), image->getHeight(), 0,
                  GL_RGBA, GL_UNSIGNED_BYTE, image->getData()->getBuffer() );
     setWidth(image->getWidth());
     setHeight(image->getHeight());
     CHECK_GL_ERROR;
+    return true;
+}
+
+bool GLTexture::initWithSize(int w,int h)
+{
+    void* data = malloc(w*h*4);
+    if (!data) {
+        return false;
+    }
+    memset(data, 0, w*h*4);
+    glGenTextures(1, &m_textureId);
+    glBindTexture(GL_TEXTURE_2D,m_textureId);
+    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
+    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
+    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
+    glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0,
+                 GL_RGBA, GL_UNSIGNED_BYTE, data );
+    setWidth(w);
+    setHeight(h);
+    free(data);
     return true;
 }
 

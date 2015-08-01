@@ -1,0 +1,24 @@
+
+class __Kag
+{
+	//图层控制
+	var fore;//表层
+	var back;//里层
+
+	//存档控制
+
+
+	//剧本控制
+	var tagHandlers; //tags
+	var allskip = 1;// 0 已读跳过 1 skip时全部跳过
+
+	function __Kag () 
+	{
+		if(typeof global.app == 'undefined'){
+			em("不存在App类的实例");
+		}
+		this.fore = app.world;
+		this.tagHandlers = app.tags;
+	}
+}
+

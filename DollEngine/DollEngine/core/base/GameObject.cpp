@@ -10,6 +10,7 @@
 #include "GLCanvas.h"
 #include "Component.h"
 #include "CompManager.h"
+#include "Window.h"
 
 DE_BEGIN
 
@@ -29,8 +30,8 @@ GameObject::GameObject()
 GameObject::~GameObject()
 {
     if (!m_parent) {
-        if (DEApplication->getWorld() == this) {
-            DEApplication->setWorld(null);
+        if (Window::GetInstance()->getWorld() == this) {
+            Window::GetInstance()->setWorld(null);
         }
     }
     for (Component* comp : m_unknowComps) {
@@ -101,7 +102,7 @@ void GameObject::transform()
     }
     else
     {
-        m_transInWorld->copy(GLCanvas::GetInstance()->getGlobalTrans());
+        m_transInWorld->init();
         m_transInWorld->transform(m_transform);
     }
     m_transInWorld->setWidth(m_transform->getWidth());

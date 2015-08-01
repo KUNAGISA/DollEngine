@@ -1,0 +1,8 @@
+
+class GraphicLayer extends Node
+{
+	function GraphicLayer (par) 
+	{
+		super.Node(par);
+	}
+}

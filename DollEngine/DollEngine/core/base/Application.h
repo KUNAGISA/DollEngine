@@ -14,6 +14,7 @@
 DE_BEGIN
 
 class GameObject;
+class Character;
 
 class Application
 {
@@ -24,7 +25,7 @@ public:
     
 public:
     void mainLoop();
-    
+    void initDebugInfo();
     void startup(); //脚本入口
     void setDeviceSize(float w,float h);
     
@@ -32,8 +33,6 @@ public:
     PROPERTY_CONST(string,DataPath,m_dataPath){m_dataPath=v;}
     PROPERTY_CONST(string,SaveDataPath,m_saveDataPath){m_saveDataPath=v;}
     PROPERTY_CONST(string,PatchPath,m_patchPath){m_patchPath=v;}
-    
-    PROPERTY(GameObject*,World,m_world);
     
     PROPERTY_RO(float,DeviceWidth,m_deviceWidth)
     PROPERTY_RO(float,DeviceHeight,m_deviceHeight) //设备大小
@@ -44,6 +43,10 @@ protected:
 //    void timerEvent(QTimerEvent*event );
     
 protected:
+    GameObject* m_debugFPS;
+    Character* m_debugFPSCOM;
+    double m_debugTime;
+    int m_debugPrintTime;
 };
 
 DE_END

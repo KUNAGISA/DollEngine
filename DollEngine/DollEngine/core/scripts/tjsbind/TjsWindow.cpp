@@ -13,4 +13,8 @@ NCB_REGISTER_CLASS_DIFFER(Window,TjsWindow)
 {
     TJS_FACTORY
     NCB_METHOD(initialize);
+    NCB_METHOD(beginTransition);
+    NCB_METHOD(transFinished);
+    NCB_METHOD(transWithCrossFade);
+    NCB_PROPERTY(world, getWorld, setWorld);
 }

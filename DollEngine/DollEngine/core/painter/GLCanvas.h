@@ -14,6 +14,9 @@
 
 DE_BEGIN
 
+
+class GLProgram;
+
 class GLCanvas
 {
 public:
@@ -33,7 +36,15 @@ public:
     PROPERTY(float,LayerY,m_layerY){m_layerY = v;}
     PROPERTY(float,LayerZoom,m_layerZoom){m_layerZoom=v;}
     
+public:
+    void blendFunc(GLenum src,GLenum dst);
+    void addProgram(string pm,GLProgram*);
+    GLProgram* getProgram(string pm);
+    
+public:
+    void paint(PaintConfig& config);
 protected:
+    map<string,GLProgram*> m_allPrograms;
     bool m_initialized;
 };
 

@@ -289,4 +289,11 @@ int64_t GetMilliSeconds()
     return tv.tv_sec * 1000 + tv.tv_usec / 1000;
 }
 
+double GetSeconds()
+{
+    struct timeval tv;
+    gettimeofday(&tv,NULL);
+    return (double)tv.tv_sec + (double)tv.tv_usec/1000000.0f;
+}
+
 DE_END

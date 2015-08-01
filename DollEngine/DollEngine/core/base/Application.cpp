@@ -13,28 +13,65 @@
 #include "ScriptEngine.h"
 #include "FontCache.h"
 #include "GLCanvas.h"
+#include "Character.h"
+#include "Window.h"
 
 DE_BEGIN
 
 Application::Application()
-:m_world(null)
+:m_debugTime(0)
+,m_debugFPS(null)
+,m_debugFPSCOM(null)
+,m_needRedraw(true)
+,m_debugPrintTime(0)
 {
 }
 
 
 Application::~Application()
 {
-    SAFF_DELETE(m_world);
+    SAFF_DELETE(m_debugFPS);
 }
 
 void Application::mainLoop()
 {
-    if (m_world) {
-        if (m_needRedraw) {
-            GLCanvas::GetInstance()->clearGL();
-            m_world->visit();
-            m_needRedraw = false;
+    CompManager::GetInstance()->updateComp();
+    if (m_needRedraw) {
+//        m_needRedraw = false;
+        GLCanvas::GetInstance()->clearGL();
+        if (Window::GetInstance()) {
+            Window::GetInstance()->visit();
+//            if (m_debugFPS) {
+//                double ttime = GetSeconds();
+//                double dt = ttime - m_debugTime;
+//                m_debugTime = ttime;
+//                if (m_debugPrintTime == 0) {
+//                    m_debugPrintTime = ttime;
+//                }
+//                if (m_debugTime > m_debugPrintTime) {
+//                    ++m_debugPrintTime;
+//                    string tm = Utf8WithFormat("FPS: %f",round(10/dt)/10);
+//                    m_debugFPSCOM->setText(tm);
+//                }
+//                m_debugFPS->onPaint();
+//            }
         }
+    }
+    CompManager::GetInstance()->releaseComp();
+}
+
+void Application::initDebugInfo()
+{
+    if (!m_debugFPS) {
+        m_debugFPS = new GameObject();
+        m_debugFPSCOM = new Character();
+        m_debugFPS->addComponent(m_debugFPSCOM);
+        m_debugFPS->setAnchorX(0);
+        m_debugFPS->setAnchorY(0);
+        m_debugFPS->setX(20);
+        m_debugFPS->setY(20);
+        m_debugFPSCOM->setFontSize(24);
+        m_debugFPS->transform();
     }
 }
 
@@ -69,17 +106,6 @@ void Application::setDeviceSize(float w,float h)
     m_deviceHeight = h;
 }
 
-void Application::setWorld(DE::GameObject *v)
-{
-    if (!v) {
-        m_world = v;
-        return;
-    }
-    if (m_world) {
-        delete m_world;
-    }
-    m_world = v;
-}
 
 
 DE_END

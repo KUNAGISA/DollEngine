@@ -1,2 +1,14 @@
-*start
-[ui storage=start/StartScene.json layer=base page=fore name=StartScene]
+[wait time=200]
+*start|スタート
+[call storage=initialize.ks]
+[call storage=macro.ks]
+[startmenu]
+[image storage=image063 layer=base page=fore]
+[image storage=image060 layer=1 page=fore left=700 top=100]
+[wait time=5000]
+;[image storage=image063 layer=base page=back]
+[trans method=crossfade time=1000][wt]
+[s]
+[wait time=2000]
+[toblack]
+[jump storage=title.ks]

@@ -129,7 +129,6 @@ static int MAX_ATTRIBUTES = 16;
 static uint32_t s_attributeFlags = 0;
 void GLProgram::enableVertexAttribs(uint32_t flags)
 {
-    bindVAO(0);
     
     // hardcoded!
     for(int i=0; i < MAX_ATTRIBUTES; i++) {
@@ -178,6 +177,42 @@ void GLProgram::setUniformValue(const char* name,const kmMat4& value)
         glUniformMatrix4fv(iter->second, 1,GL_FALSE,(GLfloat*)value.mat);
     }
     CHECK_GL_ERROR;
+}
+
+
+void GLProgram::draw()
+{
+    if (m_quads.size() == 0) {
+        return;
+    }
+    bindVAO(0);
+    
+#define kQuadSize sizeof(GLVertex)
+    long offset = (long)m_quads.data();
+    enableVertexAttribs(VERTEX_ATTRIB_FLAG_POS_COLOR_TEX);
+    
+    int diff = offsetof( GLVertex, vertex);
+    glVertexAttribPointer(PROGRAM_VERTEX_ATTRIBUTE, 2, GL_FLOAT, GL_FALSE, kQuadSize, (void*) (offset + diff));
+    diff = offsetof( GLVertex, color);
+    glVertexAttribPointer(PROGRAM_COLOR_ATTRIBUTE, 4, GL_FLOAT, GL_FALSE, kQuadSize, (void*) (offset + diff));
+    diff = offsetof( GLVertex, uv);
+    glVertexAttribPointer(PROGRAM_TEXCOORD_ATTRIBUTE, 2, GL_FLOAT, GL_FALSE, kQuadSize,(void*) (offset + diff));
+    int size = (int)m_quads.size()*4;
+    
+    for (int i=0; i<m_quads.size(); ++i) {
+        m_indexs.push_back(i*4);
+        m_indexs.push_back(i*4+1);
+        m_indexs.push_back(i*4+2);
+        m_indexs.push_back(i*4+2);
+        m_indexs.push_back(i*4+3);
+        m_indexs.push_back(i*4);
+    }
+    glDrawElements(GL_TRIANGLES, m_quads.size()*2*3, GL_UNSIGNED_SHORT, m_indexs.data());
+//    glDrawArrays(GL_TRIANGLE_FAN, 0, size);
+    
+    CHECK_GL_ERROR;
+    m_quads.clear();
+    m_indexs.clear();
 }
 
 DE_END

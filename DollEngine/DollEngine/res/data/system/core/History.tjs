@@ -1,0 +1,8 @@
+class History
+{
+	var enabled=true;//是否记录当前文本历史
+	function History () 
+	{
+		
+	}
+}

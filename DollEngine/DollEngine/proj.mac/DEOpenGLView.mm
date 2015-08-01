@@ -19,7 +19,7 @@
 
 - (void)redraw:(NSTimer *)pTimer
 {
-    [self drawRect:[self bounds]];
+    [self setNeedsDisplay:YES];
 }
 
 

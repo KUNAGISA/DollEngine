@@ -14,12 +14,15 @@ class TagHandlers extends KAGParser
 	{
 		var time = 0;
 		if (name == 'jumpTo'||
+			name == 'onExecute'||
+			name == 'returnCall'||
+			name == 'callMacro'||
 			name == 'returnMacro'||
 			name == 'getMacroParams'||
 			name == 'onScenarioEnded') {
 			print("%s指令被TagHandlers类占用",name);
 		}
-		if(this[name])
+		if(typeof this[name] != "undefined")
 		{
 			time = (this[name] incontextof this._owner)(params);
 			if(time == void) time = 0;
@@ -72,6 +75,11 @@ class TagHandlers extends KAGParser
 	}
 
 	/*******TAG部分*******/
+	/*******无效的指令*******/
+	function laycount () {dm('失效的指令');}
+	function loadplugin () {dm('失效的指令');}
+	function mappfont () {dm('失效的指令');}
+	function rclick () {dm('失效的指令');}
 
 	/*******系统操作*******/
 	//打印
@@ -90,16 +98,69 @@ class TagHandlers extends KAGParser
 		if (elm.exp) {
 			Scripts.eval(elm.exp);
 		}
-		return 0;
+	}
+
+	function iscript (elm) 
+	{
+		Scripts.exec(elm.exp);
+	}
+
+	function endscript (elm) 
+	{
+	}
+
+
+	/*******剧本控制*******/
+	function call (elm) 
+	{
+		this.tags.callLabel(elm.storage,elm.target);
+		return -1;
+	}
+
+	function endmacro () 
+	{
+		this.tags.returnMacro();
+		return -1;
+	}
+
+	function wait (elm) 
+	{
+		checkElm(elm,['time']);
+		return elm.time;
+	}
+
+	function wt (elm) 
+	{
+	}
+
+	function deffont (elm) 
+	{
+		merger(this.deffont,elm);
+		this.deffontChanged = true;
+	}
+
+	function history (elm) 
+	{
+		this.history.enabled = elm.enabled if elm.enabled !== void;
+	}
+
+	function s (elm) 
+	{
+		return -2;
 	}
 
 	/*******界面控制*******/
-	//创建界面@ui storage=xx layer=xx page=xx visible=xx name=xx data=xx
+	//创建界面@ui storage=xx layer=xx page=xx visible=xx data=xx
 	function ui (elm) 
 	{
-		var par = this.getLayerByElm(elm);
-		if (!par) {
+		checkElm(elm,['layer','storage']);
+		if (elm.page == 'back') {
+			this.mergerBack('ui',elm);
 			return;
+		}
+		if (typeof this.world.names[elm.layer] != 'undefined') {
+			em('重复的UI %s',elm.layer);
+			return -2;
 		}
 		var uipath = Storages.getFullPath(elm.storage);
 		if (!uipath) {
@@ -109,17 +170,9 @@ class TagHandlers extends KAGParser
 		if (typeof elm.hd == 'undefined') {
 			elm.hd = true;
 		}
-		var lay = UIReader.readJsonFile(uipath,par,elm.hd);
-		if (typeof elm['visible'] == 'undefined') {
-			lay.visible = true;
-		}
-		else {
-			lay.visible = elm.visible;
-		}
-		if (elm.name && par.names) {
-			par.names[elm.name] = lay;
-			lay.name = elm.name;
-		}
+		var lay = UIReader.readJsonFile(uipath,this.world,elm.hd);
+		this.world.names[elm.layer] = lay;
+		lay.visible = elm.visible if elm.visible !== void;
 		if (typeof lay.initialize != 'undefined') {
 			if (elm.data) {
 				var data = Scripts.eval(elm.data);
@@ -138,8 +191,38 @@ class TagHandlers extends KAGParser
 
 	function image (elm) 
 	{
-		var node = new Sprite(this.current);
-		node.setParams(elm);
+		this.checkElm(elm,['layer','storage']);
+		var par = this.getLayerByElm(elm);
+		if(!par) {
+			this.mergerBack('image',elm);
+			return;
+		}
+		var node = new Sprite(par);
+		node.loadImages(elm.storage);
+		node.setAnchor(0,0);
+		node.setPos(elm.left,par.height-elm.top-elm.height) if elm.left!==void||elm.top!==void;
+		node.visible = elm.visible if elm.visible!==void;
 	}
 
+
+	/*******效果控制*******/
+	function backlay () 
+	{
+		this.back.clear();
+	}
+
+	function trans (elm) 
+	{
+		this.checkElm(elm,['method']);
+		var time = 1000;
+		time = +elm.time if elm.time!==void;
+		this.transWithMethod(elm.method, time);
+		return time;
+	}
+}
+
+property mp{
+	getter {
+		return App.mainApp.tags.getMacroParams();
+	}
 }

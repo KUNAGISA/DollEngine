@@ -97,7 +97,10 @@ ImageData* FontCache::addText(const string& text,const string& fontName,int font
     fd->advance = (int)(face->glyph->metrics.horiAdvance/64);
     fd->bearingX = (int)(face->glyph->metrics.horiBearingX/64);
     fd->bearingY = (int)(face->glyph->metrics.horiBearingY/64);
-    fd->yMin = (int)(face->bbox.yMin);
+    fd->yMin = (int)(face->bbox.yMin/64);
+    fd->yMax = (int)(face->bbox.yMax/64);
+    fd->xMin = (int)(face->bbox.xMin/64);
+    fd->xMax = (int)(face->bbox.xMax/64);
     return image;
 }
 

@@ -14,18 +14,43 @@
 DE_BEGIN
 
 CompManager::CompManager()
+:m_lastTime(-1)
 {
     
 }
 
-void CompManager::addTouchComp(Component* comp)
+void CompManager::addUpdateComp(Component* comp)
 {
-    m_touchComps.push_back(comp);
+    m_updatePools.insert(comp);
 }
 
-void CompManager::clearTouches()
+void CompManager::removeUpdateComp(Component* comp)
 {
-    m_touchComps.clear();
+    m_updatePools.erase(comp);
+}
+
+void CompManager::updateComp()
+{
+    if (m_lastTime < 0) {
+        m_lastTime = GetSeconds();
+    }
+    double time = GetSeconds();
+    double dt = time - m_lastTime;
+    m_lastTime = time;
+    set<Component*> tmp = m_updatePools;
+    for (Component* comp : tmp) {
+        comp->setTime(comp->getTime()+dt);
+        comp->update();
+    }
+}
+
+void CompManager::releaseComp()
+{
+    for (Component* comp : m_releasePools) {
+        comp->setIsReleased(true);
+        delete comp;
+    }
+    m_releasePools.clear();
 }
 
 void CompManager::addReleaseComp(DE::Component *comp)
@@ -37,6 +62,17 @@ void CompManager::addReleaseComp(DE::Component *comp)
 void CompManager::removeReleaseComp(DE::Component *comp)
 {
     m_releasePools.erase(comp);
+}
+
+void CompManager::addTouchComp(Component* comp)
+{
+    m_touchComps.push_back(comp);
+}
+
+
+void CompManager::clearTouches()
+{
+    m_touchComps.clear();
 }
 
 

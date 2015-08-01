@@ -25,6 +25,7 @@ public:
 public:
     void init();
     void flush();
+    void transTo(float inx, float iny, GLV2F* outValue);
     bool pointInside(float x,float y,float& ox,float& oy);
 public:
     const kmMat4& getMatrix(){return m_matrix;}

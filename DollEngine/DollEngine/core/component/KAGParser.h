@@ -10,11 +10,11 @@
 #define __Krkr_GL__KAGParser__
 
 #include "KAGData.h"
-#include "Component.h"
+#include "Timer.h"
 
 DE_BEGIN
 
-class KAGParser : public Component
+class KAGParser : public Timer
 {
 public:
     KAGParser();
@@ -28,7 +28,7 @@ public:
     virtual void clearCallStack();
     virtual void returnCall();
     virtual bool callMacro(const wstring& name);
-    virtual void trigger();
+    virtual void update();
     virtual int execute(KAGTag* tag);
     PROPERTY(float, WaitTime, m_waitTime){m_waitTime=v;}
     PROPERTY(bool, IsProcessed, m_isProcssed){m_isProcssed=v;}

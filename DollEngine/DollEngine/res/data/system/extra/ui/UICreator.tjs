@@ -216,6 +216,11 @@ class UICreator
         node.titleColorSelect = colorBy4F(properties.labelColor_Highlighted*) if properties.labelColor_Highlighted;
         node.titleColorDisable = colorBy4F(properties.labelColor_Disabled*) if properties.labelColor_Disabled;
         node.disabled = !properties.userInteractionEnabled;
+
+        if (properties.preferredSize) {
+            var size = getSizeByType(node,properties.preferredSize,hd);
+            node.setImageSize(size[0],size[1],true);
+        }
         return node;
     }
 }

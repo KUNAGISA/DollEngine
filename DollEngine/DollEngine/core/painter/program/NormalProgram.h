@@ -19,6 +19,7 @@ public:
     ~NormalProgram();
     bool init();
     void actived(PaintConfig& config);
+    void activedWithScale9(PaintConfig& config);
     
 };
 DE_END

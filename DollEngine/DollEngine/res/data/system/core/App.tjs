@@ -1,18 +1,33 @@
 
 class App extends Window
 {
+	//tag
 	var tags; //KAGParser
-	var back = %[];
-	var world;
-	var width;
+
+	//画面管理
+	var back = []; //里层配置
+	var width;//画面宽高
 	var height;
+
+	//剧本表现
+	var deffont = %[]; //默认字体设置
+	var deffontChanged = true;//默认字体是否有过变化
+	var history = void; //历史记录的管理器
+	var current = void;
+	var currentLayer = "message0";//默认
+
+	var status = %[
+		trans : 0,//trans的过渡时长
+	];
+	var transTimer = void; //trans用的Timer
+
 	function App () 
 	{
 		super.Window();
-		if(global.App.mainApp) {
+		if(global.App.main) {
 			em("不可重复创建App");
 		}
-		global.App.mainApp = this;
+		global.App.main = this;
 		this.width = DEConfig.device.width;
 		this.height = DEConfig.device.height;
 		this.initialize(DEConfig.device.width,DEConfig.device.height,DEConfig.device.scale);
@@ -21,10 +36,19 @@ class App extends Window
 		
 		this.world = new GameWorld();
 		this.world.initialize(DEConfig.device.width,DEConfig.device.height);
+
+		this.history = new History();
 	}
 
 	function finalize () 
 	{
+		global.App.main = void;
+		invalidate this.tags;
+		invalidate this.history;
+		invalidate this.world;
+		if (typeof global.kag != 'undefined') {
+			invalidate kag;
+		}
 		super.finalize();
 	}
 
@@ -32,41 +56,46 @@ class App extends Window
 	{
 		var p=elm.page,layer=elm.layer;
 		if (p == 'back') {
-			if (layer == 'base' ||
-				layer == 'world') {
-				if(!this.back.world)
-					this.back.world = %[];
-				merger(this.back.world,elm);
-			}
-			else {
-				if(!this.back[layer])
-					this.back[layer] = %[];
-				merger(this.back[layer],elm);
-			}
 			return void;
 		}
 		else {
-			if (layer == 'base' ||
-				layer == 'world') {
-				return this.world;
-			}
 			var lay;
+			var msgIdx = -1;
+			if (layer.indexOf('message') == 0) {
+				layer = 'message0' if layer == 'message';
+				msgIdx = +layer.substr(7);
+				if (msgIdx == 0 && layer != 'message0') {
+					layer = 'message0';
+				}
+				else if(msgIdx < 0){
+					msgIdx = 0;
+					layer = 'message0';
+				}
+			}
 			if (typeof this.world.names[layer] == 'undefined') {
 				var zorder=0;
-				if(layer.indexOf('message') == 0)
+				if(msgIdx>=0)
 				{
-					if(layer == 'message')
-						zorder=1000000;
-					else
-						zorder=1000000+1000*layer.substr(7);
+					lay = new MessageLayer(this.world);
+					zorder=1000000+1000*msgIdx;
+					this.world.messages[msgIdx] = lay;
+				}
+				else if(layer == 'base'){
+					lay = new GraphicLayer(this.world);
+					zorder = -1;
+					this.world.base = lay;
+				}
+				else if(layer!='0'&&+layer==0){
+					lay = new MessageLayer(this.world);
+					zorder = 0;
 				}
 				else {
-					if (layer!='0'&&+layer==0) {
-						zorder = 0;
-					}
-					else
-						zorder=1000*layer;
+					lay = new GraphicLayer(this.world);
+					zorder=1000*layer;
+					this.world.layers[+layer] = lay;
 				}
+				lay.absolute = zorder;
+				this.world.names[layer] = lay;
 			}
 			else {
 				lay = this.world.names[layer];
@@ -75,19 +104,21 @@ class App extends Window
 		}
 	}
 
-	function getMessageByIndex (idx) 
+	function checkElm (elm,arr) 
 	{
-		// body...
+		for (var i = 0; i < arr.count; i++) {
+			if(typeof elm[arr[i]] == 'undefined'){
+				em("必须的参数 %s 不存在",arr[i]);
+			}
+		};
 	}
 
-	function getLayerByName (name) 
+	function mergerBack (tag, elm) 
 	{
-		// body...
-	}
-
-	function getLayerByIndex (idx) 
-	{
-		// body...
+		var telm = %[];
+		(Dictionary.assignStruct incontextof telm)(elm);
+		telm.page = 'fore';
+		this.back.add([tag,telm]);
 	}
 
 	function proccess (file, label) 
@@ -99,6 +130,54 @@ class App extends Window
 	{
 		
 	}
+
+
+	/**********场景切换*********/
+
+	function beginTransition (isblack) 
+	{
+		super.beginTransition(isblack);
+		var count = this.back.count;
+		for (var i = 0; i < count; i++) {
+			this.tags.onExecute(this.back[i][0],this.back[i][1]);
+		};
+	}
+
+	function transWithMethod (method,time) 
+	{
+		if (!this.transTimer) {
+			this.transTimer = new Timer();
+			this.transTimer.interval = 0;
+		}
+		this.transTimer.enabled = false;
+		switch(method)
+		{
+			case 'crossfade':
+			{
+				this.beginTransition(true);
+				this.transTimer.handler = this.onTransCrossFadeUpdate;
+			}
+			break;
+			default:
+			{
+				dm('未实现的trans模式',method);
+				return;
+			}
+				break;
+		}
+		this.status.trans = time;
+		this.transTimer.enabled = true;
+	}
+
+	function onTransCrossFadeUpdate (timer) 
+	{
+		// var dt = timer.time*1000/this.status.trans;
+		// this.transWithCrossFade(dt);
+		// if (dt >= 1) {
+		// 	timer.enabled = false;
+		// 	this.transFinished();
+		// }
+	}
 }
 
-App.mainApp = void;
+App.main = void;

@@ -4,9 +4,12 @@
 		"system/core/App.tjs",
 		"system/core/HttpClient.tjs",
 		"system/core/TagHandlers.tjs",
-		"system/action/ActionInstant.tjs",
-		"system/action/ActionInterval.tjs",
-		"system/action/ActionSpeed.tjs",
+		"system/core/Timer.tjs",
+		"system/core/History.tjs",
+		"system/core/KagController.tjs",
+		"system/core/action/ActionInstant.tjs",
+		"system/core/action/ActionInterval.tjs",
+		"system/core/action/ActionSpeed.tjs",
 		"system/extra/ui/UIAnimation.tjs",
 		"system/extra/ui/UICreator.tjs",
 		"system/extra/ui/UIReader.tjs",
@@ -32,12 +35,18 @@
 	],
 	"autoPaths" :[
 		"scenario",
-		"uicfg"
+		"scenario/event",
+		"scenario/ui",
+		"uicfg",
+		"bgimage",
+		"bgm",
+		"fgimage",
+		"image",
+		"sound"
 	],
 	"device" :{
-		"width" : 640,
-		"height" : 1136,
-		"scale" : 0.5
-	},
-    "test" : 92233720368547758
+		"width" : 1136,
+		"height" : 640,
+		"scale" : 1
+	}
 }

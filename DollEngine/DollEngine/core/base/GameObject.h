@@ -37,6 +37,8 @@ public:
     PROPERTY_RO(Transform*, TransInWorld, m_transInWorld);
     PROPERTY_RO(Transform*, Transform, m_transform);
     
+    PROPERTY(uint32_t, Color, m_color){m_color=v;}
+    PROPERTY(int, Opacity, m_opacity){m_opacity=v;}
 protected:
     vector<Component*> m_unknowComps;
     vector<Component*> m_updateComps;
@@ -68,6 +70,7 @@ public:
 //    void onDoubleClick(float x,float y){qDebug()<<"doubleclick"<<x<<y<<this;}
 protected:
     bool m_needSortChildren;
+    Color m_realColor;
 };
 
 DE_END

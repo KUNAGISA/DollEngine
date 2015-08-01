@@ -14,6 +14,16 @@ class Button extends Control
 		this._title.absolute = 1;
 	}
 
+	function setImageSize (w,h) 
+	{
+    	this.setSize(...);
+    	this.imageBase.x = this.width/2;
+    	this.imageBase.y = this.height/2;
+		this._normalImage.setImageSize(w,h,true);
+		this._selectImage.setImageSize(w,h,true);
+		this._disableImage.setImageSize(w,h,true);
+	}
+
 	function onMouseDown (x,y) 
 	{
 		this._selectImage.visible=true;

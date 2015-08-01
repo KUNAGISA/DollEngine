@@ -1,3 +1,12 @@
+/***********枚举值************/
+
+//com组件类型
+var COMP_UNKNOW=0,
+COMP_UPDATE=1,
+COMP_PAINT=2,
+COMP_TOUCH=3;
+
+
 
 /***********字典操作************/
 

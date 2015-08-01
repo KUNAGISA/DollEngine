@@ -21,6 +21,7 @@ public:
     virtual ~GLTexture();
     
     bool initWithImage(ImageData* img);
+    bool initWithSize(int w,int h);
     void retain();
     void release();
     void bind(GLenum activeId=GL_TEXTURE0);

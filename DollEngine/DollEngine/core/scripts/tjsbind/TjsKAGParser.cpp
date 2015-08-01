@@ -57,6 +57,15 @@ int TjsKAGParser::execute(KAGTag* tag)
         tTJSVariant ret;
         if (kv.entity)
         {
+            if (kv.isstring) {
+                TjsEngine::Global()->EvalExpression( kv.value.substr(2,kv.value.length()-3), &ret) ;
+            }
+            else {
+                TjsEngine::Global()->EvalExpression( kv.value.substr(1), &ret) ;
+            }
+        }
+        else if (kv.isstring)
+        {
             TjsEngine::Global()->EvalExpression( kv.value, &ret) ;
         }
         else if (kv.macroarg)
@@ -80,7 +89,6 @@ NCB_REGISTER_CLASS_DIFFER(KAGParser, TjsKAGParser)
 {
     TJS_FACTORY
     NCB_METHOD(jumpTo);
-    NCB_METHOD(doNext);
     NCB_METHOD(callLabel);
     NCB_METHOD(callMacro);
     NCB_METHOD(returnCall);

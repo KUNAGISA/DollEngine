@@ -11,7 +11,25 @@
 
 #include "TjsBind.h"
 #include "Window.h"
+#include "TjsGameObject.h"
 
-TJS_NCB(Window){}};
+TJS_NCB(Window){}
+tTJSVariant getWorld() {
+    auto obj = dynamic_cast<TjsGameObject*>(Window::getWorld());
+    if (obj) {
+        return obj->_self;
+    } else {
+        return tTJSVariant();
+    }
+}
+void setWorld(tTJSVariant v){
+    if (v.Type() == tvtVoid) {
+        Window::setWorld(null);
+        return;
+    }
+    TjsGameObject* obj = TJS_GET_OBJECT(TjsGameObject, v.AsObject());
+    Window::setWorld(obj);
+}
+};
 
 #endif /* defined(__DollEngine__TjsWindow__) */

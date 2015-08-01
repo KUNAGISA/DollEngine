@@ -24,9 +24,6 @@ Component::Component()
 
 Component::~Component()
 {
-    if (!m_isReleased) {
-        CompManager::GetInstance()->removeReleaseComp(this);
-    }
 }
 
 void Component::release()

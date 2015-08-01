@@ -75,55 +75,87 @@ bool NormalProgram::init()
 
 void NormalProgram::actived(PaintConfig& config)
 {
-    static GLfloat vertices[] = {
-        0,0,
-        0,0,
-        0,0,
-        0,0
-    };
-#define VE0(p) vertices[p]=0
-#define VEH(p) vertices[p]=config.height
-#define VEW(p) vertices[p]=config.width
+    if (config.scale9) {
+        activedWithScale9(config);
+        return;
+    }
     
-    VE0(0);VEH(1);//左下
-    VE0(2);VE0(3);//左上
-    VEW(4);VE0(5);//右上
-    VEW(6);VEH(7);//右下
-    
-    GLfloat colors[4][4];
-    memset(colors, 1.0f, 16);
+    GLDrawData quad;
+    quad.setPos(0, 0, config.width, config.height,config.trans);
+    quad.setStart(config.start);
     if (config.end) {
-        int idx[4];
-        if(config.gradVector == 1){
-            idx[0]=1;idx[1]=2;idx[2]=3;idx[3]=0;
-        }
-        else if(config.gradVector == 2){
-            idx[0]=0;idx[1]=1;idx[2]=2;idx[3]=3;
-        }
-        else if(config.gradVector == 3){
-            idx[0]=2;idx[1]=3;idx[2]=0;idx[3]=1;
-        }
-        else {
-            idx[0]=3;idx[1]=0;idx[2]=1;idx[3]=2;
-        }
-        config.color->toColorF(colors[idx[0]]);
-        config.color->toColorF(colors[idx[1]]);
-        config.end->toColorF(colors[idx[2]]);
-        config.end->toColorF(colors[idx[3]]);
+        quad.setEnd(config.end);
     }
     else {
-        for (int j = 0; j < 4; ++j) {
-            config.color->toColorF(colors[j]);
-        }
+        quad.setEnd(config.start);
     }
-    enableVertexAttribs(VERTEX_ATTRIB_FLAG_POS_COLOR_TEX);
-    
-    glVertexAttribPointer(PROGRAM_VERTEX_ATTRIBUTE, 2, GL_FLOAT, GL_TRUE, 0, vertices);
-    glVertexAttribPointer(PROGRAM_COLOR_ATTRIBUTE, 4, GL_FLOAT, GL_TRUE, 0, colors);
-    glVertexAttribPointer(PROGRAM_TEXCOORD_ATTRIBUTE, 2, GL_FLOAT, GL_TRUE, 0, config.frame->getGLCoord());
-    CHECK_GL_ERROR;
-    
-    glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+    const Rect& rect = config.frame->getRect();
+    if (config.flipY) {
+        quad.setFrameRect(rect.x/config.frame->getTexture()->getWidth(),
+                          (rect.y+rect.height)/config.frame->getTexture()->getHeight(),
+                          (rect.x+rect.width)/config.frame->getTexture()->getWidth(),
+                          rect.y/config.frame->getTexture()->getHeight());
+    }
+    else {
+        quad.setFrameRect(rect.x/config.frame->getTexture()->getWidth(),
+                          rect.y/config.frame->getTexture()->getHeight(),
+                          (rect.x+rect.width)/config.frame->getTexture()->getWidth(),
+                          (rect.y+rect.height)/config.frame->getTexture()->getHeight());
+    }
+    m_quads.push_back(quad);
+    draw();
+}
+
+void NormalProgram::activedWithScale9(PaintConfig& config)
+{
+    GLDrawData quad;
+    float frameW = config.frame->getWidth();
+    float frameH = config.frame->getHeight();
+    float vx[] = {
+        0,
+        frameW*config.scale9->l,
+        config.width - frameW*(config.scale9->r)
+    };
+    float vy[] = {
+        0,
+        frameH*config.scale9->b,
+        config.height - frameH*(config.scale9->t)
+    };
+    float vw[] = {
+        frameW*config.scale9->l,
+        config.width - frameW*(config.scale9->r+config.scale9->l),
+        frameW*config.scale9->r
+    };
+    float vh[] = {
+        frameH*config.scale9->b,
+        config.height - frameH*(config.scale9->b+config.scale9->t),
+        frameH*config.scale9->t
+    };
+    float fw [] = {
+        0,1-config.scale9->l,
+        config.scale9->l,config.scale9->r,
+        1-config.scale9->r,0
+    };
+    float fh [] = {
+        0,1-config.scale9->b,
+        config.scale9->b,config.scale9->t,
+        1-config.scale9->t,0
+    };
+    for (int i=0; i<9; ++i) {
+        int iw = i%3;
+        int ih = i/3;
+        quad.setPos(vx[iw], vy[ih], vw[iw], vh[ih],config.trans);
+        quad.setStart(config.start);
+        quad.setEnd(config.start);
+        const Rect& rect = config.frame->getRect();
+        quad.setFrameRect(rect.x/config.frame->getTexture()->getWidth(),
+                          rect.y/config.frame->getTexture()->getHeight(),
+                          rect.width/config.frame->getTexture()->getWidth(),
+                          rect.height/config.frame->getTexture()->getHeight());
+        quad.setInnerRect(fw[iw*2], fw[iw*2+1], fh[ih*2], fh[ih*2+1]);
+        m_quads.push_back(quad);
+    }
+    draw();
 }
 
 DE_END

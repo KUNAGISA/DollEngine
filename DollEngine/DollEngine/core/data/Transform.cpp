@@ -48,6 +48,16 @@ void Transform::init()
     kmMat4Identity(&m_matrix);
 }
 
+void Transform::transTo(float inx, float iny, GLV2F* outValue)
+{
+    kmVec3 inpos;
+    kmVec3Fill(&inpos,inx,iny,0);
+    kmVec3 outpos;
+    kmVec3Transform(&outpos, &inpos, &m_matrix);
+    outValue->v1 = outpos.x;
+    outValue->v2 = outpos.y;
+}
+
 void Transform::flush()
 {
     if (m_needFlush)

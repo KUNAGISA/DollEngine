@@ -8,6 +8,7 @@
 
 #include "GLCanvas.h"
 #include "Application.h"
+#include "NormalProgram.h"
 
 DE_BEGIN
 
@@ -41,6 +42,7 @@ void GLCanvas::initializeGL()
         CHECK_GL_ERROR;
         
         resizeGL();
+        addProgram("normal", new NormalProgram());
     }
 }
 
@@ -93,4 +95,55 @@ void GLCanvas::resizeGL()
     }
 }
 
+void GLCanvas::addProgram(string pm,GLProgram* effect)
+{
+    if(effect->init()) {
+        m_allPrograms[pm] = effect;
+    }
+    else {
+        delete effect;
+    }
+}
+
+GLProgram* GLCanvas::getProgram(string pm)
+{
+    return m_allPrograms[pm];
+}
+
+
+static GLenum s_blendingSource = -1;
+static GLenum s_blendingDest = -1;
+void GLCanvas::blendFunc(GLenum src,GLenum dst)
+{
+    if (src != s_blendingSource || dst != s_blendingDest)
+    {
+        s_blendingSource = src;
+        s_blendingDest = dst;
+        if (src == GL_ONE && dst == GL_ZERO)
+        {
+            glDisable(GL_BLEND);
+        }
+        else
+        {
+            glEnable(GL_BLEND);
+            glBlendFunc(src, dst);
+        }
+    }
+}
+
+void GLCanvas::paint(PaintConfig& config)
+{
+    SpriteFrame* frame = config.frame;
+    if (frame &&
+        frame->getTexture() &&
+        frame->getTexture()->getTextureId() != 0)
+    {
+        blendFunc(config.blendSrc,config.blendDst);
+        config.program->use();
+        config.program->setUniformValue("matrix", GLCanvas::GetInstance()->getGlobalTrans()->getMatrix());
+        
+        frame->getTexture()->bind(GL_TEXTURE0);
+        config.program->actived(config);
+    }
+}
 DE_END

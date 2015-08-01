@@ -92,6 +92,8 @@ void Window::initialize(float w, float h,float s)
         GLCanvas::GetInstance()->setLayerWidth(w);
         GLCanvas::GetInstance()->setLayerHeight(h);
         GLCanvas::GetInstance()->initializeGL();
+        DEApplication->initDebugInfo();
+        onInitFinished();
     }
 }
 

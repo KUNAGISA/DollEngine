@@ -192,7 +192,7 @@ bool KAGParser::callMacro(const wstring& name)
     return false;
 }
 
-void KAGParser::trigger()
+void KAGParser::update()
 {
     if (m_waitTime <= getTime()) {
         setEnabled(false);
@@ -451,6 +451,9 @@ kagchar* KAGParser::parseTagParamValue(kagchar* text,bool is_at,wstring& value,b
     if (*ntext == '%') {
         macroarg = true;
     }
+    if (*ntext == '&') {
+        entity = true;
+    }
     while (true)
     {
         if (*ntext == '\\') {
@@ -459,9 +462,6 @@ kagchar* KAGParser::parseTagParamValue(kagchar* text,bool is_at,wstring& value,b
             value.push_back(*ntext);
             ++ntext;
             continue;
-        }
-        if (*ntext == '&' && *(ntext+1) != '&') {
-            entity = true;
         }
         if (*ntext == '\'' || *ntext == '"')
         {

@@ -116,6 +116,75 @@ public:
     float outlineSize;
 };
 
+
+struct GLV2F
+{
+    float v1;
+    float v2;
+};
+
+struct GLV3F
+{
+    float v1;
+    float v2;
+    float v3;
+};
+
+struct GLV4F
+{
+    float v1;
+    float v2;
+    float v3;
+    float v4;
+};
+
+struct GLVertex {
+    GLV2F vertex;
+    GLV4F color;
+    GLV2F uv;
+};
+
+class Transform;
+struct GLDrawData
+{
+    void setPos(float x, float y,float w,float h,Transform* trans);
+    void setFrameRect(float l,float t,float r,float b);
+    void setInnerRect(float l,float r,float b,float t);
+    void setStart(Color* color);
+    void setEnd(Color* color);
+    
+    GLVertex lt;
+    GLVertex rt;
+    GLVertex rb;
+    GLVertex lb;
+};
+
+struct Scale9Config
+{
+    float l;
+    float t;
+    float b;
+    float r;
+};
+
+class SpriteFrame;
+class GLProgram;
+struct PaintConfig
+{
+    Transform* trans;
+    SpriteFrame* frame;
+    float width;
+    float height;
+    Scale9Config* scale9;
+    Color* start;
+    Color* end;
+    int gradVector;
+    GLProgram* program;
+    GLenum blendSrc;
+    GLenum blendDst;
+    bool flipY;
+};
+
 DE_END
 
 

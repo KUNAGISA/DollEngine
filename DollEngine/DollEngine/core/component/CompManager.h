@@ -21,6 +21,12 @@ class CompManager
 public:
     CompManager();
     Shared(CompManager)
+    
+public:
+    void addUpdateComp(Component* comp);
+    void removeUpdateComp(Component* comp);
+    void updateComp();
+    
 public:
     void addTouchComp(Component* comp);
     void clearTouches();
@@ -32,12 +38,14 @@ public:
 public:
     void addReleaseComp(Component* comp);
     void removeReleaseComp(Component* comp);
-    
+    void releaseComp();
 public:
 protected:
     set<Component*> m_releasePools;
     list<Component*> m_touchComps;
     vector<TouchListener*> m_validTouches;
+    set<Component*> m_updatePools;
+    double m_lastTime;
 };
 
 DE_END

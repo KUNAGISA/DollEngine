@@ -10,7 +10,7 @@
 #include "GLCache.h"
 #include "TextFrame.h"
 #include "GameObject.h"
-#include "GLPainter.h"
+#include "GLCanvas.h"
 
 DE_BEGIN
 
@@ -50,24 +50,33 @@ void Character::setSizeToImageSize()
 
 void Character::update()
 {
-    if (!getObject()) {
-        return;
-    }
     setSizeToImageSize();
     if (m_allTextFrames.size() == 0) {
         return;
     }
     
-    float ox = -getObject()->getAnchorX()*m_paintWidth;
-    float oy = -getObject()->getAnchorY()*m_paintHeight;
+    float ox,oy;
+    if (getObject()) {
+        ox = -getObject()->getAnchorX()*m_paintWidth;
+        oy = -getObject()->getAnchorY()*m_paintHeight;
+    }
+    else {
+        ox = 0;
+        oy = m_paintHeight;
+    }
     
     float lastX=0;
     for (TextFrame* frame : m_allTextFrames) {
+        FontData* font = frame->getFont();
         Transform orgin;
-        orgin.copy(getObject()->getTransInWorld());
+        if (getObject()) {
+            orgin.copy(getObject()->getTransInWorld());
+        }
         Transform offst;
-        offst.setX(lastX+ox);
-        offst.setY(m_fontSize-frame->getFont()->bearingY+oy);
+        offst.setX(lastX + font->bearingX +ox);
+        float y = -(frame->getHeight()-font->bearingY)+oy;
+        string fontname = frame->getCacheKey();
+        offst.setY(y);
         offst.flush();
         orgin.setWidth(frame->getWidth());
         orgin.setHeight(frame->getHeight());
@@ -79,7 +88,7 @@ void Character::update()
         config.frame = frame;
         config.width = frame->getWidth();
         config.height = frame->getHeight();
-        GLPainter::GetInstance()->paint(config);
+        GLCanvas::GetInstance()->paint(config);
         lastX += frame->getFont()->advance;
     }
 }

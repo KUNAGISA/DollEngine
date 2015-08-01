@@ -95,31 +95,6 @@ tTJSNC_Application::tTJSNC_Application() : inherited(TJS_W("Application"))
     TJS_END_NATIVE_STATIC_PROP_DECL(patchPath)
     
     
-    TJS_BEGIN_NATIVE_PROP_DECL(world)
-    {
-        TJS_BEGIN_NATIVE_PROP_GETTER
-        {
-            TjsGameObject* obj = dynamic_cast<TjsGameObject*>(DEApplication->getWorld());
-            if (obj) {
-                result->SetObject(obj->_self);
-            }
-            else {
-                result->Clear();
-            }
-            return TJS_S_OK;
-        }
-        TJS_END_NATIVE_PROP_GETTER
-        TJS_BEGIN_NATIVE_PROP_SETTER
-        {
-            iTJSDispatch2* dis =(*param).AsObject();
-            TjsGameObject* obj = TJS_GET_OBJECT(TjsGameObject,dis);
-            DEApplication->setWorld(obj);
-            return TJS_S_OK;
-        }
-        TJS_END_NATIVE_PROP_SETTER
-    }
-    TJS_END_NATIVE_STATIC_PROP_DECL(world)
-    
 //    TJS_NATIVE_PROP(graphicCacheLimit,
 //                    System::GetInstance()->getGraphicCacheLimit(),
 //                    System::GetInstance()->setGraphicCacheLimit(param->AsReal()))

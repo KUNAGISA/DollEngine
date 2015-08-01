@@ -7,6 +7,7 @@
 //
 
 #include "CoreType.h"
+#include "Transform.h"
 
 DE_BEGIN
 
@@ -155,6 +156,53 @@ GradientColor::GradientColor()
 GradientColor::GradientColor(const Color& start, const Color& e)
 :Color(start),end(e),vector(0)
 {
+}
+
+
+void GLDrawData::setPos(float x, float y,float w,float h,Transform* trans)
+{
+    lb.vertex.v1 = lt.vertex.v1 = x;
+    rb.vertex.v2 = lb.vertex.v2 = y;
+    rb.vertex.v1 = rt.vertex.v1 = x+w;
+    lt.vertex.v2 = rt.vertex.v2 = y+h;
+    if (trans) {
+        trans->transTo(lb.vertex.v1, lb.vertex.v2, &lb.vertex);
+        trans->transTo(lt.vertex.v1, lt.vertex.v2, &lt.vertex);
+        trans->transTo(rb.vertex.v1, rb.vertex.v2, &rb.vertex);
+        trans->transTo(rt.vertex.v1, rt.vertex.v2, &rt.vertex);
+    }
+}
+
+void GLDrawData::setFrameRect(float l,float t,float r,float b)
+{
+    lt.uv.v1 = lb.uv.v1 = l;
+    rt.uv.v1 = rb.uv.v1 = r;
+    lt.uv.v2 = rt.uv.v2 = t;
+    lb.uv.v2 = rb.uv.v2 = b;
+}
+
+void GLDrawData::setInnerRect(float l,float r,float b,float t)
+{
+    float nl = (rt.uv.v1-lt.uv.v1) * l + lt.uv.v1;
+    float nb = lb.uv.v2 - (lb.uv.v2-lt.uv.v2) * b;
+    float nr = rt.uv.v1 - (rt.uv.v1-lt.uv.v1) * r;
+    float nt = (lb.uv.v2-lt.uv.v2) * t + lt.uv.v2;
+    lt.uv.v1 = lb.uv.v1 = nl;
+    rt.uv.v1 = rb.uv.v1 = nr;
+    lt.uv.v2 = rt.uv.v2 = nt;
+    lb.uv.v2 = rb.uv.v2 = nb;
+}
+
+void GLDrawData::setStart(Color* color)
+{
+    color->toColorF((GLfloat*)&lt.color);
+    color->toColorF((GLfloat*)&rt.color);
+}
+
+void GLDrawData::setEnd(Color* color)
+{
+    color->toColorF((GLfloat*)&lb.color);
+    color->toColorF((GLfloat*)&rb.color);
 }
 
 DE_END

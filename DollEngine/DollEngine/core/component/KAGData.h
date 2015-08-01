@@ -17,10 +17,11 @@ typedef wchar_t kagchar;
 
 struct KAGTagParamValue
 {
-    KAGTagParamValue():entity(false),macroarg(false){}
+    KAGTagParamValue():entity(false),macroarg(false),isstring(false){}
     wstring key;
     wstring value;
-    bool entity;//是否需要解析成字符串
+    bool entity;//是否是需要eval的参数
+    bool isstring;//是否是字符串
     bool macroarg;//是否是宏参数
 };
 
@@ -41,12 +42,16 @@ public:
         v.key = key;
         v.value = value;
         v.macroarg = macroarg;
-        v.macroarg = entity;
-        if(value.size() > 1 && value.at(0) == value.at(value.size()-1))
+        v.entity = entity;
+        int startIdx = 0;
+        if (entity) {
+            startIdx = 1;
+        }
+        if(value.size() > 1 && value.at(startIdx) == value.at(value.size()-1))
         {
-            if(value.at(0)=='\"'||value.at(0) == '\'')
+            if(value.at(startIdx)=='\"'||value.at(startIdx) == '\'')
             {
-                v.entity = true;
+                v.isstring = true;
             }
         }
         params.push_back(v);

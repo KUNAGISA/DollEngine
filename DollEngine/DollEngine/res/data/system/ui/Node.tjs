@@ -7,18 +7,9 @@ class Node extends GameObject
 	function Node (par=void) 
 	{
 		super.GameObject();
-		if (par == void) {
-			if(Application.world){
-				Application.world.children.add(this);
-				this.parent = Application.world;
-			}
-			else {
-				Application.world = this;
-			}
-		}
-		else {
+		this.parent = par;
+		if (par) {
 			par.children.add(this);
-			this.parent = par;
 		}
 	}
 
@@ -97,6 +88,11 @@ class Node extends GameObject
 		this.anchorY = y if y !== void;
 	}
 
+	function beginTransition (elm) 
+	{
+		
+	}
+
 	property absolute{
 	    setter(v) {
 	    	//setter
@@ -111,3 +107,6 @@ class Node extends GameObject
 		}
 	}
 }
+
+Node.DrawIndex = 0;
+

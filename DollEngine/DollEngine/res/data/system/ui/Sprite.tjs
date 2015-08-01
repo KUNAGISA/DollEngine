@@ -13,11 +13,31 @@ class Sprite extends Node
 	{
 		this.width = w if w !== void;
 		this.height = h if h !== void;
-		this._image.setSizeToImageSize();
+		this._image.paintWidth = w if w !== void;
+		this._image.paintHeight = h if h !== void;
+	}
+
+	function setImageSize (w=void,h=void,isscale9=false) 
+	{
+		this._image.scale9 = isscale9;
+		this.setSize(w,h);
 	}
 
 	function loadImages (path,plist=void) 
 	{
+		var fullpath = Storages.getFullPath(path);
+		if (!fullpath) {
+			fullpath = Storages.getFullPath(path+'.png');
+			if (!fullpath) {
+				fullpath = Storages.getFullPath(path+'.jpg');
+				if (!fullpath) {
+					fullpath = Storages.getFullPath(path+'.jpeg');
+				}
+			}
+		}
+		if (fullpath) {
+			path = fullpath;
+		}
 		return this._image.loadImages(path,plist);
 	}
 
@@ -33,5 +53,4 @@ class Sprite extends Node
 			return this._image;
 		}
 	}
-
 }

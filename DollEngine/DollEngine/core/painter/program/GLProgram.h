@@ -13,7 +13,6 @@
 #include "GLShaderObject.h"
 #include "Transform.h"
 #include "SpriteFrame.h"
-#include "GLPainter.h"
 
 DE_BEGIN
 
@@ -42,10 +41,17 @@ public:
     
     virtual bool init(){return false;}
     virtual void actived(PaintConfig& config){}
-private:
+    virtual void draw();
+protected:
     vector<GLShaderObject*> m_shaders;
     map<const char*, GLint> m_allUniformIndex;
-
+    
+    vector<GLDrawData> m_quads;
+    vector<GLushort> m_indexs;
+    
+    GLuint              m_pBuffersVBO[2]; //0: vertex  1: indices
+    vector<GLushort>           m_pIndices;
+    GLuint              m_uVAOname;
 };
 
 DE_END

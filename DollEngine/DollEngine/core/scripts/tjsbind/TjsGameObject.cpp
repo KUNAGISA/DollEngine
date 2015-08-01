@@ -38,6 +38,8 @@ NCB_REGISTER_CLASS_DIFFER(GameObject,TjsGameObject)
     NCB_PROPERTY(parent, getParent,setParent);
     NCB_PROPERTY(absolute,getZ,setZ);
     NCB_PROPERTY(enabled,getEnabled,setEnabled);
+    NCB_PROPERTY(opacity,getOpacity,setOpacity);
+    NCB_PROPERTY(color,getColor,setColor);
     NCB_PROPERTY(visible,getVisible,setVisible);
     NCB_PROPERTY(x,getX,setX);
     NCB_PROPERTY(y,getY,setY);

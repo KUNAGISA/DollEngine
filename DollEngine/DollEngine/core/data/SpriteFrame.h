@@ -28,12 +28,14 @@ public:
     
     GLfloat* getGLCoord(){return m_glCoord;}
     PROPERTY(GLTexture*,Texture,m_texture);
-    PROPERTY_CONST(Rect,Rect,m_rect);
+    void setRect(const Rect& v);
+    const Rect& getRect(){return m_rect;}
     PROPERTY_CONST(string,CacheKey,m_cacheKey){m_cacheKey=v;}
     PROPERTY_RO(int,RetainCount,m_retainCount)
 protected:
     GLfloat m_glCoord[8];
     void* m_otherData;
+    Rect m_rect;
 };
 DE_END
 

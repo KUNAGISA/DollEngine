@@ -9,7 +9,6 @@
 #include "Painter.h"
 #include "GLCache.h"
 #include "Application.h"
-#include "GLPainter.h"
 #include "GameObject.h"
 #include "GLCanvas.h"
 
@@ -23,11 +22,19 @@ Painter::Painter()
 ,m_paintWidth(0)
 ,m_blendSrc(GL_ONE)
 ,m_blendDst(GL_ONE_MINUS_SRC_ALPHA)
+,m_gradient(false)
+,m_scale9B(1.0/3)
+,m_scale9L(1.0/3)
+,m_scale9R(1.0/3)
+,m_scale9T(1.0/3)
+,m_color(null)
+,m_program(null)
+,m_flipY(false)
 {
     setCompName("Painter");
     m_type = COMP_PAINT;
     m_color = new GradientColor();
-    m_program = GLPainter::GetInstance()->getProgram("normal");
+    m_program = GLCanvas::GetInstance()->getProgram("normal");
 }
 
 Painter::~Painter()
@@ -124,32 +131,43 @@ void Painter::setOpacity(GLubyte o)
 
 void Painter::update()
 {
-    if (!getObject()) {
-        return;
-    }
     if (!m_displayFrame) {
         return;
     }
     if (m_scale9) {
-        
+        updateWithScale9();
     }
     else {
         updateWithFrame();
     }
 }
 
+void Painter::updateWithScale9()
+{
+    PaintConfig config;
+    flushPaintConfig(config);
+    Scale9Config scfg = {m_scale9L,m_scale9B,m_scale9R,m_scale9T};
+    config.scale9 = &scfg;
+    GLCanvas::GetInstance()->paint(config);
+}
+
 void Painter::updateWithFrame()
 {
     PaintConfig config;
     flushPaintConfig(config);
-    GLPainter::GetInstance()->paint(config);
+    GLCanvas::GetInstance()->paint(config);
 }
 
 void Painter::flushPaintConfig(PaintConfig& config)
 {
     config.frame = m_displayFrame;
-    config.trans = getObject()->getTransInWorld();
-    config.color = m_color;
+    if (getObject()) {
+        config.trans = getObject()->getTransInWorld();
+    }
+    else {
+        config.trans = null;
+    }
+    config.start = m_color;
     if (m_gradient) {
         config.end = &m_color->end;
         config.gradVector = m_color->vector;
@@ -162,6 +180,8 @@ void Painter::flushPaintConfig(PaintConfig& config)
     config.height = m_paintHeight;
     config.blendSrc = m_blendSrc;
     config.blendDst = m_blendDst;
+    config.scale9 = null;
+    config.flipY = m_flipY;
 }
 
 DE_END
