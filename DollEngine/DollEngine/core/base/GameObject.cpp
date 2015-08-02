@@ -22,6 +22,11 @@ GameObject::GameObject()
 ,m_z(0)
 ,m_enabled(true)
 ,m_visible(true)
+,m_opacity(0xff)
+,m_realColor(0xffffffff)
+,m_color(0xffffffff)
+,m_transform(null)
+,m_transInWorld(null)
 {
     m_transInWorld = new Transform();
     m_transform = new Transform();
@@ -99,9 +104,14 @@ void GameObject::transform()
     {
         m_transInWorld->copy(getParent()->m_transInWorld);
         m_transInWorld->transform(m_transform);
+        m_realColor.set(m_color);
+        m_realColor.a = (GLubyte)m_opacity;
+        m_realColor.multiply(getParent()->m_realColor);
     }
     else
     {
+        m_realColor.set(m_color);
+        m_realColor.a = (GLubyte)m_opacity;
         m_transInWorld->init();
         m_transInWorld->transform(m_transform);
     }

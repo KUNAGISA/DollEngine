@@ -24,6 +24,7 @@ Component::Component()
 
 Component::~Component()
 {
+    CompManager::GetInstance()->removeReleaseComp(this);
 }
 
 void Component::release()

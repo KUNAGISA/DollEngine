@@ -75,11 +75,11 @@ TextFrame* GLCache::addText(const string& text,const string& fontName,int fontSi
     return frame;
 }
 
-GLTexture* GLCache::addTexture(const string& picKey)
+GLTexture* GLCache::addTexture(const string& path)
 {
-    FileInfo file(picKey);
+    FileInfo file(path);
     if (!file.exist()) {
-        Debug::throwMsg(ERROR_FILE_EXIST_FAILD,picKey);
+        Debug::throwMsg(ERROR_FILE_EXIST_FAILD,path);
     }
     auto iter2 = m_allTextures.find(file.absolutePath());
     GLTexture* tex=null;
@@ -94,7 +94,7 @@ GLTexture* GLCache::addTexture(const string& picKey)
             tex->initWithImage(&image);
         }
         else {
-            Debug::throwMsg(ERROR_IMAGE_LOAD_FAILD,picKey);
+            Debug::throwMsg(ERROR_IMAGE_LOAD_FAILD,path);
             return null;
         }
         m_allTextures[file.absolutePath()] = tex;
@@ -135,6 +135,34 @@ SpriteFrame* GLCache::addFrame(const string& picKey,const string& plist)
         Debug::throwMsg("暂时不支持Plist格式");
         return null;
     }
+}
+
+SpriteFrame* GLCache::addFrame(const string& path,const Rect& rect)
+{
+    FileInfo file(path);
+    if (!file.exist()) {
+        Debug::throwMsg(ERROR_FILE_EXIST_FAILD,path);
+    }
+    string key = Utf8WithFormat("%s_%d_%d_%d_%d",file.absolutePath().c_str(),(int)rect.x,(int)rect.y,(int)rect.width,(int)rect.height);
+    auto iter = m_allSpriteFrames.find(key);
+    if (iter != m_allSpriteFrames.end()) {
+        return iter->second;
+    }
+    auto iter2 = m_allTextures.find(file.absolutePath());
+    GLTexture* tex=null;
+    if(iter2 != m_allTextures.end()) {
+        tex = iter2->second;
+    }
+    else {
+        tex = addTexture(file.absolutePath());
+    }
+    SpriteFrame* frame = new SpriteFrame();
+    frame->setTexture(tex);
+    frame->setRect(rect);
+    m_allSpriteFrames[key] = frame;
+    frame->setCacheKey(key);
+    frame->retain();
+    return frame;
 }
 
 GLTexture* GLCache::addTexture(int r)

@@ -31,7 +31,7 @@ public:
     void transFinished();
     GameObject* getTransNode(){return m_transNode;}
     PROPERTY(bool, Visible, m_visible){m_visible=v;}
-    
+    PROPERTY_CONST(string, Title, m_title);
     PROPERTY(GameObject*,World,m_world);
 protected:
     void* m_deviceWindow;

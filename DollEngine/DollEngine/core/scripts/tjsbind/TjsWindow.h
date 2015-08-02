@@ -30,6 +30,14 @@ void setWorld(tTJSVariant v){
     TjsGameObject* obj = TJS_GET_OBJECT(TjsGameObject, v.AsObject());
     Window::setWorld(obj);
 }
+void setTitle(tTJSVariant v){
+    TJS_STRING(v, str);
+    Window::setTitle(str);
+}
+tTJSVariant getTitle(){
+    TJS_WSTRING(m_title,str);
+    return str.c_str();
+}
 };
 
 #endif /* defined(__DollEngine__TjsWindow__) */

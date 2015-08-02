@@ -28,9 +28,18 @@ class GameWorld extends Node
 
 	function release (name) 
 	{
-		if (typeof names[name] != 'undefined') {
-			invalidate names[name];
-			delete names[name];
+		if (typeof this.names[name] != 'undefined') {
+			invalidate this.names[name];
+			delete this.names[name];
 		}
+	}
+
+	function clearLayers () 
+	{
+		this.removeAllChildren();
+		this.base = void;
+		this.names = %[];
+		this.layers = [];
+		this.messages = [];
 	}
 }

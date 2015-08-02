@@ -6,6 +6,7 @@
 		"system/core/TagHandlers.tjs",
 		"system/core/Timer.tjs",
 		"system/core/History.tjs",
+		"system/core/SoundBuffer.tjs",
 		"system/core/KagController.tjs",
 		"system/core/action/ActionInstant.tjs",
 		"system/core/action/ActionInterval.tjs",
@@ -16,6 +17,7 @@
 		"system/layer/GameWorld.tjs",
 		"system/layer/GraphicLayer.tjs",
 		"system/layer/MessageLayer.tjs",
+		"system/layer/TextLayer.tjs",
 		"system/ui/Node.tjs",
 		"system/ui/UILayer.tjs",
 		"system/ui/Sprite.tjs",
@@ -48,5 +50,8 @@
 		"width" : 1136,
 		"height" : 640,
 		"scale" : 1
+	},
+	"game" : {
+		"title" : "幽冥录II for Mac v1.0.0",
 	}
 }

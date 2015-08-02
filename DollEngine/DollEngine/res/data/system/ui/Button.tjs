@@ -79,6 +79,9 @@ class Button extends Control
 			}
 			else if(typeof v == 'String'){
 				this._normalImage.loadImages(v);
+		    	this.setSize(this._normalImage.width,this._normalImage.height);
+		    	this.imageBase.x = this.width/2;
+		    	this.imageBase.y = this.height/2;
 			}
 		}
 		getter {
@@ -120,6 +123,18 @@ class Button extends Control
 		getter {
 	    	//getter
 			return this._disableImage;
+		}
+	}
+
+	property graphicImage{
+	    setter(v) {
+	    	//setter
+	    	this._normalImage.loadImageWithRect(v,0,0,2/3,0);
+	    	this.setSize(this._normalImage.width,this._normalImage.height);
+	    	this.imageBase.x = this.width/2;
+	    	this.imageBase.y = this.height/2;
+	    	this._selectImage.loadImageWithRect(v,0,1/3,1/3,0);
+	    	this._disableImage.loadImageWithRect(v,0,0,2/3,0);
 		}
 	}
 

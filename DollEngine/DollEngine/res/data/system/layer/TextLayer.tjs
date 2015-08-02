@@ -1,0 +1,18 @@
+
+class TextLayer extends Node
+{
+	function TextLayer (par) 
+	{
+		super.Node(par);
+	}
+
+	function clearCH () 
+	{
+		this.removeAllChildren();
+	}
+
+	function refreshCH () 
+	{
+		//根据界面大小重新刷新文字位置
+	}
+}

@@ -51,4 +51,16 @@ class Control extends Node
 			return !this._touch.enabled;
 		}
 	}
+
+	var _issystem=false;//是否是系统控件（不受er/cm指令清除
+	property issystem{
+	    setter(v) {
+	    	//setter
+	    	this._issystem = v;
+		}
+		getter {
+	    	//getter
+			return this._issystem;
+		}
+	}
 }

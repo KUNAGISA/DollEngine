@@ -11,6 +11,7 @@
 #include "Application.h"
 #include "GameObject.h"
 #include "GLCanvas.h"
+#include "Storages.h"
 
 DE_BEGIN
 
@@ -27,27 +28,48 @@ Painter::Painter()
 ,m_scale9L(1.0/3)
 ,m_scale9R(1.0/3)
 ,m_scale9T(1.0/3)
-,m_color(null)
+,m_color(0xffffffff)
 ,m_program(null)
 ,m_flipY(false)
+,m_opacity(0xff)
+,m_endColor(0xffffffff)
+,m_endOpacity(0xff)
 {
     setCompName("Painter");
     m_type = COMP_PAINT;
-    m_color = new GradientColor();
     m_program = GLCanvas::GetInstance()->getProgram("normal");
 }
 
 Painter::~Painter()
 {
     SAFF_RELEASE(m_displayFrame);
-    SAFF_DELETE(m_color);
 }
 
 bool Painter::loadImages(const string& path,const string& plist)
 {
     SpriteFrame* frame = GLCache::GetInstance()->addFrame(path);
-    m_colorRect = false;
     if (frame) {
+        m_colorRect = false;
+        setDisplayFrame(frame);
+        setSizeToImageSize();
+        NEED_REDRAW;
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+bool Painter::loadImageWithRect(const string& path,float l,float t,float r,float b)
+{
+    SpriteFrame* frame = GLCache::GetInstance()->addFrame(path);
+    Rect rect(l*frame->getWidth(),
+              t*frame->getHeight(),
+              (1-l-r)*frame->getWidth(),
+              (1-t-b)*frame->getHeight());
+    frame = GLCache::GetInstance()->addFrame(path,rect);
+    if (frame) {
+        m_colorRect = false;
         setDisplayFrame(frame);
         setSizeToImageSize();
         NEED_REDRAW;
@@ -107,24 +129,24 @@ void Painter::setDisplayFrame(DE::SpriteFrame *v)
 void Painter::setColor(uint32_t color)
 {
     m_gradient = false;
-    m_color->set(color);
+    m_color = color;
     NEED_REDRAW;
 }
 
 void Painter::setGradientColor(uint32_t start,uint32_t end,int vector)
 {
     m_gradient = true;
-    m_color->set(start);
-    m_color->vector = vector;
-    m_color->end.set(end);
+    m_realColor.vector = vector;
+    m_color = start;
+    m_endColor = end;
     NEED_REDRAW;
 }
 
 void Painter::setOpacity(GLubyte o)
 {
-    m_color->a = o;
+    m_opacity = o;
     if (m_gradient) {
-        m_color->end.a = o;
+        m_endOpacity = o;
     }
     NEED_REDRAW;
 }
@@ -161,16 +183,24 @@ void Painter::updateWithFrame()
 void Painter::flushPaintConfig(PaintConfig& config)
 {
     config.frame = m_displayFrame;
+    m_realColor.set(m_color);
+    m_realColor.a = m_opacity;
     if (getObject()) {
         config.trans = getObject()->getTransInWorld();
+        m_realColor.multiply(getObject()->m_realColor);
     }
     else {
         config.trans = null;
     }
-    config.start = m_color;
+    config.start = &m_realColor;
     if (m_gradient) {
-        config.end = &m_color->end;
-        config.gradVector = m_color->vector;
+        m_realColor.end.set(m_endColor);
+        m_realColor.end.a = m_endOpacity;
+        if (getObject()) {
+            m_realColor.end.multiply(getObject()->m_realColor);
+        }
+        config.end = &m_realColor.end;
+        config.gradVector = m_realColor.vector;
     }
     else {
         config.end = null;

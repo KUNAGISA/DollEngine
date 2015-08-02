@@ -21,7 +21,6 @@ public:
     
     bool loadRender(GameObject* obj, int w,int h,Painter* bg=null);
 protected:
-    void flushPaintConfig(PaintConfig& config);
     GLuint m_FBO;
     GLint m_oldFBO;
 };

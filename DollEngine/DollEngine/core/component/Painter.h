@@ -25,13 +25,13 @@ public:
     ~Painter();
 public:
     virtual bool loadImages(const string& path,const string& plist="");
+    virtual bool loadImageWithRect(const string& path,float l,float t,float r,float b);
     bool loadSize(int w,int h,int r);
     virtual void setSizeToImageSize();
 public:
     void update();
     void updateWithScale9();
     void updateWithFrame();
-    void setColor(uint32_t color);
     void setGradientColor(uint32_t start,uint32_t end,int vector);
     void setOpacity(GLubyte o);
     PROPERTY(bool, Scale9, m_scale9){m_scale9=v;NEED_REDRAW;}
@@ -48,11 +48,14 @@ public:
     PROPERTY(float, PaintWidth, m_paintWidth){m_paintWidth=v;NEED_REDRAW;}
     PROPERTY(float, PaintHeight, m_paintHeight){m_paintHeight=v;NEED_REDRAW;}
     PROPERTY(bool, FlipY, m_flipY){m_flipY=v;}
-    
+    PROPERTY(uint32_t, Color, m_color);
 protected:
     void flushPaintConfig(PaintConfig& config);
 protected:
-    GradientColor* m_color;
+    GradientColor m_realColor;
+    uint32_t m_endColor;
+    GLubyte m_opacity;
+    GLubyte m_endOpacity;
 };
 
 DE_END

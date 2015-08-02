@@ -18,7 +18,7 @@ class __Kag
 			em("不存在App类的实例");
 		}
 		this.fore = app.world;
-		this.tagHandlers = app.tags;
+		this.tagHandlers = app.tagHandlers;
 	}
 }
 

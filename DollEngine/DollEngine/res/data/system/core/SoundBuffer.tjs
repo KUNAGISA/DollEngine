@@ -1,0 +1,25 @@
+
+class SoundBuffer extends Audio
+{
+	function SoundBuffer () 
+	{
+		super.Audio();
+	}
+}
+
+class BGMBuffer extends SoundBuffer
+{
+	function BGMBuffer () 
+	{
+		super.SoundBuffer();
+	}
+}
+
+class SEBuffer extends SoundBuffer
+{
+	var buf=0;
+	function SEBuffer () 
+	{
+		super.SoundBuffer();
+	}
+}

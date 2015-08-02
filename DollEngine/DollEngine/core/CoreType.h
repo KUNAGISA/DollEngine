@@ -83,6 +83,7 @@ public:
     void set(uint32_t color);
     void toInt32(uint32_t& color);
     void toColorF(GLfloat* colorf);
+    void multiply(const Color& v);
     GLubyte r;
     GLubyte g;
     GLubyte b;

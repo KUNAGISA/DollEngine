@@ -58,19 +58,27 @@ int TjsKAGParser::execute(KAGTag* tag)
         if (kv.entity)
         {
             if (kv.isstring) {
-                TjsEngine::Global()->EvalExpression( kv.value.substr(2,kv.value.length()-3), &ret) ;
+                try {
+                    TjsEngine::Global()->EvalExpression( kv.value.substr(2,kv.value.length()-3), &ret) ;
+                }TJS_CATCH
             }
             else {
-                TjsEngine::Global()->EvalExpression( kv.value.substr(1), &ret) ;
+                try {
+                    TjsEngine::Global()->EvalExpression( kv.value.substr(1), &ret) ;
+                }TJS_CATCH
             }
         }
         else if (kv.isstring)
         {
-            TjsEngine::Global()->EvalExpression( kv.value, &ret) ;
+            try {
+                TjsEngine::Global()->EvalExpression( kv.value, &ret) ;
+            }TJS_CATCH
         }
         else if (kv.macroarg)
         {
-            TjsEngine::Global()->EvalExpression( (L"mp."+kv.value.substr(1)), &ret) ;
+            try {
+                TjsEngine::Global()->EvalExpression( (L"mp."+kv.value.substr(1)), &ret) ;
+            }TJS_CATCH
         }
         else
         {

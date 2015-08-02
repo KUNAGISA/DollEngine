@@ -147,6 +147,13 @@ void Color::toColorF(GLfloat* colorf)
     colorf[3] = a/255.0f;
 }
 
+void Color::multiply(const Color& v)
+{
+    r *= v.r/255.0f;
+    g *= v.g/255.0f;
+    b *= v.b/255.0f;
+    a *= v.a/255.0f;
+}
 
 GradientColor::GradientColor()
 :end(0xffffffff),vector(0)
@@ -195,14 +202,24 @@ void GLDrawData::setInnerRect(float l,float r,float b,float t)
 
 void GLDrawData::setStart(Color* color)
 {
-    color->toColorF((GLfloat*)&lt.color);
-    color->toColorF((GLfloat*)&rt.color);
+    GLfloat c[4];
+    color->toColorF(c);
+    c[0] *= c[3];
+    c[1] *= c[3];
+    c[2] *= c[3];
+    memcpy(&lt.color, c, sizeof(lt.color));
+    memcpy(&rt.color, c, sizeof(rt.color));
 }
 
 void GLDrawData::setEnd(Color* color)
 {
-    color->toColorF((GLfloat*)&lb.color);
-    color->toColorF((GLfloat*)&rb.color);
+    GLfloat c[4];
+    color->toColorF(c);
+    c[0] *= c[3];
+    c[1] *= c[3];
+    c[2] *= c[3];
+    memcpy(&lb.color, c, sizeof(lb.color));
+    memcpy(&rb.color, c, sizeof(rb.color));
 }
 
 DE_END

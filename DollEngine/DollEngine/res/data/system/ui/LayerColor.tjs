@@ -4,6 +4,7 @@ class LayerColor extends Sprite
 	{
 		super.Sprite(par);
 		this.round = 0;
+		this.setAnchor(0,0);
 	}
 
 	function setSize (w,h) 

@@ -50,13 +50,11 @@ void Window::onInitFinished()
 
 void Window::visit()
 {
+    if (m_world) {
+        m_world->visit();
+    }
     if (m_transNode&&m_transNode->getVisible()) {
         m_transNode->onPaint();
-    }
-    else {
-        if (m_world) {
-            m_world->visit();
-        }
     }
 }
 
@@ -83,6 +81,7 @@ void Window::beginTransition(bool isblack)
                            GLCanvas::GetInstance()->getLayerWidth(),
                            GLCanvas::GetInstance()->getLayerHeight(),
                            bg);
+    m_transNode->setColor(0xffffffff);
     m_transNode->setOpacity(255);
     m_transNode->setX(0);
     m_transNode->setY(0);
@@ -102,6 +101,7 @@ void Window::transWithCrossFade(float dt)
             dt=0;
         }
         m_transNode->setOpacity((1.0f-dt)*255);
+        m_transNode->transform();
     }
 }
 

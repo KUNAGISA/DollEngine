@@ -97,4 +97,10 @@ void Window::initialize(float w, float h,float s)
     }
 }
 
+void Window::setTitle(const string &v)
+{
+    m_title = v;
+    s_window.title = [NSString stringWithUTF8String:v.c_str()];
+}
+
 DE_END

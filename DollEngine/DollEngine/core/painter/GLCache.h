@@ -24,8 +24,9 @@ public:
     Shared(GLCache)
     
     TextFrame* addText(const string& text,const string& fontName,int fontSize);
-    GLTexture* addTexture(const string& picKey);
+    GLTexture* addTexture(const string& path);
     SpriteFrame* addFrame(const string& picKey,const string& plist="");
+    SpriteFrame* addFrame(const string& path,const Rect& rect);
     GLTexture* addTexture(int r);//创建圆角矩形
     SpriteFrame* addFrame(int r);//创建圆角矩形
     void removeSpriteFrameCache(SpriteFrame* frame);

@@ -23,7 +23,7 @@ class Sprite extends Node
 		this.setSize(w,h);
 	}
 
-	function loadImages (path,plist=void) 
+	function getExistPath (path) 
 	{
 		var fullpath = Storages.getFullPath(path);
 		if (!fullpath) {
@@ -35,10 +35,27 @@ class Sprite extends Node
 				}
 			}
 		}
-		if (fullpath) {
-			path = fullpath;
+		return fullpath;
+	}
+
+	function loadImages (path,plist=void) 
+	{
+		var ret = this._image.loadImages(this.getExistPath(path),plist);
+		if (ret) {
+			this.width = this._image.paintWidth;
+			this.height = this._image.paintHeight;
 		}
-		return this._image.loadImages(path,plist);
+		return ret;
+	}
+
+	function loadImageWithRect (path,l,t,r,b) 
+	{
+		var ret = this._image.loadImageWithRect(this.getExistPath(path),l,t,r,b);
+		if (ret) {
+			this.width = this._image.paintWidth;
+			this.height = this._image.paintHeight;
+		}
+		return ret;
 	}
 
 	function setColorF (fr,fg,fb,fa) 

@@ -46,8 +46,8 @@ void CompManager::updateComp()
 
 void CompManager::releaseComp()
 {
-    for (Component* comp : m_releasePools) {
-        comp->setIsReleased(true);
+    set<Component*> tmp = m_releasePools;
+    for (Component* comp : tmp) {
         delete comp;
     }
     m_releasePools.clear();

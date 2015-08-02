@@ -13,13 +13,23 @@ class App extends Window
 	var deffont = %[]; //默认字体设置
 	var deffontChanged = true;//默认字体是否有过变化
 	var history = void; //历史记录的管理器
-	var current = void;
 	var currentLayer = "message0";//默认
 
+	var transTimer = void; //trans用的Timer
+
+	//音频管理
+	var bgmBuffer = void;
+	var seBuffers = %[];
+
+	//状态数据
 	var status = %[
 		trans : 0,//trans的过渡时长
+		transReady : false, //是否进行过trans准备（backlay）
+		uiPage : 'fore', //UI控件将被创建在back层还是fore层
+
+		delay : 200,//文字显示速度
+		nowait : false, //是否瞬间显示文本/按钮
 	];
-	var transTimer = void; //trans用的Timer
 
 	function App () 
 	{
@@ -31,7 +41,7 @@ class App extends Window
 		this.width = DEConfig.device.width;
 		this.height = DEConfig.device.height;
 		this.initialize(DEConfig.device.width,DEConfig.device.height,DEConfig.device.scale);
-
+		this.title = DEConfig.game.title;
 		this.tags = new TagHandlers(this);
 		
 		this.world = new GameWorld();
@@ -50,6 +60,16 @@ class App extends Window
 			invalidate kag;
 		}
 		super.finalize();
+	}
+
+	/*图层管理*/
+
+	function getCurrentLayer () 
+	{
+		if (this.status.uiPage == 'back') {
+			return void;
+		}
+		return getLayerByElm(%[layer:this.currentLayer]);
 	}
 
 	function getLayerByElm (elm) 
@@ -104,6 +124,36 @@ class App extends Window
 		}
 	}
 
+
+	function clearLayers () 
+	{
+		this.world.clearLayers();
+	}
+
+
+	/*音频控制*/
+
+	function getBGM () 
+	{
+		if (this.bgmBuffer == void) {
+			this.bgmBuffer = new BGMBuffer();
+		}
+		return this.bgmBuffer;
+	}
+
+	function getSE (buf=0) 
+	{
+		var se = this.seBuffers[buf];
+		if (se == void) {
+			se = new SEBuffer();
+			se.buf = buf;
+			this.seBuffers[buf] = se;
+		}
+		return se;
+	}
+
+	/*TAG控制*/
+
 	function checkElm (elm,arr) 
 	{
 		for (var i = 0; i < arr.count; i++) {
@@ -118,6 +168,7 @@ class App extends Window
 		var telm = %[];
 		(Dictionary.assignStruct incontextof telm)(elm);
 		telm.page = 'fore';
+		telm.cond = void;
 		this.back.add([tag,telm]);
 	}
 
@@ -131,16 +182,20 @@ class App extends Window
 		
 	}
 
-
 	/**********场景切换*********/
 
 	function beginTransition (isblack) 
 	{
 		super.beginTransition(isblack);
+		if (this.status.transReady == false) {
+			this.clearLayers();
+		}
 		var count = this.back.count;
 		for (var i = 0; i < count; i++) {
 			this.tags.onExecute(this.back[i][0],this.back[i][1]);
 		};
+		this.back.clear();
+		this.status.transReady = false;
 	}
 
 	function transWithMethod (method,time) 
@@ -166,18 +221,275 @@ class App extends Window
 				break;
 		}
 		this.status.trans = time;
+		this.status.transT = 0;
 		this.transTimer.enabled = true;
 	}
 
 	function onTransCrossFadeUpdate (timer) 
 	{
+		var dt = this.status.transT/this.status.trans;
 		// var dt = timer.time*1000/this.status.trans;
-		// this.transWithCrossFade(dt);
-		// if (dt >= 1) {
-		// 	timer.enabled = false;
-		// 	this.transFinished();
-		// }
+		this.transWithCrossFade(dt);
+		if (dt >= 1) {
+			timer.enabled = false;
+			this.transFinished();
+		}
+		this.status.transT += 1000/60;
 	}
+
+
+	/*******TAG部分*******/
+	var tagHandlers = %[
+
+		/*******无效的指令*******/
+		laycount : function () {dm('失效的指令');} incontextof this,
+		loadplugin : function () {dm('失效的指令');} incontextof this,
+		mappfont : function () {dm('失效的指令');} incontextof this,
+		rclick : function () {dm('失效的指令');} incontextof this,
+
+		/*******系统操作*******/
+
+		//执行表达式
+		eval : function (elm) 
+		{
+			if (elm.exp) {
+				Scripts.eval(elm.exp);
+			}
+		} incontextof this,
+
+		iscript : function (elm) 
+		{
+			Scripts.exec(elm.exp);
+		} incontextof this,
+
+		endscript : function (elm) 
+		{
+		} incontextof this,
+
+
+		/*******剧本控制*******/
+		call : function (elm) 
+		{
+			this.tags.callLabel(elm.storage,elm.target);
+			return -1;
+		} incontextof this,
+
+		jump : function (elm) 
+		{
+			this.tags.jumpTo(elm.storage,elm.target);
+			return -1;
+		} incontextof this,
+
+		endmacro : function () 
+		{
+			this.tags.returnMacro();
+			return -1;
+		} incontextof this,
+
+		wait : function (elm) 
+		{
+			checkElm(elm,['time']);
+			return elm.time;
+		} incontextof this,
+
+		wt : function (elm) 
+		{
+		} incontextof this,
+
+		deffont : function (elm) 
+		{
+			merger(this.deffont,elm);
+			this.deffontChanged = true;
+		} incontextof this,
+
+		history : function (elm) 
+		{
+			this.history.enabled = elm.enabled if elm.enabled !== void;
+		} incontextof this,
+
+		s : function (elm) 
+		{
+			return -2;
+		} incontextof this,
+
+		/*******音频控制*******/
+		bgmopt : function (elm)
+		{
+			this.getBGM().volume = elm.volume if elm.volume !== void;
+		} incontextof this,
+
+		seopt : function (elm)
+		{
+			var se = this.getSE(elm.buf);
+			se.volume = elm.volume if elm.volume!==void;
+			se.pan = elm.pan if elm.pan!==void;
+		} incontextof this,
+
+		/*******界面控制*******/
+		//创建界面@ui storage=xx layer=xx page=xx visible=xx data=xx
+		ui : function (elm) 
+		{
+			checkElm(elm,['layer','storage']);
+			if (elm.page == 'back') {
+				this.mergerBack('ui',elm);
+				return;
+			}
+			if (typeof this.world.names[elm.layer] != 'undefined') {
+				em('重复的UI %s',elm.layer);
+				return -2;
+			}
+			var uipath = Storages.getFullPath(elm.storage);
+			if (!uipath) {
+				print("[loadui]ui配置文件%s未找到",uipath);
+				return;
+			}
+			if (typeof elm.hd == 'undefined') {
+				elm.hd = true;
+			}
+			var lay = UIReader.readJsonFile(uipath,this.world,elm.hd);
+			this.world.names[elm.layer] = lay;
+			lay.visible = elm.visible if elm.visible !== void;
+			if (typeof lay.initialize != 'undefined') {
+				if (elm.data) {
+					var data = Scripts.eval(elm.data);
+					lay.initialize(data);
+				}
+				else {
+					lay.initialize();
+				}
+				lay.refresh();
+				if (elm.anim) {
+					lay.playShow();
+				}
+			}
+			print("UI %s 创建成功",elm.storage);
+		} incontextof this,
+
+		image : function (elm) 
+		{
+			this.checkElm(elm,['layer','storage']);
+			var lay = this.getLayerByElm(elm);
+			if(!lay) {
+				this.mergerBack('image',elm);
+				return;
+			}
+			lay.loadImages(elm.storage);
+			var x = elm.left;
+			var y = lay.parent.height-elm.top;
+			lay.setPos(x,y);
+			lay.visible = elm.visible if elm.visible!==void;
+		} incontextof this,
+
+		clearlayers : function (elm) 
+		{
+			if (elm.page == 'back') {
+				this.mergerBack('clearlayers',elm);
+				this.status.transReady = false;
+				return;
+			}
+			this.clearLayers();
+		} incontextof this,
+
+		position : function (elm) 
+		{
+			this.checkElm(elm,['layer']);
+			var lay = this.getLayerByElm(elm);
+			if(!lay) {
+				this.mergerBack('position',elm);
+				return;
+			}
+			if (lay instanceof "MessageLayer") {
+				lay.setPosition(elm);
+			}
+			else {
+				em("position只能设定MessageLayer类对象");
+				return -2;
+			}
+		} incontextof this,
+
+		current : function (elm) 
+		{
+			this.checkElm(elm,['layer']);
+			if (elm.page == 'back') {
+				this.status.uiPage = 'back';
+				this.mergerBack('current',elm);
+			}
+			else {
+				this.status.uiPage = 'fore';
+			}
+			this.currentLayer = elm.layer;
+		} incontextof this,
+
+		er : function (elm) 
+		{
+			var lay = this.getCurrentLayer();
+			if (!lay) {
+				this.mergerBack('er',elm);
+				return;
+			}
+			lay.clearEr();
+		} incontextof this,
+
+		delay : function (elm) 
+		{
+			this.checkElm(elm,['speed']);
+			this.status.delay = elm.speed;
+		} incontextof this,
+
+		nowait : function (elm) 
+		{
+			this.status.nowait = true;
+		} incontextof this,
+
+		endnowait : function (elm) 
+		{
+			this.status.nowait = false;
+		} incontextof this,
+
+		locate : function (elm) 
+		{
+			var lay = this.getCurrentLayer();
+			if(!lay) {
+				this.mergerBack('locate',elm);
+				return;
+			}
+			this.status.locateX = elm.x if elm.x!==void;
+			this.status.locateY = elm.y if elm.y!==void;
+		} incontextof this,
+
+		button : function (elm) 
+		{
+			var lay = this.getCurrentLayer();
+			if(!lay) {
+				this.mergerBack('button',elm);
+				return;
+			}
+			elm.issys = false;
+			elm.x = this.status.locateX;
+			elm.y = this.status.locateY;
+			lay.addButton(elm);
+			if (this.status.nowait) {
+				return 0;
+			}
+			return this.status.delay;
+		} incontextof this,
+
+		/*******效果控制*******/
+		backlay : function () 
+		{
+			this.back.clear();
+			this.status.transReady = true;
+		} incontextof this,
+
+		trans : function (elm) 
+		{
+			this.checkElm(elm,['method']);
+			var time = 1000;
+			time = +elm.time if elm.time!==void;
+			this.transWithMethod(elm.method, time);
+			return time;
+		} incontextof this,
+	];
 }
 
 App.main = void;

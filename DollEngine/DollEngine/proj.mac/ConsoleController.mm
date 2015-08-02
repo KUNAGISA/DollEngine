@@ -114,11 +114,16 @@ static ConsoleController* s_instance=nil;
         wstring code;
         DE::Utf8ToUnicode(control.stringValue.UTF8String, code);
 
-        DE::TjsEngine::GetSelf()->eval(code, &ret);
+        if(!DE::TjsEngine::GetSelf()->eval(code, &ret)){
+            control.stringValue = @"";
+            return YES;
+        }
+        ret.ToString();
         const wchar_t* res = ret.AsStringNoAddRef()->operator const wchar_t *();
         string r;
         DE::UnicodeToUtf8(res, r);
-        [self pushString:[NSString stringWithUTF8String:r.c_str()]];
+        string tr = control.stringValue.UTF8String;
+        [self pushString:[NSString stringWithUTF8String:(tr+":\n"+r).c_str()]];
         control.stringValue = @"";
         return YES;
     }

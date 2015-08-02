@@ -11,8 +11,8 @@ class UICreator
         }
         else
         {
-            par_width = App.mainApp.width;
-            par_height = App.mainApp.height;
+            par_width = App.main.width;
+            par_height = App.main.height;
         }
         var posTypeOrgin=posArr[2],posTypeX=posArr[3],posTypeY=posArr[4];
         if(posArr.count < 3) {
@@ -68,8 +68,8 @@ class UICreator
         }
         else
         {
-            par_width = App.mainApp.width;
-            par_height = App.mainApp.height;
+            par_width = App.main.width;
+            par_height = App.main.height;
         }
         var w=sizeArr[0],h=sizeArr[1];
         if(sizeArr[2] == 2)

@@ -89,9 +89,7 @@ bool RTT::loadRender(GameObject* obj,int w,int h,Painter* bg)
     glGetIntegerv(GL_FRAMEBUFFER_BINDING, &m_oldFBO);
     glBindFramebuffer(GL_FRAMEBUFFER, m_FBO);
     glClear(GL_COLOR_BUFFER_BIT);
-    GLfloat v[4];
-    m_color->toColorF(v);
-    glClearColor(v[0], v[1], v[2], v[3]);
+    glClearColor(1,1,1,1);
     
     if (bg) {
         bg->update();

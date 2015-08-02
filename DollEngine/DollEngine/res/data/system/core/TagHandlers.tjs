@@ -1,13 +1,15 @@
 
 class TagHandlers extends KAGParser
 {
-	var _owner; //函数所调用的对象，通常是App对象
+	var owner; //函数所调用的对象，通常是App对象
 	var curFile;
 	var macroParams = [];
+	var tagHandlers;
 	function TagHandlers (object) 
 	{
 		super.KAGParser();
-		this._owner = object;
+		this.owner = object;
+		this.tagHandlers = object.tagHandlers;
 	}
 
 	function onExecute (name, params)
@@ -22,9 +24,9 @@ class TagHandlers extends KAGParser
 			name == 'onScenarioEnded') {
 			print("%s指令被TagHandlers类占用",name);
 		}
-		if(typeof this[name] != "undefined")
+		if(typeof this.tagHandlers[name] != "undefined")
 		{
-			time = (this[name] incontextof this._owner)(params);
+			time = this.tagHandlers[name](params);
 			if(time == void) time = 0;
 		}
 		else
@@ -71,158 +73,13 @@ class TagHandlers extends KAGParser
 
 	function onScenarioEnded () 
 	{
-		this._owner.waitClick(0);
+		this.owner.waitClick(0);
 	}
 
-	/*******TAG部分*******/
-	/*******无效的指令*******/
-	function laycount () {dm('失效的指令');}
-	function loadplugin () {dm('失效的指令');}
-	function mappfont () {dm('失效的指令');}
-	function rclick () {dm('失效的指令');}
-
-	/*******系统操作*******/
-	//打印
-	function dm (elm) 
-	{
-		var str;
-		if (elm.exp) {
-			str = Scripts.eval(elm.exp);
-		}
-		print(str);
-	}
-
-	//执行表达式
-	function eval (elm) 
-	{
-		if (elm.exp) {
-			Scripts.eval(elm.exp);
-		}
-	}
-
-	function iscript (elm) 
-	{
-		Scripts.exec(elm.exp);
-	}
-
-	function endscript (elm) 
-	{
-	}
-
-
-	/*******剧本控制*******/
-	function call (elm) 
-	{
-		this.tags.callLabel(elm.storage,elm.target);
-		return -1;
-	}
-
-	function endmacro () 
-	{
-		this.tags.returnMacro();
-		return -1;
-	}
-
-	function wait (elm) 
-	{
-		checkElm(elm,['time']);
-		return elm.time;
-	}
-
-	function wt (elm) 
-	{
-	}
-
-	function deffont (elm) 
-	{
-		merger(this.deffont,elm);
-		this.deffontChanged = true;
-	}
-
-	function history (elm) 
-	{
-		this.history.enabled = elm.enabled if elm.enabled !== void;
-	}
-
-	function s (elm) 
-	{
-		return -2;
-	}
-
-	/*******界面控制*******/
-	//创建界面@ui storage=xx layer=xx page=xx visible=xx data=xx
-	function ui (elm) 
-	{
-		checkElm(elm,['layer','storage']);
-		if (elm.page == 'back') {
-			this.mergerBack('ui',elm);
-			return;
-		}
-		if (typeof this.world.names[elm.layer] != 'undefined') {
-			em('重复的UI %s',elm.layer);
-			return -2;
-		}
-		var uipath = Storages.getFullPath(elm.storage);
-		if (!uipath) {
-			print("[loadui]ui配置文件%s未找到",uipath);
-			return;
-		}
-		if (typeof elm.hd == 'undefined') {
-			elm.hd = true;
-		}
-		var lay = UIReader.readJsonFile(uipath,this.world,elm.hd);
-		this.world.names[elm.layer] = lay;
-		lay.visible = elm.visible if elm.visible !== void;
-		if (typeof lay.initialize != 'undefined') {
-			if (elm.data) {
-				var data = Scripts.eval(elm.data);
-				lay.initialize(data);
-			}
-			else {
-				lay.initialize();
-			}
-			lay.refresh();
-			if (elm.anim) {
-				lay.playShow();
-			}
-		}
-		print("UI %s 创建成功",elm.storage);
-	}
-
-	function image (elm) 
-	{
-		this.checkElm(elm,['layer','storage']);
-		var par = this.getLayerByElm(elm);
-		if(!par) {
-			this.mergerBack('image',elm);
-			return;
-		}
-		var node = new Sprite(par);
-		node.loadImages(elm.storage);
-		node.setAnchor(0,0);
-		node.setPos(elm.left,par.height-elm.top-elm.height) if elm.left!==void||elm.top!==void;
-		node.visible = elm.visible if elm.visible!==void;
-	}
-
-
-	/*******效果控制*******/
-	function backlay () 
-	{
-		this.back.clear();
-	}
-
-	function trans (elm) 
-	{
-		this.checkElm(elm,['method']);
-		var time = 1000;
-		time = +elm.time if elm.time!==void;
-		this.transWithMethod(elm.method, time);
-		return time;
-	}
 }
 
 property mp{
 	getter {
-		return App.mainApp.tags.getMacroParams();
+		return App.main.tags.getMacroParams();
 	}
 }

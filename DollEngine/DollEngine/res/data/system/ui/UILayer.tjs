@@ -5,6 +5,7 @@ class UILayer extends MessageLayer
 	function UILayer (par) 
 	{
 		super.MessageLayer(par);
+		this.setAnchor(0,0);
 	}
 
 	function finalize () 

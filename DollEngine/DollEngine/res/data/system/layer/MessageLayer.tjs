@@ -1,0 +1,107 @@
+
+class MessageLayer extends Node
+{
+	var frameImage = void;//message层的背景
+	var frameColor = void;//message层的颜色
+	var chLayer = void;//message层的文字层
+	var controlLayer = void;//message层的控件层
+
+	var names = %[]; //用于存放control
+	var buttons = %[]; //用于存放syscontrol
+	var links = []; //用于存放文字链接
+
+	var uiIndex = 0;
+	function MessageLayer (par) 
+	{
+		super.Node(par);
+		this.setAnchor(0,1);
+		this.frameImage = new Sprite(this);
+		this.frameImage.visible = false;
+		this.frameImage.setAnchor(0,1);
+		this.frameImage.absolute = -3;
+		this.frameColor = new LayerColor(this);
+		this.frameColor.visible = false;
+		this.frameColor.absolute = -3;
+
+		this.chLayer = new TextLayer(this);
+		this.chLayer.visible = true;
+		this.chLayer.absolute = -2;
+
+		this.controlLayer = new global.Node(this);
+		this.controlLayer.visible = true;
+		this.controlLayer.absolute = -1;
+	}
+
+	function setPosition (elm) 
+	{
+		this.x = elm.left if elm.left !== void;
+		this.y = this.parent.height-elm.top;
+		this.width = elm.width if elm.width !== void;
+		this.height = elm.height if elm.height !== void;
+		if (elm.frame) {
+			this.frameColor.visible = false;
+			this.frameImage.loadImages(elm.frame);
+			this.frameImage.y = this.height;
+			this.frameImage.visible = true;
+			this.frameImage.opacity = elm.opacity if elm.opacity !== void;
+		}
+		else {
+			this.frameImage.visible = false;
+			this.frameColor.setSize(this.width,this.height);
+			this.frameColor.y = this.height;
+			this.frameColor.visible = true;
+			this.frameColor.opacity = elm.opacity if elm.opacity !== void;
+		}
+		this.chLayer.x = elm.marginl if elm.marginl !== void;
+		this.chLayer.y = elm.marginb if elm.marginb !== void;
+		this.chLayer.width = this.width - this.chLayer.x - elm.marginr if elm.marginr !== void;
+		this.chLayer.height = this.height - this.chLayer.y - elm.margint if elm.margint !== void;
+		this.chLayer.refreshCH();
+		this.controlLayer.setPos(this.chLayer.x,this.chLayer.y,this.chLayer.width,this.chLayer.height);
+	}
+
+	function clearEr () 
+	{
+		this.chLayer.clearCH();
+		for (var i = this.controlLayer.children.count - 1; i >= 0; i--) {
+			var control = this.controlLayer.children[i];
+			if(!control.issystem)
+			{
+				invalidate control;
+				this.controlLayer.children.erase(i);
+			}
+		};
+		this.names = %[];
+		this.links.clear();
+		this.uiIndex = 0;
+	}
+
+
+	/********控件创建********/
+	function addButton (elm) 
+	{
+		if (elm.name == void) {
+			elm.name = "_num_"+this.uiIndex;
+		}
+		var node = new Button(this.controlLayer);
+		node.issystem = elm.issys===void?false:elm.issys;
+		if (node.issystem) {
+			this.buttons[elm.name] = node;
+		}
+		else {
+			this.names[elm.name] = node;
+		}
+		if (elm.graphic) {
+			node.graphicImage = elm.graphic;
+		}
+		else {
+			node.normalImage = elm.normal;
+			node.selectImage = elm.on;
+		}
+		node.x = +elm.x+node.width/2;
+		node.y = node.parent.height-elm.y-node.height/2;
+		node.enabled = elm.enabled if elm.enabled!==void;
+		++this.uiIndex;
+	}
+
+}

@@ -71,6 +71,8 @@ public:
 protected:
     bool m_needSortChildren;
     Color m_realColor;
+    
+    friend class Painter;
 };
 
 DE_END

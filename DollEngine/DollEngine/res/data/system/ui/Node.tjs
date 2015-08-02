@@ -19,12 +19,17 @@ class Node extends GameObject
 			this.parent.children.remove(this);
 		}
 		this.parent = void;
+		this.removeAllChildren();
+		super.finalize();
+	}
+
+	function removeAllChildren () 
+	{
 		for (var i = this.children.count - 1; i >= 0; i--) {
 			this.children[i].parent = void;
 			invalidate this.children[i];
 		};
 		this.children.clear();
-		super.finalize();
 	}
 
 	function visit () 

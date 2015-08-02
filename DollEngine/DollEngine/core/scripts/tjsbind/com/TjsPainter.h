@@ -20,6 +20,11 @@ bool loadImages(tTJSVariant v1,tTJSVariant v2)
     TJS_STRING(v2, plist);
     return Painter::loadImages(path,plist);
 }
+bool loadImageWithRect(tTJSVariant v,float l,float t,float r,float b)
+{
+    TJS_STRING(v, path)
+    return Painter::loadImageWithRect(path, l, t, r, b);
+}
 };
 
 #endif /* defined(__DollEngine__TjsPainter__) */
