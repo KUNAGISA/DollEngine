@@ -20,20 +20,6 @@
                ReferencedContainer = "container:DollEngine.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B8261DE21ADC05430017767B"
-               BuildableName = "DollEngineIOSTests.xctest"
-               BlueprintName = "DollEngineIOSTests"
-               ReferencedContainer = "container:DollEngine.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -42,16 +28,6 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B8261DE21ADC05430017767B"
-               BuildableName = "DollEngineIOSTests.xctest"
-               BlueprintName = "DollEngineIOSTests"
-               ReferencedContainer = "container:DollEngine.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

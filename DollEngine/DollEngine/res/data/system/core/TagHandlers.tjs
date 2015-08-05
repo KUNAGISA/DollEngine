@@ -5,6 +5,7 @@ class TagHandlers extends KAGParser
 	var curFile;
 	var macroParams = [];
 	var tagHandlers;
+	var ifExp = [];
 	function TagHandlers (object) 
 	{
 		super.KAGParser();

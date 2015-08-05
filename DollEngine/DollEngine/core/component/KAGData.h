@@ -32,12 +32,15 @@ class KAGParser;
 class KAGTag
 {
 public:
-    KAGTag():storage(null),label(null){}
+    KAGTag():storage(null),label(null),hasCond(false){}
     ~KAGTag(){
         params.clear();
     }
     void addParam(const wstring& key, const wstring& value,bool entity=false,bool macroarg=false)
     {
+        if (key == L"cond") {
+            hasCond = true;
+        }
         KAGTagParamValue v;
         v.key = key;
         v.value = value;
@@ -106,6 +109,7 @@ public:
     KAGStorage* storage;
     KAGLabel* label;
     wstring name;
+    bool hasCond;
     vector<KAGTagParamValue> params;
 };
 

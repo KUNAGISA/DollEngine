@@ -27,6 +27,7 @@ public:
     virtual bool eval(const wstring& code,void* ret);
     virtual bool exec(const wstring& code,void* ret);
     virtual void catchError(void* error);
+    void evalAsyncScripts();
 };
 
 DE_END

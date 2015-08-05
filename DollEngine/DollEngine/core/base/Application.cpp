@@ -38,6 +38,7 @@ void Application::mainLoop()
     CompManager::GetInstance()->updateComp();
     if (m_needRedraw) {
 //        m_needRedraw = false;
+        CompManager::GetInstance()->clearTouches();
         GLCanvas::GetInstance()->clearGL();
         if (Window::GetInstance()) {
             Window::GetInstance()->visit();
@@ -57,6 +58,7 @@ void Application::mainLoop()
 //            }
         }
     }
+    ScriptEngine::GetInstance()->evalAsyncScripts();
     CompManager::GetInstance()->releaseComp();
 }
 

@@ -65,7 +65,7 @@ class Node extends GameObject
 
 	function onTouchUpdate () 
 	{
-		if (enabled) {
+		if (this.enabled) {
 			super.onTouchUpdate();
 			for (var i = 0; i < this.children.count; i++) {
 				this.children[i].onTouchUpdate();
@@ -109,6 +109,26 @@ class Node extends GameObject
 		getter {
 	    	//getter
 			return super.absolute;
+		}
+	}
+
+	property left{
+	    setter(v) {
+	    	//setter
+	    	this.x = v;
+		}
+		getter {
+	    	//getter
+			return this.x;
+		}
+	}
+
+	property top{
+	    setter(v) {
+	    	this.y = this.parent.height-v-this.height;
+		}
+		getter{
+			return this.parent.height-this.y-this.height;
 		}
 	}
 }

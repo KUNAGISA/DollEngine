@@ -60,17 +60,22 @@ class MessageLayer extends Node
 		this.controlLayer.setPos(this.chLayer.x,this.chLayer.y,this.chLayer.width,this.chLayer.height);
 	}
 
-	function clearEr () 
+	function clearEr (sys=false) 
 	{
 		this.chLayer.clearCH();
-		for (var i = this.controlLayer.children.count - 1; i >= 0; i--) {
+		var syses = [];
+		for (var i = 0; i < this.controlLayer.children.count; ++i) {
 			var control = this.controlLayer.children[i];
-			if(!control.issystem)
+			if(sys && control.issystem)
 			{
+				syses.add(control);
+			}
+			else {
 				invalidate control;
-				this.controlLayer.children.erase(i);
 			}
 		};
+		this.controlLayer.children.clear();
+		this.controlLayer.children = syses;
 		this.names = %[];
 		this.links.clear();
 		this.uiIndex = 0;
@@ -98,9 +103,18 @@ class MessageLayer extends Node
 			node.normalImage = elm.normal;
 			node.selectImage = elm.on;
 		}
-		node.x = +elm.x+node.width/2;
-		node.y = node.parent.height-elm.y-node.height/2;
+		node.setAnchor(0,1);
+		node.x = +elm.x;
+		node.y = node.parent.height-elm.y;
 		node.enabled = elm.enabled if elm.enabled!==void;
+
+		node.clickData.exp = elm.exp if elm.exp!==void;
+		node.clickData.se = elm.se if elm.se!==void;
+		node.clickData.sebuf = elm.sebuf if elm.sebuf!==void;
+		node.clickData.callback = elm.callback if elm.callback!==void;
+		node.clickData.storage = elm.storage if elm.storage!==void;
+		node.clickData.target = elm.target if elm.target!==void;
+
 		++this.uiIndex;
 	}
 

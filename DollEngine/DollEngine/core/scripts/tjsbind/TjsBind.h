@@ -147,7 +147,7 @@ NCB_PROPERTY(name, getCompName, setCompName);
 
 #define TJS_FACTORY \
 Factory(&TjsFactory::factory<ClassT>);\
-NCB_PROPERTY_RO(class, getClass);
+NCB_METHOD(getClass);
 
 #define TJS_STRING(v,str) string str;\
 UnicodeToUtf8(v.AsStringNoAddRef()->operator const wchar_t *(), str);

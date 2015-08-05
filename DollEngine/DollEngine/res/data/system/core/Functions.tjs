@@ -111,3 +111,70 @@ function dm (arr*)
     var str = arr.join('\t');
     print(str);
 }
+
+/***********路径操作************/
+
+
+function getExistImagePath (path) 
+{
+    var fullpath = Storages.getFullPath(path);
+    if (!fullpath) {
+        fullpath = Storages.getFullPath(path+'.png');
+        if (!fullpath) {
+            fullpath = Storages.getFullPath(path+'.jpg');
+            if (!fullpath) {
+                fullpath = Storages.getFullPath(path+'.jpeg');
+            }
+        }
+    }
+    return fullpath;
+}
+
+function getExistSoundPath (path) 
+{
+    var fullpath = Storages.getFullPath(path);
+    if (!fullpath) {
+        fullpath = Storages.getFullPath(path+'.mp3');
+        if (!fullpath) {
+            fullpath = Storages.getFullPath(path+'.wav');
+            // if (!fullpath) {
+            //     fullpath = Storages.getFullPath(path+'.ogg');
+            // }
+        }
+    }
+    return fullpath;
+}
+
+/***********动作操作************/
+
+function sequence(array) 
+{
+    var count = array.count;
+    var actarr = [];
+    for (var i = 0; i < count; i++) {
+        var act = array[i];
+        if (typeof act == "Object") {
+            if (act instanceof "Function") {
+                actarr.add(new CallFunc(act));
+            }
+            else if(act instanceof "ActionBase"){
+                actarr.add(act);
+            }
+            else {
+                continue;
+            }
+        }
+        else {
+            if (+act != 0) {
+                actarr.add(new DelayTime(void,+act));
+            }
+            else {
+                continue;
+            }
+        }
+    };
+    var seq = new Sequence(array);
+    return seq;
+}
+
+

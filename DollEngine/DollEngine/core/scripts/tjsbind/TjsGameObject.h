@@ -23,6 +23,10 @@ tTJSVariant getParent() {
 }
 void setParent(tTJSVariant v){
     if (v.Type() == tvtVoid) {
+        auto obj = dynamic_cast<TjsGameObject*>(GameObject::getParent());
+        if(obj){
+            obj->_self->Release();
+        }
         GameObject::setParent(null);
         return;
     }

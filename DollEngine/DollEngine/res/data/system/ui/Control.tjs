@@ -4,6 +4,7 @@ class Control extends Node
 	function Control (par) 
 	{
 		super.Node(par);
+		this.setAnchor(0.5,0.5);
 		this._touch = new Touch();
 		this.addCOM(this._touch);
 		this.enabled = true;
@@ -11,11 +12,11 @@ class Control extends Node
 		this._touch.onMouseMove = this.onMouseMove;
 		this._touch.onMouseUp = this.onMouseUp;
 		this._touch.onClick = this.onClick;
+		this._touch.enabled = true;
 	}
 
 	function onMouseDown (x,y) 
 	{
-		
 	}
 
 	function onMouseMove (x,y) 

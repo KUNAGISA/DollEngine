@@ -101,6 +101,16 @@ tTJSNC_Scripts::tTJSNC_Scripts() : inherited(TJS_W("Scripts"))
     }
     TJS_END_NATIVE_STATIC_METHOD_DECL(/*func. name*/json)
     
+    TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/addAsyncScripts)
+    {
+        const wchar_t* code = (*param[0]).GetString();
+        TjsEngine::GetSelf()->addAsyncScripts(code);
+        return TJS_S_OK;
+    }
+    TJS_END_NATIVE_STATIC_METHOD_DECL(/*func. name*/addAsyncScripts)
+    
+    
+    
     //--property
     
     //----------------------------------------------------------------------

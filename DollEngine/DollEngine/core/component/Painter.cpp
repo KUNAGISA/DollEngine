@@ -60,7 +60,7 @@ bool Painter::loadImages(const string& path,const string& plist)
     }
 }
 
-bool Painter::loadImageWithRect(const string& path,float l,float t,float r,float b)
+bool Painter::loadImageWithMargin(const string& path,float l,float r,float t,float b)
 {
     SpriteFrame* frame = GLCache::GetInstance()->addFrame(path);
     Rect rect(l*frame->getWidth(),

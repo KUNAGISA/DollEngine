@@ -29,6 +29,8 @@ class App extends Window
 
 		delay : 200,//文字显示速度
 		nowait : false, //是否瞬间显示文本/按钮
+		clickskip : false, //是否允许点击略过
+		locklink : false, //禁止Message层的按钮被点击
 	];
 
 	function App () 
@@ -312,6 +314,11 @@ class App extends Window
 			return -2;
 		} incontextof this,
 
+		clickskip : function (elm) 
+		{
+			this.status.clickskip = elm.enabled if elm.enabled!==void;
+		} incontextof this,
+
 		/*******音频控制*******/
 		bgmopt : function (elm)
 		{
@@ -323,6 +330,23 @@ class App extends Window
 			var se = this.getSE(elm.buf);
 			se.volume = elm.volume if elm.volume!==void;
 			se.pan = elm.pan if elm.pan!==void;
+		} incontextof this,
+
+		fadeinbgm : function (elm) 
+		{
+			checkElm(elm,['storage','time']);
+			elm.loop = true if elm.loop===void;
+			var bgm = this.getBGM();
+			bgm.preload(elm.storage);
+			bgm.fadeTime = elm.time/1000;
+			bgm.play(elm.loop,true);
+		} incontextof this,
+
+		fadeoutbgm : function (elm) 
+		{
+			checkElm(elm,['time']);
+			this.getBGM().fadeTime = elm.time/1000;
+			this.getBGM().stop(true);
 		} incontextof this,
 
 		/*******界面控制*******/
@@ -373,11 +397,30 @@ class App extends Window
 				this.mergerBack('image',elm);
 				return;
 			}
+			if (!(lay instanceof "Sprite")) {
+				em("image指令只能操作Sprite类对象");
+				return -2;
+			}
 			lay.loadImages(elm.storage);
 			var x = elm.left;
 			var y = lay.parent.height-elm.top;
 			lay.setPos(x,y);
 			lay.visible = elm.visible if elm.visible!==void;
+		} incontextof this,
+
+		freeimage : function (elm) 
+		{
+			this.checkElm(elm,['layer']);
+			var lay = this.getLayerByElm(elm);
+			if(!lay) {
+				this.mergerBack('freeimage',elm);
+				return;
+			}
+			if (!(lay instanceof "Sprite")) {
+				em("image指令只能操作Sprite类对象");
+				return -2;
+			}
+			lay.freeImage();
 		} incontextof this,
 
 		clearlayers : function (elm) 
@@ -388,6 +431,21 @@ class App extends Window
 				return;
 			}
 			this.clearLayers();
+		} incontextof this,
+
+		layopt : function (elm) 
+		{
+			this.checkElm(elm,['layer']);
+			var lay = this.getLayerByElm(elm);
+			if(!lay) {
+				this.mergerBack('layopt',elm);
+				return;
+			}
+			lay.visible = elm.visible if elm.visible!==void;
+			lay.left = elm.left if elm.left!==void;
+			lay.top = elm.top if elm.top!==void;
+			lay.opacity = elm.opacity if elm.opacity!==void;
+			lay.absolute = elm.index if elm.index!==void;
 		} incontextof this,
 
 		position : function (elm) 
@@ -402,7 +460,7 @@ class App extends Window
 				lay.setPosition(elm);
 			}
 			else {
-				em("position只能设定MessageLayer类对象");
+				em("position指令只能操作MessageLayer类对象");
 				return -2;
 			}
 		} incontextof this,
@@ -428,6 +486,16 @@ class App extends Window
 				return;
 			}
 			lay.clearEr();
+		} incontextof this,
+
+		csysbutton : function (elm) 
+		{
+			var lay = this.getCurrentLayer();
+			if (!lay) {
+				this.mergerBack('csysbutton',elm);
+				return;
+			}
+			lay.clearEr(true);
 		} incontextof this,
 
 		delay : function (elm) 
@@ -488,6 +556,34 @@ class App extends Window
 			time = +elm.time if elm.time!==void;
 			this.transWithMethod(elm.method, time);
 			return time;
+		} incontextof this,
+
+		move : function (elm) 
+		{
+			this.checkElm(elm,['layer','path','time']);
+			var lay = this.getLayerByElm(elm);
+			if(!lay) {
+				this.mergerBack('move',elm);
+				return;
+			}
+			var time = elm.time/1000;
+			var path = elm.path;
+			path = path.substr(1,path.length-2);
+			var paths = path.split(")(");
+			var arr1 = [];
+			var arr2 = [];
+			for (var i = 0; i < paths.count; i++) {
+				var cfg = paths[i].split(",");
+				var y = lay.parent.height - cfg[1];
+				var mv = new MoveTo(lay,time/paths.count,+cfg[0],y);
+				var fd = new FadeTo(lay,time/paths.count,+cfg[2]);
+				arr1.add(mv);
+				arr2.add(fd);
+			};
+			var s1 = sequence(arr1);
+			var s2 = sequence(arr2);
+			s1.start();
+			s2.start();
 		} incontextof this,
 	];
 }

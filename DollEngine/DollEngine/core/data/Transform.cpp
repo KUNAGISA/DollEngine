@@ -92,14 +92,14 @@ void Transform::flush()
 
 bool Transform::pointInside(float x,float y,float& ox,float& oy)
 {
-    kmMat4 t_mat;
-    kmMat4Inverse(&t_mat, &m_matrix);
+    kmMat4 i_mat;
+    kmMat4Inverse(&i_mat, &m_matrix);
     kmVec3 outpos;
     kmVec3 inpos;
-    float nx = x*2/GLCanvas::GetInstance()->getLayerWidth()-1;
-    float ny = y*2/GLCanvas::GetInstance()->getLayerHeight()-1;
+    float nx = x;
+    float ny = y;
     kmVec3Fill(&inpos,nx,ny,0);
-    kmVec3Transform(&outpos,&inpos,&t_mat);
+    kmVec3Transform(&outpos,&inpos,&i_mat);
     ox = outpos.x;
     oy = outpos.y;
     if (outpos.x >= 0 &&

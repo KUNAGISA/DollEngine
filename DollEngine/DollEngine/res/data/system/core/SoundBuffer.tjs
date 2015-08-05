@@ -5,6 +5,11 @@ class SoundBuffer extends Audio
 	{
 		super.Audio();
 	}
+
+	function preload (path) 
+	{
+		return super.preload(getExistSoundPath(path));
+	}
 }
 
 class BGMBuffer extends SoundBuffer

@@ -151,6 +151,9 @@ void Debug::throwMsg(DEBUG_MSG error,int p1,const wstring& p2)
         case ERROR_KAG_MACRO_NESTING:
             msg = UnicodeWithFormat(L"(#%d)Macro不可嵌套",p1);
             break;
+        case ERROR_KAG_IF_FAIL:
+            msg = UnicodeWithFormat(L"(#%d)if、elsif、else、endif不对应",p1);
+            break;
         default:
             msg = UnicodeWithFormat(L"(#%d)KAG发生未知错误",p1);
             break;
@@ -250,5 +253,14 @@ bool TjsEngine::exec(const wstring& code,void* ret)
     return false;
 }
 
+void TjsEngine::evalAsyncScripts()
+{
+    if (m_asyncScripts == L"") {
+        return;
+    }
+    wstring tmp = m_asyncScripts;
+    m_asyncScripts = L"";
+    eval(tmp, null);
+}
 
 DE_END

@@ -20,5 +20,16 @@ class __Kag
 		this.fore = app.world;
 		this.tagHandlers = app.tagHandlers;
 	}
+
+	property historyWriteEnabled{
+	    setter(v) {
+	    	//setter
+	    	app.history.enabled=v;
+		}
+		getter {
+	    	//getter
+			return app.history.enabled;
+		}
+	}
 }
 

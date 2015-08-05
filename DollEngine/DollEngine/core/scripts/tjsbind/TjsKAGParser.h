@@ -23,6 +23,8 @@ virtual void onScenarioEnded(){
 }
 virtual int execute(KAGTag* tag);
 virtual void onExecute(ttstr name,iTJSDispatch2* params){}
+protected:
+vector<wstring> m_ifKey;
 };
 
 #endif /* defined(__Krkr_GL__TJSKAGParser__) */

@@ -25,7 +25,8 @@ public:
     ~Painter();
 public:
     virtual bool loadImages(const string& path,const string& plist="");
-    virtual bool loadImageWithRect(const string& path,float l,float t,float r,float b);
+    virtual void freeImage(){SAFF_RELEASE(m_displayFrame);}
+    virtual bool loadImageWithMargin(const string& path,float l,float r,float t,float b);
     bool loadSize(int w,int h,int r);
     virtual void setSizeToImageSize();
 public:

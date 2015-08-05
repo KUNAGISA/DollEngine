@@ -91,8 +91,9 @@ bool CompManager::onMouseDown(float x,float y )
         }
         obj->setMoved(false);
         obj->setFocus(false);
+        obj->setIgnore(false);
         float ox,oy;
-        if (obj->getEnabled() && !obj->getIgnore() && obj->pointInside(x,y,ox,oy))
+        if (obj->getEnabled() && obj->pointInside(x,y,ox,oy))
         {
             obj->onMouseDown(ox, oy);
             if (!obj->getIgnore())

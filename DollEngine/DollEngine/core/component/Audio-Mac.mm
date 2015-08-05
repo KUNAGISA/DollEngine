@@ -56,6 +56,8 @@ bool Audio::preload(const string &path)
     }
     player = [[AVAudioPlayer alloc]initWithContentsOfURL:[NSURL URLWithString:[NSString stringWithUTF8String:fullpath.c_str()]] error:nil];
     if (player) {
+        [player prepareToPlay];
+        [player stop];
         m_prePlayer = (__bridge void*)player;
         [s_AVAPlayers addObject:player];
         return true;
