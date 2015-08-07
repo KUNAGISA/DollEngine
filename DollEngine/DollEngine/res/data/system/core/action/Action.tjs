@@ -1,127 +1,215 @@
-var ActionManager = %[
-	allActions : %[],
-	actionId : 0,
-];
+var ACTION_KEY = 0;
 
-class ActionBase extends Action
+class Action
 {
-	function ActionBase (obj,time) 
+	var duration = 0;//动作时长
+	var time = 0;
+	var paused = false;
+	var target = void;//影响的目标
+	var manager = void;
+	var key = 0;
+	var timeScale = 1;
+	function Action ()
 	{
-		super.Action();
-		this.object = obj;
-		ActionManager.allActions[ActionManager.actionId] = this;
-		this.key = ActionManager.actionId;
-		ActionManager.actionId++;
-		this.targetTime = time;
+		this.key = ACTION_KEY++;
 	}
 
 	function finalize () 
 	{
-		if (this.key != -1) {
-			delete ActionManager.allActions[this.key];
-			this.key = -1;
-		}
-		super.finalize();
-	}
-
-	function onActionStop () 
-	{
-		if (this.key != -1) {
-			delete ActionManager.allActions[this.key];
-			this.key = -1;
+		if (manager) {
+			manager.removeAction(this);
 		}
 	}
 
-	function getClass () 
+	function update (dt) 
 	{
-		return "ActionBase";
+	}
+
+	function initialize () 
+	{
+	}
+
+	//当动作会被释放的时候该值将会改变
+	var _released=false;
+	property released{
+		getter {
+	    	//getter
+			return this._released;
+		}
 	}
 }
 
-class Sequence extends ActionBase
+class Sequence extends Action
 {
-	var firstAct = void;
-	var secondAct = void;
-	var curAct = void;
+	var current = void;
 	function Sequence (array) 
 	{
-		super.ActionBase(void,0);
-		this.firstAct = array[0];
-		if (array.count == 1) {
-			this.targetTime = this.firstAct.targetTime;
+		super.Action();
+		this.first = array[0];
+		array.erase(0);
+		if (array.count == 0) {
+			return;
+		}
+		else if(array.count == 1){
+			this.second = array[0];
 		}
 		else {
-			array.erase(0);
-			this.secondAct = new global.Sequence(array);
-			this.targetTime = this.firstAct.targetTime + this.secondAct.targetTime;
+			this.second = new global.Sequence(array);
 		}
 	}
 
 	function finalize () 
 	{
-		if (isvalid this.firstAct) {
-			invalidate this.firstAct;
+		if (isvalid this.first) {
+			invalidate this.first;
 		}
-		if (this.secondAct && isvalid this.secondAct) {
-			invalidate this.secondAct;
+		if (this.second && isvalid this.second) {
+			invalidate this.second;
 		}
 		super.finalize();
 	}
 
-	function start () 
+	function initialize () 
 	{
-		curAct = firstAct;
-		if (curAct.targetTime == 0) {
-			curAct.onAction(1);
-			curAct.onActionStop();
-			if (secondAct) {
-				curAct = secondAct;
-				if (curAct.targetTime == 0) {
-					curAct.onAction(1);
-					curAct.onActionStop();
+		this.current = first;
+		this.current.initialize();
+		if (this.current.released) {
+			if (second) {
+				this.current = second;
+				this.current.initialize();
+				if (this.current.released) {
+					this._released = true;
 					return;
 				}
 			}
 			else {
-				return;
+				this._released = true;
 			}
 		}
-		super.start();
 	}
 
-	function onAction (dt) 
+	function update (dt) 
 	{
-		var t = this.targetTime*dt;
-		if (curAct == firstAct) {
-			var p = t/firstAct.targetTime;
+		var t = this.duration*dt;
+		if (this.current == first) {
+			var p = t/first.duration;
 			if (p >= 1) {
-				curAct.onAction(1);
-				curAct = secondAct;
+				this.current.update(1);
+				this.current = second;
+				if (this.current) {
+					this.current.initialize();
+					if (this.current.released) {
+						this._released = true;
+						return;
+					}
+				}
+				else {
+					this._released = true;
+					return;
+				}
 			}
 			else {
-				curAct.onAction(p);
+				this.current.update(p);
 				return;
 			}
 		}
-		if (secondAct == void) {
-			onActionStop();
-			stop();
-			return;
-		}
-		t -= firstAct.targetTime;
-		var p = t/secondAct.targetTime;
+		t -= first.duration;
+		var p = t/second.duration;
 		if (p >= 1) {
-			curAct.onAction(1);
-			onActionStop();
-			stop();
+			this.current.update(1);
+			this._released = true;
 		}
 		else {
-			curAct.onAction(p);
+			this.current.update(p);
+		}
+	}
+
+	var _first=void;
+	property first{
+	    setter(v) {
+	    	//setter
+	    	this._first = v;
+    		this.duration = this._first.duration+(this._second==void?0:this._second.duration);
+		}
+		getter {
+	    	//getter
+			return this._first;
+		}
+	}
+
+	var _second=void;
+	property second{
+	    setter(v) {
+	    	//setter
+	    	this._second = v;
+    		this.duration = this._second.duration+(this._first==void?0:this._first.duration);
+		}
+		getter {
+	    	//getter
+			return this._second;
 		}
 	}
 }
 
-class MoveTo extends ActionBase
+class Spawn extends Action
+{
+	var allActions;
+	function Spawn (array) 
+	{
+		super.Action(void,0);
+		this.allActions = array;
+		this.duration = 0;
+		for (var i = 0; i < array.count; i++) {
+			if(array[i].duration > this.duration)
+				this.duration = array[i].duration;
+		};
+	}
+
+	function finalize () 
+	{
+		for (var i = 0; i < this.allActions.count; i++) {
+			invalidate this.allActions[i];
+		};
+		super.finalize();
+	}
+
+	function initialize () 
+	{
+		var rs = true;
+		for (var i = 0; i < this.allActions.count; i++) {
+			var act = this.allActions[i];
+			act.initialize();
+			if (!act.released) {
+				rs = false;
+			}
+		};
+		this._released = rs;
+	}
+
+	function update (dt) 
+	{
+		var rs = true;
+		for (var i = 0; i < this.allActions.count; i++) {
+			var act = this.allActions[i];
+			if (!act.released) {
+				var p = act.duration/this.duration;
+				p = dt/p;
+				if (p >= 1) {
+					p = 1;
+					act.update(1);
+					act._released = true;
+				}
+				else {
+					act.update(p);
+					rs = false;
+				}
+			}
+		}
+		this._released = rs;
+	}
+}
+
+class MoveTo extends Action
 {
 	var tx=0;
 	var ty=0;
@@ -129,92 +217,81 @@ class MoveTo extends ActionBase
 	var sy=0;
 	function MoveTo (obj,time,x,y) 
 	{
-		super.ActionBase(obj,time);
+		super.Action();
+		assert(obj);
+		this.target = obj;
+		this.duration = time;
 		this.tx = x;
 		this.ty = y;
 	}
 
-	function start () 
+	function initialize () 
 	{
-		if (this.object) {
-			this.sx = this.object.x;
-			this.sy = this.object.y;
+		this.sx = this.target.x;
+		this.sy = this.target.y;
+		if (this.duration == 0) {
+			this.update(1);
+			this._released = true;
 		}
-		super.start();
 	}
 
-	function onAction (dt) 
+	function update (dt) 
 	{
-		if (this.object) {
-			this.object.x = this.sx + (this.tx-this.sx)*dt;
-			this.object.y = this.sy + (this.ty-this.sy)*dt;
-		}
-	}
-	function getClass () 
-	{
-		return "MoveTo";
+		this.target.x = this.sx + (this.tx-this.sx)*dt;
+		this.target.y = this.sy + (this.ty-this.sy)*dt;
 	}
 }
 
-class FadeTo extends ActionBase
+class FadeTo extends Action
 {
 	var so =0;
 	var to =0;
 	function FadeTo (obj,time,o) 
 	{
-		super.ActionBase(obj,time);
+		super.Action();
+		assert(obj);
+		this.target = obj;
+		this.duration = time;
 		this.to = o;
 	}
 
-	function start () 
+	function initialize () 
 	{
-		if (this.object) {
-			this.so = this.object.opacity;
+		this.so = this.target.opacity;
+		if (this.duration == 0) {
+			this.target.opacity = this.to;
+			this._released = true;
 		}
-		super.start();
 	}
 
-	function onAction (dt) 
+	function update (dt) 
 	{
-		if (this.object) {
-			this.object.opacity = (this.to-this.so)*dt + this.so;
-		}
-	}
-	function getClass () 
-	{
-		return "FadeTo";
+		this.target.opacity = (this.to-this.so)*dt + this.so;
 	}
 }
 
-class DelayTime extends ActionBase
+class DelayTime extends Action
 {
-	function DelayTime (obj,time) 
+	function DelayTime (time) 
 	{
-		super.ActionBase(...);
-	}
-	function getClass () 
-	{
-		return "DelayTime";
+		super.Action();
+		this.duration = time;
 	}
 }
 
-class CallFunc extends ActionBase
+class CallFunc extends Action
 {
 	var datas = void;
 	var exec = void;
 	function CallFunc (func,datas*) 
 	{
-		super.ActionBase(void,0);
+		super.Action();
 		this.datas = datas;
 		this.exec = func;
 	}
 
-	function onAction (dt) 
+	function update (dt) 
 	{
-		this.exec(this.datas*);
-	}
-	function getClass () 
-	{
-		return "CallFunc";
+		this.exec(datas*);
 	}
 }

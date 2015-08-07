@@ -4,6 +4,7 @@ class Node extends GameObject
 	var name;//名称
 	var children=[];
 	var _needSortChildren=false;
+	var actionManager = void;
 	function Node (par=void) 
 	{
 		super.GameObject();
@@ -93,9 +94,17 @@ class Node extends GameObject
 		this.anchorY = y if y !== void;
 	}
 
-	function beginTransition (elm) 
+	function runAction (act) 
 	{
-		
+		if (!this.actionManager) {
+			this.actionManager = new ActionManager();
+		}
+		this.actionManager.addAction(act);
+	}
+
+	function stopAllActions () 
+	{
+		this.actionManager.removeAllActions();
 	}
 
 	property absolute{
@@ -109,26 +118,6 @@ class Node extends GameObject
 		getter {
 	    	//getter
 			return super.absolute;
-		}
-	}
-
-	property left{
-	    setter(v) {
-	    	//setter
-	    	this.x = v;
-		}
-		getter {
-	    	//getter
-			return this.x;
-		}
-	}
-
-	property top{
-	    setter(v) {
-	    	this.y = this.parent.height-v-this.height;
-		}
-		getter{
-			return this.parent.height-this.y-this.height;
 		}
 	}
 }

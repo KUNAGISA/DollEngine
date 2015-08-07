@@ -73,6 +73,8 @@ void KAGParser::wait(float time)
 void KAGParser::doNext()
 {
     setWaitTime(0);
+    setTime(0);
+    setEnabled(true);
 }//立刻执行下一个
 
 KAGStorage* KAGParser::loadScenario(const wstring& filepath)
@@ -161,7 +163,7 @@ void KAGParser::callLabel(const wstring& filepath, const wstring& key)
 
 void KAGParser::clearCallStack()
 {
-
+    m_callStack.clear();
 }
 
 void KAGParser::returnCall()
@@ -561,15 +563,20 @@ kagchar* KAGParser::parseCh(kagchar* text)
     kagchar* ntext = text;
     while (true)
     {
-        if (*ntext < 0x20 ||
-            *ntext == '[')
+        if (*ntext >= 0x20)
         {
-            if (!m_tag || m_tag->name != L"ch")
-            {
-                createTag(L"ch");
-                m_tag->addParam(L"text", L"");
+            if (*ntext == L'[') {
+                if (*(ntext+1) != L'[') {
+                    return ntext;
+                }
+                ntext++;
             }
-            m_tag->params[0].value.append(text, ntext-text);
+            createTag(L"ch");
+            wstring value;
+            value.push_back(*ntext);
+            m_tag->addParam(L"text", value);
+        }
+        else {
             return ntext;
         }
         ++ntext;

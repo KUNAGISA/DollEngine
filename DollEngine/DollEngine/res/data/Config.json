@@ -8,6 +8,7 @@
 		"system/core/History.tjs",
 		"system/core/SoundBuffer.tjs",
 		"system/core/KagController.tjs",
+		"system/core/action/ActionManager.tjs",
 		"system/core/action/Action.tjs",
 		"system/core/action/ActionEase.tjs",
 		"system/extra/ui/UIAnimation.tjs",

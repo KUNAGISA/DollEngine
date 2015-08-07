@@ -30,6 +30,7 @@ public:
         }
     }
     virtual void evalAsyncScripts(){}
+    virtual void print(const wstring& text){}
     
     string topFile(){return m_fileStack.top();}
     void pushFile(const string& path)

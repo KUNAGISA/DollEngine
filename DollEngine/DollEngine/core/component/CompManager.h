@@ -28,6 +28,8 @@ public:
     void updateComp();
     
 public:
+    void addGlobalTouchComp(Component* comp);
+    void removeGlobalTouchComp(Component* comp);
     void addTouchComp(Component* comp);
     void clearTouches();
     
@@ -43,6 +45,7 @@ public:
 protected:
     set<Component*> m_releasePools;
     list<Component*> m_touchComps;
+    set<Component*> m_globalTouchs;
     vector<TouchListener*> m_validTouches;
     set<Component*> m_updatePools;
     double m_lastTime;

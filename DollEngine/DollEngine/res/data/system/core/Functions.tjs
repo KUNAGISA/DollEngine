@@ -112,6 +112,13 @@ function dm (arr*)
     print(str);
 }
 
+function assert (obj,text="断言失败") 
+{
+    if (!obj) {
+        em(text);
+    }
+}
+
 /***********路径操作************/
 
 
@@ -147,15 +154,16 @@ function getExistSoundPath (path)
 
 /***********动作操作************/
 
-function sequence(array) 
+var action = %[];
+action.array = function (arr) 
 {
-    var count = array.count;
+    var count = arr.count;
     var actarr = [];
     for (var i = 0; i < count; i++) {
-        var act = array[i];
+        var act = arr[i];
         if (typeof act == "Object") {
             if (act instanceof "Function") {
-                actarr.add(new CallFunc(act));
+                actarr.add(new global.CallFunc(act));
             }
             else if(act instanceof "ActionBase"){
                 actarr.add(act);
@@ -166,15 +174,30 @@ function sequence(array)
         }
         else {
             if (+act != 0) {
-                actarr.add(new DelayTime(void,+act));
+                var dt = new global.DelayTime(void,+act);
+                actarr.add(dt);
             }
             else {
                 continue;
             }
         }
-    };
-    var seq = new Sequence(array);
+    }
+    return actarr;
+};
+
+action.seq = function(array) 
+{
+    var arr = global.action.array(array);
+    var seq = new global.Sequence(arr);
     return seq;
-}
+};
+
+action.spawn = function (array) 
+{
+    var arr = global.action.array(array);
+    dm(arr);
+    var sp = new global.Spawn(arr);
+    return sp;
+};
 
 

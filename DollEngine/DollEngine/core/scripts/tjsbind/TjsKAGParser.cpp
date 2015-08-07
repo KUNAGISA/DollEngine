@@ -197,6 +197,7 @@ NCB_REGISTER_CLASS_DIFFER(KAGParser, TjsKAGParser)
 {
     TJS_FACTORY
     NCB_METHOD(jumpTo);
+    NCB_METHOD(doNext);
     NCB_METHOD(callLabel);
     NCB_METHOD(callMacro);
     NCB_METHOD(returnCall);

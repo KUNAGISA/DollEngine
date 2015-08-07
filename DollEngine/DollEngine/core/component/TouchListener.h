@@ -18,8 +18,10 @@ class TouchListener: public Component
 {
 public:
     TouchListener();
+    ~TouchListener();
     bool pointInside(float x,float y,float& ox,float &oy);
     virtual void setEnabled(bool v){ Component::setEnabled(v);NEED_REDRAW;}
+    PROPERTY(bool, Global, m_global);
     PROPERTY(bool, Ignore, m_ignore){m_ignore=v;}
     PROPERTY(bool, Swallow, m_swallow){m_swallow=v;}
     PROPERTY(int, Priority, m_priority){m_priority=v;}

@@ -15,7 +15,6 @@ class TagHandlers extends KAGParser
 
 	function onExecute (name, params)
 	{
-		var time = 0;
 		if (name == 'jumpTo'||
 			name == 'onExecute'||
 			name == 'returnCall'||
@@ -25,24 +24,38 @@ class TagHandlers extends KAGParser
 			name == 'onScenarioEnded') {
 			print("%s指令被TagHandlers类占用",name);
 		}
+		this.owner.status.waitClickMode = 0;
 		if(typeof this.tagHandlers[name] != "undefined")
 		{
-			time = this.tagHandlers[name](params);
-			if(time == void) time = 0;
+			var time = this.tagHandlers[name](params);
+			if(time == void || time == 0) {
+				return 0;
+			}
+			else {
+				if (this.owner.status.waitClickMode == 1 && this.owner.status.isClickSkip) {
+					if (name == "ch") {
+						return 0;
+					}
+					else {
+						this.owner.status.isClickSkip = false;
+					}
+				}
+				return time;
+			}
 		}
 		else
 		{
 			if(this.callMacro(name))
 			{
-				time = -1;
 				this.macroParams.add(params);
+				return -1;
 			}
 			else
 			{
 				print("未找到指令"+name);
+				// return -2;
 			}
 		}
-        return time;
 	}
 
 	function jumpTo (file, label) 
@@ -74,13 +87,12 @@ class TagHandlers extends KAGParser
 
 	function onScenarioEnded () 
 	{
-		this.owner.waitClick(0);
 	}
 
 }
 
 property mp{
 	getter {
-		return App.main.tags.getMacroParams();
+		return App.main.tagManager.getMacroParams();
 	}
 }

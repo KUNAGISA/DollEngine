@@ -10,6 +10,7 @@
 #define __Krkr_GL__KAGData__
 
 #include "CoreUnits.h"
+#include "ScriptEngine.h"
 
 DE_BEGIN
 
@@ -85,9 +86,15 @@ public:
     void print()
     {
         wstring str = L"(#";
-        str += DE::UnicodeWithFormat(L"%d",line);
-        str += L") @";
-        str += name;
+        if (name == L"ch") {
+            str = L"";
+        }
+        else
+        {
+            str += DE::UnicodeWithFormat(L"%d",line);
+            str += L") @";
+            str += name;
+        }
         if (name == L"iscript")
         {
             str += L"\n// some code...";
@@ -96,13 +103,18 @@ public:
         {
             for(auto iter=params.begin();iter != params.end();++iter)
             {
-                str += L" ";
-                str += (*iter).key;
-                str += L"=";
-                str += (*iter).value;
+                if(name == L"ch" && (*iter).key==L"text") {
+                    str = (*iter).value;
+                }
+                else {
+                    str += L" ";
+                    str += (*iter).key;
+                    str += L"=";
+                    str += (*iter).value;
+                }
             }
         }
-        DM("%ls",str.c_str());
+        ScriptEngine::GetInstance()->print(str);
     }
     int exec(KAGParser* parser);
     int line;

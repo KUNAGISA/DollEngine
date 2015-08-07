@@ -263,4 +263,9 @@ void TjsEngine::evalAsyncScripts()
     eval(tmp, null);
 }
 
+void TjsEngine::print(const wstring& text)
+{
+    s_tjs->GetConsoleOutput()->Print(text.c_str());
+}
+
 DE_END

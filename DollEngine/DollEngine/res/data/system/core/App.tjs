@@ -2,7 +2,7 @@
 class App extends Window
 {
 	//tag
-	var tags; //KAGParser
+	var tagManager; //KAGParser
 
 	//画面管理
 	var back = []; //里层配置
@@ -16,6 +16,11 @@ class App extends Window
 	var currentLayer = "message0";//默认
 
 	var transTimer = void; //trans用的Timer
+	var moveActions = [];
+	var moveWaits = [];
+	var moveWaitTime = 0;
+	var actionManager = void; //全部action的管理器
+	var touch = void;
 
 	//音频管理
 	var bgmBuffer = void;
@@ -31,7 +36,11 @@ class App extends Window
 		nowait : false, //是否瞬间显示文本/按钮
 		clickskip : false, //是否允许点击略过
 		locklink : false, //禁止Message层的按钮被点击
+
+		waitClickMode : 0,//0 不等待，1等待文字，2等待移动 3等待trans 4等待时间
+		isClickSkip : false,//是否点击之后skip动画中
 	];
+
 
 	function App () 
 	{
@@ -44,18 +53,27 @@ class App extends Window
 		this.height = DEConfig.device.height;
 		this.initialize(DEConfig.device.width,DEConfig.device.height,DEConfig.device.scale);
 		this.title = DEConfig.game.title;
-		this.tags = new TagHandlers(this);
+		this.tagManager = new TagHandlers(this);
 		
 		this.world = new GameWorld();
 		this.world.initialize(DEConfig.device.width,DEConfig.device.height);
 
 		this.history = new History();
+		this.actionManager = new ActionManager();
+
+		this.touch = new Touch();
+		this.touch.onMouseDown = this.onMouseDown;
+		this.touch.onMouseMove = this.onMouseMove;
+		this.touch.onMouseUp = this.onMouseUp;
+		this.touch.onClick = this.onClick;
+		this.touch.global = true;
+		this.touch.enabled = true;
 	}
 
 	function finalize () 
 	{
 		global.App.main = void;
-		invalidate this.tags;
+		invalidate this.tagManager;
 		invalidate this.history;
 		invalidate this.world;
 		if (typeof global.kag != 'undefined') {
@@ -176,12 +194,7 @@ class App extends Window
 
 	function proccess (file, label) 
 	{
-		this.tags.jumpTo(file,label);
-	}
-
-	function waitClick (time) 
-	{
-		
+		this.tagManager.jumpTo(file,label);
 	}
 
 	/**********场景切换*********/
@@ -194,7 +207,7 @@ class App extends Window
 		}
 		var count = this.back.count;
 		for (var i = 0; i < count; i++) {
-			this.tags.onExecute(this.back[i][0],this.back[i][1]);
+			this.tagManager.onExecute(this.back[i][0],this.back[i][1]);
 		};
 		this.back.clear();
 		this.status.transReady = false;
@@ -236,9 +249,64 @@ class App extends Window
 			timer.enabled = false;
 			this.transFinished();
 		}
-		this.status.transT += 1000/60;
+		this.status.transT += 1/60;
 	}
 
+	function onMouseDown(x,y)
+	{
+
+	}
+
+	function onMouseMove(x,y)
+	{
+
+	}
+
+	function onMouseUp(x,y)
+	{
+		switch(this.status.waitClickMode) {
+			case 0:
+			break;
+			case 1:
+			{
+				//等待文字
+				this.status.isClickSkip = true;
+			}
+			break;
+			case 2:
+			{
+				//等待move
+				for (var i = this.moveActions.count - 1; i >= 0; i--) {
+					var act = this.moveActions[i];
+					if (isvalid act && !act.released ) {
+						act.update(1);
+						invalidate act;
+					}
+				}
+				this.moveActions.clear();
+				this.moveWaits.clear();
+				this.tagManager.doNext();
+			}
+			break;
+			case 3:
+			{
+				//等待trans
+				this.status.transT=this.status.trans;
+			}
+			break;
+			case 4:
+			{
+				//等待时间
+				this.tagManager.doNext();
+			}
+			break;
+		}
+	}
+
+	function onClick(x,y)
+	{
+
+	}
 
 	/*******TAG部分*******/
 	var tagHandlers = %[
@@ -272,25 +340,26 @@ class App extends Window
 		/*******剧本控制*******/
 		call : function (elm) 
 		{
-			this.tags.callLabel(elm.storage,elm.target);
+			this.tagManager.callLabel(elm.storage,elm.target);
 			return -1;
 		} incontextof this,
 
 		jump : function (elm) 
 		{
-			this.tags.jumpTo(elm.storage,elm.target);
+			this.tagManager.jumpTo(elm.storage,elm.target);
 			return -1;
 		} incontextof this,
 
 		endmacro : function () 
 		{
-			this.tags.returnMacro();
+			this.tagManager.returnMacro();
 			return -1;
 		} incontextof this,
 
 		wait : function (elm) 
 		{
 			checkElm(elm,['time']);
+			this.status.waitClickMode = 4;
 			return elm.time;
 		} incontextof this,
 
@@ -317,6 +386,16 @@ class App extends Window
 		clickskip : function (elm) 
 		{
 			this.status.clickskip = elm.enabled if elm.enabled!==void;
+		} incontextof this,
+
+		locklink : function (elm) 
+		{
+			this.status.locklink = true;
+		} incontextof this,
+
+		unlocklink : function (elm) 
+		{
+			this.status.locklink = false;
 		} incontextof this,
 
 		/*******音频控制*******/
@@ -442,8 +521,8 @@ class App extends Window
 				return;
 			}
 			lay.visible = elm.visible if elm.visible!==void;
-			lay.left = elm.left if elm.left!==void;
-			lay.top = elm.top if elm.top!==void;
+			lay.x = elm.left if elm.left!==void;
+			lay.y = lay.parent.height - elm.top if elm.top!==void;
 			lay.opacity = elm.opacity if elm.opacity!==void;
 			lay.absolute = elm.index if elm.index!==void;
 		} incontextof this,
@@ -521,8 +600,8 @@ class App extends Window
 				this.mergerBack('locate',elm);
 				return;
 			}
-			this.status.locateX = elm.x if elm.x!==void;
-			this.status.locateY = elm.y if elm.y!==void;
+			lay.locateX = elm.x if elm.x!==void;
+			lay.locateY = elm.y if elm.y!==void;
 		} incontextof this,
 
 		button : function (elm) 
@@ -533,12 +612,33 @@ class App extends Window
 				return;
 			}
 			elm.issys = false;
-			elm.x = this.status.locateX;
-			elm.y = this.status.locateY;
+			elm.x = lay.locateX;
+			elm.y = lay.locateY;
 			lay.addButton(elm);
 			if (this.status.nowait) {
 				return 0;
 			}
+			return this.status.delay;
+		} incontextof this,
+
+		ch : function (elm) 
+		{
+			var lay = this.getCurrentLayer();
+			if(!lay) {
+				this.mergerBack('ch',elm);
+				return;
+			}
+			var pos = lay.addText(elm.text,lay.locateX,lay.locateY);
+			lay.locateX = pos[0];
+			lay.locateY = pos[1];
+			if (pos[2] == true) {
+				//点击等待换页
+				return -2;
+			}
+			if (this.status.nowait) {
+				return 0;
+			}
+			this.status.waitClickMode = 1;
 			return this.status.delay;
 		} incontextof this,
 
@@ -552,10 +652,11 @@ class App extends Window
 		trans : function (elm) 
 		{
 			this.checkElm(elm,['method']);
-			var time = 1000;
-			time = +elm.time if elm.time!==void;
+			var time = 1;
+			time = elm.time/1000 if elm.time!==void;
 			this.transWithMethod(elm.method, time);
-			return time;
+			this.status.waitClickMode = 3;
+			return elm.time;
 		} incontextof this,
 
 		move : function (elm) 
@@ -570,6 +671,16 @@ class App extends Window
 			var path = elm.path;
 			path = path.substr(1,path.length-2);
 			var paths = path.split(")(");
+
+			//瞬间处理
+			if (elm.time == 0) {
+				var cfg = paths[-1].split(",");
+				lay.setPos(cfg[0],lay.parent.height-cfg[1]);
+				lay.opacity = cfg[2];
+				return;
+			}
+
+			//持续一段时间的处理
 			var arr1 = [];
 			var arr2 = [];
 			for (var i = 0; i < paths.count; i++) {
@@ -580,10 +691,37 @@ class App extends Window
 				arr1.add(mv);
 				arr2.add(fd);
 			};
-			var s1 = sequence(arr1);
-			var s2 = sequence(arr2);
-			s1.start();
-			s2.start();
+			var s1 = new Sequence(arr1);
+			var s2 = new Sequence(arr2);
+			var s3 = new Spawn([s1,s2]);
+			var s4 = new Sequence([s3]);
+			s4.second = new CallFunc(function () 
+			{
+				this[0].moveActions.remove(this[1]);
+				this[0].moveWaits.remove(this[1]);
+			} incontextof [this,s4]);
+			this.moveActions.add(s4);
+			this.moveWaits.add(s4);
+			lay.runAction(s4);
+
+		} incontextof this,
+
+		wm : function (elm) 
+		{
+			if (this.moveWaits.count == 0) {
+				return 0;
+			}
+			else {
+				var act = this.moveWaits[0];
+				if (!isvalid act) {
+					this.moveWaits.erase(0);
+					return 0;
+				}
+				var t = Math.max(0,(act.duration - act.time));
+				this.moveWaits.erase(0);
+				this.status.waitClickMode = 2;
+				return t*1000;
+			}
 		} incontextof this,
 	];
 }

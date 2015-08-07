@@ -10,6 +10,9 @@ class MessageLayer extends Node
 	var buttons = %[]; //用于存放syscontrol
 	var links = []; //用于存放文字链接
 
+	var locateX = 0;
+	var locateY = 0;
+
 	var uiIndex = 0;
 	function MessageLayer (par) 
 	{
@@ -52,10 +55,10 @@ class MessageLayer extends Node
 			this.frameColor.visible = true;
 			this.frameColor.opacity = elm.opacity if elm.opacity !== void;
 		}
-		this.chLayer.x = elm.marginl if elm.marginl !== void;
-		this.chLayer.y = elm.marginb if elm.marginb !== void;
-		this.chLayer.width = this.width - this.chLayer.x - elm.marginr if elm.marginr !== void;
-		this.chLayer.height = this.height - this.chLayer.y - elm.margint if elm.margint !== void;
+		this.chLayer.x = (elm.marginl===void?0:elm.marginl);
+		this.chLayer.y = (elm.marginb===void?0:elm.marginb);
+		this.chLayer.width = this.width - this.chLayer.x - (elm.marginr===void?0:elm.marginr);
+		this.chLayer.height = this.height - this.chLayer.y - (elm.margint===void?0:elm.margint);
 		this.chLayer.refreshCH();
 		this.controlLayer.setPos(this.chLayer.x,this.chLayer.y,this.chLayer.width,this.chLayer.height);
 	}
@@ -118,4 +121,24 @@ class MessageLayer extends Node
 		++this.uiIndex;
 	}
 
+	function addText (text,x,y) 
+	{
+		var node = new Label(this.chLayer);
+		node.setAnchor(0,1);
+		node.text = text;
+		node.setSizeToImageSize();
+		//这里还要设置文字属性
+		node.x = x;
+		node.y = node.parent.height-y;
+		//这里需要另加字间距
+		x += node.width;
+		if (x+node.width > this.chLayer.width) {
+			x = 0;
+			y += node.height*1.3;
+			if (y + node.height > this.chLayer.height) {
+				return [0,0,true];
+			}
+		}
+		return [x,y,false];
+	}
 }

@@ -32,10 +32,6 @@
 		B84C197A1B6E5F6A0056F401 /* Audio-Mac.mm in Sources */ = {isa = PBXBuildFile; fileRef = B84C19771B6E5F6A0056F401 /* Audio-Mac.mm */; };
 		B84C197D1B6E74790056F401 /* TjsAudio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B84C197B1B6E74790056F401 /* TjsAudio.cpp */; };
 		B84C197E1B6E74790056F401 /* TjsAudio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B84C197B1B6E74790056F401 /* TjsAudio.cpp */; };
-		B84C19811B72384E0056F401 /* Action.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B84C197F1B72384E0056F401 /* Action.cpp */; };
-		B84C19821B72384E0056F401 /* Action.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B84C197F1B72384E0056F401 /* Action.cpp */; };
-		B84C19851B724C8F0056F401 /* TjsAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B84C19831B724C8F0056F401 /* TjsAction.cpp */; };
-		B84C19861B724C8F0056F401 /* TjsAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B84C19831B724C8F0056F401 /* TjsAction.cpp */; };
 		B85B52B71B6745E500D05305 /* TjsCharacter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B85B52B51B6745E500D05305 /* TjsCharacter.cpp */; };
 		B887B8681B6BF583004C72BA /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B887B8661B6BF583004C72BA /* Timer.cpp */; };
 		B887B86B1B6BF8EA004C72BA /* TjsTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B887B8691B6BF8EA004C72BA /* TjsTimer.cpp */; };
@@ -370,10 +366,6 @@
 		B84C19781B6E5F6A0056F401 /* Audio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Audio.h; sourceTree = "<group>"; };
 		B84C197B1B6E74790056F401 /* TjsAudio.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TjsAudio.cpp; sourceTree = "<group>"; };
 		B84C197C1B6E74790056F401 /* TjsAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsAudio.h; sourceTree = "<group>"; };
-		B84C197F1B72384E0056F401 /* Action.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Action.cpp; sourceTree = "<group>"; };
-		B84C19801B72384E0056F401 /* Action.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Action.h; sourceTree = "<group>"; };
-		B84C19831B724C8F0056F401 /* TjsAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TjsAction.cpp; sourceTree = "<group>"; };
-		B84C19841B724C8F0056F401 /* TjsAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsAction.h; sourceTree = "<group>"; };
 		B85B52B51B6745E500D05305 /* TjsCharacter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TjsCharacter.cpp; sourceTree = "<group>"; };
 		B85B52B61B6745E500D05305 /* TjsCharacter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsCharacter.h; sourceTree = "<group>"; };
 		B880AE5F1AFD94F500E0F92C /* DollEnginePrefixMac.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DollEnginePrefixMac.pch; sourceTree = "<group>"; };
@@ -891,8 +883,6 @@
 				B887B86A1B6BF8EA004C72BA /* TjsTimer.h */,
 				B84C197B1B6E74790056F401 /* TjsAudio.cpp */,
 				B84C197C1B6E74790056F401 /* TjsAudio.h */,
-				B84C19831B724C8F0056F401 /* TjsAction.cpp */,
-				B84C19841B724C8F0056F401 /* TjsAction.h */,
 			);
 			path = com;
 			sourceTree = "<group>";
@@ -1603,8 +1593,6 @@
 				B887B86D1B6C9781004C72BA /* RTT.h */,
 				B84C19771B6E5F6A0056F401 /* Audio-Mac.mm */,
 				B84C19781B6E5F6A0056F401 /* Audio.h */,
-				B84C197F1B72384E0056F401 /* Action.cpp */,
-				B84C19801B72384E0056F401 /* Action.h */,
 			);
 			path = component;
 			sourceTree = "<group>";
@@ -1858,7 +1846,6 @@
 				B8AEF0621B35997800490A8D /* tjsdate.tab.cpp in Sources */,
 				B89345AB1B5546CB0065A3A3 /* matrix.c in Sources */,
 				B89345BD1B5546CC0065A3A3 /* vec3.c in Sources */,
-				B84C19861B724C8F0056F401 /* TjsAction.cpp in Sources */,
 				B89345AF1B5546CC0065A3A3 /* mat4.c in Sources */,
 				B8EE2DF01B5B7B3B001EB825 /* TjsStorages.cpp in Sources */,
 				B8AEF02A1B35997800490A8D /* utf16_le.c in Sources */,
@@ -1901,7 +1888,6 @@
 				B8AEF0601B35997800490A8D /* tjsDate.cpp in Sources */,
 				B83671CC1B65149E00256B62 /* TjsCOM.cpp in Sources */,
 				B8AEF0521B35997800490A8D /* tjs.tab.cpp in Sources */,
-				B84C19821B72384E0056F401 /* Action.cpp in Sources */,
 				B8EE2DBA1B5B7B3B001EB825 /* KAGData.cpp in Sources */,
 				B8EE2DB81B5B7B3B001EB825 /* Component.cpp in Sources */,
 				B8EE2DDA1B5B7B3B001EB825 /* GLCache.cpp in Sources */,
@@ -2032,7 +2018,6 @@
 				B8EE2DE51B5B7B3B001EB825 /* NormalProgram.cpp in Sources */,
 				B8AEF0591B35997800490A8D /* tjsCompileControl.cpp in Sources */,
 				B8EE2DBF1B5B7B3B001EB825 /* Painter.cpp in Sources */,
-				B84C19851B724C8F0056F401 /* TjsAction.cpp in Sources */,
 				B8AEF0371B35997800490A8D /* regexec.c in Sources */,
 				B8EE2DD71B5B7B3B001EB825 /* Debug.cpp in Sources */,
 				B8EE2DAF1B5B7B3B001EB825 /* FontCache.cpp in Sources */,
@@ -2127,7 +2112,6 @@
 				B8AEF0191B35997800490A8D /* iso8859_8.c in Sources */,
 				B8AEF03B1B35997800490A8D /* reggnu.c in Sources */,
 				B8EE2DD91B5B7B3B001EB825 /* GLCache.cpp in Sources */,
-				B84C19811B72384E0056F401 /* Action.cpp in Sources */,
 				B8EE2DEB1B5B7B3B001EB825 /* TjsGameObject.cpp in Sources */,
 				B8AEF00D1B35997800490A8D /* iso8859_2.c in Sources */,
 				B887B86B1B6BF8EA004C72BA /* TjsTimer.cpp in Sources */,

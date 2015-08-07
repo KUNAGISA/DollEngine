@@ -64,6 +64,16 @@ void CompManager::removeReleaseComp(DE::Component *comp)
     m_releasePools.erase(comp);
 }
 
+void CompManager::addGlobalTouchComp(Component* comp)
+{
+    m_globalTouchs.insert(comp);
+}
+
+void CompManager::removeGlobalTouchComp(Component* comp)
+{
+    m_globalTouchs.erase(comp);
+}
+
 void CompManager::addTouchComp(Component* comp)
 {
     m_touchComps.push_back(comp);
@@ -81,6 +91,10 @@ bool CompManager::onMouseDown(float x,float y )
     x /= DEApplication->getDeviceWidth()/GLCanvas::GetInstance()->getLayerWidth();
     y /= DEApplication->getDeviceHeight()/GLCanvas::GetInstance()->getLayerHeight();
     list<Component*> allTouchs = m_touchComps;
+    for (auto iter = m_globalTouchs.begin();
+         iter != m_globalTouchs.end(); ++iter) {
+        allTouchs.push_front(*iter);
+    }
     m_validTouches.clear();
     for (auto iter = allTouchs.begin();
          iter != allTouchs.end(); ++iter)

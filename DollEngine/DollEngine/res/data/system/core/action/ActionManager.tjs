@@ -1,0 +1,122 @@
+var ALL_INIT_ACTIONS = [];
+
+function ASYNC_ACTION_INIT () 
+{
+	if (ALL_INIT_ACTIONS.count > 0) {
+		for (var i = 0; i < ALL_INIT_ACTIONS.count; i++) {
+			ALL_INIT_ACTIONS[i].initialize();
+		};
+		ALL_INIT_ACTIONS.clear();
+	}
+}
+
+class ActionManager
+{
+	var timer;
+	var allActions = %[];
+	var lastTime;
+	var timeScale = 1;
+	var paused = false;
+	var count = 0;
+	function ActionManager () 
+	{
+		this.timer = new Timer(this.update);
+		this.timer.interval = 0;
+		this.timer.enabled = false;
+		this.lastTime = this.timer.time;
+	}
+
+	function finalize () 
+	{
+		invalidate this.timer;
+		foreach(this.allActions,function(key,value){
+		    value.manager = void;
+		    invalidate value;
+		});
+		this.allActions = void;
+	}
+
+	function addAction (act) 
+	{
+		if (act.manager) {
+			em("一个Action不可重复被添加");
+			return;
+		}
+		allActions[act.key] = act;
+		act.manager = this;
+		count++;
+		if (!this.timer.enabled) {
+			this.timer.enabled = true;
+			this.lastTime = this.timer.time;
+		}
+		ALL_INIT_ACTIONS.add(act);
+		Scripts.addAsyncScripts("ASYNC_ACTION_INIT();");
+	}
+
+	function removeAction (act) 
+	{
+		if (act.manager) {
+			delete allActions[act.key];
+			act.manager = void;
+			count--;
+			if (count == 0) {
+				this.timer.enabled = false;
+			}
+		}
+	}
+
+	function removeAllActions () 
+	{
+		var arr = [];
+		foreach(this.allActions,function(key,value){
+		    this.add(value);
+		} incontextof arr);
+		for (var i = 0; i < arr.count; i++) {
+			arr[i].manager = void;
+			invalidate  arr[i];
+		};
+		arr.clear();
+		this.allActions = %[];
+		this.timer.enabled = false;
+		this.lastTime = 0;
+	}
+
+	function update () 
+	{
+		var dt = this.timer.time - this.lastTime;
+		dt *= this.timeScale*App.main.actionManager.timeScale;
+		this.lastTime = this.timer.time;
+		if (this.paused) {
+			return;
+		}
+		var release = [];
+		foreach(this.allActions,function(key,value){
+			if (value.released) {
+			    this[1].add(value);
+			    return;
+			}
+			if (value.paused) {
+				return;
+			}
+			var vt = this[0] * value.timeScale;
+		    value.time += vt;
+		    if (value.time >= value.duration) {
+			    value.update(1);
+			    value._released = true;
+		    }
+		    else {
+		    	value.update(value.time/value.duration);
+		    }
+		    if (value.released) {
+			    this[1].add(value);
+		    }
+		} incontextof [dt,release]);
+		if (release.count > 0) {
+			for (var i = 0; i < release.count; i++) {
+				invalidate release[i];
+			};
+			release.clear();
+		}
+	}
+
+}
