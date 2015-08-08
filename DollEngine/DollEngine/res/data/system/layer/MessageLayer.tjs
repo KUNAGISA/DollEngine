@@ -16,9 +16,9 @@ class MessageLayer extends Node
 	var uiIndex = 0;
 
 	var font = %[
-		fontSize : 24,
-		fontName : "WenQuanYi Micro Hei",
-		lineSpacing : 5,//行距
+		size : 20,
+		face : "WenQuanYi Micro Hei",
+		lineSpacing : 10,//行距
 		wordSpacing : 0,//字间距
 	];
 	function MessageLayer (par) 
@@ -40,6 +40,15 @@ class MessageLayer extends Node
 		this.controlLayer = new global.Node(this);
 		this.controlLayer.visible = true;
 		this.controlLayer.absolute = -1;
+
+		this.setPosition(%[
+				left:0,
+				top:0,
+				width:par.width,
+				height:par.height,
+				color:void,
+				opacity:255
+			]);
 	}
 
 	function setPosition (elm) 
@@ -57,10 +66,22 @@ class MessageLayer extends Node
 		}
 		else {
 			this.frameImage.visible = false;
-			this.frameColor.setSize(this.width,this.height);
-			this.frameColor.y = this.height;
-			this.frameColor.visible = true;
-			this.frameColor.opacity = elm.opacity if elm.opacity !== void;
+			if (elm.color !== void) {
+				var x = (elm.marginl===void?0:elm.marginl);
+				var y = (elm.marginb===void?0:elm.marginb);
+				var w = this.width - this.frameColor.x - (elm.marginr===void?0:elm.marginr);
+				var h = this.height - this.frameColor.y - (elm.margint===void?0:elm.margint);
+
+				this.frameColor.color = elm.color;
+				this.frameColor.x = x;
+				this.frameColor.y = y;
+				this.frameColor.setSize(w,h);
+				this.frameColor.visible = true;
+				this.frameColor.opacity = elm.opacity if elm.opacity !== void;
+			}
+			else {
+				this.frameColor.visible=false;
+			}
 		}
 		this.chLayer.x = (elm.marginl===void?0:elm.marginl);
 		this.chLayer.y = (elm.marginb===void?0:elm.marginb);
@@ -99,8 +120,9 @@ class MessageLayer extends Node
 	function locateChangeLine () 
 	{
 		this.locateX = 0;
-		this.locateY = this.font.fontSize+this.font.lineSpacing;
-		if (this.locateY+this.font.fontSize>this.chLayer.height) {
+		dm(this.chLayer.height,this.locateY);
+		this.locateY += this.font.size+this.font.lineSpacing;
+		if (this.locateY+this.font.size>this.chLayer.height) {
 			this.locateY = 0;
 			return false;
 		}
@@ -147,17 +169,18 @@ class MessageLayer extends Node
 	{
 		var node = new Label(this.chLayer);
 		node.setAnchor(0,1);
+		//这里还要设置文字属性
+		node.font.size = this.font.size;
 		node.text = text;
 		node.setSizeToImageSize();
-		//这里还要设置文字属性
 		node.x = x;
 		node.y = node.parent.height-y;
 		//这里需要另加字间距
 		x += node.width+this.font.wordSpacing;
 		if (x+node.width > this.chLayer.width) {
 			x = 0;
-			y += this.font.fontSize+this.font.lineSpacing;
-			if (y + this.font.fontSize > this.chLayer.height) {
+			y += this.font.size+this.font.lineSpacing;
+			if (y + this.font.size > this.chLayer.height) {
 				return [0,0,true];
 			}
 		}

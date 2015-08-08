@@ -55,16 +55,6 @@ void Character::update()
         return;
     }
     
-    float ox,oy;
-    if (getObject()) {
-        ox = -getObject()->getAnchorX()*m_paintWidth;
-        oy = -getObject()->getAnchorY()*m_paintHeight;
-    }
-    else {
-        ox = 0;
-        oy = m_paintHeight;
-    }
-    
     float lastX=0;
     for (TextFrame* frame : m_allTextFrames) {
         FontData* font = frame->getFont();
@@ -73,10 +63,12 @@ void Character::update()
             orgin.copy(getObject()->getTransInWorld());
         }
         Transform offst;
-        offst.setX(lastX + font->bearingX +ox);
-        float y = -(frame->getHeight()-font->bearingY)+oy;
+        offst.setX(lastX + font->bearingX);
+        float y = -(frame->getHeight()-font->bearingY);
         string fontname = frame->getCacheKey();
         offst.setY(y);
+        offst.setAnchorX(0);
+        offst.setAnchorY(0);
         offst.flush();
         orgin.setWidth(frame->getWidth());
         orgin.setHeight(frame->getHeight());

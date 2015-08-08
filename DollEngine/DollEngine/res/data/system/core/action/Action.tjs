@@ -46,7 +46,6 @@ class Sequence extends Action
 	{
 		super.Action();
 		this.first = array[0];
-		dm(this,"ctor",this.first);
 		array.erase(0);
 		if (array.count == 0) {
 			return;
@@ -57,7 +56,6 @@ class Sequence extends Action
 		else {
 			this.second = new global.Sequence(array);
 		}
-		dm(this,"ctor",this.first,second);
 	}
 
 	function finalize () 
@@ -73,7 +71,6 @@ class Sequence extends Action
 
 	function initialize () 
 	{
-		dm(this,"init",this.first,second);
 		this.current = first;
 		this.current.initialize();
 		if (this.current.released) {
@@ -93,7 +90,6 @@ class Sequence extends Action
 
 	function update (dt) 
 	{
-		dm(this,"update",this.first,second);
 		assert(this.current);
 		var t = this.duration*dt;
 		if (this.current == first) {

@@ -93,12 +93,12 @@ static ConsoleController* s_instance=nil;
 
 -(IBAction)onOKClick:(id)sender
 {
-    
+    [self control:input textShouldBeginEditing:nil];
 }
 
 -(IBAction)onClearClick:(id)sender
 {
-//    output.string = @"";//[NSMutableString stringWithString:@""];
+    output.string = @"";//[NSMutableString stringWithString:@""];
 }
 
 

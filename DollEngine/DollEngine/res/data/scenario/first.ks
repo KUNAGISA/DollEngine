@@ -1,5 +1,5 @@
 [wait time=200]
-*start|スタート
+*start
 [call storage=initialize.ks]
 [call storage=macro.ks]
 [startmenu]

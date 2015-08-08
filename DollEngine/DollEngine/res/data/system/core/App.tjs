@@ -290,6 +290,8 @@ class App extends Window
 			return;
 		}
 		lay.clearWord();
+		lay.locateX = 0;
+		lay.locateY = 0;
 		clickToNext();
 	}
 
@@ -456,6 +458,17 @@ class App extends Window
 			return -2;
 		} incontextof this,
 
+		p : function (elm) 
+		{
+			var lay = getCurrentLayer();
+			if (!lay) {
+				this.mergerBack('p',elm);
+				return;
+			}
+			this.status.waitClickMode = 6;
+			return -2;
+		} incontextof this,
+
 		/*******音频控制*******/
 		bgmopt : function (elm)
 		{
@@ -484,6 +497,14 @@ class App extends Window
 			checkElm(elm,['time']);
 			this.getBGM().fadeTime = elm.time/1000;
 			this.getBGM().stop(true);
+		} incontextof this,
+
+		playse : function (elm) 
+		{
+			checkElm(elm,['storage']);
+			var se = this.getSE(elm.buf);
+			se.preload(elm.storage);
+			se.play(elm.loop,false);
 		} incontextof this,
 
 		/*******界面控制*******/
@@ -634,6 +655,7 @@ class App extends Window
 			}
 			if (!lay.locateChangeLine()) {
 				this.status.waitClickMode = 6;
+				this.status.isClickSkip = false;
 				return -2;
 			}
 		} incontextof this,
@@ -704,9 +726,10 @@ class App extends Window
 			lay.locateY = pos[1];
 			if (pos[2] == true) {
 				this.status.waitClickMode = 6;//点击等待换页
+				this.status.isClickSkip = false;
 				return -2;
 			}
-			if (this.status.nowait) {
+			if (this.status.nowait || this.status.isClickSkip) {
 				return 0;
 			}
 			this.status.waitClickMode = 1;

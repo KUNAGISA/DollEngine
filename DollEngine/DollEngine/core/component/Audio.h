@@ -9,7 +9,7 @@
 #ifndef __DollEngine__Audio__
 #define __DollEngine__Audio__
 
-#include "Component.h"
+#include "Timer.h"
 
 DE_BEGIN
 
@@ -17,18 +17,18 @@ struct AudioFadeData
 {
     bool autorelease;
     float time;
-    float startTime;
     float start;
     float end;
 };
 
-class Audio :public Component
+class Audio :public Timer
 {
 public:
     Audio();
     ~Audio();
     virtual bool preload(const string& path);
     void play(bool isloop,bool isfade);
+    void switchAudio(bool isfade);
     void stop(bool isfade);
     void fadeTo(float vol);
     void pause();

@@ -23,6 +23,7 @@ public:
     ~Character();
     
     virtual void setSizeToImageSize();
+    float getTextWidth(int v){setSizeToImageSize();return getPaintWidth();}
 public:
     PROPERTY_CONST(string, FontName, m_fontName){
         if(m_fontName!=v){

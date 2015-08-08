@@ -1568,6 +1568,7 @@
 			isa = PBXGroup;
 			children = (
 				B8EE2D551B5B7B3B001EB825 /* base */,
+				B8037B291B75969A00D70821 /* KAGParser */,
 				B8EE2D601B5B7B3B001EB825 /* component */,
 				B8EE2D6F1B5B7B3B001EB825 /* CoreMacros.h */,
 				B8EE2D701B5B7B3B001EB825 /* CoreType.cpp */,
@@ -1603,7 +1604,6 @@
 		B8EE2D601B5B7B3B001EB825 /* component */ = {
 			isa = PBXGroup;
 			children = (
-				B8037B291B75969A00D70821 /* KAGParser */,
 				B8EE2D611B5B7B3B001EB825 /* CompManager.cpp */,
 				B8EE2D621B5B7B3B001EB825 /* CompManager.h */,
 				B8EE2D631B5B7B3B001EB825 /* Component.cpp */,

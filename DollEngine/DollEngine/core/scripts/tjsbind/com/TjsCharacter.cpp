@@ -13,11 +13,12 @@ NCB_REGISTER_CLASS_DIFFER(Character, TjsCharacter)
 {
     TJS_FACTORY_COM
     NCB_METHOD(setSizeToImageSize);
+    NCB_METHOD(getTextWidth);
     NCB_METHOD(setColor);
     NCB_METHOD(setGradientColor);
     NCB_PROPERTY(text,getText,setText);
-    NCB_PROPERTY(fontName,getFontName,setFontName);
-    NCB_PROPERTY(fontSize,getFontSize,setFontSize);
+    NCB_PROPERTY(face,getFontName,setFontName);
+    NCB_PROPERTY(size,getFontSize,setFontSize);
     NCB_PROPERTY(paintWidth,getPaintWidth,setPaintWidth);
     NCB_PROPERTY(paintHeight,getPaintHeight,setPaintHeight);
 };

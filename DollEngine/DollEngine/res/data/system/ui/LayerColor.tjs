@@ -31,6 +31,17 @@ class LayerColor extends Sprite
 		}
 	}
 
+	property color{
+	    setter(v) {
+	    	//setter
+	    	this._image.color = v;
+		}
+		getter {
+	    	//getter
+			return this._image.color;
+		}
+	}
+
 	var _startColor=0;
 	property startColor{
 	    setter(v) {

@@ -11,6 +11,8 @@ class KAG
 	//剧本控制
 	var tagHandlers; //tags
 	var allskip = 1;// 0 已读跳过 1 skip时全部跳过
+	var fullScreen = false;// 全屏与否
+	var bookMarkDates = [];//存档
 	function KAG () 
 	{
 		if(typeof global.app == 'undefined'){

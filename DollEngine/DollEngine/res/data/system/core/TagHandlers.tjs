@@ -68,6 +68,9 @@ class TagHandlers extends KAGController
 	function onExecute (name,params) 
 	{
 		app.status.waitClickMode = 0;
+		if (app.status.isClickSkip && name != 'ch' && name != 'locate' && name != 'r') {
+			app.status.isClickSkip = false;
+		}
 		if (name == "return") {
 			if(this.stepOutLabel()){
 				this.stepNext();
@@ -94,14 +97,6 @@ class TagHandlers extends KAGController
 				return 0;
 			}
 			else {
-				if (app.status.waitClickMode == 1 && app.status.isClickSkip) {
-					if (name == "ch") {
-						return 0;
-					}
-					else {
-						app.status.isClickSkip = false;
-					}
-				}
 				return time;
 			}
 		}

@@ -98,44 +98,67 @@ void Audio::update()
 
 void Audio::play(bool isloop, bool isfade)
 {
-    AVAudioPlayer* player=nil;
+    switchAudio(isfade);
+    setLoop(isloop);
+    setPan(m_pan);
+    m_playing = true;
+}
+
+void Audio::switchAudio(bool isfade)
+{
     if (m_fadeTime < 1/60.0f) {
         isfade = false;
     }
-    if (m_prePlayer) {
-        //当存在prePlayer的时候说明这时候是切换声音
-        stop(isfade);
+    if (m_fadeData.size() > 0) {
+        for (auto iter = m_fadeData.begin();
+             iter != m_fadeData.end(); ++iter)
+        {
+            AVAudioPlayer* audio = (__bridge AVAudioPlayer*)iter->first;
+            [audio stop];
+            if (m_player != iter->first && m_prePlayer != iter->first) {
+                [s_AVAPlayers removeObject:audio];
+            }
+        }
+        m_fadeData.clear();
+        setEnabled(false);
+    }
+    
+    AVAudioPlayer* audioIn=(__bridge AVAudioPlayer*)m_prePlayer;
+    AVAudioPlayer* audioOut=(__bridge AVAudioPlayer*)m_player;
+    if (isfade) {
+        if (m_prePlayer) {
+            AudioFadeData cfgin;
+            cfgin.autorelease = false;
+            cfgin.time = m_fadeTime;
+            cfgin.start = 0;
+            cfgin.end = m_volume;
+            audioIn.volume = 0;
+            [audioIn play];
+            m_fadeData[m_prePlayer] = cfgin;
+        }
+        if (m_player) {
+            AudioFadeData cfgout;
+            cfgout.autorelease = true;
+            cfgout.time = m_fadeTime;
+            cfgout.start = audioOut.volume*100;
+            cfgout.end = 0;
+            m_fadeData[m_player] = cfgout;
+        }
         m_player = m_prePlayer;
         m_prePlayer = null;
-    }
-    setEnabled(false);
-    m_fadeData.clear();
-    if (m_player) {
-        player = (__bridge AVAudioPlayer*)m_player;
-        setLoop(isloop);
-        setPan(m_pan);
-        if(isfade) {
-            AudioFadeData config;
-            config.time = m_fadeTime;
-            config.startTime = -1;
-            config.start = 0;
-            config.end = m_volume;
-            config.autorelease = false;
-            player.volume = 0;
-            [player play];
-            m_fadeData[m_player] = config;
-            setEnabled(true);
-        }
-        else {
-            player.volume = m_volume;
-            [player play];
-            setEnabled(false);
-        }
-        m_playing = true;
+        setEnabled(true);
     }
     else {
-        Debug::throwMsg("音频文件未加载");
-        m_playing = false;
+        if (m_player) {
+            [audioOut stop];
+            [s_AVAPlayers removeObject:audioOut];
+        }
+        if (m_prePlayer) {
+            audioIn.volume = m_volume/100;
+            [audioIn play];
+        }
+        m_player = m_prePlayer;
+        m_prePlayer = null;
     }
 }
 
@@ -144,28 +167,9 @@ void Audio::stop(bool isfade)
     if (m_fadeTime < 1/60.0f) {
         isfade = false;
     }
-    setEnabled(false);
-    m_fadeData.clear();
-    AVAudioPlayer* player=nil;
-    if (m_player) {
-        player = (__bridge AVAudioPlayer*)m_player;
-        if(isfade) {
-            AudioFadeData config;
-            config.time = m_fadeTime;
-            config.startTime = -1;
-            config.start = player.volume*100;
-            config.end = 0;
-            config.autorelease = true;
-            m_fadeData[m_player] = config;
-            setEnabled(true);
-        }
-        else {
-            [player stop];
-            [s_AVAPlayers removeObject:player];
-            setEnabled(false);
-        }
-        m_player = null;
-    }
+    AVAudioPlayer* audioIn=(__bridge AVAudioPlayer*)m_prePlayer;
+    [s_AVAPlayers removeObject:audioIn];
+    switchAudio(isfade);
     m_playing = false;
 }
 
@@ -176,7 +180,6 @@ void Audio::fadeTo(float vol)
     if (m_player) {
         AudioFadeData config;
         config.time = m_fadeTime;
-        config.startTime = -1;
         config.start = m_volume;
         config.end = vol;
         config.autorelease = false;
