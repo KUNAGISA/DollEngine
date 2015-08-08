@@ -14,6 +14,13 @@ class MessageLayer extends Node
 	var locateY = 0;
 
 	var uiIndex = 0;
+
+	var font = %[
+		fontSize : 24,
+		fontName : "WenQuanYi Micro Hei",
+		lineSpacing : 5,//行距
+		wordSpacing : 0,//字间距
+	];
 	function MessageLayer (par) 
 	{
 		super.Node(par);
@@ -26,7 +33,7 @@ class MessageLayer extends Node
 		this.frameColor.visible = false;
 		this.frameColor.absolute = -3;
 
-		this.chLayer = new TextLayer(this);
+		this.chLayer = new WordLayer(this);
 		this.chLayer.visible = true;
 		this.chLayer.absolute = -2;
 
@@ -59,13 +66,18 @@ class MessageLayer extends Node
 		this.chLayer.y = (elm.marginb===void?0:elm.marginb);
 		this.chLayer.width = this.width - this.chLayer.x - (elm.marginr===void?0:elm.marginr);
 		this.chLayer.height = this.height - this.chLayer.y - (elm.margint===void?0:elm.margint);
-		this.chLayer.refreshCH();
+		this.chLayer.refreshWord();
 		this.controlLayer.setPos(this.chLayer.x,this.chLayer.y,this.chLayer.width,this.chLayer.height);
+	}
+
+	function clearWord () 
+	{
+		this.chLayer.clearWord();
 	}
 
 	function clearEr (sys=false) 
 	{
-		this.chLayer.clearCH();
+		clearWord();
 		var syses = [];
 		for (var i = 0; i < this.controlLayer.children.count; ++i) {
 			var control = this.controlLayer.children[i];
@@ -84,6 +96,16 @@ class MessageLayer extends Node
 		this.uiIndex = 0;
 	}
 
+	function locateChangeLine () 
+	{
+		this.locateX = 0;
+		this.locateY = this.font.fontSize+this.font.lineSpacing;
+		if (this.locateY+this.font.fontSize>this.chLayer.height) {
+			this.locateY = 0;
+			return false;
+		}
+		return true;
+	}
 
 	/********控件创建********/
 	function addButton (elm) 
@@ -131,11 +153,11 @@ class MessageLayer extends Node
 		node.x = x;
 		node.y = node.parent.height-y;
 		//这里需要另加字间距
-		x += node.width;
+		x += node.width+this.font.wordSpacing;
 		if (x+node.width > this.chLayer.width) {
 			x = 0;
-			y += node.height*1.3;
-			if (y + node.height > this.chLayer.height) {
+			y += this.font.fontSize+this.font.lineSpacing;
+			if (y + this.font.fontSize > this.chLayer.height) {
 				return [0,0,true];
 			}
 		}

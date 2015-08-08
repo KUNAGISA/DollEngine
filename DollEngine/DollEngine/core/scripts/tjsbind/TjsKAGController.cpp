@@ -1,40 +1,13 @@
 //
-//  TJSKAGParser.cpp
-//  Krkr_GL
+//  TjsKAGController.cpp
+//  DollEngine
 //
-//  Created by DollStudio on 14/11/22.
-//  Copyright (c) 2014年 DollStudio. All rights reserved.
+//  Created by DollStudio on 15/8/8.
+//  Copyright (c) 2015年 DollStudio. All rights reserved.
 //
 
-#include "TjsKAGParser.h"
+#include "TjsKAGController.h"
 
-using namespace DE;
-
-void TjsKAGParser::jumpTo(ttstr storage, ttstr label)
-{
-    if (label.IsEmpty() || label.length() == 0)
-    {
-        label = L"_def_";
-    }
-    if (storage.IsEmpty() || storage.length() == 0)
-    {
-        storage = m_currentStorage->fileName;
-    }
-    DE::KAGParser::jumpTo(storage.AsStdString(),label.AsStdString());
-}
-
-void TjsKAGParser::callLabel(ttstr storage,ttstr label)
-{
-    if (label.IsEmpty() || label.length() == 0)
-    {
-        label = L"_def_";
-    }
-    if (storage.IsEmpty() || storage.length() == 0)
-    {
-        storage = m_currentStorage->fileName;
-    }
-    DE::KAGParser::callLabel(storage.AsStdString(),label.AsStdString());
-}
 
 static void GetTagParamValue(KAGTagParamValue& kv, tTJSVariant &ret)
 {
@@ -60,7 +33,25 @@ static void GetTagParamValue(KAGTagParamValue& kv, tTJSVariant &ret)
     else if (kv.macroarg)
     {
         try {
-            TjsEngine::Global()->EvalExpression( (L"mp."+kv.value.substr(1)), &ret) ;
+            size_t p = kv.value.find(L"|");
+            wstring v1, v2;
+            if (p != string::npos) {
+                v1 = kv.value.substr(1,p-1);
+                tTJSVariant r1;
+                TjsEngine::Global()->EvalExpression( (L"mp."+v1), &r1) ;
+                if (r1.operator bool()) {
+                    ret = r1;
+                }
+                else {
+                    v2 = kv.value.substr(p+1);
+                    tTJSVariant r2;
+                    TjsEngine::Global()->EvalExpression( v2, &r2) ;
+                    ret = r2;
+                }
+            }
+            else {
+                TjsEngine::Global()->EvalExpression( (L"mp."+kv.value.substr(1)), &ret) ;
+            }
         }TJS_CATCH
     }
     else
@@ -82,9 +73,35 @@ static void GetTagParamsValue(KAGTag* tag,const wstring& key,tTJSVariant &value)
     }
 }
 
-int TjsKAGParser::execute(KAGTag* tag)
+
+
+int TjsKAGController::doTag()
 {
+    if (m_tagIndex >= m_label->allTags.size()) {
+        stepNext();
+    }
+    KAGTag * tag = m_label->allTags[m_tagIndex];
     tag->print();
+    if (tag->name == L"macro") {
+        wstring macroname = tag->getValue(L"name");
+        KAGParser::GetInstance()->startMacro(macroname);
+        while (true) {
+            ++m_tagIndex;
+            if (m_tagIndex>=m_label->allTags.size()) {
+                Debug::throwMsg(ERROR_KAG_UNKONW);
+                return -2;
+            }
+            KAGTag * tt = m_label->allTags[m_tagIndex];
+            KAGTag* c = tt->clone();
+            KAGParser::GetInstance()->pushMacro(c);
+            if (c->name == L"endmacro") {
+                KAGParser::GetInstance()->endMacro();
+                break;
+            }
+        }
+        return 0;
+    }
+    
     if (tag->hasCond) {
         tTJSVariant ret;
         GetTagParamsValue(tag,L"cond",ret);
@@ -98,11 +115,6 @@ int TjsKAGParser::execute(KAGTag* tag)
             return 0;
         }
     }
-    if (tag->name == L"return")
-    {
-        returnCall();
-        return -1;
-    }
     else if (tag->name == L"if")
     {
         tTJSVariant ret;
@@ -112,23 +124,23 @@ int TjsKAGParser::execute(KAGTag* tag)
             TjsEngine::Global()->EvalExpression( ret, &cond);
         }TJS_CATCH
         if (cond.operator bool()) {
-            m_ifKey.push_back(L"doing");
+            m_ifKey.push(L"doing");
         }
         else{
-            m_ifKey.push_back(L"toelse");
+            m_ifKey.push(L"toelse");
         }
         return 0;
     }
     else if (tag->name == L"else")
     {
         if (m_ifKey.size() > 0) {
-            if (m_ifKey.back() == L"doing") {
-                m_ifKey.back() = L"toend";
+            if (m_ifKey.top() == L"doing") {
+                m_ifKey.top() = L"toend";
             }
-            else if(m_ifKey.back() == L"toelse"){
-                m_ifKey.back() = L"doing";
+            else if(m_ifKey.top() == L"toelse"){
+                m_ifKey.top() = L"doing";
             }
-            else if (m_ifKey.back() == L"toend"){
+            else if (m_ifKey.top() == L"toend"){
             }
             return 0;
         }
@@ -145,20 +157,20 @@ int TjsKAGParser::execute(KAGTag* tag)
         }
         else
         {
-            if (m_ifKey.back() == L"doing") {
-                m_ifKey.back() = L"toend";
+            if (m_ifKey.top() == L"doing") {
+                m_ifKey.top() = L"toend";
             }
-            else if(m_ifKey.back() == L"toelse"){
+            else if(m_ifKey.top() == L"toelse"){
                 tTJSVariant cond;
                 try {
                     TjsEngine::Global()->EvalExpression( ret, &cond);
                 }TJS_CATCH
                 if (cond.operator bool()) {
-                    m_ifKey.back() = L"doing";
+                    m_ifKey.top() = L"doing";
                 }
                 return 0;
             }
-            else if (m_ifKey.back() == L"toend"){
+            else if (m_ifKey.top() == L"toend"){
                 return 0;
             }
             return 0;
@@ -166,10 +178,10 @@ int TjsKAGParser::execute(KAGTag* tag)
     }
     else if (tag->name == L"endif")
     {
-        m_ifKey.pop_back();
+        m_ifKey.pop();
         return 0;
     }
-    if (m_ifKey.size()>0 && (m_ifKey.back() == L"toend" || m_ifKey.back() == L"toelse")) {
+    if (m_ifKey.size()>0 && (m_ifKey.top() == L"toend" || m_ifKey.top() == L"toelse")) {
         return 0;
     }
     string fileName;
@@ -193,13 +205,12 @@ int TjsKAGParser::execute(KAGTag* tag)
     return (int)result.AsInteger();
 }
 
-NCB_REGISTER_CLASS_DIFFER(KAGParser, TjsKAGParser)
+
+NCB_REGISTER_CLASS_DIFFER(KAGController, TjsKAGController)
 {
     TJS_FACTORY
-    NCB_METHOD(jumpTo);
-    NCB_METHOD(doNext);
-    NCB_METHOD(callLabel);
-    NCB_METHOD(callMacro);
-    NCB_METHOD(returnCall);
-    NCB_METHOD(onExecute);
+    NCB_METHOD(doTag);
+    NCB_METHOD(stepOutLabel);
+    NCB_METHOD(stepNext);
+    NCB_METHOD(stepInLabel);
 };

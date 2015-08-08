@@ -24,8 +24,8 @@ var sf=%[];
 
 var app = new App();
 
-if (typeof global.__Kag != 'undefined') {
-    global.kag = new __Kag();
+if (typeof global.KAG != 'undefined') {
+    global.kag = new KAG();
 }
 
 app.proccess("first.ks");

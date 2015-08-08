@@ -1,17 +1,17 @@
 
-class TextLayer extends Node
+class WordLayer extends Node
 {
-	function TextLayer (par) 
+	function WordLayer (par) 
 	{
 		super.Node(par);
 	}
 
-	function clearCH () 
+	function clearWord () 
 	{
 		this.removeAllChildren();
 	}
 
-	function refreshCH () 
+	function refreshWord () 
 	{
 		//根据界面大小重新刷新文字位置
 	}

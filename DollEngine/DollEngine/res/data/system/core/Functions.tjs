@@ -195,9 +195,20 @@ action.seq = function(array)
 action.spawn = function (array) 
 {
     var arr = global.action.array(array);
-    dm(arr);
     var sp = new global.Spawn(arr);
     return sp;
 };
 
+action.async = function (handler) 
+{
+    return global.action.delay(10,handler);
+};
+
+action.delay = function (time,handler) 
+{
+    var timer = new global.Timer(handler);
+    timer.interval = time;
+    timer.count = 1;
+    timer.enabled = true;
+};
 

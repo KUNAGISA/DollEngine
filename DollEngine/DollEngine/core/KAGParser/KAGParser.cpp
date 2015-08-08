@@ -1,8 +1,8 @@
 //
 //  KAGParser.cpp
-//  Krkr_GL
+//  DollEngine
 //
-//  Created by DollStudio on 14/11/14.
+//  Created by DollStudio on 15/8/8.
 //  Copyright (c) 2014年 DollStudio. All rights reserved.
 //
 
@@ -18,67 +18,20 @@ KAGParser::KAGParser()
 ,m_tag(null)
 ,m_isScripts(false)
 ,m_errorInfo(NO_ERROR)
-,m_currentStorage(null)
-,m_waitTime(0)
-,m_isProcssed(false)
-,m_currentLine(0)
-,m_currentTagIndex(0)
 ,m_parseLine(0)
-,m_isMakeMacro(false)
+,m_curMacroLabel(null)
 {
-    setCompName("KAGParser");
-    m_type = COMP_UPDATE;
     m_macros = new KAGStorage();
     m_macros->fileName = L"MACRO";
     m_macros->fullPath = L"MACRO";
     m_allStorage[L"MACRO"] = m_macros;
 }
 
-KAGParser::~KAGParser()
-{
-    for (auto iter: m_allStorage)
-    {
-        delete iter.second;
-    }
-    m_allStorage.clear();
-//    delete m_macros;
-}
-
-void KAGParser::jumpTo(const wstring& filepath,const wstring& key)
-{
-    setEnabled(false);
-    DM("\n========%ls(%ls)========",filepath.c_str(),key.c_str());
-    if (getIsProcessed())
-    {
-        m_nextKAG.storage = loadScenario(filepath);
-        m_nextKAG.labelKey = key;
-        m_nextKAG.tagIndex = 0;
-    }
-    else
-    {
-        auto storage = loadScenario(filepath);
-        if (storage) {
-            storage->exec(this, key, 0);
-        }
-    }
-}
-
-void KAGParser::wait(float time)
-{
-    setWaitTime(time);
-    setTime(0);
-    setEnabled(true);
-}
-
-void KAGParser::doNext()
-{
-    setWaitTime(0);
-    setTime(0);
-    setEnabled(true);
-}//立刻执行下一个
-
 KAGStorage* KAGParser::loadScenario(const wstring& filepath)
 {
+    if (filepath == L"MACRO") {
+        return m_macros;
+    }
     string fpath;
     string path;
     UnicodeToUtf8(filepath.c_str(), path);
@@ -151,68 +104,54 @@ KAGStorage* KAGParser::loadScenario(const wstring& filepath)
     }
 }
 
-void KAGParser::callLabel(const wstring& filepath, const wstring& key)
+void KAGParser::clearScenario()
 {
-    KAGStack stack;
-    stack.storage = m_currentStorage;
-    stack.labelKey = m_currentLabelKey;
-    stack.tagIndex = m_currentTagIndex;
-    m_callStack.push_back(stack);
-    jumpTo(filepath,key);
-}
-
-void KAGParser::clearCallStack()
-{
-    m_callStack.clear();
-}
-
-void KAGParser::returnCall()
-{
-    if (m_callStack.size() == 0)
-    {
-        Debug::throwMsg(ERROR_KAG_LABEL_FIND_FAIL,m_currentLine);
+    for (auto iter = m_allStorage.begin();
+         iter != m_allStorage.end(); ++iter) {
+        delete iter->second;
     }
-    KAGStack stack = m_callStack.back();
-    m_callStack.pop_back();
-    
-    m_nextKAG.storage = stack.storage;
-    m_nextKAG.labelKey = stack.labelKey;
-    m_nextKAG.tagIndex = stack.tagIndex+1;
-    DM("\n========%ls(%ls)========",
-       m_nextKAG.storage->fileName.c_str(),
-       m_nextKAG.labelKey.c_str());
+    m_allStorage.clear();
+    delete m_macros;
+    m_macros = new KAGStorage();
+    m_macros->fileName = L"MACRO";
+    m_macros->fullPath = L"MACRO";
+    m_allStorage[L"MACRO"] = m_macros;
 }
 
-bool KAGParser::callMacro(const wstring& name)
+KAGLabel* KAGParser::startMacro(const wstring& name)
 {
-    auto label = m_macros->getLabel(name);
-    if (label)
-    {
-        callLabel(L"MACRO", name);
-        return true;
+    KAGLabel* lb = m_macros->getLabel(name);
+    if (lb) {
+        delete lb;
     }
-    return false;
+    lb = new KAGLabel();
+    lb->key = name;
+    lb->isMacro = true;
+    lb->storage = m_macros;
+    m_macros->addLabel(lb);
+    m_curMacroLabel = lb;
+    return lb;
 }
 
-void KAGParser::update()
+void KAGParser::pushMacro(KAGTag* tag)
 {
-    if (m_waitTime <= getTime()) {
-        setEnabled(false);
-        m_nextKAG.storage->exec(this, m_nextKAG.labelKey, m_nextKAG.tagIndex);
-    }
+    m_curMacroLabel->addTag(tag);
+    tag->label = m_curMacroLabel;
+    tag->storage = m_macros;
 }
 
-int KAGParser::execute(KAGTag* tag)
+void KAGParser::endMacro()
 {
-    tag->print();
-    return 0;
+    m_curMacroLabel = null;
 }
-
 kagchar* KAGParser::parseLine(kagchar* text,bool is_scripts)
 {
     bool _is_note = false;
     while (text && *text)//*text != '\0' && *text != '\n' && *text != '\r')
     {
+        if (m_errorLine!=0) {
+            return null;
+        }
         if (*text == '\r' && *(text+1) != '\n')
         {
             *text = '\n';

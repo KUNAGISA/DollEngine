@@ -17,6 +17,11 @@ class Control extends Node
 
 	function onMouseDown (x,y) 
 	{
+		if (App.main.status.waitClickMode == 3||
+			App.main.status.locklink) {
+			//trans中或locklink时
+			this._touch.ignore = true;
+		}
 	}
 
 	function onMouseMove (x,y) 

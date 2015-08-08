@@ -9,6 +9,18 @@
 /* Begin PBXBuildFile section */
 		B80365A01ADE9E9400DD4B71 /* ConsoleController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B803659E1ADE9E9400DD4B71 /* ConsoleController.mm */; };
 		B80365A11ADE9E9400DD4B71 /* ConsoleController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B803659F1ADE9E9400DD4B71 /* ConsoleController.xib */; };
+		B8037B2C1B7596AB00D70821 /* KAGStorage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8037B2A1B7596AB00D70821 /* KAGStorage.cpp */; };
+		B8037B2D1B7596AB00D70821 /* KAGStorage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8037B2A1B7596AB00D70821 /* KAGStorage.cpp */; };
+		B8037B301B7596E100D70821 /* KAGLabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8037B2E1B7596E100D70821 /* KAGLabel.cpp */; };
+		B8037B311B7596E100D70821 /* KAGLabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8037B2E1B7596E100D70821 /* KAGLabel.cpp */; };
+		B8037B341B75971300D70821 /* KAGTag.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8037B321B75971300D70821 /* KAGTag.cpp */; };
+		B8037B351B75971300D70821 /* KAGTag.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8037B321B75971300D70821 /* KAGTag.cpp */; };
+		B8037B381B75978E00D70821 /* KAGParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8037B361B75978E00D70821 /* KAGParser.cpp */; };
+		B8037B391B75978E00D70821 /* KAGParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8037B361B75978E00D70821 /* KAGParser.cpp */; };
+		B8037B3C1B75990F00D70821 /* KAGController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8037B3A1B75990F00D70821 /* KAGController.cpp */; };
+		B8037B3D1B75990F00D70821 /* KAGController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8037B3A1B75990F00D70821 /* KAGController.cpp */; };
+		B8037B401B75B7FB00D70821 /* TjsKAGController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8037B3E1B75B7FB00D70821 /* TjsKAGController.cpp */; };
+		B8037B411B75B7FB00D70821 /* TjsKAGController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8037B3E1B75B7FB00D70821 /* TjsKAGController.cpp */; };
 		B81C2D351B634F3100DF97E8 /* TjsConsole.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B81C2D331B634F3100DF97E8 /* TjsConsole.cpp */; };
 		B81C2D361B634F3100DF97E8 /* TjsConsole.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B81C2D331B634F3100DF97E8 /* TjsConsole.cpp */; };
 		B81C2D381B634FAE00DF97E8 /* TjsConsole-Mac.mm in Sources */ = {isa = PBXBuildFile; fileRef = B81C2D371B634FAE00DF97E8 /* TjsConsole-Mac.mm */; };
@@ -265,10 +277,6 @@
 		B8EE2DB61B5B7B3B001EB825 /* CompManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D611B5B7B3B001EB825 /* CompManager.cpp */; };
 		B8EE2DB71B5B7B3B001EB825 /* Component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D631B5B7B3B001EB825 /* Component.cpp */; };
 		B8EE2DB81B5B7B3B001EB825 /* Component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D631B5B7B3B001EB825 /* Component.cpp */; };
-		B8EE2DB91B5B7B3B001EB825 /* KAGData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D651B5B7B3B001EB825 /* KAGData.cpp */; };
-		B8EE2DBA1B5B7B3B001EB825 /* KAGData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D651B5B7B3B001EB825 /* KAGData.cpp */; };
-		B8EE2DBB1B5B7B3B001EB825 /* KAGParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D671B5B7B3B001EB825 /* KAGParser.cpp */; };
-		B8EE2DBC1B5B7B3B001EB825 /* KAGParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D671B5B7B3B001EB825 /* KAGParser.cpp */; };
 		B8EE2DBD1B5B7B3B001EB825 /* Character.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D691B5B7B3B001EB825 /* Character.cpp */; };
 		B8EE2DBE1B5B7B3B001EB825 /* Character.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D691B5B7B3B001EB825 /* Character.cpp */; };
 		B8EE2DBF1B5B7B3B001EB825 /* Painter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D6B1B5B7B3B001EB825 /* Painter.cpp */; };
@@ -323,8 +331,6 @@
 		B8EE2DF41B5B7B3B001EB825 /* TjsEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2DA41B5B7B3B001EB825 /* TjsEngine.cpp */; };
 		B8EE2DF71B5B7B3B001EB825 /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2DA91B5B7B3B001EB825 /* Window.cpp */; };
 		B8EE2DF81B5B7B3B001EB825 /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2DA91B5B7B3B001EB825 /* Window.cpp */; };
-		B8EE2DFC1B5BDA25001EB825 /* TjsKAGParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2DFA1B5BDA25001EB825 /* TjsKAGParser.cpp */; };
-		B8EE2DFD1B5BDA25001EB825 /* TjsKAGParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2DFA1B5BDA25001EB825 /* TjsKAGParser.cpp */; };
 		B8EE2E001B5CDDC8001EB825 /* JsonParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2DFE1B5CDDC8001EB825 /* JsonParser.cpp */; };
 		B8EE2E011B5CDDC8001EB825 /* JsonParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2DFE1B5CDDC8001EB825 /* JsonParser.cpp */; };
 		B8EE2E231B5D7F91001EB825 /* savedata in Resources */ = {isa = PBXBuildFile; fileRef = B8EE2E221B5D7F91001EB825 /* savedata */; };
@@ -338,6 +344,18 @@
 		B803659D1ADE9E9400DD4B71 /* ConsoleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsoleController.h; sourceTree = "<group>"; };
 		B803659E1ADE9E9400DD4B71 /* ConsoleController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ConsoleController.mm; sourceTree = "<group>"; };
 		B803659F1ADE9E9400DD4B71 /* ConsoleController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConsoleController.xib; sourceTree = "<group>"; };
+		B8037B2A1B7596AB00D70821 /* KAGStorage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KAGStorage.cpp; sourceTree = "<group>"; };
+		B8037B2B1B7596AB00D70821 /* KAGStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KAGStorage.h; sourceTree = "<group>"; };
+		B8037B2E1B7596E100D70821 /* KAGLabel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KAGLabel.cpp; sourceTree = "<group>"; };
+		B8037B2F1B7596E100D70821 /* KAGLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KAGLabel.h; sourceTree = "<group>"; };
+		B8037B321B75971300D70821 /* KAGTag.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KAGTag.cpp; sourceTree = "<group>"; };
+		B8037B331B75971300D70821 /* KAGTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KAGTag.h; sourceTree = "<group>"; };
+		B8037B361B75978E00D70821 /* KAGParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KAGParser.cpp; sourceTree = "<group>"; };
+		B8037B371B75978E00D70821 /* KAGParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KAGParser.h; sourceTree = "<group>"; };
+		B8037B3A1B75990F00D70821 /* KAGController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KAGController.cpp; sourceTree = "<group>"; };
+		B8037B3B1B75990F00D70821 /* KAGController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KAGController.h; sourceTree = "<group>"; };
+		B8037B3E1B75B7FB00D70821 /* TjsKAGController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TjsKAGController.cpp; sourceTree = "<group>"; };
+		B8037B3F1B75B7FB00D70821 /* TjsKAGController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsKAGController.h; sourceTree = "<group>"; };
 		B81C2D331B634F3100DF97E8 /* TjsConsole.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TjsConsole.cpp; sourceTree = "<group>"; };
 		B81C2D341B634F3100DF97E8 /* TjsConsole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsConsole.h; sourceTree = "<group>"; };
 		B81C2D371B634FAE00DF97E8 /* TjsConsole-Mac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "TjsConsole-Mac.mm"; sourceTree = "<group>"; };
@@ -756,10 +774,6 @@
 		B8EE2D621B5B7B3B001EB825 /* CompManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompManager.h; sourceTree = "<group>"; };
 		B8EE2D631B5B7B3B001EB825 /* Component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Component.cpp; sourceTree = "<group>"; };
 		B8EE2D641B5B7B3B001EB825 /* Component.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Component.h; sourceTree = "<group>"; };
-		B8EE2D651B5B7B3B001EB825 /* KAGData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KAGData.cpp; sourceTree = "<group>"; };
-		B8EE2D661B5B7B3B001EB825 /* KAGData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KAGData.h; sourceTree = "<group>"; };
-		B8EE2D671B5B7B3B001EB825 /* KAGParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KAGParser.cpp; sourceTree = "<group>"; };
-		B8EE2D681B5B7B3B001EB825 /* KAGParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KAGParser.h; sourceTree = "<group>"; };
 		B8EE2D691B5B7B3B001EB825 /* Character.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Character.cpp; sourceTree = "<group>"; };
 		B8EE2D6A1B5B7B3B001EB825 /* Character.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Character.h; sourceTree = "<group>"; };
 		B8EE2D6B1B5B7B3B001EB825 /* Painter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Painter.cpp; sourceTree = "<group>"; };
@@ -816,8 +830,6 @@
 		B8EE2DA91B5B7B3B001EB825 /* Window.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Window.cpp; sourceTree = "<group>"; };
 		B8EE2DAA1B5B7B3B001EB825 /* Window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Window.h; sourceTree = "<group>"; };
 		B8EE2DF91B5B7B76001EB825 /* ScriptEngine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScriptEngine.h; sourceTree = "<group>"; };
-		B8EE2DFA1B5BDA25001EB825 /* TjsKAGParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TjsKAGParser.cpp; sourceTree = "<group>"; };
-		B8EE2DFB1B5BDA25001EB825 /* TjsKAGParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsKAGParser.h; sourceTree = "<group>"; };
 		B8EE2DFE1B5CDDC8001EB825 /* JsonParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JsonParser.cpp; sourceTree = "<group>"; };
 		B8EE2DFF1B5CDDC8001EB825 /* JsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JsonParser.h; sourceTree = "<group>"; };
 		B8EE2E221B5D7F91001EB825 /* savedata */ = {isa = PBXFileReference; lastKnownFileType = folder; path = savedata; sourceTree = "<group>"; };
@@ -851,6 +863,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B8037B291B75969A00D70821 /* KAGParser */ = {
+			isa = PBXGroup;
+			children = (
+				B8037B2A1B7596AB00D70821 /* KAGStorage.cpp */,
+				B8037B2B1B7596AB00D70821 /* KAGStorage.h */,
+				B8037B2E1B7596E100D70821 /* KAGLabel.cpp */,
+				B8037B2F1B7596E100D70821 /* KAGLabel.h */,
+				B8037B321B75971300D70821 /* KAGTag.cpp */,
+				B8037B331B75971300D70821 /* KAGTag.h */,
+				B8037B361B75978E00D70821 /* KAGParser.cpp */,
+				B8037B371B75978E00D70821 /* KAGParser.h */,
+				B8037B3A1B75990F00D70821 /* KAGController.cpp */,
+				B8037B3B1B75990F00D70821 /* KAGController.h */,
+			);
+			name = KAGParser;
+			path = DollEngine/core/KAGParser;
+			sourceTree = SOURCE_ROOT;
+		};
 		B8261DF31ADC06160017767B /* proj.ios */ = {
 			isa = PBXGroup;
 			children = (
@@ -1573,14 +1603,11 @@
 		B8EE2D601B5B7B3B001EB825 /* component */ = {
 			isa = PBXGroup;
 			children = (
+				B8037B291B75969A00D70821 /* KAGParser */,
 				B8EE2D611B5B7B3B001EB825 /* CompManager.cpp */,
 				B8EE2D621B5B7B3B001EB825 /* CompManager.h */,
 				B8EE2D631B5B7B3B001EB825 /* Component.cpp */,
 				B8EE2D641B5B7B3B001EB825 /* Component.h */,
-				B8EE2D651B5B7B3B001EB825 /* KAGData.cpp */,
-				B8EE2D661B5B7B3B001EB825 /* KAGData.h */,
-				B8EE2D671B5B7B3B001EB825 /* KAGParser.cpp */,
-				B8EE2D681B5B7B3B001EB825 /* KAGParser.h */,
 				B8EE2D691B5B7B3B001EB825 /* Character.cpp */,
 				B8EE2D6A1B5B7B3B001EB825 /* Character.h */,
 				B8EE2D6B1B5B7B3B001EB825 /* Painter.cpp */,
@@ -1676,8 +1703,6 @@
 				B83671C01B65116100256B62 /* com */,
 				B8B5F4471B5E08860051E564 /* TjsDictIterator.cpp */,
 				B8B5F4481B5E08860051E564 /* TjsDictIterator.h */,
-				B8EE2DFA1B5BDA25001EB825 /* TjsKAGParser.cpp */,
-				B8EE2DFB1B5BDA25001EB825 /* TjsKAGParser.h */,
 				B8EE2D981B5B7B3B001EB825 /* TjsApplication.cpp */,
 				B8EE2D991B5B7B3B001EB825 /* TjsApplication.h */,
 				B8EE2D9A1B5B7B3B001EB825 /* TjsBind.cpp */,
@@ -1690,6 +1715,8 @@
 				B8EE2DA11B5B7B3B001EB825 /* TjsStorages.h */,
 				B8EE2DA21B5B7B3B001EB825 /* TjsWindow.cpp */,
 				B8EE2DA31B5B7B3B001EB825 /* TjsWindow.h */,
+				B8037B3E1B75B7FB00D70821 /* TjsKAGController.cpp */,
+				B8037B3F1B75B7FB00D70821 /* TjsKAGController.h */,
 			);
 			path = tjsbind;
 			sourceTree = "<group>";
@@ -1861,12 +1888,14 @@
 				B8AEF0361B35997800490A8D /* regerror.c in Sources */,
 				B84C197A1B6E5F6A0056F401 /* Audio-Mac.mm in Sources */,
 				B84C197E1B6E74790056F401 /* TjsAudio.cpp in Sources */,
+				B8037B311B7596E100D70821 /* KAGLabel.cpp in Sources */,
 				B8AEF0961B35997800490A8D /* tjsString.cpp in Sources */,
 				B89345B31B5546CC0065A3A3 /* plane.c in Sources */,
 				B89345A31B5546CB0065A3A3 /* aabb.c in Sources */,
 				B8EE2DE41B5B7B3B001EB825 /* GLProgram.cpp in Sources */,
 				B8AEF07E1B35997800490A8D /* tjsMessage.cpp in Sources */,
 				B8AEF01A1B35997800490A8D /* iso8859_8.c in Sources */,
+				B8037B411B75B7FB00D70821 /* TjsKAGController.cpp in Sources */,
 				B8AEF08A1B35997800490A8D /* tjsOctPack.cpp in Sources */,
 				B8EE2E011B5CDDC8001EB825 /* JsonParser.cpp in Sources */,
 				B8AEF0861B35997800490A8D /* tjsObject.cpp in Sources */,
@@ -1887,8 +1916,8 @@
 				B8AEF0101B35997800490A8D /* iso8859_3.c in Sources */,
 				B8AEF0601B35997800490A8D /* tjsDate.cpp in Sources */,
 				B83671CC1B65149E00256B62 /* TjsCOM.cpp in Sources */,
+				B8037B391B75978E00D70821 /* KAGParser.cpp in Sources */,
 				B8AEF0521B35997800490A8D /* tjs.tab.cpp in Sources */,
-				B8EE2DBA1B5B7B3B001EB825 /* KAGData.cpp in Sources */,
 				B8EE2DB81B5B7B3B001EB825 /* Component.cpp in Sources */,
 				B8EE2DDA1B5B7B3B001EB825 /* GLCache.cpp in Sources */,
 				B8AEF03E1B35997800490A8D /* regparse.c in Sources */,
@@ -1918,14 +1947,12 @@
 				B8AEF03A1B35997800490A8D /* regext.c in Sources */,
 				B8EE2DCE1B5B7B3B001EB825 /* IOData.cpp in Sources */,
 				B8AEF0201B35997800490A8D /* koi8_r.c in Sources */,
-				B8EE2DFD1B5BDA25001EB825 /* TjsKAGParser.cpp in Sources */,
 				B8AEF0821B35997800490A8D /* tjsNamespace.cpp in Sources */,
 				B8AEF0181B35997800490A8D /* iso8859_7.c in Sources */,
 				B89345B71B5546CC0065A3A3 /* ray2.c in Sources */,
 				B8AEF02C1B35997800490A8D /* utf32_be.c in Sources */,
 				B8AEF0441B35997800490A8D /* regsyntax.c in Sources */,
 				B8AEEFF61B35997800490A8D /* cp1251.c in Sources */,
-				B8EE2DBC1B5B7B3B001EB825 /* KAGParser.cpp in Sources */,
 				B8AEF0561B35997800490A8D /* tjsBinarySerializer.cpp in Sources */,
 				B8EE2DC21B5B7B3B001EB825 /* TouchListener.cpp in Sources */,
 				B8AEF0221B35997800490A8D /* mktable.c in Sources */,
@@ -1934,6 +1961,7 @@
 				B8AEF0041B35997800490A8D /* iso8859_11.c in Sources */,
 				B8EE2DE61B5B7B3B001EB825 /* NormalProgram.cpp in Sources */,
 				B8AEF04A1B35997800490A8D /* st.c in Sources */,
+				B8037B351B75971300D70821 /* KAGTag.cpp in Sources */,
 				B8EE2DE01B5B7B3B001EB825 /* GLShaderObject.cpp in Sources */,
 				B8AEF0261B35997800490A8D /* unicode.c in Sources */,
 				B8AEF0761B35997800490A8D /* tjsInterCodeGen.cpp in Sources */,
@@ -1975,9 +2003,11 @@
 				B8AEF00A1B35997800490A8D /* iso8859_15.c in Sources */,
 				B8AEF0301B35997800490A8D /* utf8.c in Sources */,
 				B8AEF02E1B35997800490A8D /* utf32_le.c in Sources */,
+				B8037B3D1B75990F00D70821 /* KAGController.cpp in Sources */,
 				B8AEEFF41B35997800490A8D /* big5.c in Sources */,
 				B8AEF09C1B35997800490A8D /* tjsVariantString.cpp in Sources */,
 				B8EE2DB01B5B7B3B001EB825 /* FontCache.cpp in Sources */,
+				B8037B2D1B7596AB00D70821 /* KAGStorage.cpp in Sources */,
 				B8AEEFF21B35997800490A8D /* ascii.c in Sources */,
 				B8AEF0341B35997800490A8D /* regenc.c in Sources */,
 				B8AEF0581B35997800490A8D /* tjsByteCodeLoader.cpp in Sources */,
@@ -2010,6 +2040,7 @@
 				B8EE2DBD1B5B7B3B001EB825 /* Character.cpp in Sources */,
 				B8AEF0971B35997800490A8D /* tjsUtils.cpp in Sources */,
 				B8EE2DF71B5B7B3B001EB825 /* Window.cpp in Sources */,
+				B8037B2C1B7596AB00D70821 /* KAGStorage.cpp in Sources */,
 				B8EE2DED1B5B7B3B001EB825 /* TjsScripts.cpp in Sources */,
 				B8EE2DCB1B5B7B3B001EB825 /* ImageData.cpp in Sources */,
 				B8AEF0831B35997800490A8D /* tjsNative.cpp in Sources */,
@@ -2022,8 +2053,10 @@
 				B8EE2DD71B5B7B3B001EB825 /* Debug.cpp in Sources */,
 				B8EE2DAF1B5B7B3B001EB825 /* FontCache.cpp in Sources */,
 				B89854231ADC04D0003784AA /* DEOpenGLView.mm in Sources */,
+				B8037B341B75971300D70821 /* KAGTag.cpp in Sources */,
 				B8AEF08B1B35997800490A8D /* tjspp.tab.cpp in Sources */,
 				B8AEF0811B35997800490A8D /* tjsNamespace.cpp in Sources */,
+				B8037B3C1B75990F00D70821 /* KAGController.cpp in Sources */,
 				B8AEF0391B35997800490A8D /* regext.c in Sources */,
 				B8AEF00B1B35997800490A8D /* iso8859_16.c in Sources */,
 				B8AEF0131B35997800490A8D /* iso8859_5.c in Sources */,
@@ -2043,6 +2076,7 @@
 				B89345B61B5546CC0065A3A3 /* ray2.c in Sources */,
 				B8AEF0611B35997800490A8D /* tjsdate.tab.cpp in Sources */,
 				B8AEF0791B35997800490A8D /* tjsLex.cpp in Sources */,
+				B8037B401B75B7FB00D70821 /* TjsKAGController.cpp in Sources */,
 				B8AEF01F1B35997800490A8D /* koi8_r.c in Sources */,
 				B8EE2DD31B5B7B3B001EB825 /* Transform.cpp in Sources */,
 				B8AEF0491B35997800490A8D /* st.c in Sources */,
@@ -2070,8 +2104,8 @@
 				B8EE2DE71B5B7B3B001EB825 /* TjsApplication.cpp in Sources */,
 				B8EE2DE31B5B7B3B001EB825 /* GLProgram.cpp in Sources */,
 				B8EE2DDF1B5B7B3B001EB825 /* GLShaderObject.cpp in Sources */,
-				B8EE2DB91B5B7B3B001EB825 /* KAGData.cpp in Sources */,
 				B8EE2DC51B5B7B3B001EB825 /* CoreUnits.cpp in Sources */,
+				B8037B381B75978E00D70821 /* KAGParser.cpp in Sources */,
 				B8AEF05B1B35997800490A8D /* tjsConfig.cpp in Sources */,
 				B89345BE1B5546CC0065A3A3 /* vec4.c in Sources */,
 				B89345B41B5546CC0065A3A3 /* quaternion.c in Sources */,
@@ -2097,6 +2131,7 @@
 				B84C19791B6E5F6A0056F401 /* Audio-Mac.mm in Sources */,
 				B8AEF0751B35997800490A8D /* tjsInterCodeGen.cpp in Sources */,
 				B8AEF04F1B35997800490A8D /* tjs.cpp in Sources */,
+				B8037B301B7596E100D70821 /* KAGLabel.cpp in Sources */,
 				B8AEEFF91B35997800490A8D /* euc_kr.c in Sources */,
 				B8EE2DB31B5B7B3B001EB825 /* Storages.cpp in Sources */,
 				B8EE2DAD1B5B7B3B001EB825 /* Application.cpp in Sources */,
@@ -2130,7 +2165,6 @@
 				B83411471B68307F005BEE96 /* TjsTouchListener.cpp in Sources */,
 				B89345A81B5546CB0065A3A3 /* mat4stack.c in Sources */,
 				B85B52B71B6745E500D05305 /* TjsCharacter.cpp in Sources */,
-				B8EE2DBB1B5B7B3B001EB825 /* KAGParser.cpp in Sources */,
 				B8AEF0631B35997800490A8D /* tjsDateParser.cpp in Sources */,
 				B8B5F4491B5E08860051E564 /* TjsDictIterator.cpp in Sources */,
 				B8AEF0011B35997800490A8D /* iso8859_10.c in Sources */,
@@ -2139,7 +2173,6 @@
 				B8AEF07F1B35997800490A8D /* tjsMT19937ar-cok.cpp in Sources */,
 				B8AEF02F1B35997800490A8D /* utf8.c in Sources */,
 				B8AEF03D1B35997800490A8D /* regparse.c in Sources */,
-				B8EE2DFC1B5BDA25001EB825 /* TjsKAGParser.cpp in Sources */,
 				B8AEF0571B35997800490A8D /* tjsByteCodeLoader.cpp in Sources */,
 				B8AEEFFD1B35997800490A8D /* gb18030.c in Sources */,
 				B8AEEFEB1B35997800490A8D /* ncbind.cpp in Sources */,

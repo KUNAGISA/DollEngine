@@ -37,7 +37,16 @@ class App extends Window
 		clickskip : false, //是否允许点击略过
 		locklink : false, //禁止Message层的按钮被点击
 
-		waitClickMode : 0,//0 不等待，1等待文字，2等待移动 3等待trans 4等待时间
+		/*
+		0 不等待
+		1 等待文字
+		2 等待移动
+		3 等待trans 
+		4 等待时间
+		5 等待点击继续文字
+		6 等待点击换页
+		*/
+		waitClickMode : 0,
 		isClickSkip : false,//是否点击之后skip动画中
 	];
 
@@ -194,7 +203,12 @@ class App extends Window
 
 	function proccess (file, label) 
 	{
-		this.tagManager.jumpTo(file,label);
+		this.tagManager.proccess(file,label);
+		this.tagManager.execTags();
+		// action.async(function () 
+		// {
+		// 	this.tagManager.execTags();
+		// } incontextof this.tagManager);
 	}
 
 	/**********场景切换*********/
@@ -252,6 +266,33 @@ class App extends Window
 		this.status.transT += 1/60;
 	}
 
+	function clickToNext () 
+	{
+		// body...
+		this.tagManager.doNext();
+	}
+
+	function clickToNextCh () 
+	{
+		var lay = getCurrentLayer();
+		if (!lay) {
+			dm("指令l在点击时，当前图层应该是表层");
+			return;
+		}
+		clickToNext();
+	}
+
+	function clickToNextPage () 
+	{
+		var lay = getCurrentLayer();
+		if (!lay) {
+			dm("指令p在点击时，当前图层应该是表层");
+			return;
+		}
+		lay.clearWord();
+		clickToNext();
+	}
+
 	function onMouseDown(x,y)
 	{
 
@@ -297,7 +338,19 @@ class App extends Window
 			case 4:
 			{
 				//等待时间
-				this.tagManager.doNext();
+				clickToNext();
+			}
+			break;
+			case 5:
+			{
+				//等待点击继续文字
+				clickToNextCh();
+			}
+			break;
+			case 6:
+			{
+				//等待点击换页
+				clickToNextPage();
 			}
 			break;
 		}
@@ -340,19 +393,13 @@ class App extends Window
 		/*******剧本控制*******/
 		call : function (elm) 
 		{
-			this.tagManager.callLabel(elm.storage,elm.target);
+			this.tagManager.callStorage(elm.storage,elm.target);
 			return -1;
 		} incontextof this,
 
 		jump : function (elm) 
 		{
-			this.tagManager.jumpTo(elm.storage,elm.target);
-			return -1;
-		} incontextof this,
-
-		endmacro : function () 
-		{
-			this.tagManager.returnMacro();
+			this.tagManager.proccess(elm.storage,elm.target);
 			return -1;
 		} incontextof this,
 
@@ -396,6 +443,17 @@ class App extends Window
 		unlocklink : function (elm) 
 		{
 			this.status.locklink = false;
+		} incontextof this,
+
+		l : function (elm) 
+		{
+			var lay = getCurrentLayer();
+			if (!lay) {
+				this.mergerBack('l',elm);
+				return;
+			}
+			this.status.waitClickMode = 5;
+			return -2;
 		} incontextof this,
 
 		/*******音频控制*******/
@@ -567,6 +625,19 @@ class App extends Window
 			lay.clearEr();
 		} incontextof this,
 
+		r : function (elm) 
+		{
+			var lay = this.getCurrentLayer();
+			if (!lay) {
+				this.mergerBack('r',elm);
+				return;
+			}
+			if (!lay.locateChangeLine()) {
+				this.status.waitClickMode = 6;
+				return -2;
+			}
+		} incontextof this,
+
 		csysbutton : function (elm) 
 		{
 			var lay = this.getCurrentLayer();
@@ -632,7 +703,7 @@ class App extends Window
 			lay.locateX = pos[0];
 			lay.locateY = pos[1];
 			if (pos[2] == true) {
-				//点击等待换页
+				this.status.waitClickMode = 6;//点击等待换页
 				return -2;
 			}
 			if (this.status.nowait) {
