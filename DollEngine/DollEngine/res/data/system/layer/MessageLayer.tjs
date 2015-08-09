@@ -12,6 +12,12 @@ class MessageLayer extends Node
 
 	var locateX = 0;
 	var locateY = 0;
+	var margin = %[
+		l : 0,
+		r : 0,
+		t : 0,
+		b : 0,
+	];
 
 	var uiIndex = 0;
 
@@ -54,9 +60,14 @@ class MessageLayer extends Node
 	function setPosition (elm) 
 	{
 		this.x = elm.left if elm.left !== void;
-		this.y = this.parent.height-elm.top;
+		this.y = this.parent.height-elm.top if elm.top !== void;
 		this.width = elm.width if elm.width !== void;
 		this.height = elm.height if elm.height !== void;
+		this.visible = elm.visible if elm.visible!==void;
+		margin.l = elm.marginl if elm.marginl!==void;
+		margin.r = elm.marginr if elm.marginr!==void;
+		margin.t = elm.margint if elm.margint!==void;
+		margin.b = elm.marginb if elm.marginb!==void;
 		if (elm.frame) {
 			this.frameColor.visible = false;
 			this.frameImage.loadImages(elm.frame);
@@ -83,10 +94,10 @@ class MessageLayer extends Node
 				this.frameColor.visible=false;
 			}
 		}
-		this.chLayer.x = (elm.marginl===void?0:elm.marginl);
-		this.chLayer.y = (elm.marginb===void?0:elm.marginb);
-		this.chLayer.width = this.width - this.chLayer.x - (elm.marginr===void?0:elm.marginr);
-		this.chLayer.height = this.height - this.chLayer.y - (elm.margint===void?0:elm.margint);
+		this.chLayer.x = margin.l;
+		this.chLayer.y = margin.b;
+		this.chLayer.width = this.width - this.chLayer.x - margin.r;
+		this.chLayer.height = this.height - this.chLayer.y - margin.t;
 		this.chLayer.refreshWord();
 		this.controlLayer.setPos(this.chLayer.x,this.chLayer.y,this.chLayer.width,this.chLayer.height);
 	}
@@ -120,10 +131,9 @@ class MessageLayer extends Node
 	function locateChangeLine () 
 	{
 		this.locateX = 0;
-		dm(this.chLayer.height,this.locateY);
 		this.locateY += this.font.size+this.font.lineSpacing;
 		if (this.locateY+this.font.size>this.chLayer.height) {
-			this.locateY = 0;
+			this.locateY=0;
 			return false;
 		}
 		return true;
@@ -149,6 +159,10 @@ class MessageLayer extends Node
 		else {
 			node.normalImage = elm.normal;
 			node.selectImage = elm.on;
+		}
+		if (elm.title) {
+			node.title = elm.title;
+			node.titleColor = elm.color if elm.color!==void;
 		}
 		node.setAnchor(0,1);
 		node.x = +elm.x;

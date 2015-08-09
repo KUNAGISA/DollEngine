@@ -23,13 +23,7 @@ public:
     virtual bool eval(const wstring& code,void* ret){return false;}
     virtual bool exec(const wstring& code,void* ret){return false;}
     virtual void catchError(void* error){}
-    virtual void addAsyncScripts(const wstring& code){
-        m_asyncScripts += code;
-        if (code.back() != L';') {
-            m_asyncScripts.push_back(L';');
-        }
-    }
-    virtual void evalAsyncScripts(){}
+    virtual void doAsyncFunctions(){}
     virtual void print(const wstring& text){}
     
     string topFile(){return m_fileStack.top();}
@@ -45,7 +39,6 @@ public:
 
 protected:
     stack<string> m_fileStack;
-    wstring m_asyncScripts;
 };
 
 DE_END

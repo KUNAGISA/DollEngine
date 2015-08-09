@@ -1,25 +1,15 @@
-var ALL_INIT_ACTIONS = [];
 
-function ASYNC_ACTION_INIT () 
-{
-	if (ALL_INIT_ACTIONS.count > 0) {
-		for (var i = 0; i < ALL_INIT_ACTIONS.count; i++) {
-			ALL_INIT_ACTIONS[i].initialize();
-		};
-		ALL_INIT_ACTIONS.clear();
-	}
-}
 
 class ActionManager
 {
 	var timer;
-	var allActions = %[];
+	var allActions = void;
 	var lastTime;
 	var timeScale = 1;
 	var paused = false;
-	var count = 0;
 	function ActionManager () 
 	{
+		allActions = new Set();
 		this.timer = new Timer(this.update);
 		this.timer.interval = 0;
 		this.timer.enabled = false;
@@ -29,11 +19,11 @@ class ActionManager
 	function finalize () 
 	{
 		invalidate this.timer;
-		foreach(this.allActions,function(key,value){
-		    value.manager = void;
-		    invalidate value;
+		this.allActions.foreach(function (v) 
+		{
+			invalidate v;
 		});
-		this.allActions = void;
+		invalidate allActions;
 	}
 
 	function addAction (act) 
@@ -42,41 +32,35 @@ class ActionManager
 			em("一个Action不可重复被添加");
 			return;
 		}
-		allActions[act.key] = act;
+		allActions.add(act);
 		act.manager = this;
-		count++;
 		if (!this.timer.enabled) {
 			this.timer.enabled = true;
 			this.lastTime = this.timer.time;
 		}
-		ALL_INIT_ACTIONS.add(act);
-		Scripts.addAsyncScripts("ASYNC_ACTION_INIT();");
+		Scripts.addAsyncFunction(act.initialize);
 	}
 
 	function removeAction (act) 
 	{
 		if (act.manager) {
-			delete allActions[act.key];
+			allActions.remove(act);
 			act.manager = void;
-			count--;
-			if (count == 0) {
-				this.timer.enabled = false;
+			if(allActions.count == 0){
+				timer.enabled = false;
+				this.lastTime = 0;
 			}
 		}
 	}
 
 	function removeAllActions () 
 	{
-		var arr = [];
-		foreach(this.allActions,function(key,value){
-		    this.add(value);
-		} incontextof arr);
-		for (var i = 0; i < arr.count; i++) {
-			arr[i].manager = void;
-			invalidate  arr[i];
-		};
-		arr.clear();
-		this.allActions = %[];
+		allActions.foreach(function (v) 
+		{
+			v.manager = void;
+			invalidate v;
+		});
+		allActions.clear();
 		this.timer.enabled = false;
 		this.lastTime = 0;
 	}
@@ -89,34 +73,21 @@ class ActionManager
 		if (this.paused) {
 			return;
 		}
-		var release = [];
-		foreach(this.allActions,function(key,value){
-			if (value.released) {
-			    this[1].add(value);
-			    return;
-			}
-			if (value.paused) {
+		allActions.foreach(function (v) 
+		{
+			if (v.paused) {
 				return;
 			}
-			var vt = this[0] * value.timeScale;
-		    value.time += vt;
-		    if (value.time >= value.duration) {
-			    value.update(1);
-			    value._released = true;
+			var vt = this[0] * v.timeScale;
+		    v.time += vt;
+		    if (v.time >= v.duration) {
+			    v.update(1);
+			    invalidate v;
 		    }
 		    else {
-		    	value.update(value.time/value.duration);
+		    	v.update(v.time/v.duration);
 		    }
-		    if (value.released) {
-			    this[1].add(value);
-		    }
-		} incontextof [dt,release]);
-		if (release.count > 0) {
-			for (var i = 0; i < release.count; i++) {
-				invalidate release[i];
-			};
-			release.clear();
-		}
+		} incontextof [dt]);
 	}
 
 }

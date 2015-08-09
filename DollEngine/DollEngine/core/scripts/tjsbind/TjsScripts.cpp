@@ -101,13 +101,29 @@ tTJSNC_Scripts::tTJSNC_Scripts() : inherited(TJS_W("Scripts"))
     }
     TJS_END_NATIVE_STATIC_METHOD_DECL(/*func. name*/json)
     
-    TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/addAsyncScripts)
+    TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/addAsyncFunction)
     {
-        const wchar_t* code = (*param[0]).GetString();
-        TjsEngine::GetSelf()->addAsyncScripts(code);
+        if (numparams<1) {
+            return TJS_E_BADPARAMCOUNT;
+        }
+        iTJSDispatch2* f = (param[0])->AsObjectNoAddRef();
+        iTJSDispatch2* objthis = (param[0])->AsObjectThisNoAddRef();
+        tTJSInterCodeContext* func = dynamic_cast<tTJSInterCodeContext*>(f);
+        if (!func) {
+            return TJS_E_INVALIDTYPE;
+        }
+        tTVInteger p = 0;
+        if (numparams >= 2) {
+            p = param[1]->AsInteger();
+        }
+        AsyncFunction af;
+        af.priority = p;
+        af.objthis = objthis;
+        af.handler = func;
+        TjsEngine::GetSelf()->addAsyncFunction(af);
         return TJS_S_OK;
     }
-    TJS_END_NATIVE_STATIC_METHOD_DECL(/*func. name*/addAsyncScripts)
+    TJS_END_NATIVE_STATIC_METHOD_DECL(/*func. name*/addAsyncFunction)
     
     
     

@@ -29,10 +29,12 @@ void KAGTag::addParam(const wstring& key, const wstring& value,bool entity,bool 
         if (entity) {
             startIdx = 1;
         }
-        if(value.size() > 1 && value.at(startIdx) == value.at(value.size()-1))
+        if(value.size() > 1)
         {
-            if(value.at(startIdx)=='\"'||value.at(startIdx) == '\'')
-            {
+            wchar_t ch1 = value.at(startIdx);
+            wchar_t ch2 = value.at(value.size()-1);
+            if (ch1 == ch2 &&
+                (ch1 == L'\"' || ch1 == L'\'')) {
                 v.isstring = true;
             }
         }
@@ -78,7 +80,7 @@ KAGTag* KAGTag::clone()
     return tag;
 }
 
-void KAGTag::print()
+void KAGTag::print(bool cond)
 {
     wstring str = L"(#";
     if (name == L"ch") {
@@ -108,6 +110,9 @@ void KAGTag::print()
                 str += (*iter).value;
             }
         }
+    }
+    if (!cond) {
+        str += L" [COND FALSE] ";
     }
     ScriptEngine::GetInstance()->print(str);
 }

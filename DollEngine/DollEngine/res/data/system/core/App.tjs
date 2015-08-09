@@ -48,6 +48,7 @@ class App extends Window
 		*/
 		waitClickMode : 0,
 		isClickSkip : false,//是否点击之后skip动画中
+		clickToNext : false,//是否刚刚点击继续过（用于过滤r）
 	];
 
 
@@ -58,6 +59,7 @@ class App extends Window
 			em("不可重复创建App");
 		}
 		global.App.main = this;
+
 		this.width = DEConfig.device.width;
 		this.height = DEConfig.device.height;
 		this.initialize(DEConfig.device.width,DEConfig.device.height,DEConfig.device.scale);
@@ -268,7 +270,7 @@ class App extends Window
 
 	function clickToNext () 
 	{
-		// body...
+		this.status.clickToNext = true;
 		this.tagManager.doNext();
 	}
 
@@ -296,16 +298,6 @@ class App extends Window
 	}
 
 	function onMouseDown(x,y)
-	{
-
-	}
-
-	function onMouseMove(x,y)
-	{
-
-	}
-
-	function onMouseUp(x,y)
 	{
 		switch(this.status.waitClickMode) {
 			case 0:
@@ -356,6 +348,15 @@ class App extends Window
 			}
 			break;
 		}
+	}
+
+	function onMouseMove(x,y)
+	{
+
+	}
+
+	function onMouseUp(x,y)
+	{
 	}
 
 	function onClick(x,y)
@@ -564,6 +565,7 @@ class App extends Window
 			var y = lay.parent.height-elm.top;
 			lay.setPos(x,y);
 			lay.visible = elm.visible if elm.visible!==void;
+			lay.absolute = elm.index if elm.index!==void;
 		} incontextof this,
 
 		freeimage : function (elm) 
@@ -654,10 +656,19 @@ class App extends Window
 				return;
 			}
 			if (!lay.locateChangeLine()) {
-				this.status.waitClickMode = 6;
-				this.status.isClickSkip = false;
-				return -2;
+				if (!app.status.clickToNext) {
+					this.status.waitClickMode = 6;
+					this.status.isClickSkip = false;
+					return -2;
+				}
+				else {
+					lay.clearWord();
+				}
 			}
+			if (this.status.nowait) {
+				return 0;
+			}
+			return this.status.delay;
 		} incontextof this,
 
 		csysbutton : function (elm) 

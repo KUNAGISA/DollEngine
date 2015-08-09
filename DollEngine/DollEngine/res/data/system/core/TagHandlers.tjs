@@ -93,6 +93,7 @@ class TagHandlers extends KAGController
 		if(typeof this.tagHandlers[name] != "undefined")
 		{
 			var time = this.tagHandlers[name](params);
+			app.status.clickToNext = false;
 			if(time == void || time == 0) {
 				return 0;
 			}
@@ -119,7 +120,7 @@ class TagHandlers extends KAGController
 	{
 		this.tagTimer.enabled = false;
 		stepNext();
-		Scripts.addAsyncScripts("App.main.tagManager.execTags();");
+		Scripts.addAsyncFunction(App.main.tagManager.execTags);
 	}
 
 	function waitTime (time) 

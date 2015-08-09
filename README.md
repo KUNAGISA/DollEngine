@@ -22,6 +22,7 @@
 - 引擎：独立的文字类，华丽的文字效果  
 - TJS：新增字典的迭代器类  
 - TJS：新增Json文件的解析  
+- TJS: 在Array和Dictionary之外另加一Set数据结构类型  
 - KAG：可以对图层单独命名了  
 - KAG：新增控件，且控件摆放更加自由（不限定于message层）  
 - KAG：新增for、while、goto等KAG指令  

@@ -21,6 +21,20 @@ DE_BEGIN
 //    int tagIndex;
 //};
 
+//enum DEBUG_MSG
+//{   
+//    ERROR_KAG_UNKONW = 6000, //KAG解析发生未知错误
+//    ERROR_KAG_LABELKEY_NULL, //标签的名字不能为空
+//    ERROR_KAG_VALUE_STRING_ENDED, //字符串没有结尾，可能缺少 \" 或 \' ，请检查
+//    ERROR_KAG_TAG_ENDED, //Tag没有结尾，可能缺少 ] ，请检查
+//    ERROR_KAG_LABEL_FIND_FAIL, //未找到名为%ls的标签
+//    ERROR_KAG_TAG_FIND_FAIL, //未找到名为%ls的指令
+//    ERROR_KAG_TOO_MANY_RETURN, //过多的Return指令，与Call指令无法形成对应
+//    ERROR_KAG_MACRONAME_EMPTY, //Macro的name属性为空
+//    ERROR_KAG_MACRO_NESTING, //Macro不可嵌套
+//    ERROR_KAG_IF_FAIL, //if、elsif、else、endif不对应
+//}
+
 class KAGParser
 {
 public:

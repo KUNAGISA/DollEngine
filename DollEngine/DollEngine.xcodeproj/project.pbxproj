@@ -21,6 +21,7 @@
 		B8037B3D1B75990F00D70821 /* KAGController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8037B3A1B75990F00D70821 /* KAGController.cpp */; };
 		B8037B401B75B7FB00D70821 /* TjsKAGController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8037B3E1B75B7FB00D70821 /* TjsKAGController.cpp */; };
 		B8037B411B75B7FB00D70821 /* TjsKAGController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8037B3E1B75B7FB00D70821 /* TjsKAGController.cpp */; };
+		B8037B441B76F60F00D70821 /* TjsSet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8037B421B76F60F00D70821 /* TjsSet.cpp */; };
 		B81C2D351B634F3100DF97E8 /* TjsConsole.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B81C2D331B634F3100DF97E8 /* TjsConsole.cpp */; };
 		B81C2D361B634F3100DF97E8 /* TjsConsole.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B81C2D331B634F3100DF97E8 /* TjsConsole.cpp */; };
 		B81C2D381B634FAE00DF97E8 /* TjsConsole-Mac.mm in Sources */ = {isa = PBXBuildFile; fileRef = B81C2D371B634FAE00DF97E8 /* TjsConsole-Mac.mm */; };
@@ -356,6 +357,8 @@
 		B8037B3B1B75990F00D70821 /* KAGController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KAGController.h; sourceTree = "<group>"; };
 		B8037B3E1B75B7FB00D70821 /* TjsKAGController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TjsKAGController.cpp; sourceTree = "<group>"; };
 		B8037B3F1B75B7FB00D70821 /* TjsKAGController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsKAGController.h; sourceTree = "<group>"; };
+		B8037B421B76F60F00D70821 /* TjsSet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TjsSet.cpp; sourceTree = "<group>"; };
+		B8037B431B76F60F00D70821 /* TjsSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsSet.h; sourceTree = "<group>"; };
 		B81C2D331B634F3100DF97E8 /* TjsConsole.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TjsConsole.cpp; sourceTree = "<group>"; };
 		B81C2D341B634F3100DF97E8 /* TjsConsole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsConsole.h; sourceTree = "<group>"; };
 		B81C2D371B634FAE00DF97E8 /* TjsConsole-Mac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "TjsConsole-Mac.mm"; sourceTree = "<group>"; };
@@ -1717,6 +1720,8 @@
 				B8EE2DA31B5B7B3B001EB825 /* TjsWindow.h */,
 				B8037B3E1B75B7FB00D70821 /* TjsKAGController.cpp */,
 				B8037B3F1B75B7FB00D70821 /* TjsKAGController.h */,
+				B8037B421B76F60F00D70821 /* TjsSet.cpp */,
+				B8037B431B76F60F00D70821 /* TjsSet.h */,
 			);
 			path = tjsbind;
 			sourceTree = "<group>";
@@ -2124,6 +2129,7 @@
 				B887B8681B6BF583004C72BA /* Timer.cpp in Sources */,
 				B8AEF0471B35997800490A8D /* regversion.c in Sources */,
 				B8AEF0991B35997800490A8D /* tjsVariant.cpp in Sources */,
+				B8037B441B76F60F00D70821 /* TjsSet.cpp in Sources */,
 				B8EE2DCF1B5B7B3B001EB825 /* SpriteFrame.cpp in Sources */,
 				B887B86E1B6C9781004C72BA /* RTT.cpp in Sources */,
 				B8EE2DE91B5B7B3B001EB825 /* TjsBind.cpp in Sources */,

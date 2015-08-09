@@ -108,7 +108,7 @@ function dump (db,tab=0,key=void)
 
 function dm (arr*) 
 {
-    var str = arr.join('\t');
+    var str = arr.join('  ');
     print(str);
 }
 

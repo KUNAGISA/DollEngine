@@ -6,4 +6,5 @@ class GraphicLayer extends Sprite
 		super.Sprite(par);
 		this.setAnchor(0,1);
 	}
+	
 }

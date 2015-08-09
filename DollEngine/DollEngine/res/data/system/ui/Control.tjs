@@ -69,4 +69,15 @@ class Control extends Node
 			return this._issystem;
 		}
 	}
+	
+	property ignore{
+	    setter(v) {
+	    	//setter
+	    	this._touch.ignore = v;
+		}
+		getter {
+	    	//getter
+			return this._touch.ignore;
+		}
+	}
 }

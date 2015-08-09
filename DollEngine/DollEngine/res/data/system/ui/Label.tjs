@@ -22,8 +22,8 @@ class Label extends Node
 	    	//setter
 	    	if(this._text != v){
 	    		this._font.text = v;
+		    	this._text = v;
 	    	}
-	    	this._text = v;
 		}
 		getter {
 	    	//getter

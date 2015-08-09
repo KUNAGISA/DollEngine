@@ -81,7 +81,6 @@ int TjsKAGController::doTag()
         stepNext();
     }
     KAGTag * tag = m_label->allTags[m_tagIndex];
-    tag->print();
     if (tag->name == L"macro") {
         wstring macroname = tag->getValue(L"name");
         KAGParser::GetInstance()->startMacro(macroname);
@@ -99,6 +98,7 @@ int TjsKAGController::doTag()
                 break;
             }
         }
+        tag->print();
         return 0;
     }
     
@@ -112,11 +112,13 @@ int TjsKAGController::doTag()
         if (cond.operator bool()) {
         }
         else {
+            tag->print();
             return 0;
         }
     }
-    else if (tag->name == L"if")
+    if (tag->name == L"if")
     {
+        tag->print();
         tTJSVariant ret;
         GetTagParamsValue(tag,L"exp",ret);
         tTJSVariant cond;
@@ -133,6 +135,7 @@ int TjsKAGController::doTag()
     }
     else if (tag->name == L"else")
     {
+        tag->print();
         if (m_ifKey.size() > 0) {
             if (m_ifKey.top() == L"doing") {
                 m_ifKey.top() = L"toend";
@@ -150,6 +153,7 @@ int TjsKAGController::doTag()
     }
     else if (tag->name == L"elsif")
     {
+        tag->print();
         tTJSVariant ret;
         GetTagParamsValue(tag,L"exp",ret);
         if (m_ifKey.size() == 0) {
@@ -178,12 +182,14 @@ int TjsKAGController::doTag()
     }
     else if (tag->name == L"endif")
     {
+        tag->print();
         m_ifKey.pop();
         return 0;
     }
     if (m_ifKey.size()>0 && (m_ifKey.top() == L"toend" || m_ifKey.top() == L"toelse")) {
         return 0;
     }
+    tag->print();
     string fileName;
     UnicodeToUtf8(tag->storage->fileName.c_str(), fileName);
     TjsEngine::GetSelf()->pushFile(fileName);

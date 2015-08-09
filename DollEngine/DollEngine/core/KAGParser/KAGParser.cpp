@@ -476,9 +476,6 @@ kagchar* KAGParser::parseString(kagchar* text,wstring& str,bool& entity)
             ++text;
             continue;
         }
-        if (*text == '&' && *(text+1) != '&') {
-            entity = true;
-        }
         if (*text == '\'' || *text == '\"') {
             if (*text == start_ch) {
                 str.push_back(*text);

@@ -19,9 +19,10 @@ class Button extends Control
 		this._selectImage.visible=false;
 		this._normalImage.visible=true;
 		this._disableImage.visible=false;
-		this._font = new Label(this.imageBase);
-		this._font.absolute = 1;
-		this._font.visible = false;
+		_title = new Label(this.imageBase);
+		_title.setAnchor(0.5,0.5);
+		_title.absolute = 1;
+		_title.visible = false;
 	}
 
 	function setImageSize (w,h) 
@@ -36,16 +37,20 @@ class Button extends Control
 
 	function onMouseDown (x,y) 
 	{
-		this._selectImage.visible=true;
-		this._normalImage.visible=false;
-		this._font.color = this._fontColorSelect;
+		super.onMouseDown(x,y);
+		if(!this.ignore){
+			this._selectImage.visible=true;
+			this._normalImage.visible=false;
+			_title.color = _titleColorSelect;
+		}
 	}
 
 	function onMouseUp (x,y) 
 	{
+		super.onMouseUp(x,y);
 		this._selectImage.visible=false;
 		this._normalImage.visible=true;
-		this._font.color = this._fontColor;
+		_title.color = _titleColor;
 		if (x>=0 && y>=0 && x<=this.width&&y<=this.height) {
 			this.exception();
 		}
@@ -66,7 +71,9 @@ class Button extends Control
 			exp += "\");";
 		}
 		if (exp != "") {
-			Scripts.addAsyncScripts(exp);
+			Scripts.addAsyncFunction(function (){
+				Scripts.eval(this[0]);
+			} incontextof [exp]);
 		}
 	}
 
@@ -79,10 +86,10 @@ class Button extends Control
 	    		this._selectImage.visible = !v;
 	    		this._normalImage.visible = !v;
 	    		if (v) {
-	    			this._font.color = this._fontColorDisable;
+	    			_title.color = _titleColorDisable;
 	    		}
 	    		else {
-	    			this._font.color = this._fontColor;
+	    			_title.color = _titleColor;
 	    		}
 	    	}
 		}
@@ -164,73 +171,81 @@ class Button extends Control
 		}
 	}
 
-	var _font=void;
-	property font{
+	var _title=void;
+	property title{
 	    setter(v) {
 	    	//setter
-	    	this._font.text = v;
+	    	if (v == "") {
+	    		_title.visible = false;
+	    	}
+	    	else {
+	    		_title.visible = true;
+	    	}
+	    	_title.text = v;
+			_title.setSizeToImageSize();
 		}
 		getter {
 	    	//getter
-			return this._font.text;
+			return _title.text;
 		}
 	}
 
-	property fontFontName{
+	property titleFace{
 	    setter(v) {
 	    	//setter
-	    	this._font.font.fontName = v;
+	    	_title.font.face = v;
 		}
 		getter {
 	    	//getter
-			return this._font.font.fontName;
+			return _title.font.face;
 		}
 	}
 
-	property fontFontSize{
+	property titleSize{
 	    setter(v) {
 	    	//setter
-	    	this._font.font.fontSize = v;
+	    	_title.font.size = v;
 		}
 		getter {
 	    	//getter
-			return this._font.font.fontSize;
+			return _title.font.size;
 		}
 	}
 
-	var _fontColor=void;
-	property fontColor{
+	var _titleColor=0xffffffff;
+	property titleColor{
 	    setter(v) {
 	    	//setter
-	    	this._fontColor = v;
+	    	_title.color = v;
+	    	_titleColor = v;
 		}
 		getter {
 	    	//getter
-			return this._fontColor;
+			return _titleColor;
 		}
 	}
 
-	var _fontColorSelect=void;
-	property fontColorSelect{
+	var _titleColorSelect=0xffffffff;
+	property titleColorSelect{
 	    setter(v) {
 	    	//setter
-	    	this._fontColorSelect = v;
+	    	_titleColorSelect = v;
 		}
 		getter {
 	    	//getter
-			return this._fontColorSelect;
+			return _titleColorSelect;
 		}
 	}
 
-	var _fontColorDisable=void;
-	property fontColorDisable{
+	var _titleColorDisable=0xffffffff;
+	property titleColorDisable{
 	    setter(v) {
 	    	//setter
-	    	this._fontColorDisable = v;
+	    	_titleColorDisable = v;
 		}
 		getter {
 	    	//getter
-			return this._fontColorDisable;
+			return _titleColorDisable;
 		}
 	}
 }

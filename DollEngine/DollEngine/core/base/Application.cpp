@@ -58,7 +58,7 @@ void Application::mainLoop()
 //            }
         }
     }
-    ScriptEngine::GetInstance()->evalAsyncScripts();
+    ScriptEngine::GetInstance()->doAsyncFunctions();
     CompManager::GetInstance()->releaseComp();
 }
 

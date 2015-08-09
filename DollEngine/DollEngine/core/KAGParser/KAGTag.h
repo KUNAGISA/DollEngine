@@ -51,7 +51,7 @@ public:
     
     KAGTag* clone();
     
-    void print();
+    void print(bool cond=true);
     int line;
     KAGStorage* storage;
     KAGLabel* label;

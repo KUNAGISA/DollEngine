@@ -253,14 +253,39 @@ bool TjsEngine::exec(const wstring& code,void* ret)
     return false;
 }
 
-void TjsEngine::evalAsyncScripts()
+void TjsEngine::doAsyncFunctions()
 {
-    if (m_asyncScripts == L"") {
+    if (m_allAsyncFunctions.size() == 0) {
         return;
     }
-    wstring tmp = m_asyncScripts;
-    m_asyncScripts = L"";
-    eval(tmp, null);
+    vector<AsyncFunction> tmp = m_allAsyncFunctions;
+    std::sort(tmp.begin(), tmp.end(),
+              [](const AsyncFunction& a, const AsyncFunction& b){
+                  return a.priority < b.priority;
+              });
+    m_allAsyncFunctions.clear();
+    
+    try {
+        for (auto iter = tmp.begin();
+             iter != tmp.end(); ++iter)
+        {
+            AsyncFunction& t = *iter;
+            t.handler->FuncCall(0, NULL, NULL, NULL, 0, NULL, t.objthis);
+            t.handler->Release();
+            if (t.objthis) {
+                t.objthis->Release();
+            }
+        }
+    }TJS_CATCH
+}
+
+void TjsEngine::addAsyncFunction(const AsyncFunction& func)
+{
+    func.handler->AddRef();
+    if (func.objthis) {
+        func.objthis->AddRef();
+    }
+    m_allAsyncFunctions.push_back(func);
 }
 
 void TjsEngine::print(const wstring& text)

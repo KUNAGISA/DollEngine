@@ -12,11 +12,19 @@
 #include "ScriptEngine.h"
 
 namespace TJS{
-class tTJS;
+    class tTJS;
+    class tTJSInterCodeContext;
+    class iTJSDispatch2;
 }
 
 DE_BEGIN
 
+struct AsyncFunction
+{
+    int priority;
+    TJS::iTJSDispatch2* objthis;
+    TJS::tTJSInterCodeContext* handler;
+};
 
 class TjsEngine : public ScriptEngine
 {
@@ -27,8 +35,12 @@ public:
     virtual bool eval(const wstring& code,void* ret);
     virtual bool exec(const wstring& code,void* ret);
     virtual void catchError(void* error);
-    void evalAsyncScripts();
+    void doAsyncFunctions();
+    void addAsyncFunction(const AsyncFunction& func);
     void print(const wstring& text);
+    
+protected:
+    vector<AsyncFunction> m_allAsyncFunctions;
 };
 
 DE_END

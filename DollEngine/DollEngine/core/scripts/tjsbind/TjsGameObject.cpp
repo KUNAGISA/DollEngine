@@ -36,7 +36,7 @@ NCB_REGISTER_CLASS_DIFFER(GameObject,TjsGameObject)
     NCB_METHOD(onTouchUpdate);
     NCB_METHOD(transform);
     NCB_PROPERTY(parent, getParent,setParent);
-    NCB_PROPERTY(absolute,getZ,setZ);
+    NCB_PROPERTY(zOrder,getZ,setZ);
     NCB_PROPERTY(enabled,getEnabled,setEnabled);
     NCB_PROPERTY(opacity,getOpacity,setOpacity);
     NCB_PROPERTY(color,getColor,setColor);
