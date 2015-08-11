@@ -82,6 +82,7 @@ class ActionManager
 		    v.time += vt;
 		    if (v.time >= v.duration) {
 			    v.update(1);
+			    v.onActionEnded();
 			    invalidate v;
 		    }
 		    else {

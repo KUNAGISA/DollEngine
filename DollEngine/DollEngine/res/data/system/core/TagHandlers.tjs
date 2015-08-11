@@ -67,7 +67,7 @@ class TagHandlers extends KAGController
 
 	function onExecute (name,params) 
 	{
-		app.status.waitClickMode = 0;
+		app.status.waitClickMode = WAIT_CLICK_NONE;
 		if (app.status.isClickSkip && name != 'ch' && name != 'locate' && name != 'r') {
 			app.status.isClickSkip = false;
 		}

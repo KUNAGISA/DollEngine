@@ -11,6 +11,7 @@
 		"system/core/action/ActionManager.tjs",
 		"system/core/action/Action.tjs",
 		"system/core/action/ActionEase.tjs",
+		"system/core/action/TagActions.tjs",
 		"system/extra/ui/UIAnimation.tjs",
 		"system/extra/ui/UICreator.tjs",
 		"system/extra/ui/UIReader.tjs",

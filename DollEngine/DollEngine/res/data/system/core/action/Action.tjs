@@ -7,6 +7,7 @@ class Action
 	var target = void;//影响的目标
 	var manager = void;
 	var timeScale = 1;
+	var autoreleased = true;
 	function Action ()
 	{
 	}
@@ -26,13 +27,8 @@ class Action
 	{
 	}
 
-	//当动作会被释放的时候该值将会改变
-	var _released=false;
-	property released{
-		getter {
-	    	//getter
-			return this._released;
-		}
+	function onActionEnded () 
+	{
 	}
 }
 
@@ -70,39 +66,24 @@ class Sequence extends Action
 	{
 		this.current = first;
 		this.current.initialize();
-		if (this.current.released) {
-			if (second) {
-				this.current = second;
-				this.current.initialize();
-				if (this.current.released) {
-					this._released = true;
-					return;
-				}
-			}
-			else {
-				this._released = true;
-			}
-		}
 	}
 
 	function update (dt) 
 	{
-		assert(this.current);
 		var t = this.duration*dt;
+		if (!this.current) {
+			return;
+		}
 		if (this.current == first) {
 			var p = t/first.duration;
 			if (p >= 1) {
 				this.current.update(1);
+				this.current.onActionEnded();
 				this.current = second;
 				if (this.current) {
 					this.current.initialize();
-					if (this.current.released) {
-						this._released = true;
-						return;
-					}
 				}
 				else {
-					this._released = true;
 					return;
 				}
 			}
@@ -112,10 +93,10 @@ class Sequence extends Action
 			}
 		}
 		t -= first.duration;
-		var p = t/second.duration;
+		var p = t/this.current.duration;
 		if (p >= 1) {
 			this.current.update(1);
-			this._released = true;
+			this.current.onActionEnded();
 		}
 		else {
 			this.current.update(p);
@@ -154,7 +135,7 @@ class Spawn extends Action
 	var allActions;
 	function Spawn (array) 
 	{
-		super.Action(void,0);
+		super.Action();
 		this.allActions = array;
 		this.duration = 0;
 		for (var i = 0; i < array.count; i++) {
@@ -177,33 +158,26 @@ class Spawn extends Action
 		for (var i = 0; i < this.allActions.count; i++) {
 			var act = this.allActions[i];
 			act.initialize();
-			if (!act.released) {
-				rs = false;
-			}
 		};
-		this._released = rs;
 	}
 
 	function update (dt) 
 	{
-		var rs = true;
-		for (var i = 0; i < this.allActions.count; i++) {
+		for (var i = this.allActions.count-1; i >= 0 ; --i) {
 			var act = this.allActions[i];
-			if (!act.released) {
-				var p = act.duration/this.duration;
-				p = dt/p;
-				if (p >= 1) {
-					p = 1;
-					act.update(1);
-					act._released = true;
-				}
-				else {
-					act.update(p);
-					rs = false;
-				}
+			var p = act.duration/this.duration;
+			p = dt/p;
+			if (p >= 1) {
+				p = 1;
+				act.update(1);
+				act.onActionEnded();
+				invalidate act;
+				this.allActions.erase(i);
+			}
+			else {
+				act.update(p);
 			}
 		}
-		this._released = rs;
 	}
 }
 
@@ -227,10 +201,6 @@ class MoveTo extends Action
 	{
 		this.sx = this.target.x;
 		this.sy = this.target.y;
-		if (this.duration == 0) {
-			this.update(1);
-			this._released = true;
-		}
 	}
 
 	function update (dt) 
@@ -256,15 +226,40 @@ class FadeTo extends Action
 	function initialize () 
 	{
 		this.so = this.target.opacity;
-		if (this.duration == 0) {
-			this.target.opacity = this.to;
-			this._released = true;
-		}
 	}
 
 	function update (dt) 
 	{
 		this.target.opacity = (this.to-this.so)*dt + this.so;
+	}
+}
+
+class ScaleTo extends Action
+{
+	var sx =1;
+	var tx =1;
+	var sy =1;
+	var ty =1;
+	function ScaleTo (obj,time,x,y=void) 
+	{
+		super.Action();
+		assert(obj);
+		this.target = obj;
+		this.duration = time;
+		this.tx = x;
+		this.ty = y===void?x:y;
+	}
+
+	function initialize () 
+	{
+		this.sx = this.target.scaleX;
+		this.sy = this.target.scaleY;
+	}
+
+	function update (dt) 
+	{
+		this.target.scaleX = (this.tx-this.sx)*dt + this.sx;
+		this.target.scaleY = (this.ty-this.sy)*dt + this.sy;
 	}
 }
 

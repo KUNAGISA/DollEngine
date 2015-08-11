@@ -105,6 +105,8 @@ class MessageLayer extends Node
 	function clearWord () 
 	{
 		this.chLayer.clearWord();
+		this.locateX = 0;
+		this.locateY = 0;
 	}
 
 	function clearEr (sys=false) 

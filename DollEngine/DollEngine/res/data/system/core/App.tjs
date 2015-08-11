@@ -16,9 +16,8 @@ class App extends Window
 	var currentLayer = "message0";//默认
 
 	var transTimer = void; //trans用的Timer
-	var moveActions = [];
 	var moveWaits = [];
-	var moveWaitTime = 0;
+	var actionWaits = [];
 	var actionManager = void; //全部action的管理器
 	var touch = void;
 
@@ -46,7 +45,7 @@ class App extends Window
 		5 等待点击继续文字
 		6 等待点击换页
 		*/
-		waitClickMode : 0,
+		waitClickMode : WAIT_CLICK_NONE,
 		isClickSkip : false,//是否点击之后skip动画中
 		clickToNext : false,//是否刚刚点击继续过（用于过滤r）
 	];
@@ -300,51 +299,66 @@ class App extends Window
 	function onMouseDown(x,y)
 	{
 		switch(this.status.waitClickMode) {
-			case 0:
+			case WAIT_CLICK_NONE:
 			break;
-			case 1:
+			case WAIT_CLICK_WORD:
 			{
 				//等待文字
 				this.status.isClickSkip = true;
 			}
 			break;
-			case 2:
+			case WAIT_CLICK_MOVE:
 			{
 				//等待move
-				for (var i = this.moveActions.count - 1; i >= 0; i--) {
-					var act = this.moveActions[i];
-					if (isvalid act && !act.released ) {
+				for (var i = this.moveWaits.count - 1; i >= 0; i--) {
+					var act = this.moveWaits[i];
+					if (isvalid act) {
 						act.update(1);
+						act.onActionEnded();
 						invalidate act;
 					}
 				}
-				this.moveActions.clear();
 				this.moveWaits.clear();
 				this.tagManager.doNext();
 			}
 			break;
-			case 3:
+			case WAIT_CLICK_TRANS:
 			{
 				//等待trans
 				this.status.transT=this.status.trans;
 			}
 			break;
-			case 4:
+			case WAIT_CLICK_TIME:
 			{
 				//等待时间
 				clickToNext();
 			}
 			break;
-			case 5:
+			case WAIT_CLICK_L:
 			{
 				//等待点击继续文字
 				clickToNextCh();
 			}
 			break;
-			case 6:
+			case WAIT_CLICK_P:
 			{
 				//等待点击换页
 				clickToNextPage();
+			}
+			break;
+			case WAIT_CLICK_ACTION:
+			{
+				//等待动作结束
+				for (var i = this.actionWaits.count - 1; i >= 0; i--) {
+					var act = this.actionWaits[i];
+					if (isvalid act) {
+						act.update(1);
+						act.onActionEnded();
+						invalidate act;
+					}
+				}
+				this.actionWaits.clear();
+				this.tagManager.doNext();
 			}
 			break;
 		}
@@ -409,7 +423,7 @@ class App extends Window
 		wait : function (elm) 
 		{
 			checkElm(elm,['time']);
-			this.status.waitClickMode = 4;
+			this.status.waitClickMode = WAIT_CLICK_TIME;
 			return elm.time;
 		} incontextof this,
 
@@ -455,7 +469,7 @@ class App extends Window
 				this.mergerBack('l',elm);
 				return;
 			}
-			this.status.waitClickMode = 5;
+			this.status.waitClickMode = WAIT_CLICK_L;
 			return -2;
 		} incontextof this,
 
@@ -466,7 +480,7 @@ class App extends Window
 				this.mergerBack('p',elm);
 				return;
 			}
-			this.status.waitClickMode = 6;
+			this.status.waitClickMode = WAIT_CLICK_P;
 			return -2;
 		} incontextof this,
 
@@ -564,6 +578,7 @@ class App extends Window
 			var x = elm.left;
 			var y = lay.parent.height-elm.top;
 			lay.setPos(x,y);
+			lay.scale = 1;
 			lay.visible = elm.visible if elm.visible!==void;
 			lay.absolute = elm.index if elm.index!==void;
 		} incontextof this,
@@ -657,7 +672,7 @@ class App extends Window
 			}
 			if (!lay.locateChangeLine()) {
 				if (!app.status.clickToNext) {
-					this.status.waitClickMode = 6;
+					this.status.waitClickMode = WAIT_CLICK_P;
 					this.status.isClickSkip = false;
 					return -2;
 				}
@@ -736,14 +751,14 @@ class App extends Window
 			lay.locateX = pos[0];
 			lay.locateY = pos[1];
 			if (pos[2] == true) {
-				this.status.waitClickMode = 6;//点击等待换页
+				this.status.waitClickMode = WAIT_CLICK_P;//点击等待换页
 				this.status.isClickSkip = false;
 				return -2;
 			}
 			if (this.status.nowait || this.status.isClickSkip) {
 				return 0;
 			}
-			this.status.waitClickMode = 1;
+			this.status.waitClickMode = WAIT_CLICK_WORD;
 			return this.status.delay;
 		} incontextof this,
 
@@ -760,19 +775,22 @@ class App extends Window
 			var time = 1;
 			time = elm.time/1000 if elm.time!==void;
 			this.transWithMethod(elm.method, time);
-			this.status.waitClickMode = 3;
+			this.status.waitClickMode = WAIT_CLICK_TRANS;
 			return elm.time;
 		} incontextof this,
 
 		move : function (elm) 
 		{
-			this.checkElm(elm,['layer','path','time']);
+			this.checkElm(elm,['layer','path']);
 			var lay = this.getLayerByElm(elm);
 			if(!lay) {
 				this.mergerBack('move',elm);
 				return;
 			}
-			var time = elm.time/1000;
+			var time = 1;
+			if (elm.time!==void) {
+				time = elm.time/1000;
+			}
 			var path = elm.path;
 			path = path.substr(1,path.length-2);
 			var paths = path.split(")(");
@@ -799,16 +817,71 @@ class App extends Window
 			var s1 = new Sequence(arr1);
 			var s2 = new Sequence(arr2);
 			var s3 = new Spawn([s1,s2]);
-			var s4 = new Sequence([s3]);
-			s4.second = new CallFunc(function () 
+			s3.onActionEnded = function () 
 			{
-				this[0].moveActions.remove(this[1]);
 				this[0].moveWaits.remove(this[1]);
-			} incontextof [this,s4]);
-			this.moveActions.add(s4);
-			this.moveWaits.add(s4);
-			lay.runAction(s4);
+			}incontextof [this,s3];
+			this.moveWaits.add(s3);
+			lay.runAction(s3);
 
+		} incontextof this,
+
+		action : function (elm) 
+		{
+			this.checkElm(elm,['layer','module']);
+			var lay = this.getLayerByElm(elm);
+			if(!lay) {
+				this.mergerBack('action',elm);
+				return;
+			}
+			var time = 1;
+			if (elm.time!==void) {
+				time = elm.time/1000;
+			}
+			var act;
+			if(TagActions[elm.module]){
+				act = TagActions[elm.module](lay,time,elm);
+			}
+			else {
+				dm("未实现的tag action",elm.module);
+				return;
+			}
+			act.target = lay;
+			act.onActionEnded = function () 
+			{
+				this[0].actionWaits.remove(this[1]);
+			} incontextof [this,act];
+			this.actionWaits.add(act);
+			lay.runAction(act);
+		} incontextof this,
+
+		wact : function (elm) 
+		{
+			if (this.actionWaits.count == 0) {
+				return 0;
+			}
+			else {
+				elm.page = "fore";
+				var lay = this.getLayerByElm(elm);
+				var act=void;
+				for (var i = 0; i < actionWaits.count; i++) {
+					if(actionWaits[i].target==lay){
+						act = actionWaits[i];
+						break;
+					}
+				}
+				if (!act) {
+					return 0;
+				}
+				if (!isvalid act) {
+					actionWaits.remove(act);
+					return 0;
+				}
+				var t = Math.max(0,(act.duration - act.time));
+				this.actionWaits.remove(act);
+				this.status.waitClickMode = WAIT_CLICK_ACTION;
+				return t*1000;
+			}
 		} incontextof this,
 
 		wm : function (elm) 
@@ -824,7 +897,7 @@ class App extends Window
 				}
 				var t = Math.max(0,(act.duration - act.time));
 				this.moveWaits.erase(0);
-				this.status.waitClickMode = 2;
+				this.status.waitClickMode = WAIT_CLICK_MOVE;
 				return t*1000;
 			}
 		} incontextof this,

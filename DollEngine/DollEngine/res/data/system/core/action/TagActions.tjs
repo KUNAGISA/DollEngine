@@ -1,0 +1,8 @@
+
+var TagActions = %[
+	LayerNormalZoomModule: function (obj,time,elm) 
+	{
+		var act = new global.ScaleTo(obj,time,elm.zoom/100);
+		return act;
+	}
+];
