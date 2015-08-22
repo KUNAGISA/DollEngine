@@ -8,7 +8,7 @@
 
 #include "Painter.h"
 #include "GLCache.h"
-#include "Application.h"
+#include "System.h"
 #include "GameObject.h"
 #include "GLCanvas.h"
 #include "Storages.h"

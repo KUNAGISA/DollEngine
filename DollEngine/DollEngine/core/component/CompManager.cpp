@@ -9,7 +9,7 @@
 #include "CompManager.h"
 #include "TouchListener.h"
 #include "GLCanvas.h"
-#include "Application.h"
+#include "System.h"
 
 DE_BEGIN
 
@@ -36,7 +36,13 @@ void CompManager::updateComp()
     }
     double time = GetSeconds();
     double dt = time - m_lastTime;
-    m_lastTime = time;
+    if (System::GetInstance()->getDebugMode()>0) {
+        dt = 1/60.0f;
+        m_lastTime = m_lastTime+dt;
+    }
+    else {
+        m_lastTime = time;
+    }
     set<Component*> tmp = m_updatePools;
     for (Component* comp : tmp) {
         comp->setTime(comp->getTime()+dt);
@@ -76,7 +82,7 @@ void CompManager::removeGlobalTouchComp(Component* comp)
 
 void CompManager::addTouchComp(Component* comp)
 {
-    m_touchComps.push_back(comp);
+    m_touchComps.push_front(comp);
 }
 
 
@@ -88,8 +94,8 @@ void CompManager::clearTouches()
 
 bool CompManager::onMouseDown(float x,float y )
 {
-    x /= DEApplication->getDeviceWidth()/GLCanvas::GetInstance()->getLayerWidth();
-    y /= DEApplication->getDeviceHeight()/GLCanvas::GetInstance()->getLayerHeight();
+    x /= DESystem->getDeviceWidth()/GLCanvas::GetInstance()->getLayerWidth();
+    y /= DESystem->getDeviceHeight()/GLCanvas::GetInstance()->getLayerHeight();
     list<Component*> allTouchs = m_touchComps;
     for (auto iter = m_globalTouchs.begin();
          iter != m_globalTouchs.end(); ++iter) {
@@ -130,8 +136,8 @@ bool CompManager::onMouseDown(float x,float y )
 
 void CompManager::onMouseUp(float x,float y )
 {
-    x /= DEApplication->getDeviceWidth()/GLCanvas::GetInstance()->getLayerWidth();
-    y /= DEApplication->getDeviceHeight()/GLCanvas::GetInstance()->getLayerHeight();
+    x /= DESystem->getDeviceWidth()/GLCanvas::GetInstance()->getLayerWidth();
+    y /= DESystem->getDeviceHeight()/GLCanvas::GetInstance()->getLayerHeight();
     for (auto iter = m_validTouches.begin();
          iter != m_validTouches.end(); ++iter)
     {
@@ -156,8 +162,8 @@ void CompManager::onMouseUp(float x,float y )
 
 void CompManager::onMouseMove(float x,float y )
 {
-    x /= DEApplication->getDeviceWidth()/GLCanvas::GetInstance()->getLayerWidth();
-    y /= DEApplication->getDeviceHeight()/GLCanvas::GetInstance()->getLayerHeight();
+    x /= DESystem->getDeviceWidth()/GLCanvas::GetInstance()->getLayerWidth();
+    y /= DESystem->getDeviceHeight()/GLCanvas::GetInstance()->getLayerHeight();
     for (auto iter = m_validTouches.begin();
          iter != m_validTouches.end(); ++iter)
     {

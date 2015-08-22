@@ -22,6 +22,14 @@
 		B8037B401B75B7FB00D70821 /* TjsKAGController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8037B3E1B75B7FB00D70821 /* TjsKAGController.cpp */; };
 		B8037B411B75B7FB00D70821 /* TjsKAGController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8037B3E1B75B7FB00D70821 /* TjsKAGController.cpp */; };
 		B8037B441B76F60F00D70821 /* TjsSet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8037B421B76F60F00D70821 /* TjsSet.cpp */; };
+		B8037B631B876E2700D70821 /* TjsScripts.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8037B5B1B876E2700D70821 /* TjsScripts.cpp */; };
+		B8037B641B876E2700D70821 /* TjsScripts.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8037B5B1B876E2700D70821 /* TjsScripts.cpp */; };
+		B8037B651B876E2700D70821 /* TjsStorages.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8037B5D1B876E2700D70821 /* TjsStorages.cpp */; };
+		B8037B661B876E2700D70821 /* TjsStorages.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8037B5D1B876E2700D70821 /* TjsStorages.cpp */; };
+		B8037B671B876E2700D70821 /* TjsSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8037B5F1B876E2700D70821 /* TjsSystem.cpp */; };
+		B8037B681B876E2700D70821 /* TjsSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8037B5F1B876E2700D70821 /* TjsSystem.cpp */; };
+		B8037B691B876E2700D70821 /* TjsUnits.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8037B611B876E2700D70821 /* TjsUnits.cpp */; };
+		B8037B6A1B876E2700D70821 /* TjsUnits.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8037B611B876E2700D70821 /* TjsUnits.cpp */; };
 		B81C2D351B634F3100DF97E8 /* TjsConsole.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B81C2D331B634F3100DF97E8 /* TjsConsole.cpp */; };
 		B81C2D361B634F3100DF97E8 /* TjsConsole.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B81C2D331B634F3100DF97E8 /* TjsConsole.cpp */; };
 		B81C2D381B634FAE00DF97E8 /* TjsConsole-Mac.mm in Sources */ = {isa = PBXBuildFile; fileRef = B81C2D371B634FAE00DF97E8 /* TjsConsole-Mac.mm */; };
@@ -50,6 +58,8 @@
 		B887B86B1B6BF8EA004C72BA /* TjsTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B887B8691B6BF8EA004C72BA /* TjsTimer.cpp */; };
 		B887B86E1B6C9781004C72BA /* RTT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B887B86C1B6C9781004C72BA /* RTT.cpp */; };
 		B887B86F1B6C9782004C72BA /* RTT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B887B86C1B6C9781004C72BA /* RTT.cpp */; };
+		B89216421B88016E00F2289E /* libtjs2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B89216411B88016E00F2289E /* libtjs2.a */; };
+		B89216431B88016E00F2289E /* libtjs2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B89216411B88016E00F2289E /* libtjs2.a */; };
 		B893459F1B5546CB0065A3A3 /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B89345781B5546CB0065A3A3 /* libfreetype.a */; };
 		B89345A01B5546CB0065A3A3 /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B893457A1B5546CB0065A3A3 /* libfreetype.a */; };
 		B89345A21B5546CB0065A3A3 /* aabb.c in Sources */ = {isa = PBXBuildFile; fileRef = B893458E1B5546CB0065A3A3 /* aabb.c */; };
@@ -86,178 +96,10 @@
 		B89854231ADC04D0003784AA /* DEOpenGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = B898541D1ADC04D0003784AA /* DEOpenGLView.mm */; };
 		B89F267F1B5E87B40081CA6C /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B89F267E1B5E87B40081CA6C /* OpenGLES.framework */; };
 		B89F26801B5E88040081CA6C /* ImageData-Mac.mm in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D771B5B7B3B001EB825 /* ImageData-Mac.mm */; };
-		B89F26821B5E8B3B0081CA6C /* Application-iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = B89F26811B5E8B3B0081CA6C /* Application-iOS.mm */; };
+		B89F26821B5E8B3B0081CA6C /* System-iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = B89F26811B5E8B3B0081CA6C /* System-iOS.mm */; };
 		B89F26841B5E8BA00081CA6C /* Window-iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = B89F26831B5E8BA00081CA6C /* Window-iOS.mm */; };
 		B89F26851B5E8DD60081CA6C /* neon_matrix_impl.c in Sources */ = {isa = PBXBuildFile; fileRef = B89345961B5546CB0065A3A3 /* neon_matrix_impl.c */; };
 		B8A1D8A41AE2CB23005A6595 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8A1D8A31AE2CB23005A6595 /* OpenGL.framework */; };
-		B8AEEFEB1B35997800490A8D /* ncbind.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF581B35997800490A8D /* ncbind.cpp */; };
-		B8AEEFEC1B35997800490A8D /* ncbind.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF581B35997800490A8D /* ncbind.cpp */; };
-		B8AEEFF11B35997800490A8D /* ascii.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF5F1B35997800490A8D /* ascii.c */; };
-		B8AEEFF21B35997800490A8D /* ascii.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF5F1B35997800490A8D /* ascii.c */; };
-		B8AEEFF31B35997800490A8D /* big5.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF601B35997800490A8D /* big5.c */; };
-		B8AEEFF41B35997800490A8D /* big5.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF601B35997800490A8D /* big5.c */; };
-		B8AEEFF51B35997800490A8D /* cp1251.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF611B35997800490A8D /* cp1251.c */; };
-		B8AEEFF61B35997800490A8D /* cp1251.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF611B35997800490A8D /* cp1251.c */; };
-		B8AEEFF71B35997800490A8D /* euc_jp.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF621B35997800490A8D /* euc_jp.c */; };
-		B8AEEFF81B35997800490A8D /* euc_jp.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF621B35997800490A8D /* euc_jp.c */; };
-		B8AEEFF91B35997800490A8D /* euc_kr.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF631B35997800490A8D /* euc_kr.c */; };
-		B8AEEFFA1B35997800490A8D /* euc_kr.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF631B35997800490A8D /* euc_kr.c */; };
-		B8AEEFFB1B35997800490A8D /* euc_tw.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF641B35997800490A8D /* euc_tw.c */; };
-		B8AEEFFC1B35997800490A8D /* euc_tw.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF641B35997800490A8D /* euc_tw.c */; };
-		B8AEEFFD1B35997800490A8D /* gb18030.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF651B35997800490A8D /* gb18030.c */; };
-		B8AEEFFE1B35997800490A8D /* gb18030.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF651B35997800490A8D /* gb18030.c */; };
-		B8AEEFFF1B35997800490A8D /* iso8859_1.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF661B35997800490A8D /* iso8859_1.c */; };
-		B8AEF0001B35997800490A8D /* iso8859_1.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF661B35997800490A8D /* iso8859_1.c */; };
-		B8AEF0011B35997800490A8D /* iso8859_10.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF671B35997800490A8D /* iso8859_10.c */; };
-		B8AEF0021B35997800490A8D /* iso8859_10.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF671B35997800490A8D /* iso8859_10.c */; };
-		B8AEF0031B35997800490A8D /* iso8859_11.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF681B35997800490A8D /* iso8859_11.c */; };
-		B8AEF0041B35997800490A8D /* iso8859_11.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF681B35997800490A8D /* iso8859_11.c */; };
-		B8AEF0051B35997800490A8D /* iso8859_13.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF691B35997800490A8D /* iso8859_13.c */; };
-		B8AEF0061B35997800490A8D /* iso8859_13.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF691B35997800490A8D /* iso8859_13.c */; };
-		B8AEF0071B35997800490A8D /* iso8859_14.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF6A1B35997800490A8D /* iso8859_14.c */; };
-		B8AEF0081B35997800490A8D /* iso8859_14.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF6A1B35997800490A8D /* iso8859_14.c */; };
-		B8AEF0091B35997800490A8D /* iso8859_15.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF6B1B35997800490A8D /* iso8859_15.c */; };
-		B8AEF00A1B35997800490A8D /* iso8859_15.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF6B1B35997800490A8D /* iso8859_15.c */; };
-		B8AEF00B1B35997800490A8D /* iso8859_16.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF6C1B35997800490A8D /* iso8859_16.c */; };
-		B8AEF00C1B35997800490A8D /* iso8859_16.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF6C1B35997800490A8D /* iso8859_16.c */; };
-		B8AEF00D1B35997800490A8D /* iso8859_2.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF6D1B35997800490A8D /* iso8859_2.c */; };
-		B8AEF00E1B35997800490A8D /* iso8859_2.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF6D1B35997800490A8D /* iso8859_2.c */; };
-		B8AEF00F1B35997800490A8D /* iso8859_3.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF6E1B35997800490A8D /* iso8859_3.c */; };
-		B8AEF0101B35997800490A8D /* iso8859_3.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF6E1B35997800490A8D /* iso8859_3.c */; };
-		B8AEF0111B35997800490A8D /* iso8859_4.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF6F1B35997800490A8D /* iso8859_4.c */; };
-		B8AEF0121B35997800490A8D /* iso8859_4.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF6F1B35997800490A8D /* iso8859_4.c */; };
-		B8AEF0131B35997800490A8D /* iso8859_5.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF701B35997800490A8D /* iso8859_5.c */; };
-		B8AEF0141B35997800490A8D /* iso8859_5.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF701B35997800490A8D /* iso8859_5.c */; };
-		B8AEF0151B35997800490A8D /* iso8859_6.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF711B35997800490A8D /* iso8859_6.c */; };
-		B8AEF0161B35997800490A8D /* iso8859_6.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF711B35997800490A8D /* iso8859_6.c */; };
-		B8AEF0171B35997800490A8D /* iso8859_7.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF721B35997800490A8D /* iso8859_7.c */; };
-		B8AEF0181B35997800490A8D /* iso8859_7.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF721B35997800490A8D /* iso8859_7.c */; };
-		B8AEF0191B35997800490A8D /* iso8859_8.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF731B35997800490A8D /* iso8859_8.c */; };
-		B8AEF01A1B35997800490A8D /* iso8859_8.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF731B35997800490A8D /* iso8859_8.c */; };
-		B8AEF01B1B35997800490A8D /* iso8859_9.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF741B35997800490A8D /* iso8859_9.c */; };
-		B8AEF01C1B35997800490A8D /* iso8859_9.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF741B35997800490A8D /* iso8859_9.c */; };
-		B8AEF01D1B35997800490A8D /* koi8.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF751B35997800490A8D /* koi8.c */; };
-		B8AEF01E1B35997800490A8D /* koi8.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF751B35997800490A8D /* koi8.c */; };
-		B8AEF01F1B35997800490A8D /* koi8_r.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF761B35997800490A8D /* koi8_r.c */; };
-		B8AEF0201B35997800490A8D /* koi8_r.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF761B35997800490A8D /* koi8_r.c */; };
-		B8AEF0211B35997800490A8D /* mktable.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF771B35997800490A8D /* mktable.c */; };
-		B8AEF0221B35997800490A8D /* mktable.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF771B35997800490A8D /* mktable.c */; };
-		B8AEF0231B35997800490A8D /* sjis.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF781B35997800490A8D /* sjis.c */; };
-		B8AEF0241B35997800490A8D /* sjis.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF781B35997800490A8D /* sjis.c */; };
-		B8AEF0251B35997800490A8D /* unicode.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF791B35997800490A8D /* unicode.c */; };
-		B8AEF0261B35997800490A8D /* unicode.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF791B35997800490A8D /* unicode.c */; };
-		B8AEF0271B35997800490A8D /* utf16_be.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF7A1B35997800490A8D /* utf16_be.c */; };
-		B8AEF0281B35997800490A8D /* utf16_be.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF7A1B35997800490A8D /* utf16_be.c */; };
-		B8AEF0291B35997800490A8D /* utf16_le.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF7B1B35997800490A8D /* utf16_le.c */; };
-		B8AEF02A1B35997800490A8D /* utf16_le.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF7B1B35997800490A8D /* utf16_le.c */; };
-		B8AEF02B1B35997800490A8D /* utf32_be.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF7C1B35997800490A8D /* utf32_be.c */; };
-		B8AEF02C1B35997800490A8D /* utf32_be.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF7C1B35997800490A8D /* utf32_be.c */; };
-		B8AEF02D1B35997800490A8D /* utf32_le.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF7D1B35997800490A8D /* utf32_le.c */; };
-		B8AEF02E1B35997800490A8D /* utf32_le.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF7D1B35997800490A8D /* utf32_le.c */; };
-		B8AEF02F1B35997800490A8D /* utf8.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF7E1B35997800490A8D /* utf8.c */; };
-		B8AEF0301B35997800490A8D /* utf8.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF7E1B35997800490A8D /* utf8.c */; };
-		B8AEF0311B35997800490A8D /* regcomp.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF821B35997800490A8D /* regcomp.c */; };
-		B8AEF0321B35997800490A8D /* regcomp.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF821B35997800490A8D /* regcomp.c */; };
-		B8AEF0331B35997800490A8D /* regenc.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF831B35997800490A8D /* regenc.c */; };
-		B8AEF0341B35997800490A8D /* regenc.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF831B35997800490A8D /* regenc.c */; };
-		B8AEF0351B35997800490A8D /* regerror.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF851B35997800490A8D /* regerror.c */; };
-		B8AEF0361B35997800490A8D /* regerror.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF851B35997800490A8D /* regerror.c */; };
-		B8AEF0371B35997800490A8D /* regexec.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF861B35997800490A8D /* regexec.c */; };
-		B8AEF0381B35997800490A8D /* regexec.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF861B35997800490A8D /* regexec.c */; };
-		B8AEF0391B35997800490A8D /* regext.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF871B35997800490A8D /* regext.c */; };
-		B8AEF03A1B35997800490A8D /* regext.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF871B35997800490A8D /* regext.c */; };
-		B8AEF03B1B35997800490A8D /* reggnu.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF881B35997800490A8D /* reggnu.c */; };
-		B8AEF03C1B35997800490A8D /* reggnu.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF881B35997800490A8D /* reggnu.c */; };
-		B8AEF03D1B35997800490A8D /* regparse.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF8A1B35997800490A8D /* regparse.c */; };
-		B8AEF03E1B35997800490A8D /* regparse.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF8A1B35997800490A8D /* regparse.c */; };
-		B8AEF03F1B35997800490A8D /* regposerr.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF8C1B35997800490A8D /* regposerr.c */; };
-		B8AEF0401B35997800490A8D /* regposerr.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF8C1B35997800490A8D /* regposerr.c */; };
-		B8AEF0411B35997800490A8D /* regposix.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF8D1B35997800490A8D /* regposix.c */; };
-		B8AEF0421B35997800490A8D /* regposix.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF8D1B35997800490A8D /* regposix.c */; };
-		B8AEF0431B35997800490A8D /* regsyntax.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF8E1B35997800490A8D /* regsyntax.c */; };
-		B8AEF0441B35997800490A8D /* regsyntax.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF8E1B35997800490A8D /* regsyntax.c */; };
-		B8AEF0451B35997800490A8D /* regtrav.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF8F1B35997800490A8D /* regtrav.c */; };
-		B8AEF0461B35997800490A8D /* regtrav.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF8F1B35997800490A8D /* regtrav.c */; };
-		B8AEF0471B35997800490A8D /* regversion.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF901B35997800490A8D /* regversion.c */; };
-		B8AEF0481B35997800490A8D /* regversion.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF901B35997800490A8D /* regversion.c */; };
-		B8AEF0491B35997800490A8D /* st.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF911B35997800490A8D /* st.c */; };
-		B8AEF04A1B35997800490A8D /* st.c in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF911B35997800490A8D /* st.c */; };
-		B8AEF04F1B35997800490A8D /* tjs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF971B35997800490A8D /* tjs.cpp */; };
-		B8AEF0501B35997800490A8D /* tjs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF971B35997800490A8D /* tjs.cpp */; };
-		B8AEF0511B35997800490A8D /* tjs.tab.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF991B35997800490A8D /* tjs.tab.cpp */; };
-		B8AEF0521B35997800490A8D /* tjs.tab.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF991B35997800490A8D /* tjs.tab.cpp */; };
-		B8AEF0531B35997800490A8D /* tjsArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF9C1B35997800490A8D /* tjsArray.cpp */; };
-		B8AEF0541B35997800490A8D /* tjsArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF9C1B35997800490A8D /* tjsArray.cpp */; };
-		B8AEF0551B35997800490A8D /* tjsBinarySerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF9E1B35997800490A8D /* tjsBinarySerializer.cpp */; };
-		B8AEF0561B35997800490A8D /* tjsBinarySerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEF9E1B35997800490A8D /* tjsBinarySerializer.cpp */; };
-		B8AEF0571B35997800490A8D /* tjsByteCodeLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFA01B35997800490A8D /* tjsByteCodeLoader.cpp */; };
-		B8AEF0581B35997800490A8D /* tjsByteCodeLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFA01B35997800490A8D /* tjsByteCodeLoader.cpp */; };
-		B8AEF0591B35997800490A8D /* tjsCompileControl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFA31B35997800490A8D /* tjsCompileControl.cpp */; };
-		B8AEF05A1B35997800490A8D /* tjsCompileControl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFA31B35997800490A8D /* tjsCompileControl.cpp */; };
-		B8AEF05B1B35997800490A8D /* tjsConfig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFA51B35997800490A8D /* tjsConfig.cpp */; };
-		B8AEF05C1B35997800490A8D /* tjsConfig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFA51B35997800490A8D /* tjsConfig.cpp */; };
-		B8AEF05D1B35997800490A8D /* tjsConstArrayData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFA71B35997800490A8D /* tjsConstArrayData.cpp */; };
-		B8AEF05E1B35997800490A8D /* tjsConstArrayData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFA71B35997800490A8D /* tjsConstArrayData.cpp */; };
-		B8AEF05F1B35997800490A8D /* tjsDate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFA91B35997800490A8D /* tjsDate.cpp */; };
-		B8AEF0601B35997800490A8D /* tjsDate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFA91B35997800490A8D /* tjsDate.cpp */; };
-		B8AEF0611B35997800490A8D /* tjsdate.tab.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFAB1B35997800490A8D /* tjsdate.tab.cpp */; };
-		B8AEF0621B35997800490A8D /* tjsdate.tab.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFAB1B35997800490A8D /* tjsdate.tab.cpp */; };
-		B8AEF0631B35997800490A8D /* tjsDateParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFAE1B35997800490A8D /* tjsDateParser.cpp */; };
-		B8AEF0641B35997800490A8D /* tjsDateParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFAE1B35997800490A8D /* tjsDateParser.cpp */; };
-		B8AEF0671B35997800490A8D /* tjsDebug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFB11B35997800490A8D /* tjsDebug.cpp */; };
-		B8AEF0681B35997800490A8D /* tjsDebug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFB11B35997800490A8D /* tjsDebug.cpp */; };
-		B8AEF0691B35997800490A8D /* tjsDictionary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFB31B35997800490A8D /* tjsDictionary.cpp */; };
-		B8AEF06A1B35997800490A8D /* tjsDictionary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFB31B35997800490A8D /* tjsDictionary.cpp */; };
-		B8AEF06B1B35997800490A8D /* tjsDisassemble.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFB51B35997800490A8D /* tjsDisassemble.cpp */; };
-		B8AEF06C1B35997800490A8D /* tjsDisassemble.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFB51B35997800490A8D /* tjsDisassemble.cpp */; };
-		B8AEF06D1B35997800490A8D /* tjsError.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFB61B35997800490A8D /* tjsError.cpp */; };
-		B8AEF06E1B35997800490A8D /* tjsError.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFB61B35997800490A8D /* tjsError.cpp */; };
-		B8AEF06F1B35997800490A8D /* tjsException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFBA1B35997800490A8D /* tjsException.cpp */; };
-		B8AEF0701B35997800490A8D /* tjsException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFBA1B35997800490A8D /* tjsException.cpp */; };
-		B8AEF0711B35997800490A8D /* tjsGlobalStringMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFBC1B35997800490A8D /* tjsGlobalStringMap.cpp */; };
-		B8AEF0721B35997800490A8D /* tjsGlobalStringMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFBC1B35997800490A8D /* tjsGlobalStringMap.cpp */; };
-		B8AEF0731B35997800490A8D /* tjsInterCodeExec.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFBF1B35997800490A8D /* tjsInterCodeExec.cpp */; };
-		B8AEF0741B35997800490A8D /* tjsInterCodeExec.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFBF1B35997800490A8D /* tjsInterCodeExec.cpp */; };
-		B8AEF0751B35997800490A8D /* tjsInterCodeGen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFC11B35997800490A8D /* tjsInterCodeGen.cpp */; };
-		B8AEF0761B35997800490A8D /* tjsInterCodeGen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFC11B35997800490A8D /* tjsInterCodeGen.cpp */; };
-		B8AEF0771B35997800490A8D /* tjsInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFC31B35997800490A8D /* tjsInterface.cpp */; };
-		B8AEF0781B35997800490A8D /* tjsInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFC31B35997800490A8D /* tjsInterface.cpp */; };
-		B8AEF0791B35997800490A8D /* tjsLex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFC51B35997800490A8D /* tjsLex.cpp */; };
-		B8AEF07A1B35997800490A8D /* tjsLex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFC51B35997800490A8D /* tjsLex.cpp */; };
-		B8AEF07B1B35997800490A8D /* tjsMath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFC71B35997800490A8D /* tjsMath.cpp */; };
-		B8AEF07C1B35997800490A8D /* tjsMath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFC71B35997800490A8D /* tjsMath.cpp */; };
-		B8AEF07D1B35997800490A8D /* tjsMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFC91B35997800490A8D /* tjsMessage.cpp */; };
-		B8AEF07E1B35997800490A8D /* tjsMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFC91B35997800490A8D /* tjsMessage.cpp */; };
-		B8AEF07F1B35997800490A8D /* tjsMT19937ar-cok.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFCB1B35997800490A8D /* tjsMT19937ar-cok.cpp */; };
-		B8AEF0801B35997800490A8D /* tjsMT19937ar-cok.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFCB1B35997800490A8D /* tjsMT19937ar-cok.cpp */; };
-		B8AEF0811B35997800490A8D /* tjsNamespace.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFCD1B35997800490A8D /* tjsNamespace.cpp */; };
-		B8AEF0821B35997800490A8D /* tjsNamespace.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFCD1B35997800490A8D /* tjsNamespace.cpp */; };
-		B8AEF0831B35997800490A8D /* tjsNative.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFCF1B35997800490A8D /* tjsNative.cpp */; };
-		B8AEF0841B35997800490A8D /* tjsNative.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFCF1B35997800490A8D /* tjsNative.cpp */; };
-		B8AEF0851B35997800490A8D /* tjsObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFD11B35997800490A8D /* tjsObject.cpp */; };
-		B8AEF0861B35997800490A8D /* tjsObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFD11B35997800490A8D /* tjsObject.cpp */; };
-		B8AEF0871B35997800490A8D /* tjsObjectExtendable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFD31B35997800490A8D /* tjsObjectExtendable.cpp */; };
-		B8AEF0881B35997800490A8D /* tjsObjectExtendable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFD31B35997800490A8D /* tjsObjectExtendable.cpp */; };
-		B8AEF0891B35997800490A8D /* tjsOctPack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFD51B35997800490A8D /* tjsOctPack.cpp */; };
-		B8AEF08A1B35997800490A8D /* tjsOctPack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFD51B35997800490A8D /* tjsOctPack.cpp */; };
-		B8AEF08B1B35997800490A8D /* tjspp.tab.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFD71B35997800490A8D /* tjspp.tab.cpp */; };
-		B8AEF08C1B35997800490A8D /* tjspp.tab.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFD71B35997800490A8D /* tjspp.tab.cpp */; };
-		B8AEF08D1B35997800490A8D /* tjsRandomGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFDA1B35997800490A8D /* tjsRandomGenerator.cpp */; };
-		B8AEF08E1B35997800490A8D /* tjsRandomGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFDA1B35997800490A8D /* tjsRandomGenerator.cpp */; };
-		B8AEF08F1B35997800490A8D /* tjsRegExp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFDC1B35997800490A8D /* tjsRegExp.cpp */; };
-		B8AEF0901B35997800490A8D /* tjsRegExp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFDC1B35997800490A8D /* tjsRegExp.cpp */; };
-		B8AEF0911B35997800490A8D /* tjsScriptBlock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFDE1B35997800490A8D /* tjsScriptBlock.cpp */; };
-		B8AEF0921B35997800490A8D /* tjsScriptBlock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFDE1B35997800490A8D /* tjsScriptBlock.cpp */; };
-		B8AEF0931B35997800490A8D /* tjsScriptCache.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFE01B35997800490A8D /* tjsScriptCache.cpp */; };
-		B8AEF0941B35997800490A8D /* tjsScriptCache.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFE01B35997800490A8D /* tjsScriptCache.cpp */; };
-		B8AEF0951B35997800490A8D /* tjsString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFE21B35997800490A8D /* tjsString.cpp */; };
-		B8AEF0961B35997800490A8D /* tjsString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFE21B35997800490A8D /* tjsString.cpp */; };
-		B8AEF0971B35997800490A8D /* tjsUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFE51B35997800490A8D /* tjsUtils.cpp */; };
-		B8AEF0981B35997800490A8D /* tjsUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFE51B35997800490A8D /* tjsUtils.cpp */; };
-		B8AEF0991B35997800490A8D /* tjsVariant.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFE71B35997800490A8D /* tjsVariant.cpp */; };
-		B8AEF09A1B35997800490A8D /* tjsVariant.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFE71B35997800490A8D /* tjsVariant.cpp */; };
-		B8AEF09B1B35997800490A8D /* tjsVariantString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFE91B35997800490A8D /* tjsVariantString.cpp */; };
-		B8AEF09C1B35997800490A8D /* tjsVariantString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEEFE91B35997800490A8D /* tjsVariantString.cpp */; };
 		B8AEF0B01B35998400490A8D /* MsgLoad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEF09F1B35998400490A8D /* MsgLoad.cpp */; };
 		B8AEF0B11B35998400490A8D /* MsgLoad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8AEF09F1B35998400490A8D /* MsgLoad.cpp */; };
 		B8B5F4491B5E08860051E564 /* TjsDictIterator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8B5F4471B5E08860051E564 /* TjsDictIterator.cpp */; };
@@ -265,9 +107,9 @@
 		B8D366081B0663AC00E627A7 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B8D366071B0663AC00E627A7 /* libz.dylib */; };
 		B8D3660A1B0663B700E627A7 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B8D366091B0663B700E627A7 /* libz.dylib */; };
 		B8EE2D171B5605A4001EB825 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8EE2D161B5605A4001EB825 /* MainMenu.xib */; };
-		B8EE2DAB1B5B7B3B001EB825 /* Application-Mac.mm in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D561B5B7B3B001EB825 /* Application-Mac.mm */; };
-		B8EE2DAD1B5B7B3B001EB825 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D571B5B7B3B001EB825 /* Application.cpp */; };
-		B8EE2DAE1B5B7B3B001EB825 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D571B5B7B3B001EB825 /* Application.cpp */; };
+		B8EE2DAB1B5B7B3B001EB825 /* System-Mac.mm in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D561B5B7B3B001EB825 /* System-Mac.mm */; };
+		B8EE2DAD1B5B7B3B001EB825 /* System.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D571B5B7B3B001EB825 /* System.cpp */; };
+		B8EE2DAE1B5B7B3B001EB825 /* System.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D571B5B7B3B001EB825 /* System.cpp */; };
 		B8EE2DAF1B5B7B3B001EB825 /* FontCache.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D591B5B7B3B001EB825 /* FontCache.cpp */; };
 		B8EE2DB01B5B7B3B001EB825 /* FontCache.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D591B5B7B3B001EB825 /* FontCache.cpp */; };
 		B8EE2DB11B5B7B3B001EB825 /* GameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D5B1B5B7B3B001EB825 /* GameObject.cpp */; };
@@ -316,16 +158,10 @@
 		B8EE2DE41B5B7B3B001EB825 /* GLProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D921B5B7B3B001EB825 /* GLProgram.cpp */; };
 		B8EE2DE51B5B7B3B001EB825 /* NormalProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D941B5B7B3B001EB825 /* NormalProgram.cpp */; };
 		B8EE2DE61B5B7B3B001EB825 /* NormalProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D941B5B7B3B001EB825 /* NormalProgram.cpp */; };
-		B8EE2DE71B5B7B3B001EB825 /* TjsApplication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D981B5B7B3B001EB825 /* TjsApplication.cpp */; };
-		B8EE2DE81B5B7B3B001EB825 /* TjsApplication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D981B5B7B3B001EB825 /* TjsApplication.cpp */; };
 		B8EE2DE91B5B7B3B001EB825 /* TjsBind.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D9A1B5B7B3B001EB825 /* TjsBind.cpp */; };
 		B8EE2DEA1B5B7B3B001EB825 /* TjsBind.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D9A1B5B7B3B001EB825 /* TjsBind.cpp */; };
 		B8EE2DEB1B5B7B3B001EB825 /* TjsGameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D9C1B5B7B3B001EB825 /* TjsGameObject.cpp */; };
 		B8EE2DEC1B5B7B3B001EB825 /* TjsGameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D9C1B5B7B3B001EB825 /* TjsGameObject.cpp */; };
-		B8EE2DED1B5B7B3B001EB825 /* TjsScripts.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D9E1B5B7B3B001EB825 /* TjsScripts.cpp */; };
-		B8EE2DEE1B5B7B3B001EB825 /* TjsScripts.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2D9E1B5B7B3B001EB825 /* TjsScripts.cpp */; };
-		B8EE2DEF1B5B7B3B001EB825 /* TjsStorages.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2DA01B5B7B3B001EB825 /* TjsStorages.cpp */; };
-		B8EE2DF01B5B7B3B001EB825 /* TjsStorages.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2DA01B5B7B3B001EB825 /* TjsStorages.cpp */; };
 		B8EE2DF11B5B7B3B001EB825 /* TjsWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2DA21B5B7B3B001EB825 /* TjsWindow.cpp */; };
 		B8EE2DF21B5B7B3B001EB825 /* TjsWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2DA21B5B7B3B001EB825 /* TjsWindow.cpp */; };
 		B8EE2DF31B5B7B3B001EB825 /* TjsEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8EE2DA41B5B7B3B001EB825 /* TjsEngine.cpp */; };
@@ -359,6 +195,14 @@
 		B8037B3F1B75B7FB00D70821 /* TjsKAGController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsKAGController.h; sourceTree = "<group>"; };
 		B8037B421B76F60F00D70821 /* TjsSet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TjsSet.cpp; sourceTree = "<group>"; };
 		B8037B431B76F60F00D70821 /* TjsSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsSet.h; sourceTree = "<group>"; };
+		B8037B5B1B876E2700D70821 /* TjsScripts.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TjsScripts.cpp; sourceTree = "<group>"; };
+		B8037B5C1B876E2700D70821 /* TjsScripts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsScripts.h; sourceTree = "<group>"; };
+		B8037B5D1B876E2700D70821 /* TjsStorages.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TjsStorages.cpp; sourceTree = "<group>"; };
+		B8037B5E1B876E2700D70821 /* TjsStorages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsStorages.h; sourceTree = "<group>"; };
+		B8037B5F1B876E2700D70821 /* TjsSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TjsSystem.cpp; sourceTree = "<group>"; };
+		B8037B601B876E2700D70821 /* TjsSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsSystem.h; sourceTree = "<group>"; };
+		B8037B611B876E2700D70821 /* TjsUnits.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TjsUnits.cpp; sourceTree = "<group>"; };
+		B8037B621B876E2700D70821 /* TjsUnits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsUnits.h; sourceTree = "<group>"; };
 		B81C2D331B634F3100DF97E8 /* TjsConsole.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TjsConsole.cpp; sourceTree = "<group>"; };
 		B81C2D341B634F3100DF97E8 /* TjsConsole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsConsole.h; sourceTree = "<group>"; };
 		B81C2D371B634FAE00DF97E8 /* TjsConsole-Mac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "TjsConsole-Mac.mm"; sourceTree = "<group>"; };
@@ -396,6 +240,51 @@
 		B887B86A1B6BF8EA004C72BA /* TjsTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsTimer.h; sourceTree = "<group>"; };
 		B887B86C1B6C9781004C72BA /* RTT.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RTT.cpp; sourceTree = "<group>"; };
 		B887B86D1B6C9781004C72BA /* RTT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTT.h; sourceTree = "<group>"; };
+		B89216141B88016E00F2289E /* ncb_foreach.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ncb_foreach.h; sourceTree = "<group>"; };
+		B89216151B88016E00F2289E /* ncb_invoke.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ncb_invoke.hpp; sourceTree = "<group>"; };
+		B89216161B88016E00F2289E /* ncbind.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ncbind.hpp; sourceTree = "<group>"; };
+		B89216171B88016E00F2289E /* tjs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjs.h; sourceTree = "<group>"; };
+		B89216181B88016E00F2289E /* tjsArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsArray.h; sourceTree = "<group>"; };
+		B89216191B88016E00F2289E /* tjsBinarySerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsBinarySerializer.h; sourceTree = "<group>"; };
+		B892161A1B88016E00F2289E /* tjsByteCodeLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsByteCodeLoader.h; sourceTree = "<group>"; };
+		B892161B1B88016E00F2289E /* tjsCommHead.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsCommHead.h; sourceTree = "<group>"; };
+		B892161C1B88016E00F2289E /* tjsCompileControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsCompileControl.h; sourceTree = "<group>"; };
+		B892161D1B88016E00F2289E /* tjsConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsConfig.h; sourceTree = "<group>"; };
+		B892161E1B88016E00F2289E /* tjsConstArrayData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsConstArrayData.h; sourceTree = "<group>"; };
+		B892161F1B88016E00F2289E /* tjsDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsDate.h; sourceTree = "<group>"; };
+		B89216201B88016E00F2289E /* tjsdate.tab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsdate.tab.h; sourceTree = "<group>"; };
+		B89216211B88016E00F2289E /* tjsDateParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsDateParser.h; sourceTree = "<group>"; };
+		B89216221B88016E00F2289E /* tjsDebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsDebug.h; sourceTree = "<group>"; };
+		B89216231B88016E00F2289E /* tjsDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsDictionary.h; sourceTree = "<group>"; };
+		B89216241B88016E00F2289E /* tjsError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsError.h; sourceTree = "<group>"; };
+		B89216251B88016E00F2289E /* tjsErrorInc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsErrorInc.h; sourceTree = "<group>"; };
+		B89216261B88016E00F2289E /* tjsException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsException.h; sourceTree = "<group>"; };
+		B89216271B88016E00F2289E /* tjsGlobalStringMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsGlobalStringMap.h; sourceTree = "<group>"; };
+		B89216281B88016E00F2289E /* tjsHashSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsHashSearch.h; sourceTree = "<group>"; };
+		B89216291B88016E00F2289E /* tjsInterCodeExec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsInterCodeExec.h; sourceTree = "<group>"; };
+		B892162A1B88016E00F2289E /* tjsInterCodeGen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsInterCodeGen.h; sourceTree = "<group>"; };
+		B892162B1B88016E00F2289E /* tjsInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsInterface.h; sourceTree = "<group>"; };
+		B892162C1B88016E00F2289E /* tjsLex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsLex.h; sourceTree = "<group>"; };
+		B892162D1B88016E00F2289E /* tjsMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsMath.h; sourceTree = "<group>"; };
+		B892162E1B88016E00F2289E /* tjsMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsMessage.h; sourceTree = "<group>"; };
+		B892162F1B88016E00F2289E /* tjsMT19937ar-cok.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "tjsMT19937ar-cok.h"; sourceTree = "<group>"; };
+		B89216301B88016E00F2289E /* tjsNamespace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsNamespace.h; sourceTree = "<group>"; };
+		B89216311B88016E00F2289E /* tjsNative.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsNative.h; sourceTree = "<group>"; };
+		B89216321B88016E00F2289E /* tjsObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsObject.h; sourceTree = "<group>"; };
+		B89216331B88016E00F2289E /* tjsObjectExtendable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsObjectExtendable.h; sourceTree = "<group>"; };
+		B89216341B88016E00F2289E /* tjsOctPack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsOctPack.h; sourceTree = "<group>"; };
+		B89216351B88016E00F2289E /* tjspp.tab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjspp.tab.h; sourceTree = "<group>"; };
+		B89216361B88016E00F2289E /* tjsRandomGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsRandomGenerator.h; sourceTree = "<group>"; };
+		B89216371B88016E00F2289E /* tjsRegExp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsRegExp.h; sourceTree = "<group>"; };
+		B89216381B88016E00F2289E /* tjsScriptBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsScriptBlock.h; sourceTree = "<group>"; };
+		B89216391B88016E00F2289E /* tjsScriptCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsScriptCache.h; sourceTree = "<group>"; };
+		B892163A1B88016E00F2289E /* tjsString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsString.h; sourceTree = "<group>"; };
+		B892163B1B88016E00F2289E /* tjsTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsTypes.h; sourceTree = "<group>"; };
+		B892163C1B88016E00F2289E /* tjsUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsUtils.h; sourceTree = "<group>"; };
+		B892163D1B88016E00F2289E /* tjsVariant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsVariant.h; sourceTree = "<group>"; };
+		B892163E1B88016E00F2289E /* tjsVariantString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsVariantString.h; sourceTree = "<group>"; };
+		B89216411B88016E00F2289E /* libtjs2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libtjs2.a; sourceTree = "<group>"; };
+		B89216441B8801AD00F2289E /* tjsErrorDefs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tjsErrorDefs.h; sourceTree = "<group>"; };
 		B89344BF1B5546CB0065A3A3 /* ftconfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ftconfig.h; sourceTree = "<group>"; };
 		B89344C01B5546CB0065A3A3 /* ftheader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ftheader.h; sourceTree = "<group>"; };
 		B89344C11B5546CB0065A3A3 /* ftmodule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ftmodule.h; sourceTree = "<group>"; };
@@ -612,149 +501,9 @@
 		B898541D1ADC04D0003784AA /* DEOpenGLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DEOpenGLView.mm; sourceTree = "<group>"; };
 		B89F267D1B5E86C30081CA6C /* DollEnginePrefixiOS.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DollEnginePrefixiOS.pch; sourceTree = "<group>"; };
 		B89F267E1B5E87B40081CA6C /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/System/Library/Frameworks/OpenGLES.framework; sourceTree = DEVELOPER_DIR; };
-		B89F26811B5E8B3B0081CA6C /* Application-iOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "Application-iOS.mm"; sourceTree = "<group>"; };
+		B89F26811B5E8B3B0081CA6C /* System-iOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "System-iOS.mm"; sourceTree = "<group>"; };
 		B89F26831B5E8BA00081CA6C /* Window-iOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "Window-iOS.mm"; sourceTree = "<group>"; };
 		B8A1D8A31AE2CB23005A6595 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
-		B8AEEF561B35997800490A8D /* ncb_foreach.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ncb_foreach.h; sourceTree = "<group>"; };
-		B8AEEF571B35997800490A8D /* ncb_invoke.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ncb_invoke.hpp; sourceTree = "<group>"; };
-		B8AEEF581B35997800490A8D /* ncbind.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ncbind.cpp; sourceTree = "<group>"; };
-		B8AEEF591B35997800490A8D /* ncbind.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ncbind.hpp; sourceTree = "<group>"; };
-		B8AEEF5D1B35997800490A8D /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
-		B8AEEF5F1B35997800490A8D /* ascii.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ascii.c; sourceTree = "<group>"; };
-		B8AEEF601B35997800490A8D /* big5.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = big5.c; sourceTree = "<group>"; };
-		B8AEEF611B35997800490A8D /* cp1251.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = cp1251.c; sourceTree = "<group>"; };
-		B8AEEF621B35997800490A8D /* euc_jp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = euc_jp.c; sourceTree = "<group>"; };
-		B8AEEF631B35997800490A8D /* euc_kr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = euc_kr.c; sourceTree = "<group>"; };
-		B8AEEF641B35997800490A8D /* euc_tw.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = euc_tw.c; sourceTree = "<group>"; };
-		B8AEEF651B35997800490A8D /* gb18030.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gb18030.c; sourceTree = "<group>"; };
-		B8AEEF661B35997800490A8D /* iso8859_1.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = iso8859_1.c; sourceTree = "<group>"; };
-		B8AEEF671B35997800490A8D /* iso8859_10.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = iso8859_10.c; sourceTree = "<group>"; };
-		B8AEEF681B35997800490A8D /* iso8859_11.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = iso8859_11.c; sourceTree = "<group>"; };
-		B8AEEF691B35997800490A8D /* iso8859_13.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = iso8859_13.c; sourceTree = "<group>"; };
-		B8AEEF6A1B35997800490A8D /* iso8859_14.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = iso8859_14.c; sourceTree = "<group>"; };
-		B8AEEF6B1B35997800490A8D /* iso8859_15.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = iso8859_15.c; sourceTree = "<group>"; };
-		B8AEEF6C1B35997800490A8D /* iso8859_16.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = iso8859_16.c; sourceTree = "<group>"; };
-		B8AEEF6D1B35997800490A8D /* iso8859_2.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = iso8859_2.c; sourceTree = "<group>"; };
-		B8AEEF6E1B35997800490A8D /* iso8859_3.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = iso8859_3.c; sourceTree = "<group>"; };
-		B8AEEF6F1B35997800490A8D /* iso8859_4.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = iso8859_4.c; sourceTree = "<group>"; };
-		B8AEEF701B35997800490A8D /* iso8859_5.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = iso8859_5.c; sourceTree = "<group>"; };
-		B8AEEF711B35997800490A8D /* iso8859_6.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = iso8859_6.c; sourceTree = "<group>"; };
-		B8AEEF721B35997800490A8D /* iso8859_7.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = iso8859_7.c; sourceTree = "<group>"; };
-		B8AEEF731B35997800490A8D /* iso8859_8.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = iso8859_8.c; sourceTree = "<group>"; };
-		B8AEEF741B35997800490A8D /* iso8859_9.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = iso8859_9.c; sourceTree = "<group>"; };
-		B8AEEF751B35997800490A8D /* koi8.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = koi8.c; sourceTree = "<group>"; };
-		B8AEEF761B35997800490A8D /* koi8_r.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = koi8_r.c; sourceTree = "<group>"; };
-		B8AEEF771B35997800490A8D /* mktable.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mktable.c; sourceTree = "<group>"; };
-		B8AEEF781B35997800490A8D /* sjis.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sjis.c; sourceTree = "<group>"; };
-		B8AEEF791B35997800490A8D /* unicode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unicode.c; sourceTree = "<group>"; };
-		B8AEEF7A1B35997800490A8D /* utf16_be.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = utf16_be.c; sourceTree = "<group>"; };
-		B8AEEF7B1B35997800490A8D /* utf16_le.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = utf16_le.c; sourceTree = "<group>"; };
-		B8AEEF7C1B35997800490A8D /* utf32_be.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = utf32_be.c; sourceTree = "<group>"; };
-		B8AEEF7D1B35997800490A8D /* utf32_le.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = utf32_le.c; sourceTree = "<group>"; };
-		B8AEEF7E1B35997800490A8D /* utf8.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = utf8.c; sourceTree = "<group>"; };
-		B8AEEF7F1B35997800490A8D /* oniggnu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = oniggnu.h; sourceTree = "<group>"; };
-		B8AEEF801B35997800490A8D /* onigposix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = onigposix.h; sourceTree = "<group>"; };
-		B8AEEF811B35997800490A8D /* oniguruma.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = oniguruma.h; sourceTree = "<group>"; };
-		B8AEEF821B35997800490A8D /* regcomp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = regcomp.c; sourceTree = "<group>"; };
-		B8AEEF831B35997800490A8D /* regenc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = regenc.c; sourceTree = "<group>"; };
-		B8AEEF841B35997800490A8D /* regenc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = regenc.h; sourceTree = "<group>"; };
-		B8AEEF851B35997800490A8D /* regerror.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = regerror.c; sourceTree = "<group>"; };
-		B8AEEF861B35997800490A8D /* regexec.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = regexec.c; sourceTree = "<group>"; };
-		B8AEEF871B35997800490A8D /* regext.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = regext.c; sourceTree = "<group>"; };
-		B8AEEF881B35997800490A8D /* reggnu.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = reggnu.c; sourceTree = "<group>"; };
-		B8AEEF891B35997800490A8D /* regint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = regint.h; sourceTree = "<group>"; };
-		B8AEEF8A1B35997800490A8D /* regparse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = regparse.c; sourceTree = "<group>"; };
-		B8AEEF8B1B35997800490A8D /* regparse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = regparse.h; sourceTree = "<group>"; };
-		B8AEEF8C1B35997800490A8D /* regposerr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = regposerr.c; sourceTree = "<group>"; };
-		B8AEEF8D1B35997800490A8D /* regposix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = regposix.c; sourceTree = "<group>"; };
-		B8AEEF8E1B35997800490A8D /* regsyntax.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = regsyntax.c; sourceTree = "<group>"; };
-		B8AEEF8F1B35997800490A8D /* regtrav.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = regtrav.c; sourceTree = "<group>"; };
-		B8AEEF901B35997800490A8D /* regversion.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = regversion.c; sourceTree = "<group>"; };
-		B8AEEF911B35997800490A8D /* st.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = st.c; sourceTree = "<group>"; };
-		B8AEEF921B35997800490A8D /* st.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = st.h; sourceTree = "<group>"; };
-		B8AEEF971B35997800490A8D /* tjs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tjs.cpp; sourceTree = "<group>"; };
-		B8AEEF981B35997800490A8D /* tjs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjs.h; sourceTree = "<group>"; };
-		B8AEEF991B35997800490A8D /* tjs.tab.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tjs.tab.cpp; sourceTree = "<group>"; };
-		B8AEEF9A1B35997800490A8D /* tjs.tab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjs.tab.h; sourceTree = "<group>"; };
-		B8AEEF9B1B35997800490A8D /* tjs.tab.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tjs.tab.hpp; sourceTree = "<group>"; };
-		B8AEEF9C1B35997800490A8D /* tjsArray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tjsArray.cpp; sourceTree = "<group>"; };
-		B8AEEF9D1B35997800490A8D /* tjsArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsArray.h; sourceTree = "<group>"; };
-		B8AEEF9E1B35997800490A8D /* tjsBinarySerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tjsBinarySerializer.cpp; sourceTree = "<group>"; };
-		B8AEEF9F1B35997800490A8D /* tjsBinarySerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsBinarySerializer.h; sourceTree = "<group>"; };
-		B8AEEFA01B35997800490A8D /* tjsByteCodeLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tjsByteCodeLoader.cpp; sourceTree = "<group>"; };
-		B8AEEFA11B35997800490A8D /* tjsByteCodeLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsByteCodeLoader.h; sourceTree = "<group>"; };
-		B8AEEFA21B35997800490A8D /* tjsCommHead.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsCommHead.h; sourceTree = "<group>"; };
-		B8AEEFA31B35997800490A8D /* tjsCompileControl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tjsCompileControl.cpp; sourceTree = "<group>"; };
-		B8AEEFA41B35997800490A8D /* tjsCompileControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsCompileControl.h; sourceTree = "<group>"; };
-		B8AEEFA51B35997800490A8D /* tjsConfig.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tjsConfig.cpp; sourceTree = "<group>"; };
-		B8AEEFA61B35997800490A8D /* tjsConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsConfig.h; sourceTree = "<group>"; };
-		B8AEEFA71B35997800490A8D /* tjsConstArrayData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tjsConstArrayData.cpp; sourceTree = "<group>"; };
-		B8AEEFA81B35997800490A8D /* tjsConstArrayData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsConstArrayData.h; sourceTree = "<group>"; };
-		B8AEEFA91B35997800490A8D /* tjsDate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tjsDate.cpp; sourceTree = "<group>"; };
-		B8AEEFAA1B35997800490A8D /* tjsDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsDate.h; sourceTree = "<group>"; };
-		B8AEEFAB1B35997800490A8D /* tjsdate.tab.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tjsdate.tab.cpp; sourceTree = "<group>"; };
-		B8AEEFAC1B35997800490A8D /* tjsdate.tab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsdate.tab.h; sourceTree = "<group>"; };
-		B8AEEFAD1B35997800490A8D /* tjsdate.tab.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tjsdate.tab.hpp; sourceTree = "<group>"; };
-		B8AEEFAE1B35997800490A8D /* tjsDateParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tjsDateParser.cpp; sourceTree = "<group>"; };
-		B8AEEFAF1B35997800490A8D /* tjsDateParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsDateParser.h; sourceTree = "<group>"; };
-		B8AEEFB11B35997800490A8D /* tjsDebug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tjsDebug.cpp; sourceTree = "<group>"; };
-		B8AEEFB21B35997800490A8D /* tjsDebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsDebug.h; sourceTree = "<group>"; };
-		B8AEEFB31B35997800490A8D /* tjsDictionary.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tjsDictionary.cpp; sourceTree = "<group>"; };
-		B8AEEFB41B35997800490A8D /* tjsDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsDictionary.h; sourceTree = "<group>"; };
-		B8AEEFB51B35997800490A8D /* tjsDisassemble.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tjsDisassemble.cpp; sourceTree = "<group>"; };
-		B8AEEFB61B35997800490A8D /* tjsError.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tjsError.cpp; sourceTree = "<group>"; };
-		B8AEEFB71B35997800490A8D /* tjsError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsError.h; sourceTree = "<group>"; };
-		B8AEEFB81B35997800490A8D /* tjsErrorDefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsErrorDefs.h; sourceTree = "<group>"; };
-		B8AEEFB91B35997800490A8D /* tjsErrorInc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsErrorInc.h; sourceTree = "<group>"; };
-		B8AEEFBA1B35997800490A8D /* tjsException.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tjsException.cpp; sourceTree = "<group>"; };
-		B8AEEFBB1B35997800490A8D /* tjsException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsException.h; sourceTree = "<group>"; };
-		B8AEEFBC1B35997800490A8D /* tjsGlobalStringMap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tjsGlobalStringMap.cpp; sourceTree = "<group>"; };
-		B8AEEFBD1B35997800490A8D /* tjsGlobalStringMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsGlobalStringMap.h; sourceTree = "<group>"; };
-		B8AEEFBE1B35997800490A8D /* tjsHashSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsHashSearch.h; sourceTree = "<group>"; };
-		B8AEEFBF1B35997800490A8D /* tjsInterCodeExec.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tjsInterCodeExec.cpp; sourceTree = "<group>"; };
-		B8AEEFC01B35997800490A8D /* tjsInterCodeExec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsInterCodeExec.h; sourceTree = "<group>"; };
-		B8AEEFC11B35997800490A8D /* tjsInterCodeGen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tjsInterCodeGen.cpp; sourceTree = "<group>"; };
-		B8AEEFC21B35997800490A8D /* tjsInterCodeGen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsInterCodeGen.h; sourceTree = "<group>"; };
-		B8AEEFC31B35997800490A8D /* tjsInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tjsInterface.cpp; sourceTree = "<group>"; };
-		B8AEEFC41B35997800490A8D /* tjsInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsInterface.h; sourceTree = "<group>"; };
-		B8AEEFC51B35997800490A8D /* tjsLex.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tjsLex.cpp; sourceTree = "<group>"; };
-		B8AEEFC61B35997800490A8D /* tjsLex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsLex.h; sourceTree = "<group>"; };
-		B8AEEFC71B35997800490A8D /* tjsMath.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tjsMath.cpp; sourceTree = "<group>"; };
-		B8AEEFC81B35997800490A8D /* tjsMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsMath.h; sourceTree = "<group>"; };
-		B8AEEFC91B35997800490A8D /* tjsMessage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tjsMessage.cpp; sourceTree = "<group>"; };
-		B8AEEFCA1B35997800490A8D /* tjsMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsMessage.h; sourceTree = "<group>"; };
-		B8AEEFCB1B35997800490A8D /* tjsMT19937ar-cok.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "tjsMT19937ar-cok.cpp"; sourceTree = "<group>"; };
-		B8AEEFCC1B35997800490A8D /* tjsMT19937ar-cok.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "tjsMT19937ar-cok.h"; sourceTree = "<group>"; };
-		B8AEEFCD1B35997800490A8D /* tjsNamespace.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tjsNamespace.cpp; sourceTree = "<group>"; };
-		B8AEEFCE1B35997800490A8D /* tjsNamespace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsNamespace.h; sourceTree = "<group>"; };
-		B8AEEFCF1B35997800490A8D /* tjsNative.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tjsNative.cpp; sourceTree = "<group>"; };
-		B8AEEFD01B35997800490A8D /* tjsNative.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsNative.h; sourceTree = "<group>"; };
-		B8AEEFD11B35997800490A8D /* tjsObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tjsObject.cpp; sourceTree = "<group>"; };
-		B8AEEFD21B35997800490A8D /* tjsObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsObject.h; sourceTree = "<group>"; };
-		B8AEEFD31B35997800490A8D /* tjsObjectExtendable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tjsObjectExtendable.cpp; sourceTree = "<group>"; };
-		B8AEEFD41B35997800490A8D /* tjsObjectExtendable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsObjectExtendable.h; sourceTree = "<group>"; };
-		B8AEEFD51B35997800490A8D /* tjsOctPack.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tjsOctPack.cpp; sourceTree = "<group>"; };
-		B8AEEFD61B35997800490A8D /* tjsOctPack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsOctPack.h; sourceTree = "<group>"; };
-		B8AEEFD71B35997800490A8D /* tjspp.tab.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tjspp.tab.cpp; sourceTree = "<group>"; };
-		B8AEEFD81B35997800490A8D /* tjspp.tab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjspp.tab.h; sourceTree = "<group>"; };
-		B8AEEFD91B35997800490A8D /* tjspp.tab.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tjspp.tab.hpp; sourceTree = "<group>"; };
-		B8AEEFDA1B35997800490A8D /* tjsRandomGenerator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tjsRandomGenerator.cpp; sourceTree = "<group>"; };
-		B8AEEFDB1B35997800490A8D /* tjsRandomGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsRandomGenerator.h; sourceTree = "<group>"; };
-		B8AEEFDC1B35997800490A8D /* tjsRegExp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tjsRegExp.cpp; sourceTree = "<group>"; };
-		B8AEEFDD1B35997800490A8D /* tjsRegExp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsRegExp.h; sourceTree = "<group>"; };
-		B8AEEFDE1B35997800490A8D /* tjsScriptBlock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tjsScriptBlock.cpp; sourceTree = "<group>"; };
-		B8AEEFDF1B35997800490A8D /* tjsScriptBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsScriptBlock.h; sourceTree = "<group>"; };
-		B8AEEFE01B35997800490A8D /* tjsScriptCache.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tjsScriptCache.cpp; sourceTree = "<group>"; };
-		B8AEEFE11B35997800490A8D /* tjsScriptCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsScriptCache.h; sourceTree = "<group>"; };
-		B8AEEFE21B35997800490A8D /* tjsString.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tjsString.cpp; sourceTree = "<group>"; };
-		B8AEEFE31B35997800490A8D /* tjsString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsString.h; sourceTree = "<group>"; };
-		B8AEEFE41B35997800490A8D /* tjsTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsTypes.h; sourceTree = "<group>"; };
-		B8AEEFE51B35997800490A8D /* tjsUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tjsUtils.cpp; sourceTree = "<group>"; };
-		B8AEEFE61B35997800490A8D /* tjsUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsUtils.h; sourceTree = "<group>"; };
-		B8AEEFE71B35997800490A8D /* tjsVariant.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tjsVariant.cpp; sourceTree = "<group>"; };
-		B8AEEFE81B35997800490A8D /* tjsVariant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsVariant.h; sourceTree = "<group>"; };
-		B8AEEFE91B35997800490A8D /* tjsVariantString.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tjsVariantString.cpp; sourceTree = "<group>"; };
-		B8AEEFEA1B35997800490A8D /* tjsVariantString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsVariantString.h; sourceTree = "<group>"; };
 		B8AEF09F1B35998400490A8D /* MsgLoad.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MsgLoad.cpp; sourceTree = "<group>"; };
 		B8AEF0A01B35998400490A8D /* string_table_en.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = string_table_en.h; sourceTree = "<group>"; };
 		B8AEF0A11B35998400490A8D /* string_table_jp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = string_table_jp.h; sourceTree = "<group>"; };
@@ -764,9 +513,9 @@
 		B8D366071B0663AC00E627A7 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		B8D366091B0663B700E627A7 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/usr/lib/libz.dylib; sourceTree = DEVELOPER_DIR; };
 		B8EE2D161B5605A4001EB825 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
-		B8EE2D561B5B7B3B001EB825 /* Application-Mac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "Application-Mac.mm"; sourceTree = "<group>"; };
-		B8EE2D571B5B7B3B001EB825 /* Application.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Application.cpp; sourceTree = "<group>"; };
-		B8EE2D581B5B7B3B001EB825 /* Application.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Application.h; sourceTree = "<group>"; };
+		B8EE2D561B5B7B3B001EB825 /* System-Mac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "System-Mac.mm"; sourceTree = "<group>"; };
+		B8EE2D571B5B7B3B001EB825 /* System.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = System.cpp; sourceTree = "<group>"; };
+		B8EE2D581B5B7B3B001EB825 /* System.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = System.h; sourceTree = "<group>"; };
 		B8EE2D591B5B7B3B001EB825 /* FontCache.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FontCache.cpp; sourceTree = "<group>"; };
 		B8EE2D5A1B5B7B3B001EB825 /* FontCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontCache.h; sourceTree = "<group>"; };
 		B8EE2D5B1B5B7B3B001EB825 /* GameObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameObject.cpp; sourceTree = "<group>"; };
@@ -816,16 +565,10 @@
 		B8EE2D931B5B7B3B001EB825 /* GLProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLProgram.h; sourceTree = "<group>"; };
 		B8EE2D941B5B7B3B001EB825 /* NormalProgram.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NormalProgram.cpp; sourceTree = "<group>"; };
 		B8EE2D951B5B7B3B001EB825 /* NormalProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NormalProgram.h; sourceTree = "<group>"; };
-		B8EE2D981B5B7B3B001EB825 /* TjsApplication.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TjsApplication.cpp; sourceTree = "<group>"; };
-		B8EE2D991B5B7B3B001EB825 /* TjsApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsApplication.h; sourceTree = "<group>"; };
 		B8EE2D9A1B5B7B3B001EB825 /* TjsBind.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TjsBind.cpp; sourceTree = "<group>"; };
 		B8EE2D9B1B5B7B3B001EB825 /* TjsBind.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsBind.h; sourceTree = "<group>"; };
 		B8EE2D9C1B5B7B3B001EB825 /* TjsGameObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TjsGameObject.cpp; sourceTree = "<group>"; };
 		B8EE2D9D1B5B7B3B001EB825 /* TjsGameObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsGameObject.h; sourceTree = "<group>"; };
-		B8EE2D9E1B5B7B3B001EB825 /* TjsScripts.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TjsScripts.cpp; sourceTree = "<group>"; };
-		B8EE2D9F1B5B7B3B001EB825 /* TjsScripts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsScripts.h; sourceTree = "<group>"; };
-		B8EE2DA01B5B7B3B001EB825 /* TjsStorages.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TjsStorages.cpp; sourceTree = "<group>"; };
-		B8EE2DA11B5B7B3B001EB825 /* TjsStorages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsStorages.h; sourceTree = "<group>"; };
 		B8EE2DA21B5B7B3B001EB825 /* TjsWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TjsWindow.cpp; sourceTree = "<group>"; };
 		B8EE2DA31B5B7B3B001EB825 /* TjsWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsWindow.h; sourceTree = "<group>"; };
 		B8EE2DA41B5B7B3B001EB825 /* TjsEngine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TjsEngine.cpp; sourceTree = "<group>"; };
@@ -847,6 +590,7 @@
 			files = (
 				B89F267F1B5E87B40081CA6C /* OpenGLES.framework in Frameworks */,
 				B8D3660A1B0663B700E627A7 /* libz.dylib in Frameworks */,
+				B89216431B88016E00F2289E /* libtjs2.a in Frameworks */,
 				B893459F1B5546CB0065A3A3 /* libfreetype.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -857,6 +601,7 @@
 			files = (
 				B84C19761B6E5EF60056F401 /* AVFoundation.framework in Frameworks */,
 				B81C2D3B1B6383FB00DF97E8 /* WebKit.framework in Frameworks */,
+				B89216421B88016E00F2289E /* libtjs2.a in Frameworks */,
 				B8D366081B0663AC00E627A7 /* libz.dylib in Frameworks */,
 				B8A1D8A41AE2CB23005A6595 /* OpenGL.framework in Frameworks */,
 				B89345A01B5546CB0065A3A3 /* libfreetype.a in Frameworks */,
@@ -883,6 +628,21 @@
 			name = KAGParser;
 			path = DollEngine/core/KAGParser;
 			sourceTree = SOURCE_ROOT;
+		};
+		B8037B5A1B876E2700D70821 /* singleton */ = {
+			isa = PBXGroup;
+			children = (
+				B8037B5B1B876E2700D70821 /* TjsScripts.cpp */,
+				B8037B5C1B876E2700D70821 /* TjsScripts.h */,
+				B8037B5D1B876E2700D70821 /* TjsStorages.cpp */,
+				B8037B5E1B876E2700D70821 /* TjsStorages.h */,
+				B8037B5F1B876E2700D70821 /* TjsSystem.cpp */,
+				B8037B601B876E2700D70821 /* TjsSystem.h */,
+				B8037B611B876E2700D70821 /* TjsUnits.cpp */,
+				B8037B621B876E2700D70821 /* TjsUnits.h */,
+			);
+			path = singleton;
+			sourceTree = "<group>";
 		};
 		B8261DF31ADC06160017767B /* proj.ios */ = {
 			isa = PBXGroup;
@@ -928,6 +688,82 @@
 				B83B5F0E1B555618004B43AC /* data */,
 			);
 			path = res;
+			sourceTree = "<group>";
+		};
+		B89216121B88016E00F2289E /* tjs */ = {
+			isa = PBXGroup;
+			children = (
+				B89216131B88016E00F2289E /* include */,
+				B892163F1B88016E00F2289E /* prebuilt */,
+			);
+			path = tjs;
+			sourceTree = "<group>";
+		};
+		B89216131B88016E00F2289E /* include */ = {
+			isa = PBXGroup;
+			children = (
+				B89216141B88016E00F2289E /* ncb_foreach.h */,
+				B89216151B88016E00F2289E /* ncb_invoke.hpp */,
+				B89216161B88016E00F2289E /* ncbind.hpp */,
+				B89216171B88016E00F2289E /* tjs.h */,
+				B89216181B88016E00F2289E /* tjsArray.h */,
+				B89216191B88016E00F2289E /* tjsBinarySerializer.h */,
+				B892161A1B88016E00F2289E /* tjsByteCodeLoader.h */,
+				B892161B1B88016E00F2289E /* tjsCommHead.h */,
+				B892161C1B88016E00F2289E /* tjsCompileControl.h */,
+				B892161D1B88016E00F2289E /* tjsConfig.h */,
+				B89216441B8801AD00F2289E /* tjsErrorDefs.h */,
+				B892161E1B88016E00F2289E /* tjsConstArrayData.h */,
+				B892161F1B88016E00F2289E /* tjsDate.h */,
+				B89216201B88016E00F2289E /* tjsdate.tab.h */,
+				B89216211B88016E00F2289E /* tjsDateParser.h */,
+				B89216221B88016E00F2289E /* tjsDebug.h */,
+				B89216231B88016E00F2289E /* tjsDictionary.h */,
+				B89216241B88016E00F2289E /* tjsError.h */,
+				B89216251B88016E00F2289E /* tjsErrorInc.h */,
+				B89216261B88016E00F2289E /* tjsException.h */,
+				B89216271B88016E00F2289E /* tjsGlobalStringMap.h */,
+				B89216281B88016E00F2289E /* tjsHashSearch.h */,
+				B89216291B88016E00F2289E /* tjsInterCodeExec.h */,
+				B892162A1B88016E00F2289E /* tjsInterCodeGen.h */,
+				B892162B1B88016E00F2289E /* tjsInterface.h */,
+				B892162C1B88016E00F2289E /* tjsLex.h */,
+				B892162D1B88016E00F2289E /* tjsMath.h */,
+				B892162E1B88016E00F2289E /* tjsMessage.h */,
+				B892162F1B88016E00F2289E /* tjsMT19937ar-cok.h */,
+				B89216301B88016E00F2289E /* tjsNamespace.h */,
+				B89216311B88016E00F2289E /* tjsNative.h */,
+				B89216321B88016E00F2289E /* tjsObject.h */,
+				B89216331B88016E00F2289E /* tjsObjectExtendable.h */,
+				B89216341B88016E00F2289E /* tjsOctPack.h */,
+				B89216351B88016E00F2289E /* tjspp.tab.h */,
+				B89216361B88016E00F2289E /* tjsRandomGenerator.h */,
+				B89216371B88016E00F2289E /* tjsRegExp.h */,
+				B89216381B88016E00F2289E /* tjsScriptBlock.h */,
+				B89216391B88016E00F2289E /* tjsScriptCache.h */,
+				B892163A1B88016E00F2289E /* tjsString.h */,
+				B892163B1B88016E00F2289E /* tjsTypes.h */,
+				B892163C1B88016E00F2289E /* tjsUtils.h */,
+				B892163D1B88016E00F2289E /* tjsVariant.h */,
+				B892163E1B88016E00F2289E /* tjsVariantString.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		B892163F1B88016E00F2289E /* prebuilt */ = {
+			isa = PBXGroup;
+			children = (
+				B89216401B88016E00F2289E /* apple */,
+			);
+			path = prebuilt;
+			sourceTree = "<group>";
+		};
+		B89216401B88016E00F2289E /* apple */ = {
+			isa = PBXGroup;
+			children = (
+				B89216411B88016E00F2289E /* libtjs2.a */,
+			);
+			path = apple;
 			sourceTree = "<group>";
 		};
 		B89344BA1B5546CB0065A3A3 /* freetype2 */ = {
@@ -1339,9 +1175,7 @@
 				B89344BA1B5546CB0065A3A3 /* freetype2 */,
 				B893457B1B5546CB0065A3A3 /* kazmath */,
 				B8AEF09D1B35998400490A8D /* msg */,
-				B8AEEF551B35997800490A8D /* ncbind */,
-				B8AEEF5C1B35997800490A8D /* onig */,
-				B8AEEF961B35997800490A8D /* tjs2 */,
+				B89216121B88016E00F2289E /* tjs */,
 			);
 			path = lib;
 			sourceTree = "<group>";
@@ -1363,175 +1197,6 @@
 				B8EE2D161B5605A4001EB825 /* MainMenu.xib */,
 			);
 			path = proj.mac;
-			sourceTree = "<group>";
-		};
-		B8AEEF551B35997800490A8D /* ncbind */ = {
-			isa = PBXGroup;
-			children = (
-				B8AEEF561B35997800490A8D /* ncb_foreach.h */,
-				B8AEEF571B35997800490A8D /* ncb_invoke.hpp */,
-				B8AEEF581B35997800490A8D /* ncbind.cpp */,
-				B8AEEF591B35997800490A8D /* ncbind.hpp */,
-			);
-			path = ncbind;
-			sourceTree = "<group>";
-		};
-		B8AEEF5C1B35997800490A8D /* onig */ = {
-			isa = PBXGroup;
-			children = (
-				B8AEEF5D1B35997800490A8D /* config.h */,
-				B8AEEF5E1B35997800490A8D /* enc */,
-				B8AEEF7F1B35997800490A8D /* oniggnu.h */,
-				B8AEEF801B35997800490A8D /* onigposix.h */,
-				B8AEEF811B35997800490A8D /* oniguruma.h */,
-				B8AEEF821B35997800490A8D /* regcomp.c */,
-				B8AEEF831B35997800490A8D /* regenc.c */,
-				B8AEEF841B35997800490A8D /* regenc.h */,
-				B8AEEF851B35997800490A8D /* regerror.c */,
-				B8AEEF861B35997800490A8D /* regexec.c */,
-				B8AEEF871B35997800490A8D /* regext.c */,
-				B8AEEF881B35997800490A8D /* reggnu.c */,
-				B8AEEF891B35997800490A8D /* regint.h */,
-				B8AEEF8A1B35997800490A8D /* regparse.c */,
-				B8AEEF8B1B35997800490A8D /* regparse.h */,
-				B8AEEF8C1B35997800490A8D /* regposerr.c */,
-				B8AEEF8D1B35997800490A8D /* regposix.c */,
-				B8AEEF8E1B35997800490A8D /* regsyntax.c */,
-				B8AEEF8F1B35997800490A8D /* regtrav.c */,
-				B8AEEF901B35997800490A8D /* regversion.c */,
-				B8AEEF911B35997800490A8D /* st.c */,
-				B8AEEF921B35997800490A8D /* st.h */,
-			);
-			path = onig;
-			sourceTree = "<group>";
-		};
-		B8AEEF5E1B35997800490A8D /* enc */ = {
-			isa = PBXGroup;
-			children = (
-				B8AEEF5F1B35997800490A8D /* ascii.c */,
-				B8AEEF601B35997800490A8D /* big5.c */,
-				B8AEEF611B35997800490A8D /* cp1251.c */,
-				B8AEEF621B35997800490A8D /* euc_jp.c */,
-				B8AEEF631B35997800490A8D /* euc_kr.c */,
-				B8AEEF641B35997800490A8D /* euc_tw.c */,
-				B8AEEF651B35997800490A8D /* gb18030.c */,
-				B8AEEF661B35997800490A8D /* iso8859_1.c */,
-				B8AEEF671B35997800490A8D /* iso8859_10.c */,
-				B8AEEF681B35997800490A8D /* iso8859_11.c */,
-				B8AEEF691B35997800490A8D /* iso8859_13.c */,
-				B8AEEF6A1B35997800490A8D /* iso8859_14.c */,
-				B8AEEF6B1B35997800490A8D /* iso8859_15.c */,
-				B8AEEF6C1B35997800490A8D /* iso8859_16.c */,
-				B8AEEF6D1B35997800490A8D /* iso8859_2.c */,
-				B8AEEF6E1B35997800490A8D /* iso8859_3.c */,
-				B8AEEF6F1B35997800490A8D /* iso8859_4.c */,
-				B8AEEF701B35997800490A8D /* iso8859_5.c */,
-				B8AEEF711B35997800490A8D /* iso8859_6.c */,
-				B8AEEF721B35997800490A8D /* iso8859_7.c */,
-				B8AEEF731B35997800490A8D /* iso8859_8.c */,
-				B8AEEF741B35997800490A8D /* iso8859_9.c */,
-				B8AEEF751B35997800490A8D /* koi8.c */,
-				B8AEEF761B35997800490A8D /* koi8_r.c */,
-				B8AEEF771B35997800490A8D /* mktable.c */,
-				B8AEEF781B35997800490A8D /* sjis.c */,
-				B8AEEF791B35997800490A8D /* unicode.c */,
-				B8AEEF7A1B35997800490A8D /* utf16_be.c */,
-				B8AEEF7B1B35997800490A8D /* utf16_le.c */,
-				B8AEEF7C1B35997800490A8D /* utf32_be.c */,
-				B8AEEF7D1B35997800490A8D /* utf32_le.c */,
-				B8AEEF7E1B35997800490A8D /* utf8.c */,
-			);
-			path = enc;
-			sourceTree = "<group>";
-		};
-		B8AEEF961B35997800490A8D /* tjs2 */ = {
-			isa = PBXGroup;
-			children = (
-				B8AEEF971B35997800490A8D /* tjs.cpp */,
-				B8AEEF981B35997800490A8D /* tjs.h */,
-				B8AEEF991B35997800490A8D /* tjs.tab.cpp */,
-				B8AEEF9A1B35997800490A8D /* tjs.tab.h */,
-				B8AEEF9B1B35997800490A8D /* tjs.tab.hpp */,
-				B8AEEF9C1B35997800490A8D /* tjsArray.cpp */,
-				B8AEEF9D1B35997800490A8D /* tjsArray.h */,
-				B8AEEF9E1B35997800490A8D /* tjsBinarySerializer.cpp */,
-				B8AEEF9F1B35997800490A8D /* tjsBinarySerializer.h */,
-				B8AEEFA01B35997800490A8D /* tjsByteCodeLoader.cpp */,
-				B8AEEFA11B35997800490A8D /* tjsByteCodeLoader.h */,
-				B8AEEFA21B35997800490A8D /* tjsCommHead.h */,
-				B8AEEFA31B35997800490A8D /* tjsCompileControl.cpp */,
-				B8AEEFA41B35997800490A8D /* tjsCompileControl.h */,
-				B8AEEFA51B35997800490A8D /* tjsConfig.cpp */,
-				B8AEEFA61B35997800490A8D /* tjsConfig.h */,
-				B8AEEFA71B35997800490A8D /* tjsConstArrayData.cpp */,
-				B8AEEFA81B35997800490A8D /* tjsConstArrayData.h */,
-				B8AEEFA91B35997800490A8D /* tjsDate.cpp */,
-				B8AEEFAA1B35997800490A8D /* tjsDate.h */,
-				B8AEEFAB1B35997800490A8D /* tjsdate.tab.cpp */,
-				B8AEEFAC1B35997800490A8D /* tjsdate.tab.h */,
-				B8AEEFAD1B35997800490A8D /* tjsdate.tab.hpp */,
-				B8AEEFAE1B35997800490A8D /* tjsDateParser.cpp */,
-				B8AEEFAF1B35997800490A8D /* tjsDateParser.h */,
-				B8AEEFB11B35997800490A8D /* tjsDebug.cpp */,
-				B8AEEFB21B35997800490A8D /* tjsDebug.h */,
-				B8AEEFB31B35997800490A8D /* tjsDictionary.cpp */,
-				B8AEEFB41B35997800490A8D /* tjsDictionary.h */,
-				B8AEEFB51B35997800490A8D /* tjsDisassemble.cpp */,
-				B8AEEFB61B35997800490A8D /* tjsError.cpp */,
-				B8AEEFB71B35997800490A8D /* tjsError.h */,
-				B8AEEFB81B35997800490A8D /* tjsErrorDefs.h */,
-				B8AEEFB91B35997800490A8D /* tjsErrorInc.h */,
-				B8AEEFBA1B35997800490A8D /* tjsException.cpp */,
-				B8AEEFBB1B35997800490A8D /* tjsException.h */,
-				B8AEEFBC1B35997800490A8D /* tjsGlobalStringMap.cpp */,
-				B8AEEFBD1B35997800490A8D /* tjsGlobalStringMap.h */,
-				B8AEEFBE1B35997800490A8D /* tjsHashSearch.h */,
-				B8AEEFBF1B35997800490A8D /* tjsInterCodeExec.cpp */,
-				B8AEEFC01B35997800490A8D /* tjsInterCodeExec.h */,
-				B8AEEFC11B35997800490A8D /* tjsInterCodeGen.cpp */,
-				B8AEEFC21B35997800490A8D /* tjsInterCodeGen.h */,
-				B8AEEFC31B35997800490A8D /* tjsInterface.cpp */,
-				B8AEEFC41B35997800490A8D /* tjsInterface.h */,
-				B8AEEFC51B35997800490A8D /* tjsLex.cpp */,
-				B8AEEFC61B35997800490A8D /* tjsLex.h */,
-				B8AEEFC71B35997800490A8D /* tjsMath.cpp */,
-				B8AEEFC81B35997800490A8D /* tjsMath.h */,
-				B8AEEFC91B35997800490A8D /* tjsMessage.cpp */,
-				B8AEEFCA1B35997800490A8D /* tjsMessage.h */,
-				B8AEEFCB1B35997800490A8D /* tjsMT19937ar-cok.cpp */,
-				B8AEEFCC1B35997800490A8D /* tjsMT19937ar-cok.h */,
-				B8AEEFCD1B35997800490A8D /* tjsNamespace.cpp */,
-				B8AEEFCE1B35997800490A8D /* tjsNamespace.h */,
-				B8AEEFCF1B35997800490A8D /* tjsNative.cpp */,
-				B8AEEFD01B35997800490A8D /* tjsNative.h */,
-				B8AEEFD11B35997800490A8D /* tjsObject.cpp */,
-				B8AEEFD21B35997800490A8D /* tjsObject.h */,
-				B8AEEFD31B35997800490A8D /* tjsObjectExtendable.cpp */,
-				B8AEEFD41B35997800490A8D /* tjsObjectExtendable.h */,
-				B8AEEFD51B35997800490A8D /* tjsOctPack.cpp */,
-				B8AEEFD61B35997800490A8D /* tjsOctPack.h */,
-				B8AEEFD71B35997800490A8D /* tjspp.tab.cpp */,
-				B8AEEFD81B35997800490A8D /* tjspp.tab.h */,
-				B8AEEFD91B35997800490A8D /* tjspp.tab.hpp */,
-				B8AEEFDA1B35997800490A8D /* tjsRandomGenerator.cpp */,
-				B8AEEFDB1B35997800490A8D /* tjsRandomGenerator.h */,
-				B8AEEFDC1B35997800490A8D /* tjsRegExp.cpp */,
-				B8AEEFDD1B35997800490A8D /* tjsRegExp.h */,
-				B8AEEFDE1B35997800490A8D /* tjsScriptBlock.cpp */,
-				B8AEEFDF1B35997800490A8D /* tjsScriptBlock.h */,
-				B8AEEFE01B35997800490A8D /* tjsScriptCache.cpp */,
-				B8AEEFE11B35997800490A8D /* tjsScriptCache.h */,
-				B8AEEFE21B35997800490A8D /* tjsString.cpp */,
-				B8AEEFE31B35997800490A8D /* tjsString.h */,
-				B8AEEFE41B35997800490A8D /* tjsTypes.h */,
-				B8AEEFE51B35997800490A8D /* tjsUtils.cpp */,
-				B8AEEFE61B35997800490A8D /* tjsUtils.h */,
-				B8AEEFE71B35997800490A8D /* tjsVariant.cpp */,
-				B8AEEFE81B35997800490A8D /* tjsVariant.h */,
-				B8AEEFE91B35997800490A8D /* tjsVariantString.cpp */,
-				B8AEEFEA1B35997800490A8D /* tjsVariantString.h */,
-			);
-			path = tjs2;
 			sourceTree = "<group>";
 		};
 		B8AEF09D1B35998400490A8D /* msg */ = {
@@ -1590,10 +1255,10 @@
 		B8EE2D551B5B7B3B001EB825 /* base */ = {
 			isa = PBXGroup;
 			children = (
-				B8EE2D561B5B7B3B001EB825 /* Application-Mac.mm */,
-				B89F26811B5E8B3B0081CA6C /* Application-iOS.mm */,
-				B8EE2D571B5B7B3B001EB825 /* Application.cpp */,
-				B8EE2D581B5B7B3B001EB825 /* Application.h */,
+				B8EE2D561B5B7B3B001EB825 /* System-Mac.mm */,
+				B89F26811B5E8B3B0081CA6C /* System-iOS.mm */,
+				B8EE2D571B5B7B3B001EB825 /* System.cpp */,
+				B8EE2D581B5B7B3B001EB825 /* System.h */,
 				B8EE2D591B5B7B3B001EB825 /* FontCache.cpp */,
 				B8EE2D5A1B5B7B3B001EB825 /* FontCache.h */,
 				B8EE2D5B1B5B7B3B001EB825 /* GameObject.cpp */,
@@ -1704,18 +1369,13 @@
 			isa = PBXGroup;
 			children = (
 				B83671C01B65116100256B62 /* com */,
+				B8037B5A1B876E2700D70821 /* singleton */,
 				B8B5F4471B5E08860051E564 /* TjsDictIterator.cpp */,
 				B8B5F4481B5E08860051E564 /* TjsDictIterator.h */,
-				B8EE2D981B5B7B3B001EB825 /* TjsApplication.cpp */,
-				B8EE2D991B5B7B3B001EB825 /* TjsApplication.h */,
 				B8EE2D9A1B5B7B3B001EB825 /* TjsBind.cpp */,
 				B8EE2D9B1B5B7B3B001EB825 /* TjsBind.h */,
 				B8EE2D9C1B5B7B3B001EB825 /* TjsGameObject.cpp */,
 				B8EE2D9D1B5B7B3B001EB825 /* TjsGameObject.h */,
-				B8EE2D9E1B5B7B3B001EB825 /* TjsScripts.cpp */,
-				B8EE2D9F1B5B7B3B001EB825 /* TjsScripts.h */,
-				B8EE2DA01B5B7B3B001EB825 /* TjsStorages.cpp */,
-				B8EE2DA11B5B7B3B001EB825 /* TjsStorages.h */,
 				B8EE2DA21B5B7B3B001EB825 /* TjsWindow.cpp */,
 				B8EE2DA31B5B7B3B001EB825 /* TjsWindow.h */,
 				B8037B3E1B75B7FB00D70821 /* TjsKAGController.cpp */,
@@ -1871,153 +1531,70 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B8AEF0461B35997800490A8D /* regtrav.c in Sources */,
-				B8AEF08E1B35997800490A8D /* tjsRandomGenerator.cpp in Sources */,
 				B8EE2DE21B5B7B3B001EB825 /* GLTexture.cpp in Sources */,
 				B8EE2DD01B5B7B3B001EB825 /* SpriteFrame.cpp in Sources */,
-				B8AEF0621B35997800490A8D /* tjsdate.tab.cpp in Sources */,
 				B89345AB1B5546CB0065A3A3 /* matrix.c in Sources */,
 				B89345BD1B5546CC0065A3A3 /* vec3.c in Sources */,
 				B89345AF1B5546CC0065A3A3 /* mat4.c in Sources */,
-				B8EE2DF01B5B7B3B001EB825 /* TjsStorages.cpp in Sources */,
-				B8AEF02A1B35997800490A8D /* utf16_le.c in Sources */,
 				B89345BF1B5546CC0065A3A3 /* vec4.c in Sources */,
-				B8AEEFEC1B35997800490A8D /* ncbind.cpp in Sources */,
-				B8AEF01E1B35997800490A8D /* koi8.c in Sources */,
 				B8EE2DDC1B5B7B3B001EB825 /* GLCanvas.cpp in Sources */,
 				B89345AD1B5546CC0065A3A3 /* mat3.c in Sources */,
+				B8037B6A1B876E2700D70821 /* TjsUnits.cpp in Sources */,
 				B8261E031ADC06160017767B /* ViewController.m in Sources */,
-				B8AEF06A1B35997800490A8D /* tjsDictionary.cpp in Sources */,
-				B8AEF01C1B35997800490A8D /* iso8859_9.c in Sources */,
-				B8AEF0021B35997800490A8D /* iso8859_10.c in Sources */,
-				B8AEF0361B35997800490A8D /* regerror.c in Sources */,
 				B84C197A1B6E5F6A0056F401 /* Audio-Mac.mm in Sources */,
 				B84C197E1B6E74790056F401 /* TjsAudio.cpp in Sources */,
 				B8037B311B7596E100D70821 /* KAGLabel.cpp in Sources */,
-				B8AEF0961B35997800490A8D /* tjsString.cpp in Sources */,
 				B89345B31B5546CC0065A3A3 /* plane.c in Sources */,
 				B89345A31B5546CB0065A3A3 /* aabb.c in Sources */,
 				B8EE2DE41B5B7B3B001EB825 /* GLProgram.cpp in Sources */,
-				B8AEF07E1B35997800490A8D /* tjsMessage.cpp in Sources */,
-				B8AEF01A1B35997800490A8D /* iso8859_8.c in Sources */,
 				B8037B411B75B7FB00D70821 /* TjsKAGController.cpp in Sources */,
-				B8AEF08A1B35997800490A8D /* tjsOctPack.cpp in Sources */,
 				B8EE2E011B5CDDC8001EB825 /* JsonParser.cpp in Sources */,
-				B8AEF0861B35997800490A8D /* tjsObject.cpp in Sources */,
 				B8EE2DC61B5B7B3B001EB825 /* CoreUnits.cpp in Sources */,
 				B8EE2DB41B5B7B3B001EB825 /* Storages.cpp in Sources */,
-				B8AEF0401B35997800490A8D /* regposerr.c in Sources */,
-				B8AEF0781B35997800490A8D /* tjsInterface.cpp in Sources */,
-				B8AEF0321B35997800490A8D /* regcomp.c in Sources */,
-				B8AEF0701B35997800490A8D /* tjsException.cpp in Sources */,
+				B8037B681B876E2700D70821 /* TjsSystem.cpp in Sources */,
 				B8EE2DC41B5B7B3B001EB825 /* CoreType.cpp in Sources */,
-				B8AEF0681B35997800490A8D /* tjsDebug.cpp in Sources */,
 				B89F26841B5E8BA00081CA6C /* Window-iOS.mm in Sources */,
-				B8AEF07A1B35997800490A8D /* tjsLex.cpp in Sources */,
 				B89F26851B5E8DD60081CA6C /* neon_matrix_impl.c in Sources */,
-				B8AEF0001B35997800490A8D /* iso8859_1.c in Sources */,
-				B8AEF0721B35997800490A8D /* tjsGlobalStringMap.cpp in Sources */,
 				B89345A91B5546CB0065A3A3 /* mat4stack.c in Sources */,
-				B8AEF0101B35997800490A8D /* iso8859_3.c in Sources */,
-				B8AEF0601B35997800490A8D /* tjsDate.cpp in Sources */,
 				B83671CC1B65149E00256B62 /* TjsCOM.cpp in Sources */,
 				B8037B391B75978E00D70821 /* KAGParser.cpp in Sources */,
-				B8AEF0521B35997800490A8D /* tjs.tab.cpp in Sources */,
 				B8EE2DB81B5B7B3B001EB825 /* Component.cpp in Sources */,
 				B8EE2DDA1B5B7B3B001EB825 /* GLCache.cpp in Sources */,
-				B8AEF03E1B35997800490A8D /* regparse.c in Sources */,
-				B8AEF08C1B35997800490A8D /* tjspp.tab.cpp in Sources */,
-				B8AEF0541B35997800490A8D /* tjsArray.cpp in Sources */,
 				B8EE2DD21B5B7B3B001EB825 /* TextFrame.cpp in Sources */,
-				B8AEF0921B35997800490A8D /* tjsScriptBlock.cpp in Sources */,
 				B8EE2DF41B5B7B3B001EB825 /* TjsEngine.cpp in Sources */,
-				B8AEF0061B35997800490A8D /* iso8859_13.c in Sources */,
 				B89345BB1B5546CC0065A3A3 /* vec2.c in Sources */,
 				B8EE2DF21B5B7B3B001EB825 /* TjsWindow.cpp in Sources */,
-				B8AEF0241B35997800490A8D /* sjis.c in Sources */,
-				B89F26821B5E8B3B0081CA6C /* Application-iOS.mm in Sources */,
-				B8AEF0501B35997800490A8D /* tjs.cpp in Sources */,
-				B8AEEFFE1B35997800490A8D /* gb18030.c in Sources */,
-				B8AEF00E1B35997800490A8D /* iso8859_2.c in Sources */,
+				B89F26821B5E8B3B0081CA6C /* System-iOS.mm in Sources */,
 				B8261E011ADC06160017767B /* main.m in Sources */,
 				B8261DFD1ADC06160017767B /* AppDelegateIOS.m in Sources */,
 				B8EE2DC81B5B7B3B001EB825 /* FileInfo.cpp in Sources */,
-				B8AEF09A1B35997800490A8D /* tjsVariant.cpp in Sources */,
 				B83671C41B65117500256B62 /* TjsPainter.cpp in Sources */,
-				B8AEF0941B35997800490A8D /* tjsScriptCache.cpp in Sources */,
-				B8AEF0841B35997800490A8D /* tjsNative.cpp in Sources */,
 				B89345B91B5546CC0065A3A3 /* utility.c in Sources */,
-				B8EE2DAE1B5B7B3B001EB825 /* Application.cpp in Sources */,
-				B8AEF06E1B35997800490A8D /* tjsError.cpp in Sources */,
-				B8AEF03A1B35997800490A8D /* regext.c in Sources */,
+				B8EE2DAE1B5B7B3B001EB825 /* System.cpp in Sources */,
 				B8EE2DCE1B5B7B3B001EB825 /* IOData.cpp in Sources */,
-				B8AEF0201B35997800490A8D /* koi8_r.c in Sources */,
-				B8AEF0821B35997800490A8D /* tjsNamespace.cpp in Sources */,
-				B8AEF0181B35997800490A8D /* iso8859_7.c in Sources */,
 				B89345B71B5546CC0065A3A3 /* ray2.c in Sources */,
-				B8AEF02C1B35997800490A8D /* utf32_be.c in Sources */,
-				B8AEF0441B35997800490A8D /* regsyntax.c in Sources */,
-				B8AEEFF61B35997800490A8D /* cp1251.c in Sources */,
-				B8AEF0561B35997800490A8D /* tjsBinarySerializer.cpp in Sources */,
 				B8EE2DC21B5B7B3B001EB825 /* TouchListener.cpp in Sources */,
-				B8AEF0221B35997800490A8D /* mktable.c in Sources */,
-				B8AEF0881B35997800490A8D /* tjsObjectExtendable.cpp in Sources */,
-				B8AEF0801B35997800490A8D /* tjsMT19937ar-cok.cpp in Sources */,
-				B8AEF0041B35997800490A8D /* iso8859_11.c in Sources */,
 				B8EE2DE61B5B7B3B001EB825 /* NormalProgram.cpp in Sources */,
-				B8AEF04A1B35997800490A8D /* st.c in Sources */,
 				B8037B351B75971300D70821 /* KAGTag.cpp in Sources */,
 				B8EE2DE01B5B7B3B001EB825 /* GLShaderObject.cpp in Sources */,
-				B8AEF0261B35997800490A8D /* unicode.c in Sources */,
-				B8AEF0761B35997800490A8D /* tjsInterCodeGen.cpp in Sources */,
 				B81C2D361B634F3100DF97E8 /* TjsConsole.cpp in Sources */,
 				B8EE2DEA1B5B7B3B001EB825 /* TjsBind.cpp in Sources */,
-				B8AEF0421B35997800490A8D /* regposix.c in Sources */,
-				B8AEF03C1B35997800490A8D /* reggnu.c in Sources */,
 				B8AEF0B11B35998400490A8D /* MsgLoad.cpp in Sources */,
 				B8EE2DF81B5B7B3B001EB825 /* Window.cpp in Sources */,
-				B8AEF0081B35997800490A8D /* iso8859_14.c in Sources */,
-				B8AEF0161B35997800490A8D /* iso8859_6.c in Sources */,
-				B8EE2DEE1B5B7B3B001EB825 /* TjsScripts.cpp in Sources */,
-				B8EE2DE81B5B7B3B001EB825 /* TjsApplication.cpp in Sources */,
 				B8EE2DD41B5B7B3B001EB825 /* Transform.cpp in Sources */,
-				B8AEF0281B35997800490A8D /* utf16_be.c in Sources */,
-				B8AEF07C1B35997800490A8D /* tjsMath.cpp in Sources */,
 				B81C2D391B634FAE00DF97E8 /* TjsConsole-Mac.mm in Sources */,
 				B8EE2DB61B5B7B3B001EB825 /* CompManager.cpp in Sources */,
 				B8EE2DD81B5B7B3B001EB825 /* Debug.cpp in Sources */,
-				B8AEF0641B35997800490A8D /* tjsDateParser.cpp in Sources */,
-				B8AEF05E1B35997800490A8D /* tjsConstArrayData.cpp in Sources */,
-				B8AEF05C1B35997800490A8D /* tjsConfig.cpp in Sources */,
-				B8AEEFFA1B35997800490A8D /* euc_kr.c in Sources */,
-				B8AEF0981B35997800490A8D /* tjsUtils.cpp in Sources */,
-				B8AEF06C1B35997800490A8D /* tjsDisassemble.cpp in Sources */,
 				B8B5F44A1B5E08860051E564 /* TjsDictIterator.cpp in Sources */,
-				B8AEF00C1B35997800490A8D /* iso8859_16.c in Sources */,
-				B8AEF0481B35997800490A8D /* regversion.c in Sources */,
-				B8AEF0901B35997800490A8D /* tjsRegExp.cpp in Sources */,
 				B8EE2DEC1B5B7B3B001EB825 /* TjsGameObject.cpp in Sources */,
 				B887B86F1B6C9782004C72BA /* RTT.cpp in Sources */,
-				B8AEF05A1B35997800490A8D /* tjsCompileControl.cpp in Sources */,
-				B8AEF0381B35997800490A8D /* regexec.c in Sources */,
 				B8EE2DCC1B5B7B3B001EB825 /* ImageData.cpp in Sources */,
-				B8AEF0741B35997800490A8D /* tjsInterCodeExec.cpp in Sources */,
 				B8EE2DC01B5B7B3B001EB825 /* Painter.cpp in Sources */,
-				B8AEEFFC1B35997800490A8D /* euc_tw.c in Sources */,
-				B8AEF0121B35997800490A8D /* iso8859_4.c in Sources */,
-				B8AEF00A1B35997800490A8D /* iso8859_15.c in Sources */,
-				B8AEF0301B35997800490A8D /* utf8.c in Sources */,
-				B8AEF02E1B35997800490A8D /* utf32_le.c in Sources */,
+				B8037B661B876E2700D70821 /* TjsStorages.cpp in Sources */,
 				B8037B3D1B75990F00D70821 /* KAGController.cpp in Sources */,
-				B8AEEFF41B35997800490A8D /* big5.c in Sources */,
-				B8AEF09C1B35997800490A8D /* tjsVariantString.cpp in Sources */,
 				B8EE2DB01B5B7B3B001EB825 /* FontCache.cpp in Sources */,
 				B8037B2D1B7596AB00D70821 /* KAGStorage.cpp in Sources */,
-				B8AEEFF21B35997800490A8D /* ascii.c in Sources */,
-				B8AEF0341B35997800490A8D /* regenc.c in Sources */,
-				B8AEF0581B35997800490A8D /* tjsByteCodeLoader.cpp in Sources */,
-				B8AEEFF81B35997800490A8D /* euc_jp.c in Sources */,
-				B8AEF0141B35997800490A8D /* iso8859_5.c in Sources */,
+				B8037B641B876E2700D70821 /* TjsScripts.cpp in Sources */,
 				B8EE2DBE1B5B7B3B001EB825 /* Character.cpp in Sources */,
 				B89345B51B5546CC0065A3A3 /* quaternion.c in Sources */,
 				B8EE2DB21B5B7B3B001EB825 /* GameObject.cpp in Sources */,
@@ -2028,163 +1605,80 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B8AEF0051B35997800490A8D /* iso8859_13.c in Sources */,
-				B8AEF0871B35997800490A8D /* tjsObjectExtendable.cpp in Sources */,
 				B89345AA1B5546CB0065A3A3 /* matrix.c in Sources */,
 				B89345BA1B5546CC0065A3A3 /* vec2.c in Sources */,
-				B8AEF0211B35997800490A8D /* mktable.c in Sources */,
-				B8AEEFF51B35997800490A8D /* cp1251.c in Sources */,
 				B81C2D381B634FAE00DF97E8 /* TjsConsole-Mac.mm in Sources */,
 				B83671CB1B65149E00256B62 /* TjsCOM.cpp in Sources */,
 				B89345B81B5546CC0065A3A3 /* utility.c in Sources */,
-				B8AEF0291B35997800490A8D /* utf16_le.c in Sources */,
 				B8EE2DB11B5B7B3B001EB825 /* GameObject.cpp in Sources */,
-				B8AEF0071B35997800490A8D /* iso8859_14.c in Sources */,
 				B8EE2DB51B5B7B3B001EB825 /* CompManager.cpp in Sources */,
-				B8EE2DAB1B5B7B3B001EB825 /* Application-Mac.mm in Sources */,
+				B8EE2DAB1B5B7B3B001EB825 /* System-Mac.mm in Sources */,
 				B8EE2DBD1B5B7B3B001EB825 /* Character.cpp in Sources */,
-				B8AEF0971B35997800490A8D /* tjsUtils.cpp in Sources */,
 				B8EE2DF71B5B7B3B001EB825 /* Window.cpp in Sources */,
 				B8037B2C1B7596AB00D70821 /* KAGStorage.cpp in Sources */,
-				B8EE2DED1B5B7B3B001EB825 /* TjsScripts.cpp in Sources */,
 				B8EE2DCB1B5B7B3B001EB825 /* ImageData.cpp in Sources */,
-				B8AEF0831B35997800490A8D /* tjsNative.cpp in Sources */,
-				B8AEF0431B35997800490A8D /* regsyntax.c in Sources */,
-				B8AEF0511B35997800490A8D /* tjs.tab.cpp in Sources */,
 				B8EE2DE51B5B7B3B001EB825 /* NormalProgram.cpp in Sources */,
-				B8AEF0591B35997800490A8D /* tjsCompileControl.cpp in Sources */,
 				B8EE2DBF1B5B7B3B001EB825 /* Painter.cpp in Sources */,
-				B8AEF0371B35997800490A8D /* regexec.c in Sources */,
 				B8EE2DD71B5B7B3B001EB825 /* Debug.cpp in Sources */,
 				B8EE2DAF1B5B7B3B001EB825 /* FontCache.cpp in Sources */,
 				B89854231ADC04D0003784AA /* DEOpenGLView.mm in Sources */,
 				B8037B341B75971300D70821 /* KAGTag.cpp in Sources */,
-				B8AEF08B1B35997800490A8D /* tjspp.tab.cpp in Sources */,
-				B8AEF0811B35997800490A8D /* tjsNamespace.cpp in Sources */,
 				B8037B3C1B75990F00D70821 /* KAGController.cpp in Sources */,
-				B8AEF0391B35997800490A8D /* regext.c in Sources */,
-				B8AEF00B1B35997800490A8D /* iso8859_16.c in Sources */,
-				B8AEF0131B35997800490A8D /* iso8859_5.c in Sources */,
-				B8AEF0151B35997800490A8D /* iso8859_6.c in Sources */,
-				B8AEF0271B35997800490A8D /* utf16_be.c in Sources */,
 				B89854211ADC04D0003784AA /* main.m in Sources */,
-				B8AEF0911B35997800490A8D /* tjsScriptBlock.cpp in Sources */,
 				B8EE2E001B5CDDC8001EB825 /* JsonParser.cpp in Sources */,
-				B8AEF0231B35997800490A8D /* sjis.c in Sources */,
-				B8AEEFFF1B35997800490A8D /* iso8859_1.c in Sources */,
-				B8AEEFFB1B35997800490A8D /* euc_tw.c in Sources */,
-				B8AEEFF11B35997800490A8D /* ascii.c in Sources */,
 				B8EE2DE11B5B7B3B001EB825 /* GLTexture.cpp in Sources */,
 				B8EE2E291B5D8119001EB825 /* Window-Mac.mm in Sources */,
-				B8AEF05F1B35997800490A8D /* tjsDate.cpp in Sources */,
 				B898541F1ADC04D0003784AA /* AppDelegateMac.mm in Sources */,
 				B89345B61B5546CC0065A3A3 /* ray2.c in Sources */,
-				B8AEF0611B35997800490A8D /* tjsdate.tab.cpp in Sources */,
-				B8AEF0791B35997800490A8D /* tjsLex.cpp in Sources */,
 				B8037B401B75B7FB00D70821 /* TjsKAGController.cpp in Sources */,
-				B8AEF01F1B35997800490A8D /* koi8_r.c in Sources */,
 				B8EE2DD31B5B7B3B001EB825 /* Transform.cpp in Sources */,
-				B8AEF0491B35997800490A8D /* st.c in Sources */,
 				B81C2D351B634F3100DF97E8 /* TjsConsole.cpp in Sources */,
 				B83671C31B65117500256B62 /* TjsPainter.cpp in Sources */,
-				B8AEF0031B35997800490A8D /* iso8859_11.c in Sources */,
-				B8AEF01B1B35997800490A8D /* iso8859_9.c in Sources */,
-				B8AEF06F1B35997800490A8D /* tjsException.cpp in Sources */,
 				B89345A21B5546CB0065A3A3 /* aabb.c in Sources */,
-				B8AEF0711B35997800490A8D /* tjsGlobalStringMap.cpp in Sources */,
-				B8AEF0951B35997800490A8D /* tjsString.cpp in Sources */,
 				B89F26801B5E88040081CA6C /* ImageData-Mac.mm in Sources */,
 				B8AEF0B01B35998400490A8D /* MsgLoad.cpp in Sources */,
-				B8AEF05D1B35997800490A8D /* tjsConstArrayData.cpp in Sources */,
-				B8AEF09B1B35997800490A8D /* tjsVariantString.cpp in Sources */,
-				B8AEF0331B35997800490A8D /* regenc.c in Sources */,
-				B8AEF0851B35997800490A8D /* tjsObject.cpp in Sources */,
 				B8EE2DF11B5B7B3B001EB825 /* TjsWindow.cpp in Sources */,
-				B8AEF0931B35997800490A8D /* tjsScriptCache.cpp in Sources */,
 				B8EE2DC71B5B7B3B001EB825 /* FileInfo.cpp in Sources */,
-				B8AEF0111B35997800490A8D /* iso8859_4.c in Sources */,
-				B8AEF0311B35997800490A8D /* regcomp.c in Sources */,
 				B84C197D1B6E74790056F401 /* TjsAudio.cpp in Sources */,
-				B8AEF0411B35997800490A8D /* regposix.c in Sources */,
-				B8EE2DE71B5B7B3B001EB825 /* TjsApplication.cpp in Sources */,
 				B8EE2DE31B5B7B3B001EB825 /* GLProgram.cpp in Sources */,
 				B8EE2DDF1B5B7B3B001EB825 /* GLShaderObject.cpp in Sources */,
 				B8EE2DC51B5B7B3B001EB825 /* CoreUnits.cpp in Sources */,
 				B8037B381B75978E00D70821 /* KAGParser.cpp in Sources */,
-				B8AEF05B1B35997800490A8D /* tjsConfig.cpp in Sources */,
+				B8037B651B876E2700D70821 /* TjsStorages.cpp in Sources */,
 				B89345BE1B5546CC0065A3A3 /* vec4.c in Sources */,
 				B89345B41B5546CC0065A3A3 /* quaternion.c in Sources */,
-				B8AEF0771B35997800490A8D /* tjsInterface.cpp in Sources */,
-				B8AEEFF31B35997800490A8D /* big5.c in Sources */,
 				B89345AC1B5546CC0065A3A3 /* mat3.c in Sources */,
 				B8EE2DD11B5B7B3B001EB825 /* TextFrame.cpp in Sources */,
-				B8AEF0691B35997800490A8D /* tjsDictionary.cpp in Sources */,
-				B8AEEFF71B35997800490A8D /* euc_jp.c in Sources */,
 				B89345B01B5546CC0065A3A3 /* neon_matrix_impl.c in Sources */,
-				B8AEF0451B35997800490A8D /* regtrav.c in Sources */,
-				B8AEF02B1B35997800490A8D /* utf32_be.c in Sources */,
-				B8AEF07D1B35997800490A8D /* tjsMessage.cpp in Sources */,
 				B89345B21B5546CC0065A3A3 /* plane.c in Sources */,
-				B8AEF01D1B35997800490A8D /* koi8.c in Sources */,
+				B8037B671B876E2700D70821 /* TjsSystem.cpp in Sources */,
 				B887B8681B6BF583004C72BA /* Timer.cpp in Sources */,
-				B8AEF0471B35997800490A8D /* regversion.c in Sources */,
-				B8AEF0991B35997800490A8D /* tjsVariant.cpp in Sources */,
 				B8037B441B76F60F00D70821 /* TjsSet.cpp in Sources */,
 				B8EE2DCF1B5B7B3B001EB825 /* SpriteFrame.cpp in Sources */,
 				B887B86E1B6C9781004C72BA /* RTT.cpp in Sources */,
 				B8EE2DE91B5B7B3B001EB825 /* TjsBind.cpp in Sources */,
-				B8AEF0671B35997800490A8D /* tjsDebug.cpp in Sources */,
 				B84C19791B6E5F6A0056F401 /* Audio-Mac.mm in Sources */,
-				B8AEF0751B35997800490A8D /* tjsInterCodeGen.cpp in Sources */,
-				B8AEF04F1B35997800490A8D /* tjs.cpp in Sources */,
 				B8037B301B7596E100D70821 /* KAGLabel.cpp in Sources */,
-				B8AEEFF91B35997800490A8D /* euc_kr.c in Sources */,
 				B8EE2DB31B5B7B3B001EB825 /* Storages.cpp in Sources */,
-				B8EE2DAD1B5B7B3B001EB825 /* Application.cpp in Sources */,
+				B8EE2DAD1B5B7B3B001EB825 /* System.cpp in Sources */,
 				B8EE2DC31B5B7B3B001EB825 /* CoreType.cpp in Sources */,
-				B8EE2DEF1B5B7B3B001EB825 /* TjsStorages.cpp in Sources */,
-				B8AEF00F1B35997800490A8D /* iso8859_3.c in Sources */,
-				B8AEF06B1B35997800490A8D /* tjsDisassemble.cpp in Sources */,
-				B8AEF0531B35997800490A8D /* tjsArray.cpp in Sources */,
-				B8AEF0891B35997800490A8D /* tjsOctPack.cpp in Sources */,
-				B8AEF0091B35997800490A8D /* iso8859_15.c in Sources */,
-				B8AEF0731B35997800490A8D /* tjsInterCodeExec.cpp in Sources */,
-				B8AEF0251B35997800490A8D /* unicode.c in Sources */,
-				B8AEF0191B35997800490A8D /* iso8859_8.c in Sources */,
-				B8AEF03B1B35997800490A8D /* reggnu.c in Sources */,
 				B8EE2DD91B5B7B3B001EB825 /* GLCache.cpp in Sources */,
 				B8EE2DEB1B5B7B3B001EB825 /* TjsGameObject.cpp in Sources */,
-				B8AEF00D1B35997800490A8D /* iso8859_2.c in Sources */,
 				B887B86B1B6BF8EA004C72BA /* TjsTimer.cpp in Sources */,
 				B89345AE1B5546CC0065A3A3 /* mat4.c in Sources */,
-				B8AEF08F1B35997800490A8D /* tjsRegExp.cpp in Sources */,
-				B8AEF0351B35997800490A8D /* regerror.c in Sources */,
-				B8AEF0551B35997800490A8D /* tjsBinarySerializer.cpp in Sources */,
 				B80365A01ADE9E9400DD4B71 /* ConsoleController.mm in Sources */,
-				B8AEF03F1B35997800490A8D /* regposerr.c in Sources */,
 				B8EE2DDB1B5B7B3B001EB825 /* GLCanvas.cpp in Sources */,
 				B89345BC1B5546CC0065A3A3 /* vec3.c in Sources */,
 				B8EE2DF31B5B7B3B001EB825 /* TjsEngine.cpp in Sources */,
 				B8EE2DC11B5B7B3B001EB825 /* TouchListener.cpp in Sources */,
-				B8AEF02D1B35997800490A8D /* utf32_le.c in Sources */,
-				B8AEF06D1B35997800490A8D /* tjsError.cpp in Sources */,
 				B83411471B68307F005BEE96 /* TjsTouchListener.cpp in Sources */,
 				B89345A81B5546CB0065A3A3 /* mat4stack.c in Sources */,
 				B85B52B71B6745E500D05305 /* TjsCharacter.cpp in Sources */,
-				B8AEF0631B35997800490A8D /* tjsDateParser.cpp in Sources */,
 				B8B5F4491B5E08860051E564 /* TjsDictIterator.cpp in Sources */,
-				B8AEF0011B35997800490A8D /* iso8859_10.c in Sources */,
+				B8037B691B876E2700D70821 /* TjsUnits.cpp in Sources */,
 				B8EE2DCD1B5B7B3B001EB825 /* IOData.cpp in Sources */,
-				B8AEF0171B35997800490A8D /* iso8859_7.c in Sources */,
-				B8AEF07F1B35997800490A8D /* tjsMT19937ar-cok.cpp in Sources */,
-				B8AEF02F1B35997800490A8D /* utf8.c in Sources */,
-				B8AEF03D1B35997800490A8D /* regparse.c in Sources */,
-				B8AEF0571B35997800490A8D /* tjsByteCodeLoader.cpp in Sources */,
-				B8AEEFFD1B35997800490A8D /* gb18030.c in Sources */,
-				B8AEEFEB1B35997800490A8D /* ncbind.cpp in Sources */,
-				B8AEF08D1B35997800490A8D /* tjsRandomGenerator.cpp in Sources */,
+				B8037B631B876E2700D70821 /* TjsScripts.cpp in Sources */,
 				B8EE2DB71B5B7B3B001EB825 /* Component.cpp in Sources */,
-				B8AEF07B1B35997800490A8D /* tjsMath.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2213,6 +1707,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/DollEngine/lib/fdv_res",
 					"$(PROJECT_DIR)/DollEngine/lib/freetype2/prebuilt/ios",
+					"$(PROJECT_DIR)/DollEngine/lib/tjs/prebuilt/apple",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -2237,6 +1732,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/DollEngine/lib/fdv_res",
 					"$(PROJECT_DIR)/DollEngine/lib/freetype2/prebuilt/ios",
+					"$(PROJECT_DIR)/DollEngine/lib/tjs/prebuilt/apple",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -2337,6 +1833,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/DollEngine/lib/freetype2/prebuilt/mac",
+					"$(PROJECT_DIR)/DollEngine/lib/tjs/prebuilt/apple",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -2359,6 +1856,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/DollEngine/lib/freetype2/prebuilt/mac",
+					"$(PROJECT_DIR)/DollEngine/lib/tjs/prebuilt/apple",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

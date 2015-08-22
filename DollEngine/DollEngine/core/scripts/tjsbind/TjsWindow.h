@@ -38,6 +38,10 @@ tTJSVariant getTitle(){
     TJS_WSTRING(m_title,str);
     return str.c_str();
 }
+
+virtual void onVisit(){
+    TJS_EVENT_CALL(onVisit, 0);
+}
 };
 
 #endif /* defined(__DollEngine__TjsWindow__) */

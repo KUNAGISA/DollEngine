@@ -14,7 +14,7 @@ class TagHandlers extends KAGController
 		tagTimer.enabled = false;
 	}
 
-	function proccess (storage="",label="") 
+	function process (storage="",label="") 
 	{
 		if(this.stepInLabel(storage,label,false)) {
 			return true;
@@ -67,9 +67,9 @@ class TagHandlers extends KAGController
 
 	function onExecute (name,params) 
 	{
-		app.status.waitClickMode = WAIT_CLICK_NONE;
-		if (app.status.isClickSkip && name != 'ch' && name != 'locate' && name != 'r') {
-			app.status.isClickSkip = false;
+		owner.status.waitClickMode = WAIT_CLICK_NONE;
+		if (owner.status.isClickSkip && name != 'ch' && name != 'locate' && name != 'r') {
+			owner.status.isClickSkip = false;
 		}
 		if (name == "return") {
 			if(this.stepOutLabel()){
@@ -93,7 +93,7 @@ class TagHandlers extends KAGController
 		if(typeof this.tagHandlers[name] != "undefined")
 		{
 			var time = this.tagHandlers[name](params);
-			app.status.clickToNext = false;
+			owner.status.clickToNext = false;
 			if(time == void || time == 0) {
 				return 0;
 			}
@@ -120,7 +120,7 @@ class TagHandlers extends KAGController
 	{
 		this.tagTimer.enabled = false;
 		stepNext();
-		Scripts.addAsyncFunction(App.main.tagManager.execTags);
+		Scripts.addAsyncFunction(this.execTags);
 	}
 
 	function waitTime (time) 
@@ -148,7 +148,7 @@ class TagHandlers extends KAGController
 
 property mp{
 	getter {
-		return App.main.tagManager.getMacroParams();
+		return System.main.tagManager.getMacroParams();
 	}
 }
 

@@ -8,13 +8,19 @@
 
 #import "ConsoleController.h"
 #include "TjsConsole.h"
+#include "System.h"
 
 DE_BEGIN
 
 void TjsConsole::setVisible(bool v)
 {
     m_visible=v;
-    [[ConsoleController GetInstance] setVisible:v];
+    if(v && System::GetInstance()->getDebugMode()>0){
+        [[ConsoleController GetInstance] setVisible:v];
+    }
+    else {
+        [[ConsoleController GetInstance] setVisible:NO];
+    }
 }
 
 void TjsConsole::ExceptionPrint(const tjs_char *msg)

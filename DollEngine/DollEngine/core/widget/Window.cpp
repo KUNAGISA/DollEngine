@@ -27,6 +27,7 @@ Window::Window()
 ,m_world(null)
 ,m_transBlack(null)
 ,m_visible(true)
+,m_fullScreen(false)
 {
     s_instance = this;
 }
@@ -44,17 +45,15 @@ void Window::onInitFinished()
     m_transBlack->loadSize(GLCanvas::GetInstance()->getLayerWidth(),
                            GLCanvas::GetInstance()->getLayerHeight(), 0);
     m_transNode = new GameObject();
-    m_transNode->addComponent(m_transRTT);
+    m_transRTT->setObject(m_transNode);
     m_transNode->setVisible(false);
 }
 
 void Window::visit()
 {
-    if (m_world) {
-        m_world->visit();
-    }
+    onVisit();
     if (m_transNode&&m_transNode->getVisible()) {
-        m_transNode->onPaint();
+        m_transRTT->update();
     }
 }
 

@@ -11,6 +11,7 @@
 NCB_REGISTER_CLASS_DIFFER(Touch, TjsTouchListener)
 {
     TJS_FACTORY_COM
+    NCB_METHOD(addToManager);
     NCB_PROPERTY(focus,getFocus,setFocus);
     NCB_PROPERTY(global,getGlobal,setGlobal);
     NCB_PROPERTY(ignore,getIgnore,setIgnore);

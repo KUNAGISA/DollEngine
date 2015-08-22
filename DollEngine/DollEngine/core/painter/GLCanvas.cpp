@@ -7,7 +7,7 @@
 //
 
 #include "GLCanvas.h"
-#include "Application.h"
+#include "System.h"
 #include "NormalProgram.h"
 
 DE_BEGIN
@@ -57,8 +57,8 @@ void GLCanvas::resizeGL()
     if (m_initialized) {
         float layerWidth = getLayerWidth();
         float layerHeight = getLayerHeight();
-        float deviceWidth = DEApplication->getDeviceWidth();
-        float deviceHeight = DEApplication->getDeviceHeight();
+        float deviceWidth = DESystem->getDeviceWidth();
+        float deviceHeight = DESystem->getDeviceHeight();
         float p = layerWidth/layerHeight;
         float sc_p = deviceWidth/deviceHeight;
         float layerZoom = 1, layerX = 0, layerY = 0;

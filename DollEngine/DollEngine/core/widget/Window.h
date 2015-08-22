@@ -23,6 +23,7 @@ public:
     Window();
     ~Window();
     static Window* GetInstance();
+    virtual void onVisit(){}
     void initialize(float w,float h,float s);
     void onInitFinished();
     void visit();
@@ -31,6 +32,7 @@ public:
     void transFinished();
     GameObject* getTransNode(){return m_transNode;}
     PROPERTY(bool, Visible, m_visible){m_visible=v;}
+    PROPERTY(bool, FullScreen, m_fullScreen);
     PROPERTY_CONST(string, Title, m_title);
     PROPERTY(GameObject*,World,m_world);
 protected:

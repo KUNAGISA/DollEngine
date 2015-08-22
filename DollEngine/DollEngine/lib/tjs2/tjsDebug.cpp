@@ -20,7 +20,7 @@
 #include <map>
 #include <list>
 #include "Debugger.h"
-#include "Application.h"
+#include "System.h"
 #include "NativeEventQueue.h"
 #endif // ENABLE_DEBUGGER
 

@@ -8,81 +8,14 @@
 
 #include "TjsEngine.h"
 #include "TjsBind.h"
-#include "TjsApplication.h"
+#include "TjsSystem.h"
 #include "TjsStorages.h"
 #include "TjsScripts.h"
+#include "TjsUnits.h"
 #include "Debug.h"
 #include "TjsConsole.h"
 
 DE_BEGIN
-
-TJS_NATIVE_FUNCTION_BEGIN(TJSPrintf)
-if ( numparams <1 ) return TJS_E_BADPARAMCOUNT ;
-tTJSVariantString *res;
-res = TJSFormatString(param[0]->AsString()->operator const wchar_t *(), numparams-1, &param[1]);
-wstring dg = L"【TJS】: ";
-if(res) {
-    dg += (const tjs_char*)*res;
-}
-if(TjsEngine::Global()) {
-    TjsEngine::Global()->OutputToConsole(dg.c_str());
-}
-if(res) res->Release();
-return TJS_S_OK ;
-TJS_NATIVE_FUNCTION_END
-
-
-TJS_NATIVE_FUNCTION_BEGIN(TJSColorBy4F)
-if ( numparams <4 ) return TJS_E_BADPARAMCOUNT ;
-Color c;
-tTJSVariant* v = param[0];
-tjs_int32 k = v->AsReal()*255;
-c.r = k;
-v = param[1];
-k = v->AsReal()*255;
-c.g = k;
-v = param[2];
-k = v->AsReal()*255;
-c.b = k;
-v = param[3];
-k = v->AsReal()*255;
-c.a = k;
-
-uint32_t r;
-c.toInt32(r);
-(*result) = (long long)r;
-return TJS_S_OK ;
-TJS_NATIVE_FUNCTION_END
-
-TJS_NATIVE_FUNCTION_BEGIN(TJSColorBy4B)
-if ( numparams <4 ) return TJS_E_BADPARAMCOUNT ;
-Color c((int)param[0]->AsInteger(),(int)param[1]->AsInteger(),(int)param[2]->AsInteger(),(int)param[3]->AsInteger());
-uint32_t r;
-c.toInt32(r);
-(*result) = (long long)r;
-return TJS_S_OK ;
-TJS_NATIVE_FUNCTION_END
-
-
-
-TJS_NATIVE_FUNCTION_BEGIN(TJSPrintTime)
-DM("%lld\n",DE::GetMilliSeconds());
-return TJS_S_OK ;
-TJS_NATIVE_FUNCTION_END
-
-
-TJS_NATIVE_FUNCTION_BEGIN(TJSThrow)
-if ( numparams <1 ) return TJS_E_BADPARAMCOUNT ;
-tTJSVariantString *res;
-res = TJSFormatString(param[0]->GetString(), numparams, &param[1]);
-if(res) {
-    TJS_eTJSError(*res);
-}
-else {
-    TJS_eTJSError(L"");
-}
-return TJS_S_OK;
-TJS_NATIVE_FUNCTION_END
 
 static const int kMaxLogLen = 32*1024;
 static char logbuff[sizeof(char) * (kMaxLogLen + 1)];
@@ -191,16 +124,13 @@ TjsEngine::TjsEngine()
         tTJSVariant val;
         iTJSDispatch2 *dsp;
         iTJSDispatch2* global = s_tjs->GetGlobalNoAddRef () ;
-        TJS_REGIST_CLASS(Application)
+        TJS_REGIST_CLASS(System)
         TJS_REGIST_CLASS(Storages)
         TJS_REGIST_CLASS(Scripts)
+        TJS_REGIST_CLASS(Units)
+        
         
         TVPLoadMessage();
-        TJS_REGIST_FUNCTION(TJSThrow, "throwMsg");
-        TJS_REGIST_FUNCTION(TJSPrintf,"print");
-        TJS_REGIST_FUNCTION(TJSPrintTime, "printTime");
-        TJS_REGIST_FUNCTION(TJSColorBy4F,"colorBy4F");
-        TJS_REGIST_FUNCTION(TJSColorBy4B,"colorBy4B");
         //        REGIST_TJS_FUNCTION(TJSConsoleShow,"__console_show")
         
         // AutoRegisterで登録されたクラス等を登録する
@@ -291,6 +221,16 @@ void TjsEngine::addAsyncFunction(const AsyncFunction& func)
 void TjsEngine::print(const wstring& text)
 {
     s_tjs->GetConsoleOutput()->Print(text.c_str());
+}
+
+void TjsEngine::setConsoleVisible(bool v)
+{
+    TjsConsole::GetInstance()->setVisible(v);
+}
+
+bool TjsEngine::getConsoleVisible()
+{
+    return TjsConsole::GetInstance()->getVisible();
 }
 
 DE_END

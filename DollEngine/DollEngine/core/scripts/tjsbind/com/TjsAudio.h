@@ -12,7 +12,7 @@
 #include "TjsCOM.h"
 #include "Audio.h"
 
-TJS_NCB_COM(Audio)
+TJS_NCB(Audio){}
 
 bool preload(tTJSVariant v){
     TJS_STRING(v, str);

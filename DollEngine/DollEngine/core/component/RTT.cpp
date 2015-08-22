@@ -81,10 +81,10 @@ bool RTT::loadRender(GameObject* obj,int w,int h,Painter* bg)
     obj->setParent(null);
     
     //begin
-//    glViewport(0, 0, DEApplication->getDeviceWidth(), DEApplication->getDeviceHeight());
-    float deviceW = DEApplication->getDeviceWidth();
-    float deviceH = DEApplication->getDeviceHeight();
-    DEApplication->setDeviceSize(GLCanvas::GetInstance()->getLayerWidth(), GLCanvas::GetInstance()->getLayerHeight());
+//    glViewport(0, 0, DESystem->getDeviceWidth(), DESystem->getDeviceHeight());
+    float deviceW = DESystem->getDeviceWidth();
+    float deviceH = DESystem->getDeviceHeight();
+    DESystem->setDeviceSize(GLCanvas::GetInstance()->getLayerWidth(), GLCanvas::GetInstance()->getLayerHeight());
     GLCanvas::GetInstance()->resizeGL();
     glGetIntegerv(GL_FRAMEBUFFER_BINDING, &m_oldFBO);
     glBindFramebuffer(GL_FRAMEBUFFER, m_FBO);
@@ -99,7 +99,7 @@ bool RTT::loadRender(GameObject* obj,int w,int h,Painter* bg)
     //end
     glBindFramebuffer(GL_FRAMEBUFFER, m_oldFBO);
     CHECK_GL_ERROR;
-    DEApplication->setDeviceSize(deviceW,deviceH);
+    DESystem->setDeviceSize(deviceW,deviceH);
     GLCanvas::GetInstance()->resizeGL();
     obj->setParent(parent);
     return true;

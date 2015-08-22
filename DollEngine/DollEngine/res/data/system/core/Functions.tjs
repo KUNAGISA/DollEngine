@@ -16,6 +16,11 @@ WAIT_CLICK_TIME = 5,
 WAIT_CLICK_L = 6,
 WAIT_CLICK_P = 7;
 
+//拖拽的方向
+var DRAG_NONE = 0,
+DRAG_HORIZONTAL = 1,
+DRAG_VERTICAL = 2,
+DRAG_FREE = 3;
 
 /***********字典操作************/
 

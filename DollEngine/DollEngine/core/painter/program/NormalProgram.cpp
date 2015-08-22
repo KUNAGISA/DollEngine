@@ -44,6 +44,7 @@ bool NormalProgram::init()
         "v_texCoord = a_texCoord;"
     "}";
     if(!vshader->compileShaderCode(vsrc)) {
+        CHECK_GL_ERROR;
         return false;
     }
     
@@ -61,6 +62,7 @@ bool NormalProgram::init()
         "gl_FragColor = v_fragmentColor * texture2D(tex_fore, v_texCoord);"
     "}";
     if(!fshader->compileShaderCode(fsrc)) {
+        CHECK_GL_ERROR;
         return false;
     }
     

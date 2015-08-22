@@ -12,8 +12,10 @@
 
 #include "TjsCOM.h"
 #include "TouchListener.h"
+#include "TjsGameObject.h"
 
 TJS_NCB_COM(TouchListener)
+
 
 virtual void onMouseDown(float x,float y ){
     tTJSVariant v1=x;

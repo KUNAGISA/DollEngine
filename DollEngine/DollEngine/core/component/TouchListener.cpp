@@ -30,6 +30,11 @@ TouchListener::~TouchListener()
     setGlobal(false);
 }
 
+void TouchListener::addToManager()
+{
+    CompManager::GetInstance()->addTouchComp(this);
+}
+
 void TouchListener::setGlobal(bool v)
 {
     if (m_global!=v) {

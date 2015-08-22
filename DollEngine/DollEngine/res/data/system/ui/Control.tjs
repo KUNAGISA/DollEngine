@@ -6,19 +6,36 @@ class Control extends Node
 		super.Node(par);
 		this.setAnchor(0.5,0.5);
 		this._touch = new Touch();
-		this.addCOM(this._touch);
+		this._touch.object = this;
 		this.enabled = true;
 		this._touch.onMouseDown = this.onMouseDown;
 		this._touch.onMouseMove = this.onMouseMove;
 		this._touch.onMouseUp = this.onMouseUp;
 		this._touch.onClick = this.onClick;
+		this._touch.swallow = true;
 		this._touch.enabled = true;
+	}
+
+	function finalize () 
+	{
+		invalidate this._touch;
+		super.finalize();
+	}
+
+	function onTouchUpdate () 
+	{
+		if (this.enabled) {
+			this._touch.addToManager();
+			for (var i = 0; i < this.children.count; i++) {
+				this.children[i].onTouchUpdate();
+			};
+		}
 	}
 
 	function onMouseDown (x,y) 
 	{
-		if (App.main.status.waitClickMode == WAIT_CLICK_TRANS||
-			App.main.status.locklink) {
+		if (System.main.status.waitClickMode == WAIT_CLICK_TRANS||
+			System.main.status.locklink) {
 			//trans中或locklink时
 			this._touch.ignore = true;
 		}
@@ -26,12 +43,10 @@ class Control extends Node
 
 	function onMouseMove (x,y) 
 	{
-		// body...
 	}
 
 	function onMouseUp (x,y) 
 	{
-		// body...
 	}
 
 	function onClick (x,y) 

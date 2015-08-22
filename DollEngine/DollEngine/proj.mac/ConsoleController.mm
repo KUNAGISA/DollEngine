@@ -123,8 +123,8 @@ static ConsoleController* s_instance=nil;
         string r;
         DE::UnicodeToUtf8(res, r);
         string tr = control.stringValue.UTF8String;
-        [self pushString:[NSString stringWithUTF8String:(tr+":\n"+r).c_str()]];
         control.stringValue = @"";
+        [self pushString:[NSString stringWithUTF8String:(tr+":\n"+r).c_str()]];
         return YES;
     }
 }

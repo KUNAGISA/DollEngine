@@ -10,6 +10,7 @@
 #include "KAGStorage.h"
 #include "KAGLabel.h"
 #include "ScriptEngine.h"
+#include "System.h"
 
 DE_BEGIN
 
@@ -82,6 +83,13 @@ KAGTag* KAGTag::clone()
 
 void KAGTag::print(bool cond)
 {
+    if (System::GetInstance()->getDebugMode() <= 1) {
+        return;
+    }
+    if (System::GetInstance()->getDebugMode() <= 2 &&
+        label->isMacro) {
+        return;
+    }
     wstring str = L"(#";
     if (name == L"ch") {
         str = L"";

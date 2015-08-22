@@ -16,6 +16,7 @@ NCB_REGISTER_CLASS_DIFFER(Window,TjsWindow)
     NCB_METHOD(beginTransition);
     NCB_METHOD(transFinished);
     NCB_METHOD(transWithCrossFade);
+    NCB_PROPERTY(fullScreen, getFullScreen, setFullScreen);
     NCB_PROPERTY(world, getWorld, setWorld);
     NCB_PROPERTY(title, getTitle, setTitle);
 }

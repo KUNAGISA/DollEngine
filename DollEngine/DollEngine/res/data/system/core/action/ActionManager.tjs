@@ -68,7 +68,7 @@ class ActionManager
 	function update () 
 	{
 		var dt = this.timer.time - this.lastTime;
-		dt *= this.timeScale*App.main.actionManager.timeScale;
+		dt *= this.timeScale*System.main.actionManager.timeScale;
 		this.lastTime = this.timer.time;
 		if (this.paused) {
 			return;

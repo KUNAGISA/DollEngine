@@ -10,7 +10,7 @@
 #define __DollEngine__Character__
 
 #include "Painter.h"
-#include "Application.h"
+#include "System.h"
 
 DE_BEGIN
 

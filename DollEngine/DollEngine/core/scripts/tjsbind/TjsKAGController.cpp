@@ -78,7 +78,10 @@ static void GetTagParamsValue(KAGTag* tag,const wstring& key,tTJSVariant &value)
 int TjsKAGController::doTag()
 {
     if (m_tagIndex >= m_label->allTags.size()) {
-        stepNext();
+        if(!stepNext())
+        {
+            return -2;
+        }
     }
     KAGTag * tag = m_label->allTags[m_tagIndex];
     if (tag->name == L"macro") {

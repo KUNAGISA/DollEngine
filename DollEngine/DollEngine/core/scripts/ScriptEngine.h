@@ -36,6 +36,9 @@ public:
     {
         m_fileStack.pop();
     }
+    
+    virtual void setConsoleVisible(bool v){};
+    virtual bool getConsoleVisible(){return false;};
 
 protected:
     stack<string> m_fileStack;

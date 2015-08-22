@@ -136,11 +136,33 @@ tTJSVariant getCompName(){\
     wstring name;\
     Utf8ToUnicode(m_compName.c_str(), name);\
     return name.c_str();\
+} \
+tTJSVariant getObject() {\
+    auto obj = dynamic_cast<TjsGameObject*>(CLASS::getObject());\
+    if (obj) {\
+        return obj->_self;\
+    } else {\
+        return tTJSVariant();\
+    }\
+}\
+void setObject(tTJSVariant v){\
+    if (v.Type() == tvtVoid) {\
+        auto obj = dynamic_cast<TjsGameObject*>(CLASS::getObject());\
+        if(obj){\
+            obj->_self->Release();\
+        }\
+        CLASS::setObject(null);\
+        return;\
+    }\
+    TjsGameObject* obj = TJS_GET_OBJECT(TjsGameObject, v.AsObject());\
+    CLASS::setObject(obj);\
 }
 
 #define TJS_FACTORY_COM \
 TJS_FACTORY \
+NCB_METHOD(update);\
 NCB_PROPERTY(enabled, getEnabled, setEnabled); \
+NCB_PROPERTY(object,getObject,setObject); \
 NCB_PROPERTY(time, getTime, setTime);\
 NCB_PROPERTY(type, getType, setType);\
 NCB_PROPERTY(name, getCompName, setCompName);

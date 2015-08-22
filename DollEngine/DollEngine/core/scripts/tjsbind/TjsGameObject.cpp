@@ -11,29 +11,9 @@
 #include "TjsCharacter.h"
 #include "TjsTouchListener.h"
 
-void TjsGameObject::addCOM(TJS::iTJSDispatch2 *v)
-{
-#define _ADD_COM(TYPE) \
-{\
-    TYPE* OBJ = TJS_GET_OBJECT(TYPE, v);\
-    if (OBJ) {\
-        addComponent(OBJ);\
-        return;\
-    }\
-}
-    
-    _ADD_COM(TjsCharacter)
-    _ADD_COM(TjsPainter)
-    _ADD_COM(TjsTouchListener)
-    _ADD_COM(TjsComponent)
-}
-
 NCB_REGISTER_CLASS_DIFFER(GameObject,TjsGameObject)
 {
     TJS_FACTORY
-    NCB_METHOD(addCOM);
-    NCB_METHOD(onPaint);
-    NCB_METHOD(onTouchUpdate);
     NCB_METHOD(transform);
     NCB_PROPERTY(parent, getParent,setParent);
     NCB_PROPERTY(zOrder,getZ,setZ);

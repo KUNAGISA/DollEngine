@@ -5,7 +5,7 @@ class Sprite extends Node
 	{
 		super.Node(par);
 		this._image = new Painter();
-		this.addCOM(this._image);
+		this._image.object = this;
 		this.setAnchor(0.5,0.5);
 	}
 
@@ -48,9 +48,14 @@ class Sprite extends Node
 		this._image.freeImage();
 	}
 
+	function onPaint () 
+	{
+		this._image.update();
+	}
+
 	function setColorF (fr,fg,fb,fa) 
 	{
-		this._image.setColor(colorBy4F(...));
+		this._image.setColor(Units.colorBy4F(...));
 	}
 
 	var _image=void;

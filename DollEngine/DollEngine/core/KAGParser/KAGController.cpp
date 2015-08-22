@@ -9,6 +9,7 @@
 #include "KAGController.h"
 #include "KAGParser.h"
 #include "ScriptEngine.h"
+#include "System.h"
 
 DE_BEGIN
 
@@ -56,12 +57,7 @@ bool KAGController::stepInLabel(const wstring& file, const wstring& label, bool 
     m_storage = storage;
     m_label = lb;
     m_tagIndex = 0;
-    wstring dm = L"\n========";
-    dm += m_storage->fileName;
-    dm += L"(";
-    dm += m_label->key;
-    dm += L")========";
-    ScriptEngine::GetInstance()->print(dm);
+    printLabel();
     return true;
 }
 bool KAGController::stepOutLabel()
@@ -74,12 +70,8 @@ bool KAGController::stepOutLabel()
     m_label = stack.label;
     m_tagIndex = stack.tagIndex;
     m_stack.pop();
-    wstring dm = L"\n========";
-    dm += m_storage->fileName;
-    dm += L"(";
-    dm += m_label->key;
-    dm += L")========";
-    ScriptEngine::GetInstance()->print(dm);
+   
+    printLabel();
     return true;
 }
 
@@ -93,12 +85,7 @@ bool KAGController::stepNext()
             }
             m_label = m_label->nextLabel;
             m_tagIndex = 0;
-            wstring dm = L"\n========";
-            dm += m_storage->fileName;
-            dm += L"(";
-            dm += m_label->key;
-            dm += L")========";
-            ScriptEngine::GetInstance()->print(dm);
+            printLabel();
         }
         else{
             break;
@@ -107,4 +94,20 @@ bool KAGController::stepNext()
     return true;
 }
 
+void KAGController::printLabel()
+{
+    if (System::GetInstance()->getDebugMode() <= 1) {
+        return;
+    }
+    if (System::GetInstance()->getDebugMode() <= 2 &&
+        m_label->isMacro) {
+        return;
+    }
+    wstring dm = UnicodeWithFormat(L"\n========%ls(%ls|%ls)#%d========",
+                                   m_storage->fileName.c_str(),
+                                   m_label->key.c_str(),
+                                   m_label->name.c_str(),
+                                   m_tagIndex);
+    ScriptEngine::GetInstance()->print(dm);
+}
 DE_END

@@ -1,0 +1,126 @@
+
+class Slider extends Control
+{
+	//资源
+	var baseImage;
+	var sliderBtn;
+
+	//数据
+	var step=1;
+	var min=0;
+	var max=100;
+	var vertical=false;
+	function Slider (par) 
+	{
+		super.Control(par);
+		baseImage = new Sprite(this);
+		baseImage.setAnchor(0.5,0.5);
+		sliderBtn = new Button(this);
+		sliderBtn.enabled = false;
+		sliderBtn.setAnchor(0.5,0.5);
+	}
+
+	function loadBase (path) 
+	{
+		baseImage.loadImages(path);
+		setSize(baseImage.width,baseImage.height);
+		baseImage.setPos(baseImage.width/2,baseImage.height/2);
+	}
+
+	function loadTabs (path,select) 
+	{
+		if (select) {
+			sliderBtn.loadButtons(path,select);
+		}
+		else {
+			sliderBtn.loadImages(path);
+		}
+	}
+
+	function updateBtnPos (x,y) 
+	{
+		if (vertical) {
+			if (y < _dragBottom) y=_dragBottom;
+			if (y > _dragTop) y=_dragTop;
+			sliderBtn.y = y;
+			sliderBtn.x = width/2;
+		}
+		else {
+			if (x < _dragLeft) x=_dragLeft;
+			if (x > _dragRight) x=_dragRight;
+			sliderBtn.x = x;
+			sliderBtn.y = height/2;
+		}
+	}
+
+	function onMouseDown (x,y) 
+	{
+		super.onMouseDown(...);
+		sliderBtn.onMouseDown(...);
+		if (!this._touch.ignore) {
+			updateBtnPos(x,y);
+		}
+	}
+
+	function onMouseMove (x,y) 
+	{
+		super.onMouseMove(...);
+		sliderBtn.onMouseMove(...);
+		updateBtnPos(x,y);
+	}
+
+	function onMouseUp (x,y) 
+	{
+		super.onMouseUp(...);
+		sliderBtn.onMouseUp(...);
+		updateBtnPos(x,y);
+	}
+
+	var _position=void;
+	property position{
+	    setter(v) {
+	    	var pos = (v-min)/(max-min);
+	    	if(vertical){
+	    		updateBtnPos(0,height*pos);
+	    	}
+	    	else {
+	    		updateBtnPos(width*pos,0);
+	    	}
+	    	this._position = v;
+		}
+		getter {
+	    	//getter
+			return this._position;
+		}
+	}
+
+	var _dragLeft=0;
+	var _dragRight=0;
+	var _dragWidth=0;
+	property dragWidth{
+	    setter(v) {
+	    	_dragLeft = (width-v)/2;
+	    	_dragRight = _dragLeft+v;
+	    	this._dragWidth = v;
+		}
+		getter {
+	    	//getter
+			return this._dragWidth;
+		}
+	}
+
+	var _dragTop=0;
+	var _dragBottom=0;
+	var _dragHeight=0;
+	property dragHeight{
+	    setter(v) {
+	    	_dragBottom = (height-v)/2;
+	    	_dragTop = _dragBottom+v;
+	    	this._dragHeight = v;
+		}
+		getter {
+	    	//getter
+			return this._dragHeight;
+		}
+	}
+}

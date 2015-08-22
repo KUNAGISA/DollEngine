@@ -10,7 +10,7 @@
 #define __DollEngine__TouchListener__
 
 #include "Component.h"
-#include "Application.h"
+#include "System.h"
 
 DE_BEGIN
 
@@ -19,6 +19,7 @@ class TouchListener: public Component
 public:
     TouchListener();
     ~TouchListener();
+    void addToManager();
     bool pointInside(float x,float y,float& ox,float &oy);
     virtual void setEnabled(bool v){ Component::setEnabled(v);NEED_REDRAW;}
     PROPERTY(bool, Global, m_global);

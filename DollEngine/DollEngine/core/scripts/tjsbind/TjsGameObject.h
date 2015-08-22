@@ -37,7 +37,6 @@ void setParent(tTJSVariant v){
 virtual void visit(){
     TJS_EVENT_CALL(visit, 0);
 }
-void addCOM(iTJSDispatch2* v);
 };
 
 #endif /* defined(__DollEngine__TjsGameObject__) */

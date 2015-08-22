@@ -7,7 +7,7 @@
 //
 
 #include "Storages.h"
-#include "Application.h"
+#include "System.h"
 
 DE_BEGIN
 
@@ -105,25 +105,25 @@ string Storages::getFullPath(const string& storage)
         }
         else
         {
-            string temp_path = DEApplication->getPatchPath()+storage;
+            string temp_path = DESystem->getPatchPath()+storage;
             if (access(temp_path.c_str(),0) == 0)
             {
                 m_searchPathsCache[storage] = temp_path;
                 return temp_path;
             }
-            temp_path = DEApplication->getSaveDataPath()+storage;
+            temp_path = DESystem->getSaveDataPath()+storage;
             if (access(temp_path.c_str(),0) == 0)
             {
                 m_searchPathsCache[storage] = temp_path;
                 return temp_path;
             }
-            temp_path = DEApplication->getDataPath()+storage;
+            temp_path = DESystem->getDataPath()+storage;
             if (access(temp_path.c_str(),0) == 0)
             {
                 m_searchPathsCache[storage] = temp_path;
                 return temp_path;
             }
-            temp_path = DEApplication->getAppPath()+storage;
+            temp_path = DESystem->getAppPath()+storage;
             if (access(temp_path.c_str(),0) == 0)
             {
                 m_searchPathsCache[storage] = temp_path;
@@ -132,7 +132,7 @@ string Storages::getFullPath(const string& storage)
             auto auto_iter = m_autoPaths.begin();
             for (; auto_iter != m_autoPaths.end(); ++auto_iter)
             {
-                temp_path = DEApplication->getPatchPath()+(*auto_iter)+storage;
+                temp_path = DESystem->getPatchPath()+(*auto_iter)+storage;
                 if (access(temp_path.c_str(),0) == 0)
                 {
                     m_searchPathsCache[storage] = temp_path;
@@ -142,7 +142,7 @@ string Storages::getFullPath(const string& storage)
             auto_iter = m_autoPaths.begin();
             for (; auto_iter != m_autoPaths.end(); ++auto_iter)
             {
-                temp_path = DEApplication->getSaveDataPath()+(*auto_iter)+storage;
+                temp_path = DESystem->getSaveDataPath()+(*auto_iter)+storage;
                 if (access(temp_path.c_str(),0) == 0)
                 {
                     m_searchPathsCache[storage] = temp_path;
@@ -152,7 +152,7 @@ string Storages::getFullPath(const string& storage)
             auto_iter = m_autoPaths.begin();
             for (; auto_iter != m_autoPaths.end(); ++auto_iter)
             {
-                temp_path = DEApplication->getDataPath()+(*auto_iter)+storage;
+                temp_path = DESystem->getDataPath()+(*auto_iter)+storage;
                 if (access(temp_path.c_str(),0) == 0)
                 {
                     m_searchPathsCache[storage] = temp_path;

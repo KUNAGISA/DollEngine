@@ -38,7 +38,8 @@ public:
     void doAsyncFunctions();
     void addAsyncFunction(const AsyncFunction& func);
     void print(const wstring& text);
-    
+    void setConsoleVisible(bool v);
+    bool getConsoleVisible();
 protected:
     vector<AsyncFunction> m_allAsyncFunctions;
 };

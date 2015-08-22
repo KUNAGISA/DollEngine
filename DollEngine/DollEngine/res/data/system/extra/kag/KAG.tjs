@@ -1,0 +1,29 @@
+
+class KAG extends Application
+{
+	//图层控制
+	var fore;//表层
+
+	//存档控制
+
+
+	//剧本控制
+	var allskip = 1;// 0 已读跳过 1 skip时全部跳过
+	var bookMarkDates = [];//存档
+	function KAG () 
+	{
+		super.Application();
+		this.fore = this.world;
+	}
+
+	property historyWriteEnabled{
+	    setter(v) {
+	    	//setter
+	    	history.enabled=v;
+		}
+		getter {
+	    	//getter
+			return history.enabled;
+		}
+	}
+}

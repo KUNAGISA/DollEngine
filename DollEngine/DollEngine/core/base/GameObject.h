@@ -11,7 +11,7 @@
 
 #include "CoreUnits.h"
 #include "Transform.h"
-#include "Application.h"
+#include "System.h"
 
 DE_BEGIN
 
@@ -23,10 +23,7 @@ public:
     GameObject();
     virtual ~GameObject();
     
-    void addComponent(Component* comp);
     virtual void visit(){}
-    virtual void onPaint();
-    virtual void onTouchUpdate();
     virtual void transform();
     
     PROPERTY(int, Z, m_z){m_z=v;}
@@ -39,11 +36,6 @@ public:
     
     PROPERTY(uint32_t, Color, m_color){m_color=v;}
     PROPERTY(int, Opacity, m_opacity){m_opacity=v;}
-protected:
-    vector<Component*> m_unknowComps;
-    vector<Component*> m_updateComps;
-    vector<Component*> m_paintComps;
-    vector<Component*> m_touchComps;
     
 public:
     TRANSFORM_PROPERTY_FUNC(X,X)

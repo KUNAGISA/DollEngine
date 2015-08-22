@@ -1,8 +1,10 @@
 
-var dm = print;
-var em = throwMsg;
+var print = System.log;
+var em = System.throwMsg;
 
 var DEConfig = Scripts.jsonStorage("Config.json");
+
+System.debugMode = DEConfig.debugMode;
 
 {
     var count = DEConfig.scripts.count;
@@ -22,11 +24,16 @@ var tf=%[];
 var f=%[];
 var sf=%[];
 
-var app = new App();
-
-if (typeof global.KAG != 'undefined') {
-    global.kag = new KAG();
+var app;
+if(DEConfig.module.kag)
+{
+    app = new KAG();
+    global.kag = app;
+}
+else
+{
+    app = new Application();
 }
 
-app.proccess("first.ks");
+app.process("first.ks");
 

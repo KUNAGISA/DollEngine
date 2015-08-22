@@ -8,7 +8,7 @@
 
 #import "DEOpenGLView.h"
 #import <OpenGL/OpenGL.h>
-#include "Application.h"
+#include "System.h"
 #include "GLCanvas.h"
 #include "CompManager.h"
 
@@ -77,7 +77,7 @@
 - (void) drawRect:(NSRect)dirtyRect
 {
     [self lockOpenGLContext];
-    DEApplication->mainLoop();
+    DESystem->mainLoop();
     glFlush();
     //    [[self openGLContext] flushBuffer];
     [self unlockOpenGLContext];

@@ -10,6 +10,7 @@
 #define __DollEngine__TjsCOM__
 
 #include "TjsBind.h"
+#include "TjsGameObject.h"
 #include "Component.h"
 
 TJS_NCB_COM(Component)};

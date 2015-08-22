@@ -35,9 +35,9 @@ using namespace std;
 #define DE_BEGIN namespace DE {
 #define DE_END }
 
-#define DEApplication DE::Application::GetInstance()
+#define DESystem DE::System::GetInstance()
 
-#define NEED_REDRAW DEApplication->setNeedRedraw(true)
+#define NEED_REDRAW DESystem->setNeedRedraw(true)
 
 #define Shared(type) static type* GetInstance() \
 {\

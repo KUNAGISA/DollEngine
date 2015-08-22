@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "DEOpenGLView.h"
 #include "Window.h"
-#include "Application.h"
+#include "System.h"
 #include "GLCanvas.h"
 
 static NSWindow* s_window=nil;
@@ -42,7 +42,7 @@ static WindowDelegate* s_instance=nil;
         frameSize.height=128+menuBarHeight;
     }
     
-    DEApplication->setDeviceSize(frameSize.width, frameSize.height - menuBarHeight);
+    DESystem->setDeviceSize(frameSize.width, frameSize.height - menuBarHeight);
     DE::GLCanvas::GetInstance()->resizeGL();
     
     return frameSize;
@@ -58,6 +58,13 @@ static WindowDelegate* s_instance=nil;
 
 DE_BEGIN
 
+static NSUInteger s_uiStyle =
+NSTitledWindowMask      |
+NSResizableWindowMask   |
+NSClosableWindowMask;
+
+static NSRect s_orginRect;
+
 void Window::initialize(float w, float h,float s)
 {
     if (!m_deviceWindow) {
@@ -68,10 +75,10 @@ void Window::initialize(float w, float h,float s)
             h = 120;
         }
         NSRect rc = NSMakeRect(0, 0, w*s, h*s);
-        NSUInteger uiStyle = NSTitledWindowMask | NSResizableWindowMask | NSClosableWindowMask;
+        s_orginRect = rc;
         NSBackingStoreType storeStyle = NSBackingStoreBuffered;
         s_window = [[NSWindow alloc]initWithContentRect:rc
-                                              styleMask:uiStyle
+                                              styleMask:s_uiStyle
                                                 backing:storeStyle
                                                   defer:NO
                                                  screen:[NSScreen mainScreen]];
@@ -88,11 +95,11 @@ void Window::initialize(float w, float h,float s)
         [s_window makeMainWindow];
         
         s_window.delegate = [WindowDelegate GetInstance];
-        DEApplication->setDeviceSize(w*s,h*s);
+        DESystem->setDeviceSize(w*s,h*s);
         GLCanvas::GetInstance()->setLayerWidth(w);
         GLCanvas::GetInstance()->setLayerHeight(h);
         GLCanvas::GetInstance()->initializeGL();
-        DEApplication->initDebugInfo();
+        DESystem->initDebugInfo();
         onInitFinished();
     }
 }
@@ -101,6 +108,29 @@ void Window::setTitle(const string &v)
 {
     m_title = v;
     s_window.title = [NSString stringWithUTF8String:v.c_str()];
+}
+
+void Window::setFullScreen(bool v)
+{
+    m_fullScreen = v;
+    if(v){
+        s_window.styleMask = NSFullScreenWindowMask;
+        NSRect screenRect = [[NSScreen mainScreen] frame];
+        [s_window setFrame:screenRect display:YES];
+        s_window.level = NSStatusWindowLevel;
+        
+        DESystem->setDeviceSize(screenRect.size.width, screenRect.size.height);
+        DE::GLCanvas::GetInstance()->resizeGL();
+    }
+    else {
+        [s_window setFrame:s_orginRect display:YES];
+        [s_window center];
+        s_window.styleMask = s_uiStyle;
+        s_window.level = NSNormalWindowLevel;
+        
+        DESystem->setDeviceSize(s_orginRect.size.width, s_orginRect.size.height);
+        DE::GLCanvas::GetInstance()->resizeGL();
+    }
 }
 
 DE_END

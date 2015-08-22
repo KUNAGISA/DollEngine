@@ -1,24 +1,17 @@
 {
 	"scripts" : [
 		"system/core/Functions.tjs",
-		"system/core/App.tjs",
+		"system/core/Application.tjs",
 		"system/core/HttpClient.tjs",
 		"system/core/TagHandlers.tjs",
 		"system/core/Timer.tjs",
 		"system/core/History.tjs",
 		"system/core/SoundBuffer.tjs",
-		"system/core/KAG.tjs",
 		"system/core/action/ActionManager.tjs",
 		"system/core/action/Action.tjs",
 		"system/core/action/ActionEase.tjs",
 		"system/core/action/TagActions.tjs",
-		"system/extra/ui/UIAnimation.tjs",
-		"system/extra/ui/UICreator.tjs",
-		"system/extra/ui/UIReader.tjs",
 		"system/layer/GameWorld.tjs",
-		"system/layer/GraphicLayer.tjs",
-		"system/layer/MessageLayer.tjs",
-		"system/layer/WordLayer.tjs",
 		"system/ui/Node.tjs",
 		"system/ui/UILayer.tjs",
 		"system/ui/Sprite.tjs",
@@ -34,7 +27,14 @@
 		"system/ui/RadioButton.tjs",
 		"system/ui/ScrollArea.tjs",
 		"system/ui/Slider.tjs",
-		"system/ui/Tab.tjs"
+		"system/ui/Tab.tjs",
+		"system/extra/ui/UIAnimation.tjs",
+		"system/extra/ui/UICreator.tjs",
+		"system/extra/ui/UIReader.tjs",
+		"system/extra/kag/KAG.tjs",
+		"system/extra/kag/GraphicLayer.tjs",
+		"system/extra/kag/MessageLayer.tjs",
+		"system/extra/kag/WordLayer.tjs"
 	],
 	"autoPaths" :[
 		"scenario",
@@ -51,6 +51,10 @@
 		"width" : 1136,
 		"height" : 640,
 		"scale" : 1
+	},
+	"debugMode" : 3,
+	"module" : {
+		"kag" : true
 	},
 	"game" : {
 		"title" : "幽冥录II for Mac v1.0.0",

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #include "Window.h"
-#include "Application.h"
+#include "System.h"
 #include "GLCanvas.h"
 
 static UIWindow* s_window=nil;

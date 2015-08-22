@@ -14,7 +14,7 @@
 #include "GLTexture.h"
 #include "Transform.h"
 #include "GLProgram.h"
-#include "Application.h"
+#include "System.h"
 
 DE_BEGIN
 

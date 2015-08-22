@@ -34,6 +34,7 @@ public:
     bool stepNext();
     virtual int doTag(){return 0;}
     
+    void printLabel();
 protected:
     KAGStorage* m_storage;
     KAGLabel* m_label;

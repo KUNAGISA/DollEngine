@@ -69,10 +69,13 @@ class Node extends GameObject
 		}
 	}
 
+	function onPaint () 
+	{
+	}
+
 	function onTouchUpdate () 
 	{
 		if (this.enabled) {
-			super.onTouchUpdate();
 			for (var i = 0; i < this.children.count; i++) {
 				this.children[i].onTouchUpdate();
 			};

@@ -39,62 +39,9 @@ GameObject::~GameObject()
             Window::GetInstance()->setWorld(null);
         }
     }
-    for (Component* comp : m_unknowComps) {
-        comp->release();
-    }
-    m_unknowComps.clear();
-    for (Component* comp : m_paintComps) {
-        comp->release();
-    }
-    if (m_paintComps.size() > 0) {
-        NEED_REDRAW;
-    }
-    m_paintComps.clear();
-    for (Component* comp : m_touchComps) {
-        comp->release();
-    }
-    if (m_touchComps.size() > 0) {
-        NEED_REDRAW;
-    }
-    m_touchComps.clear();
-    for (Component* comp : m_updateComps) {
-        comp->release();
-    }
-    m_updateComps.clear();
+    NEED_REDRAW;
     SAFF_DELETE(m_transform);
     SAFF_DELETE(m_transInWorld);
-}
-
-void GameObject::addComponent(DE::Component *comp)
-{
-    comp->setObject(this);
-    switch (comp->getType()) {
-        case COMP_UNKNOW:
-            m_unknowComps.push_back(comp);
-            break;
-        case COMP_PAINT:
-            m_paintComps.push_back(comp);
-            break;
-        case COMP_TOUCH:
-            m_touchComps.push_back(comp);
-            break;
-        case COMP_UPDATE:
-            m_updateComps.push_back(comp);
-            break;
-        default:
-            break;
-    }
-}
-
-void GameObject::onPaint()
-{
-    if (m_paintComps.size() > 0) {
-        for(Component* comp: m_paintComps) {
-            if (comp->getEnabled()) {
-                comp->update();
-            }
-        }
-    }
 }
 
 void GameObject::transform()
@@ -117,15 +64,6 @@ void GameObject::transform()
     }
     m_transInWorld->setWidth(m_transform->getWidth());
     m_transInWorld->setHeight(m_transform->getHeight());
-}
-
-void GameObject::onTouchUpdate()
-{
-    if (getEnabled()) {
-        for (Component* comp : m_touchComps) {
-            CompManager::GetInstance()->addTouchComp(comp);
-        }
-    }
 }
 
 DE_END

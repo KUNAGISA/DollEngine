@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegateMac.h"
-#include "Application.h"
+#include "System.h"
 #include "TjsEngine.h"
 #include "Window.h"
 #include "TjsConsole.h"
@@ -32,7 +32,7 @@ enum TEST{
     
     new TjsEngine();
     DE::TjsConsole::GetInstance()->setVisible(true);
-    DEApplication->startup();
+    DESystem->startup();
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {

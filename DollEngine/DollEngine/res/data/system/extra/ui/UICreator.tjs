@@ -11,8 +11,8 @@ class UICreator
         }
         else
         {
-            par_width = App.main.width;
-            par_height = App.main.height;
+            par_width = System.main.width;
+            par_height = System.main.height;
         }
         var posTypeOrgin=posArr[2],posTypeX=posArr[3],posTypeY=posArr[4];
         if(posArr.count < 3) {
@@ -68,8 +68,8 @@ class UICreator
         }
         else
         {
-            par_width = App.main.width;
-            par_height = App.main.height;
+            par_width = System.main.width;
+            par_height = System.main.height;
         }
         var w=sizeArr[0],h=sizeArr[1];
         if(sizeArr[2] == 2)
@@ -153,8 +153,8 @@ class UICreator
     {
         var node = new LayerColor(parent);
         // dump(properties);
-        node.startColor = colorBy4F(properties.startColor*);
-        node.endColor = colorBy4F(properties.endColor*);
+        node.startColor = Units.colorBy4F(properties.startColor*);
+        node.endColor = Units.colorBy4F(properties.endColor*);
         if (properties.vector[0]==0) {
             if(properties.vector[1]>=0){
                 node.gradVector = 0;
@@ -178,7 +178,7 @@ class UICreator
     function create_CCLabelTTF (owner,parent,properties,customProperties,hd) 
     {
         var node = new Label(parent);
-        node.color = colorBy4F(properties.fontColor*);
+        node.color = Units.colorBy4F(properties.fontColor*);
         node.text = properties.string[0];
         node.font.fontName = properties.fontName;
         node.font.fontSize = properties.fontSize[0];
@@ -212,9 +212,9 @@ class UICreator
         node.titleFontName = properties.fontName;
         node.titleFontSize = properties.fontSize[0];
         node.titleFontSize *= 2 if hd;
-        node.titleColor = colorBy4B(properties.fontColor*);
-        node.titleColorSelect = colorBy4F(properties.labelColor_Highlighted*) if properties.labelColor_Highlighted;
-        node.titleColorDisable = colorBy4F(properties.labelColor_Disabled*) if properties.labelColor_Disabled;
+        node.titleColor = Units.colorBy4B(properties.fontColor*);
+        node.titleColorSelect = Units.colorBy4F(properties.labelColor_Highlighted*) if properties.labelColor_Highlighted;
+        node.titleColorDisable = Units.colorBy4F(properties.labelColor_Disabled*) if properties.labelColor_Disabled;
         node.disabled = !properties.userInteractionEnabled;
 
         if (properties.preferredSize) {

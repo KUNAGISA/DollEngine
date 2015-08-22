@@ -1,0 +1,10 @@
+
+class GraphicLayer extends Sprite
+{
+	function GraphicLayer (par) 
+	{
+		super.Sprite(par);
+		this.setAnchor(0,1);
+	}
+	
+}

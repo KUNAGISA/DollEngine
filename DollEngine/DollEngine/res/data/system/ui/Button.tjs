@@ -25,6 +25,19 @@ class Button extends Control
 		_title.visible = false;
 	}
 
+	function loadImages (graphic) 
+	{
+		graphicImage = graphic;
+	}
+
+	function loadButtons (normal,select) 
+	{
+		normalImage = normal;
+		if (select) {
+			selectImage = select;
+		}
+	}
+
 	function setImageSize (w,h) 
 	{
     	this.setSize(...);
@@ -64,7 +77,7 @@ class Button extends Control
 			exp += ";";
 		}
 		if (this.clickData.storage || this.clickData.target) {
-			exp += "App.main.proccess(\"";
+			exp += "System.main.process(\"";
 			exp += this.clickData.storage;
 			exp += "\",\"";
 			exp += this.clickData.target;
