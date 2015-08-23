@@ -22,18 +22,23 @@ class GLProgram
 public:
     GLProgram();
     ~GLProgram();
+    virtual const char* getShader_V();
+    virtual const char* getShader_F();
     void addShader(SHADER_TYPE type,const char* code);
     void addShader(GLShaderObject* obj);
-    bool bind();
+    virtual bool bind();
     bool link();
     void use();
 public:
+    size_t getShaderCount(){return m_shaders.size();}
+    GLShaderObject* getShader(int idx){return m_shaders[idx];}
     void bindVAO(GLuint vaoId);
     void enableVertexAttribs(uint32_t flags);
     void bindAttributeLocation(const char * name, int location);
     void setUniformValue(const char* name,GLfloat value);
     void setUniformValue(const char* name,GLint value);
     void setUniformValue(const char* name,GLuint value);
+    void setUniformValue(const char* name,const Size& value);
     void setUniformValue(const char* name,const kmMat4& value);
     
 public:

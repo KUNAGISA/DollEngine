@@ -118,5 +118,6 @@ return 0;\
 #endif
 
 #define CHECK_GL_ERROR DE::GLCheckError();
+#define CHECK_PROGRAM_ERROR(ID) DE::GLCheckProgramError(ID);
 
 #endif

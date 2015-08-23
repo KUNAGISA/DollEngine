@@ -9,6 +9,7 @@
 #include "GLCanvas.h"
 #include "System.h"
 #include "NormalProgram.h"
+#include "GrowProgram.h"
 
 DE_BEGIN
 
@@ -43,6 +44,7 @@ void GLCanvas::initializeGL()
         
         resizeGL();
         addProgram("normal", new NormalProgram());
+        addProgram("grow", new GrowProgram());
     }
 }
 

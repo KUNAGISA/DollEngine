@@ -23,7 +23,8 @@ System::System()
 ,m_debugFPS(null)
 ,m_debugFPSCOM(null)
 ,m_needRedraw(true)
-,m_debugPrintTime(0)
+,m_debugTimeCount(0)
+,m_debugTime2(0)
 ,m_debugMode(0)
 {
 }
@@ -41,22 +42,26 @@ void System::mainLoop()
 //        m_needRedraw = false;
         CompManager::GetInstance()->clearTouches();
         GLCanvas::GetInstance()->clearGL();
+        if (m_debugFPS) {
+            double ttime = GetSeconds();
+            double dt = ttime - m_debugTime;
+            m_debugTime = ttime;
+            m_debugTime2 += dt;
+            if (m_debugTimeCount >= 59) {
+                m_debugTimeCount = 0;
+                string tm = Utf8WithFormat("FPS: %f",60.0f/m_debugTime2);
+                m_debugTime2 = 0;
+                m_debugFPSCOM->setText(tm);
+            }
+            else {
+                m_debugTimeCount++;
+            }
+        }
         if (Window::GetInstance()) {
             Window::GetInstance()->visit();
-//            if (m_debugFPS) {
-//                double ttime = GetSeconds();
-//                double dt = ttime - m_debugTime;
-//                m_debugTime = ttime;
-//                if (m_debugPrintTime == 0) {
-//                    m_debugPrintTime = ttime;
-//                }
-//                if (m_debugTime > m_debugPrintTime) {
-//                    ++m_debugPrintTime;
-//                    string tm = Utf8WithFormat("FPS: %f",round(10/dt)/10);
-//                    m_debugFPSCOM->setText(tm);
-//                }
-//                m_debugFPS->onPaint();
-//            }
+        }
+        if (m_debugFPS) {
+            m_debugFPSCOM->update();
         }
     }
     ScriptEngine::GetInstance()->doAsyncFunctions();
@@ -83,6 +88,7 @@ void System::startup()
     initEnginePaths();
     FontCache::GetInstance()->getFont(DEFFONT);
     string fullpath = Storages::GetInstance()->getFullPath("Startup.tjs");
+    m_debugTime = GetSeconds();
     try{
         IOData* data = Storages::GetFileString(fullpath);
         wstring code;

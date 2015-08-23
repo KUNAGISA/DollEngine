@@ -14,7 +14,10 @@
 
 DE_BEGIN
 
+class GLProgram;
+
 extern void GLCheckError();
+extern void GLCheckProgramError(GLProgram*);
 extern string Utf8WithFormat(const char* format,...);
 extern wstring UnicodeWithFormat(const wchar_t* format,...);
 extern void Utf8ToUnicode(const char* src, wstring& target);

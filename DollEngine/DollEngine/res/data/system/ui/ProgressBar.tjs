@@ -1,0 +1,56 @@
+
+class ProgressBar extends Sprite
+{
+	function ProgressBar (par) 
+	{
+		super.Sprite(par);
+	}
+
+	var _start='left';
+	property start{
+	    setter(v) {
+	    	//setter
+	    	this._start = v;
+		}
+		getter {
+	    	//getter
+			return this._start;
+		}
+	}
+	var _end='right';
+	property end{
+	    setter(v) {
+	    	//setter
+	    	this._end = v;
+		}
+		getter {
+	    	//getter
+			return this._end;
+		}
+	}
+
+	var _value=100;
+	property value{
+	    setter(v) {
+	    	//setter
+	    	if (v>100) v=100;
+	    	if (v<0) v=0;
+	    	this._value = v;
+    		this._image.setSizeToOrginSize();
+	    	if(this.start == 'left' && this.end == 'right'){
+	    		var ow = this._image.paintWidth;
+	    		this._image.setMargin(0,1-v/100,0,0);
+	    		this.width = ow;
+	    	}
+	    	else if(this.start == 'right' && this.end == 'left'){
+	    		var ow = this._image.paintWidth;
+	    		this._image.setMargin(1-v/100,0,0,0);
+	    		this.width = ow;
+	    	}
+		}
+		getter {
+	    	//getter
+			return this._value;
+		}
+	}
+}

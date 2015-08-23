@@ -25,6 +25,11 @@ bool loadImageWithMargin(tTJSVariant v,float l,float t,float r,float b)
     TJS_STRING(v, path)
     return Painter::loadImageWithMargin(path, l, t, r, b);
 }
+void setProgramTJS(tTJSVariant v)
+{
+    TJS_STRING(v, name);
+    Painter::setProgram(name);
+}
 };
 
 #endif /* defined(__DollEngine__TjsPainter__) */

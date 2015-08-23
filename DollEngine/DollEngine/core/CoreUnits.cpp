@@ -7,14 +7,38 @@
 //
 
 #include "CoreUnits.h"
+#include "GLProgram.h"
+#include "GLShaderObject.h"
 #include <sys/time.h>
 
 DE_BEGIN
 
 void GLCheckError()
 {
-    if(glGetError()){
-        DM("OpenGL 出错:%x\n",glGetError());
+    GLint v = glGetError();
+    if(v){
+        DM("OpenGL 出错:%x\n%s",v);
+    }
+}
+
+void GLCheckProgramError(GLProgram* program)
+{
+    GLint v = glGetError();
+    if (v) {
+        DM("Error GL:0x%x", v);
+        char infoLog[128];
+        memset(infoLog, 0, 128);
+        
+        glGetProgramInfoLog ( program->getProgramId(), 127, NULL, infoLog );
+        DM("Error program:%s", (const char*)infoLog);
+        
+        for (int i=0; i< program->getShaderCount(); ++i)
+        {
+            GLShaderObject* obj = program->getShader(i);
+            memset(infoLog, 0, 128);
+            glGetShaderInfoLog ( obj->getId(), 127, NULL, infoLog );
+            DM("Error shader:%s", (const char*)infoLog);
+        }
     }
 }
 

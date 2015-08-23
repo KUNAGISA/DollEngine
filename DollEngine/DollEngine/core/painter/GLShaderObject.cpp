@@ -60,7 +60,7 @@ bool GLShaderObject::compileShaderCode(const char* code)
                 memset(infoLog, 0, infoLen+1);
                 
                 glGetShaderInfoLog ( m_id, infoLen, NULL, infoLog );
-//                DM("Error compiling shader:\n%s", (const char*)infoLog);
+                DM("Error compiling shader:\n%s", (const char*)infoLog);
             }
             
             glDeleteShader ( m_id );

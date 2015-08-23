@@ -248,6 +248,7 @@ class MessageLayer extends UILayer
 		else {
 			node.loadTabs(elm.normal,elm.on);
 		}
+		node.onChangeFunc = Scripts.eval(elm.onchangefunc) if elm.onchangefunc!==void;
 		node.dragWidth = +elm.width if elm.width!==void;
 		node.dragHeight = +elm.height if elm.height!==void;
 		node.step = +elm.step if elm.step!==void;

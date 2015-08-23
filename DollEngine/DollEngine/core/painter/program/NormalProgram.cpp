@@ -25,24 +25,7 @@ bool NormalProgram::init()
 {
     GLShaderObject *vshader = new GLShaderObject();
     vshader->setType(SHADER_TYPE_VERTEX);
-    const char *vsrc =
-    "uniform mat4 matrix;"
-    "attribute vec4 a_position;"
-    "attribute vec2 a_texCoord;"
-    "attribute vec4 a_color;"
-    "\n#ifdef GL_ES\n"
-    "varying lowp vec4 v_fragmentColor;"
-    "varying mediump vec2 v_texCoord;"
-    "\n#else\n"
-    "varying vec4 v_fragmentColor;"
-    "varying vec2 v_texCoord;"
-    "\n#endif\n"
-    "void main()"
-    "{"
-        "gl_Position = matrix * a_position;"
-        "v_fragmentColor = a_color;"
-        "v_texCoord = a_texCoord;"
-    "}";
+    const char *vsrc = getShader_V();
     if(!vshader->compileShaderCode(vsrc)) {
         CHECK_GL_ERROR;
         return false;
@@ -50,17 +33,7 @@ bool NormalProgram::init()
     
     GLShaderObject *fshader = new GLShaderObject();
     fshader->setType(SHADER_TYPE_FRAGMENT);
-    const char *fsrc =
-    "#ifdef GL_ES\n"
-    "precision lowp float;"
-    "\n#endif\n"
-    "varying vec4 v_fragmentColor;"
-    "varying vec2 v_texCoord;"
-    "uniform sampler2D tex_fore;"
-    "void main()"
-    "{"
-        "gl_FragColor = v_fragmentColor * texture2D(tex_fore, v_texCoord);"
-    "}";
+    const char *fsrc = getShader_F();
     if(!fshader->compileShaderCode(fsrc)) {
         CHECK_GL_ERROR;
         return false;

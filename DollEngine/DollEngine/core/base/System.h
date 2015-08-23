@@ -49,7 +49,8 @@ protected:
     GameObject* m_debugFPS;
     Character* m_debugFPSCOM;
     double m_debugTime;
-    int m_debugPrintTime;
+    double m_debugTime2;
+    int m_debugTimeCount;
 };
 
 DE_END

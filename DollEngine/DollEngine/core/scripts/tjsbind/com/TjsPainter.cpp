@@ -18,6 +18,9 @@ NCB_REGISTER_CLASS_DIFFER(Painter, TjsPainter)
     NCB_METHOD(setSizeToImageSize);
     NCB_METHOD(setColor);
     NCB_METHOD(setGradientColor);
+    NCB_METHOD(setMargin);
+    NCB_METHOD(setSizeToOrginSize);
+    NCB_METHOD_DIFFER(setProgram, setProgramTJS);
     NCB_PROPERTY(paintWidth,getPaintWidth,setPaintWidth);
     NCB_PROPERTY(paintHeight,getPaintHeight,setPaintHeight);
     NCB_PROPERTY(scale9,getScale9,setScale9);

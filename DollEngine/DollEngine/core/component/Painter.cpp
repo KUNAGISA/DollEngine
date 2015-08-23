@@ -37,7 +37,7 @@ Painter::Painter()
 {
     setCompName("Painter");
     m_type = COMP_PAINT;
-    m_program = GLCanvas::GetInstance()->getProgram("normal");
+    setProgram("normal");
 }
 
 Painter::~Painter()
@@ -50,6 +50,7 @@ bool Painter::loadImages(const string& path,const string& plist)
     SpriteFrame* frame = GLCache::GetInstance()->addFrame(path);
     if (frame) {
         m_colorRect = false;
+        frame->saveRect();
         setDisplayFrame(frame);
         setSizeToImageSize();
         NEED_REDRAW;
@@ -58,6 +59,28 @@ bool Painter::loadImages(const string& path,const string& plist)
     else {
         return false;
     }
+}
+
+bool Painter::setMargin(float l,float r,float t,float b)
+{
+    if (!m_displayFrame) {
+        return false;
+    }
+    if (m_displayFrame->getCacheKey()!="") {
+        SpriteFrame* frame = new SpriteFrame();
+        frame->setTexture(m_displayFrame->getTexture());
+        frame->setRect(m_displayFrame->getRect());
+        frame->saveRect();
+        setDisplayFrame(frame);
+    }
+    Rect rect(l*m_displayFrame->getOrginWidth(),
+              t*m_displayFrame->getOrginHeight(),
+              (1-l-r)*m_displayFrame->getOrginWidth(),
+              (1-t-b)*m_displayFrame->getOrginHeight());
+    m_displayFrame->setRect(rect);
+    setSizeToImageSize();
+    NEED_REDRAW;
+    return true;
 }
 
 bool Painter::loadImageWithMargin(const string& path,float l,float r,float t,float b)
@@ -70,6 +93,7 @@ bool Painter::loadImageWithMargin(const string& path,float l,float r,float t,flo
     frame = GLCache::GetInstance()->addFrame(path,rect);
     if (frame) {
         m_colorRect = false;
+        frame->saveRect();
         setDisplayFrame(frame);
         setSizeToImageSize();
         NEED_REDRAW;
@@ -88,12 +112,21 @@ bool Painter::loadSize(int w,int h,int r)
     m_paintHeight = h;
     if (frame) {
         setDisplayFrame(frame);
+        frame->saveRect();
         setSizeToImageSize();
         NEED_REDRAW;
         return true;
     }
     else {
         return false;
+    }
+}
+
+void Painter::setSizeToOrginSize()
+{
+    if (m_displayFrame) {
+        m_paintWidth = m_displayFrame->getOrginWidth();
+        m_paintHeight = m_displayFrame->getOrginHeight();
     }
 }
 
@@ -116,6 +149,12 @@ void Painter::setSizeToImageSize()
         getObject()->setWidth(m_paintWidth);
         getObject()->setHeight(m_paintHeight);
     }
+}
+
+
+void Painter::setProgram(const string& name)
+{
+    m_program = GLCanvas::GetInstance()->getProgram(name);
 }
 
 void Painter::setDisplayFrame(DE::SpriteFrame *v)

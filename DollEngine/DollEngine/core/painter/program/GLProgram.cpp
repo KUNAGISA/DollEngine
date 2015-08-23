@@ -26,6 +26,43 @@ GLProgram::~GLProgram()
     glDeleteProgram(m_programId);
 }
 
+const char* GLProgram::getShader_V()
+{
+    return
+    "uniform mat4 matrix;"
+    "attribute vec4 a_position;"
+    "attribute vec2 a_texCoord;"
+    "attribute vec4 a_color;"
+    "\n#ifdef GL_ES\n"
+    "varying lowp vec4 v_fragmentColor;"
+    "varying mediump vec2 v_texCoord;"
+    "\n#else\n"
+    "varying vec4 v_fragmentColor;"
+    "varying vec2 v_texCoord;"
+    "\n#endif\n"
+    "void main()"
+    "{"
+    "gl_Position = matrix * a_position;"
+    "v_fragmentColor = a_color;"
+    "v_texCoord = a_texCoord;"
+    "}";
+}
+
+const char* GLProgram::getShader_F()
+{
+    return
+    "#ifdef GL_ES\n"
+    "precision lowp float;"
+    "\n#endif\n"
+    "varying vec4 v_fragmentColor;"
+    "varying vec2 v_texCoord;"
+    "uniform sampler2D tex_fore;"
+    "void main()"
+    "{"
+    "gl_FragColor = v_fragmentColor * texture2D(tex_fore, v_texCoord);"
+    "}";
+}
+
 void GLProgram::addShader(SHADER_TYPE type,const char* code)
 {
     GLShaderObject* obj = new GLShaderObject();
@@ -150,7 +187,7 @@ void GLProgram::setUniformValue(const char* name,GLfloat value)
     auto iter = m_allUniformIndex.find(name);
     if(iter != m_allUniformIndex.end())
         glUniform1f(iter->second, value);
-    CHECK_GL_ERROR;
+    CHECK_PROGRAM_ERROR(this);
 }
 
 void GLProgram::setUniformValue(const char* name,GLint value)
@@ -158,7 +195,7 @@ void GLProgram::setUniformValue(const char* name,GLint value)
     auto iter = m_allUniformIndex.find(name);
     if(iter != m_allUniformIndex.end())
         glUniform1i(iter->second, value);
-    CHECK_GL_ERROR;
+    CHECK_PROGRAM_ERROR(this);
 }
 
 void GLProgram::setUniformValue(const char* name,GLuint value)
@@ -166,7 +203,20 @@ void GLProgram::setUniformValue(const char* name,GLuint value)
     auto iter = m_allUniformIndex.find(name);
     if(iter != m_allUniformIndex.end())
         glUniform1i(iter->second, value);
-    CHECK_GL_ERROR;
+    CHECK_PROGRAM_ERROR(this);
+}
+
+void GLProgram::setUniformValue(const char* name,const Size& value)
+{
+    auto iter = m_allUniformIndex.find(name);
+    if(iter != m_allUniformIndex.end())
+    {
+        int v[2];
+        v[0] = value.width;
+        v[1] = value.height;
+        glUniform2fv(iter->second,2,(GLfloat*)&value);
+    }
+    CHECK_PROGRAM_ERROR(this);
 }
 
 void GLProgram::setUniformValue(const char* name,const kmMat4& value)
@@ -176,7 +226,7 @@ void GLProgram::setUniformValue(const char* name,const kmMat4& value)
     {
         glUniformMatrix4fv(iter->second, 1,GL_FALSE,(GLfloat*)value.mat);
     }
-    CHECK_GL_ERROR;
+    CHECK_PROGRAM_ERROR(this);
 }
 
 

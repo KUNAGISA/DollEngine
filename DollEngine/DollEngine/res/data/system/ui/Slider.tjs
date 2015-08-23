@@ -13,7 +13,7 @@ class Slider extends Control
 	function Slider (par) 
 	{
 		super.Control(par);
-		baseImage = new Sprite(this);
+		baseImage = new ProgressBar(this);
 		baseImage.setAnchor(0.5,0.5);
 		sliderBtn = new Button(this);
 		sliderBtn.enabled = false;
@@ -42,15 +42,28 @@ class Slider extends Control
 		if (vertical) {
 			if (y < _dragBottom) y=_dragBottom;
 			if (y > _dragTop) y=_dragTop;
+			baseImage.value = y*100/height;
 			sliderBtn.y = y;
 			sliderBtn.x = width/2;
+	    	var p = (y-_dragBottom)/(_dragTop-_dragBottom);
+	    	p = p*(max-min)+min;
+			onChangeFunc(p);
 		}
 		else {
 			if (x < _dragLeft) x=_dragLeft;
 			if (x > _dragRight) x=_dragRight;
+			baseImage.value = x*100/width;
 			sliderBtn.x = x;
 			sliderBtn.y = height/2;
+	    	var p = (x-_dragLeft)/(_dragRight-_dragLeft);
+	    	p = p*(max-min)+min;
+			onChangeFunc(p);
 		}
+	}
+
+	function onChangeFunc (pos) 
+	{
+		
 	}
 
 	function onMouseDown (x,y) 
@@ -121,6 +134,27 @@ class Slider extends Control
 		getter {
 	    	//getter
 			return this._dragHeight;
+		}
+	}
+
+	var _vertical=void;
+	property vertical{
+	    setter(v) {
+	    	//setter
+	    	if(v != this._vertical){
+		    	this._vertical = v;
+	    		if (v) {
+	    			
+	    		}
+	    		else {
+	    			baseImage.start = 'left';
+	    			baseImage.end = 'right';
+	    		}
+	    	}
+		}
+		getter {
+	    	//getter
+			return this._vertical;
 		}
 	}
 }

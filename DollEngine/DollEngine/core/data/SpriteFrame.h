@@ -20,6 +20,9 @@ public:
     ~SpriteFrame();
     void retain();
     void release();
+    void saveRect(){m_orginRect = m_rect;}
+    float getOrginWidth(){return m_orginRect.width;}
+    float getOrginHeight(){return m_orginRect.height;}
     
     void setWidth(float v){m_rect.width=v;}
     float getWidth(){return m_rect.width;}
@@ -36,6 +39,7 @@ protected:
     GLfloat m_glCoord[8];
     void* m_otherData;
     Rect m_rect;
+    Rect m_orginRect;
 };
 DE_END
 

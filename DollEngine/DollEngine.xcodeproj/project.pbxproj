@@ -60,6 +60,8 @@
 		B887B86F1B6C9782004C72BA /* RTT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B887B86C1B6C9781004C72BA /* RTT.cpp */; };
 		B89216421B88016E00F2289E /* libtjs2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B89216411B88016E00F2289E /* libtjs2.a */; };
 		B89216431B88016E00F2289E /* libtjs2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B89216411B88016E00F2289E /* libtjs2.a */; };
+		B89216471B8A0D1E00F2289E /* GrowProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B89216451B8A0D1E00F2289E /* GrowProgram.cpp */; };
+		B89216481B8A0D1E00F2289E /* GrowProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B89216451B8A0D1E00F2289E /* GrowProgram.cpp */; };
 		B893459F1B5546CB0065A3A3 /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B89345781B5546CB0065A3A3 /* libfreetype.a */; };
 		B89345A01B5546CB0065A3A3 /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B893457A1B5546CB0065A3A3 /* libfreetype.a */; };
 		B89345A21B5546CB0065A3A3 /* aabb.c in Sources */ = {isa = PBXBuildFile; fileRef = B893458E1B5546CB0065A3A3 /* aabb.c */; };
@@ -285,6 +287,8 @@
 		B892163E1B88016E00F2289E /* tjsVariantString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsVariantString.h; sourceTree = "<group>"; };
 		B89216411B88016E00F2289E /* libtjs2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libtjs2.a; sourceTree = "<group>"; };
 		B89216441B8801AD00F2289E /* tjsErrorDefs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tjsErrorDefs.h; sourceTree = "<group>"; };
+		B89216451B8A0D1E00F2289E /* GrowProgram.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GrowProgram.cpp; sourceTree = "<group>"; };
+		B89216461B8A0D1E00F2289E /* GrowProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrowProgram.h; sourceTree = "<group>"; };
 		B89344BF1B5546CB0065A3A3 /* ftconfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ftconfig.h; sourceTree = "<group>"; };
 		B89344C01B5546CB0065A3A3 /* ftheader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ftheader.h; sourceTree = "<group>"; };
 		B89344C11B5546CB0065A3A3 /* ftmodule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ftmodule.h; sourceTree = "<group>"; };
@@ -1345,6 +1349,8 @@
 				B8EE2D931B5B7B3B001EB825 /* GLProgram.h */,
 				B8EE2D941B5B7B3B001EB825 /* NormalProgram.cpp */,
 				B8EE2D951B5B7B3B001EB825 /* NormalProgram.h */,
+				B89216451B8A0D1E00F2289E /* GrowProgram.cpp */,
+				B89216461B8A0D1E00F2289E /* GrowProgram.h */,
 			);
 			path = program;
 			sourceTree = "<group>";
@@ -1566,6 +1572,7 @@
 				B8EE2DF21B5B7B3B001EB825 /* TjsWindow.cpp in Sources */,
 				B89F26821B5E8B3B0081CA6C /* System-iOS.mm in Sources */,
 				B8261E011ADC06160017767B /* main.m in Sources */,
+				B89216481B8A0D1E00F2289E /* GrowProgram.cpp in Sources */,
 				B8261DFD1ADC06160017767B /* AppDelegateIOS.m in Sources */,
 				B8EE2DC81B5B7B3B001EB825 /* FileInfo.cpp in Sources */,
 				B83671C41B65117500256B62 /* TjsPainter.cpp in Sources */,
@@ -1670,6 +1677,7 @@
 				B8EE2DDB1B5B7B3B001EB825 /* GLCanvas.cpp in Sources */,
 				B89345BC1B5546CC0065A3A3 /* vec3.c in Sources */,
 				B8EE2DF31B5B7B3B001EB825 /* TjsEngine.cpp in Sources */,
+				B89216471B8A0D1E00F2289E /* GrowProgram.cpp in Sources */,
 				B8EE2DC11B5B7B3B001EB825 /* TouchListener.cpp in Sources */,
 				B83411471B68307F005BEE96 /* TjsTouchListener.cpp in Sources */,
 				B89345A81B5546CB0065A3A3 /* mat4stack.c in Sources */,
