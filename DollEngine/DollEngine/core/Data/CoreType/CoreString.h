@@ -36,7 +36,7 @@ public:
     ~String();
 public:
     bool readFromFile(const String& path);
-    size_type
+//    size_type
     void split(const String& t,vector<String>& ret,bool ignoreEmpty=false);
 public:
 public:
