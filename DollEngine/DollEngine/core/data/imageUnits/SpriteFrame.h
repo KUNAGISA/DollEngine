@@ -33,7 +33,7 @@ public:
     PROPERTY(GLTexture*,Texture,m_texture);
     void setRect(const Rect& v);
     const Rect& getRect(){return m_rect;}
-    PROPERTY_CONST(string,CacheKey,m_cacheKey){m_cacheKey=v;}
+    PROPERTY_CONST(String,CacheKey,m_cacheKey){m_cacheKey=v;}
     PROPERTY_RO(int,RetainCount,m_retainCount)
 protected:
     GLfloat m_glCoord[8];

@@ -9,7 +9,7 @@
 #include "System.h"
 #include "Storages.h"
 #include "CompManager.h"
-#include "FontCache.h"
+#include "FontInterface.h"
 #include "GLCanvas.h"
 #include "Character.h"
 #include "ScriptEngine.h"
@@ -49,7 +49,7 @@ void System::mainLoop()
 void System::startup()
 {
     initEnginePaths();
-    FontCache::GetInstance()->getFont(DEFFONT);
+    FontInterface::GetInstance()->addFont(DEFFONT);
     string fullpath = Storages::GetInstance()->getFullPath("Startup.tjs");
     try{
         IOData* data = Storages::GetFileString(fullpath);

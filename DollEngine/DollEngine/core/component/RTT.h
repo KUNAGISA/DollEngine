@@ -23,7 +23,7 @@ public:
     void end();
 protected:
     GLuint m_FBO;
-    GLint m_oldFBO;
+    GLuint m_oldFBO;
 };
 
 DE_END

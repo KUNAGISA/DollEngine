@@ -33,9 +33,9 @@ public:
     void removeTextureCache(GLTexture* frame);
     
 protected:
-    map<string,string > m_allPlist;
-    map<string,SpriteFrame*> m_allSpriteFrames;
-    map<string,GLTexture*> m_allTextures;
+    map<String,String > m_allPlist;
+    map<String,SpriteFrame*> m_allSpriteFrames;
+    map<String,GLTexture*> m_allTextures;
     
 };
 

@@ -26,15 +26,10 @@
 using namespace std;
 
 #ifdef __QT__
-#include <QtOpenGL>
-//#define GL_TEXTURE0 0
-//#define GL_TEXTURE1 1
-//#define glDeleteVertexArrays glDeleteVertexArraysAPPLE
-//#define glGenVertexArrays  glGenVertexArraysAPPLE
-//#define glBindVertexArray glBindVertexArrayAPPLE
-//#define glClearDepthf glClearDepth
-//#define glDepthRangef glDepthRange
-//#define glReleaseShaderCompiler(xxx)
+#include <GL/gl.h>
+
+#define GL_TEXTURE0 0
+#define GL_TEXTURE1 1
 #endif
 
 #define null NULL
@@ -42,7 +37,6 @@ using namespace std;
 #define DEFFONT "WenQuanYi Micro Hei"
 #define DEFFONTSIZE 24
 #define DM DE::Debug::message
-#define DI DE::DrawInterface::GetInstance()
 #define ASSERT assert
 
 #define DE_BEGIN namespace DE {

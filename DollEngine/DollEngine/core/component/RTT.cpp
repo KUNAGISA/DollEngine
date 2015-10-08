@@ -22,7 +22,7 @@ RTT::RTT()
 RTT::~RTT()
 {
     if (m_FBO) {
-        glDeleteFramebuffers(1, &m_FBO);
+        DI->deleteFBO(1, &m_FBO);
     }
     SAFF_DELETE(m_displayFrame);
 }
@@ -30,7 +30,6 @@ RTT::~RTT()
 
 bool RTT::begin(int w,int h,Painter* bg)
 {
-    glGetIntegerv(GL_FRAMEBUFFER_BINDING, &m_oldFBO);
     if (m_displayFrame) {
         if (m_displayFrame->getTexture()->getWidth() != w ||
             m_displayFrame->getTexture()->getHeight() != h) {
@@ -61,26 +60,13 @@ bool RTT::begin(int w,int h,Painter* bg)
         m_displayFrame = frame;
         m_displayFrame->setTexture(tex);
     }
-    GLint oldRBO;
-    glGetIntegerv(GL_RENDERBUFFER_BINDING, &oldRBO);
+    m_FBO = DI->createFBO(m_displayFrame->getTexture()->getTextureId());
     
-    glGenFramebuffers(1, &m_FBO);
-    glBindFramebuffer(GL_FRAMEBUFFER, m_FBO);
-    
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_displayFrame->getTexture()->getTextureId(), 0);
-    ASSERT(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE);
-    
-    glBindRenderbuffer(GL_RENDERBUFFER, oldRBO);
-    glBindFramebuffer(GL_FRAMEBUFFER, m_oldFBO);
-    
-    float deviceW = DESystem->getDeviceWidth();
-    float deviceH = DESystem->getDeviceHeight();
     DESystem->setDeviceSize(GLCanvas::GetInstance()->getLayerWidth(), GLCanvas::GetInstance()->getLayerHeight());
     GLCanvas::GetInstance()->resizeGL();
-    glGetIntegerv(GL_FRAMEBUFFER_BINDING, &m_oldFBO);
-    glBindFramebuffer(GL_FRAMEBUFFER, m_FBO);
-    glClear(GL_COLOR_BUFFER_BIT);
-    glClearColor(1,1,1,1);
+    
+    DI->switchFBO(&m_oldFBO,m_FBO);
+    DI->clearColor(GL_COLOR_BUFFER_BIT,1,1,1,1);
     
     if (bg) {
         bg->update();
@@ -92,7 +78,7 @@ void RTT::end()
 {
     float deviceW = DESystem->getDeviceWidth();
     float deviceH = DESystem->getDeviceHeight();
-    glBindFramebuffer(GL_FRAMEBUFFER, m_oldFBO);
+    DI->switchFBO(null,m_oldFBO);
     CHECK_GL_ERROR;
     DESystem->setDeviceSize(deviceW,deviceH);
     GLCanvas::GetInstance()->resizeGL();

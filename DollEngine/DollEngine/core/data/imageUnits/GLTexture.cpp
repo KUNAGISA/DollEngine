@@ -30,17 +30,9 @@ GLTexture::~GLTexture()
 
 bool GLTexture::initWithImage(ImageData* image)
 {
-    glGenTextures(1,&m_textureId);
-    glBindTexture(GL_TEXTURE_2D,m_textureId);
-    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
-    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
-    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
-    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
-    glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, image->getWidth(), image->getHeight(), 0,
-                 GL_RGBA, GL_UNSIGNED_BYTE, image->getData()->getBuffer() );
+    setTextureId(DI->loadTexture(image->getData()->getBuffer(),image->getWidth(),image->getHeight()));
     setWidth(image->getWidth());
     setHeight(image->getHeight());
-    CHECK_GL_ERROR;
     return true;
 }
 
@@ -51,14 +43,7 @@ bool GLTexture::initWithSize(int w,int h)
         return false;
     }
     memset(data, 0, w*h*4);
-    glGenTextures(1, &m_textureId);
-    glBindTexture(GL_TEXTURE_2D,m_textureId);
-    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
-    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
-    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
-    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
-    glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0,
-                 GL_RGBA, GL_UNSIGNED_BYTE, data );
+    setTextureId(DI->loadTexture(data,w,h));
     setWidth(w);
     setHeight(h);
     free(data);
@@ -81,16 +66,14 @@ void GLTexture::release()
 void GLTexture::bind(GLenum activeId)
 {
     if (m_textureId) {
-        glActiveTexture(activeId);
-        glBindTexture(GL_TEXTURE_2D, m_textureId);
-        CHECK_GL_ERROR;
+        DI->bindTexture(activeId,m_textureId);
     }
 }
 
 void GLTexture::setTextureId(GLuint v)
 {
     if (m_textureId) {
-        glDeleteTextures(1, &m_textureId);
+        DI->deleteTexture(1, &m_textureId);
     }
     m_textureId = v;
 }

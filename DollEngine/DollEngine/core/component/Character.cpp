@@ -64,7 +64,7 @@ void Character::update()
         Transform offst;
         offst.setX(lastX + font->bearingX);
         float y = -(frame->getHeight()-font->bearingY);
-        string fontname = frame->getCacheKey();
+        String fontname = frame->getCacheKey();
         offst.setY(y);
         offst.setAnchorX(0);
         offst.setAnchorY(0);

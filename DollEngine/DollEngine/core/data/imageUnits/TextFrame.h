@@ -10,7 +10,6 @@
 #define __DollEngine__TextFrame__
 
 #include "SpriteFrame.h"
-#include "FontCache.h"
 
 DE_BEGIN
 

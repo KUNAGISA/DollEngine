@@ -11,7 +11,7 @@
 
 #include "CoreMacros.h"
 #include "Color.h"
-#include "Value.h"
+#include "CoreString.h"
 
 DE_BEGIN
 

@@ -1,12 +1,4 @@
-//
-//  FontCache.cpp
-//  DECore
-//
-//  Created by DollStudio on 15/7/14.
-//  Copyright (c) 2015年 DollStudio. All rights reserved.
-//
-
-#include "FontCache.h"
+#include "FontInterface.h"
 #include "FileInfo.h"
 #include <ft2build.h>
 #include FT_FREETYPE_H
@@ -14,17 +6,17 @@
 
 DE_BEGIN
 
-FontCache::FontCache()
+FontInterface::FontInterface()
 {
     FT_Init_FreeType(&m_fontLibrary);
 }
 
-FontCache::~FontCache()
+FontInterface::~FontInterface()
 {
     FT_Done_FreeType(m_fontLibrary);
 }
 
-FT_Face FontCache::getFont(const string& fontName)
+FT_Face FontInterface::getFont(const string& fontName)
 {
     auto iter = m_allFonts.find(fontName);
     if (iter != m_allFonts.end()) {
@@ -38,7 +30,7 @@ FT_Face FontCache::getFont(const string& fontName)
     }
 }
 
-ImageData* FontCache::addText(const string& text,const string& fontName,int fontSize,FontData* fd)
+ImageData* FontInterface::addText(const string& text,const string& fontName,int fontSize,FontData* fd)
 {
     FT_Face face = getFont(fontName);
     if (!face) {
@@ -104,7 +96,7 @@ ImageData* FontCache::addText(const string& text,const string& fontName,int font
     return image;
 }
 
-string FontCache::addFont(const string& path)
+string FontInterface::addFont(const string& path)
 {
     FileInfo file(path);
     if (!file.exist()) {
@@ -137,7 +129,7 @@ string FontCache::addFont(const string& path)
     return iter->second;
 }
 
-void FontCache::removeFont(const string& fontName)
+void FontInterface::removeFont(const string& fontName)
 {
     auto iter = m_allFonts.find(fontName);
     if (iter != m_allFonts.end()) {
@@ -152,16 +144,5 @@ void FontCache::removeFont(const string& fontName)
         m_allFonts.erase(fontName);
     }
 }
-
-string FontCache::GetKeyByFont(const string& str,const string& fontName,int fontSize,int outlineSize)
-{
-    return Utf8WithFormat("%s_%s_%d_%d"
-                            ,str.c_str()
-                            ,fontName.c_str()
-                            ,fontSize
-                            ,outlineSize);
-}
-
-
 
 DE_END

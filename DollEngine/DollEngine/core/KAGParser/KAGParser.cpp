@@ -17,7 +17,7 @@ KAGParser::KAGParser()
 ,m_label(null)
 ,m_tag(null)
 ,m_isScripts(false)
-,m_errorInfo(NO_ERROR)
+,m_errorInfo(ERROR_NONE)
 ,m_parseLine(0)
 ,m_curMacroLabel(null)
 {
