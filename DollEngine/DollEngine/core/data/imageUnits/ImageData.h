@@ -30,7 +30,7 @@ public:
 public:
     ImageData();
     virtual ~ImageData();
-    bool loadImages(const string& fullPath);
+    bool loadImages(const String& fullPath);
     static ImageData* createRoundRect(int r);//创建一个圆角矩形的数据
 public:
     PROPERTY(IOData*, Data, m_data){m_data=v;}

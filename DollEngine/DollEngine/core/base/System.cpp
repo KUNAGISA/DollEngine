@@ -50,7 +50,7 @@ void System::startup()
 {
     initEnginePaths();
     FontInterface::GetInstance()->addFont(DEFFONT);
-    string fullpath = Storages::GetInstance()->getFullPath("Startup.tjs");
+    String fullpath = Storages::GetInstance()->getFullPath("Startup.tjs");
     try{
         IOData* data = Storages::GetFileString(fullpath);
         wstring code;

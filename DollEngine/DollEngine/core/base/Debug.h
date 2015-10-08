@@ -42,9 +42,9 @@ public:
     virtual ~Debug();
     
     static void message(const char* format,...);
-    static void throwMsg(DEBUG_MSG error,const string& p1="");
+    static void throwMsg(DEBUG_MSG error,const String& p1="");
     static void throwMsg(DEBUG_MSG error,int p1,const wstring& p2=L"");
-    static void throwMsg(const string& v);
+    static void throwMsg(const String& v);
 };
 
 DE_END

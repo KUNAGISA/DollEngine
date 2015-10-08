@@ -17,12 +17,12 @@ FileInfo::FileInfo()
     
 }
 
-FileInfo::FileInfo(const string& path)
+FileInfo::FileInfo(const String& path)
 {
     setPath(path);
 }
 
-void FileInfo::setPath(const string &path)
+void FileInfo::setPath(const String& path)
 {
     if (m_path != path) {
         m_status = FILE_UNKNOW;
@@ -34,12 +34,12 @@ void FileInfo::setPath(const string &path)
     }
 }
 
-string FileInfo::fileExt()
+String FileInfo::fileExt()
 {
     if (m_fileExt == "") {
         fileName();
-        string::size_type t = m_fileName.rfind(".");
-        if (t != string::npos) {
+        String::size_type t = m_fileName.rfind(".");
+        if (t != String::npos) {
             m_fileNameIgnoreExt = m_fileName.substr(m_fileName.rfind(".")+1);
         }
         else {
@@ -49,7 +49,7 @@ string FileInfo::fileExt()
     return m_fileExt;
 }
 
-string FileInfo::fileNameIgnoreExt()
+String FileInfo::fileNameIgnoreExt()
 {
     if (m_fileNameIgnoreExt == "") {
         fileName();
@@ -65,11 +65,11 @@ string FileInfo::fileNameIgnoreExt()
     return m_fileNameIgnoreExt;
 }
 
-string FileInfo::fileName()
+String FileInfo::fileName()
 {
     if (m_fileName=="") {
-        string::size_type t = m_path.rfind("/");
-        if (t != string::npos) {
+        String::size_type t = m_path.rfind("/");
+        if (t != String::npos) {
             m_fileName = m_path.substr(m_path.rfind("/")+1);
         }
         else {
@@ -79,7 +79,7 @@ string FileInfo::fileName()
     return m_fileName;
 }
 
-string FileInfo::absolutePath()
+String FileInfo::absolutePath()
 {
     if (exist()) {
         return m_absolutePath;

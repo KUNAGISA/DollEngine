@@ -19,16 +19,16 @@ class Storages
 public:
     Storages();
     Shared(Storages)
-    static IOData* GetFileData(const string& fullpath);
-    static IOData* GetFileString(const string& fullpath);
+    static IOData* GetFileData(const String& fullpath);
+    static IOData* GetFileString(const String& fullpath);
 public:
-    void addAutoPath(const string& storage);// ( 增加自动检索路径 )
-    string getFullPath(const string& storage);// ( 获取统一文件路径 )
-    void removeAutoPath(const string& storage);// ( 删除自动检索路径 )
+    void addAutoPath(const String& storage);// ( 增加自动检索路径 )
+    String getFullPath(const String& storage);// ( 获取统一文件路径 )
+    void removeAutoPath(const String& storage);// ( 删除自动检索路径 )
     void clearAutoPath();
 private:
     list<string> m_autoPaths;
-    map<string, string> m_searchPathsCache;
+    map<String, String> m_searchPathsCache;
 };
 
 DE_END

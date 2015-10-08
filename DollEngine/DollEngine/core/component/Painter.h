@@ -24,14 +24,14 @@ public:
     Painter();
     ~Painter();
 public:
-    virtual bool loadImages(const string& path,const string& plist="");
+    virtual bool loadImages(const String& path,const String& plist="");
     virtual void freeImage(){SAFF_RELEASE(m_displayFrame);}
     virtual bool setMargin(float l,float r,float t,float b);
-    virtual bool loadImageWithMargin(const string& path,float l,float r,float t,float b);
+    virtual bool loadImageWithMargin(const String& path,float l,float r,float t,float b);
     bool loadSize(int w,int h,int r);
     virtual void setSizeToImageSize();
     virtual void setSizeToOrginSize();
-    virtual void setProgram(const string& name);
+    virtual void setProgram(const String& name);
 public:
     void update();
     void updateWithScale9();

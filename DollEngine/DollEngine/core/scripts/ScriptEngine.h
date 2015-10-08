@@ -41,8 +41,8 @@ public:
     void setConsoleVisible(bool v);
     bool getConsoleVisible();
     
-    string topFile(){return m_fileStack.top();}
-    void pushFile(const string& path)
+    String topFile(){return m_fileStack.top();}
+    void pushFile(const String& path)
     {
         m_fileStack.push(path);
     }
@@ -54,7 +54,7 @@ public:
     
 protected:
     vector<AsyncFunction> m_allAsyncFunctions;
-    stack<string> m_fileStack;
+    stack<String> m_fileStack;
 };
 
 DE_END

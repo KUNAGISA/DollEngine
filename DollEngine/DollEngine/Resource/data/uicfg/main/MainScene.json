@@ -1,0 +1,366 @@
+{
+  "nodeGraph" : {
+    "displayName" : "CCNode",
+    "baseClass" : "CCNode",
+    "memberVarAssignmentType" : 1,
+    "children" : [
+      {
+        "displayName" : "CCNodeGradient",
+        "baseClass" : "CCNodeGradient",
+        "memberVarAssignmentType" : 1,
+        "children" : [
+
+        ],
+        "memberVarAssignmentName" : "",
+        "UUID" : 2,
+        "customClass" : "",
+        "properties" : [
+          {
+            "value" : "",
+            "type" : "StringSimple",
+            "name" : "name"
+          },
+          {
+            "value" : [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "type" : "Position",
+            "name" : "position"
+          },
+          {
+            "value" : [
+              1,
+              1,
+              2,
+              2
+            ],
+            "type" : "Size",
+            "name" : "contentSize"
+          },
+          {
+            "value" : [
+              0,
+              0
+            ],
+            "type" : "Point",
+            "name" : "anchorPoint"
+          },
+          {
+            "value" : [
+              1,
+              1,
+              false,
+              0
+            ],
+            "type" : "ScaleLock",
+            "name" : "scale"
+          },
+          {
+            "value" : [
+              0.8700000047683716,
+              0.5943650007247925,
+              0.3985870480537415,
+              1
+            ],
+            "type" : "Color3",
+            "name" : "startColor"
+          },
+          {
+            "value" : [
+              0.4128404557704926,
+              0.800000011920929,
+              0.3021306991577148,
+              1
+            ],
+            "type" : "Color3",
+            "name" : "endColor"
+          },
+          {
+            "value" : [
+              0,
+              -1
+            ],
+            "type" : "Point",
+            "name" : "vector"
+          }
+        ]
+      },
+      {
+        "displayName" : "CCNode",
+        "baseClass" : "CCNode",
+        "memberVarAssignmentType" : 1,
+        "children" : [
+
+        ],
+        "memberVarAssignmentName" : "",
+        "UUID" : 7,
+        "selected" : true,
+        "customClass" : "",
+        "properties" : [
+          {
+            "value" : "mainNode",
+            "type" : "StringSimple",
+            "name" : "name"
+          },
+          {
+            "value" : [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "type" : "Position",
+            "name" : "position"
+          },
+          {
+            "value" : [
+              1,
+              1,
+              2,
+              2
+            ],
+            "type" : "Size",
+            "name" : "contentSize"
+          },
+          {
+            "value" : [
+              0,
+              0
+            ],
+            "type" : "Point",
+            "name" : "anchorPoint"
+          },
+          {
+            "value" : [
+              1,
+              1,
+              false,
+              0
+            ],
+            "type" : "ScaleLock",
+            "name" : "scale"
+          }
+        ]
+      },
+      {
+        "displayName" : "CCBFile",
+        "baseClass" : "CCBFile",
+        "memberVarAssignmentType" : 1,
+        "children" : [
+
+        ],
+        "memberVarAssignmentName" : "_menuLayer",
+        "UUID" : 5,
+        "customClass" : "",
+        "properties" : [
+          {
+            "value" : "",
+            "type" : "StringSimple",
+            "name" : "name"
+          },
+          {
+            "value" : [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "type" : "Position",
+            "name" : "position"
+          },
+          {
+            "value" : [
+              1,
+              1,
+              false,
+              0
+            ],
+            "type" : "ScaleLock",
+            "name" : "scale"
+          },
+          {
+            "value" : "main\/MenuLayer.ccb",
+            "type" : "CCBFile",
+            "name" : "ccbFile"
+          }
+        ]
+      },
+      {
+        "displayName" : "CCBFile",
+        "baseClass" : "CCBFile",
+        "memberVarAssignmentType" : 1,
+        "children" : [
+
+        ],
+        "memberVarAssignmentName" : "_topLayer",
+        "UUID" : 6,
+        "customClass" : "",
+        "properties" : [
+          {
+            "value" : "",
+            "type" : "StringSimple",
+            "name" : "name"
+          },
+          {
+            "value" : [
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            "type" : "Position",
+            "name" : "position"
+          },
+          {
+            "value" : [
+              1,
+              1,
+              false,
+              0
+            ],
+            "type" : "ScaleLock",
+            "name" : "scale"
+          },
+          {
+            "value" : "main\/TopLayer.ccb",
+            "type" : "CCBFile",
+            "name" : "ccbFile"
+          }
+        ]
+      }
+    ],
+    "memberVarAssignmentName" : "",
+    "UUID" : 1,
+    "customClass" : "MainScene",
+    "properties" : [
+      {
+        "value" : "",
+        "type" : "StringSimple",
+        "name" : "name"
+      },
+      {
+        "value" : [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "type" : "Position",
+        "name" : "position"
+      },
+      {
+        "value" : [
+          1,
+          1,
+          2,
+          2
+        ],
+        "type" : "Size",
+        "name" : "contentSize"
+      },
+      {
+        "value" : [
+          0,
+          0
+        ],
+        "type" : "Point",
+        "name" : "anchorPoint"
+      },
+      {
+        "value" : [
+          1,
+          1,
+          false,
+          0
+        ],
+        "type" : "ScaleLock",
+        "name" : "scale"
+      }
+    ]
+  },
+  "guides" : [
+
+  ],
+  "currentSequenceId" : 0,
+  "gridspaceWidth" : 64,
+  "gridspaceHeight" : 64,
+  "resolutions" : [
+    {
+      "height" : 568,
+      "scale" : 1,
+      "ext" : "phone",
+      "width" : 320,
+      "centeredOrigin" : false,
+      "name" : "Phone Portrait"
+    },
+    {
+      "height" : 512,
+      "scale" : 2,
+      "ext" : "tablet phonehd",
+      "width" : 384,
+      "centeredOrigin" : false,
+      "name" : "Tablet Portrait"
+    },
+    {
+      "height" : 480,
+      "scale" : 1,
+      "ext" : "phone",
+      "width" : 320,
+      "centeredOrigin" : false,
+      "name" : "iPhone Portrait (short)"
+    }
+  ],
+  "sequences" : [
+    {
+      "autoPlay" : true,
+      "length" : 10,
+      "offset" : 0,
+      "position" : 0,
+      "resolution" : 30,
+      "scale" : 128,
+      "sequenceId" : 0,
+      "soundChannel" : {
+        "isExpanded" : false,
+        "keyframes" : [
+
+        ],
+        "type" : 10
+      },
+      "chainedSequenceId" : -1,
+      "name" : "Default Timeline",
+      "callbackChannel" : {
+        "keyframes" : [
+
+        ],
+        "type" : 11
+      }
+    }
+  ],
+  "currentResolution" : 0,
+  "stageBorder" : 0,
+  "centeredOrigin" : false,
+  "UUID" : 8,
+  "notes" : [
+
+  ],
+  "joints" : [
+
+  ],
+  "stageColor" : 0,
+  "fileType" : "CocosBuilder",
+  "SequencerJoints" : {
+    "hidden" : false,
+    "locked" : false
+  },
+  "jsControlled" : false,
+  "fileVersion" : 4,
+  "docDimensionsType" : 0
+}

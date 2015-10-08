@@ -15,7 +15,7 @@ Storages::Storages()
 {
 }
 
-IOData* Storages::GetFileData(const string& fullpath)
+IOData* Storages::GetFileData(const String& fullpath)
 {
     if (fullpath.size() == 0)
     {
@@ -23,7 +23,7 @@ IOData* Storages::GetFileData(const string& fullpath)
         return null;
     }
     
-    FILE * fp = fopen(fullpath.c_str(), "rb");
+    FILE * fp = fopen(fullpath.c_nstr(), "rb");
     if (!fp) {
         Debug::throwMsg("文件打开失败:"+fullpath);
         return null;
@@ -42,14 +42,14 @@ IOData* Storages::GetFileData(const string& fullpath)
     return ret;
 }
 
-IOData* Storages::GetFileString(const string& fullpath)
+IOData* Storages::GetFileString(const String& fullpath)
 {
     if (fullpath.size() == 0)
     {
         Debug::throwMsg(ERROR_FILE_EXIST_FAILD,fullpath);
         return null;
     }
-    FILE *fp = fopen(fullpath.c_str(), "rb");
+    FILE *fp = fopen(fullpath.c_nstr(), "rb");
     if (!fp) {
         perror("fopen");
         Debug::throwMsg("文件打开失败:"+fullpath);
@@ -71,9 +71,10 @@ IOData* Storages::GetFileString(const string& fullpath)
     return ret;
 }
 
-void Storages::addAutoPath(const string& storage)
+void Storages::addAutoPath(const String& path)
 {
     // ( 增加自动检索路径 )
+    string storage = path.utf8Value();
     DM("增加自动检索路径:%s",storage.c_str());
     if (storage.back() != '/')
     {
@@ -85,9 +86,10 @@ void Storages::addAutoPath(const string& storage)
     }
 }
 
-string Storages::getFullPath(const string& storage)
+String Storages::getFullPath(const String& path)
 {
     // ( 获取统一文件路径 )
+    string storage = path.utf8Value();
     if (storage.size() == 0) {
         return "";
     }
@@ -164,10 +166,10 @@ string Storages::getFullPath(const string& storage)
     return "";
 }
 
-void Storages::removeAutoPath(const string& storage)
+void Storages::removeAutoPath(const String& storage)
 {
     // ( 删除自动检索路径 )
-    std::remove(m_autoPaths.begin(), m_autoPaths.end(), storage);
+    std::remove(m_autoPaths.begin(), m_autoPaths.end(), storage.utf8Value());
 }
 
 void Storages::clearAutoPath()

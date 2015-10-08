@@ -10,9 +10,17 @@
 
 DE_BEGIN
 
+static const int g_maxLen = 16*1024;
+static char g_tmpStr[g_maxLen+1];
+
 String String::fromFormat(const char* format,...)
 {
-
+    va_list args;
+    memset(g_tmpStr, 0, sizeof(g_tmpStr));
+    va_start(args, format);
+    vsprintf(g_tmpStr, format, args);
+    va_end(args);
+    return String((const char*)g_tmpStr);
 }
 
 String::String()
@@ -82,88 +90,27 @@ String::~String()
 
 bool String::readFromFile(const String& path)
 {
-
+    return false;
 }
 
-const String::String& operator+ (const String& v)
+int String::intValue()
 {
-
+    return -1;
 }
 
-const String::String& operator+= (const String& v)
+int64_t String::int64Value()
 {
-
+    return -1;
 }
 
-const String::String& operator<< (const String& v)
+double String::doubleValue()
 {
-
+    return 0;
 }
 
-String String::operator[] (const String& v)
+string String::utf8Value() const
 {
-
-}
-
-bool String::operator< (const String& v)
-{
-
-}
-
-bool String::operator> (const String& v)
-{
-
-}
-
-bool String::operator== (const String& v)
-{
-
-}
-
-
-int String::toInt()
-{
-
-}
-
-int64_t String::toInt64()
-{
-
-}
-
-double String::toDouble()
-{
-
-}
-
-char String::toChar()
-{
-
-}
-
-wchar_t String::toWChar()
-{
-
-}
-
-const string& String::toUtf8()
-{
-
-}
-
-const wstring& String::toUnicode()
-{
-
-}
-
-const char* String::c_str()
-{
-
-}
-
-const wchar_t* String::c_wstr()
-{
-
+    return "";
 }
 
 

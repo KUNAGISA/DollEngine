@@ -44,7 +44,7 @@ Painter::~Painter()
     SAFF_RELEASE(m_displayFrame);
 }
 
-bool Painter::loadImages(const string& path,const string& plist)
+bool Painter::loadImages(const String& path,const String& plist)
 {
     SpriteFrame* frame = GLCache::GetInstance()->addFrame(path);
     if (frame) {
@@ -82,7 +82,7 @@ bool Painter::setMargin(float l,float r,float t,float b)
     return true;
 }
 
-bool Painter::loadImageWithMargin(const string& path,float l,float r,float t,float b)
+bool Painter::loadImageWithMargin(const String& path,float l,float r,float t,float b)
 {
     SpriteFrame* frame = GLCache::GetInstance()->addFrame(path);
     Rect rect(l*frame->getWidth(),
@@ -151,7 +151,7 @@ void Painter::setSizeToImageSize()
 }
 
 
-void Painter::setProgram(const string& name)
+void Painter::setProgram(const String& name)
 {
     m_program = GLCanvas::GetInstance()->getProgram(name);
 }

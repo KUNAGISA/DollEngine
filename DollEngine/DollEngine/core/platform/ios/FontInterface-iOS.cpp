@@ -6,17 +6,19 @@
 
 DE_BEGIN
 
+static FT_Library g_fontLibrary=null;
+
 FontInterface::FontInterface()
 {
-    FT_Init_FreeType(&m_fontLibrary);
+    FT_Init_FreeType(&g_fontLibrary);
 }
 
 FontInterface::~FontInterface()
 {
-    FT_Done_FreeType(m_fontLibrary);
+    FT_Done_FreeType(g_fontLibrary);
 }
 
-FT_Face FontInterface::getFont(const string& fontName)
+void* FontInterface::getFont(const String& fontName)
 {
     auto iter = m_allFonts.find(fontName);
     if (iter != m_allFonts.end()) {
@@ -30,11 +32,11 @@ FT_Face FontInterface::getFont(const string& fontName)
     }
 }
 
-ImageData* FontInterface::addText(const string& text,const string& fontName,int fontSize,FontData* fd)
+ImageData* FontInterface::addText(const String& text,const String& fontName,int fontSize,FontData* fd)
 {
-    FT_Face face = getFont(fontName);
+    FT_Face face = (FT_Face)getFont(fontName);
     if (!face) {
-        face = getFont(DEFFONT);
+        face = (FT_Face)getFont(DEFFONT);
     }
     wstring str;
     Utf8ToUnicode((char*)text.c_str(),str);
@@ -42,7 +44,7 @@ ImageData* FontInterface::addText(const string& text,const string& fontName,int 
     FT_UInt graphIdx = FT_Get_Char_Index(face, (FT_ULong)charcode);
     if (graphIdx == 0)
     {
-        face = getFont(DEFFONT);
+        face = (FT_Face)getFont(DEFFONT);
         graphIdx = FT_Get_Char_Index(face, charcode);
     }
     FT_Error ft_err = FT_Set_Char_Size(face,
@@ -96,7 +98,7 @@ ImageData* FontInterface::addText(const string& text,const string& fontName,int 
     return image;
 }
 
-string FontInterface::addFont(const string& path)
+String FontInterface::addFont(const String& path)
 {
     FileInfo file(path);
     if (!file.exist()) {
@@ -106,7 +108,7 @@ string FontInterface::addFont(const string& path)
     if (iter == m_allFontPaths.end())
     {
         FT_Face face;
-        FT_Error ft_err = FT_New_Face(m_fontLibrary, file.absolutePath().c_str(), 0, &face);
+        FT_Error ft_err = FT_New_Face(g_fontLibrary, file.absolutePath().utf8Value().c_str(), 0, &face);
         if (ft_err) {
             Debug::throwMsg(ERROR_ADDFONT_FAILD);
         }
@@ -129,7 +131,7 @@ string FontInterface::addFont(const string& path)
     return iter->second;
 }
 
-void FontInterface::removeFont(const string& fontName)
+void FontInterface::removeFont(const String& fontName)
 {
     auto iter = m_allFonts.find(fontName);
     if (iter != m_allFonts.end()) {
@@ -140,7 +142,7 @@ void FontInterface::removeFont(const string& fontName)
             }
         }
         
-        FT_Done_Face(iter->second);
+        FT_Done_Face((FT_Face)iter->second);
         m_allFonts.erase(fontName);
     }
 }

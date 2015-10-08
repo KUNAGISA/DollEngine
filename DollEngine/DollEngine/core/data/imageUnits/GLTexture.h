@@ -28,7 +28,7 @@ public:
     
     unsigned char* getData();
     PROPERTY_RO(int,RetainCount,m_retainCount)
-    PROPERTY_CONST(string,CacheKey,m_cacheKey){m_cacheKey=v;}
+    PROPERTY_CONST(String,CacheKey,m_cacheKey){m_cacheKey=v;}
     PROPERTY(GLuint, TextureId, m_textureId);
     
     PROPERTY(int, Width, m_width){m_width=v;}

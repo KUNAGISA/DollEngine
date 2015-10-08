@@ -18,7 +18,7 @@ class Audio
 public:
     Audio();
     ~Audio();
-    virtual bool preload(const string& path);
+    virtual bool preload(const String& path);
     void play(bool isloop,bool isfade);
     void stop(bool isfade);
     PROPERTY(bool, Loop, m_loop);

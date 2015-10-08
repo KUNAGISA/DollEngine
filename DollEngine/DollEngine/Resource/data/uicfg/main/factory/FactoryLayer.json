@@ -1,0 +1,1099 @@
+{
+  "nodeGraph" : {
+    "displayName" : "CCNode",
+    "baseClass" : "CCNode",
+    "memberVarAssignmentType" : 1,
+    "children" : [
+      {
+        "displayName" : "CCNode",
+        "baseClass" : "CCNode",
+        "memberVarAssignmentType" : 1,
+        "children" : [
+          {
+            "displayName" : "CCNode",
+            "baseClass" : "CCNode",
+            "memberVarAssignmentType" : 1,
+            "children" : [
+              {
+                "displayName" : "CCNodeGradient",
+                "baseClass" : "CCNodeGradient",
+                "memberVarAssignmentType" : 1,
+                "children" : [
+
+                ],
+                "memberVarAssignmentName" : "",
+                "UUID" : 6,
+                "customClass" : "",
+                "properties" : [
+                  {
+                    "value" : "",
+                    "type" : "StringSimple",
+                    "name" : "name"
+                  },
+                  {
+                    "value" : [
+                      0,
+                      0,
+                      0,
+                      0,
+                      0
+                    ],
+                    "type" : "Position",
+                    "name" : "position"
+                  },
+                  {
+                    "value" : [
+                      1,
+                      1,
+                      2,
+                      2
+                    ],
+                    "type" : "Size",
+                    "name" : "contentSize"
+                  },
+                  {
+                    "value" : [
+                      0,
+                      0
+                    ],
+                    "type" : "Point",
+                    "name" : "anchorPoint"
+                  },
+                  {
+                    "value" : [
+                      1,
+                      1,
+                      false,
+                      0
+                    ],
+                    "type" : "ScaleLock",
+                    "name" : "scale"
+                  },
+                  {
+                    "value" : [
+                      0.2980392277240753,
+                      0.2980392277240753,
+                      0.2980392277240753,
+                      1
+                    ],
+                    "type" : "Color3",
+                    "name" : "startColor"
+                  },
+                  {
+                    "value" : [
+                      0.800000011920929,
+                      0.800000011920929,
+                      0.800000011920929,
+                      1
+                    ],
+                    "type" : "Color3",
+                    "name" : "endColor"
+                  },
+                  {
+                    "value" : [
+                      0,
+                      -1
+                    ],
+                    "type" : "Point",
+                    "name" : "vector"
+                  }
+                ]
+              }
+            ],
+            "memberVarAssignmentName" : "",
+            "UUID" : 5,
+            "customClass" : "",
+            "properties" : [
+              {
+                "value" : "",
+                "type" : "StringSimple",
+                "name" : "name"
+              },
+              {
+                "value" : [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "type" : "Position",
+                "name" : "position"
+              },
+              {
+                "value" : [
+                  1,
+                  40,
+                  2,
+                  3
+                ],
+                "type" : "Size",
+                "name" : "contentSize"
+              },
+              {
+                "value" : [
+                  0,
+                  0
+                ],
+                "type" : "Point",
+                "name" : "anchorPoint"
+              },
+              {
+                "value" : [
+                  1,
+                  1,
+                  false,
+                  0
+                ],
+                "type" : "ScaleLock",
+                "name" : "scale"
+              }
+            ]
+          },
+          {
+            "displayName" : "CCLayoutBox",
+            "baseClass" : "CCLayoutBox",
+            "memberVarAssignmentType" : 1,
+            "children" : [
+              {
+                "displayName" : "CCButton",
+                "baseClass" : "CCButton",
+                "memberVarAssignmentType" : 1,
+                "children" : [
+
+                ],
+                "memberVarAssignmentName" : "",
+                "UUID" : 8,
+                "customClass" : "",
+                "properties" : [
+                  {
+                    "value" : "",
+                    "type" : "StringSimple",
+                    "name" : "name"
+                  },
+                  {
+                    "value" : [
+                      50,
+                      20,
+                      0,
+                      0,
+                      0
+                    ],
+                    "type" : "Position",
+                    "name" : "position"
+                  },
+                  {
+                    "value" : [
+                      0.5,
+                      0.5
+                    ],
+                    "type" : "Point",
+                    "name" : "anchorPoint"
+                  },
+                  {
+                    "value" : [
+                      1,
+                      1,
+                      false,
+                      0
+                    ],
+                    "type" : "ScaleLock",
+                    "name" : "scale"
+                  },
+                  {
+                    "value" : [
+                      "",
+                      1
+                    ],
+                    "type" : "Block",
+                    "name" : "block"
+                  },
+                  {
+                    "value" : [
+                      100,
+                      40,
+                      0,
+                      0
+                    ],
+                    "type" : "Size",
+                    "name" : "preferredSize"
+                  },
+                  {
+                    "value" : [
+                      0,
+                      0,
+                      0,
+                      0
+                    ],
+                    "type" : "Size",
+                    "name" : "maxSize"
+                  },
+                  {
+                    "value" : true,
+                    "type" : "Check",
+                    "name" : "userInteractionEnabled"
+                  },
+                  {
+                    "value" : [
+                      "星舰维修",
+                      false
+                    ],
+                    "type" : "String",
+                    "name" : "title"
+                  },
+                  {
+                    "value" : [
+                      "",
+                      "ccbResources\/ccbButtonNormal.png"
+                    ],
+                    "type" : "SpriteFrame",
+                    "name" : "backgroundSpriteFrame|Normal"
+                  },
+                  {
+                    "value" : [
+                      "",
+                      "ccbResources\/ccbButtonHighlighted.png"
+                    ],
+                    "type" : "SpriteFrame",
+                    "name" : "backgroundSpriteFrame|Highlighted"
+                  },
+                  {
+                    "value" : [
+                      1,
+                      1,
+                      1,
+                      1
+                    ],
+                    "type" : "Color3",
+                    "name" : "labelColor|Highlighted"
+                  },
+                  {
+                    "value" : [
+                      "",
+                      "ccbResources\/ccbButtonNormal.png"
+                    ],
+                    "type" : "SpriteFrame",
+                    "name" : "backgroundSpriteFrame|Disabled"
+                  },
+                  {
+                    "value" : 1,
+                    "type" : "Float",
+                    "name" : "labelOpacity|Disabled"
+                  },
+                  {
+                    "value" : [
+                      "",
+                      "ccbResources\/ccbButtonNormal.png"
+                    ],
+                    "type" : "SpriteFrame",
+                    "name" : "backgroundSpriteFrame|Selected"
+                  },
+                  {
+                    "value" : 1,
+                    "type" : "Float",
+                    "name" : "labelOpacity|Selected"
+                  },
+                  {
+                    "value" : "Helvetica",
+                    "type" : "FontTTF",
+                    "name" : "fontName"
+                  },
+                  {
+                    "value" : [
+                      17,
+                      0
+                    ],
+                    "type" : "FloatScale",
+                    "name" : "fontSize"
+                  },
+                  {
+                    "value" : 1,
+                    "type" : "IntegerLabeled",
+                    "name" : "horizontalAlignment"
+                  },
+                  {
+                    "value" : 1,
+                    "type" : "IntegerLabeled",
+                    "name" : "verticalAlignment"
+                  },
+                  {
+                    "value" : [
+                      10,
+                      0
+                    ],
+                    "type" : "FloatScale",
+                    "name" : "horizontalPadding"
+                  },
+                  {
+                    "value" : [
+                      0,
+                      0
+                    ],
+                    "type" : "FloatScale",
+                    "name" : "verticalPadding"
+                  },
+                  {
+                    "value" : [
+                      255,
+                      255,
+                      255,
+                      255
+                    ],
+                    "type" : "Color4",
+                    "name" : "fontColor"
+                  },
+                  {
+                    "value" : [
+                      0,
+                      0,
+                      0,
+                      0
+                    ],
+                    "type" : "Color4",
+                    "name" : "outlineColor"
+                  },
+                  {
+                    "value" : [
+                      1,
+                      0
+                    ],
+                    "type" : "FloatScale",
+                    "name" : "outlineWidth"
+                  },
+                  {
+                    "value" : [
+                      0,
+                      0,
+                      0,
+                      127
+                    ],
+                    "type" : "Color4",
+                    "name" : "shadowColor"
+                  },
+                  {
+                    "value" : [
+                      2,
+                      0
+                    ],
+                    "type" : "FloatScale",
+                    "name" : "shadowBlurRadius"
+                  },
+                  {
+                    "value" : [
+                      0,
+                      -2,
+                      0,
+                      0,
+                      0
+                    ],
+                    "type" : "Position",
+                    "name" : "shadowOffset"
+                  }
+                ]
+              },
+              {
+                "displayName" : "CCButton",
+                "baseClass" : "CCButton",
+                "memberVarAssignmentType" : 1,
+                "children" : [
+
+                ],
+                "memberVarAssignmentName" : "",
+                "UUID" : 11,
+                "customClass" : "",
+                "properties" : [
+                  {
+                    "value" : "",
+                    "type" : "StringSimple",
+                    "name" : "name"
+                  },
+                  {
+                    "value" : [
+                      160,
+                      20,
+                      0,
+                      0,
+                      0
+                    ],
+                    "type" : "Position",
+                    "name" : "position"
+                  },
+                  {
+                    "value" : [
+                      0.5,
+                      0.5
+                    ],
+                    "type" : "Point",
+                    "name" : "anchorPoint"
+                  },
+                  {
+                    "value" : [
+                      1,
+                      1,
+                      false,
+                      0
+                    ],
+                    "type" : "ScaleLock",
+                    "name" : "scale"
+                  },
+                  {
+                    "value" : [
+                      "",
+                      1
+                    ],
+                    "type" : "Block",
+                    "name" : "block"
+                  },
+                  {
+                    "value" : [
+                      100,
+                      40,
+                      0,
+                      0
+                    ],
+                    "type" : "Size",
+                    "name" : "preferredSize"
+                  },
+                  {
+                    "value" : [
+                      0,
+                      0,
+                      0,
+                      0
+                    ],
+                    "type" : "Size",
+                    "name" : "maxSize"
+                  },
+                  {
+                    "value" : true,
+                    "type" : "Check",
+                    "name" : "userInteractionEnabled"
+                  },
+                  {
+                    "value" : [
+                      "星舰生产",
+                      false
+                    ],
+                    "type" : "String",
+                    "name" : "title"
+                  },
+                  {
+                    "value" : [
+                      "",
+                      "ccbResources\/ccbButtonNormal.png"
+                    ],
+                    "type" : "SpriteFrame",
+                    "name" : "backgroundSpriteFrame|Normal"
+                  },
+                  {
+                    "value" : [
+                      "",
+                      "ccbResources\/ccbButtonHighlighted.png"
+                    ],
+                    "type" : "SpriteFrame",
+                    "name" : "backgroundSpriteFrame|Highlighted"
+                  },
+                  {
+                    "value" : [
+                      1,
+                      1,
+                      1,
+                      1
+                    ],
+                    "type" : "Color3",
+                    "name" : "labelColor|Highlighted"
+                  },
+                  {
+                    "value" : [
+                      "",
+                      "ccbResources\/ccbButtonNormal.png"
+                    ],
+                    "type" : "SpriteFrame",
+                    "name" : "backgroundSpriteFrame|Disabled"
+                  },
+                  {
+                    "value" : 1,
+                    "type" : "Float",
+                    "name" : "labelOpacity|Disabled"
+                  },
+                  {
+                    "value" : [
+                      "",
+                      "ccbResources\/ccbButtonNormal.png"
+                    ],
+                    "type" : "SpriteFrame",
+                    "name" : "backgroundSpriteFrame|Selected"
+                  },
+                  {
+                    "value" : 1,
+                    "type" : "Float",
+                    "name" : "labelOpacity|Selected"
+                  },
+                  {
+                    "value" : "Helvetica",
+                    "type" : "FontTTF",
+                    "name" : "fontName"
+                  },
+                  {
+                    "value" : [
+                      17,
+                      0
+                    ],
+                    "type" : "FloatScale",
+                    "name" : "fontSize"
+                  },
+                  {
+                    "value" : 1,
+                    "type" : "IntegerLabeled",
+                    "name" : "horizontalAlignment"
+                  },
+                  {
+                    "value" : 1,
+                    "type" : "IntegerLabeled",
+                    "name" : "verticalAlignment"
+                  },
+                  {
+                    "value" : [
+                      10,
+                      0
+                    ],
+                    "type" : "FloatScale",
+                    "name" : "horizontalPadding"
+                  },
+                  {
+                    "value" : [
+                      0,
+                      0
+                    ],
+                    "type" : "FloatScale",
+                    "name" : "verticalPadding"
+                  },
+                  {
+                    "value" : [
+                      255,
+                      255,
+                      255,
+                      255
+                    ],
+                    "type" : "Color4",
+                    "name" : "fontColor"
+                  },
+                  {
+                    "value" : [
+                      0,
+                      0,
+                      0,
+                      0
+                    ],
+                    "type" : "Color4",
+                    "name" : "outlineColor"
+                  },
+                  {
+                    "value" : [
+                      1,
+                      0
+                    ],
+                    "type" : "FloatScale",
+                    "name" : "outlineWidth"
+                  },
+                  {
+                    "value" : [
+                      0,
+                      0,
+                      0,
+                      127
+                    ],
+                    "type" : "Color4",
+                    "name" : "shadowColor"
+                  },
+                  {
+                    "value" : [
+                      2,
+                      0
+                    ],
+                    "type" : "FloatScale",
+                    "name" : "shadowBlurRadius"
+                  },
+                  {
+                    "value" : [
+                      0,
+                      -2,
+                      0,
+                      0,
+                      0
+                    ],
+                    "type" : "Position",
+                    "name" : "shadowOffset"
+                  }
+                ]
+              },
+              {
+                "displayName" : "CCButton",
+                "baseClass" : "CCButton",
+                "memberVarAssignmentType" : 1,
+                "children" : [
+
+                ],
+                "memberVarAssignmentName" : "",
+                "UUID" : 14,
+                "selected" : true,
+                "customClass" : "",
+                "properties" : [
+                  {
+                    "value" : "",
+                    "type" : "StringSimple",
+                    "name" : "name"
+                  },
+                  {
+                    "value" : [
+                      270,
+                      20,
+                      0,
+                      0,
+                      0
+                    ],
+                    "type" : "Position",
+                    "name" : "position"
+                  },
+                  {
+                    "value" : [
+                      0.5,
+                      0.5
+                    ],
+                    "type" : "Point",
+                    "name" : "anchorPoint"
+                  },
+                  {
+                    "value" : [
+                      1,
+                      1,
+                      false,
+                      0
+                    ],
+                    "type" : "ScaleLock",
+                    "name" : "scale"
+                  },
+                  {
+                    "value" : [
+                      "",
+                      1
+                    ],
+                    "type" : "Block",
+                    "name" : "block"
+                  },
+                  {
+                    "value" : [
+                      100,
+                      40,
+                      0,
+                      0
+                    ],
+                    "type" : "Size",
+                    "name" : "preferredSize"
+                  },
+                  {
+                    "value" : [
+                      0,
+                      0,
+                      0,
+                      0
+                    ],
+                    "type" : "Size",
+                    "name" : "maxSize"
+                  },
+                  {
+                    "value" : true,
+                    "type" : "Check",
+                    "name" : "userInteractionEnabled"
+                  },
+                  {
+                    "value" : [
+                      "生产序列",
+                      false
+                    ],
+                    "type" : "String",
+                    "name" : "title"
+                  },
+                  {
+                    "value" : [
+                      "",
+                      "ccbResources\/ccbButtonNormal.png"
+                    ],
+                    "type" : "SpriteFrame",
+                    "name" : "backgroundSpriteFrame|Normal"
+                  },
+                  {
+                    "value" : [
+                      "",
+                      "ccbResources\/ccbButtonHighlighted.png"
+                    ],
+                    "type" : "SpriteFrame",
+                    "name" : "backgroundSpriteFrame|Highlighted"
+                  },
+                  {
+                    "value" : [
+                      1,
+                      1,
+                      1,
+                      1
+                    ],
+                    "type" : "Color3",
+                    "name" : "labelColor|Highlighted"
+                  },
+                  {
+                    "value" : [
+                      "",
+                      "ccbResources\/ccbButtonNormal.png"
+                    ],
+                    "type" : "SpriteFrame",
+                    "name" : "backgroundSpriteFrame|Disabled"
+                  },
+                  {
+                    "value" : 1,
+                    "type" : "Float",
+                    "name" : "labelOpacity|Disabled"
+                  },
+                  {
+                    "value" : [
+                      "",
+                      "ccbResources\/ccbButtonNormal.png"
+                    ],
+                    "type" : "SpriteFrame",
+                    "name" : "backgroundSpriteFrame|Selected"
+                  },
+                  {
+                    "value" : 1,
+                    "type" : "Float",
+                    "name" : "labelOpacity|Selected"
+                  },
+                  {
+                    "value" : "Helvetica",
+                    "type" : "FontTTF",
+                    "name" : "fontName"
+                  },
+                  {
+                    "value" : [
+                      17,
+                      0
+                    ],
+                    "type" : "FloatScale",
+                    "name" : "fontSize"
+                  },
+                  {
+                    "value" : 1,
+                    "type" : "IntegerLabeled",
+                    "name" : "horizontalAlignment"
+                  },
+                  {
+                    "value" : 1,
+                    "type" : "IntegerLabeled",
+                    "name" : "verticalAlignment"
+                  },
+                  {
+                    "value" : [
+                      10,
+                      0
+                    ],
+                    "type" : "FloatScale",
+                    "name" : "horizontalPadding"
+                  },
+                  {
+                    "value" : [
+                      0,
+                      0
+                    ],
+                    "type" : "FloatScale",
+                    "name" : "verticalPadding"
+                  },
+                  {
+                    "value" : [
+                      255,
+                      255,
+                      255,
+                      255
+                    ],
+                    "type" : "Color4",
+                    "name" : "fontColor"
+                  },
+                  {
+                    "value" : [
+                      0,
+                      0,
+                      0,
+                      0
+                    ],
+                    "type" : "Color4",
+                    "name" : "outlineColor"
+                  },
+                  {
+                    "value" : [
+                      1,
+                      0
+                    ],
+                    "type" : "FloatScale",
+                    "name" : "outlineWidth"
+                  },
+                  {
+                    "value" : [
+                      0,
+                      0,
+                      0,
+                      127
+                    ],
+                    "type" : "Color4",
+                    "name" : "shadowColor"
+                  },
+                  {
+                    "value" : [
+                      2,
+                      0
+                    ],
+                    "type" : "FloatScale",
+                    "name" : "shadowBlurRadius"
+                  },
+                  {
+                    "value" : [
+                      0,
+                      -2,
+                      0,
+                      0,
+                      0
+                    ],
+                    "type" : "Position",
+                    "name" : "shadowOffset"
+                  }
+                ]
+              }
+            ],
+            "memberVarAssignmentName" : "",
+            "UUID" : 7,
+            "customClass" : "",
+            "properties" : [
+              {
+                "value" : "",
+                "type" : "StringSimple",
+                "name" : "name"
+              },
+              {
+                "value" : [
+                  0,
+                  0,
+                  1,
+                  0,
+                  0
+                ],
+                "type" : "Position",
+                "name" : "position"
+              },
+              {
+                "value" : [
+                  0,
+                  1
+                ],
+                "type" : "Point",
+                "name" : "anchorPoint"
+              },
+              {
+                "value" : [
+                  1,
+                  1,
+                  false,
+                  0
+                ],
+                "type" : "ScaleLock",
+                "name" : "scale"
+              },
+              {
+                "value" : 0,
+                "type" : "IntegerLabeled",
+                "name" : "direction"
+              },
+              {
+                "value" : [
+                  10,
+                  0
+                ],
+                "type" : "FloatScale",
+                "name" : "spacing"
+              }
+            ]
+          }
+        ],
+        "memberVarAssignmentName" : "",
+        "UUID" : 4,
+        "customClass" : "",
+        "properties" : [
+          {
+            "value" : "",
+            "type" : "StringSimple",
+            "name" : "name"
+          },
+          {
+            "value" : [
+              0,
+              56,
+              0,
+              0,
+              0
+            ],
+            "type" : "Position",
+            "name" : "position"
+          },
+          {
+            "value" : [
+              1,
+              156,
+              2,
+              3
+            ],
+            "type" : "Size",
+            "name" : "contentSize"
+          },
+          {
+            "value" : [
+              0,
+              0
+            ],
+            "type" : "Point",
+            "name" : "anchorPoint"
+          },
+          {
+            "value" : [
+              1,
+              1,
+              false,
+              0
+            ],
+            "type" : "ScaleLock",
+            "name" : "scale"
+          }
+        ]
+      }
+    ],
+    "memberVarAssignmentName" : "",
+    "customClass" : "FactoryLayer",
+    "properties" : [
+      {
+        "value" : "",
+        "type" : "StringSimple",
+        "name" : "name"
+      },
+      {
+        "value" : [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "type" : "Position",
+        "name" : "position"
+      },
+      {
+        "value" : [
+          1,
+          1,
+          2,
+          2
+        ],
+        "type" : "Size",
+        "name" : "contentSize"
+      },
+      {
+        "value" : [
+          0,
+          0
+        ],
+        "type" : "Point",
+        "name" : "anchorPoint"
+      },
+      {
+        "value" : [
+          1,
+          1,
+          false,
+          0
+        ],
+        "type" : "ScaleLock",
+        "name" : "scale"
+      }
+    ]
+  },
+  "guides" : [
+
+  ],
+  "currentSequenceId" : 0,
+  "gridspaceWidth" : 64,
+  "gridspaceHeight" : 64,
+  "resolutions" : [
+    {
+      "height" : 568,
+      "scale" : 1,
+      "ext" : "phone",
+      "width" : 320,
+      "centeredOrigin" : false,
+      "name" : "Phone Portrait"
+    },
+    {
+      "height" : 512,
+      "scale" : 2,
+      "ext" : "tablet phonehd",
+      "width" : 384,
+      "centeredOrigin" : false,
+      "name" : "Tablet Portrait"
+    },
+    {
+      "height" : 480,
+      "scale" : 1,
+      "ext" : "phone",
+      "width" : 320,
+      "centeredOrigin" : false,
+      "name" : "iPhone Portrait (short)"
+    }
+  ],
+  "sequences" : [
+    {
+      "autoPlay" : true,
+      "length" : 10,
+      "offset" : 0,
+      "position" : 0,
+      "resolution" : 30,
+      "scale" : 128,
+      "sequenceId" : 0,
+      "soundChannel" : {
+        "isExpanded" : false,
+        "keyframes" : [
+
+        ],
+        "type" : 11
+      },
+      "chainedSequenceId" : -1,
+      "name" : "Default Timeline",
+      "callbackChannel" : {
+        "keyframes" : [
+
+        ],
+        "type" : 12
+      }
+    }
+  ],
+  "currentResolution" : 0,
+  "stageBorder" : 0,
+  "centeredOrigin" : false,
+  "UUID" : 17,
+  "notes" : [
+
+  ],
+  "joints" : [
+
+  ],
+  "stageColor" : 0,
+  "fileType" : "CocosBuilder",
+  "SequencerJoints" : {
+    "hidden" : false,
+    "locked" : false
+  },
+  "jsControlled" : false,
+  "fileVersion" : 4,
+  "docDimensionsType" : 0
+}

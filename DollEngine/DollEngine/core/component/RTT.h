@@ -22,8 +22,8 @@ public:
     bool begin(int w,int h,Painter* bg=null);
     void end();
 protected:
-    GLuint m_FBO;
-    GLuint m_oldFBO;
+    DrawFBOId m_FBO;
+    DrawFBOId m_oldFBO;
 };
 
 DE_END

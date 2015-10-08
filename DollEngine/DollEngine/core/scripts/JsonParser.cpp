@@ -11,9 +11,9 @@
 
 DE_BEGIN
 
-tTJSVariant JsonParser::FromJsonFile(const string& path)
+tTJSVariant JsonParser::FromJsonFile(const String& path)
 {
-    string fullpath = Storages::GetInstance()->getFullPath(path);
+    String fullpath = Storages::GetInstance()->getFullPath(path);
     IOData* data = Storages::GetFileString(fullpath);
     if (data) {
         string error;

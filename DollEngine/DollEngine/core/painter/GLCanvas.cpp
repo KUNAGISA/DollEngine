@@ -97,7 +97,7 @@ void GLCanvas::resizeGL()
     }
 }
 
-void GLCanvas::addProgram(string pm,GLProgram* effect)
+void GLCanvas::addProgram(String pm,GLProgram* effect)
 {
     if(effect->init()) {
         m_allPrograms[pm] = effect;
@@ -107,7 +107,7 @@ void GLCanvas::addProgram(string pm,GLProgram* effect)
     }
 }
 
-GLProgram* GLCanvas::getProgram(string pm)
+GLProgram* GLCanvas::getProgram(String pm)
 {
     return m_allPrograms[pm];
 }

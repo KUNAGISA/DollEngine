@@ -38,13 +38,13 @@ public:
     
 public:
     void blendFunc(GLenum src,GLenum dst);
-    void addProgram(string pm,GLProgram*);
-    GLProgram* getProgram(string pm);
+    void addProgram(String pm,GLProgram*);
+    GLProgram* getProgram(String pm);
     
 public:
     void paint(PaintConfig& config);
 protected:
-    map<string,GLProgram*> m_allPrograms;
+    map<String,GLProgram*> m_allPrograms;
     bool m_initialized;
 };
 

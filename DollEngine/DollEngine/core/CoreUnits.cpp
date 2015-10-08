@@ -89,15 +89,15 @@ unsigned int utf8_len_for_table[256] =
 
 #define UTFLEN(x)  utf8_len_for_table[(int)(x)]
 
-void Utf8ToVector(const string& _in, vector<string>& _out)
+void Utf8ToVector(const String& _in, vector<string>& _out)
 {
-    for (int i = 0; i < _in.size();)
-    {
-        int len = UTFLEN(_in[i] & 0xff);
-        string o(_in.c_str()+i,len);
-        _out.push_back(o);
-        i+=len;
-    }
+//    for (int i = 0; i < _in.size();)
+//    {
+//        int len = UTFLEN(_in[i] & 0xff);
+//        string o(_in.c_str()+i,len);
+//        _out.push_back(o);
+//        i+=len;
+//    }
 }
 
 void Utf8ToUnicode(const char* src, wstring& target)

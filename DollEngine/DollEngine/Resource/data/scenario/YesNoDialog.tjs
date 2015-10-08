@@ -1,0 +1,104 @@
+
+function askYesNo (type,elm)
+{
+	var obj=kag.fore.base;
+	if(tf.tempAskCloseLayer===void)
+	{
+		tf.tempAskCloseLayer=new KAGLayer(kag,kag.sysbase);
+		with(tf.tempAskCloseLayer)
+		{
+			.setPos(0,0,obj.width,obj.height);
+			.selProcessLock=false;
+			.loadImages("image046.png");
+			.hitType=htMask;
+			.hitThreshold=0;
+			.hasWheel=function(){return false;};
+			.enabled=true;
+			.visible=true;
+			.font.face = sf.ask_font_face;
+			.font.mapPrerenderedFont(sf.ask_font_face+".tft");
+			
+			tf.tempAskCloseYes=new LinkButtonLayer(kag,tf.tempAskCloseLayer);
+			tf.tempAskCloseYes.loadImages("image048");
+			tf.tempAskCloseYes.setPos(482,291);
+			tf.tempAskCloseYes.visible=true;
+			tf.tempAskCloseYes.onenter="(kag.se[0].play(%[storage:sf.button_enter]))";
+			
+			tf.tempAskCloseNo=new LinkButtonLayer(kag,tf.tempAskCloseLayer);
+			tf.tempAskCloseNo.loadImages("image047");
+			tf.tempAskCloseNo.setPos(482+135,291);
+			tf.tempAskCloseNo.visible=true;
+			tf.tempAskCloseNo.onenter="(kag.se[0].play(%[storage:sf.button_enter]))";
+			
+			kag.add(tf.tempAskCloseLayer);
+			kag.add(tf.tempAskCloseNo);
+			kag.add(tf.tempAskCloseYes);
+		}
+	}
+	kag.currentDialog = tf.tempAskCloseLayer;
+	tf.tempAskCloseLayer.fillRect(0,0,1136,640,0);
+	tf.tempAskCloseLayer.loadImages("image046.png");
+	if(type=="覆盖存档")
+	{
+		tf.tempAskCloseLayer.drawText(498,250,"是否覆盖存档？",0x001915);
+		tf.tempAskCloseYes.onClick=function (){
+			kag.currentDialog = void;
+			kag.se[0].play(%[storage:sf.button_click]);
+			tf.tempAskCloseLayer.visible=false;
+			kag.process('save.ks','*save_yes');
+		};
+		tf.tempAskCloseNo.onClick=function (){
+			kag.currentDialog = void;
+			kag.se[0].play(%[storage:sf.button_click]);
+			tf.tempAskCloseLayer.visible=false;
+		};
+	}
+	else if(type=="读档")
+	{
+		tf.tempAskCloseLayer.drawText(498,250,"是否读取档案？",0x001915);
+		
+		tf.tempAskCloseYes.onClick=function (){
+			kag.currentDialog = void;
+			kag.se[0].play(%[storage:sf.button_click]);
+			kag.tagHandlers.load(%[place:tf.saveload_index,ask:false]);
+			tf.tempAskCloseLayer.visible=false;
+			kag.process('load.ks','*load_yes');
+		};
+		tf.tempAskCloseNo.onClick=function (){
+			kag.currentDialog = void;
+			kag.se[0].play(%[storage:sf.button_click]);
+			tf.tempAskCloseLayer.visible=false;
+		};
+	}
+	else if(type=="返回标题")
+	{
+		tf.tempAskCloseLayer.drawText(498,250,"是否返回标题？",0x001915);
+		tf.tempAskCloseYes.onClick=function (){
+			kag.currentDialog = void;
+			kag.se[0].play(%[storage:sf.button_click]);
+			tf.tempAskCloseLayer.visible=false;
+			kag.process("title.ks","*from_game");
+		};
+		tf.tempAskCloseNo.onClick=function (){
+			kag.currentDialog = void;
+			kag.se[0].play(%[storage:sf.button_click]);
+			tf.tempAskCloseLayer.visible=false;
+		};
+	}
+	else
+	{
+		tf.tempAskCloseLayer.drawText(498,250,"是否退出游戏？",0x001915);
+		tf.tempAskCloseYes.onClick=function (){
+			kag.currentDialog = void;
+			kag.askOnClose=false;
+			kag.close();
+		};
+		tf.tempAskCloseNo.onClick=function (){
+			kag.currentDialog = void;
+			kag.se[0].play(%[storage:sf.button_click]);
+			kag.askOnClose=true;
+			tf.tempAskCloseLayer.visible=false;
+		};
+	}
+	tf.tempAskCloseLayer.visible=true;
+}

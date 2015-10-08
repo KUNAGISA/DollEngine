@@ -53,11 +53,11 @@
     if (back) {
         [back stop];
     }
-    string fullpath = DE::Storages::GetInstance()->getFullPath(path.UTF8String);
+    DE::String fullpath = DE::Storages::GetInstance()->getFullPath(path.UTF8String);
     if (fullpath == "") {
         return NO;
     }
-    NSString* url = [NSString stringWithUTF8String:fullpath.c_str()];
+    NSString* url = [NSString stringWithUTF8String:fullpath.c_nstr()];
     //printf("%s\n",fullpath.c_str());
     NSError  *error;
     back = [[AVAudioPlayer alloc]initWithContentsOfURL:[NSURL URLWithString:url] error:&error];
@@ -198,10 +198,10 @@ Audio::~Audio()
     }
 }
 
-bool Audio::preload(const string &path)
+bool Audio::preload(const String& path)
 {
     AudioPlayer* player = (__bridge AudioPlayer*)m_player;
-    BOOL ret = [player preload:[NSString stringWithUTF8String:path.c_str()]];
+    BOOL ret = [player preload:[NSString stringWithUTF8String:path.c_nstr()]];
     return ret;
 }
 

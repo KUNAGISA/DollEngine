@@ -32,17 +32,15 @@ void Debug::message(const char* format,...)
     ScriptEngine::Global()->OutputToConsole(str.c_str());
 }
 
-void Debug::throwMsg(DEBUG_MSG error,const string& p1)
+void Debug::throwMsg(DEBUG_MSG error,const String& p1)
 {
-    wstring p2;
-    Utf8ToUnicode(p1.c_str(), p2);
-    wstring msg;
+    String msg;
     switch (error) {
         case ERROR_IMAGE_LOAD_FAILD:
-            msg = L"图片资源加载失败:"+p2;
+            msg = L"图片资源加载失败:"+p1;
             break;
         case ERROR_FILE_EXIST_FAILD:
-            msg = L"文件未找到:"+p2;
+            msg = L"文件未找到:"+p1;
             break;
         case ERROR_ADDFONT_FAILD:
             msg = L"添加字体时出错";
@@ -95,11 +93,9 @@ void Debug::throwMsg(DEBUG_MSG error,int p1,const wstring& p2)
     TJS_eTJSError(msg);
 }
 
-void Debug::throwMsg(const string &v)
+void Debug::throwMsg(const String& v)
 {
-    wstring msg;
-    Utf8ToUnicode(v.c_str(), msg);
-    TJS_eTJSError(msg);
+    TJS_eTJSError(v);
 }
 
 static TJS::tTJS* s_tjs = null;

@@ -24,26 +24,26 @@ class FileInfo
     };
 public:
     FileInfo();
-    FileInfo(const string& path);
+    FileInfo(const String& path);
     
 public:
     
-    void setPath(const string& path);
+    void setPath(const String& path);
     
-    string fileExt();
-    string fileNameIgnoreExt();
-    string fileName();
-    string absolutePath();
+    String fileExt();
+    String fileNameIgnoreExt();
+    String fileName();
+    String absolutePath();
     bool exist(bool cache=true);
     bool isDir();
     
 protected:
     FILE_EXIST_STATUS m_status;
-    string m_path;
-    string m_fileExt;
-    string m_absolutePath;
-    string m_fileName;
-    string m_fileNameIgnoreExt;
+    String m_path;
+    String m_fileExt;
+    String m_absolutePath;
+    String m_fileName;
+    String m_fileNameIgnoreExt;
 };
 
 DE_END

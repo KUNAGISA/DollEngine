@@ -20,9 +20,9 @@ GLCache::GLCache()
 {
 }
 
-TextFrame* GLCache::addText(const string& text,const string& fontName,int fontSize)
+TextFrame* GLCache::addText(const String& text,const String& fontName,int fontSize)
 {
-    string _fontName;
+    String _fontName;
     if (fontName.empty() || text == "") {
         _fontName = DEFFONT;
     }
@@ -75,7 +75,7 @@ TextFrame* GLCache::addText(const string& text,const string& fontName,int fontSi
     return frame;
 }
 
-GLTexture* GLCache::addTexture(const string& path)
+GLTexture* GLCache::addTexture(const String& path)
 {
     FileInfo file(path);
     if (!file.exist()) {
@@ -104,7 +104,7 @@ GLTexture* GLCache::addTexture(const string& path)
     return tex;
 }
 
-SpriteFrame* GLCache::addFrame(const string& picKey,const string& plist)
+SpriteFrame* GLCache::addFrame(const String& picKey,const String& plist)
 {
     if (plist == "") {
         FileInfo file(picKey);
@@ -137,7 +137,7 @@ SpriteFrame* GLCache::addFrame(const string& picKey,const string& plist)
     }
 }
 
-SpriteFrame* GLCache::addFrame(const string& path,const Rect& rect)
+SpriteFrame* GLCache::addFrame(const String& path,const Rect& rect)
 {
     FileInfo file(path);
     if (!file.exist()) {

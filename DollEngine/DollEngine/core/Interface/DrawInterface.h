@@ -1,14 +1,14 @@
 #ifndef DRAWINTERFACE_H
 #define DRAWINTERFACE_H
 
-#include "Types.h"
+#include "CoreUnits.h"
 
 DE_BEGIN
 
 class ImageData;
 
-typedef GLuint DrawFBOId;//fbo手柄
-typedef GLuint DrawTexId;//贴图手柄
+typedef GLuint DrawFBOId;//fbo
+typedef GLuint DrawTexId;//贴图
 typedef GLuint DrawActiveTexId;//生效的贴图
 
 typedef GLsizei DrawSizeI;
@@ -22,7 +22,7 @@ class DrawInterface
 #endif
 {
 public:
-    DrawInterface(){}
+    DrawInterface();
     static DrawInterface* GetInstance();
     
     void deleteFBO(DrawSizeI n, const DrawFBOId * framebuffers);
