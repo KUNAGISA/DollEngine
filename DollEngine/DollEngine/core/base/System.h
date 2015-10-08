@@ -13,9 +13,6 @@
 
 DE_BEGIN
 
-class GameObject;
-class Character;
-
 class System
 {
 public:
@@ -25,7 +22,6 @@ public:
     
 public:
     void mainLoop();
-    void initDebugInfo();
     void startup(); //脚本入口
     void setDeviceSize(float w,float h);
     
@@ -38,6 +34,7 @@ public:
     PROPERTY_RO(float,DeviceHeight,m_deviceHeight) //设备大小
     
     PROPERTY(bool,NeedRedraw,m_needRedraw){m_needRedraw=v;}
+    PROPERTY(bool,IsError,m_isError){m_isError=v;}
     
     //debug mode:0不显示console 1显示但不打印tag 2打印tag但不打印macro 3所有都打印
     PROPERTY(int,DebugMode,m_debugMode);
@@ -45,12 +42,6 @@ protected:
     void initEnginePaths();
 //    void timerEvent(QTimerEvent*event );
     
-protected:
-    GameObject* m_debugFPS;
-    Character* m_debugFPSCOM;
-    double m_debugTime;
-    double m_debugTime2;
-    int m_debugTimeCount;
 };
 
 DE_END

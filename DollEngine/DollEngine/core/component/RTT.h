@@ -19,7 +19,8 @@ public:
     RTT();
     ~RTT();
     
-    bool loadRender(GameObject* obj, int w,int h,Painter* bg=null);
+    bool begin(int w,int h,Painter* bg=null);
+    void end();
 protected:
     GLuint m_FBO;
     GLint m_oldFBO;

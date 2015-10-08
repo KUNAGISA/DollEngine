@@ -116,6 +116,9 @@ class Application
 		else {
 			var lay;
 			var msgIdx = -1;
+			if (typeof layer != 'String') {
+				layer = string(layer);
+			}
 			if (layer.indexOf('message') == 0) {
 				layer = 'message0' if layer == 'message';
 				msgIdx = +layer.substr(7);
@@ -430,6 +433,12 @@ class Application
 			checkElm(elm,['time']);
 			this.status.waitClickMode = WAIT_CLICK_TIME;
 			return elm.time;
+		} incontextof this,
+
+		waitclick : function (elm) 
+		{
+			this.status.waitClickMode = WAIT_CLICK_TIME;
+			return -2;
 		} incontextof this,
 
 		wt : function (elm) 

@@ -13,7 +13,6 @@
 
 DE_BEGIN
 
-class GameObject;
 class RTT;
 class Painter;
 
@@ -27,19 +26,16 @@ public:
     void initialize(float w,float h,float s);
     void onInitFinished();
     void visit();
-    void beginTransition(bool isblack);
-    void transWithCrossFade(float dt);
-    void transFinished();
-    GameObject* getTransNode(){return m_transNode;}
+//    void beginTransition(bool isblack);
+//    void transWithCrossFade(float dt);
+//    void transFinished();
     PROPERTY(bool, Visible, m_visible){m_visible=v;}
     PROPERTY(bool, FullScreen, m_fullScreen);
     PROPERTY_CONST(string, Title, m_title);
-    PROPERTY(GameObject*,World,m_world);
 protected:
     void* m_deviceWindow;
-    GameObject* m_transNode;
-    Painter* m_transBlack;
-    RTT* m_transRTT;
+//    Painter* m_transBlack;
+//    RTT* m_transRTT;
 };
 
 DE_END

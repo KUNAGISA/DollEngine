@@ -9,7 +9,6 @@
 #include "Painter.h"
 #include "GLCache.h"
 #include "System.h"
-#include "GameObject.h"
 #include "GLCanvas.h"
 #include "Storages.h"
 
@@ -145,10 +144,10 @@ void Painter::setSizeToImageSize()
             m_paintHeight = 0;
         }
     }
-    if(getObject()){
-        getObject()->setWidth(m_paintWidth);
-        getObject()->setHeight(m_paintHeight);
-    }
+//    if(getObject()){
+//        getObject()->setWidth(m_paintWidth);
+//        getObject()->setHeight(m_paintHeight);
+//    }
 }
 
 
@@ -224,20 +223,20 @@ void Painter::flushPaintConfig(PaintConfig& config)
     config.frame = m_displayFrame;
     m_realColor.set(m_color);
     m_realColor.a = m_opacity;
-    if (getObject()) {
-        config.trans = getObject()->getTransInWorld();
-        m_realColor.multiply(getObject()->m_realColor);
-    }
-    else {
-        config.trans = null;
-    }
+//    if (getObject()) {
+//        config.trans = getObject()->getTransInWorld();
+//        m_realColor.multiply(getObject()->m_realColor);
+//    }
+//    else {
+//        config.trans = null;
+//    }
     config.start = &m_realColor;
     if (m_gradient) {
         m_realColor.end.set(m_endColor);
         m_realColor.end.a = m_endOpacity;
-        if (getObject()) {
-            m_realColor.end.multiply(getObject()->m_realColor);
-        }
+//        if (getObject()) {
+//            m_realColor.end.multiply(getObject()->m_realColor);
+//        }
         config.end = &m_realColor.end;
         config.gradVector = m_realColor.vector;
     }

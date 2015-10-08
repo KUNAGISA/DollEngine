@@ -8,7 +8,7 @@
 
 #import "AppDelegateMac.h"
 #include "System.h"
-#include "TjsEngine.h"
+#include "ScriptEngine.h"
 #include "Window.h"
 #include "TjsConsole.h"
 
@@ -30,7 +30,7 @@ enum TEST{
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     
-    new TjsEngine();
+    new ScriptEngine();
     DE::TjsConsole::GetInstance()->setVisible(true);
     DESystem->startup();
 }

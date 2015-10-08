@@ -8,7 +8,6 @@
 
 #include "KAGController.h"
 #include "KAGParser.h"
-#include "ScriptEngine.h"
 #include "System.h"
 
 DE_BEGIN
@@ -108,6 +107,8 @@ void KAGController::printLabel()
                                    m_label->key.c_str(),
                                    m_label->name.c_str(),
                                    m_tagIndex);
-    ScriptEngine::GetInstance()->print(dm);
+    string dm2;
+    UnicodeToUtf8(dm.c_str(), dm2);
+    DM(dm2.c_str());
 }
 DE_END

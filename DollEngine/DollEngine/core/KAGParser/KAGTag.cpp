@@ -9,7 +9,6 @@
 #include "KAGTag.h"
 #include "KAGStorage.h"
 #include "KAGLabel.h"
-#include "ScriptEngine.h"
 #include "System.h"
 
 DE_BEGIN
@@ -122,7 +121,8 @@ void KAGTag::print(bool cond)
     if (!cond) {
         str += L" [COND FALSE] ";
     }
-    ScriptEngine::GetInstance()->print(str);
+    string str2;
+    UnicodeToUtf8(str.c_str(),str2);
 }
 
 DE_END

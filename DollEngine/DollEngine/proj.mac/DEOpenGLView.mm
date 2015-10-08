@@ -77,7 +77,7 @@
 - (void) drawRect:(NSRect)dirtyRect
 {
     [self lockOpenGLContext];
-    DESystem->mainLoop();
+//    DESystem->mainLoop();
     glFlush();
     //    [[self openGLContext] flushBuffer];
     [self unlockOpenGLContext];

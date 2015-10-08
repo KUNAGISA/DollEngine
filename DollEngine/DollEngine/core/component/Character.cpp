@@ -9,7 +9,6 @@
 #include "Character.h"
 #include "GLCache.h"
 #include "TextFrame.h"
-#include "GameObject.h"
 #include "GLCanvas.h"
 
 DE_BEGIN
@@ -59,9 +58,9 @@ void Character::update()
     for (TextFrame* frame : m_allTextFrames) {
         FontData* font = frame->getFont();
         Transform orgin;
-        if (getObject()) {
-            orgin.copy(getObject()->getTransInWorld());
-        }
+//        if (getObject()) {
+//            orgin.copy(getObject()->getTransInWorld());
+//        }
         Transform offst;
         offst.setX(lastX + font->bearingX);
         float y = -(frame->getHeight()-font->bearingY);

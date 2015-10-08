@@ -1,33 +1,47 @@
 
+var g_AllControl = new Set();
+
+
 class Control extends Node
 {
 	function Control (par) 
 	{
 		super.Node(par);
-		this.setAnchor(0.5,0.5);
-		this._touch = new Touch();
-		this._touch.object = this;
-		this.enabled = true;
-		this._touch.onMouseDown = this.onMouseDown;
-		this._touch.onMouseMove = this.onMouseMove;
-		this._touch.onMouseUp = this.onMouseUp;
-		this._touch.onClick = this.onClick;
-		this._touch.swallow = true;
-		this._touch.enabled = true;
+		g_AllControl.add(this);
+		setAnchor(0.5,0.5);
+		_touch = new Touch();
+		_touch.object = this;
+		enabled = true;
+		_touch.onMouseDown = onMouseDown;
+		_touch.onMouseMove = onMouseMove;
+		_touch.onMouseUp = onMouseUp;
+		_touch.onClick = onClick;
+		_touch.swallow = true;
+		_touch.enabled = true;
 	}
 
 	function finalize () 
 	{
-		invalidate this._touch;
+		g_AllControl.remove(this);
+		invalidate _touch;
 		super.finalize();
 	}
 
+	function disableAfterClick () 
+	{
+		g_AllControl.foreach(function(value){
+			if (!value.issystem) {
+			    value.enabled = false;
+			}
+		});
+	}
+	
 	function onTouchUpdate () 
 	{
-		if (this.enabled) {
-			this._touch.addToManager();
-			for (var i = 0; i < this.children.count; i++) {
-				this.children[i].onTouchUpdate();
+		if (enabled) {
+			_touch.addToManager();
+			for (var i = 0; i < children.count; i++) {
+				children[i].onTouchUpdate();
 			};
 		}
 	}
@@ -37,8 +51,9 @@ class Control extends Node
 		if (System.main.status.waitClickMode == WAIT_CLICK_TRANS||
 			System.main.status.locklink) {
 			//trans中或locklink时
-			this._touch.ignore = true;
+			_touch.ignore = true;
 		}
+		dm(_touch.ignore);
 	}
 
 	function onMouseMove (x,y) 
@@ -58,18 +73,18 @@ class Control extends Node
 	property touch{
 		getter {
 	    	//getter
-			return this._touch;
+			return _touch;
 		}
 	}
 
 	property disabled{
 	    setter(v) {
 	    	//setter
-	    	this._touch.enabled = !v;
+	    	_touch.enabled = !v;
 		}
 		getter {
 	    	//getter
-			return !this._touch.enabled;
+			return !_touch.enabled;
 		}
 	}
 
@@ -77,22 +92,23 @@ class Control extends Node
 	property issystem{
 	    setter(v) {
 	    	//setter
-	    	this._issystem = v;
+	    	_issystem = v;
 		}
 		getter {
 	    	//getter
-			return this._issystem;
+			return _issystem;
 		}
 	}
 	
 	property ignore{
 	    setter(v) {
 	    	//setter
-	    	this._touch.ignore = v;
+	    	_touch.ignore = v;
 		}
 		getter {
 	    	//getter
-			return this._touch.ignore;
+			return _touch.ignore;
 		}
 	}
 }
+

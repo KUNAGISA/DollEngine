@@ -6,25 +6,40 @@
 //  Copyright (c) 2015年 DollStudio. All rights reserved.
 //
 
-#ifndef DollEngine_ScriptEngine_h
-#define DollEngine_ScriptEngine_h
+#ifndef __DollEngine__ScriptEngine__
+#define __DollEngine__ScriptEngine__
 
 #include "CoreUnits.h"
 
+namespace TJS{
+    class tTJS;
+    class tTJSInterCodeContext;
+    class iTJSDispatch2;
+}
+
 DE_BEGIN
+
+struct AsyncFunction
+{
+    int priority;
+    TJS::iTJSDispatch2* objthis;
+    TJS::tTJSInterCodeContext* handler;
+};
 
 class ScriptEngine
 {
 public:
-    static ScriptEngine* Engine;
-    static ScriptEngine* GetInstance(){
-        return ScriptEngine::Engine;
-    }
-    virtual bool eval(const wstring& code,void* ret){return false;}
-    virtual bool exec(const wstring& code,void* ret){return false;}
-    virtual void catchError(void* error){}
-    virtual void doAsyncFunctions(){}
-    virtual void print(const wstring& text){}
+    ScriptEngine();
+    Shared(ScriptEngine)
+    static TJS::tTJS* Global();
+    virtual bool eval(const wstring& code,void* ret);
+    virtual bool exec(const wstring& code,void* ret);
+    virtual void catchError(void* error);
+    void doAsyncFunctions();
+    void addAsyncFunction(const AsyncFunction& func);
+    void print(const wstring& text);
+    void setConsoleVisible(bool v);
+    bool getConsoleVisible();
     
     string topFile(){return m_fileStack.top();}
     void pushFile(const string& path)
@@ -37,13 +52,11 @@ public:
         m_fileStack.pop();
     }
     
-    virtual void setConsoleVisible(bool v){};
-    virtual bool getConsoleVisible(){return false;};
-
 protected:
+    vector<AsyncFunction> m_allAsyncFunctions;
     stack<string> m_fileStack;
 };
 
 DE_END
 
-#endif
+#endif /* defined(__DollEngine__ScriptEngine__) */

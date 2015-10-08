@@ -20,7 +20,7 @@ public:
     TouchListener();
     ~TouchListener();
     void addToManager();
-    bool pointInside(float x,float y,float& ox,float &oy);
+    bool pointInside(float x,float y,float& ox,float &oy,Transform* trans);
     virtual void setEnabled(bool v){ Component::setEnabled(v);NEED_REDRAW;}
     PROPERTY(bool, Global, m_global);
     PROPERTY(bool, Ignore, m_ignore){m_ignore=v;}

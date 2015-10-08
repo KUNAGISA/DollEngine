@@ -13,7 +13,6 @@
 
 DE_BEGIN
 
-class GameObject;
 
 enum COMP_TYPE
 {
@@ -32,7 +31,6 @@ public:
     void release();
     
     PROPERTY(bool, Enabled, m_enabled){m_enabled=v;}
-    PROPERTY(GameObject*, Object, m_object){m_object=v;}
     PROPERTY(bool, IsReleased, m_isReleased){m_isReleased=v;}
     PROPERTY(float, Time, m_time){m_time=v;}
     PROPERTY(int, Type, m_type){m_type=v;}

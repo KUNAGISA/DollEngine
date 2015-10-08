@@ -7,7 +7,7 @@
 //
 
 #import "ConsoleController.h"
-#include "TJSEngine.h"
+#include "ScriptEngine.h"
 #include "tjs.h"
 
 @interface ConsoleController ()
@@ -114,7 +114,7 @@ static ConsoleController* s_instance=nil;
         wstring code;
         DE::Utf8ToUnicode(control.stringValue.UTF8String, code);
 
-        if(!DE::TjsEngine::GetSelf()->eval(code, &ret)){
+        if(!DE::ScriptEngine::GetInstance()->eval(code, &ret)){
             control.stringValue = @"";
             return YES;
         }

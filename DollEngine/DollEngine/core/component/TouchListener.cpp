@@ -7,7 +7,7 @@
 //
 
 #include "TouchListener.h"
-#include "GameObject.h"
+#include "Transform.h"
 #include "CompManager.h"
 
 DE_BEGIN
@@ -48,14 +48,8 @@ void TouchListener::setGlobal(bool v)
     }
 }
 
-bool TouchListener::pointInside(float x,float y,float& ox,float &oy)
+bool TouchListener::pointInside(float x,float y,float& ox,float &oy,Transform* trans)
 {
-    if (!getObject()) {
-        ox=x;
-        oy=y;
-        return true;
-    }
-    auto trans = getObject()->getTransInWorld();
     if (trans)
     {
         return trans->pointInside(x, y,ox,oy);

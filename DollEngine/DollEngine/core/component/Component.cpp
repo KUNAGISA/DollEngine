@@ -15,7 +15,6 @@ DE_BEGIN
 Component::Component()
 :m_type(COMP_UNKNOW)
 ,m_isReleased(false)
-,m_object(null)
 ,m_enabled(true)
 ,m_time(0)
 {

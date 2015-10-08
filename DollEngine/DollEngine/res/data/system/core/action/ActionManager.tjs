@@ -18,12 +18,12 @@ class ActionManager
 
 	function finalize () 
 	{
-		invalidate this.timer;
 		this.allActions.foreach(function (v) 
 		{
 			invalidate v;
 		});
 		invalidate allActions;
+		invalidate this.timer;
 	}
 
 	function addAction (act) 
