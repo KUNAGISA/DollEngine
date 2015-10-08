@@ -22,7 +22,7 @@ DrawInterface* DrawInterface::GetInstance()
 
 void DrawInterface::deleteFBO(DrawSizeI n, const DrawFBOId * framebuffers)
 {
-    glDeleteFramebuffers(n,(GLuint*)framebuffers);
+    glDeleteFramebuffers(n,framebuffers);
 }
 
 DrawFBOId DrawInterface::createFBO(DrawTexId texId )
@@ -47,7 +47,7 @@ DrawFBOId DrawInterface::createFBO(DrawTexId texId )
 void DrawInterface::switchFBO(DrawFBOId* oldFBO,DrawFBOId newFBO)
 {
     if(oldFBO){
-        glGetIntegerv(GL_FRAMEBUFFER_BINDING,  (GLint*)oldFBO);
+        glGetIntegerv(GL_FRAMEBUFFER_BINDING, (GLint*)oldFBO);
     }
     glBindFramebuffer(GL_FRAMEBUFFER, newFBO);
 }

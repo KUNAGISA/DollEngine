@@ -16,6 +16,7 @@ DE_BEGIN
 class String : public std::wstring
 {
 public:
+    typedef wstring::size_type size_type;
     static String fromFormat(const char* format,...);
 public:
     String();
@@ -35,13 +36,8 @@ public:
     ~String();
 public:
     bool readFromFile(const String& path);
-public:
-    void append(const String& v);
-    size_type find(const String& v,size_type start=0);
-    size_type rfind(const String& v,size_type start=0);
-    String substr(size_type start=0,size_type length=-1);
+    size_type
     void split(const String& t,vector<String>& ret,bool ignoreEmpty=false);
-    bool empty() const;
 public:
 public:
     int intValue();

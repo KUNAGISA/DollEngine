@@ -178,7 +178,7 @@
 		B8F39B361BC690CA002EB3CC /* tjsVariant.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8F39B0D1BC690CA002EB3CC /* tjsVariant.cpp */; };
 		B8F39B371BC690CA002EB3CC /* tjsVariantString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8F39B0F1BC690CA002EB3CC /* tjsVariantString.cpp */; };
 		B8F39B391BC6B26A002EB3CC /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8F39B381BC6B26A002EB3CC /* AVFoundation.framework */; };
-		B8F39B3B1BC6B390002EB3CC /* DrawInterface-iOS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8F39B3A1BC6B390002EB3CC /* DrawInterface-iOS.cpp */; };
+		B8F39B3E1BC6B9E6002EB3CC /* DrawInterface-GL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8F39B3D1BC6B9E6002EB3CC /* DrawInterface-GL.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -567,7 +567,7 @@
 		B8F39B0F1BC690CA002EB3CC /* tjsVariantString.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tjsVariantString.cpp; sourceTree = "<group>"; };
 		B8F39B101BC690CA002EB3CC /* tjsVariantString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tjsVariantString.h; sourceTree = "<group>"; };
 		B8F39B381BC6B26A002EB3CC /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
-		B8F39B3A1BC6B390002EB3CC /* DrawInterface-iOS.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "DrawInterface-iOS.cpp"; sourceTree = "<group>"; };
+		B8F39B3D1BC6B9E6002EB3CC /* DrawInterface-GL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "DrawInterface-GL.cpp"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -858,6 +858,7 @@
 		B8F393FD1BC68EB1002EB3CC /* Platform */ = {
 			isa = PBXGroup;
 			children = (
+				B8F39B3C1BC6B9E6002EB3CC /* gl */,
 				B8F393FE1BC68EB1002EB3CC /* apple */,
 				B8F394081BC68EB1002EB3CC /* ios */,
 			);
@@ -884,7 +885,6 @@
 		B8F394081BC68EB1002EB3CC /* ios */ = {
 			isa = PBXGroup;
 			children = (
-				B8F39B3A1BC6B390002EB3CC /* DrawInterface-iOS.cpp */,
 				B8F394091BC68EB1002EB3CC /* FontInterface-iOS.cpp */,
 			);
 			path = ios;
@@ -1369,6 +1369,14 @@
 			path = tjs2;
 			sourceTree = "<group>";
 		};
+		B8F39B3C1BC6B9E6002EB3CC /* gl */ = {
+			isa = PBXGroup;
+			children = (
+				B8F39B3D1BC6B9E6002EB3CC /* DrawInterface-GL.cpp */,
+			);
+			path = gl;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1468,6 +1476,7 @@
 				B8F39B191BC690CA002EB3CC /* tjsDate.cpp in Sources */,
 				B8F3911D1BC68E6F002EB3CC /* TjsConsole.cpp in Sources */,
 				B8F39B331BC690CA002EB3CC /* tjsScriptCache.cpp in Sources */,
+				B8F39B3E1BC6B9E6002EB3CC /* DrawInterface-GL.cpp in Sources */,
 				B8F3910C1BC68E6F002EB3CC /* GrowProgram.cpp in Sources */,
 				B8F39B231BC690CA002EB3CC /* tjsInterCodeExec.cpp in Sources */,
 				B8F393F61BC68E70002EB3CC /* AppDelegateIOS.m in Sources */,
@@ -1504,7 +1513,6 @@
 				B8F39A4A1BC68F33002EB3CC /* aabb.c in Sources */,
 				B8F39A8F1BC68F33002EB3CC /* regtrav.c in Sources */,
 				B8F391091BC68E6F002EB3CC /* GLCanvas.cpp in Sources */,
-				B8F39B3B1BC6B390002EB3CC /* DrawInterface-iOS.cpp in Sources */,
 				B8F39A771BC68F33002EB3CC /* iso8859_6.c in Sources */,
 				B8F39A731BC68F33002EB3CC /* iso8859_2.c in Sources */,
 				B8F391181BC68E6F002EB3CC /* JsonParser.cpp in Sources */,
