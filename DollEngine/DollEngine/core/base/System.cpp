@@ -49,11 +49,13 @@ void System::mainLoop()
 void System::startup()
 {
     initEnginePaths();
-    FontInterface::GetInstance()->addFont(DEFFONT);
-    String fullpath = Storages::GetInstance()->getFullPath("Startup.tjs");
     try{
+        ScriptEngine::GetInstance();
+        FontInterface::GetInstance()->addFont("WenQuanYiMicroHei.ttc");
+        String fullpath = Storages::GetInstance()->getFullPath("Startup.tjs");
+        
         IOData* data = Storages::GetFileString(fullpath);
-        wstring code;
+        String code;
         data->convertToUnicode(code);
         if (!ScriptEngine::GetInstance()) {
             DM("请初始化脚本引擎！");

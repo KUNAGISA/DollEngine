@@ -25,7 +25,7 @@ KAGController::~KAGController()
     
 }
 
-bool KAGController::stepInLabel(const wstring& file, const wstring& label, bool iscall)
+bool KAGController::stepInLabel(const String& file, const String& label, bool iscall)
 {
     KAGStorage* storage;
     if (file == L"") {
@@ -102,7 +102,7 @@ void KAGController::printLabel()
         m_label->isMacro) {
         return;
     }
-    wstring dm = UnicodeWithFormat(L"\n========%ls(%ls|%ls)#%d========",
+    String dm = UnicodeWithFormat(L"\n========%ls(%ls|%ls)#%d========",
                                    m_storage->fileName.c_str(),
                                    m_label->key.c_str(),
                                    m_label->name.c_str(),

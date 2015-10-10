@@ -65,7 +65,7 @@ bool Painter::setMargin(float l,float r,float t,float b)
     if (!m_displayFrame) {
         return false;
     }
-    if (m_displayFrame->getCacheKey()!="") {
+    if (!m_displayFrame->getCacheKey().empty()) {
         SpriteFrame* frame = new SpriteFrame();
         frame->setTexture(m_displayFrame->getTexture());
         frame->setRect(m_displayFrame->getRect());

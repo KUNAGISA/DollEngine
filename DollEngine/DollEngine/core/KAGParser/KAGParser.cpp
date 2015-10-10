@@ -27,41 +27,37 @@ KAGParser::KAGParser()
     m_allStorage[L"MACRO"] = m_macros;
 }
 
-KAGStorage* KAGParser::loadScenario(const wstring& filepath)
+KAGStorage* KAGParser::loadScenario(const String& filepath)
 {
     if (filepath == L"MACRO") {
         return m_macros;
     }
-    string fpath;
-    string path;
-    UnicodeToUtf8(filepath.c_str(), path);
-    if (path != "MACRO")
+    String fullpath;
+    if (filepath != L"MACRO")
     {
-        fpath = Storages::GetInstance()->getFullPath(path);
-        if (fpath == "")
+        fullpath = Storages::GetInstance()->getFullPath(filepath);
+        if (fullpath.empty())
         {
-            Debug::throwMsg(ERROR_FILE_EXIST_FAILD,path.c_str());
+            Debug::throwMsg(ERROR_FILE_EXIST_FAILD,filepath.c_nstr());
             return null;
         }
     }
     else
     {
-        fpath = "MACRO";
+        fullpath = L"MACRO";
     }
-    wstring fullpath;
-    Utf8ToUnicode(fpath.c_str(), fullpath);
     auto storage_iter = m_allStorage.find(fullpath);
     if (storage_iter != m_allStorage.end())
     {
         return storage_iter->second;
     }
-    IOData* data = Storages::GetFileString(fpath);
+    IOData* data = Storages::GetFileString(fullpath);
     if (!data)
     {
         m_errorLine = -1;
         return null;
     }
-    wstring kagcode;
+    String kagcode;
     kagchar* ntext;
     if (data->getBuffer()[0] != 0xfe) {
         data->convertToUnicode(kagcode);
@@ -118,7 +114,7 @@ void KAGParser::clearScenario()
     m_allStorage[L"MACRO"] = m_macros;
 }
 
-KAGLabel* KAGParser::startMacro(const wstring& name)
+KAGLabel* KAGParser::startMacro(const String& name)
 {
     KAGLabel* lb = m_macros->getLabel(name);
     if (lb) {
@@ -254,8 +250,8 @@ kagchar* KAGParser::parseLabel(kagchar* text)
     kagchar* ntext=text;
     ++ntext;
     ntext = parseEmpty(ntext);
-    wstring key=L"*";
-    wstring name;
+    String key=L"*";
+    String name;
     while (true)
     {
         if (*ntext < 0x21||
@@ -302,11 +298,11 @@ kagchar* KAGParser::parseTag(kagchar* text,bool is_at)
     if (!ttext) {
         return null;
     }
-    wstring name;
+    String name;
     name.assign(text, ttext-text);
     createTag(name);
     text = ttext;
-    wstring key,value;
+    String key,value;
     while (true)
     {
         key = L"",value=L"";
@@ -371,7 +367,7 @@ kagchar* KAGParser::parseTagParamKey(kagchar* text,bool is_at)
     }
 }
 
-kagchar* KAGParser::parseTagParamValue(kagchar* text,bool is_at,wstring& value,bool& entity,bool& macroarg)
+kagchar* KAGParser::parseTagParamValue(kagchar* text,bool is_at,String& value,bool& entity,bool& macroarg)
 {
     kagchar* ntext = text;
     if (*ntext == '\0' || *ntext == '\n' || *ntext == '\r')
@@ -406,7 +402,7 @@ kagchar* KAGParser::parseTagParamValue(kagchar* text,bool is_at,wstring& value,b
         }
         if (*ntext == '\'' || *ntext == '"')
         {
-            wstring str;
+            String str;
             ntext = parseString(ntext,str,entity);
             if (!ntext) {
                 return null;
@@ -456,7 +452,7 @@ kagchar* KAGParser::parseEmpty(kagchar* text)
     }
 }
 
-kagchar* KAGParser::parseString(kagchar* text,wstring& str,bool& entity)
+kagchar* KAGParser::parseString(kagchar* text,String& str,bool& entity)
 {
     unsigned char start_ch = *text;
     str.push_back(*text);
@@ -508,7 +504,7 @@ kagchar* KAGParser::parseCh(kagchar* text)
                 ntext++;
             }
             createTag(L"ch");
-            wstring value;
+            String value;
             value.push_back(*ntext);
             m_tag->addParam(L"text", value);
         }
@@ -539,7 +535,7 @@ kagchar* KAGParser::containText(kagchar* text, const wchar_t* data,bool is_end)
     return text + l;
 }
 
-void KAGParser::createStorage(const wstring& file,const wstring& fullpath)
+void KAGParser::createStorage(const String& file,const String& fullpath)
 {
     SAFF_DELETE(m_storage);
     m_storage = new KAGStorage();
@@ -549,7 +545,7 @@ void KAGParser::createStorage(const wstring& file,const wstring& fullpath)
     m_tag=null;
 }
 
-void KAGParser::createLabel(const wstring& key,const wstring& name)
+void KAGParser::createLabel(const String& key,const String& name)
 {
     KAGLabel* lastLabel = m_label;
     m_label=new KAGLabel();
@@ -564,7 +560,7 @@ void KAGParser::createLabel(const wstring& key,const wstring& name)
     m_tag = null;
 }
 
-void KAGParser::createTag(const wstring& name)
+void KAGParser::createTag(const String& name)
 {
     m_tag = new KAGTag();
     m_tag->name=name;

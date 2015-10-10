@@ -17,7 +17,7 @@ tTJSVariant JsonParser::FromJsonFile(const String& path)
     IOData* data = Storages::GetFileString(fullpath);
     if (data) {
         string error;
-        wstring code;
+        String code;
         data->convertToUnicode(code);
         SAFF_DELETE(data);
         tTJSVariant ret = JsonParser::FromJsonString(code.c_str());
@@ -28,8 +28,7 @@ tTJSVariant JsonParser::FromJsonFile(const String& path)
 
 tTJSVariant JsonParser::FromJsonString(const char *str)
 {
-    wstring wstr;
-    Utf8ToUnicode(str, wstr);
+    String wstr = str;
     return FromJsonString(wstr.c_str());
 }
 
@@ -104,7 +103,7 @@ wchar_t* JsonParser::dictWithString(wchar_t* str,tTJSVariant& _out)
 {
     tTJSDictionaryObject* obj = dynamic_cast<tTJSDictionaryObject*>(TJSCreateDictionaryObject());
     while (true) {
-        wstring key;
+        String key;
         tTJSVariant value;
         str = emptyWithString(str);
         if (!str) {
@@ -210,7 +209,7 @@ wchar_t* JsonParser::valueWithString(wchar_t* str,tTJSVariant& _out)
     
 }
 
-wchar_t* JsonParser::stringWithString(wchar_t* str,wstring& _out)
+wchar_t* JsonParser::stringWithString(wchar_t* str,String& _out)
 {
     _out.clear();
     while (*str != L'\0') {
@@ -239,7 +238,7 @@ wchar_t* JsonParser::stringWithString(wchar_t* str,wstring& _out)
 
 wchar_t* JsonParser::stringWithString(wchar_t* str,tTJSVariant& _out)
 {
-    wstring wstr;
+    String wstr;
     wchar_t* res = stringWithString(str, wstr);
     if (res) {
         _out = wstr;
@@ -251,7 +250,7 @@ wchar_t* JsonParser::stringWithString(wchar_t* str,tTJSVariant& _out)
 
 wchar_t* JsonParser::nunberWithString(wchar_t* str,tTJSVariant& _out)
 {
-    wstring wstr;
+    String wstr;
     int dcount = 0;
     int ccount = 0;
     while (*str != L'\0') {

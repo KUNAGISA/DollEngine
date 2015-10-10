@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegateIOS.h"
+#include "System.h"
 
 @interface AppDelegateIOS ()
 
@@ -17,6 +18,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    DE::System::GetInstance()->startup();
     return YES;
 }
 

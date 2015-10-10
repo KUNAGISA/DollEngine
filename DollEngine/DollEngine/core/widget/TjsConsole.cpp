@@ -24,7 +24,7 @@ void TjsConsole::ExceptionPrint(const tjs_char *msg)
 
 void TjsConsole::Print(const tjs_char *msg)
 {
-    printf("%ls",msg);
+    printf("%s\n",String(msg).c_nstr());
 }
 
 #endif

@@ -22,21 +22,17 @@ GrowProgram::~GrowProgram()
 
 bool GrowProgram::bind()
 {
-    int index =glGetUniformLocation(m_programId,"resolutionX");
+    int index =DI->getUniform(m_programId,"resolutionX");
     if (index != -1) m_allUniformIndex["resolutionX"]=index;
-    CHECK_GL_ERROR;
     
-    index =glGetUniformLocation(m_programId,"resolutionY");
+    index =DI->getUniform(m_programId,"resolutionY");
     if (index != -1) m_allUniformIndex["resolutionY"]=index;
-    CHECK_GL_ERROR;
     
-    index =glGetUniformLocation(m_programId,"blurRadius");
+    index =DI->getUniform(m_programId,"blurRadius");
     if (index != -1) m_allUniformIndex["blurRadius"]=index;
-    CHECK_GL_ERROR;
     
-    index =glGetUniformLocation(m_programId,"sampleNum");
+    index =DI->getUniform(m_programId,"sampleNum");
     if (index != -1) m_allUniformIndex["sampleNum"]=index;
-    CHECK_GL_ERROR;
     return NormalProgram::bind();
 }
 

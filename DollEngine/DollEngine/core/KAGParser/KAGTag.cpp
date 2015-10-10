@@ -14,7 +14,7 @@
 DE_BEGIN
 
 
-void KAGTag::addParam(const wstring& key, const wstring& value,bool entity,bool macroarg)
+void KAGTag::addParam(const String& key, const String& value,bool entity,bool macroarg)
 {
     {
         if (key == L"cond") {
@@ -42,7 +42,7 @@ void KAGTag::addParam(const wstring& key, const wstring& value,bool entity,bool 
     }
 }
 
-bool KAGTag::exsitKey(const wstring& key)
+bool KAGTag::exsitKey(const String& key)
 {
     for (const KAGTagParamValue& pr : params)
     {
@@ -53,7 +53,7 @@ bool KAGTag::exsitKey(const wstring& key)
     return false;
 }
 
-wstring KAGTag::getValue(const wstring& key)
+String KAGTag::getValue(const String& key)
 {
     for (const KAGTagParamValue& pr : params)
     {
@@ -89,7 +89,7 @@ void KAGTag::print(bool cond)
         label->isMacro) {
         return;
     }
-    wstring str = L"(#";
+    String str = L"(#";
     if (name == L"ch") {
         str = L"";
     }

@@ -17,7 +17,7 @@ DE_BEGIN
 //struct KAGStack
 //{
 //    KAGStorage* storage;
-//    wstring labelKey;
+//    String labelKey;
 //    int tagIndex;
 //};
 
@@ -40,9 +40,9 @@ class KAGParser
 public:
     KAGParser();
     Shared(KAGParser)
-    KAGStorage* loadScenario(const wstring& filepath);
+    KAGStorage* loadScenario(const String& filepath);
     void clearScenario();
-    KAGLabel* startMacro(const wstring& name);
+    KAGLabel* startMacro(const String& name);
     void pushMacro(KAGTag* tag);
     void endMacro();
 protected:
@@ -52,18 +52,18 @@ protected:
     kagchar* parseTag(kagchar* text,bool is_at);
     kagchar* parseTagName(kagchar* text,bool is_at);
     kagchar* parseTagParamKey(kagchar* text,bool is_at);
-    kagchar* parseTagParamValue(kagchar* text,bool is_at,wstring& value,bool& entity,bool& macroarg);
+    kagchar* parseTagParamValue(kagchar* text,bool is_at,String& value,bool& entity,bool& macroarg);
     kagchar* parseEmpty(kagchar* text);
-    kagchar* parseString(kagchar* text,wstring& str,bool& entity);
+    kagchar* parseString(kagchar* text,String& str,bool& entity);
     kagchar* parseCh(kagchar* text);
 protected:
     kagchar* containText(kagchar* text, const kagchar* data,bool is_end);
-    void createStorage(const wstring& file,const wstring& fullpath);
-    void createLabel(const wstring& key,const wstring& name);
-    void createTag(const wstring& name);
+    void createStorage(const String& file,const String& fullpath);
+    void createLabel(const String& key,const String& name);
+    void createTag(const String& name);
 protected:
     int m_errorLine;
-    map<wstring,KAGStorage*> m_allStorage;
+    map<String,KAGStorage*> m_allStorage;
     KAGStorage* m_macros;
     
     KAGStorage* m_storage;

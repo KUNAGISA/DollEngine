@@ -36,11 +36,11 @@ void FileInfo::setPath(const String& path)
 
 String FileInfo::fileExt()
 {
-    if (m_fileExt == "") {
+    if (m_fileExt.empty()) {
         fileName();
-        String::size_type t = m_fileName.rfind(".");
+        String::size_type t = m_fileName.rfind(L".");
         if (t != String::npos) {
-            m_fileNameIgnoreExt = m_fileName.substr(m_fileName.rfind(".")+1);
+            m_fileNameIgnoreExt = m_fileName.substr(m_fileName.rfind(L".")+1);
         }
         else {
             m_fileNameIgnoreExt = "";
@@ -51,11 +51,11 @@ String FileInfo::fileExt()
 
 String FileInfo::fileNameIgnoreExt()
 {
-    if (m_fileNameIgnoreExt == "") {
+    if (m_fileNameIgnoreExt.empty()) {
         fileName();
-        string::size_type t = m_fileName.rfind(".");
+        string::size_type t = m_fileName.rfind(L".");
         if (t != string::npos) {
-            m_fileNameIgnoreExt = m_fileName.substr(m_fileName.rfind(".")+1);
+            m_fileNameIgnoreExt = m_fileName.substr(m_fileName.rfind(L".")+1);
         }
         else {
             m_fileNameIgnoreExt = "";
@@ -67,10 +67,10 @@ String FileInfo::fileNameIgnoreExt()
 
 String FileInfo::fileName()
 {
-    if (m_fileName=="") {
-        String::size_type t = m_path.rfind("/");
+    if (m_fileName.empty()) {
+        String::size_type t = m_path.rfind(L"/");
         if (t != String::npos) {
-            m_fileName = m_path.substr(m_path.rfind("/")+1);
+            m_fileName = m_path.substr(m_path.rfind(L"/")+1);
         }
         else {
             m_fileName = m_path;
@@ -94,7 +94,7 @@ bool FileInfo::exist(bool cache)
 {
     if (m_status == FILE_UNKNOW || cache == false) {
         m_absolutePath = Storages::GetInstance()->getFullPath(m_path);
-        if (m_absolutePath != "") {
+        if (!m_absolutePath.empty()) {
             m_status = FILE_EXIST;
         }
         else {

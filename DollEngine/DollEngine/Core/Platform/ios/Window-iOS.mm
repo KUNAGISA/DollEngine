@@ -63,4 +63,14 @@ void Window::initialize(float w, float h,float s)
     }
 }
 
+void Window::setFullScreen(bool v)
+{
+    m_fullScreen = true;
+}
+
+void Window::setTitle(const DE::String &v)
+{
+    m_title = v;
+}
+
 DE_END

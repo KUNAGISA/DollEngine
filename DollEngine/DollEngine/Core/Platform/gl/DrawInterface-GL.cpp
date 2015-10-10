@@ -1,13 +1,9 @@
 #include "DrawInterface.h"
+#include "CoreUnits.h"
 
 DE_BEGIN
 
 static DrawInterface* _instance=NULL;
-
-DrawInterface::DrawInterface()
-{
-    
-}
 
 DrawInterface* DrawInterface::GetInstance()
 {
@@ -86,6 +82,167 @@ void DrawInterface::bindTexture(DrawActiveTexId aid,DrawTexId bid)
 void DrawInterface::deleteTexture(DrawSizeI count,DrawTexId* texId)
 {
     glDeleteTextures(count,texId);
+}
+
+DrawPrgId DrawInterface::createProgram()
+{
+    return glCreateProgram();
+}
+
+bool DrawInterface::linkProgram(DrawPrgId pId)
+{
+    glLinkProgram(pId);
+    CHECK_GL_ERROR;
+    
+    GLint status;
+    glGetProgramiv(pId, GL_LINK_STATUS, &status);
+    CHECK_GL_ERROR;
+    if (status == 0) {
+        return false;
+    }
+    return true;
+}
+
+static GLuint s_currentProgramId=0;
+void DrawInterface::useProgram(DrawPrgId pId)
+{
+    if (s_currentProgramId != pId) {
+        s_currentProgramId = pId;
+        glUseProgram(pId);
+        CHECK_GL_ERROR;
+    }
+}
+
+void DrawInterface::deleteProgram(DrawPrgId pId)
+{
+    glDeleteProgram(pId);
+}
+
+
+DrawShaderId DrawInterface::createShader(GLenum type,const char* code)
+{
+    DrawShaderId m_id = glCreateShader(type);
+    CHECK_GL_ERROR;
+    if (m_id)
+    {
+        const GLchar* ptr[] = {code};
+        glShaderSource(m_id,sizeof(ptr)/sizeof(*ptr), ptr, null);
+        glCompileShader(m_id);
+        CHECK_GL_ERROR;
+        //检查
+        GLint compiled;
+        glGetShaderiv ( m_id, GL_COMPILE_STATUS, &compiled );
+        if ( !compiled )
+        {
+            GLint infoLen = 0;
+            
+            
+            glGetShaderiv ( m_id, GL_INFO_LOG_LENGTH, &infoLen );
+            
+            if ( infoLen > 1 )
+            {
+                char infoLog[infoLen+1];
+                memset(infoLog, 0, infoLen+1);
+                
+                glGetShaderInfoLog ( m_id, infoLen, NULL, infoLog );
+                DM("Error compiling shader:\n%s", (const char*)infoLog);
+            }
+            
+            glDeleteShader ( m_id );
+            m_id=0;
+            return 0;
+        }
+        return m_id;
+    }
+    return 0;
+}
+
+void DrawInterface::attachShader(DrawPrgId pId,DrawShaderId sId)
+{
+    glAttachShader(pId,sId);
+}
+
+void DrawInterface::detachShader(DrawPrgId pId,DrawShaderId sId)
+{
+    glDetachShader(pId, sId);
+}
+
+void DrawInterface::deleteShader(DrawShaderId sId)
+{
+    glDeleteShader(sId);
+}
+
+
+int DrawInterface::getUniform(DrawPrgId pId, const char* v)
+{
+    int index = glGetUniformLocation(pId,v);
+    return index;
+}
+
+void DrawInterface::bindAttribute(DrawPrgId pId,const char * name, int location)
+{
+    glBindAttribLocation(pId,location,name);
+    CHECK_GL_ERROR;
+}
+
+static GLuint s_VAO=-1;
+void DrawInterface::bindVAO(DrawVAOId vaoId)
+{
+    if (s_VAO != vaoId)
+    {
+        s_VAO = vaoId;
+        glBindVertexArray(vaoId);
+    }
+}
+
+static int MAX_ATTRIBUTES = 16;
+static uint32_t s_attributeFlags = 0;
+void DrawInterface::enableVertexAttribs(uint32_t flags)
+{
+    for(int i=0; i < MAX_ATTRIBUTES; i++) {
+        unsigned int bit = 1 << i;
+        bool enabled = flags & bit;
+        bool enabledBefore = s_attributeFlags & bit;
+        if(enabled != enabledBefore) {
+            if( enabled )
+                glEnableVertexAttribArray(i);
+            else
+                glDisableVertexAttribArray(i);
+        }
+    }
+    s_attributeFlags = flags;
+}
+
+void DrawInterface::vertexAttribPointer(GLuint indx, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const void* ptr)
+{
+    glVertexAttribPointer(indx,size,type,normalized,stride,ptr);
+}
+
+
+void DrawInterface::setUniform1f(GLint location, GLfloat x)
+{
+    glUniform1f(location, x);
+}
+
+void DrawInterface::setUniform1i(GLint location, GLint x)
+{
+    glUniform1i(location, x);
+}
+
+void DrawInterface::setUniform2fv(GLint location, GLsizei count, GLfloat* x)
+{
+    glUniform2fv(location, count, x);
+}
+
+void DrawInterface::setUniformMatrix4fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value)
+{
+    glUniformMatrix4fv(location,count,transpose,value);
+}
+
+
+void DrawInterface::drawElements(GLenum mode,GLsizei count,GLenum type,const GLvoid *indices)
+{
+    glDrawElements(mode,count,type,indices);
 }
 
 DE_END

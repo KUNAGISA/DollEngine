@@ -25,7 +25,7 @@ IOData* Storages::GetFileData(const String& fullpath)
     
     FILE * fp = fopen(fullpath.c_nstr(), "rb");
     if (!fp) {
-        Debug::throwMsg("文件打开失败:"+fullpath);
+        Debug::throwMsg(L"文件打开失败:"+fullpath);
         return null;
     }
     
@@ -52,7 +52,7 @@ IOData* Storages::GetFileString(const String& fullpath)
     FILE *fp = fopen(fullpath.c_nstr(), "rb");
     if (!fp) {
         perror("fopen");
-        Debug::throwMsg("文件打开失败:"+fullpath);
+        Debug::throwMsg(L"文件打开失败:"+fullpath);
         return null;
     }
     
@@ -86,16 +86,15 @@ void Storages::addAutoPath(const String& path)
     }
 }
 
-String Storages::getFullPath(const String& path)
+String Storages::getFullPath(const String& storage)
 {
     // ( 获取统一文件路径 )
-    string storage = path.utf8Value();
-    if (storage.size() == 0) {
+    if (storage.empty()) {
         return "";
     }
-    if (storage[0] == '/')
+    if (storage[0] == L'/')
     {
-        if(access(storage.c_str(), 0) == 0)
+        if(access(storage.c_nstr(), 0) == 0)
             return storage;
     }
     else
@@ -107,26 +106,26 @@ String Storages::getFullPath(const String& path)
         }
         else
         {
-            string temp_path = DESystem->getPatchPath()+storage;
-            if (access(temp_path.c_str(),0) == 0)
+            String temp_path = DESystem->getPatchPath()+storage;
+            if (access(temp_path.c_nstr(),0) == 0)
             {
                 m_searchPathsCache[storage] = temp_path;
                 return temp_path;
             }
             temp_path = DESystem->getSaveDataPath()+storage;
-            if (access(temp_path.c_str(),0) == 0)
+            if (access(temp_path.c_nstr(),0) == 0)
             {
                 m_searchPathsCache[storage] = temp_path;
                 return temp_path;
             }
             temp_path = DESystem->getDataPath()+storage;
-            if (access(temp_path.c_str(),0) == 0)
+            if (access(temp_path.c_nstr(),0) == 0)
             {
                 m_searchPathsCache[storage] = temp_path;
                 return temp_path;
             }
             temp_path = DESystem->getAppPath()+storage;
-            if (access(temp_path.c_str(),0) == 0)
+            if (access(temp_path.c_nstr(),0) == 0)
             {
                 m_searchPathsCache[storage] = temp_path;
                 return temp_path;
@@ -135,7 +134,7 @@ String Storages::getFullPath(const String& path)
             for (; auto_iter != m_autoPaths.end(); ++auto_iter)
             {
                 temp_path = DESystem->getPatchPath()+(*auto_iter)+storage;
-                if (access(temp_path.c_str(),0) == 0)
+                if (access(temp_path.c_nstr(),0) == 0)
                 {
                     m_searchPathsCache[storage] = temp_path;
                     return temp_path;
@@ -145,7 +144,7 @@ String Storages::getFullPath(const String& path)
             for (; auto_iter != m_autoPaths.end(); ++auto_iter)
             {
                 temp_path = DESystem->getSaveDataPath()+(*auto_iter)+storage;
-                if (access(temp_path.c_str(),0) == 0)
+                if (access(temp_path.c_nstr(),0) == 0)
                 {
                     m_searchPathsCache[storage] = temp_path;
                     return temp_path;
@@ -155,7 +154,7 @@ String Storages::getFullPath(const String& path)
             for (; auto_iter != m_autoPaths.end(); ++auto_iter)
             {
                 temp_path = DESystem->getDataPath()+(*auto_iter)+storage;
-                if (access(temp_path.c_str(),0) == 0)
+                if (access(temp_path.c_nstr(),0) == 0)
                 {
                     m_searchPathsCache[storage] = temp_path;
                     return temp_path;
@@ -169,7 +168,7 @@ String Storages::getFullPath(const String& path)
 void Storages::removeAutoPath(const String& storage)
 {
     // ( 删除自动检索路径 )
-    std::remove(m_autoPaths.begin(), m_autoPaths.end(), storage.utf8Value());
+    std::remove(m_autoPaths.begin(), m_autoPaths.end(), storage);
 }
 
 void Storages::clearAutoPath()

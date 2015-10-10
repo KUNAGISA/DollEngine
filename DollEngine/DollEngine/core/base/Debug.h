@@ -43,7 +43,7 @@ public:
     
     static void message(const char* format,...);
     static void throwMsg(DEBUG_MSG error,const String& p1="");
-    static void throwMsg(DEBUG_MSG error,int p1,const wstring& p2=L"");
+    static void throwMsg(DEBUG_MSG error,int p1,const String& p2=L"");
     static void throwMsg(const String& v);
 };
 

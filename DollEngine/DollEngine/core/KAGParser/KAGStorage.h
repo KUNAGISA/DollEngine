@@ -28,7 +28,7 @@ public:
     void addLabel(KAGLabel* title){
         allLabels[title->key] = title;
     }
-    KAGLabel* getLabel(const wstring& key)
+    KAGLabel* getLabel(const String& key)
     {
         auto iter = allLabels.find(key);
         if (iter == allLabels.end()) {
@@ -36,9 +36,9 @@ public:
         }
         return iter->second;
     }
-    wstring fullPath;
-    wstring fileName;
-    map<wstring,KAGLabel*> allLabels;
+    String fullPath;
+    String fileName;
+    map<String,KAGLabel*> allLabels;
 };
 
 DE_END

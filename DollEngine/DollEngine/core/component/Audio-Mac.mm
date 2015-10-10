@@ -54,7 +54,7 @@
         [back stop];
     }
     DE::String fullpath = DE::Storages::GetInstance()->getFullPath(path.UTF8String);
-    if (fullpath == "") {
+    if (fullpath.empty()) {
         return NO;
     }
     NSString* url = [NSString stringWithUTF8String:fullpath.c_nstr()];

@@ -28,8 +28,8 @@ struct KAGTagParamValue
         isstring = v.isstring;
         macroarg = v.macroarg;
     }
-    wstring key;
-    wstring value;
+    String key;
+    String value;
     bool entity;//是否是需要eval的参数
     bool isstring;//是否是字符串
     bool macroarg;//是否是宏参数
@@ -43,11 +43,11 @@ public:
     ~KAGTag(){
         params.clear();
     }
-    void addParam(const wstring& key, const wstring& value,bool entity=false,bool macroarg=false);
+    void addParam(const String& key, const String& value,bool entity=false,bool macroarg=false);
     
-    bool exsitKey(const wstring& key);
+    bool exsitKey(const String& key);
     
-    wstring getValue(const wstring& key);
+    String getValue(const String& key);
     
     KAGTag* clone();
     
@@ -55,7 +55,7 @@ public:
     int line;
     KAGStorage* storage;
     KAGLabel* label;
-    wstring name;
+    String name;
     bool hasCond;
     vector<KAGTagParamValue> params;
 };

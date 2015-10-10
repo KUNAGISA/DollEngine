@@ -25,10 +25,10 @@ public:
     void startup(); //脚本入口
     void setDeviceSize(float w,float h);
     
-    PROPERTY_CONST(string,AppPath,m_appPath){m_appPath=v;}
-    PROPERTY_CONST(string,DataPath,m_dataPath){m_dataPath=v;}
-    PROPERTY_CONST(string,SaveDataPath,m_saveDataPath){m_saveDataPath=v;}
-    PROPERTY_CONST(string,PatchPath,m_patchPath){m_patchPath=v;}
+    PROPERTY_CONST(String,AppPath,m_appPath){m_appPath=v;}
+    PROPERTY_CONST(String,DataPath,m_dataPath){m_dataPath=v;}
+    PROPERTY_CONST(String,SaveDataPath,m_saveDataPath){m_saveDataPath=v;}
+    PROPERTY_CONST(String,PatchPath,m_patchPath){m_patchPath=v;}
     
     PROPERTY_RO(float,DeviceWidth,m_deviceWidth)
     PROPERTY_RO(float,DeviceHeight,m_deviceHeight) //设备大小

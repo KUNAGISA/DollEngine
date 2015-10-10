@@ -56,9 +56,9 @@ unsigned short IOData::getUShort(int idx)
     return ret;
 }
 
-void IOData::convertToUnicode(wstring&target)
+void IOData::convertToUnicode(String&target)
 {
-    Utf8ToUnicode((char*)m_buffer, target);
+    target = (const char*)m_buffer;
 }
 
 DE_END

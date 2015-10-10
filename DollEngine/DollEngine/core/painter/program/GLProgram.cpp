@@ -12,18 +12,18 @@ DE_BEGIN
 
 GLProgram::GLProgram()
 {
-    m_programId = glCreateProgram();
+    m_programId = DI->createProgram();
 }
 
 GLProgram::~GLProgram()
 {
     for (GLShaderObject* obj : m_shaders)
     {
-        glDetachShader(m_programId,obj->getId());
+        DI->detachShader(m_programId,obj->getId());
         delete obj;
     }
     m_shaders.clear();
-    glDeleteProgram(m_programId);
+    DI->deleteProgram(m_programId);
 }
 
 const char* GLProgram::getShader_V()
@@ -74,119 +74,49 @@ void GLProgram::addShader(SHADER_TYPE type,const char* code)
 void GLProgram::addShader(GLShaderObject* obj)
 {
     m_shaders.push_back(obj);
-    glAttachShader(m_programId,obj->getId());
-    CHECK_GL_ERROR;
+    DI->attachShader(m_programId,obj->getId());
 }
 
 bool GLProgram::bind()
 {
-    bindAttributeLocation("a_position",PROGRAM_VERTEX_ATTRIBUTE);
-    CHECK_GL_ERROR;
-    bindAttributeLocation("a_color",PROGRAM_COLOR_ATTRIBUTE);
-    CHECK_GL_ERROR;
-    bindAttributeLocation("a_texCoord",PROGRAM_TEXCOORD_ATTRIBUTE);
-    CHECK_GL_ERROR;
+    DI->bindAttribute(m_programId, "a_position",PROGRAM_VERTEX_ATTRIBUTE);
+    DI->bindAttribute(m_programId,"a_color",PROGRAM_COLOR_ATTRIBUTE);
+    DI->bindAttribute(m_programId,"a_texCoord",PROGRAM_TEXCOORD_ATTRIBUTE);
     //    bind(PROGRAM_OPACITY_ATTRIBUTE,"a_opacity");
-    if(!link())
+    if(!DI->linkProgram(m_programId))
     {
         return false;
     }
-    bindAttributeLocation("tex_fore",PROGRAM_TEXTURE_ATTRIBUTE);
-    CHECK_GL_ERROR;
-    bindAttributeLocation("tex_back",PROGRAM_TEXTURE_ATTRIBUTE);
-    CHECK_GL_ERROR;
-    bindAttributeLocation("texture_fbo",PROGRAM_FBO_ATTRIBUTE);
-    CHECK_GL_ERROR;
-    bindAttributeLocation("matrix",PROGRAM_MATRIX_ATTRIBUTE);
-    CHECK_GL_ERROR;
+    DI->bindAttribute(m_programId,"tex_fore",PROGRAM_TEXTURE_ATTRIBUTE);
+    DI->bindAttribute(m_programId,"tex_back",PROGRAM_TEXTURE_ATTRIBUTE);
+    DI->bindAttribute(m_programId,"texture_fbo",PROGRAM_FBO_ATTRIBUTE);
+    DI->bindAttribute(m_programId,"matrix",PROGRAM_MATRIX_ATTRIBUTE);
     
-    int index =glGetUniformLocation(m_programId,"tex_fore");
-    CHECK_GL_ERROR;
+    int index = DI->getUniform(m_programId,"tex_fore");
     if (index != -1) m_allUniformIndex["tex_fore"]=index;
     
-    index =glGetUniformLocation(m_programId,"tex_back");
-    CHECK_GL_ERROR;
+    index = DI->getUniform(m_programId,"tex_back");
     if (index != -1) m_allUniformIndex["tex_back"]=index;
     
-    index =glGetUniformLocation(m_programId, "texture_fbo");
-    CHECK_GL_ERROR;
+    index = DI->getUniform(m_programId, "texture_fbo");
     if (index != -1) m_allUniformIndex["texture_fbo"]=index;
     
-    index =glGetUniformLocation(m_programId,"matrix");
-    CHECK_GL_ERROR;
+    index = DI->getUniform(m_programId,"matrix");
     if (index != -1) m_allUniformIndex["matrix"]=index;
     
-    use();
+    DI->useProgram(m_programId);
     setUniformValue("tex_fore",0);
     CHECK_GL_ERROR;
     return true;
 }
 
-void GLProgram::bindAttributeLocation(const char * name, int location)
-{
-    glBindAttribLocation(m_programId,location,name);
-    CHECK_GL_ERROR;
-}
 
-bool GLProgram::link()
-{
-    glLinkProgram(m_programId);
-    CHECK_GL_ERROR;
-    
-    GLint status;
-    glGetProgramiv(m_programId, GL_LINK_STATUS, &status);
-    CHECK_GL_ERROR;
-    if (status == 0) {
-        return false;
-    }
-    return true;
-}
-
-static GLuint s_currentProgramId=0;
-void GLProgram::use()
-{
-    if (s_currentProgramId != m_programId) {
-        s_currentProgramId = m_programId;
-        glUseProgram(m_programId);
-        CHECK_GL_ERROR;
-    }
-}
-
-static GLuint s_VAO=-1;
-void GLProgram::bindVAO(GLuint vaoId)
-{
-    if (s_VAO != vaoId)
-    {
-        s_VAO = vaoId;
-        glBindVertexArray(vaoId);
-    }
-}
-
-static int MAX_ATTRIBUTES = 16;
-static uint32_t s_attributeFlags = 0;
-void GLProgram::enableVertexAttribs(uint32_t flags)
-{
-    
-    // hardcoded!
-    for(int i=0; i < MAX_ATTRIBUTES; i++) {
-        unsigned int bit = 1 << i;
-        bool enabled = flags & bit;
-        bool enabledBefore = s_attributeFlags & bit;
-        if(enabled != enabledBefore) {
-            if( enabled )
-                glEnableVertexAttribArray(i);
-            else
-                glDisableVertexAttribArray(i);
-        }
-    }
-    s_attributeFlags = flags;
-}
 
 void GLProgram::setUniformValue(const char* name,GLfloat value)
 {
     auto iter = m_allUniformIndex.find(name);
     if(iter != m_allUniformIndex.end())
-        glUniform1f(iter->second, value);
+        DI->setUniform1f(iter->second, value);
     CHECK_PROGRAM_ERROR(this);
 }
 
@@ -194,7 +124,7 @@ void GLProgram::setUniformValue(const char* name,GLint value)
 {
     auto iter = m_allUniformIndex.find(name);
     if(iter != m_allUniformIndex.end())
-        glUniform1i(iter->second, value);
+        DI->setUniform1i(iter->second, value);
     CHECK_PROGRAM_ERROR(this);
 }
 
@@ -202,7 +132,7 @@ void GLProgram::setUniformValue(const char* name,GLuint value)
 {
     auto iter = m_allUniformIndex.find(name);
     if(iter != m_allUniformIndex.end())
-        glUniform1i(iter->second, value);
+        DI->setUniform1i(iter->second, value);
     CHECK_PROGRAM_ERROR(this);
 }
 
@@ -211,10 +141,10 @@ void GLProgram::setUniformValue(const char* name,const Size& value)
     auto iter = m_allUniformIndex.find(name);
     if(iter != m_allUniformIndex.end())
     {
-        int v[2];
+        float v[2];
         v[0] = value.width;
         v[1] = value.height;
-        glUniform2fv(iter->second,2,(GLfloat*)&value);
+        DI->setUniform2fv(iter->second,2,(GLfloat*)&value);
     }
     CHECK_PROGRAM_ERROR(this);
 }
@@ -224,7 +154,7 @@ void GLProgram::setUniformValue(const char* name,const kmMat4& value)
     auto iter = m_allUniformIndex.find(name);
     if(iter != m_allUniformIndex.end())
     {
-        glUniformMatrix4fv(iter->second, 1,GL_FALSE,(GLfloat*)value.mat);
+        DI->setUniformMatrix4fv(iter->second, 1,GL_FALSE,(GLfloat*)value.mat);
     }
     CHECK_PROGRAM_ERROR(this);
 }
@@ -235,18 +165,18 @@ void GLProgram::draw()
     if (m_quads.size() == 0) {
         return;
     }
-    bindVAO(0);
+    DI->bindVAO(0);
     
 #define kQuadSize sizeof(GLVertex)
     long offset = (long)m_quads.data();
-    enableVertexAttribs(VERTEX_ATTRIB_FLAG_POS_COLOR_TEX);
+    DI->enableVertexAttribs(VERTEX_ATTRIB_FLAG_POS_COLOR_TEX);
     
     int diff = offsetof( GLVertex, vertex);
-    glVertexAttribPointer(PROGRAM_VERTEX_ATTRIBUTE, 2, GL_FLOAT, GL_FALSE, kQuadSize, (void*) (offset + diff));
+    DI->vertexAttribPointer(PROGRAM_VERTEX_ATTRIBUTE, 2, GL_FLOAT, GL_FALSE, kQuadSize, (void*) (offset + diff));
     diff = offsetof( GLVertex, color);
-    glVertexAttribPointer(PROGRAM_COLOR_ATTRIBUTE, 4, GL_FLOAT, GL_FALSE, kQuadSize, (void*) (offset + diff));
+    DI->vertexAttribPointer(PROGRAM_COLOR_ATTRIBUTE, 4, GL_FLOAT, GL_FALSE, kQuadSize, (void*) (offset + diff));
     diff = offsetof( GLVertex, uv);
-    glVertexAttribPointer(PROGRAM_TEXCOORD_ATTRIBUTE, 2, GL_FLOAT, GL_FALSE, kQuadSize,(void*) (offset + diff));
+    DI->vertexAttribPointer(PROGRAM_TEXCOORD_ATTRIBUTE, 2, GL_FLOAT, GL_FALSE, kQuadSize,(void*) (offset + diff));
     int size = (int)m_quads.size()*4;
     
     for (int i=0; i<m_quads.size(); ++i) {
@@ -257,7 +187,7 @@ void GLProgram::draw()
         m_indexs.push_back(i*4+3);
         m_indexs.push_back(i*4);
     }
-    glDrawElements(GL_TRIANGLES, m_quads.size()*2*3, GL_UNSIGNED_SHORT, m_indexs.data());
+    DI->drawElements(GL_TRIANGLES, m_quads.size()*2*3, GL_UNSIGNED_SHORT, m_indexs.data());
 //    glDrawArrays(GL_TRIANGLE_FAN, 0, size);
     
     CHECK_GL_ERROR;

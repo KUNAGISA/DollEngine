@@ -27,8 +27,7 @@ void Debug::message(const char* format,...)
     va_start(args, format);
     vsprintf(logbuff, format, args);
     va_end(args);
-    wstring str;
-    Utf8ToUnicode(logbuff, str);
+    String str = logbuff;
     ScriptEngine::Global()->OutputToConsole(str.c_str());
 }
 
@@ -52,9 +51,9 @@ void Debug::throwMsg(DEBUG_MSG error,const String& p1)
     TJS_eTJSError(msg);
 }
 
-void Debug::throwMsg(DEBUG_MSG error,int p1,const wstring& p2)
+void Debug::throwMsg(DEBUG_MSG error,int p1,const String& p2)
 {
-    wstring msg;
+    String msg;
     switch (error) {
         case ERROR_KAG_UNKONW:
             msg = UnicodeWithFormat(L"(#%d)KAG解析发生未知错误",p1);
@@ -134,13 +133,13 @@ void ScriptEngine::catchError(void* error)
 {
     TJS::eTJSScriptError& e = *(TJS::eTJSScriptError*)error;
     ScriptEngine::Global()->OutputExceptionToConsole(L"STACK:");
-    wstring tra = e.GetTrace().AsStdString();
+    String tra = e.GetTrace().AsStdString();
     size_t idx = tra.find(L"(");
-    while (idx!=wstring::npos) {
+    while (idx!=String::npos) {
         size_t idx2 = tra.find(L" <-- anonymous@",idx);
-        wstring sub = tra.substr(idx,idx2-idx);
+        String sub = tra.substr(idx,idx2-idx);
         ScriptEngine::Global()->OutputExceptionToConsole(sub.c_str());
-        if (idx2 == wstring::npos) {
+        if (idx2 == String::npos) {
             break;
         }
         idx = tra.find(L"(",idx2);
@@ -148,7 +147,7 @@ void ScriptEngine::catchError(void* error)
     System::GetInstance()->setIsError(true);
 }
 
-bool ScriptEngine::eval(const wstring& code,void* ret)
+bool ScriptEngine::eval(const String& code,void* ret)
 {
     if (code.size() == 0) {
         return false;
@@ -161,7 +160,7 @@ bool ScriptEngine::eval(const wstring& code,void* ret)
     return false;
 }
 
-bool ScriptEngine::exec(const wstring& code,void* ret)
+bool ScriptEngine::exec(const String& code,void* ret)
 {
     if (code.size() == 0) {
         return false;
@@ -209,7 +208,7 @@ void ScriptEngine::addAsyncFunction(const AsyncFunction& func)
     m_allAsyncFunctions.push_back(func);
 }
 
-void ScriptEngine::print(const wstring& text)
+void ScriptEngine::print(const String& text)
 {
     s_tjs->GetConsoleOutput()->Print(text.c_str());
 }

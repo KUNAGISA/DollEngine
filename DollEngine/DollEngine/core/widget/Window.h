@@ -31,7 +31,7 @@ public:
 //    void transFinished();
     PROPERTY(bool, Visible, m_visible){m_visible=v;}
     PROPERTY(bool, FullScreen, m_fullScreen);
-    PROPERTY_CONST(string, Title, m_title);
+    PROPERTY_CONST(String, Title, m_title);
 protected:
     void* m_deviceWindow;
 //    Painter* m_transBlack;

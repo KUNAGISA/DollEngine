@@ -16,19 +16,19 @@ void System::initEnginePaths()
     //Data path
     
     m_dataPath = [[NSBundle mainBundle] resourcePath].UTF8String;
-    m_dataPath += "/data/";
+    m_dataPath += L"/data/";
     
     //App path
     m_appPath = [[NSBundle mainBundle] bundlePath].UTF8String;
-    m_appPath += "/";
+    m_appPath += L"/";
     
     //SaveData path
     m_saveDataPath = [[NSBundle mainBundle] resourcePath].UTF8String;
-    m_saveDataPath += "/savedata/";
+    m_saveDataPath += L"/savedata/";
     
     //Patch path
     m_patchPath = [[NSBundle mainBundle] resourcePath].UTF8String;
-    m_patchPath += "/patch/";
+    m_patchPath += L"/patch/";
 }
 
 DE_END

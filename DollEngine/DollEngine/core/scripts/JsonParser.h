@@ -43,7 +43,7 @@ private:
     wchar_t* arrayWithString(wchar_t* str,tTJSVariant& _out);
     wchar_t* dictWithString(wchar_t* str,tTJSVariant& _out);
     wchar_t* valueWithString(wchar_t* str,tTJSVariant& _out);
-    wchar_t* stringWithString(wchar_t* str,wstring& _out);
+    wchar_t* stringWithString(wchar_t* str,String& _out);
     wchar_t* stringWithString(wchar_t* str,tTJSVariant& _out);
     wchar_t* nunberWithString(wchar_t* str,tTJSVariant& _out);
     wchar_t* emptyWithString(wchar_t* str);

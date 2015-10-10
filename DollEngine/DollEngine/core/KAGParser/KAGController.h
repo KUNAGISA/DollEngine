@@ -29,7 +29,7 @@ public:
     KAGController();
     ~KAGController();
     
-    bool stepInLabel(const wstring& storage, const wstring& label, bool iscall);
+    bool stepInLabel(const String& storage, const String& label, bool iscall);
     bool stepOutLabel();
     bool stepNext();
     virtual int doTag(){return 0;}

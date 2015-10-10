@@ -133,8 +133,6 @@ TJS_STRING(v,name)\
 Component::setCompName(name);\
 }\
 tTJSVariant getCompName(){\
-    wstring name;\
-    Utf8ToUnicode(m_compName.c_str(), name);\
     return name.c_str();\
 } \
 tTJSVariant getObject() {\
@@ -173,9 +171,6 @@ NCB_METHOD(getClass);
 
 #define TJS_STRING(v,str) string str;\
 UnicodeToUtf8(v.AsStringNoAddRef()->operator const wchar_t *(), str);
-
-#define TJS_WSTRING(v,str) wstring str;\
-Utf8ToUnicode(v.c_str(), str);
 
 #define TJS_GET_DISPATCH(TYPE,NODE) (ncbInstanceAdaptor<TYPE>::GetAdaptor((TYPE*)NODE))
 

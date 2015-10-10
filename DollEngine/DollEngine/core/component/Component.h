@@ -34,7 +34,7 @@ public:
     PROPERTY(bool, IsReleased, m_isReleased){m_isReleased=v;}
     PROPERTY(float, Time, m_time){m_time=v;}
     PROPERTY(int, Type, m_type){m_type=v;}
-    PROPERTY_CONST(string, CompName, m_compName){m_compName=v;}
+    PROPERTY_CONST(String, CompName, m_compName){m_compName=v;}
 };
 
 DE_END

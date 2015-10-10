@@ -393,7 +393,7 @@ TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/replace)
 	/*
 		replaces the string
 
-		newstring = /regexp/.replace(orgstring, newsubstring);
+		neString = /regexp/.replace(orgstring, newsubstring);
 		newsubstring can be:
 			1. normal string ( literal or expression that respresents string )
 			2. a function
@@ -401,7 +401,7 @@ TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/replace)
 
 		or
 
-		newstring = string.replace(/regexp/, newsubstring);
+		neString = string.replace(/regexp/, newsubstring);
 			( via String.replace method )
 
 		replace method ignores start property, and does not change any

@@ -42,7 +42,7 @@ bool NormalProgram::init()
     addShader(vshader);
     addShader(fshader);
     
-    link();
+    DI->linkProgram(m_programId);
     
     bind();
     return true;

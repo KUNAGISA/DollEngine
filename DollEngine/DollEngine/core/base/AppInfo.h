@@ -21,10 +21,10 @@ public:
     //debug mode:0不显示console 1显示但不打印tag 2打印tag但不打印macro 3所有都打印
     PROPERTY(int,DebugMode,m_debugMode);
     
-    PROPERTY_CONST(string,AppPath,m_appPath){m_appPath=v;}
-    PROPERTY_CONST(string,DataPath,m_dataPath){m_dataPath=v;}
-    PROPERTY_CONST(string,SaveDataPath,m_saveDataPath){m_saveDataPath=v;}
-    PROPERTY_CONST(string,PatchPath,m_patchPath){m_patchPath=v;}
+    PROPERTY_CONST(String,AppPath,m_appPath){m_appPath=v;}
+    PROPERTY_CONST(String,DataPath,m_dataPath){m_dataPath=v;}
+    PROPERTY_CONST(String,SaveDataPath,m_saveDataPath){m_saveDataPath=v;}
+    PROPERTY_CONST(String,PatchPath,m_patchPath){m_patchPath=v;}
     
     float getDesktopWidth();
     float getDesktopHeight();

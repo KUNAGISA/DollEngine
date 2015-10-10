@@ -38,9 +38,7 @@ ImageData* FontInterface::addText(const String& text,const String& fontName,int 
     if (!face) {
         face = (FT_Face)getFont(DEFFONT);
     }
-    wstring str;
-    Utf8ToUnicode((char*)text.c_str(),str);
-    unsigned short charcode = str[0];
+    unsigned short charcode = text[0];
     FT_UInt graphIdx = FT_Get_Char_Index(face, (FT_ULong)charcode);
     if (graphIdx == 0)
     {

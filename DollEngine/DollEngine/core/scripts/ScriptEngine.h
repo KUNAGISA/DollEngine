@@ -32,12 +32,12 @@ public:
     ScriptEngine();
     Shared(ScriptEngine)
     static TJS::tTJS* Global();
-    virtual bool eval(const wstring& code,void* ret);
-    virtual bool exec(const wstring& code,void* ret);
+    virtual bool eval(const String& code,void* ret);
+    virtual bool exec(const String& code,void* ret);
     virtual void catchError(void* error);
     void doAsyncFunctions();
     void addAsyncFunction(const AsyncFunction& func);
-    void print(const wstring& text);
+    void print(const String& text);
     void setConsoleVisible(bool v);
     bool getConsoleVisible();
     

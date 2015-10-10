@@ -67,7 +67,7 @@ wstring UnicodeWithFormat(const wchar_t* format,...)
 
 
 //定义查找表，长度256，表中的数值表示以此为起始字节的utf8字符长度
-unsigned int utf8_len_for_table[256] =
+static unsigned int utf8_len_for_table[256] =
 {
     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
@@ -98,72 +98,6 @@ void Utf8ToVector(const String& _in, vector<string>& _out)
 //        _out.push_back(o);
 //        i+=len;
 //    }
-}
-
-void Utf8ToUnicode(const char* src, wstring& target)
-{
-    target.clear();
-    if (src == null) {
-        return;
-    }
-    char* ch = (char*)src;
-    while (*ch != '\0')
-    {
-        wchar_t ot;
-        int len = UTFLEN(*ch & 0xff);
-        switch(len)
-        {
-            case 1:
-            {
-                ot = ch[0];
-            }
-                break;
-            case 2:
-            {
-                ot = ((int)(ch[0]&0x1F)) << 6;
-                ot |= ch[1]&0x3F;
-            }
-                break;
-            case 3:
-            {
-                ot = ((int)(ch[0]&0x1F)) << 12;
-                ot |= ((int)(ch[1]&0x3F)) << 6;
-                ot |= ch[2]&0x3F;
-            }
-                break;
-            case 4:
-            {
-                ot = ((int)(ch[0]&0x07)) << 18;
-                ot |= ((int)(ch[1]&0x3F)) << 12;
-                ot |= ((int)(ch[2]&0x3F)) << 6;
-                ot |= ch[3]&0x3F;
-            }
-                break;
-            case 5:
-            {
-                ot = ((int)(ch[0]&0x03)) << 24;
-                ot |= ((int)(ch[1]&0x3F)) << 18;
-                ot |= ((int)(ch[2]&0x3F)) << 12;
-                ot |= ((int)(ch[3]&0x3F)) << 6;
-                ot |= ch[4]&0x3F;
-            }
-                break;
-            case 6:
-            {
-                ot = ((int)(ch[0]&0x01)) << 30;
-                ot |= ((int)(ch[1]&0x3F)) << 24;
-                ot |= ((int)(ch[2]&0x3F)) << 18;
-                ot |= ((int)(ch[3]&0x3F)) << 12;
-                ot |= ((int)(ch[4]&0x3F)) << 6;
-                ot |= ch[5]&0x3F;
-            }
-                break;
-            default:
-                break;
-        }
-        target += ot;
-        ch+=len;
-    }
 }
 
 void UnicodeToUtf8(const wchar_t* src, string& target)

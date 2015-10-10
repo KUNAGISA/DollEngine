@@ -23,14 +23,14 @@ GLCache::GLCache()
 TextFrame* GLCache::addText(const String& text,const String& fontName,int fontSize)
 {
     String _fontName;
-    if (fontName.empty() || text == "") {
+    if (fontName.empty() || text.empty()) {
         _fontName = DEFFONT;
     }
     else {
         _fontName = fontName;
     }
     
-    if (fontSize == 0 || text == "") {
+    if (fontSize == 0 || text.empty()) {
         fontSize = DEFFONTSIZE;
     }
     
@@ -106,7 +106,7 @@ GLTexture* GLCache::addTexture(const String& path)
 
 SpriteFrame* GLCache::addFrame(const String& picKey,const String& plist)
 {
-    if (plist == "") {
+    if (plist.empty()) {
         FileInfo file(picKey);
         if (!file.exist()) {
             Debug::throwMsg(ERROR_FILE_EXIST_FAILD,picKey);

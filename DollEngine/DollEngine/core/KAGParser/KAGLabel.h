@@ -32,8 +32,8 @@ public:
     }
     void print(int idx);
     KAGStorage* storage;
-    wstring key;
-    wstring name;
+    String key;
+    String name;
     vector<KAGTag*> allTags;
     bool isMacro;
     KAGLabel* nextLabel;

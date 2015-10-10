@@ -27,7 +27,7 @@ public:
     void removeAutoPath(const String& storage);// ( 删除自动检索路径 )
     void clearAutoPath();
 private:
-    list<string> m_autoPaths;
+    list<String> m_autoPaths;
     map<String, String> m_searchPathsCache;
 };
 

@@ -27,13 +27,13 @@ public:
         clear();
     }
     void add(tTJSVariant v){
-        wstring key = v.AsString()->operator const wchar_t *();
+        String key = v.AsString()->operator const wchar_t *();
         if(m_all.find(key)==m_all.end()){
             m_all[key] = v;
         }
     }
     void remove(tTJSVariant v){
-        wstring key = v.AsString()->operator const wchar_t *();
+        String key = v.AsString()->operator const wchar_t *();
         m_all.erase(key);
     }
     void clear(){
@@ -58,7 +58,7 @@ public:
         iTJSDispatch2* f = v.AsObjectNoAddRef();
         tTJSInterCodeContext* func = dynamic_cast<tTJSInterCodeContext*>(f);
         if (func) {
-            map<wstring,tTJSVariant> tmp = m_all;
+            map<String,tTJSVariant> tmp = m_all;
             for (auto iter = tmp.begin();
                  iter != tmp.end(); ++iter)
             {
@@ -68,7 +68,7 @@ public:
         }
     }
 protected:
-    map<wstring,tTJSVariant> m_all;
+    map<String,tTJSVariant> m_all;
 };
 
 DE_END

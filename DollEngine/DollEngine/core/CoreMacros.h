@@ -27,19 +27,12 @@ using namespace std;
 
 #ifdef __QT__
 #include <QtOpenGL>
-//#define GL_TEXTURE0 0
-//#define GL_TEXTURE1 1
-//#define glDeleteVertexArrays glDeleteVertexArraysAPPLE
-//#define glGenVertexArrays  glGenVertexArraysAPPLE
-//#define glBindVertexArray glBindVertexArrayAPPLE
-//#define glClearDepthf glClearDepth
-//#define glDepthRangef glDepthRange
-//#define glReleaseShaderCompiler(xxx)
+
 #endif
 
 #define null NULL
 #define PI 3.14159265358979323846264338327950288
-#define DEFFONT "WenQuanYi Micro Hei"
+#define DEFFONT L"WenQuanYi Micro Hei"
 #define DEFFONTSIZE 24
 #define DM DE::Debug::message
 #define DI DE::DrawInterface::GetInstance()

@@ -25,7 +25,7 @@ public:
     virtual void setSizeToImageSize();
     float getTextWidth(int v){setSizeToImageSize();return getPaintWidth();}
 public:
-    PROPERTY_CONST(string, FontName, m_fontName){
+    PROPERTY_CONST(String, FontName, m_fontName){
         if(m_fontName!=v){
             m_fontName=v;m_textChanged=true;
             NEED_REDRAW;
@@ -37,7 +37,7 @@ public:
             NEED_REDRAW;
         }
     }
-    PROPERTY_CONST(string, Text, m_text){
+    PROPERTY_CONST(String, Text, m_text){
         if(m_text!=v){
             m_text=v;m_textChanged=true;
             NEED_REDRAW;

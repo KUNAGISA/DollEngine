@@ -141,7 +141,7 @@ void GLCanvas::paint(PaintConfig& config)
         frame->getTexture()->getTextureId() != 0)
     {
         blendFunc(config.blendSrc,config.blendDst);
-        config.program->use();
+        DI->useProgram(config.program->getProgramId());
         config.program->setUniformValue("matrix", GLCanvas::GetInstance()->getGlobalTrans()->getMatrix());
         
         frame->getTexture()->bind(GL_TEXTURE0);
