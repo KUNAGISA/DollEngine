@@ -6,7 +6,7 @@
 //  Copyright (c) 2015年 DollStudio. All rights reserved.
 //
 
-#include "Types.h"
+#include "CoreTypes.h"
 #include "Transform.h"
 
 DE_BEGIN

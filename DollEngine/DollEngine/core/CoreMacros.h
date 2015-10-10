@@ -43,7 +43,7 @@ using namespace std;
 
 #define DESystem DE::System::GetInstance()
 
-#define NEED_REDRAW DESystem->setNeedRedraw(true)
+#define NEED_REDRAW DE::Status::GetInstance()->needRedraw = true;
 
 #define Shared(type) static type* GetInstance() \
 {\

@@ -9,7 +9,7 @@
 #include "CompManager.h"
 #include "TouchListener.h"
 #include "GLCanvas.h"
-#include "System.h"
+#include "AppInfo.h"
 
 DE_BEGIN
 
@@ -36,7 +36,7 @@ void CompManager::updateComp()
     }
     double time = GetSeconds();
     double dt = time - m_lastTime;
-    if (System::GetInstance()->getDebugMode()>0) {
+    if (AppInfo::GetInstance()->getDebugMode()>0) {
         dt = 1/60.0f;
         m_lastTime = m_lastTime+dt;
     }
@@ -94,8 +94,8 @@ void CompManager::clearTouches()
 
 bool CompManager::onMouseDown(float x,float y )
 {
-    x /= DESystem->getDeviceWidth()/GLCanvas::GetInstance()->getLayerWidth();
-    y /= DESystem->getDeviceHeight()/GLCanvas::GetInstance()->getLayerHeight();
+    x /= AppInfo::GetInstance()->getDesktopWidth()/GLCanvas::GetInstance()->getLayerWidth();
+    y /= AppInfo::GetInstance()->getDesktopHeight()/GLCanvas::GetInstance()->getLayerHeight();
     list<Component*> allTouchs = m_touchComps;
     for (auto iter = m_globalTouchs.begin();
          iter != m_globalTouchs.end(); ++iter) {
@@ -136,8 +136,8 @@ bool CompManager::onMouseDown(float x,float y )
 
 void CompManager::onMouseUp(float x,float y )
 {
-    x /= DESystem->getDeviceWidth()/GLCanvas::GetInstance()->getLayerWidth();
-    y /= DESystem->getDeviceHeight()/GLCanvas::GetInstance()->getLayerHeight();
+    x /= AppInfo::GetInstance()->getDesktopWidth()/GLCanvas::GetInstance()->getLayerWidth();
+    y /= AppInfo::GetInstance()->getDesktopHeight()/GLCanvas::GetInstance()->getLayerHeight();
     for (auto iter = m_validTouches.begin();
          iter != m_validTouches.end(); ++iter)
     {
@@ -162,8 +162,8 @@ void CompManager::onMouseUp(float x,float y )
 
 void CompManager::onMouseMove(float x,float y )
 {
-    x /= DESystem->getDeviceWidth()/GLCanvas::GetInstance()->getLayerWidth();
-    y /= DESystem->getDeviceHeight()/GLCanvas::GetInstance()->getLayerHeight();
+    x /= AppInfo::GetInstance()->getDesktopWidth()/GLCanvas::GetInstance()->getLayerWidth();
+    y /= AppInfo::GetInstance()->getDesktopHeight()/GLCanvas::GetInstance()->getLayerHeight();
     for (auto iter = m_validTouches.begin();
          iter != m_validTouches.end(); ++iter)
     {

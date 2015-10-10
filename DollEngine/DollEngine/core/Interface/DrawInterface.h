@@ -1,7 +1,7 @@
 #ifndef DRAWINTERFACE_H
 #define DRAWINTERFACE_H
 
-#include "Types.h"
+#include "CoreTypes.h"
 
 DE_BEGIN
 

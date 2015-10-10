@@ -10,7 +10,6 @@
 #define __DollEngine__TouchListener__
 
 #include "Component.h"
-#include "System.h"
 
 DE_BEGIN
 

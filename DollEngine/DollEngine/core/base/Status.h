@@ -9,7 +9,7 @@
 #ifndef __DollEngine__Status__
 #define __DollEngine__Status__
 
-#include "CoreUnits.h"
+#include "CoreTypes.h"
 
 DE_BEGIN
 

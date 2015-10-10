@@ -8,7 +8,7 @@
 
 #include "KAGController.h"
 #include "KAGParser.h"
-#include "System.h"
+#include "AppInfo.h"
 
 DE_BEGIN
 
@@ -95,10 +95,10 @@ bool KAGController::stepNext()
 
 void KAGController::printLabel()
 {
-    if (System::GetInstance()->getDebugMode() <= 1) {
+    if (AppInfo::GetInstance()->getDebugMode() <= 1) {
         return;
     }
-    if (System::GetInstance()->getDebugMode() <= 2 &&
+    if (AppInfo::GetInstance()->getDebugMode() <= 2 &&
         m_label->isMacro) {
         return;
     }

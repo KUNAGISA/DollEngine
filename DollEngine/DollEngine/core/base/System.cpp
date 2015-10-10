@@ -14,6 +14,7 @@
 #include "Character.h"
 #include "ScriptEngine.h"
 #include "Window.h"
+#include "AppInfo.h"
 
 DE_BEGIN
 
@@ -48,8 +49,8 @@ void System::mainLoop()
 
 void System::startup()
 {
-    initEnginePaths();
     try{
+        AppInfo::GetInstance();
         ScriptEngine::GetInstance();
         FontInterface::GetInstance()->addFont("WenQuanYiMicroHei.ttc");
         String fullpath = Storages::GetInstance()->getFullPath("Startup.tjs");
@@ -72,25 +73,5 @@ void System::startup()
         
     }
 }
-
-void System::setDeviceSize(float w,float h)
-{
-    m_deviceWidth = w;
-    m_deviceHeight = h;
-}
-
-void System::setDebugMode(int v)
-{
-    m_debugMode = v;
-    if (v == 0) {
-        ScriptEngine::GetInstance()->setConsoleVisible(false);
-    }
-    else {
-        if(ScriptEngine::GetInstance()->getConsoleVisible()){
-            ScriptEngine::GetInstance()->setConsoleVisible(true);
-        }
-    }
-}
-
 
 DE_END

@@ -25,7 +25,7 @@
 		B8D15A931BC94E8700D37D81 /* Color.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A2E1BC94E8600D37D81 /* Color.cpp */; };
 		B8D15A941BC94E8700D37D81 /* CoreString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A301BC94E8600D37D81 /* CoreString.cpp */; };
 		B8D15A951BC94E8700D37D81 /* Transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A321BC94E8600D37D81 /* Transform.cpp */; };
-		B8D15A961BC94E8700D37D81 /* Types.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A341BC94E8600D37D81 /* Types.cpp */; };
+		B8D15A961BC94E8700D37D81 /* CoreTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A341BC94E8600D37D81 /* CoreTypes.cpp */; };
 		B8D15A971BC94E8700D37D81 /* FileInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A371BC94E8600D37D81 /* FileInfo.cpp */; };
 		B8D15A981BC94E8700D37D81 /* IOData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A391BC94E8600D37D81 /* IOData.cpp */; };
 		B8D15A991BC94E8700D37D81 /* WenQuanYiMicroHei.ttc in Resources */ = {isa = PBXBuildFile; fileRef = B8D15A3B1BC94E8600D37D81 /* WenQuanYiMicroHei.ttc */; };
@@ -48,7 +48,6 @@
 		B8D15AAA1BC94E8700D37D81 /* DrawInterface-GL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A671BC94E8600D37D81 /* DrawInterface-GL.cpp */; };
 		B8D15AAB1BC94E8700D37D81 /* FontInterface-iOS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A691BC94E8600D37D81 /* FontInterface-iOS.cpp */; };
 		B8D15AAC1BC94E8700D37D81 /* ImageData-iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A6A1BC94E8600D37D81 /* ImageData-iOS.mm */; };
-		B8D15AAD1BC94E8700D37D81 /* System-iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A6B1BC94E8600D37D81 /* System-iOS.mm */; };
 		B8D15AAE1BC94E8700D37D81 /* Window-iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A6C1BC94E8600D37D81 /* Window-iOS.mm */; };
 		B8D15AB51BC94E8700D37D81 /* JsonParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A761BC94E8700D37D81 /* JsonParser.cpp */; };
 		B8D15AB61BC94E8700D37D81 /* ScriptEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A781BC94E8700D37D81 /* ScriptEngine.cpp */; };
@@ -57,6 +56,7 @@
 		B8D15AB91BC94E8700D37D81 /* TjsSet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A7F1BC94E8700D37D81 /* TjsSet.cpp */; };
 		B8D15ABA1BC94E8700D37D81 /* TjsConsole.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A821BC94E8700D37D81 /* TjsConsole.cpp */; };
 		B8D15ABB1BC94E8700D37D81 /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A841BC94E8700D37D81 /* Window.cpp */; };
+		B8D15ABD1BC962A000D37D81 /* AppInfo-iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = B8D15ABC1BC962A000D37D81 /* AppInfo-iOS.mm */; };
 		B8F393F61BC68E70002EB3CC /* AppDelegateIOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = B8F390DD1BC68E6F002EB3CC /* AppDelegateIOS.mm */; };
 		B8F393F71BC68E70002EB3CC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8F390E21BC68E6F002EB3CC /* Images.xcassets */; };
 		B8F393F81BC68E70002EB3CC /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B8F390E31BC68E6F002EB3CC /* Info.plist */; };
@@ -206,8 +206,8 @@
 		B8D15A311BC94E8600D37D81 /* CoreString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CoreString.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		B8D15A321BC94E8600D37D81 /* Transform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Transform.cpp; sourceTree = "<group>"; };
 		B8D15A331BC94E8600D37D81 /* Transform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Transform.h; sourceTree = "<group>"; };
-		B8D15A341BC94E8600D37D81 /* Types.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Types.cpp; sourceTree = "<group>"; };
-		B8D15A351BC94E8600D37D81 /* Types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Types.h; sourceTree = "<group>"; };
+		B8D15A341BC94E8600D37D81 /* CoreTypes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CoreTypes.cpp; sourceTree = "<group>"; };
+		B8D15A351BC94E8600D37D81 /* CoreTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreTypes.h; sourceTree = "<group>"; };
 		B8D15A371BC94E8600D37D81 /* FileInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FileInfo.cpp; sourceTree = "<group>"; };
 		B8D15A381BC94E8600D37D81 /* FileInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileInfo.h; sourceTree = "<group>"; };
 		B8D15A391BC94E8600D37D81 /* IOData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = IOData.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
@@ -250,7 +250,6 @@
 		B8D15A671BC94E8600D37D81 /* DrawInterface-GL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "DrawInterface-GL.cpp"; sourceTree = "<group>"; };
 		B8D15A691BC94E8600D37D81 /* FontInterface-iOS.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = "FontInterface-iOS.cpp"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		B8D15A6A1BC94E8600D37D81 /* ImageData-iOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "ImageData-iOS.mm"; sourceTree = "<group>"; };
-		B8D15A6B1BC94E8600D37D81 /* System-iOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "System-iOS.mm"; sourceTree = "<group>"; };
 		B8D15A6C1BC94E8600D37D81 /* Window-iOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "Window-iOS.mm"; sourceTree = "<group>"; };
 		B8D15A761BC94E8700D37D81 /* JsonParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = JsonParser.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		B8D15A771BC94E8700D37D81 /* JsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = JsonParser.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -266,6 +265,7 @@
 		B8D15A831BC94E8700D37D81 /* TjsConsole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsConsole.h; sourceTree = "<group>"; };
 		B8D15A841BC94E8700D37D81 /* Window.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Window.cpp; sourceTree = "<group>"; };
 		B8D15A851BC94E8700D37D81 /* Window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Window.h; sourceTree = "<group>"; };
+		B8D15ABC1BC962A000D37D81 /* AppInfo-iOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "AppInfo-iOS.mm"; sourceTree = "<group>"; };
 		B8F390DC1BC68E6F002EB3CC /* AppDelegateIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegateIOS.h; sourceTree = "<group>"; };
 		B8F390DD1BC68E6F002EB3CC /* AppDelegateIOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegateIOS.mm; sourceTree = "<group>"; };
 		B8F390E11BC68E6F002EB3CC /* DollEnginePrefixiOS.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DollEnginePrefixiOS.pch; sourceTree = "<group>"; };
@@ -653,8 +653,8 @@
 				B8D15A311BC94E8600D37D81 /* CoreString.h */,
 				B8D15A321BC94E8600D37D81 /* Transform.cpp */,
 				B8D15A331BC94E8600D37D81 /* Transform.h */,
-				B8D15A341BC94E8600D37D81 /* Types.cpp */,
-				B8D15A351BC94E8600D37D81 /* Types.h */,
+				B8D15A341BC94E8600D37D81 /* CoreTypes.cpp */,
+				B8D15A351BC94E8600D37D81 /* CoreTypes.h */,
 			);
 			path = CoreType;
 			sourceTree = "<group>";
@@ -775,9 +775,9 @@
 		B8D15A681BC94E8600D37D81 /* ios */ = {
 			isa = PBXGroup;
 			children = (
+				B8D15ABC1BC962A000D37D81 /* AppInfo-iOS.mm */,
 				B8D15A691BC94E8600D37D81 /* FontInterface-iOS.cpp */,
 				B8D15A6A1BC94E8600D37D81 /* ImageData-iOS.mm */,
-				B8D15A6B1BC94E8600D37D81 /* System-iOS.mm */,
 				B8D15A6C1BC94E8600D37D81 /* Window-iOS.mm */,
 			);
 			path = ios;
@@ -1389,7 +1389,7 @@
 				B8D15AB51BC94E8700D37D81 /* JsonParser.cpp in Sources */,
 				B8F39B121BC690CA002EB3CC /* tjs.tab.cpp in Sources */,
 				B8F39A7F1BC68F33002EB3CC /* unicode.c in Sources */,
-				B8D15A961BC94E8700D37D81 /* Types.cpp in Sources */,
+				B8D15A961BC94E8700D37D81 /* CoreTypes.cpp in Sources */,
 				B8F39A521BC68F33002EB3CC /* plane.c in Sources */,
 				B8F39B191BC690CA002EB3CC /* tjsDate.cpp in Sources */,
 				B8F39B331BC690CA002EB3CC /* tjsScriptCache.cpp in Sources */,
@@ -1432,6 +1432,7 @@
 				B8F39A7C1BC68F33002EB3CC /* koi8_r.c in Sources */,
 				B8D15A941BC94E8700D37D81 /* CoreString.cpp in Sources */,
 				B8D15AA11BC94E8700D37D81 /* KAGLabel.cpp in Sources */,
+				B8D15ABD1BC962A000D37D81 /* AppInfo-iOS.mm in Sources */,
 				B8F39B261BC690CA002EB3CC /* tjsLex.cpp in Sources */,
 				B8D15A951BC94E8700D37D81 /* Transform.cpp in Sources */,
 				B8F39A541BC68F33002EB3CC /* ray2.c in Sources */,
@@ -1447,7 +1448,6 @@
 				B8F39A801BC68F33002EB3CC /* utf16_be.c in Sources */,
 				B8F39B2F1BC690CA002EB3CC /* tjspp.tab.cpp in Sources */,
 				B8D15AA31BC94E8700D37D81 /* KAGStorage.cpp in Sources */,
-				B8D15AAD1BC94E8700D37D81 /* System-iOS.mm in Sources */,
 				B8D15A861BC94E8700D37D81 /* AppInfo.cpp in Sources */,
 				B8D15A971BC94E8700D37D81 /* FileInfo.cpp in Sources */,
 				B8D15A891BC94E8700D37D81 /* Storages.cpp in Sources */,

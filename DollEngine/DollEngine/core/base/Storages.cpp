@@ -7,7 +7,7 @@
 //
 
 #include "Storages.h"
-#include "System.h"
+#include "AppInfo.h"
 
 DE_BEGIN
 
@@ -106,25 +106,25 @@ String Storages::getFullPath(const String& storage)
         }
         else
         {
-            String temp_path = DESystem->getPatchPath()+storage;
+            String temp_path = AppInfo::GetInstance()->getPatchPath()+storage;
             if (access(temp_path.c_nstr(),0) == 0)
             {
                 m_searchPathsCache[storage] = temp_path;
                 return temp_path;
             }
-            temp_path = DESystem->getSaveDataPath()+storage;
+            temp_path = AppInfo::GetInstance()->getSaveDataPath()+storage;
             if (access(temp_path.c_nstr(),0) == 0)
             {
                 m_searchPathsCache[storage] = temp_path;
                 return temp_path;
             }
-            temp_path = DESystem->getDataPath()+storage;
+            temp_path = AppInfo::GetInstance()->getDataPath()+storage;
             if (access(temp_path.c_nstr(),0) == 0)
             {
                 m_searchPathsCache[storage] = temp_path;
                 return temp_path;
             }
-            temp_path = DESystem->getAppPath()+storage;
+            temp_path = AppInfo::GetInstance()->getAppPath()+storage;
             if (access(temp_path.c_nstr(),0) == 0)
             {
                 m_searchPathsCache[storage] = temp_path;
@@ -133,7 +133,7 @@ String Storages::getFullPath(const String& storage)
             auto auto_iter = m_autoPaths.begin();
             for (; auto_iter != m_autoPaths.end(); ++auto_iter)
             {
-                temp_path = DESystem->getPatchPath()+(*auto_iter)+storage;
+                temp_path = AppInfo::GetInstance()->getPatchPath()+(*auto_iter)+storage;
                 if (access(temp_path.c_nstr(),0) == 0)
                 {
                     m_searchPathsCache[storage] = temp_path;
@@ -143,7 +143,7 @@ String Storages::getFullPath(const String& storage)
             auto_iter = m_autoPaths.begin();
             for (; auto_iter != m_autoPaths.end(); ++auto_iter)
             {
-                temp_path = DESystem->getSaveDataPath()+(*auto_iter)+storage;
+                temp_path = AppInfo::GetInstance()->getSaveDataPath()+(*auto_iter)+storage;
                 if (access(temp_path.c_nstr(),0) == 0)
                 {
                     m_searchPathsCache[storage] = temp_path;
@@ -153,7 +153,7 @@ String Storages::getFullPath(const String& storage)
             auto_iter = m_autoPaths.begin();
             for (; auto_iter != m_autoPaths.end(); ++auto_iter)
             {
-                temp_path = DESystem->getDataPath()+(*auto_iter)+storage;
+                temp_path = AppInfo::GetInstance()->getDataPath()+(*auto_iter)+storage;
                 if (access(temp_path.c_nstr(),0) == 0)
                 {
                     m_searchPathsCache[storage] = temp_path;

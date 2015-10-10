@@ -7,9 +7,10 @@
 //
 
 #include "GLCanvas.h"
-#include "System.h"
+#include "AppInfo.h"
 #include "NormalProgram.h"
 #include "GrowProgram.h"
+#include "Status.h"
 
 DE_BEGIN
 
@@ -42,7 +43,8 @@ void GLCanvas::initializeGL()
         
         CHECK_GL_ERROR;
         
-        resizeGL();
+        resizeGL(AppInfo::GetInstance()->getDesktopWidth(),
+                 AppInfo::GetInstance()->getDesktopHeight());
         addProgram("normal", new NormalProgram());
         addProgram("grow", new GrowProgram());
     }
@@ -54,13 +56,11 @@ void GLCanvas::clearGL()
     glClear(GL_COLOR_BUFFER_BIT);
 }
 
-void GLCanvas::resizeGL()
+void GLCanvas::resizeGL(float deviceWidth,float deviceHeight)
 {
     if (m_initialized) {
         float layerWidth = getLayerWidth();
         float layerHeight = getLayerHeight();
-        float deviceWidth = DESystem->getDeviceWidth();
-        float deviceHeight = DESystem->getDeviceHeight();
         float p = layerWidth/layerHeight;
         float sc_p = deviceWidth/deviceHeight;
         float layerZoom = 1, layerX = 0, layerY = 0;

@@ -9,8 +9,9 @@
 #ifndef __DollEngine__Units__
 #define __DollEngine__Units__
 
-#include "Types.h"
+#include "CoreTypes.h"
 #include "Debug.h"
+#include "Status.h"
 #include "DrawInterface.h"
 
 DE_BEGIN

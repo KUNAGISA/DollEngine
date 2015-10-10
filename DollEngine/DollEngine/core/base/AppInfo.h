@@ -17,6 +17,7 @@ class AppInfo
 {
 public:
     AppInfo();
+    Shared(AppInfo)
     
     //debug mode:0不显示console 1显示但不打印tag 2打印tag但不打印macro 3所有都打印
     PROPERTY(int,DebugMode,m_debugMode);

@@ -9,6 +9,7 @@
 #include "RTT.h"
 #include "GLCanvas.h"
 #include "Painter.h"
+#include "AppInfo.h"
 
 DE_BEGIN
 
@@ -62,8 +63,8 @@ bool RTT::begin(int w,int h,Painter* bg)
     }
     m_FBO = DI->createFBO(m_displayFrame->getTexture()->getTextureId());
     
-    DESystem->setDeviceSize(GLCanvas::GetInstance()->getLayerWidth(), GLCanvas::GetInstance()->getLayerHeight());
-    GLCanvas::GetInstance()->resizeGL();
+    GLCanvas::GetInstance()->resizeGL(GLCanvas::GetInstance()->getLayerWidth(),
+                                      GLCanvas::GetInstance()->getLayerHeight());
     
     DI->switchFBO(&m_oldFBO,m_FBO);
     DI->clearColor(GL_COLOR_BUFFER_BIT,1,1,1,1);
@@ -76,12 +77,10 @@ bool RTT::begin(int w,int h,Painter* bg)
 
 void RTT::end()
 {
-    float deviceW = DESystem->getDeviceWidth();
-    float deviceH = DESystem->getDeviceHeight();
     DI->switchFBO(null,m_oldFBO);
     CHECK_GL_ERROR;
-    DESystem->setDeviceSize(deviceW,deviceH);
-    GLCanvas::GetInstance()->resizeGL();
+    GLCanvas::GetInstance()->resizeGL(AppInfo::GetInstance()->getDesktopWidth(),
+                                      AppInfo::GetInstance()->getDesktopHeight());
 }
 
 DE_END
