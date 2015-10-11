@@ -30,6 +30,10 @@ public:
     float getDesktopWidth();
     float getDesktopHeight();
     
+    
+    static bool NeedRedraw;
+    static bool NeedSortTouches;
+    
 };
 
 DE_END

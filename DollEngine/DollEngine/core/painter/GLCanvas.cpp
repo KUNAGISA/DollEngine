@@ -10,7 +10,6 @@
 #include "AppInfo.h"
 #include "NormalProgram.h"
 #include "GrowProgram.h"
-#include "Status.h"
 
 DE_BEGIN
 

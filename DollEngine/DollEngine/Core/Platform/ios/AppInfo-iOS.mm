@@ -14,6 +14,8 @@ DE_BEGIN
 AppInfo::AppInfo()
 :m_debugMode(0)
 {
+    AppInfo::NeedRedraw = true;
+    AppInfo::NeedSortTouches = true;
     //Data path
     m_dataPath = [[NSBundle mainBundle] resourcePath].UTF8String;
     m_dataPath += L"/data/";

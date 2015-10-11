@@ -11,7 +11,6 @@
 
 #include "CoreTypes.h"
 #include "Debug.h"
-#include "Status.h"
 #include "DrawInterface.h"
 
 DE_BEGIN

@@ -11,6 +11,9 @@
 
 DE_BEGIN
 
+bool AppInfo::NeedRedraw=true;
+bool AppInfo::NeedSortTouches=true;
+
 void AppInfo::setDebugMode(int v)
 {
     m_debugMode = v;

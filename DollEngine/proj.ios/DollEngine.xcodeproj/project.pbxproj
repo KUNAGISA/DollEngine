@@ -11,7 +11,6 @@
 		B8D15A0D1BC94CD600D37D81 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B8D15A091BC811FC00D37D81 /* libz.dylib */; };
 		B8D15A861BC94E8700D37D81 /* AppInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A101BC94E8600D37D81 /* AppInfo.cpp */; };
 		B8D15A871BC94E8700D37D81 /* Debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A121BC94E8600D37D81 /* Debug.cpp */; };
-		B8D15A881BC94E8700D37D81 /* Status.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A141BC94E8600D37D81 /* Status.cpp */; };
 		B8D15A891BC94E8700D37D81 /* Storages.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A161BC94E8600D37D81 /* Storages.cpp */; };
 		B8D15A8A1BC94E8700D37D81 /* System.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A181BC94E8600D37D81 /* System.cpp */; };
 		B8D15A8B1BC94E8700D37D81 /* Audio-Mac.mm in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A1B1BC94E8600D37D81 /* Audio-Mac.mm */; };
@@ -177,8 +176,6 @@
 		B8D15A111BC94E8600D37D81 /* AppInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppInfo.h; sourceTree = "<group>"; };
 		B8D15A121BC94E8600D37D81 /* Debug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Debug.cpp; sourceTree = "<group>"; };
 		B8D15A131BC94E8600D37D81 /* Debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Debug.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		B8D15A141BC94E8600D37D81 /* Status.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Status.cpp; sourceTree = "<group>"; };
-		B8D15A151BC94E8600D37D81 /* Status.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Status.h; sourceTree = "<group>"; };
 		B8D15A161BC94E8600D37D81 /* Storages.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Storages.cpp; sourceTree = "<group>"; };
 		B8D15A171BC94E8600D37D81 /* Storages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Storages.h; sourceTree = "<group>"; };
 		B8D15A181BC94E8600D37D81 /* System.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = System.cpp; sourceTree = "<group>"; };
@@ -603,8 +600,6 @@
 				B8D15A111BC94E8600D37D81 /* AppInfo.h */,
 				B8D15A121BC94E8600D37D81 /* Debug.cpp */,
 				B8D15A131BC94E8600D37D81 /* Debug.h */,
-				B8D15A141BC94E8600D37D81 /* Status.cpp */,
-				B8D15A151BC94E8600D37D81 /* Status.h */,
 				B8D15A161BC94E8600D37D81 /* Storages.cpp */,
 				B8D15A171BC94E8600D37D81 /* Storages.h */,
 				B8D15A181BC94E8600D37D81 /* System.cpp */,
@@ -1441,7 +1436,6 @@
 				B8F393FA1BC68E70002EB3CC /* main.m in Sources */,
 				B8F39B2C1BC690CA002EB3CC /* tjsObject.cpp in Sources */,
 				B8F39A911BC68F33002EB3CC /* st.c in Sources */,
-				B8D15A881BC94E8700D37D81 /* Status.cpp in Sources */,
 				B8F39A6B1BC68F33002EB3CC /* gb18030.c in Sources */,
 				B8D15A981BC94E8700D37D81 /* IOData.cpp in Sources */,
 				B8D15AB81BC94E8700D37D81 /* TjsDictIterator.cpp in Sources */,
