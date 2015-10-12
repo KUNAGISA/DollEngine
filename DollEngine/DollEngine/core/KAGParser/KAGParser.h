@@ -11,6 +11,7 @@
 
 #include "KAGStorage.h"
 #include "Timer.h"
+#include "Console.h"
 
 DE_BEGIN
 

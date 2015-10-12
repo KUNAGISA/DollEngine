@@ -34,7 +34,7 @@ unsigned int utf8_len_for_table[256] =
 
 #define UTFLEN(x)  utf8_len_for_table[(int)(x)]
 
-static const int g_maxLen = 16*1024;
+static const int g_maxLen = 16*1024-1;
 static char g_tmpStr[g_maxLen+1];
 static wchar_t g_tmpWStr[g_maxLen+1];
 
@@ -53,7 +53,7 @@ String String::fromFormat(const wchar_t* format,...)
     va_list args;
     memset(g_tmpWStr, 0, sizeof(g_tmpStr));
     va_start(args, format);
-    vswprintf(g_tmpWStr, format, args);
+    vswprintf(g_tmpWStr,g_maxLen, format, args);
     va_end(args);
     return String(g_tmpWStr);
 }

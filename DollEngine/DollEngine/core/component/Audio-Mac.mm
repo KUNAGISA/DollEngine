@@ -9,6 +9,7 @@
 #include <AVFoundation/AVFoundation.h>
 #include "Audio.h"
 #include "Storages.h"
+#include "System.h"
 
 @interface AudioPlayer : NSObject
 
@@ -90,7 +91,7 @@
         if (fore||back) {
             fadeTimer = [NSTimer scheduledTimerWithTimeInterval:(1/60.0f) target:self selector:@selector(audioFade) userInfo:nil repeats:YES];
             isfading = YES;
-            startFadeTime = DE::GetSeconds();
+            startFadeTime = DE::System::GetInstance()->getSeconds();
             //printf("[play]isfading=true\n");
         }
     }
@@ -135,7 +136,7 @@
         if (fore || back) {
             fadeTimer = [NSTimer scheduledTimerWithTimeInterval:(1/60.0f) target:self selector:@selector(audioFade) userInfo:nil repeats:YES];
             isfading = YES;
-            startFadeTime = DE::GetSeconds();
+            startFadeTime = DE::System::GetInstance()->getSeconds();
             //printf("[stop]isfading=true\n");
         }
     }
@@ -143,7 +144,7 @@
 
 -(void)audioFade
 {
-    double cur = DE::GetSeconds();
+    double cur = DE::System::GetInstance()->getSeconds();
     double dt = cur - startFadeTime;
     double p = dt/self.fadeTime;
     if (fore) {
@@ -179,7 +180,7 @@ DE_BEGIN
 static NSMutableSet* s_AVAPlayers = [[NSMutableSet alloc]init];
 
 Audio::Audio()
-:m_player(null)
+:m_player(NULL)
 {
     AudioPlayer* player = [[AudioPlayer alloc]init];
     m_player = (__bridge void*)player;

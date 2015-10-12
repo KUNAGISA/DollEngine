@@ -96,11 +96,8 @@ void Character::updateText()
         SAFF_RELEASE(frame);
     }
     m_allTextFrames.clear();
-    vector<string> strs;
-    Utf8ToVector(m_text,strs);
-    for (auto iter = strs.begin();
-         iter != strs.end(); ++iter) {
-        TextFrame* frame = GLCache::GetInstance()->addText(*iter, m_fontName, m_fontSize);
+    for (int i=0;i!=m_text.size();++i) {
+        TextFrame* frame = GLCache::GetInstance()->addText(m_text[i], m_fontName, m_fontSize);
         if (frame) {
             frame->retain();
             m_allTextFrames.push_back(frame);

@@ -6,7 +6,7 @@
 
 DE_BEGIN
 
-static FT_Library g_fontLibrary=null;
+static FT_Library g_fontLibrary=NULL;
 
 FontInterface::FontInterface()
 {
@@ -28,7 +28,7 @@ void* FontInterface::getFont(const String& fontName)
         if (fontName == DEFFONT) {
             addFont("WenQuanYiMicroHei.ttc");
         }
-        return null;
+        return NULL;
     }
 }
 
@@ -50,17 +50,17 @@ ImageData* FontInterface::addText(const String& text,const String& fontName,int 
                                        fontSize*64,
                                        72,72);
     if(ft_err) {
-        return null;
+        return NULL;
     }
     ft_err = FT_Load_Glyph(face, graphIdx, FT_LOAD_DEFAULT);
     if(ft_err) {
-        return null;
+        return NULL;
     }
     if (face->glyph->format != FT_GLYPH_FORMAT_BITMAP)
     {
         ft_err = FT_Render_Glyph(face->glyph,FT_RENDER_MODE_NORMAL);
         if(ft_err) {
-            return null;
+            return NULL;
         }
     }
     
@@ -100,7 +100,7 @@ String FontInterface::addFont(const String& path)
 {
     FileInfo file(path);
     if (!file.exist()) {
-        Debug::throwMsg(ERROR_FILE_EXIST_FAILD,path);
+        EM(ERROR_FILE_NOT_EXIST,path);
     }
     auto iter = m_allFontPaths.find(file.absolutePath());
     if (iter == m_allFontPaths.end())
@@ -108,12 +108,12 @@ String FontInterface::addFont(const String& path)
         FT_Face face;
         FT_Error ft_err = FT_New_Face(g_fontLibrary, file.absolutePath().utf8Value().c_str(), 0, &face);
         if (ft_err) {
-            Debug::throwMsg(ERROR_ADDFONT_FAILD);
+            EM(ERROR_ADDFONT_FAILD);
         }
         ft_err = FT_Select_Charmap(face, FT_ENCODING_UNICODE);
         if (ft_err) {
             FT_Done_Face(face);
-            Debug::throwMsg(ERROR_ADDFONT_FAILD);
+            EM(ERROR_ADDFONT_FAILD);
         }
         m_allFontPaths[file.absolutePath()] = face->family_name;
         auto iter2 = m_allFonts.find(face->family_name);

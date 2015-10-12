@@ -349,8 +349,6 @@
 /* TJS2 bison input file */
 
 
-#include <malloc.h>
-
 
 #include "tjsInterCodeGen.h"
 #include "tjsScriptBlock.h"

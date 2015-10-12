@@ -12,7 +12,7 @@
 
 DE_BEGIN
 
-bool ImageData::loadImages(const DE::String &fullPath)
+bool ImageData::loadFromFile(const DE::String &fullPath)
 {
     IOData* ioData = Storages::GetFileData(fullPath);
     if (ioData)

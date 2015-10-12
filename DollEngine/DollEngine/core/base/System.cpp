@@ -68,14 +68,14 @@ void System::startup()
     TJS_CATCH
 }
 
-int64_t System::GetMilliSeconds()
+int64_t System::getMilliSeconds()
 {
     struct timeval tv;
     gettimeofday(&tv,NULL);
     return tv.tv_sec * 1000 + tv.tv_usec / 1000;
 }
 
-double System::GetSeconds()
+double System::getSeconds()
 {
     struct timeval tv;
     gettimeofday(&tv,NULL);

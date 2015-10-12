@@ -52,7 +52,6 @@
 #include <wchar.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <malloc.h>
 
 #include <vector>
 #include <string>

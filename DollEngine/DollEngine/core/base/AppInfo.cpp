@@ -7,7 +7,7 @@
 //
 
 #include "AppInfo.h"
-#include "ScriptEngine.h"
+#include "Console.h"
 
 DE_BEGIN
 
@@ -18,11 +18,11 @@ void AppInfo::setDebugMode(int v)
 {
     m_debugMode = v;
     if (v == 0) {
-        ScriptEngine::GetInstance()->setConsoleVisible(false);
+        Console::GetInstance()->setVisible(false);
     }
     else {
-        if(ScriptEngine::GetInstance()->getConsoleVisible()){
-            ScriptEngine::GetInstance()->setConsoleVisible(true);
+        if(Console::GetInstance()->getVisible()){
+            Console::GetInstance()->setVisible(true);
         }
     }
 }

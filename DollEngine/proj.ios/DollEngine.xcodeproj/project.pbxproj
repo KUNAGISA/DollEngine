@@ -10,7 +10,6 @@
 		B89F267F1B5E87B40081CA6C /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B89F267E1B5E87B40081CA6C /* OpenGLES.framework */; };
 		B8D15A0D1BC94CD600D37D81 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B8D15A091BC811FC00D37D81 /* libz.dylib */; };
 		B8D15A861BC94E8700D37D81 /* AppInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A101BC94E8600D37D81 /* AppInfo.cpp */; };
-		B8D15A871BC94E8700D37D81 /* Debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A121BC94E8600D37D81 /* Debug.cpp */; };
 		B8D15A891BC94E8700D37D81 /* Storages.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A161BC94E8600D37D81 /* Storages.cpp */; };
 		B8D15A8A1BC94E8700D37D81 /* System.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A181BC94E8600D37D81 /* System.cpp */; };
 		B8D15A8B1BC94E8700D37D81 /* Audio-Mac.mm in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A1B1BC94E8600D37D81 /* Audio-Mac.mm */; };
@@ -20,11 +19,6 @@
 		B8D15A8F1BC94E8700D37D81 /* RTT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A231BC94E8600D37D81 /* RTT.cpp */; };
 		B8D15A901BC94E8700D37D81 /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A251BC94E8600D37D81 /* Timer.cpp */; };
 		B8D15A911BC94E8700D37D81 /* TouchListener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A271BC94E8600D37D81 /* TouchListener.cpp */; };
-		B8D15A921BC94E8700D37D81 /* CoreUnits.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A2A1BC94E8600D37D81 /* CoreUnits.cpp */; };
-		B8D15A931BC94E8700D37D81 /* Color.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A2E1BC94E8600D37D81 /* Color.cpp */; };
-		B8D15A941BC94E8700D37D81 /* CoreString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A301BC94E8600D37D81 /* CoreString.cpp */; };
-		B8D15A951BC94E8700D37D81 /* Transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A321BC94E8600D37D81 /* Transform.cpp */; };
-		B8D15A961BC94E8700D37D81 /* CoreTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A341BC94E8600D37D81 /* CoreTypes.cpp */; };
 		B8D15A971BC94E8700D37D81 /* FileInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A371BC94E8600D37D81 /* FileInfo.cpp */; };
 		B8D15A981BC94E8700D37D81 /* IOData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A391BC94E8600D37D81 /* IOData.cpp */; };
 		B8D15A991BC94E8700D37D81 /* WenQuanYiMicroHei.ttc in Resources */ = {isa = PBXBuildFile; fileRef = B8D15A3B1BC94E8600D37D81 /* WenQuanYiMicroHei.ttc */; };
@@ -53,9 +47,13 @@
 		B8D15AB71BC94E8700D37D81 /* TjsBind.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A7A1BC94E8700D37D81 /* TjsBind.cpp */; };
 		B8D15AB81BC94E8700D37D81 /* TjsDictIterator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A7D1BC94E8700D37D81 /* TjsDictIterator.cpp */; };
 		B8D15AB91BC94E8700D37D81 /* TjsSet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A7F1BC94E8700D37D81 /* TjsSet.cpp */; };
-		B8D15ABA1BC94E8700D37D81 /* TjsConsole.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A821BC94E8700D37D81 /* TjsConsole.cpp */; };
 		B8D15ABB1BC94E8700D37D81 /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A841BC94E8700D37D81 /* Window.cpp */; };
 		B8D15ABD1BC962A000D37D81 /* AppInfo-iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = B8D15ABC1BC962A000D37D81 /* AppInfo-iOS.mm */; };
+		B8D15AC01BCC07D800D37D81 /* Console.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15ABF1BCC07D800D37D81 /* Console.cpp */; };
+		B8D15AC31BCC091500D37D81 /* CoreTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15AC11BCC091500D37D81 /* CoreTypes.cpp */; };
+		B8D15ACB1BCC091F00D37D81 /* Color.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15AC51BCC091F00D37D81 /* Color.cpp */; };
+		B8D15ACC1BCC091F00D37D81 /* CoreString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15AC71BCC091F00D37D81 /* CoreString.cpp */; };
+		B8D15ACD1BCC091F00D37D81 /* Transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15AC91BCC091F00D37D81 /* Transform.cpp */; };
 		B8F393F61BC68E70002EB3CC /* AppDelegateIOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = B8F390DD1BC68E6F002EB3CC /* AppDelegateIOS.mm */; };
 		B8F393F71BC68E70002EB3CC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8F390E21BC68E6F002EB3CC /* Images.xcassets */; };
 		B8F393F81BC68E70002EB3CC /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B8F390E31BC68E6F002EB3CC /* Info.plist */; };
@@ -174,8 +172,6 @@
 		B8D15A091BC811FC00D37D81 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/usr/lib/libz.dylib; sourceTree = DEVELOPER_DIR; };
 		B8D15A101BC94E8600D37D81 /* AppInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppInfo.cpp; sourceTree = "<group>"; };
 		B8D15A111BC94E8600D37D81 /* AppInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppInfo.h; sourceTree = "<group>"; };
-		B8D15A121BC94E8600D37D81 /* Debug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Debug.cpp; sourceTree = "<group>"; };
-		B8D15A131BC94E8600D37D81 /* Debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Debug.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		B8D15A161BC94E8600D37D81 /* Storages.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Storages.cpp; sourceTree = "<group>"; };
 		B8D15A171BC94E8600D37D81 /* Storages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Storages.h; sourceTree = "<group>"; };
 		B8D15A181BC94E8600D37D81 /* System.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = System.cpp; sourceTree = "<group>"; };
@@ -195,16 +191,7 @@
 		B8D15A271BC94E8600D37D81 /* TouchListener.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TouchListener.cpp; sourceTree = "<group>"; };
 		B8D15A281BC94E8600D37D81 /* TouchListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchListener.h; sourceTree = "<group>"; };
 		B8D15A291BC94E8600D37D81 /* CoreMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreMacros.h; sourceTree = "<group>"; };
-		B8D15A2A1BC94E8600D37D81 /* CoreUnits.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = CoreUnits.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		B8D15A2B1BC94E8600D37D81 /* CoreUnits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CoreUnits.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		B8D15A2E1BC94E8600D37D81 /* Color.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Color.cpp; sourceTree = "<group>"; };
-		B8D15A2F1BC94E8600D37D81 /* Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Color.h; sourceTree = "<group>"; };
-		B8D15A301BC94E8600D37D81 /* CoreString.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CoreString.cpp; sourceTree = "<group>"; };
-		B8D15A311BC94E8600D37D81 /* CoreString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CoreString.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		B8D15A321BC94E8600D37D81 /* Transform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Transform.cpp; sourceTree = "<group>"; };
-		B8D15A331BC94E8600D37D81 /* Transform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Transform.h; sourceTree = "<group>"; };
-		B8D15A341BC94E8600D37D81 /* CoreTypes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CoreTypes.cpp; sourceTree = "<group>"; };
-		B8D15A351BC94E8600D37D81 /* CoreTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreTypes.h; sourceTree = "<group>"; };
 		B8D15A371BC94E8600D37D81 /* FileInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FileInfo.cpp; sourceTree = "<group>"; };
 		B8D15A381BC94E8600D37D81 /* FileInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileInfo.h; sourceTree = "<group>"; };
 		B8D15A391BC94E8600D37D81 /* IOData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = IOData.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
@@ -258,11 +245,19 @@
 		B8D15A7E1BC94E8700D37D81 /* TjsDictIterator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsDictIterator.h; sourceTree = "<group>"; };
 		B8D15A7F1BC94E8700D37D81 /* TjsSet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TjsSet.cpp; sourceTree = "<group>"; };
 		B8D15A801BC94E8700D37D81 /* TjsSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsSet.h; sourceTree = "<group>"; };
-		B8D15A821BC94E8700D37D81 /* TjsConsole.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TjsConsole.cpp; sourceTree = "<group>"; };
-		B8D15A831BC94E8700D37D81 /* TjsConsole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsConsole.h; sourceTree = "<group>"; };
 		B8D15A841BC94E8700D37D81 /* Window.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Window.cpp; sourceTree = "<group>"; };
 		B8D15A851BC94E8700D37D81 /* Window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Window.h; sourceTree = "<group>"; };
 		B8D15ABC1BC962A000D37D81 /* AppInfo-iOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "AppInfo-iOS.mm"; sourceTree = "<group>"; };
+		B8D15ABE1BCC06F400D37D81 /* Console.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Console.h; sourceTree = "<group>"; };
+		B8D15ABF1BCC07D800D37D81 /* Console.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Console.cpp; sourceTree = "<group>"; };
+		B8D15AC11BCC091500D37D81 /* CoreTypes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CoreTypes.cpp; sourceTree = "<group>"; };
+		B8D15AC21BCC091500D37D81 /* CoreTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreTypes.h; sourceTree = "<group>"; };
+		B8D15AC51BCC091F00D37D81 /* Color.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Color.cpp; sourceTree = "<group>"; };
+		B8D15AC61BCC091F00D37D81 /* Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Color.h; sourceTree = "<group>"; };
+		B8D15AC71BCC091F00D37D81 /* CoreString.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CoreString.cpp; sourceTree = "<group>"; };
+		B8D15AC81BCC091F00D37D81 /* CoreString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreString.h; sourceTree = "<group>"; };
+		B8D15AC91BCC091F00D37D81 /* Transform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Transform.cpp; sourceTree = "<group>"; };
+		B8D15ACA1BCC091F00D37D81 /* Transform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Transform.h; sourceTree = "<group>"; };
 		B8F390DC1BC68E6F002EB3CC /* AppDelegateIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegateIOS.h; sourceTree = "<group>"; };
 		B8F390DD1BC68E6F002EB3CC /* AppDelegateIOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegateIOS.mm; sourceTree = "<group>"; };
 		B8F390E11BC68E6F002EB3CC /* DollEnginePrefixiOS.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DollEnginePrefixiOS.pch; sourceTree = "<group>"; };
@@ -578,8 +573,9 @@
 				B8D15A0F1BC94E8600D37D81 /* Base */,
 				B8D15A1A1BC94E8600D37D81 /* Component */,
 				B8D15A291BC94E8600D37D81 /* CoreMacros.h */,
-				B8D15A2A1BC94E8600D37D81 /* CoreUnits.cpp */,
 				B8D15A2B1BC94E8600D37D81 /* CoreUnits.h */,
+				B8D15AC11BCC091500D37D81 /* CoreTypes.cpp */,
+				B8D15AC21BCC091500D37D81 /* CoreTypes.h */,
 				B8D15A2C1BC94E8600D37D81 /* Data */,
 				B8D15A471BC94E8600D37D81 /* EventManager */,
 				B8D15A4A1BC94E8600D37D81 /* Interface */,
@@ -598,8 +594,6 @@
 			children = (
 				B8D15A101BC94E8600D37D81 /* AppInfo.cpp */,
 				B8D15A111BC94E8600D37D81 /* AppInfo.h */,
-				B8D15A121BC94E8600D37D81 /* Debug.cpp */,
-				B8D15A131BC94E8600D37D81 /* Debug.h */,
 				B8D15A161BC94E8600D37D81 /* Storages.cpp */,
 				B8D15A171BC94E8600D37D81 /* Storages.h */,
 				B8D15A181BC94E8600D37D81 /* System.cpp */,
@@ -632,26 +626,11 @@
 		B8D15A2C1BC94E8600D37D81 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				B8D15A2D1BC94E8600D37D81 /* CoreType */,
+				B8D15AC41BCC091F00D37D81 /* ValueUnits */,
 				B8D15A361BC94E8600D37D81 /* FileUnits */,
 				B8D15A3C1BC94E8600D37D81 /* ImageUnits */,
 			);
 			path = Data;
-			sourceTree = "<group>";
-		};
-		B8D15A2D1BC94E8600D37D81 /* CoreType */ = {
-			isa = PBXGroup;
-			children = (
-				B8D15A2E1BC94E8600D37D81 /* Color.cpp */,
-				B8D15A2F1BC94E8600D37D81 /* Color.h */,
-				B8D15A301BC94E8600D37D81 /* CoreString.cpp */,
-				B8D15A311BC94E8600D37D81 /* CoreString.h */,
-				B8D15A321BC94E8600D37D81 /* Transform.cpp */,
-				B8D15A331BC94E8600D37D81 /* Transform.h */,
-				B8D15A341BC94E8600D37D81 /* CoreTypes.cpp */,
-				B8D15A351BC94E8600D37D81 /* CoreTypes.h */,
-			);
-			path = CoreType;
 			sourceTree = "<group>";
 		};
 		B8D15A361BC94E8600D37D81 /* FileUnits */ = {
@@ -806,12 +785,25 @@
 		B8D15A811BC94E8700D37D81 /* Widget */ = {
 			isa = PBXGroup;
 			children = (
-				B8D15A821BC94E8700D37D81 /* TjsConsole.cpp */,
-				B8D15A831BC94E8700D37D81 /* TjsConsole.h */,
+				B8D15ABE1BCC06F400D37D81 /* Console.h */,
+				B8D15ABF1BCC07D800D37D81 /* Console.cpp */,
 				B8D15A841BC94E8700D37D81 /* Window.cpp */,
 				B8D15A851BC94E8700D37D81 /* Window.h */,
 			);
 			path = Widget;
+			sourceTree = "<group>";
+		};
+		B8D15AC41BCC091F00D37D81 /* ValueUnits */ = {
+			isa = PBXGroup;
+			children = (
+				B8D15AC51BCC091F00D37D81 /* Color.cpp */,
+				B8D15AC61BCC091F00D37D81 /* Color.h */,
+				B8D15AC71BCC091F00D37D81 /* CoreString.cpp */,
+				B8D15AC81BCC091F00D37D81 /* CoreString.h */,
+				B8D15AC91BCC091F00D37D81 /* Transform.cpp */,
+				B8D15ACA1BCC091F00D37D81 /* Transform.h */,
+			);
+			path = ValueUnits;
 			sourceTree = "<group>";
 		};
 		B8D365FA1B06350F00E627A7 /* Frameworks */ = {
@@ -1384,7 +1376,6 @@
 				B8D15AB51BC94E8700D37D81 /* JsonParser.cpp in Sources */,
 				B8F39B121BC690CA002EB3CC /* tjs.tab.cpp in Sources */,
 				B8F39A7F1BC68F33002EB3CC /* unicode.c in Sources */,
-				B8D15A961BC94E8700D37D81 /* CoreTypes.cpp in Sources */,
 				B8F39A521BC68F33002EB3CC /* plane.c in Sources */,
 				B8F39B191BC690CA002EB3CC /* tjsDate.cpp in Sources */,
 				B8F39B331BC690CA002EB3CC /* tjsScriptCache.cpp in Sources */,
@@ -1400,9 +1391,11 @@
 				B8F39A621BC68F33002EB3CC /* ncbind.cpp in Sources */,
 				B8D15AA21BC94E8700D37D81 /* KAGParser.cpp in Sources */,
 				B8F39A6F1BC68F33002EB3CC /* iso8859_13.c in Sources */,
+				B8D15ACB1BCC091F00D37D81 /* Color.cpp in Sources */,
 				B8F39A751BC68F33002EB3CC /* iso8859_4.c in Sources */,
 				B8F39A581BC68F33002EB3CC /* vec4.c in Sources */,
 				B8F39A691BC68F33002EB3CC /* euc_kr.c in Sources */,
+				B8D15ACC1BCC091F00D37D81 /* CoreString.cpp in Sources */,
 				B8F39B251BC690CA002EB3CC /* tjsInterface.cpp in Sources */,
 				B8F39A781BC68F33002EB3CC /* iso8859_7.c in Sources */,
 				B8D15AA41BC94E8700D37D81 /* KAGTag.cpp in Sources */,
@@ -1410,6 +1403,7 @@
 				B8F39A531BC68F33002EB3CC /* quaternion.c in Sources */,
 				B8F39B2A1BC690CA002EB3CC /* tjsNamespace.cpp in Sources */,
 				B8F39A711BC68F33002EB3CC /* iso8859_15.c in Sources */,
+				B8D15AC31BCC091500D37D81 /* CoreTypes.cpp in Sources */,
 				B8D15AAE1BC94E8700D37D81 /* Window-iOS.mm in Sources */,
 				B8F39A901BC68F33002EB3CC /* regversion.c in Sources */,
 				B8F39B211BC690CA002EB3CC /* tjsException.cpp in Sources */,
@@ -1422,14 +1416,11 @@
 				B8F39A8F1BC68F33002EB3CC /* regtrav.c in Sources */,
 				B8F39A771BC68F33002EB3CC /* iso8859_6.c in Sources */,
 				B8D15A8E1BC94E8700D37D81 /* Painter.cpp in Sources */,
-				B8D15A871BC94E8700D37D81 /* Debug.cpp in Sources */,
 				B8F39A731BC68F33002EB3CC /* iso8859_2.c in Sources */,
 				B8F39A7C1BC68F33002EB3CC /* koi8_r.c in Sources */,
-				B8D15A941BC94E8700D37D81 /* CoreString.cpp in Sources */,
 				B8D15AA11BC94E8700D37D81 /* KAGLabel.cpp in Sources */,
 				B8D15ABD1BC962A000D37D81 /* AppInfo-iOS.mm in Sources */,
 				B8F39B261BC690CA002EB3CC /* tjsLex.cpp in Sources */,
-				B8D15A951BC94E8700D37D81 /* Transform.cpp in Sources */,
 				B8F39A541BC68F33002EB3CC /* ray2.c in Sources */,
 				B8D15A9F1BC94E8700D37D81 /* CompManager.cpp in Sources */,
 				B8D15A9E1BC94E8700D37D81 /* TextFrame.cpp in Sources */,
@@ -1453,7 +1444,6 @@
 				B8F39A681BC68F33002EB3CC /* euc_jp.c in Sources */,
 				B8F39B1A1BC690CA002EB3CC /* tjsdate.tab.cpp in Sources */,
 				B8F39B171BC690CA002EB3CC /* tjsConfig.cpp in Sources */,
-				B8D15A921BC94E8700D37D81 /* CoreUnits.cpp in Sources */,
 				B8F39A871BC68F33002EB3CC /* regerror.c in Sources */,
 				B8F39A7B1BC68F33002EB3CC /* koi8.c in Sources */,
 				B8F39A8A1BC68F33002EB3CC /* reggnu.c in Sources */,
@@ -1461,7 +1451,7 @@
 				B8F39A821BC68F33002EB3CC /* utf32_be.c in Sources */,
 				B8D15AB71BC94E8700D37D81 /* TjsBind.cpp in Sources */,
 				B8F39B161BC690CA002EB3CC /* tjsCompileControl.cpp in Sources */,
-				B8D15A931BC94E8700D37D81 /* Color.cpp in Sources */,
+				B8D15AC01BCC07D800D37D81 /* Console.cpp in Sources */,
 				B8D15AA91BC94E8700D37D81 /* NormalProgram.cpp in Sources */,
 				B8F39A651BC68F33002EB3CC /* ascii.c in Sources */,
 				B8F39A891BC68F33002EB3CC /* regext.c in Sources */,
@@ -1473,13 +1463,13 @@
 				B8F39A511BC68F33002EB3CC /* neon_matrix_impl.c in Sources */,
 				B8F39A811BC68F33002EB3CC /* utf16_le.c in Sources */,
 				B8D15AB91BC94E8700D37D81 /* TjsSet.cpp in Sources */,
-				B8D15ABA1BC94E8700D37D81 /* TjsConsole.cpp in Sources */,
 				B8F39B311BC690CA002EB3CC /* tjsRegExp.cpp in Sources */,
 				B8D15A901BC94E8700D37D81 /* Timer.cpp in Sources */,
 				B8D15A8D1BC94E8700D37D81 /* Component.cpp in Sources */,
 				B8D15AA81BC94E8700D37D81 /* GrowProgram.cpp in Sources */,
 				B8F39A741BC68F33002EB3CC /* iso8859_3.c in Sources */,
 				B8D15A8C1BC94E8700D37D81 /* Character.cpp in Sources */,
+				B8D15ACD1BCC091F00D37D81 /* Transform.cpp in Sources */,
 				B8F39A721BC68F33002EB3CC /* iso8859_16.c in Sources */,
 				B8D15A8B1BC94E8700D37D81 /* Audio-Mac.mm in Sources */,
 				B8F39B2D1BC690CA002EB3CC /* tjsObjectExtendable.cpp in Sources */,

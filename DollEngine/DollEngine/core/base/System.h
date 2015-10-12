@@ -24,8 +24,8 @@ public:
     void mainLoop();
     void startup(); //脚本入口
     
-    int64_t GetMilliSeconds();
-    double GetSeconds();
+    int64_t getMilliSeconds();
+    double getSeconds();
     
     PROPERTY(bool,NeedRedraw,m_needRedraw){m_needRedraw=v;}
     PROPERTY(bool,IsError,m_isError){m_isError=v;}

@@ -33,9 +33,9 @@ void CompManager::removeUpdateComp(Component* comp)
 void CompManager::updateComp()
 {
     if (m_lastTime < 0) {
-        m_lastTime = System::GetInstance()->GetSeconds();
+        m_lastTime = System::GetInstance()->getSeconds();
     }
-    double time = System::GetInstance()->GetSeconds();
+    double time = System::GetInstance()->getSeconds();
     double dt = time - m_lastTime;
     if (AppInfo::GetInstance()->getDebugMode()>0) {
         dt = 1/60.0f;
