@@ -1,10 +1,10 @@
 #include "TjsDictIterator.h"
 
 TjsDictIterator::TjsDictIterator()
-    :m_root_iter(null)
-    ,m_next_iter(null)
-    ,m_current_iter(null)
-    ,m_root_dict(null)
+    :m_root_iter(NULL)
+    ,m_next_iter(NULL)
+    ,m_current_iter(NULL)
+    ,m_root_dict(NULL)
     ,m_size(0)
 {
 }
@@ -69,13 +69,13 @@ bool TjsDictIterator::next()
 
 ttstr TjsDictIterator::key()
 {
-    if(m_current_iter == null) return "";
+    if(m_current_iter == NULL) return "";
     return m_current_iter->GetName();
 }
 
 tTJSVariant TjsDictIterator::value()
 {
-    if(m_current_iter == null) return "";
+    if(m_current_iter == NULL) return "";
     return *((tTJSVariant*)(&m_current_iter->Value));
 }
 

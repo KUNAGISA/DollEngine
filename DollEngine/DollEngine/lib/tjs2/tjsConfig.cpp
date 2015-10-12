@@ -397,7 +397,7 @@ void TJSNativeDebuggerBreak()
 	#ifdef __BORLANDC__
 			__emit__ (0xcc); // int 3 (Raise debugger breakpoint exception)
 	#else
-			_asm _emit 0xcc; // int 3 (Raise debugger breakpoint exception)
+//    __asm _emit 0xcc;// int 3 (Raise debugger breakpoint exception)
 	#endif
 #endif
 }

@@ -21,20 +21,16 @@
 #include <unistd.h>
 #include <stdint.h>
 #include <algorithm>
+#include <sys/time.h>
 #include "kazmath.h"
 
 using namespace std;
 
-#ifdef __QT__
-#include <QtOpenGL>
-
-#endif
-
-#define null NULL
 #define PI 3.14159265358979323846264338327950288
 #define DEFFONT L"WenQuanYi Micro Hei"
 #define DEFFONTSIZE 24
-#define DM DE::Debug::message
+#define DM(...) DE::ScriptEngine::GetInstance()->log(DE::String::fromFormat(__VA_ARGS__))
+#define EM DE::ScriptEngine::GetInstance()->throwMsg
 #define DI DE::DrawInterface::GetInstance()
 #define ASSERT assert
 
@@ -47,9 +43,9 @@ using namespace std;
 
 #define Shared(type) static type* GetInstance() \
 {\
-static type* _instance=NULL;\
-if(!_instance) \
-_instance = new type(); \
+static type* _instance=NULL; \
+if(!_instance) { \
+_instance = new type(); } \
 return  _instance; \
 }
 
@@ -121,9 +117,12 @@ return 0;\
 #define glDepthRangef glDepthRange
 #define glReleaseShaderCompiler(xxx)
 
+#elif defined(__QT__)
+#include <QtOpenGL>
+#include <QOpenGLFunctions_4_5_Core>
 #endif
 
-#define CHECK_GL_ERROR DE::GLCheckError();
-#define CHECK_PROGRAM_ERROR(ID) DE::GLCheckProgramError(ID);
+#define CHECK_GL_ERROR DI->checkError();
+#define CHECK_PROGRAM_ERROR(ID) DI->checkProgramError(ID);
 
 #endif

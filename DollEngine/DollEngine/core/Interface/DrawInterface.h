@@ -13,13 +13,16 @@ typedef GLuint DrawActiveTexId;//生效的贴图
 typedef GLuint DrawPrgId; //program
 typedef GLuint DrawShaderId; //shader
 typedef GLuint DrawVAOId;
+typedef GLenum DrawBlendId;
 
 typedef GLsizei DrawSizeI;
 typedef GLclampf DrawClampF;
 typedef GLbitfield DrawMask;
 
+class GLProgram;
+
 #ifdef __QT__
-class DrawInterface : public QOpenGLFunctions
+class DrawInterface : public QOpenGLFunctions_4_5_Core
 #else
 class DrawInterface
 #endif
@@ -27,6 +30,10 @@ class DrawInterface
 public:
     DrawInterface(){}
     static DrawInterface* GetInstance();
+    
+    void initialize();
+    
+    void blendFunc(DrawBlendId src,DrawBlendId dst);
     
     void deleteFBO(DrawSizeI n, const DrawFBOId * framebuffers);
     DrawFBOId createFBO(DrawTexId texId );
@@ -37,6 +44,7 @@ public:
     DrawTexId loadTexture(void* data, int width,int height);
     void bindTexture(DrawActiveTexId aid,DrawTexId bid);
     void deleteTexture(DrawSizeI count,DrawTexId* texId);
+    void readPixels(GLint x,GLint y,GLsizei width,GLsizei height,GLenum format,GLenum type,GLvoid *pixels);
     
     DrawPrgId createProgram();
     bool linkProgram(DrawPrgId pId);
@@ -60,6 +68,9 @@ public:
     void setUniformMatrix4fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
     
     void drawElements(GLenum mode,GLsizei count,GLenum type,const GLvoid *indices);
+    
+    void checkError();
+    void checkProgramError(GLProgram* program);
 };
 
 DE_END

@@ -7,7 +7,8 @@
 //
 
 #include "CoreString.h"
-
+#include "Storages.h"
+#include "IOData.h"
 
 DE_BEGIN
 
@@ -35,6 +36,7 @@ unsigned int utf8_len_for_table[256] =
 
 static const int g_maxLen = 16*1024;
 static char g_tmpStr[g_maxLen+1];
+static wchar_t g_tmpWStr[g_maxLen+1];
 
 String String::fromFormat(const char* format,...)
 {
@@ -44,6 +46,16 @@ String String::fromFormat(const char* format,...)
     vsprintf(g_tmpStr, format, args);
     va_end(args);
     return String((const char*)g_tmpStr);
+}
+
+String String::fromFormat(const wchar_t* format,...)
+{
+    va_list args;
+    memset(g_tmpWStr, 0, sizeof(g_tmpStr));
+    va_start(args, format);
+    vswprintf(g_tmpWStr, format, args);
+    va_end(args);
+    return String(g_tmpWStr);
 }
 
 String::String()
@@ -101,15 +113,26 @@ String::~String()
 
 }
 
-bool String::readFromFile(const String& path)
+bool String::loadFromFile(const String& path)
 {
-    return false;
+    String fullpath = Storages::GetInstance()->getFullPath(path);
+    if(fullpath.empty()){
+        return false;
+    }
+    IOData* data = Storages::GetFileString(fullpath);
+    if(!data){
+        return false;
+    }
+    //这里应该判断是哪种编码格式
+    assign((const char*)data->getBuffer());
+    delete data;
+    return true;
 }
 
 String& String::assign(const char* src)
 {
     clear();
-    if (src == null) {
+    if (src == NULL) {
         return *this;
     }
     char* ch = (char*)src;

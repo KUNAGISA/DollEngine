@@ -13,8 +13,8 @@
 DE_BEGIN
 
 KAGController::KAGController()
-:m_storage(null)
-,m_label(null)
+:m_storage(NULL)
+,m_label(NULL)
 ,m_tagIndex(0)
 {
     
@@ -102,13 +102,11 @@ void KAGController::printLabel()
         m_label->isMacro) {
         return;
     }
-    String dm = UnicodeWithFormat(L"\n========%ls(%ls|%ls)#%d========",
+    String dm = String::fromFormat(L"\n========%ls(%ls|%ls)#%d========",
                                    m_storage->fileName.c_str(),
                                    m_label->key.c_str(),
                                    m_label->name.c_str(),
                                    m_tagIndex);
-    string dm2;
-    UnicodeToUtf8(dm.c_str(), dm2);
-    DM(dm2.c_str());
+    DM(dm.c_str());
 }
 DE_END

@@ -125,7 +125,7 @@ tTJSVariant getClass()\
 {\
 return _self->ClassNames[0];\
 }\
-Tjs##CLASS():_self(null)
+Tjs##CLASS():_self(NULL)
 
 #define TJS_NCB_COM(CLASS) TJS_NCB(CLASS){}\
 void setCompName(tTJSVariant v){\
@@ -149,7 +149,7 @@ void setObject(tTJSVariant v){\
         if(obj){\
             obj->_self->Release();\
         }\
-        CLASS::setObject(null);\
+        CLASS::setObject(NULL);\
         return;\
     }\
     TjsGameObject* obj = TJS_GET_OBJECT(TjsGameObject, v.AsObject());\
@@ -169,8 +169,7 @@ NCB_PROPERTY(name, getCompName, setCompName);
 Factory(&TjsFactory::factory<ClassT>);\
 NCB_METHOD(getClass);
 
-#define TJS_STRING(v,str) string str;\
-UnicodeToUtf8(v.AsStringNoAddRef()->operator const wchar_t *(), str);
+#define TJS_STRING(v,str) String str = v.AsStringNoAddRef()->operator const wchar_t *();
 
 #define TJS_GET_DISPATCH(TYPE,NODE) (ncbInstanceAdaptor<TYPE>::GetAdaptor((TYPE*)NODE))
 

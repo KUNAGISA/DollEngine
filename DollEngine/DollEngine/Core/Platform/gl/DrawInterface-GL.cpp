@@ -1,5 +1,6 @@
 #include "DrawInterface.h"
 #include "CoreUnits.h"
+#include "GLProgram.h"
 
 DE_BEGIN
 
@@ -14,6 +15,38 @@ DrawInterface* DrawInterface::GetInstance()
 #endif
     }
     return _instance;
+}
+
+void DrawInterface::initialize()
+{
+    glEnable(GL_TEXTURE_2D);
+    
+    glDisable(GL_DEPTH_TEST);
+    
+    clearColor(GL_COLOR_BUFFER_BIT,0,0,0,0);
+    
+    CHECK_GL_ERROR;
+    
+}
+
+static DrawBlendId s_blendingSource = -1;
+static DrawBlendId s_blendingDest = -1;
+void DrawInterface::blendFunc(DrawBlendId src,DrawBlendId dst)
+{
+    if (src != s_blendingSource || dst != s_blendingDest)
+    {
+        s_blendingSource = src;
+        s_blendingDest = dst;
+        if (src == GL_ONE && dst == GL_ZERO)
+        {
+            glDisable(GL_BLEND);
+        }
+        else
+        {
+            glEnable(GL_BLEND);
+            glBlendFunc(src, dst);
+        }
+    }
 }
 
 void DrawInterface::deleteFBO(DrawSizeI n, const DrawFBOId * framebuffers)
@@ -84,6 +117,12 @@ void DrawInterface::deleteTexture(DrawSizeI count,DrawTexId* texId)
     glDeleteTextures(count,texId);
 }
 
+void DrawInterface::readPixels(GLint x,GLint y,GLsizei width,GLsizei height,GLenum format,GLenum type,GLvoid *pixels)
+{
+    glReadPixels(x,y,width,height,format,type,pixels);
+    CHECK_GL_ERROR;
+}
+
 DrawPrgId DrawInterface::createProgram()
 {
     return glCreateProgram();
@@ -126,7 +165,7 @@ DrawShaderId DrawInterface::createShader(GLenum type,const char* code)
     if (m_id)
     {
         const GLchar* ptr[] = {code};
-        glShaderSource(m_id,sizeof(ptr)/sizeof(*ptr), ptr, null);
+        glShaderSource(m_id,sizeof(ptr)/sizeof(*ptr), ptr, NULL);
         glCompileShader(m_id);
         CHECK_GL_ERROR;
         //检查
@@ -243,6 +282,35 @@ void DrawInterface::setUniformMatrix4fv(GLint location, GLsizei count, GLboolean
 void DrawInterface::drawElements(GLenum mode,GLsizei count,GLenum type,const GLvoid *indices)
 {
     glDrawElements(mode,count,type,indices);
+}
+
+void DrawInterface::checkError()
+{
+    GLint v = glGetError();
+    if(v){
+        DM("OpenGL 出错:%x\n%s",v);
+    }
+}
+
+void DrawInterface::checkProgramError(GLProgram* program)
+{
+    GLint v = glGetError();
+    if (v) {
+        DM("Error GL:0x%x", v);
+        char infoLog[128];
+        memset(infoLog, 0, 128);
+        
+        glGetProgramInfoLog ( program->getProgramId(), 127, NULL, infoLog );
+        DM("Error program:%s", (const char*)infoLog);
+        
+        for (int i=0; i< program->getShaderCount(); ++i)
+        {
+            GLShaderObject* obj = program->getShader(i);
+            memset(infoLog, 0, 128);
+            glGetShaderInfoLog ( obj->getId(), 127, NULL, infoLog );
+            DM("Error shader:%s", (const char*)infoLog);
+        }
+    }
 }
 
 DE_END

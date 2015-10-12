@@ -19,7 +19,7 @@ public:
     RTT();
     ~RTT();
     
-    bool begin(int w,int h,Painter* bg=null);
+    bool begin(int w,int h,Painter* bg=NULL);
     void end();
 protected:
     DrawFBOId m_FBO;

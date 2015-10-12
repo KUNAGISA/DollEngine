@@ -17,6 +17,7 @@ class String : public std::wstring
 {
 public:
     static String fromFormat(const char* format,...);
+    static String fromFormat(const wchar_t* format,...);
 public:
     String();
     String(wchar_t* v,size_type l);
@@ -30,7 +31,7 @@ public:
     String(int64_t v);
     ~String();
 public:
-    bool readFromFile(const String& path);
+    bool loadFromFile(const String& path);
     String& assign(const char* v);
     String& assign(wchar_t* v,size_type l);
     void split(const String& t,vector<String>& ret,bool ignoreEmpty=false);

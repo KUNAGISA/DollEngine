@@ -18,7 +18,7 @@ DE_BEGIN
 class KAGLabel
 {
 public:
-    KAGLabel():isMacro(false),storage(null),nextLabel(null){}
+    KAGLabel():isMacro(false),storage(NULL),nextLabel(NULL){}
     ~KAGLabel(){
         for(KAGTag* tag : allTags)
         {

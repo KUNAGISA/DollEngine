@@ -12,7 +12,7 @@
 
 DE_BEGIN
 
-static Window* s_instance=null;
+static Window* s_instance=NULL;
 
 Window* Window::GetInstance()
 {
@@ -20,10 +20,10 @@ Window* Window::GetInstance()
 }
 
 Window::Window()
-:m_deviceWindow(null)
-//,m_transNode(null)
-//,m_transRTT(null)
-//,m_transBlack(null)
+:m_deviceWindow(NULL)
+//,m_transNode(NULL)
+//,m_transRTT(NULL)
+//,m_transBlack(NULL)
 ,m_visible(true)
 ,m_fullScreen(false)
 {
@@ -57,7 +57,7 @@ void Window::visit()
 
 //void Window::beginTransition(bool isblack)
 //{
-//    Painter* bg=null;
+//    Painter* bg=NULL;
 //    if (isblack) {
 //        m_transBlack->setColor(0x000000ff);
 //        bg = m_transBlack;

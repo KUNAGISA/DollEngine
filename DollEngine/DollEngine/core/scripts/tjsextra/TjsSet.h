@@ -21,7 +21,7 @@ public:
     {
         return _self->ClassNames[0];
     }
-    TjsSet():_self(null){
+    TjsSet():_self(NULL){
     }
     ~TjsSet(){
         clear();
@@ -53,7 +53,11 @@ public:
     size_t count(){
         return m_all.size();
     }
+#ifdef __QT__
+    void toForeach(tTJSVariant v){
+#else
     void foreach(tTJSVariant v){
+#endif
         iTJSDispatch2* objthis = v.AsObjectThisNoAddRef();
         iTJSDispatch2* f = v.AsObjectNoAddRef();
         tTJSInterCodeContext* func = dynamic_cast<tTJSInterCodeContext*>(f);

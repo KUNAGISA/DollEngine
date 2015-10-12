@@ -77,7 +77,7 @@ bool RTT::begin(int w,int h,Painter* bg)
 
 void RTT::end()
 {
-    DI->switchFBO(null,m_oldFBO);
+    DI->switchFBO(NULL,m_oldFBO);
     CHECK_GL_ERROR;
     GLCanvas::GetInstance()->resizeGL(AppInfo::GetInstance()->getDesktopWidth(),
                                       AppInfo::GetInstance()->getDesktopHeight());

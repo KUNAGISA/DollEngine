@@ -46,18 +46,18 @@ public:
     void pushMacro(KAGTag* tag);
     void endMacro();
 protected:
-    kagchar* parseLine(kagchar* text,bool is_scripts);
-    kagchar* parseLabel(kagchar* text);
-    kagchar* parseTagAt(kagchar* text);
-    kagchar* parseTag(kagchar* text,bool is_at);
-    kagchar* parseTagName(kagchar* text,bool is_at);
-    kagchar* parseTagParamKey(kagchar* text,bool is_at);
-    kagchar* parseTagParamValue(kagchar* text,bool is_at,String& value,bool& entity,bool& macroarg);
-    kagchar* parseEmpty(kagchar* text);
-    kagchar* parseString(kagchar* text,String& str,bool& entity);
-    kagchar* parseCh(kagchar* text);
+    wchar_t* parseLine(wchar_t* text,bool is_scripts);
+    wchar_t* parseLabel(wchar_t* text);
+    wchar_t* parseTagAt(wchar_t* text);
+    wchar_t* parseTag(wchar_t* text,bool is_at);
+    wchar_t* parseTagName(wchar_t* text,bool is_at);
+    wchar_t* parseTagParamKey(wchar_t* text,bool is_at);
+    wchar_t* parseTagParamValue(wchar_t* text,bool is_at,String& value,bool& entity,bool& macroarg);
+    wchar_t* parseEmpty(wchar_t* text);
+    wchar_t* parseString(wchar_t* text,String& str,bool& entity);
+    wchar_t* parseCh(wchar_t* text);
 protected:
-    kagchar* containText(kagchar* text, const kagchar* data,bool is_end);
+    wchar_t* containText(wchar_t* text, const wchar_t* data,bool is_end);
     void createStorage(const String& file,const String& fullpath);
     void createLabel(const String& key,const String& name);
     void createTag(const String& name);

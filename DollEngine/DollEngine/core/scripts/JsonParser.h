@@ -36,9 +36,8 @@ public:
         WAITVALUE,
     };
     Shared(JsonParser);
-    tTJSVariant FromJsonFile(const String& path);
-    tTJSVariant FromJsonString(const char* str);
-    tTJSVariant FromJsonString(const wchar_t* str);
+    tTJSVariant fromJsonFile(const String& path);
+    tTJSVariant fromJsonString(const wchar_t* str);
 private:
     wchar_t* arrayWithString(wchar_t* str,tTJSVariant& _out);
     wchar_t* dictWithString(wchar_t* str,tTJSVariant& _out);

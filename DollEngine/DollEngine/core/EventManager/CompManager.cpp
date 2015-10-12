@@ -10,6 +10,7 @@
 #include "TouchListener.h"
 #include "GLCanvas.h"
 #include "AppInfo.h"
+#include "System.h"
 
 DE_BEGIN
 
@@ -32,9 +33,9 @@ void CompManager::removeUpdateComp(Component* comp)
 void CompManager::updateComp()
 {
     if (m_lastTime < 0) {
-        m_lastTime = GetSeconds();
+        m_lastTime = System::GetInstance()->GetSeconds();
     }
-    double time = GetSeconds();
+    double time = System::GetInstance()->GetSeconds();
     double dt = time - m_lastTime;
     if (AppInfo::GetInstance()->getDebugMode()>0) {
         dt = 1/60.0f;
@@ -113,7 +114,7 @@ bool CompManager::onMouseDown(float x,float y )
         obj->setFocus(false);
         obj->setIgnore(false);
         float ox,oy;
-        if (obj->getEnabled() && obj->pointInside(x,y,ox,oy,null))
+        if (obj->getEnabled() && obj->pointInside(x,y,ox,oy,NULL))
         {
             obj->onMouseDown(ox, oy);
             if (!obj->getIgnore())
@@ -172,7 +173,7 @@ void CompManager::onMouseMove(float x,float y )
             continue;
         }
         float ox,oy;
-        bool pointInside = obj->pointInside(x, y,ox,oy,null);
+        bool pointInside = obj->pointInside(x, y,ox,oy,NULL);
         if (!pointInside && obj->getFocus() == true) {
             obj->setFocus(false);
             obj->onMouseLeave();

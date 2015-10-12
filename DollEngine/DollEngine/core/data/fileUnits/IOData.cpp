@@ -12,7 +12,7 @@ DE_BEGIN
 
 
 IOData::IOData()
-:m_buffer(null)
+:m_buffer(NULL)
 ,m_size(0)
 {
 }

@@ -13,59 +13,6 @@
 
 DE_BEGIN
 
-void GLCheckError()
-{
-    GLint v = glGetError();
-    if(v){
-        DM("OpenGL 出错:%x\n%s",v);
-    }
-}
-
-void GLCheckProgramError(GLProgram* program)
-{
-    GLint v = glGetError();
-    if (v) {
-        DM("Error GL:0x%x", v);
-        char infoLog[128];
-        memset(infoLog, 0, 128);
-        
-        glGetProgramInfoLog ( program->getProgramId(), 127, NULL, infoLog );
-        DM("Error program:%s", (const char*)infoLog);
-        
-        for (int i=0; i< program->getShaderCount(); ++i)
-        {
-            GLShaderObject* obj = program->getShader(i);
-            memset(infoLog, 0, 128);
-            glGetShaderInfoLog ( obj->getId(), 127, NULL, infoLog );
-            DM("Error shader:%s", (const char*)infoLog);
-        }
-    }
-}
-
-static const int kMaxFormatLen = 16*1024;
-static char s_sff[kMaxFormatLen+1];
-string Utf8WithFormat(const char* format,...)
-{
-    va_list args;
-    memset(s_sff, 0, sizeof(s_sff));
-    va_start(args, format);
-    vsprintf(s_sff, format, args);
-    va_end(args);
-    return s_sff;
-}
-
-static wchar_t s_wsff[kMaxFormatLen+1];
-wstring UnicodeWithFormat(const wchar_t* format,...)
-{
-    va_list args;
-    memset(s_wsff, 0, sizeof(s_wsff));
-    va_start(args, format);
-    vswprintf(s_wsff, kMaxFormatLen, format, args);
-    va_end(args);
-    return s_wsff;
-}
-
-
 //定义查找表，长度256，表中的数值表示以此为起始字节的utf8字符长度
 static unsigned int utf8_len_for_table[256] =
 {
@@ -103,7 +50,7 @@ void Utf8ToVector(const String& _in, vector<string>& _out)
 void UnicodeToUtf8(const wchar_t* src, string& target)
 {
     target.clear();
-    if (src == null) {
+    if (src == NULL) {
         return;
     }
     wchar_t* ch = (wchar_t*)src;
@@ -171,12 +118,12 @@ unsigned char* WCharToChar(int& unic, unsigned char*pOutput)
         *pOutput     = ((unic >> 30) & 0x01) | 0xFC;
         return pOutput+6;
     }
-    return null;
+    return NULL;
 }
 
 void CharToWChar(const char* src,wchar_t* target)
 {
-    if (src == null) {
+    if (src == NULL) {
         return;
     }
     char* ch = (char*)src;
@@ -238,20 +185,6 @@ void CharToWChar(const char* src,wchar_t* target)
         ch+=len;
         target++;
     }
-}
-
-int64_t GetMilliSeconds()
-{
-    struct timeval tv;
-    gettimeofday(&tv,NULL);
-    return tv.tv_sec * 1000 + tv.tv_usec / 1000;
-}
-
-double GetSeconds()
-{
-    struct timeval tv;
-    gettimeofday(&tv,NULL);
-    return (double)tv.tv_sec + (double)tv.tv_usec/1000000.0f;
 }
 
 DE_END

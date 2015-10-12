@@ -8,6 +8,7 @@
 
 #include "GLTexture.h"
 #include "GLCache.h"
+#include "IOData.h"
 
 DE_BEGIN
 
@@ -24,7 +25,7 @@ GLTexture::~GLTexture()
 {
     GLCache::GetInstance()->removeTextureCache(this);
     if (m_textureId) {
-        glDeleteTextures(1, &m_textureId);
+        DI->deleteTexture(1, &m_textureId);
     }
 }
 
@@ -82,8 +83,7 @@ unsigned char* GLTexture::getData()
 {
     unsigned char* data = new unsigned char[getWidth()*getHeight()*4];
     memset(data, 0, getWidth()*getHeight()*4);
-    glReadPixels(0, 0, getWidth(), getHeight(), GL_RGBA, GL_UNSIGNED_BYTE, data);
-    CHECK_GL_ERROR;
+    DI->readPixels(0, 0, getWidth(), getHeight(), GL_RGBA, GL_UNSIGNED_BYTE, data);
     return data;
 }
 

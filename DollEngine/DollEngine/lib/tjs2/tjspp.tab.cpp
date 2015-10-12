@@ -146,7 +146,7 @@
 /* tjspp.y */
 /* TJS2 conditional compiling control's conditional expression parser */
 
-#include <malloc/malloc.h>
+#include <malloc.h>
 
 #include "tjs.h"
 #include "tjsCompileControl.h"

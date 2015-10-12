@@ -12,92 +12,15 @@
 //#include "TjsStorages.h"
 //#include "TjsScripts.h"
 //#include "TjsUnits.h"
-#include "Debug.h"
 #include "System.h"
-#include "TjsConsole.h"
-
+#ifdef __QT__
+#include "QtConsole.h"
+#else
+#include "Console.h"
+#endif
 DE_BEGIN
 
-static const int kMaxLogLen = 32*1024;
-static char logbuff[sizeof(char) * (kMaxLogLen + 1)];
-void Debug::message(const char* format,...)
-{
-    va_list args;
-    memset(logbuff, 0, sizeof(logbuff));
-    va_start(args, format);
-    vsprintf(logbuff, format, args);
-    va_end(args);
-    String str = logbuff;
-    ScriptEngine::Global()->OutputToConsole(str.c_str());
-}
-
-void Debug::throwMsg(DEBUG_MSG error,const String& p1)
-{
-    String msg;
-    switch (error) {
-        case ERROR_IMAGE_LOAD_FAILD:
-            msg = L"图片资源加载失败:"+p1;
-            break;
-        case ERROR_FILE_EXIST_FAILD:
-            msg = L"文件未找到:"+p1;
-            break;
-        case ERROR_ADDFONT_FAILD:
-            msg = L"添加字体时出错";
-            break;
-        default:
-            msg = L"未知错误";
-            break;
-    }
-    TJS_eTJSError(msg);
-}
-
-void Debug::throwMsg(DEBUG_MSG error,int p1,const String& p2)
-{
-    String msg;
-    switch (error) {
-        case ERROR_KAG_UNKONW:
-            msg = UnicodeWithFormat(L"(#%d)KAG解析发生未知错误",p1);
-            break;
-        case ERROR_KAG_LABELKEY_NULL:
-            msg = UnicodeWithFormat(L"(#%d)标签的名字不能为空",p1);
-            break;
-        case ERROR_KAG_VALUE_STRING_ENDED:
-            msg = UnicodeWithFormat(L"(#%d)字符串没有结尾，可能缺少 \" 或 \' ，请检查",p1);
-            break;
-        case ERROR_KAG_TAG_ENDED:
-            msg = UnicodeWithFormat(L"(#%d)Tag没有结尾，可能缺少 ] ，请检查",p1);
-            break;
-        case ERROR_KAG_LABEL_FIND_FAIL:
-            msg = UnicodeWithFormat(L"(#%d)未找到名为%ls的标签",p1,p2.c_str());
-            break;
-        case ERROR_KAG_TAG_FIND_FAIL:
-            msg = UnicodeWithFormat(L"(#%d)未找到名为%ls的指令",p1);
-            break;
-        case ERROR_KAG_TOO_MANY_RETURN:
-            msg = UnicodeWithFormat(L"(#%d)过多的Return指令，与Call指令无法形成对应",p1);
-            break;
-        case ERROR_KAG_MACRONAME_EMPTY:
-            msg = UnicodeWithFormat(L"(#%d)Macro的name属性为空",p1);
-            break;
-        case ERROR_KAG_MACRO_NESTING:
-            msg = UnicodeWithFormat(L"(#%d)Macro不可嵌套",p1);
-            break;
-        case ERROR_KAG_IF_FAIL:
-            msg = UnicodeWithFormat(L"(#%d)if、elsif、else、endif不对应",p1);
-            break;
-        default:
-            msg = UnicodeWithFormat(L"(#%d)KAG发生未知错误",p1);
-            break;
-    }
-    TJS_eTJSError(msg);
-}
-
-void Debug::throwMsg(const String& v)
-{
-    TJS_eTJSError(v);
-}
-
-static TJS::tTJS* s_tjs = null;
+static TJS::tTJS* s_tjs = NULL;
 
 TJS::tTJS* ScriptEngine::Global()
 {
@@ -125,7 +48,13 @@ ScriptEngine::ScriptEngine()
         // AutoRegisterで登録されたクラス等を登録する
         ncbAutoRegister::AllRegist();
         
-        s_tjs->SetConsoleOutput(TjsConsole::GetInstance());
+        Console* console;
+#ifdef __QT__
+        console = (Console*)(new QtConsole());
+#else
+        console = new Console();
+#endif
+        s_tjs->SetConsoleOutput(console);
     }
 }
 
@@ -208,19 +137,86 @@ void ScriptEngine::addAsyncFunction(const AsyncFunction& func)
     m_allAsyncFunctions.push_back(func);
 }
 
-void ScriptEngine::print(const String& text)
+void ScriptEngine::log(const String& text)
 {
-    s_tjs->GetConsoleOutput()->Print(text.c_str());
+    s_tjs->OutputToConsole(text.c_str());
+}
+
+void ScriptEngine::throwMsg(const String& v)
+{
+    s_tjs->OutputExceptionToConsole(v.c_str());
+    TJS_eTJSError(v);
+}
+
+void ScriptEngine::throwMsg(DEBUG_MSG error,const String& p1)
+{
+    String msg;
+    switch (error) {
+        case ERROR_IMAGE_LOAD_FAILD:
+            msg = L"图片资源加载失败:"+p1;
+            break;
+        case ERROR_FILE_NOT_EXIST:
+            msg = L"文件未找到:"+p1;
+            break;
+        case ERROR_ADDFONT_FAILD:
+            msg = L"添加字体时出错";
+            break;
+        default:
+            msg = L"未知错误";
+            break;
+    }
+    TJS_eTJSError(msg);
+}
+
+void ScriptEngine::throwMsg(DEBUG_MSG error,int p1,const String& p2)
+{
+    String msg;
+    switch (error) {
+        case ERROR_KAG_UNKONW:
+            msg = String::fromFormat(L"(#%d)KAG解析发生未知错误",p1);
+            break;
+        case ERROR_KAG_LABELKEY_NULL:
+            msg = String::fromFormat(L"(#%d)标签的名字不能为空",p1);
+            break;
+        case ERROR_KAG_VALUE_STRING_ENDED:
+            msg = String::fromFormat(L"(#%d)字符串没有结尾，可能缺少 \" 或 \' ，请检查",p1);
+            break;
+        case ERROR_KAG_TAG_ENDED:
+            msg = String::fromFormat(L"(#%d)Tag没有结尾，可能缺少 ] ，请检查",p1);
+            break;
+        case ERROR_KAG_LABEL_FIND_FAIL:
+            msg = String::fromFormat(L"(#%d)未找到名为%ls的标签",p1,p2.c_str());
+            break;
+        case ERROR_KAG_TAG_FIND_FAIL:
+            msg = String::fromFormat(L"(#%d)未找到名为%ls的指令",p1);
+            break;
+        case ERROR_KAG_TOO_MANY_RETURN:
+            msg = String::fromFormat(L"(#%d)过多的Return指令，与Call指令无法形成对应",p1);
+            break;
+        case ERROR_KAG_MACRONAME_EMPTY:
+            msg = String::fromFormat(L"(#%d)Macro的name属性为空",p1);
+            break;
+        case ERROR_KAG_MACRO_NESTING:
+            msg = String::fromFormat(L"(#%d)Macro不可嵌套",p1);
+            break;
+        case ERROR_KAG_IF_FAIL:
+            msg = String::fromFormat(L"(#%d)if、elsif、else、endif不对应",p1);
+            break;
+        default:
+            msg = String::fromFormat(L"(#%d)KAG发生未知错误",p1);
+            break;
+    }
+    TJS_eTJSError(msg);
 }
 
 void ScriptEngine::setConsoleVisible(bool v)
 {
-    TjsConsole::GetInstance()->setVisible(v);
+    Console::GetInstance()->setVisible(v);
 }
 
 bool ScriptEngine::getConsoleVisible()
 {
-    return TjsConsole::GetInstance()->getVisible();
+    return Console::GetInstance()->getVisible();
 }
 
 DE_END

@@ -10,9 +10,10 @@
 #define __DollEngine__Storages__
 
 #include "CoreUnits.h"
-#include "IOData.h"
 
 DE_BEGIN
+
+class IOData;
 
 class Storages
 {

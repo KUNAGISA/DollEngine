@@ -10,17 +10,13 @@
 #define __DollEngine__Units__
 
 #include "CoreTypes.h"
-#include "Debug.h"
 #include "DrawInterface.h"
+#include "ScriptEngine.h"
 
 DE_BEGIN
 
 class GLProgram;
 
-extern void GLCheckError();
-extern void GLCheckProgramError(GLProgram*);
-extern string Utf8WithFormat(const char* format,...);
-extern wstring UnicodeWithFormat(const wchar_t* format,...);
 extern void UnicodeToUtf8(const wchar_t* src, string& target);
 extern void Utf8ToVector(const String& _in, vector<string>& _out);
 extern unsigned char* WCharToChar(int& src, unsigned char*target);

@@ -9,7 +9,7 @@
 #include "KAGTag.h"
 #include "KAGStorage.h"
 #include "KAGLabel.h"
-#include "System.h"
+#include "AppInfo.h"
 
 DE_BEGIN
 
@@ -82,10 +82,10 @@ KAGTag* KAGTag::clone()
 
 void KAGTag::print(bool cond)
 {
-    if (System::GetInstance()->getDebugMode() <= 1) {
+    if (AppInfo::GetInstance()->getDebugMode() <= 1) {
         return;
     }
-    if (System::GetInstance()->getDebugMode() <= 2 &&
+    if (AppInfo::GetInstance()->getDebugMode() <= 2 &&
         label->isMacro) {
         return;
     }
@@ -95,7 +95,7 @@ void KAGTag::print(bool cond)
     }
     else
     {
-        str += DE::UnicodeWithFormat(L"%d",line);
+        str += String::fromFormat(L"%d",line);
         str += L") @";
         str += name;
     }
@@ -121,8 +121,7 @@ void KAGTag::print(bool cond)
     if (!cond) {
         str += L" [COND FALSE] ";
     }
-    string str2;
-    UnicodeToUtf8(str.c_str(),str2);
+    
 }
 
 DE_END

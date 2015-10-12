@@ -15,7 +15,7 @@
 DE_BEGIN
 
 Painter::Painter()
-:m_displayFrame(null)
+:m_displayFrame(NULL)
 ,m_scale9(false)
 ,m_colorRect(false)
 ,m_paintHeight(0)
@@ -28,7 +28,7 @@ Painter::Painter()
 ,m_scale9R(1.0/3)
 ,m_scale9T(1.0/3)
 ,m_color(0xffffffff)
-,m_program(null)
+,m_program(NULL)
 ,m_flipY(false)
 ,m_opacity(0xff)
 ,m_endColor(0xffffffff)
@@ -228,7 +228,7 @@ void Painter::flushPaintConfig(PaintConfig& config)
 //        m_realColor.multiply(getObject()->m_realColor);
 //    }
 //    else {
-//        config.trans = null;
+//        config.trans = NULL;
 //    }
     config.start = &m_realColor;
     if (m_gradient) {
@@ -241,14 +241,14 @@ void Painter::flushPaintConfig(PaintConfig& config)
         config.gradVector = m_realColor.vector;
     }
     else {
-        config.end = null;
+        config.end = NULL;
     }
     config.program = m_program;
     config.width = m_paintWidth;
     config.height = m_paintHeight;
     config.blendSrc = m_blendSrc;
     config.blendDst = m_blendDst;
-    config.scale9 = null;
+    config.scale9 = NULL;
     config.flipY = m_flipY;
 }
 

@@ -14,6 +14,7 @@
 
 DE_BEGIN
 
+class IOData;
 class ImageData
 {
 public:
@@ -30,7 +31,7 @@ public:
 public:
     ImageData();
     virtual ~ImageData();
-    bool loadImages(const String& fullPath);
+    bool loadFromFile(const String& fullPath);
     static ImageData* createRoundRect(int r);//创建一个圆角矩形的数据
 public:
     PROPERTY(IOData*, Data, m_data){m_data=v;}

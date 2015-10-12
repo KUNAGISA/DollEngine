@@ -8,6 +8,7 @@
 
 #include "Storages.h"
 #include "AppInfo.h"
+#include "IOData.h"
 
 DE_BEGIN
 
@@ -19,14 +20,14 @@ IOData* Storages::GetFileData(const String& fullpath)
 {
     if (fullpath.size() == 0)
     {
-        Debug::throwMsg(ERROR_FILE_EXIST_FAILD,fullpath);
-        return null;
+        EM(ERROR_FILE_NOT_EXIST,fullpath);
+        return NULL;
     }
     
     FILE * fp = fopen(fullpath.c_nstr(), "rb");
     if (!fp) {
-        Debug::throwMsg(L"文件打开失败:"+fullpath);
-        return null;
+        EM(L"文件打开失败:"+fullpath);
+        return NULL;
     }
     
     IOData* ret = new IOData();
@@ -46,14 +47,14 @@ IOData* Storages::GetFileString(const String& fullpath)
 {
     if (fullpath.size() == 0)
     {
-        Debug::throwMsg(ERROR_FILE_EXIST_FAILD,fullpath);
-        return null;
+        EM(ERROR_FILE_NOT_EXIST,fullpath);
+        return NULL;
     }
     FILE *fp = fopen(fullpath.c_nstr(), "rb");
     if (!fp) {
         perror("fopen");
-        Debug::throwMsg(L"文件打开失败:"+fullpath);
-        return null;
+        EM(L"文件打开失败:"+fullpath);
+        return NULL;
     }
     
     IOData* ret = new IOData();

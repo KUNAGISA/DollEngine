@@ -25,7 +25,6 @@ public:
     Shared(GLCanvas);
     
     void initializeGL();
-    void clearGL();
     void resizeGL(float desktopw,float desktoph);
     
     PROPERTY_RO(Transform*,GlobalTrans,m_globalTrans)

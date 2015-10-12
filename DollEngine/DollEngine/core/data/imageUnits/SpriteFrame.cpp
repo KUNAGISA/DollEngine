@@ -11,7 +11,7 @@
 
 DE_BEGIN
 SpriteFrame::SpriteFrame()
-:m_texture(null)
+:m_texture(NULL)
 ,m_rect(Rect::Zero())
 ,m_retainCount(0)
 {

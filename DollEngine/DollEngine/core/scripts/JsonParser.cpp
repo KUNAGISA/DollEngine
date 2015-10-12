@@ -11,28 +11,17 @@
 
 DE_BEGIN
 
-tTJSVariant JsonParser::FromJsonFile(const String& path)
+tTJSVariant JsonParser::fromJsonFile(const String& path)
 {
-    String fullpath = Storages::GetInstance()->getFullPath(path);
-    IOData* data = Storages::GetFileString(fullpath);
-    if (data) {
-        string error;
-        String code;
-        data->convertToUnicode(code);
-        SAFF_DELETE(data);
-        tTJSVariant ret = JsonParser::FromJsonString(code.c_str());
-        return ret;
+    String code;
+    if(code.loadFromFile(path))
+    {
+        return fromJsonString(code.c_str());
     }
     return tTJSVariant();
 }
 
-tTJSVariant JsonParser::FromJsonString(const char *str)
-{
-    String wstr = str;
-    return FromJsonString(wstr.c_str());
-}
-
-tTJSVariant JsonParser::FromJsonString(const wchar_t* str)
+tTJSVariant JsonParser::fromJsonString(const wchar_t* str)
 {
     tTJSVariant result;
     wchar_t* str2 = (wchar_t*)str;
@@ -65,8 +54,8 @@ wchar_t* JsonParser::arrayWithString(wchar_t* str,tTJSVariant& _out)
         tTJSVariant value;
         str = emptyWithString(str);
         if (!str) {
-            Debug::throwMsg("JSON语法错误");
-            return null;
+            EM("JSON语法错误");
+            return NULL;
         }
         if (*str == ']') {
             _out.SetObject(obj, obj);
@@ -74,15 +63,15 @@ wchar_t* JsonParser::arrayWithString(wchar_t* str,tTJSVariant& _out)
         }
         str = valueWithString(str, value);
         if (!str) {
-            Debug::throwMsg("JSON语法错误");
-            return null;
+            EM("JSON语法错误");
+            return NULL;
         }
         obj->PropSetByNum(TJS_MEMBERENSURE, i, &value, obj);
         
         str = emptyWithString(str);
         if (!str) {
-            Debug::throwMsg("JSON语法错误");
-            return null;
+            EM("JSON语法错误");
+            return NULL;
         }
         if (*str == ']') {
             _out.SetObject(obj, obj);
@@ -93,8 +82,8 @@ wchar_t* JsonParser::arrayWithString(wchar_t* str,tTJSVariant& _out)
             ++i;
             continue;
         }
-        Debug::throwMsg("JSON语法错误");
-        return null;
+        EM("JSON语法错误");
+        return NULL;
     }
     return str;
 }
@@ -107,33 +96,33 @@ wchar_t* JsonParser::dictWithString(wchar_t* str,tTJSVariant& _out)
         tTJSVariant value;
         str = emptyWithString(str);
         if (!str) {
-            Debug::throwMsg("JSON语法错误");
-            return null;
+            EM("JSON语法错误");
+            return NULL;
         }
         if (*str == '}') {
             _out.SetObject(obj,obj);
             return str+1;
         }
         if (*str != '\"') {
-            Debug::throwMsg("JSON语法错误");
-            return null;
+            EM("JSON语法错误");
+            return NULL;
         }
         str = stringWithString(str+1, key);
         str = emptyWithString(str);
         if (*str != ':') {
-            Debug::throwMsg("JSON语法错误");
-            return null;
+            EM("JSON语法错误");
+            return NULL;
         }
         str = valueWithString(str+1,value);
         if (!str) {
-            Debug::throwMsg("JSON语法错误");
-            return null;
+            EM("JSON语法错误");
+            return NULL;
         }
-        obj->PropSet(TJS_MEMBERENSURE, key.c_str(), null, &value, obj);
+        obj->PropSet(TJS_MEMBERENSURE, key.c_str(), NULL, &value, obj);
         str = emptyWithString(str);
         if (!str) {
-            Debug::throwMsg("JSON语法错误");
-            return null;
+            EM("JSON语法错误");
+            return NULL;
         }
         if (*str == '}') {
             _out.SetObject(obj,obj);
@@ -143,8 +132,8 @@ wchar_t* JsonParser::dictWithString(wchar_t* str,tTJSVariant& _out)
             ++str;
             continue;
         }
-        Debug::throwMsg("JSON语法错误");
-        return null;
+        EM("JSON语法错误");
+        return NULL;
     }
 }
 
@@ -152,13 +141,13 @@ wchar_t* JsonParser::valueWithString(wchar_t* str,tTJSVariant& _out)
 {
     wchar_t* str2 = emptyWithString(str);
     if (!str2) {
-        Debug::throwMsg("JSON语法错误");
-        return null;
+        EM("JSON语法错误");
+        return NULL;
     }
     wchar_t& ch = *str2;
     if (ch == ',') {
-        Debug::throwMsg("JSON语法错误");
-        return null;
+        EM("JSON语法错误");
+        return NULL;
     }
     if (str2[0]=='f'&&
         str2[1]=='a'&&
@@ -204,8 +193,8 @@ wchar_t* JsonParser::valueWithString(wchar_t* str,tTJSVariant& _out)
     }
     
     
-    Debug::throwMsg("JSON语法错误");
-    return null;
+    EM("JSON语法错误");
+    return NULL;
     
 }
 
@@ -232,8 +221,8 @@ wchar_t* JsonParser::stringWithString(wchar_t* str,String& _out)
         }
         str++;
     }
-    Debug::throwMsg("JSON语法错误");
-    return null;
+    EM("JSON语法错误");
+    return NULL;
 }
 
 wchar_t* JsonParser::stringWithString(wchar_t* str,tTJSVariant& _out)
@@ -244,8 +233,8 @@ wchar_t* JsonParser::stringWithString(wchar_t* str,tTJSVariant& _out)
         _out = wstr;
         return res;
     }
-    Debug::throwMsg("JSON语法错误");
-    return null;
+    EM("JSON语法错误");
+    return NULL;
 }
 
 wchar_t* JsonParser::nunberWithString(wchar_t* str,tTJSVariant& _out)
@@ -278,8 +267,8 @@ wchar_t* JsonParser::nunberWithString(wchar_t* str,tTJSVariant& _out)
             return str;
         }
     }
-    Debug::throwMsg("JSON语法错误");
-    return null;
+    EM("JSON语法错误");
+    return NULL;
 }
 
 wchar_t* JsonParser::emptyWithString(wchar_t* str)
@@ -293,8 +282,8 @@ wchar_t* JsonParser::emptyWithString(wchar_t* str)
             return str;
         }
     }
-    Debug::throwMsg("JSON语法错误");
-    return null;
+    EM("JSON语法错误");
+    return NULL;
 }
 
 DE_END

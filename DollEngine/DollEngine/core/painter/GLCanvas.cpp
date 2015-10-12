@@ -34,25 +34,14 @@ void GLCanvas::initializeGL()
 {
     if (!m_initialized) {
         m_initialized = true;
-        glEnable(GL_TEXTURE_2D);
         
-        glDisable(GL_DEPTH_TEST);
-        
-        clearGL();
-        
-        CHECK_GL_ERROR;
+        DI->initialize();
         
         resizeGL(AppInfo::GetInstance()->getDesktopWidth(),
                  AppInfo::GetInstance()->getDesktopHeight());
         addProgram("normal", new NormalProgram());
         addProgram("grow", new GrowProgram());
     }
-}
-
-void GLCanvas::clearGL()
-{
-    glClearColor(0,0,0,0);
-    glClear(GL_COLOR_BUFFER_BIT);
 }
 
 void GLCanvas::resizeGL(float deviceWidth,float deviceHeight)
@@ -111,27 +100,6 @@ GLProgram* GLCanvas::getProgram(String pm)
     return m_allPrograms[pm];
 }
 
-
-static GLenum s_blendingSource = -1;
-static GLenum s_blendingDest = -1;
-void GLCanvas::blendFunc(GLenum src,GLenum dst)
-{
-    if (src != s_blendingSource || dst != s_blendingDest)
-    {
-        s_blendingSource = src;
-        s_blendingDest = dst;
-        if (src == GL_ONE && dst == GL_ZERO)
-        {
-            glDisable(GL_BLEND);
-        }
-        else
-        {
-            glEnable(GL_BLEND);
-            glBlendFunc(src, dst);
-        }
-    }
-}
-
 void GLCanvas::paint(PaintConfig& config)
 {
     SpriteFrame* frame = config.frame;
@@ -139,7 +107,7 @@ void GLCanvas::paint(PaintConfig& config)
         frame->getTexture() &&
         frame->getTexture()->getTextureId() != 0)
     {
-        blendFunc(config.blendSrc,config.blendDst);
+        DI->blendFunc(config.blendSrc,config.blendDst);
         DI->useProgram(config.program->getProgramId());
         config.program->setUniformValue("matrix", GLCanvas::GetInstance()->getGlobalTrans()->getMatrix());
         

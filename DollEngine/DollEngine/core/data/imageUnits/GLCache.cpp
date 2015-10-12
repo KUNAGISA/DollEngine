@@ -11,7 +11,6 @@
 #include "TextFrame.h"
 #include "GLProgram.h"
 #include "FileInfo.h"
-#include "Debug.h"
 #include "FontInterface.h"
 
 DE_BEGIN
@@ -42,7 +41,7 @@ TextFrame* GLCache::addText(const String& text,const String& fontName,int fontSi
     }
     
     TextFrame* frame = new TextFrame();
-    GLTexture* tex= null;
+    GLTexture* tex= NULL;
     auto iter2 = m_allTextures.find(key);
     if(iter2 != m_allTextures.end()) {
         tex = iter2->second;
@@ -62,7 +61,7 @@ TextFrame* GLCache::addText(const String& text,const String& fontName,int fontSi
             delete tex;
             delete frame;
             delete fd;
-            return null;
+            return NULL;
         }
         frame->setFont(fd);
     }
@@ -79,23 +78,23 @@ GLTexture* GLCache::addTexture(const String& path)
 {
     FileInfo file(path);
     if (!file.exist()) {
-        Debug::throwMsg(ERROR_FILE_EXIST_FAILD,path);
+        EM(ERROR_FILE_NOT_EXIST,path);
     }
     auto iter2 = m_allTextures.find(file.absolutePath());
-    GLTexture* tex=null;
+    GLTexture* tex=NULL;
     if(iter2 != m_allTextures.end()) {
         tex = iter2->second;
     }
     else {
         ImageData image;
-        if(image.loadImages(file.absolutePath()))
+        if(image.loadFromFile(file.absolutePath()))
         {
             tex = new GLTexture();
             tex->initWithImage(&image);
         }
         else {
-            Debug::throwMsg(ERROR_IMAGE_LOAD_FAILD,path);
-            return null;
+            EM(ERROR_IMAGE_LOAD_FAILD,path);
+            return NULL;
         }
         m_allTextures[file.absolutePath()] = tex;
         tex->setCacheKey(file.absolutePath());
@@ -109,14 +108,14 @@ SpriteFrame* GLCache::addFrame(const String& picKey,const String& plist)
     if (plist.empty()) {
         FileInfo file(picKey);
         if (!file.exist()) {
-            Debug::throwMsg(ERROR_FILE_EXIST_FAILD,picKey);
+            EM(ERROR_FILE_NOT_EXIST,picKey);
         }
         auto iter = m_allSpriteFrames.find(file.absolutePath());
         if (iter != m_allSpriteFrames.end()) {
             return iter->second;
         }
         auto iter2 = m_allTextures.find(file.absolutePath());
-        GLTexture* tex=null;
+        GLTexture* tex=NULL;
         if(iter2 != m_allTextures.end()) {
             tex = iter2->second;
         }
@@ -132,8 +131,8 @@ SpriteFrame* GLCache::addFrame(const String& picKey,const String& plist)
         return frame;
     }
     else {
-        Debug::throwMsg("暂时不支持Plist格式");
-        return null;
+        EM("暂时不支持Plist格式");
+        return NULL;
     }
 }
 
@@ -141,15 +140,15 @@ SpriteFrame* GLCache::addFrame(const String& path,const Rect& rect)
 {
     FileInfo file(path);
     if (!file.exist()) {
-        Debug::throwMsg(ERROR_FILE_EXIST_FAILD,path);
+        EM(ERROR_FILE_NOT_EXIST,path);
     }
-    string key = Utf8WithFormat("%s_%d_%d_%d_%d",file.absolutePath().c_str(),(int)rect.x,(int)rect.y,(int)rect.width,(int)rect.height);
+    String key = String::fromFormat("%s_%d_%d_%d_%d",file.absolutePath().c_nstr(),(int)rect.x,(int)rect.y,(int)rect.width,(int)rect.height);
     auto iter = m_allSpriteFrames.find(key);
     if (iter != m_allSpriteFrames.end()) {
         return iter->second;
     }
     auto iter2 = m_allTextures.find(file.absolutePath());
-    GLTexture* tex=null;
+    GLTexture* tex=NULL;
     if(iter2 != m_allTextures.end()) {
         tex = iter2->second;
     }
@@ -167,9 +166,9 @@ SpriteFrame* GLCache::addFrame(const String& path,const Rect& rect)
 
 GLTexture* GLCache::addTexture(int r)
 {
-    string pickKey = Utf8WithFormat("round%d",r);
+    String pickKey = String::fromFormat("round%d",r);
     auto iter2 = m_allTextures.find(pickKey);
-    GLTexture* tex=null;
+    GLTexture* tex=NULL;
     if(iter2 != m_allTextures.end()) {
         tex = iter2->second;
     }
@@ -187,13 +186,13 @@ GLTexture* GLCache::addTexture(int r)
 
 SpriteFrame* GLCache::addFrame(int r)
 {
-    string pickKey = Utf8WithFormat("round%d",r);
+    String pickKey = String::fromFormat("round%d",r);
     auto iter = m_allSpriteFrames.find(pickKey);
     if (iter != m_allSpriteFrames.end()) {
         return iter->second;
     }
     auto iter2 = m_allTextures.find(pickKey);
-    GLTexture* tex=null;
+    GLTexture* tex=NULL;
     if(iter2 != m_allTextures.end()) {
         tex = iter2->second;
     }

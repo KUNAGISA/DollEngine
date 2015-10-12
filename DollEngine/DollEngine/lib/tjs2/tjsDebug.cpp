@@ -57,8 +57,8 @@ static T TJSRestoreLog()
 	return object;
 }
 //---------------------------------------------------------------------------
-template <>
-static void TJSStoreLog<ttstr>(const ttstr & which)
+
+static void TJSStoreLog_ttstr(const ttstr & which)
 {
 	// store a string into log stream
 	tjs_int length = which.GetLen();
@@ -67,8 +67,8 @@ static void TJSStoreLog<ttstr>(const ttstr & which)
 	TJSObjectHashMapLog->Write(which.c_str(), length * sizeof(tjs_char));
 }
 //---------------------------------------------------------------------------
-template <>
-static ttstr TJSRestoreLog<ttstr>()
+
+static ttstr TJSRestoreLog_ttstr()
 {
 	// restore a string from log stream
 	tjs_int length;
@@ -81,16 +81,16 @@ static ttstr TJSRestoreLog<ttstr>()
 	return ret;
 }
 //---------------------------------------------------------------------------
-template <>
-static void TJSStoreLog<tTJSObjectHashMapLogItemId>(const tTJSObjectHashMapLogItemId & id)
+
+static void TJSStoreLog_tTJSObjectHashMapLogItemId(const tTJSObjectHashMapLogItemId & id)
 {
 	// log item id
 	char cid = id;
 	TJSObjectHashMapLog->Write(&cid, sizeof(char));
 }
 //---------------------------------------------------------------------------
-template <>
-static tTJSObjectHashMapLogItemId TJSRestoreLog<tTJSObjectHashMapLogItemId>()
+
+static tTJSObjectHashMapLogItemId TJSRestoreLog_tTJSObjectHashMapLogItemId()
 {
 	// restore item id
 	char cid;
@@ -120,9 +120,9 @@ struct tTJSObjectHashMapRecord
 	void RestoreLog()
 	{
 		// restore the object from log stream
-		History = TJSRestoreLog<ttstr>();
-		Where   = TJSRestoreLog<ttstr>();
-		Type    = TJSRestoreLog<ttstr>();
+		History = TJSRestoreLog_ttstr();
+		Where   = TJSRestoreLog_ttstr();
+		Type    = TJSRestoreLog_ttstr();
 		Flags   = TJSRestoreLog<tjs_uint32>();
 	}
 };
@@ -380,7 +380,7 @@ public:
 		// replay recorded log
 		while(true)
 		{
-			tTJSObjectHashMapLogItemId id = TJSRestoreLog<tTJSObjectHashMapLogItemId>();
+			tTJSObjectHashMapLogItemId id = TJSRestoreLog_tTJSObjectHashMapLogItemId();
 			if(id == liiEnd)          // 00 end of the log
 			{
 				break;
@@ -406,7 +406,7 @@ public:
 			else if(id == liiSetType) // 04 set object type information
 			{
 				void * object = TJSRestoreLog<void*>();
-				ttstr type = TJSRestoreLog<ttstr>();
+				ttstr type = TJSRestoreLog_ttstr();
 				SetType(object, type);
 			}
 			else if(id == liiSetFlag) // 05 set object flag

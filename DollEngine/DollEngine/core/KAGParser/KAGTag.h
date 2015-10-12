@@ -13,7 +13,6 @@
 
 DE_BEGIN
 
-typedef wchar_t kagchar;
 class KAGParser;
 class KAGLabel;
 class KAGStorage;
@@ -39,7 +38,7 @@ struct KAGTagParamValue
 class KAGTag
 {
 public:
-    KAGTag():storage(null),label(null),hasCond(false){}
+    KAGTag():storage(NULL),label(NULL),hasCond(false){}
     ~KAGTag(){
         params.clear();
     }

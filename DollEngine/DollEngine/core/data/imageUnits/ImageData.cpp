@@ -7,11 +7,12 @@
 //
 
 #include "ImageData.h"
+#include "IOData.h"
 
 DE_BEGIN
 
 ImageData::ImageData()
-:m_data(null)
+:m_data(NULL)
 ,m_width(0)
 ,m_height(0)
 ,m_bufferPitch(IMAGE_BUFFER_PITCH_DEFAULT)

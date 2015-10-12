@@ -9,7 +9,7 @@
 #ifndef __DollEngine__ScriptEngine__
 #define __DollEngine__ScriptEngine__
 
-#include "CoreUnits.h"
+#include "CoreTypes.h"
 
 namespace TJS{
     class tTJS;
@@ -26,6 +26,27 @@ struct AsyncFunction
     TJS::tTJSInterCodeContext* handler;
 };
 
+enum DEBUG_MSG
+{
+    ERROR_NONE = 0,
+    
+    ERROR_IMAGE_LOAD_FAILD = 1001,
+    ERROR_FILE_NOT_EXIST = 1002,
+    ERROR_ADDFONT_FAILD = 1003,
+    
+    ERROR_OPENGL_ERROR = 4001,
+    
+    ERROR_KAG_UNKONW = 6000,
+    ERROR_KAG_LABELKEY_NULL,
+    ERROR_KAG_VALUE_STRING_ENDED,
+    ERROR_KAG_TAG_ENDED,
+    ERROR_KAG_LABEL_FIND_FAIL,
+    ERROR_KAG_TAG_FIND_FAIL,
+    ERROR_KAG_TOO_MANY_RETURN,
+    ERROR_KAG_MACRONAME_EMPTY,
+    ERROR_KAG_MACRO_NESTING,
+    ERROR_KAG_IF_FAIL,
+};
 class ScriptEngine
 {
 public:
@@ -37,7 +58,10 @@ public:
     virtual void catchError(void* error);
     void doAsyncFunctions();
     void addAsyncFunction(const AsyncFunction& func);
-    void print(const String& text);
+    void log(const String& text);
+    void throwMsg(const String& v);
+    void throwMsg(DEBUG_MSG msg,const String& v1);
+    void throwMsg(DEBUG_MSG msg,int v1,const String& v2);
     void setConsoleVisible(bool v);
     bool getConsoleVisible();
     

@@ -15,6 +15,8 @@
 #include "ScriptEngine.h"
 #include "Window.h"
 #include "AppInfo.h"
+#include "IOData.h"
+#include "TjsBind.h"
 
 DE_BEGIN
 
@@ -38,7 +40,7 @@ void System::mainLoop()
     if (m_needRedraw) {
 //        m_needRedraw = false;
         CompManager::GetInstance()->clearTouches();
-        GLCanvas::GetInstance()->clearGL();
+        DI->clearColor(GL_COLOR_BUFFER_BIT,0,0,0,0);
         if (Window::GetInstance()) {
             Window::GetInstance()->visit();
         }
@@ -49,29 +51,35 @@ void System::mainLoop()
 
 void System::startup()
 {
+    AppInfo::GetInstance();
+    ScriptEngine::GetInstance();
     try{
-        AppInfo::GetInstance();
-        ScriptEngine::GetInstance();
         FontInterface::GetInstance()->addFont("WenQuanYiMicroHei.ttc");
-        String fullpath = Storages::GetInstance()->getFullPath("Startup.tjs");
         
-        IOData* data = Storages::GetFileString(fullpath);
         String code;
-        data->convertToUnicode(code);
-        if (!ScriptEngine::GetInstance()) {
-            DM("请初始化脚本引擎！");
-        }
-        else {
-            ScriptEngine::GetInstance()->pushFile("【GLOBAL】");
-            ScriptEngine::GetInstance()->pushFile(fullpath);
-            ScriptEngine::GetInstance()->exec(code, null);
-            ScriptEngine::GetInstance()->popFile();
-        }
+        code.loadFromFile("startup.tjs");
+        ScriptEngine::GetInstance()->pushFile("【GLOBAL】");
+        ScriptEngine::GetInstance()->pushFile("startup.tjs");
+        ScriptEngine::GetInstance()->exec(code, NULL);
+        ScriptEngine::GetInstance()->popFile();
+        
         m_needRedraw=true;
     }
-    catch(...) {
-        
-    }
+    TJS_CATCH
+}
+
+int64_t System::GetMilliSeconds()
+{
+    struct timeval tv;
+    gettimeofday(&tv,NULL);
+    return tv.tv_sec * 1000 + tv.tv_usec / 1000;
+}
+
+double System::GetSeconds()
+{
+    struct timeval tv;
+    gettimeofday(&tv,NULL);
+    return (double)tv.tv_sec + (double)tv.tv_usec/1000000.0f;
 }
 
 DE_END
