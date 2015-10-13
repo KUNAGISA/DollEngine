@@ -7,8 +7,6 @@
 //
 
 #include "Component.h"
-#include "CompManager.h"
-//#include "GameObject.h"
 
 DE_BEGIN
 
@@ -23,14 +21,12 @@ Component::Component()
 
 Component::~Component()
 {
-    CompManager::GetInstance()->removeReleaseComp(this);
 }
 
 void Component::release()
 {
     if (!m_isReleased) {
         m_isReleased=true;
-        CompManager::GetInstance()->addReleaseComp(this);
     }
 }
 

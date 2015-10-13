@@ -7,7 +7,6 @@
 //
 
 #include "Timer.h"
-#include "CompManager.h"
 
 DE_BEGIN
 
@@ -31,10 +30,8 @@ void Timer::setEnabled(bool v)
             m_activeCount = 0;
             m_time = 0;
             m_nextTime = m_interval;
-            CompManager::GetInstance()->addUpdateComp(this);
         }
         else {
-            CompManager::GetInstance()->removeUpdateComp(this);
         }
     }
 }

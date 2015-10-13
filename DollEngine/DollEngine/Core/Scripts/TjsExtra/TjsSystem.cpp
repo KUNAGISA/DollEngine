@@ -85,17 +85,58 @@ tTJSNC_System::tTJSNC_System() : inherited(TJS_W("System"))
     }
     TJS_END_NATIVE_STATIC_PROP_DECL(patchPath)
     
+    TJS_BEGIN_NATIVE_PROP_DECL(desktopWidth)
+    {
+        TJS_BEGIN_NATIVE_PROP_GETTER
+        {
+            *result = DESystem->getDesktopWidth();
+            return TJS_S_OK;
+        }
+        TJS_END_NATIVE_PROP_GETTER
+        TJS_DENY_NATIVE_PROP_SETTER
+    }
+    TJS_END_NATIVE_STATIC_PROP_DECL(desktopWidth)
     
-            TJS_NATIVE_PROP(debugMode,DESystem->getDebugMode(),DESystem->setDebugMode((int)param->AsInteger()))
-            TJS_NATIVE_PROP_RO(appPath,DESystem->getAppPath())
-            TJS_NATIVE_PROP_RO(dataPath,DESystem->getDataPath())
-            TJS_NATIVE_PROP_RO(saveDataPath,DESystem->getSaveDataPath())
-            TJS_NATIVE_PROP_RO(patchPath,DESystem->getPatchPath())
-            
-            TJS_NATIVE_PROP_RO(desktopWidth,DESystem->getDesktopWidth())
-            TJS_NATIVE_PROP_RO(desktopHeight,DESystem->getDesktopHeight())
-            TJS_NATIVE_PROP_RO(milliSeconds,DESystem->getMilliSeconds())
-            TJS_NATIVE_PROP_RO(seconds,DESystem->getSeconds())
+    TJS_BEGIN_NATIVE_PROP_DECL(desktopHeight)
+    {
+        TJS_BEGIN_NATIVE_PROP_GETTER
+        {
+            *result = DESystem->getDesktopHeight();
+            return TJS_S_OK;
+        }
+        TJS_END_NATIVE_PROP_GETTER
+        TJS_DENY_NATIVE_PROP_SETTER
+    }
+    TJS_END_NATIVE_STATIC_PROP_DECL(desktopHeight)
+    
+    TJS_BEGIN_NATIVE_PROP_DECL(milliSeconds)
+    {
+        TJS_BEGIN_NATIVE_PROP_GETTER
+        {
+            *result = DESystem->getMilliSeconds();
+            return TJS_S_OK;
+        }
+        TJS_END_NATIVE_PROP_GETTER
+        TJS_DENY_NATIVE_PROP_SETTER
+    }
+    TJS_END_NATIVE_STATIC_PROP_DECL(milliSeconds)
+    
+    TJS_BEGIN_NATIVE_PROP_DECL(seconds)
+    {
+        TJS_BEGIN_NATIVE_PROP_GETTER
+        {
+            *result = DESystem->getSeconds();
+            return TJS_S_OK;
+        }
+        TJS_END_NATIVE_PROP_GETTER
+        TJS_DENY_NATIVE_PROP_SETTER
+    }
+    TJS_END_NATIVE_STATIC_PROP_DECL(seconds)
+    
+    
+    TJS_NATIVE_PROP(debugMode,DESystem->getDebugMode(),DESystem->setDebugMode((int)param->AsInteger()))
+    
+    
     
     TJS_END_NATIVE_MEMBERS
 }

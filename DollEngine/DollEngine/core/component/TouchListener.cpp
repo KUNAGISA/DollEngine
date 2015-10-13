@@ -8,7 +8,6 @@
 
 #include "TouchListener.h"
 #include "Transform.h"
-#include "CompManager.h"
 
 DE_BEGIN
 
@@ -32,7 +31,6 @@ TouchListener::~TouchListener()
 
 void TouchListener::addToManager()
 {
-    CompManager::GetInstance()->addTouchComp(this);
 }
 
 void TouchListener::setGlobal(bool v)
@@ -40,10 +38,8 @@ void TouchListener::setGlobal(bool v)
     if (m_global!=v) {
         m_global = v;
         if (v) {
-            CompManager::GetInstance()->addGlobalTouchComp(this);
         }
         else {
-            CompManager::GetInstance()->removeGlobalTouchComp(this);
         }
     }
 }

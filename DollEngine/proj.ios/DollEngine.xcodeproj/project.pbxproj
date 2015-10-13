@@ -46,7 +46,6 @@
 		B8D15AB81BC94E8700D37D81 /* TjsDictIterator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A7D1BC94E8700D37D81 /* TjsDictIterator.cpp */; };
 		B8D15AB91BC94E8700D37D81 /* TjsSet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A7F1BC94E8700D37D81 /* TjsSet.cpp */; };
 		B8D15ABB1BC94E8700D37D81 /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A841BC94E8700D37D81 /* Window.cpp */; };
-		B8D15ABD1BC962A000D37D81 /* AppInfo-iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = B8D15ABC1BC962A000D37D81 /* AppInfo-iOS.mm */; };
 		B8D15AC01BCC07D800D37D81 /* Console.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15ABF1BCC07D800D37D81 /* Console.cpp */; };
 		B8D15AC31BCC091500D37D81 /* CoreTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15AC11BCC091500D37D81 /* CoreTypes.cpp */; };
 		B8D15ACB1BCC091F00D37D81 /* Color.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15AC51BCC091F00D37D81 /* Color.cpp */; };
@@ -57,6 +56,7 @@
 		B8D15ADA1BCD396500D37D81 /* TjsScripts.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15AD31BCD396500D37D81 /* TjsScripts.cpp */; };
 		B8D15ADB1BCD396500D37D81 /* TjsStorages.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15AD51BCD396500D37D81 /* TjsStorages.cpp */; };
 		B8D15ADC1BCD396500D37D81 /* TjsSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15AD71BCD396500D37D81 /* TjsSystem.cpp */; };
+		B8D15AE01BCD3A5900D37D81 /* System-iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = B8D15ADF1BCD3A5900D37D81 /* System-iOS.mm */; };
 		B8F393F61BC68E70002EB3CC /* AppDelegateIOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = B8F390DD1BC68E6F002EB3CC /* AppDelegateIOS.mm */; };
 		B8F393F71BC68E70002EB3CC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8F390E21BC68E6F002EB3CC /* Images.xcassets */; };
 		B8F393F81BC68E70002EB3CC /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B8F390E31BC68E6F002EB3CC /* Info.plist */; };
@@ -246,7 +246,6 @@
 		B8D15A801BC94E8700D37D81 /* TjsSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsSet.h; sourceTree = "<group>"; };
 		B8D15A841BC94E8700D37D81 /* Window.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Window.cpp; sourceTree = "<group>"; };
 		B8D15A851BC94E8700D37D81 /* Window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Window.h; sourceTree = "<group>"; };
-		B8D15ABC1BC962A000D37D81 /* AppInfo-iOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "AppInfo-iOS.mm"; sourceTree = "<group>"; };
 		B8D15ABE1BCC06F400D37D81 /* Console.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Console.h; sourceTree = "<group>"; };
 		B8D15ABF1BCC07D800D37D81 /* Console.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Console.cpp; sourceTree = "<group>"; };
 		B8D15AC11BCC091500D37D81 /* CoreTypes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CoreTypes.cpp; sourceTree = "<group>"; };
@@ -267,6 +266,7 @@
 		B8D15AD61BCD396500D37D81 /* TjsStorages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsStorages.h; sourceTree = "<group>"; };
 		B8D15AD71BCD396500D37D81 /* TjsSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TjsSystem.cpp; sourceTree = "<group>"; };
 		B8D15AD81BCD396500D37D81 /* TjsSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsSystem.h; sourceTree = "<group>"; };
+		B8D15ADF1BCD3A5900D37D81 /* System-iOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "System-iOS.mm"; sourceTree = "<group>"; };
 		B8F390DC1BC68E6F002EB3CC /* AppDelegateIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegateIOS.h; sourceTree = "<group>"; };
 		B8F390DD1BC68E6F002EB3CC /* AppDelegateIOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegateIOS.mm; sourceTree = "<group>"; };
 		B8F390E11BC68E6F002EB3CC /* DollEnginePrefixiOS.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DollEnginePrefixiOS.pch; sourceTree = "<group>"; };
@@ -748,7 +748,7 @@
 		B8D15A681BC94E8600D37D81 /* ios */ = {
 			isa = PBXGroup;
 			children = (
-				B8D15ABC1BC962A000D37D81 /* AppInfo-iOS.mm */,
+				B8D15ADF1BCD3A5900D37D81 /* System-iOS.mm */,
 				B8D15A691BC94E8600D37D81 /* FontInterface-iOS.cpp */,
 				B8D15A6A1BC94E8600D37D81 /* ImageData-iOS.mm */,
 				B8D15A6C1BC94E8600D37D81 /* Window-iOS.mm */,
@@ -1426,10 +1426,10 @@
 				B8F39A8F1BC68F33002EB3CC /* regtrav.c in Sources */,
 				B8F39A771BC68F33002EB3CC /* iso8859_6.c in Sources */,
 				B8D15A8E1BC94E8700D37D81 /* Painter.cpp in Sources */,
+				B8D15AE01BCD3A5900D37D81 /* System-iOS.mm in Sources */,
 				B8F39A731BC68F33002EB3CC /* iso8859_2.c in Sources */,
 				B8F39A7C1BC68F33002EB3CC /* koi8_r.c in Sources */,
 				B8D15AA11BC94E8700D37D81 /* KAGLabel.cpp in Sources */,
-				B8D15ABD1BC962A000D37D81 /* AppInfo-iOS.mm in Sources */,
 				B8F39B261BC690CA002EB3CC /* tjsLex.cpp in Sources */,
 				B8F39A541BC68F33002EB3CC /* ray2.c in Sources */,
 				B8D15A9E1BC94E8700D37D81 /* TextFrame.cpp in Sources */,

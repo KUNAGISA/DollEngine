@@ -1,5 +1,5 @@
 //
-//  AppInfo.cpp
+//  System.cpp
 //  DollEngine
 //
 //  Created by DollStudio on 15/10/1.
@@ -7,15 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-#include "AppInfo.h"
+#include "System.h"
 
 DE_BEGIN
 
-AppInfo::AppInfo()
+System::System()
 :m_debugMode(0)
+,m_isError(false)
 {
-    AppInfo::NeedRedraw = true;
-    AppInfo::NeedSortTouches = true;
+    System::NeedRedraw = true;
+    System::NeedSortTouches = true;
     //Data path
     m_dataPath = [[NSBundle mainBundle] resourcePath].UTF8String;
     m_dataPath += L"/data/";
@@ -33,11 +34,11 @@ AppInfo::AppInfo()
     m_patchPath += L"/patch/";
 }
 
-float AppInfo::getDesktopWidth()
+float System::getDesktopWidth()
 {
     return [[UIScreen mainScreen] bounds].size.width;
 }
-float AppInfo::getDesktopHeight()
+float System::getDesktopHeight()
 {
     return [[UIScreen mainScreen] bounds].size.height;
 }

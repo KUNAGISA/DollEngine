@@ -8,7 +8,6 @@
 
 #include "System.h"
 #include "Storages.h"
-#include "CompManager.h"
 #include "FontInterface.h"
 #include "GLCanvas.h"
 #include "Character.h"
