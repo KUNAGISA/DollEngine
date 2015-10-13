@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include "Console.h"
+#include "CoreString.h"
 
 namespace Ui {
 class QtConsole;
@@ -16,8 +17,11 @@ public:
     explicit QtConsole(QWidget *parent = 0);
     ~QtConsole();
     
-    void setVisible(bool visible);
-    bool getVisible();
+    virtual void Print(const tjs_char *msg);
+    virtual void setVisible(bool visible){
+        QWidget::setVisible(visible);
+    }
+    virtual bool getVisible(){return isVisible();}
 private:
     Ui::QtConsole *ui;
 };

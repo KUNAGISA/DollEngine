@@ -19,7 +19,7 @@ INCLUDEPATH += \
 ../DollEngine/core \
 ../DollEngine/Core/Base \
 ../DollEngine/Core/Component \
-../DollEngine/Core/Data/CoreType \
+../DollEngine/Core/Data/ValueUnits \
 ../DollEngine/Core/Data/FileUnits \
 ../DollEngine/Core/Data/ImageUnits \
 ../DollEngine/Core/EventManager \
@@ -135,7 +135,6 @@ SOURCES += main.cpp\
     ../DollEngine/Lib/onig/regtrav.c \
     ../DollEngine/Lib/onig/regversion.c \
     ../DollEngine/Lib/onig/st.c \
-    ../DollEngine/Core/Base/AppInfo.cpp \
     ../DollEngine/Core/Base/Storages.cpp \
     ../DollEngine/Core/Base/System.cpp \
     ../DollEngine/Core/Component/Character.cpp \
@@ -144,10 +143,9 @@ SOURCES += main.cpp\
     ../DollEngine/Core/Component/RTT.cpp \
     ../DollEngine/Core/Component/Timer.cpp \
     ../DollEngine/Core/Component/TouchListener.cpp \
-    ../DollEngine/Core/Data/CoreType/Color.cpp \
-    ../DollEngine/Core/Data/CoreType/Transform.cpp \
-    ../DollEngine/Core/Data/CoreType/CoreTypes.cpp \
-    ../DollEngine/Core/Data/CoreType/CoreString.cpp \
+    ../DollEngine/Core/Data/ValueUnits/Color.cpp \
+    ../DollEngine/Core/Data/ValueUnits/Transform.cpp \
+    ../DollEngine/Core/Data/ValueUnits/CoreString.cpp \
     ../DollEngine/Core/Data/FileUnits/FileInfo.cpp \
     ../DollEngine/Core/Data/FileUnits/IOData.cpp \
     ../DollEngine/Core/Data/ImageUnits/GLCache.cpp \
@@ -155,7 +153,6 @@ SOURCES += main.cpp\
     ../DollEngine/Core/Data/ImageUnits/ImageData.cpp \
     ../DollEngine/Core/Data/ImageUnits/SpriteFrame.cpp \
     ../DollEngine/Core/Data/ImageUnits/TextFrame.cpp \
-    ../DollEngine/Core/EventManager/CompManager.cpp \
     ../DollEngine/Core/KAGParser/KAGController.cpp \
     ../DollEngine/Core/KAGParser/KAGLabel.cpp \
     ../DollEngine/Core/KAGParser/KAGParser.cpp \
@@ -172,13 +169,19 @@ SOURCES += main.cpp\
     ../DollEngine/Core/Scripts/ScriptEngine.cpp \
     ../DollEngine/Core/Scripts/TjsBind.cpp \
     ../DollEngine/Core/Widget/Window.cpp \
-    ../DollEngine/Core/CoreUnits.cpp \
+    ../DollEngine/Core/Widget/Console.cpp \
+    ../DollEngine/Core/CoreTypes.cpp \
     ../DollEngine/Core/Platform/gl/DrawInterface-GL.cpp \
     ../DollEngine/Core/Platform/qt/FontInterface-Qt.cpp \
-    ../DollEngine/Core/Platform/qt/AppInfo-Qt.cpp \
     ../DollEngine/Core/Platform/qt/ImageData-Qt.cpp \
     QtConsole.cpp \
-    ../DollEngine/Core/Interface/DeviceInterface.cpp
+    QtWindow.cpp \
+    ../DollEngine/Core/Scripts/TjsExtra/TjsScripts.cpp \
+    ../DollEngine/Core/Scripts/TjsExtra/TjsStorages.cpp \
+    ../DollEngine/Core/Scripts/TjsExtra/TjsSystem.cpp \
+    ../DollEngine/Core/Scripts/TjsExtra/TjsConsole.cpp \
+    ../DollEngine/Core/Platform/qt/System-Qt.cpp \
+    ../DollEngine/Core/Base/SystemDelegate.cpp
 
 HEADERS  += \
     ../DollEngine/Lib/kazmath/include/kazmath/GL/mat4stack.h \
@@ -254,9 +257,8 @@ HEADERS  += \
     ../DollEngine/Lib/tjs2/tjsUtils.h \
     ../DollEngine/Lib/tjs2/tjsVariant.h \
     ../DollEngine/Lib/tjs2/tjsVariantString.h \
-    ../DollEngine/Core/Base/AppInfo.h \
-    ../DollEngine/Core/Base/Storages.h \
     ../DollEngine/Core/Base/System.h \
+    ../DollEngine/Core/Base/Storages.h \
     ../DollEngine/Core/Component/Audio.h \
     ../DollEngine/Core/Component/Character.h \
     ../DollEngine/Core/Component/Component.h \
@@ -264,9 +266,8 @@ HEADERS  += \
     ../DollEngine/Core/Component/RTT.h \
     ../DollEngine/Core/Component/Timer.h \
     ../DollEngine/Core/Component/TouchListener.h \
-    ../DollEngine/Core/Data/CoreType/Color.h \
-    ../DollEngine/Core/Data/CoreType/Transform.h \
-    ../DollEngine/Core/Data/CoreType/CoreTypes.h \
+    ../DollEngine/Core/Data/ValueUnits/Color.h \
+    ../DollEngine/Core/Data/ValueUnits/Transform.h \
     ../DollEngine/Core/Data/FileUnits/FileInfo.h \
     ../DollEngine/Core/Data/FileUnits/IOData.h \
     ../DollEngine/Core/Data/ImageUnits/GLCache.h \
@@ -274,7 +275,6 @@ HEADERS  += \
     ../DollEngine/Core/Data/ImageUnits/ImageData.h \
     ../DollEngine/Core/Data/ImageUnits/SpriteFrame.h \
     ../DollEngine/Core/Data/ImageUnits/TextFrame.h \
-    ../DollEngine/Core/EventManager/CompManager.h \
     ../DollEngine/Core/KAGParser/KAGController.h \
     ../DollEngine/Core/KAGParser/KAGLabel.h \
     ../DollEngine/Core/KAGParser/KAGParser.h \
@@ -294,11 +294,20 @@ HEADERS  += \
     ../DollEngine/Core/Widget/Window.h \
     ../DollEngine/Core/CoreMacros.h \
     ../DollEngine/Core/CoreUnits.h \
+    ../DollEngine/Core/CoreTypes.h \
     ../DollEngine/Core/Interface/DrawInterface.h \
     ../DollEngine/Core/Interface/FontInterface.h \
-    ../DollEngine/Core/Data/CoreType/CoreString.h \
+    ../DollEngine/Core/Data/ValueUnits/CoreString.h \
     QtConsole.h \
-    ../DollEngine/Core/Interface/DeviceInterface.h
+    QtWindow.h \
+    ../DollEngine/Core/Scripts/TjsExtra/TjsScripts.h \
+    ../DollEngine/Core/Scripts/TjsExtra/TjsStorages.h \
+    ../DollEngine/Core/Scripts/TjsExtra/TjsSystem.h \
+    ../DollEngine/Core/Scripts/TjsExtra/TjsConsole.h \
+    ../DollEngine/Core/Base/SystemDelegate.h
 
 FORMS  += QtConsole.ui
+
+RESOURCES += \
+    font.qrc
 

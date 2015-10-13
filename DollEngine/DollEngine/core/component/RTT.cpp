@@ -9,7 +9,7 @@
 #include "RTT.h"
 #include "GLCanvas.h"
 #include "Painter.h"
-#include "AppInfo.h"
+#include "System.h"
 
 DE_BEGIN
 
@@ -79,8 +79,8 @@ void RTT::end()
 {
     DI->switchFBO(NULL,m_oldFBO);
     CHECK_GL_ERROR;
-    GLCanvas::GetInstance()->resizeGL(AppInfo::GetInstance()->getDesktopWidth(),
-                                      AppInfo::GetInstance()->getDesktopHeight());
+    GLCanvas::GetInstance()->resizeGL(System::GetInstance()->getDesktopWidth(),
+                                      System::GetInstance()->getDesktopHeight());
 }
 
 DE_END

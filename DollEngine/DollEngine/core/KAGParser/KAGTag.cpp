@@ -9,7 +9,7 @@
 #include "KAGTag.h"
 #include "KAGStorage.h"
 #include "KAGLabel.h"
-#include "AppInfo.h"
+#include "System.h"
 
 DE_BEGIN
 
@@ -82,10 +82,10 @@ KAGTag* KAGTag::clone()
 
 void KAGTag::print(bool cond)
 {
-    if (AppInfo::GetInstance()->getDebugMode() <= 1) {
+    if (System::GetInstance()->getDebugMode() <= 1) {
         return;
     }
-    if (AppInfo::GetInstance()->getDebugMode() <= 2 &&
+    if (System::GetInstance()->getDebugMode() <= 2 &&
         label->isMacro) {
         return;
     }

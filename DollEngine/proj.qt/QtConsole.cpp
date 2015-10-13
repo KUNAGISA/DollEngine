@@ -1,7 +1,6 @@
 #include "QtConsole.h"
 #include "ui_QtConsole.h"
-
-DE::Console* DE::Console::Instance = NULL;
+#include "System.h"
 
 QtConsole::QtConsole(QWidget *parent) :
     QWidget(parent),
@@ -16,17 +15,29 @@ QtConsole::~QtConsole()
     delete ui;
 }
 
-void QtConsole::setVisible(bool visible)
+void QtConsole::Print(const tjs_char *msg)
 {
-    if(visible){
+    if(DE::System::GetInstance()->getDebugMode() > 0){
         show();
     }
     else {
-        hide();
+        return;
     }
-}
-
-bool QtConsole::getVisible()
-{
-    return !isHidden();
+//    QTextCursor cursor = ui->textEdit->textCursor();
+//    cursor.movePosition( QTextCursor::StartOfLine );//行首
+//    cursor.movePosition( QTextCursor::Right, QTextCursor::MoveAnchor, 0);//向右移动到Pos
+//    cursor.movePosition( QTextCursor::NextCharacter, QTextCursor::KeepAnchor );
+//    ui->textEdit->setTextCursor( cursor ); // added
+//    QTextCharFormat defcharfmt = ui->textEdit->currentCharFormat();
+//    QTextCharFormat newcharfmt = defcharfmt;
+//    newcharfmt.setFontUnderline( true );
+//    newcharfmt.setUnderlineColor( QColor( Qt::red ) );
+//    newcharfmt.setUnderlineStyle( QTextCharFormat::SingleUnderline );
+//    ui->textEdit->setCurrentCharFormat( newcharfmt );
+    
+//    cursor.movePosition( QTextCursor::PreviousCharacter );//加上这句是为了去除光标selected
+//    ui->textEdit->setTextCursor( cursor ); // added
+//    // ui->view1->setCurrentCharFormat( defcharfmt );
+//    ui->textEdit->setFocus();
+    ui->textEdit->append(DE::String(msg).c_nstr());
 }

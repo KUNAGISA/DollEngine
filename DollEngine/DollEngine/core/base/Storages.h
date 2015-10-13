@@ -21,7 +21,6 @@ public:
     Storages();
     Shared(Storages)
     static IOData* GetFileData(const String& fullpath);
-    static IOData* GetFileString(const String& fullpath);
 public:
     void addAutoPath(const String& storage);// ( 增加自动检索路径 )
     String getFullPath(const String& storage);// ( 获取统一文件路径 )

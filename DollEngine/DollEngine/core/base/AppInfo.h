@@ -1,23 +1,23 @@
 //
-//  AppInfo.h
+//  System.h
 //  DollEngine
 //
 //  Created by DollStudio on 15/10/1.
 //  Copyright (c) 2015年 DollStudio. All rights reserved.
 //
 
-#ifndef __DollEngine__AppInfo__
-#define __DollEngine__AppInfo__
+#ifndef __DollEngine__System__
+#define __DollEngine__System__
 
 #include "CoreUnits.h"
 
 DE_BEGIN
 
-class AppInfo
+class System
 {
 public:
-    AppInfo();
-    Shared(AppInfo)
+    System();
+    Shared(System)
     
     //debug mode:0不显示console 1显示但不打印tag 2打印tag但不打印macro 3所有都打印
     PROPERTY(int,DebugMode,m_debugMode);
@@ -38,4 +38,4 @@ public:
 
 DE_END
 
-#endif /* defined(__DollEngine__AppInfo__) */
+#endif /* defined(__DollEngine__System__) */

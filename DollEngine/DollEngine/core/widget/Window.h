@@ -20,7 +20,7 @@ class Window
 {
 public:
     Window();
-    ~Window();
+    virtual ~Window();
     static Window* GetInstance();
     virtual void onVisit(){}
     void initialize(float w,float h,float s);
@@ -30,8 +30,8 @@ public:
 //    void transWithCrossFade(float dt);
 //    void transFinished();
     PROPERTY(bool, Visible, m_visible){m_visible=v;}
-    PROPERTY(bool, FullScreen, m_fullScreen);
-    PROPERTY_CONST(String, Title, m_title);
+    PROPERTY(bool, FullScreen, m_fullScreen){m_fullScreen=v;}
+    PROPERTY_CONST(String, Title, m_title){m_title=v;}
 protected:
     void* m_deviceWindow;
 //    Painter* m_transBlack;

@@ -8,10 +8,10 @@
 
 #include "ScriptEngine.h"
 #include "TjsBind.h"
-//#include "TjsSystem.h"
-//#include "TjsStorages.h"
-//#include "TjsScripts.h"
-//#include "TjsUnits.h"
+#include "TjsSystem.h"
+#include "TjsStorages.h"
+#include "TjsScripts.h"
+#include "TjsConsole.h"
 #include "System.h"
 #ifdef __QT__
 #include "QtConsole.h"
@@ -36,10 +36,10 @@ ScriptEngine::ScriptEngine()
         tTJSVariant val;
         iTJSDispatch2 *dsp;
         iTJSDispatch2* global = s_tjs->GetGlobalNoAddRef () ;
-//        TJS_REGIST_CLASS(System)
-//        TJS_REGIST_CLASS(Storages)
-//        TJS_REGIST_CLASS(Scripts)
-//        TJS_REGIST_CLASS(Units)
+        TJS_REGIST_CLASS(System)
+        TJS_REGIST_CLASS(Storages)
+        TJS_REGIST_CLASS(Scripts)
+        TJS_REGIST_CLASS(Console)
         
         
         TVPLoadMessage();
@@ -61,6 +61,7 @@ ScriptEngine::ScriptEngine()
 void ScriptEngine::catchError(void* error)
 {
     TJS::eTJSScriptError& e = *(TJS::eTJSScriptError*)error;
+    ScriptEngine::Global()->OutputExceptionToConsole(e.GetMessageW().AsStdString().c_str());
     ScriptEngine::Global()->OutputExceptionToConsole(L"STACK:");
     String tra = e.GetTrace().AsStdString();
     size_t idx = tra.find(L"(");

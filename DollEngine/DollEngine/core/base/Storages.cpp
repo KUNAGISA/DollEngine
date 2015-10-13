@@ -7,7 +7,7 @@
 //
 
 #include "Storages.h"
-#include "AppInfo.h"
+#include "System.h"
 #include "IOData.h"
 
 DE_BEGIN
@@ -37,35 +37,6 @@ IOData* Storages::GetFileData(const String& fullpath)
     fseek(fp,0,SEEK_SET);
     unsigned char* buffer = new unsigned char[size];
     ret->setSize(fread(buffer,sizeof(unsigned char), size,fp));
-    ret->setBuffer(buffer);
-    fclose(fp);
-    
-    return ret;
-}
-
-IOData* Storages::GetFileString(const String& fullpath)
-{
-    if (fullpath.size() == 0)
-    {
-        EM(ERROR_FILE_NOT_EXIST,fullpath);
-        return NULL;
-    }
-    FILE *fp = fopen(fullpath.c_nstr(), "rb");
-    if (!fp) {
-        perror("fopen");
-        EM(L"文件打开失败:"+fullpath);
-        return NULL;
-    }
-    
-    IOData* ret = new IOData();
-
-    fseek(fp,0,SEEK_END);
-    long size = ftell(fp);
-    fseek(fp,0,SEEK_SET);
-    unsigned char* buffer = new unsigned char[size+1];
-    size = fread(buffer,sizeof(unsigned char), size,fp);
-    buffer[size] = '\0';
-    ret->setSize(size+1);
     ret->setBuffer(buffer);
     fclose(fp);
     
@@ -107,25 +78,25 @@ String Storages::getFullPath(const String& storage)
         }
         else
         {
-            String temp_path = AppInfo::GetInstance()->getPatchPath()+storage;
+            String temp_path = System::GetInstance()->getPatchPath()+storage;
             if (access(temp_path.c_nstr(),0) == 0)
             {
                 m_searchPathsCache[storage] = temp_path;
                 return temp_path;
             }
-            temp_path = AppInfo::GetInstance()->getSaveDataPath()+storage;
+            temp_path = System::GetInstance()->getSaveDataPath()+storage;
             if (access(temp_path.c_nstr(),0) == 0)
             {
                 m_searchPathsCache[storage] = temp_path;
                 return temp_path;
             }
-            temp_path = AppInfo::GetInstance()->getDataPath()+storage;
+            temp_path = System::GetInstance()->getDataPath()+storage;
             if (access(temp_path.c_nstr(),0) == 0)
             {
                 m_searchPathsCache[storage] = temp_path;
                 return temp_path;
             }
-            temp_path = AppInfo::GetInstance()->getAppPath()+storage;
+            temp_path = System::GetInstance()->getAppPath()+storage;
             if (access(temp_path.c_nstr(),0) == 0)
             {
                 m_searchPathsCache[storage] = temp_path;
@@ -134,7 +105,7 @@ String Storages::getFullPath(const String& storage)
             auto auto_iter = m_autoPaths.begin();
             for (; auto_iter != m_autoPaths.end(); ++auto_iter)
             {
-                temp_path = AppInfo::GetInstance()->getPatchPath()+(*auto_iter)+storage;
+                temp_path = System::GetInstance()->getPatchPath()+(*auto_iter)+storage;
                 if (access(temp_path.c_nstr(),0) == 0)
                 {
                     m_searchPathsCache[storage] = temp_path;
@@ -144,7 +115,7 @@ String Storages::getFullPath(const String& storage)
             auto_iter = m_autoPaths.begin();
             for (; auto_iter != m_autoPaths.end(); ++auto_iter)
             {
-                temp_path = AppInfo::GetInstance()->getSaveDataPath()+(*auto_iter)+storage;
+                temp_path = System::GetInstance()->getSaveDataPath()+(*auto_iter)+storage;
                 if (access(temp_path.c_nstr(),0) == 0)
                 {
                     m_searchPathsCache[storage] = temp_path;
@@ -154,7 +125,7 @@ String Storages::getFullPath(const String& storage)
             auto_iter = m_autoPaths.begin();
             for (; auto_iter != m_autoPaths.end(); ++auto_iter)
             {
-                temp_path = AppInfo::GetInstance()->getDataPath()+(*auto_iter)+storage;
+                temp_path = System::GetInstance()->getDataPath()+(*auto_iter)+storage;
                 if (access(temp_path.c_nstr(),0) == 0)
                 {
                     m_searchPathsCache[storage] = temp_path;

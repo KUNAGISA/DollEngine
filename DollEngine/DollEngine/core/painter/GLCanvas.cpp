@@ -7,7 +7,7 @@
 //
 
 #include "GLCanvas.h"
-#include "AppInfo.h"
+#include "System.h"
 #include "NormalProgram.h"
 #include "GrowProgram.h"
 
@@ -37,8 +37,8 @@ void GLCanvas::initializeGL()
         
         DI->initialize();
         
-        resizeGL(AppInfo::GetInstance()->getDesktopWidth(),
-                 AppInfo::GetInstance()->getDesktopHeight());
+        resizeGL(System::GetInstance()->getDesktopWidth(),
+                 System::GetInstance()->getDesktopHeight());
         addProgram("normal", new NormalProgram());
         addProgram("grow", new GrowProgram());
     }

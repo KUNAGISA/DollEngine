@@ -33,6 +33,7 @@ public:
 public:
     bool loadFromFile(const String& path);
     String& assign(const char* v);
+    String& assign(char* src,size_type l);
     String& assign(wchar_t* v,size_type l);
     void split(const String& t,vector<String>& ret,bool ignoreEmpty=false);
 public:

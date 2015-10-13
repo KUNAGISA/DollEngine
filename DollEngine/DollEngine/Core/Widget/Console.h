@@ -49,12 +49,12 @@ public:
     void throwMsg(const String& v);
     void throwMsg(DEBUG_MSG msg,const String& v1);
     void throwMsg(DEBUG_MSG msg,int v1,const String& v2);
-    virtual void setVisible(bool v){}
-    virtual bool getVisible(){return false;}
     virtual void ExceptionPrint(const tjs_char *msg){Print(msg);}
     virtual void Print(const tjs_char *msg){
         printf("%s\n",String(msg).c_nstr());
     }
+    virtual void setVisible(bool v){}
+    virtual bool getVisible(){return false;}
 };
 
 DE_END

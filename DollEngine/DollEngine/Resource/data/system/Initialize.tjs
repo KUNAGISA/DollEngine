@@ -1,6 +1,6 @@
 
-var print = System.log;
-var em = System.throwMsg;
+var print = Console.log;
+var em = Console.throwMsg;
 
 var DEConfig = Scripts.jsonStorage("Config.json");
 

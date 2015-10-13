@@ -119,12 +119,13 @@ bool String::loadFromFile(const String& path)
     if(fullpath.empty()){
         return false;
     }
-    IOData* data = Storages::GetFileString(fullpath);
+    IOData* data = Storages::GetFileData(fullpath);
     if(!data){
         return false;
     }
+    clear();
     //这里应该判断是哪种编码格式
-    assign((const char*)data->getBuffer());
+    assign((char*)data->getBuffer(),data->getSize());
     delete data;
     return true;
 }
@@ -137,6 +138,73 @@ String& String::assign(const char* src)
     }
     char* ch = (char*)src;
     while (*ch != '\0')
+    {
+        wchar_t ot;
+        int len = UTFLEN(*ch & 0xff);
+        switch(len)
+        {
+            case 1:
+            {
+                ot = ch[0];
+            }
+                break;
+            case 2:
+            {
+                ot = ((int)(ch[0]&0x1F)) << 6;
+                ot |= ch[1]&0x3F;
+            }
+                break;
+            case 3:
+            {
+                ot = ((int)(ch[0]&0x1F)) << 12;
+                ot |= ((int)(ch[1]&0x3F)) << 6;
+                ot |= ch[2]&0x3F;
+            }
+                break;
+            case 4:
+            {
+                ot = ((int)(ch[0]&0x07)) << 18;
+                ot |= ((int)(ch[1]&0x3F)) << 12;
+                ot |= ((int)(ch[2]&0x3F)) << 6;
+                ot |= ch[3]&0x3F;
+            }
+                break;
+            case 5:
+            {
+                ot = ((int)(ch[0]&0x03)) << 24;
+                ot |= ((int)(ch[1]&0x3F)) << 18;
+                ot |= ((int)(ch[2]&0x3F)) << 12;
+                ot |= ((int)(ch[3]&0x3F)) << 6;
+                ot |= ch[4]&0x3F;
+            }
+                break;
+            case 6:
+            {
+                ot = ((int)(ch[0]&0x01)) << 30;
+                ot |= ((int)(ch[1]&0x3F)) << 24;
+                ot |= ((int)(ch[2]&0x3F)) << 18;
+                ot |= ((int)(ch[3]&0x3F)) << 12;
+                ot |= ((int)(ch[4]&0x3F)) << 6;
+                ot |= ch[5]&0x3F;
+            }
+                break;
+            default:
+                break;
+        }
+        push_back(ot);
+        ch+=len;
+    }
+    return *this;
+}
+
+String& String::assign(char* src,size_type l)
+{
+    clear();
+    if (src == NULL) {
+        return *this;
+    }
+    char* ch = (char*)src;
+    while (*ch != '\0' && ch-src<l)
     {
         wchar_t ot;
         int len = UTFLEN(*ch & 0xff);

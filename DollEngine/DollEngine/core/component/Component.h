@@ -10,7 +10,7 @@
 #define __DollEngine__Component__
 
 #include "CoreUnits.h"
-#include "AppInfo.h"
+#include "System.h"
 
 DE_BEGIN
 
