@@ -9,10 +9,9 @@
 /* Begin PBXBuildFile section */
 		B89F267F1B5E87B40081CA6C /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B89F267E1B5E87B40081CA6C /* OpenGLES.framework */; };
 		B8D15A0D1BC94CD600D37D81 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B8D15A091BC811FC00D37D81 /* libz.dylib */; };
-		B8D15A861BC94E8700D37D81 /* AppInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A101BC94E8600D37D81 /* AppInfo.cpp */; };
 		B8D15A891BC94E8700D37D81 /* Storages.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A161BC94E8600D37D81 /* Storages.cpp */; };
 		B8D15A8A1BC94E8700D37D81 /* System.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A181BC94E8600D37D81 /* System.cpp */; };
-		B8D15A8B1BC94E8700D37D81 /* Audio-Mac.mm in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A1B1BC94E8600D37D81 /* Audio-Mac.mm */; };
+		B8D15A8B1BC94E8700D37D81 /* Audio-iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A1B1BC94E8600D37D81 /* Audio-iOS.mm */; };
 		B8D15A8C1BC94E8700D37D81 /* Character.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A1D1BC94E8600D37D81 /* Character.cpp */; };
 		B8D15A8D1BC94E8700D37D81 /* Component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A1F1BC94E8600D37D81 /* Component.cpp */; };
 		B8D15A8E1BC94E8700D37D81 /* Painter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A211BC94E8600D37D81 /* Painter.cpp */; };
@@ -27,7 +26,6 @@
 		B8D15A9C1BC94E8700D37D81 /* ImageData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A411BC94E8600D37D81 /* ImageData.cpp */; };
 		B8D15A9D1BC94E8700D37D81 /* SpriteFrame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A431BC94E8600D37D81 /* SpriteFrame.cpp */; };
 		B8D15A9E1BC94E8700D37D81 /* TextFrame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A451BC94E8600D37D81 /* TextFrame.cpp */; };
-		B8D15A9F1BC94E8700D37D81 /* CompManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A481BC94E8600D37D81 /* CompManager.cpp */; };
 		B8D15AA01BC94E8700D37D81 /* KAGController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A4E1BC94E8600D37D81 /* KAGController.cpp */; };
 		B8D15AA11BC94E8700D37D81 /* KAGLabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A501BC94E8600D37D81 /* KAGLabel.cpp */; };
 		B8D15AA21BC94E8700D37D81 /* KAGParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15A521BC94E8600D37D81 /* KAGParser.cpp */; };
@@ -54,6 +52,11 @@
 		B8D15ACB1BCC091F00D37D81 /* Color.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15AC51BCC091F00D37D81 /* Color.cpp */; };
 		B8D15ACC1BCC091F00D37D81 /* CoreString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15AC71BCC091F00D37D81 /* CoreString.cpp */; };
 		B8D15ACD1BCC091F00D37D81 /* Transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15AC91BCC091F00D37D81 /* Transform.cpp */; };
+		B8D15AD01BCD273300D37D81 /* SystemDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15ACE1BCD273300D37D81 /* SystemDelegate.cpp */; };
+		B8D15AD91BCD396500D37D81 /* TjsConsole.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15AD11BCD396500D37D81 /* TjsConsole.cpp */; };
+		B8D15ADA1BCD396500D37D81 /* TjsScripts.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15AD31BCD396500D37D81 /* TjsScripts.cpp */; };
+		B8D15ADB1BCD396500D37D81 /* TjsStorages.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15AD51BCD396500D37D81 /* TjsStorages.cpp */; };
+		B8D15ADC1BCD396500D37D81 /* TjsSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15AD71BCD396500D37D81 /* TjsSystem.cpp */; };
 		B8F393F61BC68E70002EB3CC /* AppDelegateIOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = B8F390DD1BC68E6F002EB3CC /* AppDelegateIOS.mm */; };
 		B8F393F71BC68E70002EB3CC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8F390E21BC68E6F002EB3CC /* Images.xcassets */; };
 		B8F393F81BC68E70002EB3CC /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B8F390E31BC68E6F002EB3CC /* Info.plist */; };
@@ -170,13 +173,11 @@
 		B8261DCB1ADC05430017767B /* DollEngineIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DollEngineIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B89F267E1B5E87B40081CA6C /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/System/Library/Frameworks/OpenGLES.framework; sourceTree = DEVELOPER_DIR; };
 		B8D15A091BC811FC00D37D81 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/usr/lib/libz.dylib; sourceTree = DEVELOPER_DIR; };
-		B8D15A101BC94E8600D37D81 /* AppInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppInfo.cpp; sourceTree = "<group>"; };
-		B8D15A111BC94E8600D37D81 /* AppInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppInfo.h; sourceTree = "<group>"; };
 		B8D15A161BC94E8600D37D81 /* Storages.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Storages.cpp; sourceTree = "<group>"; };
 		B8D15A171BC94E8600D37D81 /* Storages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Storages.h; sourceTree = "<group>"; };
 		B8D15A181BC94E8600D37D81 /* System.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = System.cpp; sourceTree = "<group>"; };
 		B8D15A191BC94E8600D37D81 /* System.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = System.h; sourceTree = "<group>"; };
-		B8D15A1B1BC94E8600D37D81 /* Audio-Mac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "Audio-Mac.mm"; sourceTree = "<group>"; };
+		B8D15A1B1BC94E8600D37D81 /* Audio-iOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "Audio-iOS.mm"; sourceTree = "<group>"; };
 		B8D15A1C1BC94E8600D37D81 /* Audio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Audio.h; sourceTree = "<group>"; };
 		B8D15A1D1BC94E8600D37D81 /* Character.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Character.cpp; sourceTree = "<group>"; };
 		B8D15A1E1BC94E8600D37D81 /* Character.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Character.h; sourceTree = "<group>"; };
@@ -207,8 +208,6 @@
 		B8D15A441BC94E8600D37D81 /* SpriteFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpriteFrame.h; sourceTree = "<group>"; };
 		B8D15A451BC94E8600D37D81 /* TextFrame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextFrame.cpp; sourceTree = "<group>"; };
 		B8D15A461BC94E8600D37D81 /* TextFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFrame.h; sourceTree = "<group>"; };
-		B8D15A481BC94E8600D37D81 /* CompManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CompManager.cpp; sourceTree = "<group>"; };
-		B8D15A491BC94E8600D37D81 /* CompManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompManager.h; sourceTree = "<group>"; };
 		B8D15A4B1BC94E8600D37D81 /* DrawInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawInterface.h; sourceTree = "<group>"; };
 		B8D15A4C1BC94E8600D37D81 /* FontInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontInterface.h; sourceTree = "<group>"; };
 		B8D15A4E1BC94E8600D37D81 /* KAGController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = KAGController.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
@@ -258,6 +257,16 @@
 		B8D15AC81BCC091F00D37D81 /* CoreString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreString.h; sourceTree = "<group>"; };
 		B8D15AC91BCC091F00D37D81 /* Transform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Transform.cpp; sourceTree = "<group>"; };
 		B8D15ACA1BCC091F00D37D81 /* Transform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Transform.h; sourceTree = "<group>"; };
+		B8D15ACE1BCD273300D37D81 /* SystemDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SystemDelegate.cpp; sourceTree = "<group>"; };
+		B8D15ACF1BCD273300D37D81 /* SystemDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemDelegate.h; sourceTree = "<group>"; };
+		B8D15AD11BCD396500D37D81 /* TjsConsole.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TjsConsole.cpp; sourceTree = "<group>"; };
+		B8D15AD21BCD396500D37D81 /* TjsConsole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsConsole.h; sourceTree = "<group>"; };
+		B8D15AD31BCD396500D37D81 /* TjsScripts.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TjsScripts.cpp; sourceTree = "<group>"; };
+		B8D15AD41BCD396500D37D81 /* TjsScripts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsScripts.h; sourceTree = "<group>"; };
+		B8D15AD51BCD396500D37D81 /* TjsStorages.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TjsStorages.cpp; sourceTree = "<group>"; };
+		B8D15AD61BCD396500D37D81 /* TjsStorages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsStorages.h; sourceTree = "<group>"; };
+		B8D15AD71BCD396500D37D81 /* TjsSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TjsSystem.cpp; sourceTree = "<group>"; };
+		B8D15AD81BCD396500D37D81 /* TjsSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsSystem.h; sourceTree = "<group>"; };
 		B8F390DC1BC68E6F002EB3CC /* AppDelegateIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegateIOS.h; sourceTree = "<group>"; };
 		B8F390DD1BC68E6F002EB3CC /* AppDelegateIOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegateIOS.mm; sourceTree = "<group>"; };
 		B8F390E11BC68E6F002EB3CC /* DollEnginePrefixiOS.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DollEnginePrefixiOS.pch; sourceTree = "<group>"; };
@@ -577,7 +586,6 @@
 				B8D15AC11BCC091500D37D81 /* CoreTypes.cpp */,
 				B8D15AC21BCC091500D37D81 /* CoreTypes.h */,
 				B8D15A2C1BC94E8600D37D81 /* Data */,
-				B8D15A471BC94E8600D37D81 /* EventManager */,
 				B8D15A4A1BC94E8600D37D81 /* Interface */,
 				B8D15A4D1BC94E8600D37D81 /* KAGParser */,
 				B8D15A581BC94E8600D37D81 /* Network */,
@@ -592,12 +600,12 @@
 		B8D15A0F1BC94E8600D37D81 /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				B8D15A101BC94E8600D37D81 /* AppInfo.cpp */,
-				B8D15A111BC94E8600D37D81 /* AppInfo.h */,
 				B8D15A161BC94E8600D37D81 /* Storages.cpp */,
 				B8D15A171BC94E8600D37D81 /* Storages.h */,
 				B8D15A181BC94E8600D37D81 /* System.cpp */,
 				B8D15A191BC94E8600D37D81 /* System.h */,
+				B8D15ACE1BCD273300D37D81 /* SystemDelegate.cpp */,
+				B8D15ACF1BCD273300D37D81 /* SystemDelegate.h */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -605,7 +613,7 @@
 		B8D15A1A1BC94E8600D37D81 /* Component */ = {
 			isa = PBXGroup;
 			children = (
-				B8D15A1B1BC94E8600D37D81 /* Audio-Mac.mm */,
+				B8D15A1B1BC94E8600D37D81 /* Audio-iOS.mm */,
 				B8D15A1C1BC94E8600D37D81 /* Audio.h */,
 				B8D15A1D1BC94E8600D37D81 /* Character.cpp */,
 				B8D15A1E1BC94E8600D37D81 /* Character.h */,
@@ -660,15 +668,6 @@
 				B8D15A461BC94E8600D37D81 /* TextFrame.h */,
 			);
 			path = ImageUnits;
-			sourceTree = "<group>";
-		};
-		B8D15A471BC94E8600D37D81 /* EventManager */ = {
-			isa = PBXGroup;
-			children = (
-				B8D15A481BC94E8600D37D81 /* CompManager.cpp */,
-				B8D15A491BC94E8600D37D81 /* CompManager.h */,
-			);
-			path = EventManager;
 			sourceTree = "<group>";
 		};
 		B8D15A4A1BC94E8600D37D81 /* Interface */ = {
@@ -774,6 +773,14 @@
 		B8D15A7C1BC94E8700D37D81 /* TjsExtra */ = {
 			isa = PBXGroup;
 			children = (
+				B8D15AD11BCD396500D37D81 /* TjsConsole.cpp */,
+				B8D15AD21BCD396500D37D81 /* TjsConsole.h */,
+				B8D15AD31BCD396500D37D81 /* TjsScripts.cpp */,
+				B8D15AD41BCD396500D37D81 /* TjsScripts.h */,
+				B8D15AD51BCD396500D37D81 /* TjsStorages.cpp */,
+				B8D15AD61BCD396500D37D81 /* TjsStorages.h */,
+				B8D15AD71BCD396500D37D81 /* TjsSystem.cpp */,
+				B8D15AD81BCD396500D37D81 /* TjsSystem.h */,
 				B8D15A7D1BC94E8700D37D81 /* TjsDictIterator.cpp */,
 				B8D15A7E1BC94E8700D37D81 /* TjsDictIterator.h */,
 				B8D15A7F1BC94E8700D37D81 /* TjsSet.cpp */,
@@ -1367,6 +1374,7 @@
 				B8F39A591BC68F33002EB3CC /* MsgLoad.cpp in Sources */,
 				B8F39A881BC68F33002EB3CC /* regexec.c in Sources */,
 				B8D15A9D1BC94E8700D37D81 /* SpriteFrame.cpp in Sources */,
+				B8D15AD01BCD273300D37D81 /* SystemDelegate.cpp in Sources */,
 				B8D15AA01BC94E8700D37D81 /* KAGController.cpp in Sources */,
 				B8F39A551BC68F33002EB3CC /* utility.c in Sources */,
 				B8F39A6A1BC68F33002EB3CC /* euc_tw.c in Sources */,
@@ -1374,6 +1382,7 @@
 				B8F39A4F1BC68F33002EB3CC /* mat3.c in Sources */,
 				B8F39A7A1BC68F33002EB3CC /* iso8859_9.c in Sources */,
 				B8D15AB51BC94E8700D37D81 /* JsonParser.cpp in Sources */,
+				B8D15AD91BCD396500D37D81 /* TjsConsole.cpp in Sources */,
 				B8F39B121BC690CA002EB3CC /* tjs.tab.cpp in Sources */,
 				B8F39A7F1BC68F33002EB3CC /* unicode.c in Sources */,
 				B8F39A521BC68F33002EB3CC /* plane.c in Sources */,
@@ -1400,6 +1409,7 @@
 				B8F39A781BC68F33002EB3CC /* iso8859_7.c in Sources */,
 				B8D15AA41BC94E8700D37D81 /* KAGTag.cpp in Sources */,
 				B8F39A761BC68F33002EB3CC /* iso8859_5.c in Sources */,
+				B8D15ADA1BCD396500D37D81 /* TjsScripts.cpp in Sources */,
 				B8F39A531BC68F33002EB3CC /* quaternion.c in Sources */,
 				B8F39B2A1BC690CA002EB3CC /* tjsNamespace.cpp in Sources */,
 				B8F39A711BC68F33002EB3CC /* iso8859_15.c in Sources */,
@@ -1422,7 +1432,6 @@
 				B8D15ABD1BC962A000D37D81 /* AppInfo-iOS.mm in Sources */,
 				B8F39B261BC690CA002EB3CC /* tjsLex.cpp in Sources */,
 				B8F39A541BC68F33002EB3CC /* ray2.c in Sources */,
-				B8D15A9F1BC94E8700D37D81 /* CompManager.cpp in Sources */,
 				B8D15A9E1BC94E8700D37D81 /* TextFrame.cpp in Sources */,
 				B8F393FA1BC68E70002EB3CC /* main.m in Sources */,
 				B8F39B2C1BC690CA002EB3CC /* tjsObject.cpp in Sources */,
@@ -1433,7 +1442,6 @@
 				B8F39A801BC68F33002EB3CC /* utf16_be.c in Sources */,
 				B8F39B2F1BC690CA002EB3CC /* tjspp.tab.cpp in Sources */,
 				B8D15AA31BC94E8700D37D81 /* KAGStorage.cpp in Sources */,
-				B8D15A861BC94E8700D37D81 /* AppInfo.cpp in Sources */,
 				B8D15A971BC94E8700D37D81 /* FileInfo.cpp in Sources */,
 				B8D15A891BC94E8700D37D81 /* Storages.cpp in Sources */,
 				B8D15ABB1BC94E8700D37D81 /* Window.cpp in Sources */,
@@ -1468,10 +1476,12 @@
 				B8D15A8D1BC94E8700D37D81 /* Component.cpp in Sources */,
 				B8D15AA81BC94E8700D37D81 /* GrowProgram.cpp in Sources */,
 				B8F39A741BC68F33002EB3CC /* iso8859_3.c in Sources */,
+				B8D15ADB1BCD396500D37D81 /* TjsStorages.cpp in Sources */,
 				B8D15A8C1BC94E8700D37D81 /* Character.cpp in Sources */,
 				B8D15ACD1BCC091F00D37D81 /* Transform.cpp in Sources */,
+				B8D15ADC1BCD396500D37D81 /* TjsSystem.cpp in Sources */,
 				B8F39A721BC68F33002EB3CC /* iso8859_16.c in Sources */,
-				B8D15A8B1BC94E8700D37D81 /* Audio-Mac.mm in Sources */,
+				B8D15A8B1BC94E8700D37D81 /* Audio-iOS.mm in Sources */,
 				B8F39B2D1BC690CA002EB3CC /* tjsObjectExtendable.cpp in Sources */,
 				B8D15A8F1BC94E8700D37D81 /* RTT.cpp in Sources */,
 				B8F39B291BC690CA002EB3CC /* tjsMT19937ar-cok.cpp in Sources */,

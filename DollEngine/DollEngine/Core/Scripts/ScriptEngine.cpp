@@ -61,7 +61,7 @@ ScriptEngine::ScriptEngine()
 void ScriptEngine::catchError(void* error)
 {
     TJS::eTJSScriptError& e = *(TJS::eTJSScriptError*)error;
-    ScriptEngine::Global()->OutputExceptionToConsole(e.GetMessageW().AsStdString().c_str());
+    ScriptEngine::Global()->OutputExceptionToConsole(e.GetMessage().AsStdString().c_str());
     ScriptEngine::Global()->OutputExceptionToConsole(L"STACK:");
     String tra = e.GetTrace().AsStdString();
     size_t idx = tra.find(L"(");
