@@ -14,6 +14,37 @@
 DE_BEGIN
 
 
+class Color
+{
+public:
+    Color();
+    Color(const Color& v);
+    Color(GLubyte r,GLubyte g,GLubyte b);
+    Color(GLubyte r,GLubyte g,GLubyte b,GLubyte a);
+    Color(int r,int g,int b,int a);
+    Color(uint32_t color);
+    void set(GLubyte r,GLubyte g,GLubyte b);
+    void set(GLubyte r,GLubyte g,GLubyte b,GLubyte a);
+    void set(int r,int g,int b,int a);
+    void set(uint32_t color);
+    void toInt32(uint32_t& color);
+    void toColorF(GLfloat* colorf);
+    void multiply(const Color& v);
+    GLubyte r;
+    GLubyte g;
+    GLubyte b;
+    GLubyte a;
+};
+
+class GradientColor:public Color
+{
+public:
+    GradientColor();
+    GradientColor(const Color& start, const Color& e);
+    Color end;
+    int vector;
+};
+
 
 DE_END
 

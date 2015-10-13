@@ -57,6 +57,7 @@
 		B8D15ADB1BCD396500D37D81 /* TjsStorages.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15AD51BCD396500D37D81 /* TjsStorages.cpp */; };
 		B8D15ADC1BCD396500D37D81 /* TjsSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15AD71BCD396500D37D81 /* TjsSystem.cpp */; };
 		B8D15AE01BCD3A5900D37D81 /* System-iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = B8D15ADF1BCD3A5900D37D81 /* System-iOS.mm */; };
+		B8D15AE51BCD47DD00D37D81 /* SoundInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8D15AE41BCD47DD00D37D81 /* SoundInterface.cpp */; };
 		B8F393F61BC68E70002EB3CC /* AppDelegateIOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = B8F390DD1BC68E6F002EB3CC /* AppDelegateIOS.mm */; };
 		B8F393F71BC68E70002EB3CC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8F390E21BC68E6F002EB3CC /* Images.xcassets */; };
 		B8F393F81BC68E70002EB3CC /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B8F390E31BC68E6F002EB3CC /* Info.plist */; };
@@ -267,6 +268,8 @@
 		B8D15AD71BCD396500D37D81 /* TjsSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TjsSystem.cpp; sourceTree = "<group>"; };
 		B8D15AD81BCD396500D37D81 /* TjsSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsSystem.h; sourceTree = "<group>"; };
 		B8D15ADF1BCD3A5900D37D81 /* System-iOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "System-iOS.mm"; sourceTree = "<group>"; };
+		B8D15AE21BCD461100D37D81 /* SoundInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundInterface.h; sourceTree = "<group>"; };
+		B8D15AE41BCD47DD00D37D81 /* SoundInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoundInterface.cpp; sourceTree = "<group>"; };
 		B8F390DC1BC68E6F002EB3CC /* AppDelegateIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegateIOS.h; sourceTree = "<group>"; };
 		B8F390DD1BC68E6F002EB3CC /* AppDelegateIOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegateIOS.mm; sourceTree = "<group>"; };
 		B8F390E11BC68E6F002EB3CC /* DollEnginePrefixiOS.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DollEnginePrefixiOS.pch; sourceTree = "<group>"; };
@@ -675,6 +678,7 @@
 			children = (
 				B8D15A4B1BC94E8600D37D81 /* DrawInterface.h */,
 				B8D15A4C1BC94E8600D37D81 /* FontInterface.h */,
+				B8D15AE21BCD461100D37D81 /* SoundInterface.h */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -748,6 +752,7 @@
 		B8D15A681BC94E8600D37D81 /* ios */ = {
 			isa = PBXGroup;
 			children = (
+				B8D15AE41BCD47DD00D37D81 /* SoundInterface.cpp */,
 				B8D15ADF1BCD3A5900D37D81 /* System-iOS.mm */,
 				B8D15A691BC94E8600D37D81 /* FontInterface-iOS.cpp */,
 				B8D15A6A1BC94E8600D37D81 /* ImageData-iOS.mm */,
@@ -1483,6 +1488,7 @@
 				B8F39A721BC68F33002EB3CC /* iso8859_16.c in Sources */,
 				B8D15A8B1BC94E8700D37D81 /* Audio-iOS.mm in Sources */,
 				B8F39B2D1BC690CA002EB3CC /* tjsObjectExtendable.cpp in Sources */,
+				B8D15AE51BCD47DD00D37D81 /* SoundInterface.cpp in Sources */,
 				B8D15A8F1BC94E8700D37D81 /* RTT.cpp in Sources */,
 				B8F39B291BC690CA002EB3CC /* tjsMT19937ar-cok.cpp in Sources */,
 				B8F39A8E1BC68F33002EB3CC /* regsyntax.c in Sources */,
