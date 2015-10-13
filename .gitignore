@@ -1,11 +1,11 @@
 
-DollEngine/DollEngine/res/data/uicfg/
-DollEngine/DollEngine/res/data/sound/
-DollEngine/DollEngine/res/data/scenario/
-DollEngine/DollEngine/res/data/image/
-DollEngine/DollEngine/res/data/bgimage/
-DollEngine/DollEngine/res/data/fgimage/
-DollEngine/DollEngine/res/data/bgm/
+DollEngine/DollEngine/Resource/data/bgimage/
+DollEngine/DollEngine/Resource/data/bgm/
+DollEngine/DollEngine/Resource/data/fgimage/
+DollEngine/DollEngine/Resource/data/image/
+DollEngine/DollEngine/Resource/data/scenario/
+DollEngine/DollEngine/Resource/data/sound/
+DollEngine/DollEngine/Resource/data/uicfg/
 DollEngine/DerivedData/
 
 DollEngine/build-DollEngine-Desktop_Qt_5_5_0_MinGW_32bit-Debug
