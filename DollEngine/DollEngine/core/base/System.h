@@ -10,6 +10,7 @@
 #define __DollEngine__System__
 
 #include "CoreUnits.h"
+#include "SystemDelegate.h"
 
 DE_BEGIN
 
@@ -25,6 +26,8 @@ public:
     
     int64_t getMilliSeconds();
     double getSeconds();
+    
+    PROPERTY(SystemDelegate*,Delegate,m_delegate){m_delegate=v;}
     
     PROPERTY(bool,IsError,m_isError){m_isError=v;}
     

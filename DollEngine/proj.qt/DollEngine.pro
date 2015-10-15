@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui opengl
+QT       += core gui opengl multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -37,6 +37,8 @@ INCLUDEPATH += \
 ../DollEngine/Lib/tjs2 \
 
 SOURCES += main.cpp\
+    QtConsole.cpp \
+    QtWindow.cpp \
     ../DollEngine/Lib/msg/apple/MsgLoad.cpp \
     ../DollEngine/Lib/ncbind/ncbind.cpp \
     ../DollEngine/Lib/tjs2/tjs.cpp \
@@ -174,16 +176,17 @@ SOURCES += main.cpp\
     ../DollEngine/Core/Platform/gl/DrawInterface-GL.cpp \
     ../DollEngine/Core/Platform/qt/FontInterface-Qt.cpp \
     ../DollEngine/Core/Platform/qt/ImageData-Qt.cpp \
-    QtConsole.cpp \
-    QtWindow.cpp \
     ../DollEngine/Core/Scripts/TjsExtra/TjsScripts.cpp \
     ../DollEngine/Core/Scripts/TjsExtra/TjsStorages.cpp \
     ../DollEngine/Core/Scripts/TjsExtra/TjsSystem.cpp \
     ../DollEngine/Core/Scripts/TjsExtra/TjsConsole.cpp \
     ../DollEngine/Core/Platform/qt/System-Qt.cpp \
-    ../DollEngine/Core/Base/SystemDelegate.cpp
+    ../DollEngine/Core/Base/SystemDelegate.cpp \
+    ../DollEngine/Core/Platform/qt/Audio-Qt.cpp
 
 HEADERS  += \
+    QtConsole.h \
+    QtWindow.h \
     ../DollEngine/Lib/kazmath/include/kazmath/GL/mat4stack.h \
     ../DollEngine/Lib/kazmath/include/kazmath/GL/matrix.h \
     ../DollEngine/Lib/kazmath/include/kazmath/aabb.h \
@@ -259,7 +262,6 @@ HEADERS  += \
     ../DollEngine/Lib/tjs2/tjsVariantString.h \
     ../DollEngine/Core/Base/System.h \
     ../DollEngine/Core/Base/Storages.h \
-    ../DollEngine/Core/Component/Audio.h \
     ../DollEngine/Core/Component/Character.h \
     ../DollEngine/Core/Component/Component.h \
     ../DollEngine/Core/Component/Painter.h \
@@ -298,13 +300,12 @@ HEADERS  += \
     ../DollEngine/Core/Interface/DrawInterface.h \
     ../DollEngine/Core/Interface/FontInterface.h \
     ../DollEngine/Core/Data/ValueUnits/CoreString.h \
-    QtConsole.h \
-    QtWindow.h \
     ../DollEngine/Core/Scripts/TjsExtra/TjsScripts.h \
     ../DollEngine/Core/Scripts/TjsExtra/TjsStorages.h \
     ../DollEngine/Core/Scripts/TjsExtra/TjsSystem.h \
     ../DollEngine/Core/Scripts/TjsExtra/TjsConsole.h \
-    ../DollEngine/Core/Base/SystemDelegate.h
+    ../DollEngine/Core/Base/SystemDelegate.h \
+    ../DollEngine/Core/Base/Audio.h
 
 FORMS  += QtConsole.ui
 

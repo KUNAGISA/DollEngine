@@ -6,6 +6,7 @@ DE_BEGIN
 System::System()
 :m_debugMode(1)
 ,m_isError(false)
+,m_delegate(NULL)
 {
     System::NeedRedraw = true;
     System::NeedSortTouches = true;
