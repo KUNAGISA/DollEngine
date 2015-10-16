@@ -7,7 +7,7 @@
 //
 
 #include "NormalProgram.h"
-#include "GLCanvas.h"
+#include "PaintEngine.h"
 
 DE_BEGIN
 
@@ -43,7 +43,7 @@ bool NormalProgram::init()
     addShader(vshader);
     addShader(fshader);
     
-    GLCanvas::GetInstance()->linkProgram(m_programId);
+    PaintEngine::GetInstance()->linkProgram(m_programId);
     
     bind();
     return true;

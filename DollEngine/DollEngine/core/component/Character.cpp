@@ -9,7 +9,7 @@
 #include "Character.h"
 #include "GLCache.h"
 #include "TextFrame.h"
-#include "GLCanvas.h"
+#include "PaintEngine.h"
 
 DE_BEGIN
 
@@ -79,7 +79,7 @@ void Character::update()
         config.frame = frame;
         config.width = frame->getWidth();
         config.height = frame->getHeight();
-        GLCanvas::GetInstance()->paint(config);
+        PaintEngine::GetInstance()->paint(config);
         lastX += frame->getFont()->advance;
     }
 }

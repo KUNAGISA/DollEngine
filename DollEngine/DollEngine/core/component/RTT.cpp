@@ -7,7 +7,7 @@
 //
 
 #include "RTT.h"
-#include "GLCanvas.h"
+#include "PaintEngine.h"
 #include "Painter.h"
 #include "System.h"
 
@@ -23,7 +23,7 @@ RTT::RTT()
 RTT::~RTT()
 {
     if (m_FBO) {
-        GLCanvas::GetInstance()->deleteFBO(1, &m_FBO);
+        PaintEngine::GetInstance()->deleteFBO(1, &m_FBO);
     }
     SAFF_DELETE(m_displayFrame);
 }
@@ -61,13 +61,13 @@ bool RTT::begin(int w,int h,Painter* bg)
         m_displayFrame = frame;
         m_displayFrame->setTexture(tex);
     }
-    m_FBO = GLCanvas::GetInstance()->createFBO(m_displayFrame->getTexture()->getTextureId());
+    m_FBO = PaintEngine::GetInstance()->createFBO(m_displayFrame->getTexture()->getTextureId());
     
-    GLCanvas::GetInstance()->resizeGL(GLCanvas::GetInstance()->getLayerWidth(),
-                                      GLCanvas::GetInstance()->getLayerHeight());
+    PaintEngine::GetInstance()->resizeGL(PaintEngine::GetInstance()->getLayerWidth(),
+                                      PaintEngine::GetInstance()->getLayerHeight());
     
-    GLCanvas::GetInstance()->switchFBO(&m_oldFBO,m_FBO);
-    GLCanvas::GetInstance()->clearColor(GL_COLOR_BUFFER_BIT,1,1,1,1);
+    PaintEngine::GetInstance()->switchFBO(&m_oldFBO,m_FBO);
+    PaintEngine::GetInstance()->clearColor(GL_COLOR_BUFFER_BIT,1,1,1,1);
     
     if (bg) {
         bg->update();
@@ -77,8 +77,8 @@ bool RTT::begin(int w,int h,Painter* bg)
 
 void RTT::end()
 {
-    GLCanvas::GetInstance()->switchFBO(NULL,m_oldFBO);
-    GLCanvas::GetInstance()->resizeGL(System::GetInstance()->getDesktopWidth(),
+    PaintEngine::GetInstance()->switchFBO(NULL,m_oldFBO);
+    PaintEngine::GetInstance()->resizeGL(System::GetInstance()->getDesktopWidth(),
                                       System::GetInstance()->getDesktopHeight());
 }
 

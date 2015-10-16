@@ -27,6 +27,10 @@ System::System()
     m_patchPath += L"/patch/";
 }
 
+System::~System()
+{
+}
+
 float System::getDesktopWidth()
 {
     QDesktopWidget* desktopWidget = QApplication::desktop();

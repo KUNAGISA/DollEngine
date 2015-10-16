@@ -163,7 +163,7 @@ SOURCES += main.cpp\
     ../DollEngine/Core/Painter/Program/GLProgram.cpp \
     ../DollEngine/Core/Painter/Program/GrowProgram.cpp \
     ../DollEngine/Core/Painter/Program/NormalProgram.cpp \
-    ../DollEngine/Core/Painter/GLCanvas.cpp \
+    ../DollEngine/Core/Painter/PaintEngine.cpp \
     ../DollEngine/Core/Painter/GLShaderObject.cpp \
     ../DollEngine/Core/Scripts/TjsExtra/TjsDictIterator.cpp \
     ../DollEngine/Core/Scripts/TjsExtra/TjsSet.cpp \
@@ -181,7 +181,7 @@ SOURCES += main.cpp\
     ../DollEngine/Core/Platform/qt/System-Qt.cpp \
     ../DollEngine/Core/Base/SystemDelegate.cpp \
     ../DollEngine/Core/Platform/qt/Audio-Qt.cpp \
-    ../DollEngine/Core/Platform/gl/GLCanvas-GL.cpp
+    ../DollEngine/Core/Platform/gl/PaintEngine-GL.cpp
 
 HEADERS  += \
     QtConsole.h \
@@ -284,7 +284,7 @@ HEADERS  += \
     ../DollEngine/Core/Painter/Program/GLProgram.h \
     ../DollEngine/Core/Painter/Program/GrowProgram.h \
     ../DollEngine/Core/Painter/Program/NormalProgram.h \
-    ../DollEngine/Core/Painter/GLCanvas.h \
+    ../DollEngine/Core/Painter/PaintEngine.h \
     ../DollEngine/Core/Painter/GLShaderObject.h \
     ../DollEngine/Core/Scripts/TjsExtra/TjsDictIterator.h \
     ../DollEngine/Core/Scripts/TjsExtra/TjsSet.h \

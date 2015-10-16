@@ -8,7 +8,7 @@
 
 #include "System.h"
 #include "Storages.h"
-#include "GLCanvas.h"
+#include "PaintEngine.h"
 #include "Character.h"
 #include "ScriptEngine.h"
 #include "Window.h"
@@ -22,9 +22,6 @@ bool System::NeedRedraw=true;
 bool System::NeedSortTouches=true;
 
 
-System::~System()
-{
-}
 
 void System::startup()
 {

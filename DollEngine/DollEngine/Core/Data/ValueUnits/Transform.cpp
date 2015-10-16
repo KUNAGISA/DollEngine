@@ -7,7 +7,7 @@
 //
 
 #include "Transform.h"
-#include "GLCanvas.h"
+#include "PaintEngine.h"
 
 DE_BEGIN
 

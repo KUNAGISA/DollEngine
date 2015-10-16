@@ -121,7 +121,7 @@ return 0;\
 #include <QOpenGLFunctions_4_5_Core>
 #endif
 
-#define CHECK_GL_ERROR GLCanvas::GetInstance()->checkError();
-#define CHECK_PROGRAM_ERROR(ID) GLCanvas::GetInstance()->checkProgramError(ID);
+#define CHECK_GL_ERROR PaintEngine::GetInstance()->checkError();
+#define CHECK_PROGRAM_ERROR(ID) PaintEngine::GetInstance()->checkProgramError(ID);
 
 #endif

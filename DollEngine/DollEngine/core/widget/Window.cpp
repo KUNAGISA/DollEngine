@@ -8,7 +8,7 @@
 
 #include "Window.h"
 #include "RTT.h"
-#include "GLCanvas.h"
+#include "PaintEngine.h"
 
 DE_BEGIN
 
@@ -40,8 +40,8 @@ void Window::onInitFinished()
 {
 //    m_transRTT = new RTT();
 //    m_transBlack = new Painter();
-//    m_transBlack->loadSize(GLCanvas::GetInstance()->getLayerWidth(),
-//                           GLCanvas::GetInstance()->getLayerHeight(), 0);
+//    m_transBlack->loadSize(PaintEngine::GetInstance()->getLayerWidth(),
+//                           PaintEngine::GetInstance()->getLayerHeight(), 0);
 //    m_transNode = new GameObject();
 //    m_transRTT->setObject(m_transNode);
 //    m_transNode->setVisible(false);
@@ -63,8 +63,8 @@ void Window::visit()
 //        bg = m_transBlack;
 //    }
 //    m_transRTT->loadRender(m_world,
-//                           GLCanvas::GetInstance()->getLayerWidth(),
-//                           GLCanvas::GetInstance()->getLayerHeight(),
+//                           PaintEngine::GetInstance()->getLayerWidth(),
+//                           PaintEngine::GetInstance()->getLayerHeight(),
 //                           bg);
 //    m_transNode->setColor(0xffffffff);
 //    m_transNode->setOpacity(255);

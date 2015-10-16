@@ -1,5 +1,5 @@
 #include "QtWindow.h"
-#include "GLCanvas.h"
+#include "PaintEngine.h"
 
 QtWindow::QtWindow()
 {
@@ -10,7 +10,7 @@ QtWindow::QtWindow()
 void QtWindow::initializeGL()
 {
     QOpenGLWidget::initializeGL();
-    DE::GLCanvas::GetInstance();
+    DE::PaintEngine::GetInstance();
 }
 
 void QtWindow::resizeGL(int w,int h)

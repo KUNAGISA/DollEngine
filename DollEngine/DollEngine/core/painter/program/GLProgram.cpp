@@ -7,24 +7,24 @@
 //
 
 #include "GLProgram.h"
-#include "GLCanvas.h"
+#include "PaintEngine.h"
 
 DE_BEGIN
 
 GLProgram::GLProgram()
 {
-    m_programId = GLCanvas::GetInstance()->createProgram();
+    m_programId = PaintEngine::GetInstance()->createProgram();
 }
 
 GLProgram::~GLProgram()
 {
     for (GLShaderObject* obj : m_shaders)
     {
-        GLCanvas::GetInstance()->detachShader(m_programId,obj->getId());
+        PaintEngine::GetInstance()->detachShader(m_programId,obj->getId());
         delete obj;
     }
     m_shaders.clear();
-    GLCanvas::GetInstance()->deleteProgram(m_programId);
+    PaintEngine::GetInstance()->deleteProgram(m_programId);
 }
 
 const char* GLProgram::getShader_V()
@@ -75,37 +75,37 @@ void GLProgram::addShader(SHADER_TYPE type,const char* code)
 void GLProgram::addShader(GLShaderObject* obj)
 {
     m_shaders.push_back(obj);
-    GLCanvas::GetInstance()->attachShader(m_programId,obj->getId());
+    PaintEngine::GetInstance()->attachShader(m_programId,obj->getId());
 }
 
 bool GLProgram::bind()
 {
-    GLCanvas::GetInstance()->bindAttribute(m_programId, "a_position",PROGRAM_VERTEX_ATTRIBUTE);
-    GLCanvas::GetInstance()->bindAttribute(m_programId,"a_color",PROGRAM_COLOR_ATTRIBUTE);
-    GLCanvas::GetInstance()->bindAttribute(m_programId,"a_texCoord",PROGRAM_TEXCOORD_ATTRIBUTE);
+    PaintEngine::GetInstance()->bindAttribute(m_programId, "a_position",PROGRAM_VERTEX_ATTRIBUTE);
+    PaintEngine::GetInstance()->bindAttribute(m_programId,"a_color",PROGRAM_COLOR_ATTRIBUTE);
+    PaintEngine::GetInstance()->bindAttribute(m_programId,"a_texCoord",PROGRAM_TEXCOORD_ATTRIBUTE);
     //    bind(PROGRAM_OPACITY_ATTRIBUTE,"a_opacity");
-    if(!GLCanvas::GetInstance()->linkProgram(m_programId))
+    if(!PaintEngine::GetInstance()->linkProgram(m_programId))
     {
         return false;
     }
-    GLCanvas::GetInstance()->bindAttribute(m_programId,"tex_fore",PROGRAM_TEXTURE_ATTRIBUTE);
-    GLCanvas::GetInstance()->bindAttribute(m_programId,"tex_back",PROGRAM_TEXTURE_ATTRIBUTE);
-    GLCanvas::GetInstance()->bindAttribute(m_programId,"texture_fbo",PROGRAM_FBO_ATTRIBUTE);
-    GLCanvas::GetInstance()->bindAttribute(m_programId,"matrix",PROGRAM_MATRIX_ATTRIBUTE);
+    PaintEngine::GetInstance()->bindAttribute(m_programId,"tex_fore",PROGRAM_TEXTURE_ATTRIBUTE);
+    PaintEngine::GetInstance()->bindAttribute(m_programId,"tex_back",PROGRAM_TEXTURE_ATTRIBUTE);
+    PaintEngine::GetInstance()->bindAttribute(m_programId,"texture_fbo",PROGRAM_FBO_ATTRIBUTE);
+    PaintEngine::GetInstance()->bindAttribute(m_programId,"matrix",PROGRAM_MATRIX_ATTRIBUTE);
     
-    int index = GLCanvas::GetInstance()->getUniform(m_programId,"tex_fore");
+    int index = PaintEngine::GetInstance()->getUniform(m_programId,"tex_fore");
     if (index != -1) m_allUniformIndex["tex_fore"]=index;
     
-    index = GLCanvas::GetInstance()->getUniform(m_programId,"tex_back");
+    index = PaintEngine::GetInstance()->getUniform(m_programId,"tex_back");
     if (index != -1) m_allUniformIndex["tex_back"]=index;
     
-    index = GLCanvas::GetInstance()->getUniform(m_programId, "texture_fbo");
+    index = PaintEngine::GetInstance()->getUniform(m_programId, "texture_fbo");
     if (index != -1) m_allUniformIndex["texture_fbo"]=index;
     
-    index = GLCanvas::GetInstance()->getUniform(m_programId,"matrix");
+    index = PaintEngine::GetInstance()->getUniform(m_programId,"matrix");
     if (index != -1) m_allUniformIndex["matrix"]=index;
     
-    GLCanvas::GetInstance()->useProgram(m_programId);
+    PaintEngine::GetInstance()->useProgram(m_programId);
     setUniformValue("tex_fore",0);
     CHECK_GL_ERROR;
     return true;
@@ -117,7 +117,7 @@ void GLProgram::setUniformValue(const char* name,GLfloat value)
 {
     auto iter = m_allUniformIndex.find(name);
     if(iter != m_allUniformIndex.end())
-        GLCanvas::GetInstance()->setUniform1f(iter->second, value);
+        PaintEngine::GetInstance()->setUniform1f(iter->second, value);
     CHECK_PROGRAM_ERROR(this);
 }
 
@@ -125,7 +125,7 @@ void GLProgram::setUniformValue(const char* name,GLint value)
 {
     auto iter = m_allUniformIndex.find(name);
     if(iter != m_allUniformIndex.end())
-        GLCanvas::GetInstance()->setUniform1i(iter->second, value);
+        PaintEngine::GetInstance()->setUniform1i(iter->second, value);
     CHECK_PROGRAM_ERROR(this);
 }
 
@@ -133,7 +133,7 @@ void GLProgram::setUniformValue(const char* name,GLuint value)
 {
     auto iter = m_allUniformIndex.find(name);
     if(iter != m_allUniformIndex.end())
-        GLCanvas::GetInstance()->setUniform1i(iter->second, value);
+        PaintEngine::GetInstance()->setUniform1i(iter->second, value);
     CHECK_PROGRAM_ERROR(this);
 }
 
@@ -145,7 +145,7 @@ void GLProgram::setUniformValue(const char* name,const Size& value)
         float v[2];
         v[0] = value.width;
         v[1] = value.height;
-        GLCanvas::GetInstance()->setUniform2fv(iter->second,2,(GLfloat*)&value);
+        PaintEngine::GetInstance()->setUniform2fv(iter->second,2,(GLfloat*)&value);
     }
     CHECK_PROGRAM_ERROR(this);
 }
@@ -155,7 +155,7 @@ void GLProgram::setUniformValue(const char* name,const kmMat4& value)
     auto iter = m_allUniformIndex.find(name);
     if(iter != m_allUniformIndex.end())
     {
-        GLCanvas::GetInstance()->setUniformMatrix4fv(iter->second, 1,GL_FALSE,(GLfloat*)value.mat);
+        PaintEngine::GetInstance()->setUniformMatrix4fv(iter->second, 1,GL_FALSE,(GLfloat*)value.mat);
     }
     CHECK_PROGRAM_ERROR(this);
 }
@@ -166,18 +166,18 @@ void GLProgram::draw()
     if (m_quads.size() == 0) {
         return;
     }
-    GLCanvas::GetInstance()->bindVAO(0);
+    PaintEngine::GetInstance()->bindVAO(0);
     
 #define kQuadSize sizeof(GLVertex)
     long offset = (long)m_quads.data();
-    GLCanvas::GetInstance()->enableVertexAttribs(VERTEX_ATTRIB_FLAG_POS_COLOR_TEX);
+    PaintEngine::GetInstance()->enableVertexAttribs(VERTEX_ATTRIB_FLAG_POS_COLOR_TEX);
     
     int diff = offsetof( GLVertex, vertex);
-    GLCanvas::GetInstance()->vertexAttribPointer(PROGRAM_VERTEX_ATTRIBUTE, 2, GL_FLOAT, GL_FALSE, kQuadSize, (void*) (offset + diff));
+    PaintEngine::GetInstance()->vertexAttribPointer(PROGRAM_VERTEX_ATTRIBUTE, 2, GL_FLOAT, GL_FALSE, kQuadSize, (void*) (offset + diff));
     diff = offsetof( GLVertex, color);
-    GLCanvas::GetInstance()->vertexAttribPointer(PROGRAM_COLOR_ATTRIBUTE, 4, GL_FLOAT, GL_FALSE, kQuadSize, (void*) (offset + diff));
+    PaintEngine::GetInstance()->vertexAttribPointer(PROGRAM_COLOR_ATTRIBUTE, 4, GL_FLOAT, GL_FALSE, kQuadSize, (void*) (offset + diff));
     diff = offsetof( GLVertex, uv);
-    GLCanvas::GetInstance()->vertexAttribPointer(PROGRAM_TEXCOORD_ATTRIBUTE, 2, GL_FLOAT, GL_FALSE, kQuadSize,(void*) (offset + diff));
+    PaintEngine::GetInstance()->vertexAttribPointer(PROGRAM_TEXCOORD_ATTRIBUTE, 2, GL_FLOAT, GL_FALSE, kQuadSize,(void*) (offset + diff));
     int size = (int)m_quads.size()*4;
     
     for (int i=0; i<m_quads.size(); ++i) {
@@ -188,7 +188,7 @@ void GLProgram::draw()
         m_indexs.push_back(i*4+3);
         m_indexs.push_back(i*4);
     }
-    GLCanvas::GetInstance()->drawElements(GL_TRIANGLES, m_quads.size()*2*3, GL_UNSIGNED_SHORT, m_indexs.data());
+    PaintEngine::GetInstance()->drawElements(GL_TRIANGLES, m_quads.size()*2*3, GL_UNSIGNED_SHORT, m_indexs.data());
 //    glDrawArrays(GL_TRIANGLE_FAN, 0, size);
     
     CHECK_GL_ERROR;

@@ -9,7 +9,7 @@
 #include "Painter.h"
 #include "GLCache.h"
 #include "System.h"
-#include "GLCanvas.h"
+#include "PaintEngine.h"
 #include "Storages.h"
 
 DE_BEGIN
@@ -153,7 +153,7 @@ void Painter::setSizeToImageSize()
 
 void Painter::setProgram(const String& name)
 {
-    m_program = GLCanvas::GetInstance()->getProgram(name);
+    m_program = PaintEngine::GetInstance()->getProgram(name);
 }
 
 void Painter::setDisplayFrame(DE::SpriteFrame *v)
@@ -208,14 +208,14 @@ void Painter::updateWithScale9()
     flushPaintConfig(config);
     Scale9Config scfg = {m_scale9L,m_scale9B,m_scale9R,m_scale9T};
     config.scale9 = &scfg;
-    GLCanvas::GetInstance()->paint(config);
+    PaintEngine::GetInstance()->paint(config);
 }
 
 void Painter::updateWithFrame()
 {
     PaintConfig config;
     flushPaintConfig(config);
-    GLCanvas::GetInstance()->paint(config);
+    PaintEngine::GetInstance()->paint(config);
 }
 
 void Painter::flushPaintConfig(PaintConfig& config)
