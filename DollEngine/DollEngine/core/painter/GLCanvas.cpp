@@ -35,7 +35,7 @@ void GLCanvas::initializeGL()
     if (!m_initialized) {
         m_initialized = true;
         
-        DI->initialize();
+        initialize();
         
         resizeGL(System::GetInstance()->getDesktopWidth(),
                  System::GetInstance()->getDesktopHeight());
@@ -107,9 +107,9 @@ void GLCanvas::paint(PaintConfig& config)
         frame->getTexture() &&
         frame->getTexture()->getTextureId() != 0)
     {
-        DI->blendFunc(config.blendSrc,config.blendDst);
-        DI->useProgram(config.program->getProgramId());
-        config.program->setUniformValue("matrix", GLCanvas::GetInstance()->getGlobalTrans()->getMatrix());
+        blendFunc(config.blendSrc,config.blendDst);
+        useProgram(config.program->getProgramId());
+        config.program->setUniformValue("matrix", getGlobalTrans()->getMatrix());
         
         frame->getTexture()->bind(GL_TEXTURE0);
         config.program->actived(config);

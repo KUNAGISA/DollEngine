@@ -1,15 +1,15 @@
-#include "DrawInterface.h"
+#include "GLCanvas.h"
 #include "CoreUnits.h"
 #include "GLProgram.h"
 
 DE_BEGIN
 
-static DrawInterface* _instance=NULL;
 
-DrawInterface* DrawInterface::GetInstance()
+GLCanvas* GLCanvas::GetInstance()
 {
+    static GLCanvas* _instance=NULL;
     if(!_instance) {
-        _instance = new DrawInterface();
+        _instance = new GLCanvas();
 #ifdef __QT__
         _instance->initializeOpenGLFunctions();
 #endif
@@ -17,7 +17,7 @@ DrawInterface* DrawInterface::GetInstance()
     return _instance;
 }
 
-void DrawInterface::initialize()
+void GLCanvas::initialize()
 {
     glEnable(GL_TEXTURE_2D);
     
@@ -31,7 +31,7 @@ void DrawInterface::initialize()
 
 static DrawBlendId s_blendingSource = -1;
 static DrawBlendId s_blendingDest = -1;
-void DrawInterface::blendFunc(DrawBlendId src,DrawBlendId dst)
+void GLCanvas::blendFunc(DrawBlendId src,DrawBlendId dst)
 {
     if (src != s_blendingSource || dst != s_blendingDest)
     {
@@ -49,12 +49,12 @@ void DrawInterface::blendFunc(DrawBlendId src,DrawBlendId dst)
     }
 }
 
-void DrawInterface::deleteFBO(DrawSizeI n, const DrawFBOId * framebuffers)
+void GLCanvas::deleteFBO(DrawSizeI n, const DrawFBOId * framebuffers)
 {
     glDeleteFramebuffers(n,framebuffers);
 }
 
-DrawFBOId DrawInterface::createFBO(DrawTexId texId )
+DrawFBOId GLCanvas::createFBO(DrawTexId texId )
 {
     DrawFBOId newFBO;
     DrawFBOId oldFBO;
@@ -73,15 +73,16 @@ DrawFBOId DrawInterface::createFBO(DrawTexId texId )
     return newFBO;
 }
 
-void DrawInterface::switchFBO(DrawFBOId* oldFBO,DrawFBOId newFBO)
+void GLCanvas::switchFBO(DrawFBOId* oldFBO,DrawFBOId newFBO)
 {
     if(oldFBO){
         glGetIntegerv(GL_FRAMEBUFFER_BINDING, (GLint*)oldFBO);
     }
     glBindFramebuffer(GL_FRAMEBUFFER, newFBO);
+    CHECK_GL_ERROR;
 }
 
-void DrawInterface::clearColor(DrawMask mask,DrawClampF red,DrawClampF green,DrawClampF blue,DrawClampF alpha)
+void GLCanvas::clearColor(DrawMask mask,DrawClampF red,DrawClampF green,DrawClampF blue,DrawClampF alpha)
 {
     if(mask!=0)
     {
@@ -90,7 +91,7 @@ void DrawInterface::clearColor(DrawMask mask,DrawClampF red,DrawClampF green,Dra
     glClearColor(red,green,blue,alpha);
 }
 
-DrawTexId DrawInterface::loadTexture(void* data, int width,int height)
+DrawTexId GLCanvas::loadTexture(void* data, int width,int height)
 {
     DrawTexId m_textureId;
     glGenTextures(1,&m_textureId);
@@ -105,30 +106,30 @@ DrawTexId DrawInterface::loadTexture(void* data, int width,int height)
     return m_textureId;
 }
 
-void DrawInterface::bindTexture(DrawActiveTexId aid,DrawTexId bid)
+void GLCanvas::bindTexture(DrawActiveTexId aid,DrawTexId bid)
 {
     glActiveTexture(aid);
     glBindTexture(GL_TEXTURE_2D, bid);
     CHECK_GL_ERROR;
 }
 
-void DrawInterface::deleteTexture(DrawSizeI count,DrawTexId* texId)
+void GLCanvas::deleteTexture(DrawSizeI count,DrawTexId* texId)
 {
     glDeleteTextures(count,texId);
 }
 
-void DrawInterface::readPixels(GLint x,GLint y,GLsizei width,GLsizei height,GLenum format,GLenum type,GLvoid *pixels)
+void GLCanvas::readPixels(GLint x,GLint y,GLsizei width,GLsizei height,GLenum format,GLenum type,GLvoid *pixels)
 {
     glReadPixels(x,y,width,height,format,type,pixels);
     CHECK_GL_ERROR;
 }
 
-DrawPrgId DrawInterface::createProgram()
+DrawPrgId GLCanvas::createProgram()
 {
     return glCreateProgram();
 }
 
-bool DrawInterface::linkProgram(DrawPrgId pId)
+bool GLCanvas::linkProgram(DrawPrgId pId)
 {
     glLinkProgram(pId);
     CHECK_GL_ERROR;
@@ -143,7 +144,7 @@ bool DrawInterface::linkProgram(DrawPrgId pId)
 }
 
 static GLuint s_currentProgramId=0;
-void DrawInterface::useProgram(DrawPrgId pId)
+void GLCanvas::useProgram(DrawPrgId pId)
 {
     if (s_currentProgramId != pId) {
         s_currentProgramId = pId;
@@ -152,13 +153,13 @@ void DrawInterface::useProgram(DrawPrgId pId)
     }
 }
 
-void DrawInterface::deleteProgram(DrawPrgId pId)
+void GLCanvas::deleteProgram(DrawPrgId pId)
 {
     glDeleteProgram(pId);
 }
 
 
-DrawShaderId DrawInterface::createShader(GLenum type,const char* code)
+DrawShaderId GLCanvas::createShader(GLenum type,const char* code)
 {
     DrawShaderId m_id = glCreateShader(type);
     CHECK_GL_ERROR;
@@ -196,36 +197,36 @@ DrawShaderId DrawInterface::createShader(GLenum type,const char* code)
     return 0;
 }
 
-void DrawInterface::attachShader(DrawPrgId pId,DrawShaderId sId)
+void GLCanvas::attachShader(DrawPrgId pId,DrawShaderId sId)
 {
     glAttachShader(pId,sId);
 }
 
-void DrawInterface::detachShader(DrawPrgId pId,DrawShaderId sId)
+void GLCanvas::detachShader(DrawPrgId pId,DrawShaderId sId)
 {
     glDetachShader(pId, sId);
 }
 
-void DrawInterface::deleteShader(DrawShaderId sId)
+void GLCanvas::deleteShader(DrawShaderId sId)
 {
     glDeleteShader(sId);
 }
 
 
-int DrawInterface::getUniform(DrawPrgId pId, const char* v)
+int GLCanvas::getUniform(DrawPrgId pId, const char* v)
 {
     int index = glGetUniformLocation(pId,v);
     return index;
 }
 
-void DrawInterface::bindAttribute(DrawPrgId pId,const char * name, int location)
+void GLCanvas::bindAttribute(DrawPrgId pId,const char * name, int location)
 {
     glBindAttribLocation(pId,location,name);
     CHECK_GL_ERROR;
 }
 
 static GLuint s_VAO=-1;
-void DrawInterface::bindVAO(DrawVAOId vaoId)
+void GLCanvas::bindVAO(DrawVAOId vaoId)
 {
     if (s_VAO != vaoId)
     {
@@ -236,7 +237,7 @@ void DrawInterface::bindVAO(DrawVAOId vaoId)
 
 static int MAX_ATTRIBUTES = 16;
 static uint32_t s_attributeFlags = 0;
-void DrawInterface::enableVertexAttribs(uint32_t flags)
+void GLCanvas::enableVertexAttribs(uint32_t flags)
 {
     for(int i=0; i < MAX_ATTRIBUTES; i++) {
         unsigned int bit = 1 << i;
@@ -252,39 +253,39 @@ void DrawInterface::enableVertexAttribs(uint32_t flags)
     s_attributeFlags = flags;
 }
 
-void DrawInterface::vertexAttribPointer(GLuint indx, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const void* ptr)
+void GLCanvas::vertexAttribPointer(GLuint indx, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const void* ptr)
 {
     glVertexAttribPointer(indx,size,type,normalized,stride,ptr);
 }
 
 
-void DrawInterface::setUniform1f(GLint location, GLfloat x)
+void GLCanvas::setUniform1f(GLint location, GLfloat x)
 {
     glUniform1f(location, x);
 }
 
-void DrawInterface::setUniform1i(GLint location, GLint x)
+void GLCanvas::setUniform1i(GLint location, GLint x)
 {
     glUniform1i(location, x);
 }
 
-void DrawInterface::setUniform2fv(GLint location, GLsizei count, GLfloat* x)
+void GLCanvas::setUniform2fv(GLint location, GLsizei count, GLfloat* x)
 {
     glUniform2fv(location, count, x);
 }
 
-void DrawInterface::setUniformMatrix4fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value)
+void GLCanvas::setUniformMatrix4fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value)
 {
     glUniformMatrix4fv(location,count,transpose,value);
 }
 
 
-void DrawInterface::drawElements(GLenum mode,GLsizei count,GLenum type,const GLvoid *indices)
+void GLCanvas::drawElements(GLenum mode,GLsizei count,GLenum type,const GLvoid *indices)
 {
     glDrawElements(mode,count,type,indices);
 }
 
-void DrawInterface::checkError()
+void GLCanvas::checkError()
 {
     GLint v = glGetError();
     if(v){
@@ -292,7 +293,7 @@ void DrawInterface::checkError()
     }
 }
 
-void DrawInterface::checkProgramError(GLProgram* program)
+void GLCanvas::checkProgramError(GLProgram* program)
 {
     GLint v = glGetError();
     if (v) {

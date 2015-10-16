@@ -173,8 +173,6 @@ SOURCES += main.cpp\
     ../DollEngine/Core/Widget/Window.cpp \
     ../DollEngine/Core/Widget/Console.cpp \
     ../DollEngine/Core/CoreTypes.cpp \
-    ../DollEngine/Core/Platform/gl/DrawInterface-GL.cpp \
-    ../DollEngine/Core/Platform/qt/FontInterface-Qt.cpp \
     ../DollEngine/Core/Platform/qt/ImageData-Qt.cpp \
     ../DollEngine/Core/Scripts/TjsExtra/TjsScripts.cpp \
     ../DollEngine/Core/Scripts/TjsExtra/TjsStorages.cpp \
@@ -182,7 +180,8 @@ SOURCES += main.cpp\
     ../DollEngine/Core/Scripts/TjsExtra/TjsConsole.cpp \
     ../DollEngine/Core/Platform/qt/System-Qt.cpp \
     ../DollEngine/Core/Base/SystemDelegate.cpp \
-    ../DollEngine/Core/Platform/qt/Audio-Qt.cpp
+    ../DollEngine/Core/Platform/qt/Audio-Qt.cpp \
+    ../DollEngine/Core/Platform/gl/GLCanvas-GL.cpp
 
 HEADERS  += \
     QtConsole.h \
@@ -297,8 +296,6 @@ HEADERS  += \
     ../DollEngine/Core/CoreMacros.h \
     ../DollEngine/Core/CoreUnits.h \
     ../DollEngine/Core/CoreTypes.h \
-    ../DollEngine/Core/Interface/DrawInterface.h \
-    ../DollEngine/Core/Interface/FontInterface.h \
     ../DollEngine/Core/Data/ValueUnits/CoreString.h \
     ../DollEngine/Core/Scripts/TjsExtra/TjsScripts.h \
     ../DollEngine/Core/Scripts/TjsExtra/TjsStorages.h \

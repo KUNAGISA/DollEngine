@@ -42,4 +42,25 @@ float System::getDesktopHeight()
     return deskRect.height();
 }
 
+
+ImageData* System::addText(const String& text,const String& fontName,int fontSize,FontData* fd)
+{
+    return NULL;
+}
+
+String System::addFont(const String& filePath)
+{
+    return "";
+}
+
+void* System::getFont(const String& fontName)
+{
+    return NULL;
+}
+
+void System::removeFont(const String& filePath)
+{
+    
+}
+
 DE_END

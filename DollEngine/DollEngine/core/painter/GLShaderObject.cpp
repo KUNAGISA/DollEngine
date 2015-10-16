@@ -7,6 +7,7 @@
 //
 
 #include "GLShaderObject.h"
+#include "GLCanvas.h"
 
 DE_BEGIN
 
@@ -20,7 +21,7 @@ GLShaderObject::~GLShaderObject()
 {
     if (m_id)
     {
-        DI->deleteShader(m_id);
+        GLCanvas::GetInstance()->deleteShader(m_id);
     }
 }
 
@@ -29,10 +30,10 @@ bool GLShaderObject::compileShaderCode(const char* code)
     switch (m_type)
     {
         case SHADER_TYPE_FRAGMENT:
-            m_id = DI->createShader(GL_FRAGMENT_SHADER,code);
+            m_id = GLCanvas::GetInstance()->createShader(GL_FRAGMENT_SHADER,code);
             break;
         case SHADER_TYPE_VERTEX:
-            m_id = DI->createShader(GL_VERTEX_SHADER,code);
+            m_id = GLCanvas::GetInstance()->createShader(GL_VERTEX_SHADER,code);
             break;
         default:
             break;

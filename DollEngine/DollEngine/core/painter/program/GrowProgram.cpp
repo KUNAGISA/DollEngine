@@ -7,6 +7,7 @@
 //
 
 #include "GrowProgram.h"
+#include "GLCanvas.h"
 
 DE_BEGIN
 
@@ -22,16 +23,16 @@ GrowProgram::~GrowProgram()
 
 bool GrowProgram::bind()
 {
-    int index =DI->getUniform(m_programId,"resolutionX");
+    int index =GLCanvas::GetInstance()->getUniform(m_programId,"resolutionX");
     if (index != -1) m_allUniformIndex["resolutionX"]=index;
     
-    index =DI->getUniform(m_programId,"resolutionY");
+    index =GLCanvas::GetInstance()->getUniform(m_programId,"resolutionY");
     if (index != -1) m_allUniformIndex["resolutionY"]=index;
     
-    index =DI->getUniform(m_programId,"blurRadius");
+    index =GLCanvas::GetInstance()->getUniform(m_programId,"blurRadius");
     if (index != -1) m_allUniformIndex["blurRadius"]=index;
     
-    index =DI->getUniform(m_programId,"sampleNum");
+    index =GLCanvas::GetInstance()->getUniform(m_programId,"sampleNum");
     if (index != -1) m_allUniformIndex["sampleNum"]=index;
     return NormalProgram::bind();
 }

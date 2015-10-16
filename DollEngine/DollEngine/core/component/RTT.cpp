@@ -23,7 +23,7 @@ RTT::RTT()
 RTT::~RTT()
 {
     if (m_FBO) {
-        DI->deleteFBO(1, &m_FBO);
+        GLCanvas::GetInstance()->deleteFBO(1, &m_FBO);
     }
     SAFF_DELETE(m_displayFrame);
 }
@@ -61,13 +61,13 @@ bool RTT::begin(int w,int h,Painter* bg)
         m_displayFrame = frame;
         m_displayFrame->setTexture(tex);
     }
-    m_FBO = DI->createFBO(m_displayFrame->getTexture()->getTextureId());
+    m_FBO = GLCanvas::GetInstance()->createFBO(m_displayFrame->getTexture()->getTextureId());
     
     GLCanvas::GetInstance()->resizeGL(GLCanvas::GetInstance()->getLayerWidth(),
                                       GLCanvas::GetInstance()->getLayerHeight());
     
-    DI->switchFBO(&m_oldFBO,m_FBO);
-    DI->clearColor(GL_COLOR_BUFFER_BIT,1,1,1,1);
+    GLCanvas::GetInstance()->switchFBO(&m_oldFBO,m_FBO);
+    GLCanvas::GetInstance()->clearColor(GL_COLOR_BUFFER_BIT,1,1,1,1);
     
     if (bg) {
         bg->update();
@@ -77,8 +77,7 @@ bool RTT::begin(int w,int h,Painter* bg)
 
 void RTT::end()
 {
-    DI->switchFBO(NULL,m_oldFBO);
-    CHECK_GL_ERROR;
+    GLCanvas::GetInstance()->switchFBO(NULL,m_oldFBO);
     GLCanvas::GetInstance()->resizeGL(System::GetInstance()->getDesktopWidth(),
                                       System::GetInstance()->getDesktopHeight());
 }

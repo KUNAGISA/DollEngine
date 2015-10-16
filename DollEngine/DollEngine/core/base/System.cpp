@@ -8,7 +8,6 @@
 
 #include "System.h"
 #include "Storages.h"
-#include "FontInterface.h"
 #include "GLCanvas.h"
 #include "Character.h"
 #include "ScriptEngine.h"
@@ -32,7 +31,7 @@ void System::startup()
     System::GetInstance();
     ScriptEngine::GetInstance();
     try{
-        FontInterface::GetInstance()->addFont("WenQuanYiMicroHei.ttc");
+        addFont("WenQuanYiMicroHei.ttc");
         
         String code;
         code.loadFromFile("startup.tjs");

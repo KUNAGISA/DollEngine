@@ -42,6 +42,19 @@ enum PROGRAM_TYPE
     CROSSFADE_PROGRAM = 1,//trans中使用的crossfade模式
 };
 
+
+typedef GLuint DrawFBOId;//fbo手柄
+typedef GLuint DrawTexId;//贴图手柄
+typedef GLuint DrawActiveTexId;//生效的贴图
+typedef GLuint DrawPrgId; //program
+typedef GLuint DrawShaderId; //shader
+typedef GLuint DrawVAOId;
+typedef GLenum DrawBlendId;
+
+typedef GLsizei DrawSizeI;
+typedef GLclampf DrawClampF;
+typedef GLbitfield DrawMask;
+
 class Rect
 {
 public:

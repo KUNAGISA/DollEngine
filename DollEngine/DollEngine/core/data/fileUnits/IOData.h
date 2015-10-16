@@ -20,9 +20,6 @@ public:
     ~IOData();
     void clear();
     void initWithSize(size_t size);
-    void clearBuffer();
-    unsigned short getUShort(int idx);
-    void convertToUnicode(String&target);
     
     PROPERTY(unsigned char*, Buffer, m_buffer);
     PROPERTY(size_t, Size, m_size){m_size=v;}

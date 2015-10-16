@@ -14,6 +14,8 @@
 
 DE_BEGIN
 
+class ImageData;
+
 class System
 {
 public:
@@ -23,6 +25,16 @@ public:
     
 public:
     void startup(); //脚本入口
+    
+    
+    ImageData* addText(const String& text,const String& fontName,int fontSize,FontData* fd);
+    String addFont(const String& filePath);
+    void* getFont(const String& fontName);
+    void removeFont(const String& filePath);
+    
+    static String GetKeyByFont(const String& str,const String& fontName,int fontSize,int outlineSize) {
+        return String::fromFormat("%s_%s_%d_%d",str.c_nstr(),fontName.c_nstr(),fontSize,outlineSize);
+    }
     
     int64_t getMilliSeconds();
     double getSeconds();
@@ -47,7 +59,8 @@ public:
     static bool NeedSortTouches;
     
 protected:
-    
+    map<String, void*> m_allFonts;
+    map<String, String> m_allFontPaths;
 };
 
 DE_END

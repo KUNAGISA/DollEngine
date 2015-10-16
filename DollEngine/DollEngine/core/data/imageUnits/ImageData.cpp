@@ -15,7 +15,7 @@ ImageData::ImageData()
 :m_data(NULL)
 ,m_width(0)
 ,m_height(0)
-,m_bufferPitch(IMAGE_BUFFER_PITCH_DEFAULT)
+//,m_bufferPitch(IMAGE_BUFFER_PITCH_DEFAULT)
 {
     
 }

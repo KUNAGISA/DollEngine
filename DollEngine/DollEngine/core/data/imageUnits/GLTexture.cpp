@@ -9,6 +9,7 @@
 #include "GLTexture.h"
 #include "GLCache.h"
 #include "IOData.h"
+#include "GLCanvas.h"
 
 DE_BEGIN
 
@@ -25,13 +26,13 @@ GLTexture::~GLTexture()
 {
     GLCache::GetInstance()->removeTextureCache(this);
     if (m_textureId) {
-        DI->deleteTexture(1, &m_textureId);
+        GLCanvas::GetInstance()->deleteTexture(1, &m_textureId);
     }
 }
 
 bool GLTexture::initWithImage(ImageData* image)
 {
-    setTextureId(DI->loadTexture(image->getData()->getBuffer(),image->getWidth(),image->getHeight()));
+    setTextureId(GLCanvas::GetInstance()->loadTexture(image->getData()->getBuffer(),image->getWidth(),image->getHeight()));
     setWidth(image->getWidth());
     setHeight(image->getHeight());
     return true;
@@ -44,7 +45,7 @@ bool GLTexture::initWithSize(int w,int h)
         return false;
     }
     memset(data, 0, w*h*4);
-    setTextureId(DI->loadTexture(data,w,h));
+    setTextureId(GLCanvas::GetInstance()->loadTexture(data,w,h));
     setWidth(w);
     setHeight(h);
     free(data);
@@ -67,14 +68,14 @@ void GLTexture::release()
 void GLTexture::bind(GLenum activeId)
 {
     if (m_textureId) {
-        DI->bindTexture(activeId,m_textureId);
+        GLCanvas::GetInstance()->bindTexture(activeId,m_textureId);
     }
 }
 
 void GLTexture::setTextureId(GLuint v)
 {
     if (m_textureId) {
-        DI->deleteTexture(1, &m_textureId);
+        GLCanvas::GetInstance()->deleteTexture(1, &m_textureId);
     }
     m_textureId = v;
 }
@@ -83,7 +84,7 @@ unsigned char* GLTexture::getData()
 {
     unsigned char* data = new unsigned char[getWidth()*getHeight()*4];
     memset(data, 0, getWidth()*getHeight()*4);
-    DI->readPixels(0, 0, getWidth(), getHeight(), GL_RGBA, GL_UNSIGNED_BYTE, data);
+    GLCanvas::GetInstance()->readPixels(0, 0, getWidth(), getHeight(), GL_RGBA, GL_UNSIGNED_BYTE, data);
     return data;
 }
 

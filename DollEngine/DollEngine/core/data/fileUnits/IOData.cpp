@@ -35,30 +35,11 @@ void IOData::initWithSize(size_t size)
     m_size = size;
 }
 
-void IOData::clearBuffer()
-{
-    if (m_buffer)
-    {
-        memset(m_buffer, 0, m_size);
-    }
-}
 void IOData::setBuffer(unsigned char *v)
 {
     SAFF_DELETE_ARRAY(m_buffer);
     m_buffer = v;
 }
 
-unsigned short IOData::getUShort(int idx)
-{
-    unsigned short ret;
-    unsigned short* tbuffer = (unsigned short*)m_buffer;
-    ret = tbuffer[idx];
-    return ret;
-}
-
-void IOData::convertToUnicode(String&target)
-{
-    target = (const char*)m_buffer;
-}
 
 DE_END

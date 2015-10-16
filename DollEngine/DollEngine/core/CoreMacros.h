@@ -31,7 +31,6 @@ using namespace std;
 #define DEFFONTSIZE 24
 #define DM(...) DE::Console::GetInstance()->log(DE::String::fromFormat(__VA_ARGS__))
 #define EM DE::Console::GetInstance()->throwMsg
-#define DI DE::DrawInterface::GetInstance()
 #define ASSERT assert
 
 #define DE_BEGIN namespace DE {
@@ -122,7 +121,7 @@ return 0;\
 #include <QOpenGLFunctions_4_5_Core>
 #endif
 
-#define CHECK_GL_ERROR DI->checkError();
-#define CHECK_PROGRAM_ERROR(ID) DI->checkProgramError(ID);
+#define CHECK_GL_ERROR GLCanvas::GetInstance()->checkError();
+#define CHECK_PROGRAM_ERROR(ID) GLCanvas::GetInstance()->checkProgramError(ID);
 
 #endif

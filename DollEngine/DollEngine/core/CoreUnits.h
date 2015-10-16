@@ -10,7 +10,6 @@
 #define __DollEngine__Units__
 
 #include "CoreTypes.h"
-#include "DrawInterface.h"
 #include "Console.h"
 
 

@@ -11,7 +11,7 @@
 #include "TextFrame.h"
 #include "GLProgram.h"
 #include "FileInfo.h"
-#include "FontInterface.h"
+#include "System.h"
 
 DE_BEGIN
 
@@ -33,7 +33,7 @@ TextFrame* GLCache::addText(const String& text,const String& fontName,int fontSi
         fontSize = DEFFONTSIZE;
     }
     
-    String key = FontInterface::GetKeyByFont(text,fontName,fontSize,0);
+    String key = System::GetKeyByFont(text,fontName,fontSize,0);
     
     auto iter = m_allSpriteFrames.find(key);
     if (iter != m_allSpriteFrames.end()) {
@@ -50,7 +50,7 @@ TextFrame* GLCache::addText(const String& text,const String& fontName,int fontSi
         
         FontData* fd = new FontData();
         
-        ImageData* image = FontInterface::GetInstance()->addText(text, fontName, fontSize,fd);
+        ImageData* image = System::GetInstance()->addText(text, fontName, fontSize,fd);
         
         tex = new GLTexture();
         if(tex->initWithImage(image)) {
