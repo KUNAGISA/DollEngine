@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #include "Window.h"
 #include "System.h"
-#include "GLCanvas.h"
+#include "PaintEngine.h"
 
 static UIWindow* s_window=nil;
 

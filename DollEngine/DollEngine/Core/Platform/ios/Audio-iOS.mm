@@ -11,234 +11,148 @@
 #include "Storages.h"
 #include "System.h"
 
-@interface AudioPlayer : NSObject
-
-@property (nonatomic)  double fadeTime;
-@property (nonatomic)  BOOL loop;
-@property (nonatomic)  float volume;
-
-@end
-
-@implementation AudioPlayer
-{
-    AVAudioPlayer* fore;
-    AVAudioPlayer* back;
-    NSTimer* fadeTimer;
-    
-    double startFadeTime;
-    float foreStartVolume;
-    float foreEndVolume;
-    float backStartVolume;
-    float backEndVolume;
-    BOOL isfading;
-}
-
--(void)setVolume:(float)volume
-{
-    _volume = volume;
-    if (fore) {
-        fore.volume = volume;
-    }
-}
-
--(void)setLoop:(BOOL)loop
-{
-    _loop = loop;
-    if (fore) {
-        fore.numberOfLoops = loop?-1:0;
-    }
-}
-
--(BOOL)preload:(NSString*)path
-{
-    if (back) {
-        [back stop];
-    }
-    DE::String fullpath = DE::Storages::GetInstance()->getFullPath(path.UTF8String);
-    if (fullpath.empty()) {
-        return NO;
-    }
-    NSString* url = [NSString stringWithUTF8String:fullpath.c_nstr()];
-    //printf("%s\n",fullpath.c_str());
-    NSError  *error;
-    back = [[AVAudioPlayer alloc]initWithContentsOfURL:[NSURL URLWithString:url] error:&error];
-    [back prepareToPlay];
-    return NO;
-}
-
--(void)play:(BOOL)isfade
-{
-    if(fadeTimer){
-        [fadeTimer invalidate];
-        fadeTimer = nil;
-        isfading = NO;
-        //printf("[play]isfading=false\n");
-    }
-    AVAudioPlayer * old = fore;
-    fore = back;
-    back = old;
-    if(isfade){
-        if(fore){
-            fore.volume = 0;
-            [fore play];
-            foreStartVolume = 0;
-            foreEndVolume = self.volume;
-        }
-        if(back){
-            backStartVolume = back.volume;
-            backEndVolume = 0;
-        }
-        if (fore||back) {
-            fadeTimer = [NSTimer scheduledTimerWithTimeInterval:(1/60.0f) target:self selector:@selector(audioFade) userInfo:nil repeats:YES];
-            isfading = YES;
-            startFadeTime = DE::System::GetInstance()->getSeconds();
-            //printf("[play]isfading=true\n");
-        }
-    }
-    else {
-        if (fore) {
-            fore.volume = self.volume;
-            [fore play];
-        }
-        if(back){
-            [back stop];
-            back = nil;
-        }
-    }
-    [self setLoop:self.loop];
-}
-
--(void)stop:(BOOL)isfade
-{
-    if(fadeTimer){
-        [fadeTimer invalidate];
-        fadeTimer = nil;
-        isfading = NO;
-        //printf("[stop]isfading=false\n");
-    }
-    if (!isfade) {
-        if (fore) {
-            [fore stop];
-        }
-        if (back) {
-            [back stop];
-        }
-    }
-    else {
-        if (fore) {
-            foreStartVolume = fore.volume;
-            foreEndVolume = 0;
-        }
-        if(back){
-            backStartVolume = back.volume;
-            backEndVolume = 0;
-        }
-        if (fore || back) {
-            fadeTimer = [NSTimer scheduledTimerWithTimeInterval:(1/60.0f) target:self selector:@selector(audioFade) userInfo:nil repeats:YES];
-            isfading = YES;
-            startFadeTime = DE::System::GetInstance()->getSeconds();
-            //printf("[stop]isfading=true\n");
-        }
-    }
-}
-
--(void)audioFade
-{
-    double cur = DE::System::GetInstance()->getSeconds();
-    double dt = cur - startFadeTime;
-    double p = dt/self.fadeTime;
-    if (fore) {
-        float v =(foreEndVolume-foreStartVolume)*p+foreStartVolume;
-        fore.volume = v;
-    }
-    if (back) {
-        back.volume = (backEndVolume-backStartVolume)*p+backStartVolume;
-    }
-    if (p>=1) {
-        [fadeTimer invalidate];
-        if(back){
-            [back stop];
-            back = nil;
-        }
-        isfading = NO;
-        //printf("[update]isfading=false\n");
-    }
-}
-
--(void)dealloc
-{
-    [self stop:NO];
-    fore = nil;
-    back = nil;
-    //printf("player dealloc\n");
-}
-
-@end
-
 DE_BEGIN
 
-static NSMutableSet* s_AVAPlayers = [[NSMutableSet alloc]init];
-
 Audio::Audio()
-:m_player(NULL)
+:m_object(NULL)
+,m_fadeTimerLine(NULL)
+,m_loop(false)
+,m_muted(false)
+,m_position(0)
+,m_volume(100)
 {
-    AudioPlayer* player = [[AudioPlayer alloc]init];
-    m_player = (__bridge void*)player;
-    [s_AVAPlayers addObject:player];
-    setFadeTime(0.5f);
-    setVolume(100);
-    setLoop(false);
 }
 
 Audio::~Audio()
 {
-    if (m_player) {
-        AudioPlayer* player = (__bridge AudioPlayer*)m_player;
-        m_player=NULL;
-        [player stop:NO];
-        [s_AVAPlayers removeObject:player];
+    if (m_object) {
+        AVAudioPlayer* player = (__bridge AVAudioPlayer*)m_object;
+        m_object=NULL;
+        [player stop];
+        [player release];
     }
 }
 
 bool Audio::preload(const String& path)
 {
-    AudioPlayer* player = (__bridge AudioPlayer*)m_player;
-    BOOL ret = [player preload:[NSString stringWithUTF8String:path.c_nstr()]];
-    return ret;
+    if (m_object) {
+        AVAudioPlayer* player = (__bridge AVAudioPlayer*)m_object;
+        [player stop];
+        [player release];
+    }
+    AVAudioPlayer* player = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL URLWithString:[NSString stringWithUTF8String:path.c_nstr()]] error:nil];
+    
+    m_object = (__bridge AVAudioPlayer*)player;
+    if (m_object) {
+        return true;
+    }
+    return false;
 }
 
-void Audio::play(bool isloop, bool isfade)
+void Audio::play(bool isloop,int fadeMS)
 {
-    AudioPlayer* player = (__bridge AudioPlayer*)m_player;
+    AVAudioPlayer* player = (__bridge AVAudioPlayer*)m_object;
+    if(!player){
+        return;
+    }
+    [player play];
     setLoop(isloop);
-    [player play:isfade];
+    setMuted(m_muted);
+    setVolume(m_volume);
 }
 
-void Audio::stop(bool isfade)
+void Audio::stop(int fadeMS)
 {
-    AudioPlayer* player = (__bridge AudioPlayer*)m_player;
-    [player stop:isfade];
+    AVAudioPlayer* player = (__bridge AVAudioPlayer*)m_object;
+    if(!player){
+        return;
+    }
+    [player stop];
 }
 
-void Audio::setLoop(bool v)
+void Audio::setLoop(int v)
 {
     m_loop = v;
-    AudioPlayer* player = (__bridge AudioPlayer*)m_player;
-    player.loop = v;
+    AVAudioPlayer* player = (__bridge AVAudioPlayer*)m_object;
+    if(!player){
+        return;
+    }
+    player.numberOfLoops = v;
 }
 
 void Audio::setVolume(float v)
 {
     m_volume = v;
-    AudioPlayer* player = (__bridge AudioPlayer*)m_player;
-    player.volume = v/100;
+    AVAudioPlayer* player = (__bridge AVAudioPlayer*)m_object;
+    if(!player){
+        return;
+    }
+    if (m_muted) {
+        player.volume = 0;
+    }
+    else {
+        player.volume = v/100;
+    }
 }
 
-void Audio::setFadeTime(float v)
+void Audio::setPosition(int v)
 {
-    m_fadeTime = v;
-    AudioPlayer* player = (__bridge AudioPlayer*)m_player;
-    player.fadeTime = v;
+    m_position = v;
+    AVAudioPlayer* player = (__bridge AVAudioPlayer*)m_object;
+    if(!player){
+        return;
+    }
+    player.currentTime = v;
+}
+
+void Audio::setMuted(bool v)
+{
+    m_muted = v;
+    AVAudioPlayer* player = (__bridge AVAudioPlayer*)m_object;
+    if(!player){
+        return;
+    }
+    if (v) {
+        player.volume = 0;
+    }
+    else {
+        player.volume = m_volume/100.0f;
+    }
+}
+
+void Audio::onMutedChanged(bool v)
+{
+
+}
+
+void Audio::onVolumeChanged(bool v)
+{
+
+}
+
+void Audio::onPositionChanged(int v)
+{
+
+}
+
+void Audio::onPause()
+{
+
+}
+
+void Audio::onResume()
+{
+
+}
+
+void Audio::onPlay()
+{
+
+}
+
+void Audio::onStop()
+{
+
 }
 
 DE_END

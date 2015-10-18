@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #include "System.h"
+#include "ImageData.h"
 #include "FileInfo.h"
 #include <ft2build.h>
 #include FT_FREETYPE_H
