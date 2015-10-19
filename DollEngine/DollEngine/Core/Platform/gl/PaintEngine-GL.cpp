@@ -1,6 +1,6 @@
 #include "PaintEngine.h"
 #include "CoreUnits.h"
-#include "GLProgram.h"
+#include "PaintProgram.h"
 
 DE_BEGIN
 
@@ -293,7 +293,7 @@ void PaintEngine::checkError()
     }
 }
 
-void PaintEngine::checkProgramError(GLProgram* program)
+void PaintEngine::checkProgramError(PaintProgram* program)
 {
     GLint v = glGetError();
     if (v) {
@@ -306,7 +306,7 @@ void PaintEngine::checkProgramError(GLProgram* program)
         
         for (int i=0; i< program->getShaderCount(); ++i)
         {
-            GLShaderObject* obj = program->getShader(i);
+            PaintShader* obj = program->getShader(i);
             memset(infoLog, 0, 128);
             glGetShaderInfoLog ( obj->getId(), 127, NULL, infoLog );
             DM("Error shader:%s", (const char*)infoLog);

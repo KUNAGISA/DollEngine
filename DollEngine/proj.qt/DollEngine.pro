@@ -139,10 +139,7 @@ SOURCES += main.cpp\
     ../DollEngine/Lib/onig/st.c \
     ../DollEngine/Core/Base/Storages.cpp \
     ../DollEngine/Core/Base/System.cpp \
-    ../DollEngine/Core/Component/Character.cpp \
     ../DollEngine/Core/Component/Component.cpp \
-    ../DollEngine/Core/Component/Painter.cpp \
-    ../DollEngine/Core/Component/RTT.cpp \
     ../DollEngine/Core/Component/Timer.cpp \
     ../DollEngine/Core/Component/TouchListener.cpp \
     ../DollEngine/Core/Data/ValueUnits/Color.cpp \
@@ -160,11 +157,10 @@ SOURCES += main.cpp\
     ../DollEngine/Core/KAGParser/KAGParser.cpp \
     ../DollEngine/Core/KAGParser/KAGStorage.cpp \
     ../DollEngine/Core/KAGParser/KAGTag.cpp \
-    ../DollEngine/Core/Painter/Program/GLProgram.cpp \
     ../DollEngine/Core/Painter/Program/GrowProgram.cpp \
     ../DollEngine/Core/Painter/Program/NormalProgram.cpp \
+    ../DollEngine/Core/Painter/Program/PaintShader.cpp \
     ../DollEngine/Core/Painter/PaintEngine.cpp \
-    ../DollEngine/Core/Painter/GLShaderObject.cpp \
     ../DollEngine/Core/Scripts/TjsExtra/TjsDictIterator.cpp \
     ../DollEngine/Core/Scripts/TjsExtra/TjsSet.cpp \
     ../DollEngine/Core/Scripts/JsonParser.cpp \
@@ -181,7 +177,11 @@ SOURCES += main.cpp\
     ../DollEngine/Core/Platform/qt/System-Qt.cpp \
     ../DollEngine/Core/Base/SystemDelegate.cpp \
     ../DollEngine/Core/Platform/qt/Audio-Qt.cpp \
-    ../DollEngine/Core/Platform/gl/PaintEngine-GL.cpp
+    ../DollEngine/Core/Platform/gl/PaintEngine-GL.cpp \
+    ../DollEngine/Core/Painter/Program/PaintProgram.cpp \ 
+    ../DollEngine/Core/Painter/PaintObject/Character.cpp \
+    ../DollEngine/Core/Painter/PaintObject/Painter.cpp \
+    ../DollEngine/Core/Painter/PaintObject/RTT.cpp
 
 HEADERS  += \
     QtConsole.h \
@@ -261,10 +261,7 @@ HEADERS  += \
     ../DollEngine/Lib/tjs2/tjsVariantString.h \
     ../DollEngine/Core/Base/System.h \
     ../DollEngine/Core/Base/Storages.h \
-    ../DollEngine/Core/Component/Character.h \
     ../DollEngine/Core/Component/Component.h \
-    ../DollEngine/Core/Component/Painter.h \
-    ../DollEngine/Core/Component/RTT.h \
     ../DollEngine/Core/Component/Timer.h \
     ../DollEngine/Core/Component/TouchListener.h \
     ../DollEngine/Core/Data/ValueUnits/Color.h \
@@ -281,11 +278,14 @@ HEADERS  += \
     ../DollEngine/Core/KAGParser/KAGParser.h \
     ../DollEngine/Core/KAGParser/KAGStorage.h \
     ../DollEngine/Core/KAGParser/KAGTag.h \
-    ../DollEngine/Core/Painter/Program/GLProgram.h \
     ../DollEngine/Core/Painter/Program/GrowProgram.h \
     ../DollEngine/Core/Painter/Program/NormalProgram.h \
+    ../DollEngine/Core/Painter/Program/PaintShader.h \
+    ../DollEngine/Core/Painter/Program/PaintProgram.h \ 
+    ../DollEngine/Core/Painter/PaintObject/Character.h \
+    ../DollEngine/Core/Painter/PaintObject/Painter.h \
+    ../DollEngine/Core/Painter/PaintObject/RTT.h\
     ../DollEngine/Core/Painter/PaintEngine.h \
-    ../DollEngine/Core/Painter/GLShaderObject.h \
     ../DollEngine/Core/Scripts/TjsExtra/TjsDictIterator.h \
     ../DollEngine/Core/Scripts/TjsExtra/TjsSet.h \
     ../DollEngine/Core/Scripts/JsonParser.h \
@@ -302,7 +302,7 @@ HEADERS  += \
     ../DollEngine/Core/Scripts/TjsExtra/TjsSystem.h \
     ../DollEngine/Core/Scripts/TjsExtra/TjsConsole.h \
     ../DollEngine/Core/Base/SystemDelegate.h \
-    ../DollEngine/Core/Base/Audio.h
+    ../DollEngine/Core/Base/Audio.h 
 
 FORMS  += QtConsole.ui
 

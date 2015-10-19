@@ -24,24 +24,8 @@ NormalProgram::~NormalProgram()
 
 bool NormalProgram::init()
 {
-    GLShaderObject *vshader = new GLShaderObject();
-    vshader->setType(SHADER_TYPE_VERTEX);
-    const char *vsrc = getShader_V();
-    if(!vshader->compileShaderCode(vsrc)) {
-        CHECK_GL_ERROR;
-        return false;
-    }
-    
-    GLShaderObject *fshader = new GLShaderObject();
-    fshader->setType(SHADER_TYPE_FRAGMENT);
-    const char *fsrc = getShader_F();
-    if(!fshader->compileShaderCode(fsrc)) {
-        CHECK_GL_ERROR;
-        return false;
-    }
-    
-    addShader(vshader);
-    addShader(fshader);
+    addShader(SHADER_TYPE_VERTEX,getShader_V());
+    addShader(SHADER_TYPE_FRAGMENT,getShader_F());
     
     PaintEngine::GetInstance()->linkProgram(m_programId);
     

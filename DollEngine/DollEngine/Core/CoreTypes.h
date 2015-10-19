@@ -152,7 +152,7 @@ struct Scale9Config
 };
 
 class SpriteFrame;
-class GLProgram;
+class PaintProgram;
 struct PaintConfig
 {
     Transform* trans;
@@ -163,7 +163,7 @@ struct PaintConfig
     Color* start;
     Color* end;
     int gradVector;
-    GLProgram* program;
+    PaintProgram* program;
     GLenum blendSrc;
     GLenum blendDst;
     bool flipY;

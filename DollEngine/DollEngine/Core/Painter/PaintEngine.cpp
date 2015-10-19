@@ -85,7 +85,7 @@ void PaintEngine::resizeGL(float deviceWidth,float deviceHeight)
     }
 }
 
-void PaintEngine::addProgram(String pm,GLProgram* effect)
+void PaintEngine::addProgram(String pm,PaintProgram* effect)
 {
     if(effect->init()) {
         m_allPrograms[pm] = effect;
@@ -95,7 +95,7 @@ void PaintEngine::addProgram(String pm,GLProgram* effect)
     }
 }
 
-GLProgram* PaintEngine::getProgram(String pm)
+PaintProgram* PaintEngine::getProgram(String pm)
 {
     return m_allPrograms[pm];
 }

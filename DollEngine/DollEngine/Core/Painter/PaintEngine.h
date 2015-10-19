@@ -15,7 +15,7 @@
 DE_BEGIN
 
 class ImageData;
-class GLProgram;
+class PaintProgram;
 
 #ifdef __QT__
 class PaintEngine : public QOpenGLFunctions_4_5_Core
@@ -29,8 +29,8 @@ public:
     ~PaintEngine();
     
 public:
-    void addProgram(String pm,GLProgram*);
-    GLProgram* getProgram(String pm);
+    void addProgram(String pm,PaintProgram*);
+    PaintProgram* getProgram(String pm);
     
     void initializeGL();
     void resizeGL(float desktopw,float desktoph);
@@ -75,7 +75,7 @@ public:
     void drawElements(GLenum mode,GLsizei count,GLenum type,const GLvoid *indices);
     
     void checkError();
-    void checkProgramError(GLProgram* program);
+    void checkProgramError(PaintProgram* program);
 public:
     PROPERTY_RO(Transform*,GlobalTrans,m_globalTrans)
     
@@ -86,7 +86,7 @@ public:
     PROPERTY(float,LayerZoom,m_layerZoom){m_layerZoom=v;}
     
 protected:
-    map<String,GLProgram*> m_allPrograms;
+    map<String,PaintProgram*> m_allPrograms;
     bool m_initialized;
 };
 

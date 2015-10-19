@@ -13,15 +13,15 @@
 #include "SpriteFrame.h"
 #include "GLTexture.h"
 #include "Transform.h"
-#include "GLProgram.h"
+#include "PaintProgram.h"
 
 DE_BEGIN
 
-class Painter : public virtual Component
+class Painter
 {
 public:
     Painter();
-    ~Painter();
+    virtual ~Painter();
 public:
     virtual bool loadImages(const String& path,const String& plist="");
     virtual void freeImage(){SAFF_RELEASE(m_displayFrame);}
@@ -47,7 +47,7 @@ public:
     PROPERTY(GLenum, BlendSrc, m_blendSrc){m_blendSrc=v;NEED_REDRAW;}
     PROPERTY(GLenum, BlendDst, m_blendDst){m_blendDst=v;NEED_REDRAW;}
     PROPERTY(SpriteFrame*, DisplayFrame, m_displayFrame);
-    PROPERTY(GLProgram*, Program, m_program){m_program=v;NEED_REDRAW;}
+    PROPERTY(PaintProgram*, Program, m_program){m_program=v;NEED_REDRAW;}
     PROPERTY(float, PaintWidth, m_paintWidth){m_paintWidth=v;NEED_REDRAW;}
     PROPERTY(float, PaintHeight, m_paintHeight){m_paintHeight=v;NEED_REDRAW;}
     PROPERTY(bool, FlipY, m_flipY){m_flipY=v;}

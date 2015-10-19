@@ -6,6 +6,11 @@ QtWindow::QtWindow()
     
 }
 
+void QtWindow::setTitle(const DE::String& v)
+{
+    m_title = v;
+    setWindowTitle(v.c_nstr());
+}
 
 void QtWindow::initializeGL()
 {

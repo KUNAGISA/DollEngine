@@ -9,7 +9,7 @@
 #include "GLCache.h"
 #include "Transform.h"
 #include "TextFrame.h"
-#include "GLProgram.h"
+#include "PaintProgram.h"
 #include "FileInfo.h"
 #include "System.h"
 

@@ -9,10 +9,10 @@
 #ifndef __DollEngine__NormalProgram__
 #define __DollEngine__NormalProgram__
 
-#include "GLProgram.h"
+#include "PaintProgram.h"
 
 DE_BEGIN
-class NormalProgram : public GLProgram
+class NormalProgram : public PaintProgram
 {
 public:
     NormalProgram();
