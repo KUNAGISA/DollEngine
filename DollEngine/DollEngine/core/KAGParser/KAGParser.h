@@ -10,8 +10,6 @@
 #define __DollEngine__KAGParser__
 
 #include "KAGStorage.h"
-#include "Timer.h"
-#include "Console.h"
 
 DE_BEGIN
 

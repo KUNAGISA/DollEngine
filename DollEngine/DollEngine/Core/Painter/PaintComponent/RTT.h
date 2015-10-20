@@ -9,17 +9,17 @@
 #ifndef __DollEngine__RTT__
 #define __DollEngine__RTT__
 
-#include "Painter.h"
+#include "Image.h"
 
 DE_BEGIN
 
-class RTT:public Painter
+class RTT:public Image
 {
 public:
     RTT();
     ~RTT();
     
-    bool begin(int w,int h,Painter* bg=NULL);
+    bool begin(int w,int h,Image* bg=NULL);
     void end();
 protected:
     DrawFBOId m_FBO;

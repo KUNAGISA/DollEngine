@@ -19,13 +19,12 @@ Character::Character()
 ,m_fontName(DEFFONT)
 ,m_text("")
 {
-    setCompName("Character");
 }
 
 Character::~Character()
 {
     for (TextFrame* frame : m_allTextFrames) {
-        SAFF_RELEASE(frame);
+        delete frame;
     }
     m_allTextFrames.clear();
 }
@@ -64,7 +63,6 @@ void Character::update()
         Transform offst;
         offst.setX(lastX + font->bearingX);
         float y = -(frame->getHeight()-font->bearingY);
-        String fontname = frame->getCacheKey();
         offst.setY(y);
         offst.setAnchorX(0);
         offst.setAnchorY(0);
@@ -93,13 +91,12 @@ void Character::updateText()
     m_textChanged=false;
     
     for (TextFrame* frame : m_allTextFrames) {
-        SAFF_RELEASE(frame);
+        delete frame;
     }
     m_allTextFrames.clear();
     for (int i=0;i!=m_text.size();++i) {
         TextFrame* frame = GLCache::GetInstance()->addText(m_text[i], m_fontName, m_fontSize);
         if (frame) {
-            frame->retain();
             m_allTextFrames.push_back(frame);
         }
     }

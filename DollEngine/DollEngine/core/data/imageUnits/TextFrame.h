@@ -9,11 +9,11 @@
 #ifndef __DollEngine__TextFrame__
 #define __DollEngine__TextFrame__
 
-#include "SpriteFrame.h"
+#include "ImageInfo.h"
 
 DE_BEGIN
 
-class TextFrame : public SpriteFrame
+class TextFrame : public ImageInfo
 {
 public:
     TextFrame();

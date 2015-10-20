@@ -10,6 +10,8 @@
 #include "System.h"
 #include "NormalProgram.h"
 #include "GrowProgram.h"
+#include "Texture.h"
+#include "Storages.h"
 
 DE_BEGIN
 
@@ -100,9 +102,38 @@ PaintProgram* PaintEngine::getProgram(String pm)
     return m_allPrograms[pm];
 }
 
+Texture* PaintEngine::addTexture(const String& path)
+{
+    String fullPath = Storages::GetInstance()->getFullPath(path);
+    if(!fullPath.empty()){
+        EM(ERROR_FILE_NOT_EXIST,path);
+    }
+    auto iter2 = m_allTextures.find(fullPath);
+    Texture* tex=NULL;
+    if(iter2 != m_allTextures.end()) {
+        tex = iter2->second;
+    }
+    else {
+        PictureData image;
+        if(image.loadFromFile(fullPath))
+        {
+            tex = new Texture();
+            tex->initWithImage(&image);
+        }
+        else {
+            EM(ERROR_IMAGE_LOAD_FAILD,path);
+            return NULL;
+        }
+        m_allTextures[fullPath] = tex;
+        tex->setCacheKey(fullPath);
+        tex->retain();
+    }
+    return tex;
+}
+
 void PaintEngine::paint(PaintConfig& config)
 {
-    SpriteFrame* frame = config.frame;
+    ImageInfo* frame = config.frame;
     if (frame &&
         frame->getTexture() &&
         frame->getTexture()->getTextureId() != 0)

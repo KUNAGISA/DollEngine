@@ -8,7 +8,7 @@
 
 #include "RTT.h"
 #include "PaintEngine.h"
-#include "Painter.h"
+#include "Image.h"
 #include "System.h"
 
 DE_BEGIN
@@ -29,13 +29,13 @@ RTT::~RTT()
 }
 
 
-bool RTT::begin(int w,int h,Painter* bg)
+bool RTT::begin(int w,int h,Image* bg)
 {
     if (m_displayFrame) {
         if (m_displayFrame->getTexture()->getWidth() != w ||
             m_displayFrame->getTexture()->getHeight() != h) {
-            SpriteFrame* frame = new SpriteFrame();
-            GLTexture* tex = new GLTexture();
+            ImageInfo* frame = new ImageInfo();
+            Texture* tex = new Texture();
             if(!tex->initWithSize(w, h)){
                 delete tex;
                 delete frame;
@@ -49,8 +49,8 @@ bool RTT::begin(int w,int h,Painter* bg)
         }
     }
     else {
-        SpriteFrame* frame = new SpriteFrame();
-        GLTexture* tex = new GLTexture();
+        ImageInfo* frame = new ImageInfo();
+        Texture* tex = new Texture();
         if(!tex->initWithSize(w, h)){
             delete tex;
             delete frame;

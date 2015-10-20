@@ -1,17 +1,17 @@
 //
-//  ImageData.cpp
+//  PictureData.cpp
 //  DollEngine
 //
 //  Created by DollStudio on 15/4/19.
 //  Copyright (c) 2015年 DollStudio. All rights reserved.
 //
 
-#include "ImageData.h"
+#include "PictureData.h"
 #include "IOData.h"
 
 DE_BEGIN
 
-ImageData::ImageData()
+PictureData::PictureData()
 :m_data(NULL)
 ,m_width(0)
 ,m_height(0)
@@ -20,12 +20,12 @@ ImageData::ImageData()
     
 }
 
-ImageData::~ImageData()
+PictureData::~PictureData()
 {
     SAFF_DELETE(m_data);
 }
 
-ImageData* ImageData::createRoundRect(int r)
+PictureData* PictureData::createRoundRect(int r)
 {
     if (r == 0)
     {
@@ -34,7 +34,7 @@ ImageData* ImageData::createRoundRect(int r)
         memset(buffer, 0xff, sizeof(unsigned int)*4);
         data->setBuffer((unsigned char*)buffer);
         data->setSize((sizeof(unsigned int)/sizeof(unsigned char))*4);
-        ImageData* image = new ImageData();
+        PictureData* image = new PictureData();
         image->setData(data);
         image->setWidth(2);
         image->setHeight(2);
@@ -95,7 +95,7 @@ ImageData* ImageData::createRoundRect(int r)
     }
     data->setBuffer((unsigned char*)buffer);
     data->setSize((sizeof(unsigned int)/sizeof(unsigned char))*width*height);
-    ImageData* image = new ImageData();
+    PictureData* image = new PictureData();
     image->setData(data);
     image->setWidth(width);
     image->setHeight(height);

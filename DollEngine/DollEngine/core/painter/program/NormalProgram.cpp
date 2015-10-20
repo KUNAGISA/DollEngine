@@ -49,7 +49,7 @@ void NormalProgram::actived(PaintConfig& config)
     else {
         quad.setEnd(config.start);
     }
-    const Rect& rect = config.frame->getRect();
+    const Rect& rect = config.frame->getOrginRect();
     if (config.flipY) {
         quad.setFrameRect(rect.x/config.frame->getTexture()->getWidth(),
                           (rect.y+rect.height)/config.frame->getTexture()->getHeight(),
@@ -107,7 +107,7 @@ void NormalProgram::activedWithScale9(PaintConfig& config)
         quad.setPos(vx[iw], vy[ih], vw[iw], vh[ih],config.trans);
         quad.setStart(config.start);
         quad.setEnd(config.start);
-        const Rect& rect = config.frame->getRect();
+        const Rect& rect = config.frame->getOrginRect();
         quad.setFrameRect(rect.x/config.frame->getTexture()->getWidth(),
                           rect.y/config.frame->getTexture()->getHeight(),
                           rect.width/config.frame->getTexture()->getWidth(),

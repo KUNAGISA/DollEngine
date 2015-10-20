@@ -9,7 +9,7 @@
 #ifndef __DollEngine__KAGTag__
 #define __DollEngine__KAGTag__
 
-#include "CoreUnits.h"
+#include "CoreTypes.h"
 
 DE_BEGIN
 

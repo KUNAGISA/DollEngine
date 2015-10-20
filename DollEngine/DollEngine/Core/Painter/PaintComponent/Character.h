@@ -9,14 +9,14 @@
 #ifndef __DollEngine__Character__
 #define __DollEngine__Character__
 
-#include "Painter.h"
+#include "Image.h"
 #include "System.h"
 
 DE_BEGIN
 
 class TextFrame;
 
-class Character : public Painter
+class Character : public Image
 {
 public:
     Character();

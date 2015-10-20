@@ -9,7 +9,7 @@
 #ifndef __DollEngine__Storages__
 #define __DollEngine__Storages__
 
-#include "CoreUnits.h"
+#include "CoreTypes.h"
 
 DE_BEGIN
 

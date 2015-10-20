@@ -1,13 +1,14 @@
 //
-//  Types.cpp
+//  CoreStructs.cpp
 //  DollEngine
 //
 //  Created by DollStudio on 15/4/13.
 //  Copyright (c) 2015年 DollStudio. All rights reserved.
 //
 
-#include "CoreTypes.h"
+#include "CoreStructs.h"
 #include "Transform.h"
+#include "Color.h"
 
 DE_BEGIN
 

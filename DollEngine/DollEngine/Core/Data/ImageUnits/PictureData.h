@@ -1,5 +1,5 @@
 //
-//  ImageData.h
+//  PictureData.h
 //  DollEngine
 //
 //  Created by DollStudio on 15/4/19.
@@ -9,13 +9,13 @@
 #ifndef __DollEngine__Image__
 #define __DollEngine__Image__
 
-#include "CoreUnits.h"
+#include "CoreTypes.h"
 #include "IOData.h"
 
 DE_BEGIN
 
 class IOData;
-class ImageData
+class PictureData
 {
 public:
     enum IMAGE_BUFFER_PITCH
@@ -29,10 +29,10 @@ public:
         IMAGE_BUFFER_PITCH_2 = 2,//0xaa
     };
 public:
-    ImageData();
-    virtual ~ImageData();
+    PictureData();
+    virtual ~PictureData();
     bool loadFromFile(const String& fullPath);
-    static ImageData* createRoundRect(int r);//创建一个圆角矩形的数据
+    static PictureData* createRoundRect(int r);//创建一个圆角矩形的数据
 public:
     PROPERTY(IOData*, Data, m_data){m_data=v;}
     PROPERTY(int, Width, m_width){m_width=v;}

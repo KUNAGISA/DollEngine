@@ -10,7 +10,7 @@
 #define __DollEngine__KAGController__
 
 #include "KAGParser.h"
-#include "CoreUnits.h"
+#include "CoreTypes.h"
 
 DE_BEGIN
 

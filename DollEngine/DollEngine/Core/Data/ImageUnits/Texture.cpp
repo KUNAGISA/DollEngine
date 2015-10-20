@@ -1,19 +1,19 @@
 //
-//  GLTexture.cpp
+//  Texture.cpp
 //  DollEngine
 //
 //  Created by DollStudio on 15/4/19.
 //  Copyright (c) 2015年 DollStudio. All rights reserved.
 //
 
-#include "GLTexture.h"
+#include "Texture.h"
 #include "GLCache.h"
 #include "IOData.h"
 #include "PaintEngine.h"
 
 DE_BEGIN
 
-GLTexture::GLTexture()
+Texture::Texture()
 :m_retainCount(0)
 ,m_height(0)
 ,m_textureId(0)
@@ -22,7 +22,7 @@ GLTexture::GLTexture()
     
 }
 
-GLTexture::~GLTexture()
+Texture::~Texture()
 {
     GLCache::GetInstance()->removeTextureCache(this);
     if (m_textureId) {
@@ -30,7 +30,7 @@ GLTexture::~GLTexture()
     }
 }
 
-bool GLTexture::initWithImage(ImageData* image)
+bool Texture::initWithImage(PictureData* image)
 {
     setTextureId(PaintEngine::GetInstance()->loadTexture(image->getData()->getBuffer(),image->getWidth(),image->getHeight()));
     setWidth(image->getWidth());
@@ -38,7 +38,7 @@ bool GLTexture::initWithImage(ImageData* image)
     return true;
 }
 
-bool GLTexture::initWithSize(int w,int h)
+bool Texture::initWithSize(int w,int h)
 {
     void* data = malloc(w*h*4);
     if (!data) {
@@ -52,12 +52,12 @@ bool GLTexture::initWithSize(int w,int h)
     return true;
 }
 
-void GLTexture::retain()
+void Texture::retain()
 {
     m_retainCount++;
 }
 
-void GLTexture::release()
+void Texture::release()
 {
     m_retainCount--;
     if (m_retainCount <= 0) {
@@ -65,14 +65,14 @@ void GLTexture::release()
     }
 }
 
-void GLTexture::bind(GLenum activeId)
+void Texture::bind(GLenum activeId)
 {
     if (m_textureId) {
         PaintEngine::GetInstance()->bindTexture(activeId,m_textureId);
     }
 }
 
-void GLTexture::setTextureId(GLuint v)
+void Texture::setTextureId(GLuint v)
 {
     if (m_textureId) {
         PaintEngine::GetInstance()->deleteTexture(1, &m_textureId);
@@ -80,7 +80,7 @@ void GLTexture::setTextureId(GLuint v)
     m_textureId = v;
 }
 
-unsigned char* GLTexture::getData()
+unsigned char* Texture::getData()
 {
     unsigned char* data = new unsigned char[getWidth()*getHeight()*4];
     memset(data, 0, getWidth()*getHeight()*4);

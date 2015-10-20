@@ -1,7 +1,7 @@
 #ifndef AUDIO_H
 #define AUDIO_H
 
-#include "CoreUnits.h"
+#include "CoreTypes.h"
 
 
 DE_BEGIN

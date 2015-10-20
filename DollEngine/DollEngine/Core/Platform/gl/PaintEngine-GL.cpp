@@ -1,5 +1,5 @@
 #include "PaintEngine.h"
-#include "CoreUnits.h"
+#include "CoreTypes.h"
 #include "PaintProgram.h"
 
 DE_BEGIN

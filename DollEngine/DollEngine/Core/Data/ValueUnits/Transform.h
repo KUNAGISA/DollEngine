@@ -9,7 +9,7 @@
 #ifndef __DollEngine__Transform__
 #define __DollEngine__Transform__
 
-#include "CoreUnits.h"
+#include "CoreTypes.h"
 
 DE_BEGIN
 

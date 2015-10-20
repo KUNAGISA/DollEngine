@@ -47,7 +47,7 @@ float System::getDesktopHeight()
 }
 
 
-ImageData* System::addText(const String& text,const String& fontName,int fontSize,FontData* fd)
+PictureData* System::addText(const String& text,const String& fontName,int fontSize,FontData* fd)
 {
     return NULL;
 }

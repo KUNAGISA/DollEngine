@@ -9,7 +9,7 @@
 #ifndef __DollEngine__TjsBind__
 #define __DollEngine__TjsBind__
 
-#include "CoreUnits.h"
+#include "CoreTypes.h"
 #include "ScriptEngine.h"
 #include "ncbind.hpp"
 #include "tjs.h"

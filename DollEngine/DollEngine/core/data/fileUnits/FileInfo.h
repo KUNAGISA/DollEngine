@@ -9,7 +9,7 @@
 #ifndef __DollEngine__FileInfo__
 #define __DollEngine__FileInfo__
 
-#include "CoreUnits.h"
+#include "CoreTypes.h"
 #include "IOData.h"
 
 DE_BEGIN

@@ -1,26 +1,26 @@
 //
-//  GLTexture.h
+//  Texture.h
 //  DollEngine
 //
 //  Created by DollStudio on 15/4/19.
 //  Copyright (c) 2015年 DollStudio. All rights reserved.
 //
 
-#ifndef __DollEngine__GLTexture__
-#define __DollEngine__GLTexture__
+#ifndef __DollEngine__Texture__
+#define __DollEngine__Texture__
 
-#include "CoreUnits.h"
-#include "ImageData.h"
+#include "CoreTypes.h"
+#include "PictureData.h"
 
 DE_BEGIN
 
-class GLTexture
+class Texture
 {
 public:
-    GLTexture();
-    virtual ~GLTexture();
+    Texture();
+    virtual ~Texture();
     
-    bool initWithImage(ImageData* img);
+    bool initWithImage(PictureData* img);
     bool initWithSize(int w,int h);
     void retain();
     void release();
@@ -37,4 +37,4 @@ public:
 
 DE_END
 
-#endif /* defined(__DollEngine__GLTexture__) */
+#endif /* defined(__DollEngine__Texture__) */

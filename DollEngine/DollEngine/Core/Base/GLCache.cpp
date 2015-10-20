@@ -35,13 +35,13 @@ TextFrame* GLCache::addText(const String& text,const String& fontName,int fontSi
     
     String key = System::GetKeyByFont(text,fontName,fontSize,0);
     
-    auto iter = m_allSpriteFrames.find(key);
-    if (iter != m_allSpriteFrames.end()) {
+    auto iter = m_allImageInfos.find(key);
+    if (iter != m_allImageInfos.end()) {
         return dynamic_cast<TextFrame*>(iter->second);
     }
     
     TextFrame* frame = new TextFrame();
-    GLTexture* tex= NULL;
+    Texture* tex= NULL;
     auto iter2 = m_allTextures.find(key);
     if(iter2 != m_allTextures.end()) {
         tex = iter2->second;
@@ -50,9 +50,9 @@ TextFrame* GLCache::addText(const String& text,const String& fontName,int fontSi
         
         FontData* fd = new FontData();
         
-        ImageData* image = System::GetInstance()->addText(text, fontName, fontSize,fd);
+        PictureData* image = System::GetInstance()->addText(text, fontName, fontSize,fd);
         
-        tex = new GLTexture();
+        tex = new Texture();
         if(tex->initWithImage(image)) {
             delete image;
         }
@@ -68,28 +68,28 @@ TextFrame* GLCache::addText(const String& text,const String& fontName,int fontSi
 
     frame->setTexture(tex);
     
-    m_allSpriteFrames[key] = frame;
+    m_allImageInfos[key] = frame;
     frame->setCacheKey(key);
     frame->retain();
     return frame;
 }
 
-GLTexture* GLCache::addTexture(const String& path)
+Texture* GLCache::addTexture(const String& path)
 {
     FileInfo file(path);
     if (!file.exist()) {
         EM(ERROR_FILE_NOT_EXIST,path);
     }
     auto iter2 = m_allTextures.find(file.absolutePath());
-    GLTexture* tex=NULL;
+    Texture* tex=NULL;
     if(iter2 != m_allTextures.end()) {
         tex = iter2->second;
     }
     else {
-        ImageData image;
+        PictureData image;
         if(image.loadFromFile(file.absolutePath()))
         {
-            tex = new GLTexture();
+            tex = new Texture();
             tex->initWithImage(&image);
         }
         else {
@@ -103,29 +103,29 @@ GLTexture* GLCache::addTexture(const String& path)
     return tex;
 }
 
-SpriteFrame* GLCache::addFrame(const String& picKey,const String& plist)
+ImageInfo* GLCache::addFrame(const String& picKey,const String& plist)
 {
     if (plist.empty()) {
         FileInfo file(picKey);
         if (!file.exist()) {
             EM(ERROR_FILE_NOT_EXIST,picKey);
         }
-        auto iter = m_allSpriteFrames.find(file.absolutePath());
-        if (iter != m_allSpriteFrames.end()) {
+        auto iter = m_allImageInfos.find(file.absolutePath());
+        if (iter != m_allImageInfos.end()) {
             return iter->second;
         }
         auto iter2 = m_allTextures.find(file.absolutePath());
-        GLTexture* tex=NULL;
+        Texture* tex=NULL;
         if(iter2 != m_allTextures.end()) {
             tex = iter2->second;
         }
         else {
             tex = addTexture(picKey);
         }
-        SpriteFrame* frame = new SpriteFrame();
+        ImageInfo* frame = new ImageInfo();
         frame->setTexture(tex);
         
-        m_allSpriteFrames[file.absolutePath()] = frame;
+        m_allImageInfos[file.absolutePath()] = frame;
         frame->setCacheKey(file.absolutePath());
         frame->retain();
         return frame;
@@ -136,45 +136,45 @@ SpriteFrame* GLCache::addFrame(const String& picKey,const String& plist)
     }
 }
 
-SpriteFrame* GLCache::addFrame(const String& path,const Rect& rect)
+ImageInfo* GLCache::addFrame(const String& path,const Rect& rect)
 {
     FileInfo file(path);
     if (!file.exist()) {
         EM(ERROR_FILE_NOT_EXIST,path);
     }
     String key = String::fromFormat("%s_%d_%d_%d_%d",file.absolutePath().c_nstr(),(int)rect.x,(int)rect.y,(int)rect.width,(int)rect.height);
-    auto iter = m_allSpriteFrames.find(key);
-    if (iter != m_allSpriteFrames.end()) {
+    auto iter = m_allImageInfos.find(key);
+    if (iter != m_allImageInfos.end()) {
         return iter->second;
     }
     auto iter2 = m_allTextures.find(file.absolutePath());
-    GLTexture* tex=NULL;
+    Texture* tex=NULL;
     if(iter2 != m_allTextures.end()) {
         tex = iter2->second;
     }
     else {
         tex = addTexture(file.absolutePath());
     }
-    SpriteFrame* frame = new SpriteFrame();
+    ImageInfo* frame = new ImageInfo();
     frame->setTexture(tex);
     frame->setRect(rect);
-    m_allSpriteFrames[key] = frame;
+    m_allImageInfos[key] = frame;
     frame->setCacheKey(key);
     frame->retain();
     return frame;
 }
 
-GLTexture* GLCache::addTexture(int r)
+Texture* GLCache::addTexture(int r)
 {
     String pickKey = String::fromFormat("round%d",r);
     auto iter2 = m_allTextures.find(pickKey);
-    GLTexture* tex=NULL;
+    Texture* tex=NULL;
     if(iter2 != m_allTextures.end()) {
         tex = iter2->second;
     }
     else {
-        tex = new GLTexture();
-        ImageData* image = ImageData::createRoundRect(r);
+        tex = new Texture();
+        PictureData* image = PictureData::createRoundRect(r);
         tex->initWithImage(image);
         delete image;
         m_allTextures[pickKey] = tex;
@@ -184,37 +184,37 @@ GLTexture* GLCache::addTexture(int r)
     return tex;
 }//创建圆角矩形
 
-SpriteFrame* GLCache::addFrame(int r)
+ImageInfo* GLCache::addFrame(int r)
 {
     String pickKey = String::fromFormat("round%d",r);
-    auto iter = m_allSpriteFrames.find(pickKey);
-    if (iter != m_allSpriteFrames.end()) {
+    auto iter = m_allImageInfos.find(pickKey);
+    if (iter != m_allImageInfos.end()) {
         return iter->second;
     }
     auto iter2 = m_allTextures.find(pickKey);
-    GLTexture* tex=NULL;
+    Texture* tex=NULL;
     if(iter2 != m_allTextures.end()) {
         tex = iter2->second;
     }
     else {
         tex = addTexture(r);
     }
-    SpriteFrame* frame = new SpriteFrame();
+    ImageInfo* frame = new ImageInfo();
     frame->setTexture(tex);
     
-    m_allSpriteFrames[pickKey] = frame;
+    m_allImageInfos[pickKey] = frame;
     frame->setCacheKey(pickKey);
     frame->retain();
     return frame;
     
 }//创建圆角矩形
 
-void GLCache::removeSpriteFrameCache(SpriteFrame* frame)
+void GLCache::removeImageInfoCache(ImageInfo* frame)
 {
-    m_allSpriteFrames.erase(frame->getCacheKey());
+    m_allImageInfos.erase(frame->getCacheKey());
 }
 
-void GLCache::removeTextureCache(GLTexture* frame)
+void GLCache::removeTextureCache(Texture* frame)
 {
     m_allTextures.erase(frame->getCacheKey());
 }

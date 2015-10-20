@@ -1,52 +1,46 @@
 //
-//  Painter.h
+//  Image.h
 //  DollEngine
 //
 //  Created by DollStudio on 15/4/26.
 //  Copyright (c) 2015年 DollStudio. All rights reserved.
 //
 
-#ifndef __DollEngine__Painter__
-#define __DollEngine__Painter__
+#ifndef __DollEngine__Image__
+#define __DollEngine__Image__
 
-#include "Component.h"
-#include "SpriteFrame.h"
-#include "GLTexture.h"
+#include "System.h"
+#include "ImageInfo.h"
+#include "Texture.h"
 #include "Transform.h"
 #include "PaintProgram.h"
 
 DE_BEGIN
 
-class Painter
+class Image
 {
 public:
-    Painter();
-    virtual ~Painter();
+    Image();
+    virtual ~Image();
 public:
     virtual bool loadImages(const String& path,const String& plist="");
-    virtual void freeImage(){SAFF_RELEASE(m_displayFrame);}
-    virtual bool setMargin(float l,float r,float t,float b);
-    virtual bool loadImageWithMargin(const String& path,float l,float r,float t,float b);
-    bool loadSize(int w,int h,int r);
-    virtual void setSizeToImageSize();
-    virtual void setSizeToOrginSize();
-    virtual void setProgram(const String& name);
+    virtual void freeImage(){SAFF_DELETE(m_displayFrame);}
+    void setDrawSize(float w,float h);
+    void clipRect(float x,float y,float w,float h);
+    void setScale9(float l,float t,float r,float b);
+    void setSizeToImageSize();
+    void setIsScale9(bool v);
+    void setProgram(const String& name);
 public:
     void update();
     void updateWithScale9();
     void updateWithFrame();
     void setGradientColor(uint32_t start,uint32_t end,int vector);
     void setOpacity(GLubyte o);
-    PROPERTY(bool, Scale9, m_scale9){m_scale9=v;NEED_REDRAW;}
-    PROPERTY(float, Scale9L, m_scale9L){m_scale9L=v;NEED_REDRAW;}
-    PROPERTY(float, Scale9T, m_scale9T){m_scale9T=v;NEED_REDRAW;}
-    PROPERTY(float, Scale9R, m_scale9R){m_scale9R=v;NEED_REDRAW;}
-    PROPERTY(float, Scale9B, m_scale9B){m_scale9B=v;NEED_REDRAW;}
-    PROPERTY_RO(bool, ColorRect, m_colorRect);
     PROPERTY_RO(bool, Gradient, m_gradient);
     PROPERTY(GLenum, BlendSrc, m_blendSrc){m_blendSrc=v;NEED_REDRAW;}
     PROPERTY(GLenum, BlendDst, m_blendDst){m_blendDst=v;NEED_REDRAW;}
-    PROPERTY(SpriteFrame*, DisplayFrame, m_displayFrame);
+    PROPERTY(ImageInfo*, DisplayFrame, m_displayFrame);
     PROPERTY(PaintProgram*, Program, m_program){m_program=v;NEED_REDRAW;}
     PROPERTY(float, PaintWidth, m_paintWidth){m_paintWidth=v;NEED_REDRAW;}
     PROPERTY(float, PaintHeight, m_paintHeight){m_paintHeight=v;NEED_REDRAW;}
@@ -63,4 +57,4 @@ protected:
 
 DE_END
 
-#endif /* defined(__DollEngine__Painter__) */
+#endif /* defined(__DollEngine__Image__) */

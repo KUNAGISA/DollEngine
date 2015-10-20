@@ -9,13 +9,14 @@
 #ifndef __DEPainter__PaintEngine__
 #define __DEPainter__PaintEngine__
 
-#include "CoreUnits.h"
+#include "CoreTypes.h"
 #include "Transform.h"
 
 DE_BEGIN
 
-class ImageData;
+class PictureData;
 class PaintProgram;
+class Texture;
 
 #ifdef __QT__
 class PaintEngine : public QOpenGLFunctions_4_5_Core
@@ -29,12 +30,15 @@ public:
     ~PaintEngine();
     
 public:
-    void addProgram(String pm,PaintProgram*);
-    PaintProgram* getProgram(String pm);
     
     void initializeGL();
     void resizeGL(float desktopw,float desktoph);
     void paint(PaintConfig& config);
+    
+public:
+    void addProgram(String pm,PaintProgram*);
+    PaintProgram* getProgram(String pm);
+    Texture* addTexture(const String& path);
     
 public:
     void initialize();
@@ -87,6 +91,7 @@ public:
     
 protected:
     map<String,PaintProgram*> m_allPrograms;
+    map<String,Texture*> m_allTextures;
     bool m_initialized;
 };
 

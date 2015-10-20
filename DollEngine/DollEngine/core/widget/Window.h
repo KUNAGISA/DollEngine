@@ -9,7 +9,7 @@
 #ifndef __DollEngine__Window__
 #define __DollEngine__Window__
 
-#include "CoreUnits.h"
+#include "CoreTypes.h"
 
 DE_BEGIN
 

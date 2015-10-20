@@ -1,12 +1,12 @@
 //
-//  Painter.cpp
+//  ColorRect.cpp
 //  DollEngine
 //
 //  Created by DollStudio on 15/4/26.
 //  Copyright (c) 2015年 DollStudio. All rights reserved.
 //
 
-#include "Painter.h"
+#include "ColorRect.h"
 #include "GLCache.h"
 #include "System.h"
 #include "PaintEngine.h"
@@ -14,7 +14,7 @@
 
 DE_BEGIN
 
-Painter::Painter()
+ColorRect::ColorRect()
 :m_displayFrame(NULL)
 ,m_scale9(false)
 ,m_colorRect(false)
@@ -34,19 +34,17 @@ Painter::Painter()
 ,m_endColor(0xffffffff)
 ,m_endOpacity(0xff)
 {
-    setCompName("Painter");
-    m_type = COMP_PAINT;
     setProgram("normal");
 }
 
-Painter::~Painter()
+ColorRect::~ColorRect()
 {
-    SAFF_RELEASE(m_displayFrame);
+    delete m_displayFrame;
 }
 
-bool Painter::loadImages(const String& path,const String& plist)
+bool ColorRect::loadImages(const String& path,const String& plist)
 {
-    SpriteFrame* frame = GLCache::GetInstance()->addFrame(path);
+    ImageInfo* frame = GLCache::GetInstance()->addFrame(path);
     if (frame) {
         m_colorRect = false;
         frame->saveRect();
@@ -60,13 +58,13 @@ bool Painter::loadImages(const String& path,const String& plist)
     }
 }
 
-bool Painter::setMargin(float l,float r,float t,float b)
+bool ColorRect::setMargin(float l,float r,float t,float b)
 {
     if (!m_displayFrame) {
         return false;
     }
     if (!m_displayFrame->getCacheKey().empty()) {
-        SpriteFrame* frame = new SpriteFrame();
+        ImageInfo* frame = new ImageInfo();
         frame->setTexture(m_displayFrame->getTexture());
         frame->setRect(m_displayFrame->getRect());
         frame->saveRect();
@@ -82,9 +80,9 @@ bool Painter::setMargin(float l,float r,float t,float b)
     return true;
 }
 
-bool Painter::loadImageWithMargin(const String& path,float l,float r,float t,float b)
+bool ColorRect::loadImageWithMargin(const String& path,float l,float r,float t,float b)
 {
-    SpriteFrame* frame = GLCache::GetInstance()->addFrame(path);
+    ImageInfo* frame = GLCache::GetInstance()->addFrame(path);
     Rect rect(l*frame->getWidth(),
               t*frame->getHeight(),
               (1-l-r)*frame->getWidth(),
@@ -103,9 +101,9 @@ bool Painter::loadImageWithMargin(const String& path,float l,float r,float t,flo
     }
 }
 
-bool Painter::loadSize(int w,int h,int r)
+bool ColorRect::loadSize(int w,int h,int r)
 {
-    SpriteFrame* frame = GLCache::GetInstance()->addFrame(r);
+    ImageInfo* frame = GLCache::GetInstance()->addFrame(r);
     m_colorRect=true;
     m_paintWidth = w;
     m_paintHeight = h;
@@ -121,7 +119,7 @@ bool Painter::loadSize(int w,int h,int r)
     }
 }
 
-void Painter::setSizeToOrginSize()
+void ColorRect::setSizeToOrginSize()
 {
     if (m_displayFrame) {
         m_paintWidth = m_displayFrame->getOrginWidth();
@@ -129,7 +127,7 @@ void Painter::setSizeToOrginSize()
     }
 }
 
-void Painter::setSizeToImageSize()
+void ColorRect::setSizeToImageSize()
 {
     if (m_colorRect) {
         
@@ -151,27 +149,26 @@ void Painter::setSizeToImageSize()
 }
 
 
-void Painter::setProgram(const String& name)
+void ColorRect::setProgram(const String& name)
 {
     m_program = PaintEngine::GetInstance()->getProgram(name);
 }
 
-void Painter::setDisplayFrame(DE::SpriteFrame *v)
+void ColorRect::setDisplayFrame(DE::ImageInfo *v)
 {
-    SAFF_RELEASE(m_displayFrame);
+    SAFF_DELETE(m_displayFrame);
     m_displayFrame = v;
-    SAFF_RETAIN(m_displayFrame);
 }
 
 
-void Painter::setColor(uint32_t color)
+void ColorRect::setColor(uint32_t color)
 {
     m_gradient = false;
     m_color = color;
     NEED_REDRAW;
 }
 
-void Painter::setGradientColor(uint32_t start,uint32_t end,int vector)
+void ColorRect::setGradientColor(uint32_t start,uint32_t end,int vector)
 {
     m_gradient = true;
     m_realColor.vector = vector;
@@ -180,7 +177,7 @@ void Painter::setGradientColor(uint32_t start,uint32_t end,int vector)
     NEED_REDRAW;
 }
 
-void Painter::setOpacity(GLubyte o)
+void ColorRect::setOpacity(GLubyte o)
 {
     m_opacity = o;
     if (m_gradient) {
@@ -189,7 +186,7 @@ void Painter::setOpacity(GLubyte o)
     NEED_REDRAW;
 }
 
-void Painter::update()
+void ColorRect::update()
 {
     if (!m_displayFrame) {
         return;
@@ -202,7 +199,7 @@ void Painter::update()
     }
 }
 
-void Painter::updateWithScale9()
+void ColorRect::updateWithScale9()
 {
     PaintConfig config;
     flushPaintConfig(config);
@@ -211,14 +208,14 @@ void Painter::updateWithScale9()
     PaintEngine::GetInstance()->paint(config);
 }
 
-void Painter::updateWithFrame()
+void ColorRect::updateWithFrame()
 {
     PaintConfig config;
     flushPaintConfig(config);
     PaintEngine::GetInstance()->paint(config);
 }
 
-void Painter::flushPaintConfig(PaintConfig& config)
+void ColorRect::flushPaintConfig(PaintConfig& config)
 {
     config.frame = m_displayFrame;
     m_realColor.set(m_color);

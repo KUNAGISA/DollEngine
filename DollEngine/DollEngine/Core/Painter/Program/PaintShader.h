@@ -9,7 +9,7 @@
 #ifndef __DollEngine__PaintShader__
 #define __DollEngine__PaintShader__
 
-#include "CoreUnits.h"
+#include "CoreTypes.h"
 
 DE_BEGIN
 

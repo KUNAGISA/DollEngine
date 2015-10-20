@@ -9,10 +9,10 @@
 #ifndef __DollEngine__PaintProgram__
 #define __DollEngine__PaintProgram__
 
-#include "CoreUnits.h"
+#include "CoreTypes.h"
 #include "PaintShader.h"
 #include "Transform.h"
-#include "SpriteFrame.h"
+#include "ImageInfo.h"
 
 DE_BEGIN
 

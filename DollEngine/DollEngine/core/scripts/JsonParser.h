@@ -9,7 +9,7 @@
 #ifndef __DollEngine__JsonParser__
 #define __DollEngine__JsonParser__
 
-#include "CoreUnits.h"
+#include "CoreTypes.h"
 #include "TjsBind.h"
 
 DE_BEGIN

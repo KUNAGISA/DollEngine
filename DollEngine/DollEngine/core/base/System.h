@@ -9,12 +9,12 @@
 #ifndef __DollEngine__System__
 #define __DollEngine__System__
 
-#include "CoreUnits.h"
+#include "CoreTypes.h"
 #include "SystemDelegate.h"
 
 DE_BEGIN
 
-class ImageData;
+class PictureData;
 
 class System
 {
@@ -27,7 +27,7 @@ public:
     void startup(); //脚本入口
     
     
-    ImageData* addText(const String& text,const String& fontName,int fontSize,FontData* fd);
+    PictureData* addText(const String& text,const String& fontName,int fontSize,FontData* fd);
     String addFont(const String& filePath);
     void* getFont(const String& fontName);
     void removeFont(const String& filePath);
