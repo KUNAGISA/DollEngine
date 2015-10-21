@@ -39,18 +39,15 @@ public:
     PROPERTY_RO(GLuint, ProgramId, m_programId)
     
     virtual bool init(){return false;}
-    virtual void actived(PaintConfig& config){}
-    virtual void draw();
+    virtual void beforeDraw(PaintConfig& config){}
 protected:
     vector<PaintShader*> m_shaders;
     map<const char*, GLint> m_allUniformIndex;
     
-    vector<GLDrawData> m_quads;
-    vector<GLushort> m_indexs;
     
-    GLuint              m_pBuffersVBO[2]; //0: vertex  1: indices
-    vector<GLushort>           m_pIndices;
-    GLuint              m_uVAOname;
+//    GLuint              m_pBuffersVBO[2]; //0: vertex  1: indices
+//    vector<GLushort>           m_pIndices;
+//    GLuint              m_uVAOname;
 };
 
 DE_END

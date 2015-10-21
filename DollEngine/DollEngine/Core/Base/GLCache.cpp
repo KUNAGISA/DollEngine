@@ -21,56 +21,54 @@ GLCache::GLCache()
 
 TextFrame* GLCache::addText(const String& text,const String& fontName,int fontSize)
 {
-    String _fontName;
-    if (fontName.empty() || text.empty()) {
-        _fontName = DEFFONT;
-    }
-    else {
-        _fontName = fontName;
-    }
+//    String _fontName;
+//    if (fontName.empty() || text.empty()) {
+//        _fontName = DEFFONT;
+//    }
+//    else {
+//        _fontName = fontName;
+//    }
     
-    if (fontSize == 0 || text.empty()) {
-        fontSize = DEFFONTSIZE;
-    }
+//    if (fontSize == 0 || text.empty()) {
+//        fontSize = DEFFONTSIZE;
+//    }
     
-    String key = System::GetKeyByFont(text,fontName,fontSize,0);
+//    String key = System::GetKeyByFont(text,fontName,fontSize,0);
     
-    auto iter = m_allImageInfos.find(key);
-    if (iter != m_allImageInfos.end()) {
-        return dynamic_cast<TextFrame*>(iter->second);
-    }
+//    auto iter = m_allImageInfos.find(key);
+//    if (iter != m_allImageInfos.end()) {
+//        return dynamic_cast<TextFrame*>(iter->second);
+//    }
     
     TextFrame* frame = new TextFrame();
-    Texture* tex= NULL;
-    auto iter2 = m_allTextures.find(key);
-    if(iter2 != m_allTextures.end()) {
-        tex = iter2->second;
-    }
-    else {
+//    Texture* tex= NULL;
+//    auto iter2 = m_allTextures.find(key);
+//    if(iter2 != m_allTextures.end()) {
+//        tex = iter2->second;
+//    }
+//    else {
         
-        FontData* fd = new FontData();
+//        FontData* fd = new FontData();
         
-        PictureData* image = System::GetInstance()->addText(text, fontName, fontSize,fd);
+//        PictureData* image = System::GetInstance()->addText(text, fontName, fontSize,fd);
         
-        tex = new Texture();
-        if(tex->initWithImage(image)) {
-            delete image;
-        }
-        else {
-            delete image;
-            delete tex;
-            delete frame;
-            delete fd;
-            return NULL;
-        }
-        frame->setFont(fd);
-    }
+//        tex = new Texture();
+//        if(tex->initWithImage(image)) {
+//            delete image;
+//        }
+//        else {
+//            delete image;
+//            delete tex;
+//            delete frame;
+//            delete fd;
+//            return NULL;
+//        }
+//        frame->setFont(fd);
+//    }
 
-    frame->setTexture(tex);
+//    frame->setTexture(tex);
     
-    m_allImageInfos[key] = frame;
-    frame->setCacheKey(key);
-    frame->retain();
+//    m_allImageInfos[key] = frame;
     return frame;
 }
 
@@ -106,28 +104,26 @@ Texture* GLCache::addTexture(const String& path)
 ImageInfo* GLCache::addFrame(const String& picKey,const String& plist)
 {
     if (plist.empty()) {
-        FileInfo file(picKey);
-        if (!file.exist()) {
-            EM(ERROR_FILE_NOT_EXIST,picKey);
-        }
-        auto iter = m_allImageInfos.find(file.absolutePath());
-        if (iter != m_allImageInfos.end()) {
-            return iter->second;
-        }
-        auto iter2 = m_allTextures.find(file.absolutePath());
-        Texture* tex=NULL;
-        if(iter2 != m_allTextures.end()) {
-            tex = iter2->second;
-        }
-        else {
-            tex = addTexture(picKey);
-        }
+//        FileInfo file(picKey);
+//        if (!file.exist()) {
+//            EM(ERROR_FILE_NOT_EXIST,picKey);
+//        }
+//        auto iter = m_allImageInfos.find(file.absolutePath());
+//        if (iter != m_allImageInfos.end()) {
+//            return iter->second;
+//        }
+//        auto iter2 = m_allTextures.find(file.absolutePath());
+//        Texture* tex=NULL;
+//        if(iter2 != m_allTextures.end()) {
+//            tex = iter2->second;
+//        }
+//        else {
+//            tex = addTexture(picKey);
+//        }
         ImageInfo* frame = new ImageInfo();
-        frame->setTexture(tex);
+//        frame->setTexture(tex);
         
-        m_allImageInfos[file.absolutePath()] = frame;
-        frame->setCacheKey(file.absolutePath());
-        frame->retain();
+//        m_allImageInfos[file.absolutePath()] = frame;
         return frame;
     }
     else {
@@ -138,29 +134,27 @@ ImageInfo* GLCache::addFrame(const String& picKey,const String& plist)
 
 ImageInfo* GLCache::addFrame(const String& path,const Rect& rect)
 {
-    FileInfo file(path);
-    if (!file.exist()) {
-        EM(ERROR_FILE_NOT_EXIST,path);
-    }
-    String key = String::fromFormat("%s_%d_%d_%d_%d",file.absolutePath().c_nstr(),(int)rect.x,(int)rect.y,(int)rect.width,(int)rect.height);
-    auto iter = m_allImageInfos.find(key);
-    if (iter != m_allImageInfos.end()) {
-        return iter->second;
-    }
-    auto iter2 = m_allTextures.find(file.absolutePath());
-    Texture* tex=NULL;
-    if(iter2 != m_allTextures.end()) {
-        tex = iter2->second;
-    }
-    else {
-        tex = addTexture(file.absolutePath());
-    }
+//    FileInfo file(path);
+//    if (!file.exist()) {
+//        EM(ERROR_FILE_NOT_EXIST,path);
+//    }
+//    String key = String::fromFormat("%s_%d_%d_%d_%d",file.absolutePath().c_nstr(),(int)rect.x,(int)rect.y,(int)rect.width,(int)rect.height);
+//    auto iter = m_allImageInfos.find(key);
+//    if (iter != m_allImageInfos.end()) {
+//        return iter->second;
+//    }
+//    auto iter2 = m_allTextures.find(file.absolutePath());
+//    Texture* tex=NULL;
+//    if(iter2 != m_allTextures.end()) {
+//        tex = iter2->second;
+//    }
+//    else {
+//        tex = addTexture(file.absolutePath());
+//    }
     ImageInfo* frame = new ImageInfo();
-    frame->setTexture(tex);
-    frame->setRect(rect);
-    m_allImageInfos[key] = frame;
-    frame->setCacheKey(key);
-    frame->retain();
+//    frame->setTexture(tex);
+//    frame->setOrginRect(rect);
+//    m_allImageInfos[key] = frame;
     return frame;
 }
 
@@ -169,49 +163,45 @@ Texture* GLCache::addTexture(int r)
     String pickKey = String::fromFormat("round%d",r);
     auto iter2 = m_allTextures.find(pickKey);
     Texture* tex=NULL;
-    if(iter2 != m_allTextures.end()) {
-        tex = iter2->second;
-    }
-    else {
-        tex = new Texture();
-        PictureData* image = PictureData::createRoundRect(r);
-        tex->initWithImage(image);
-        delete image;
-        m_allTextures[pickKey] = tex;
-        tex->setCacheKey(pickKey);
-        tex->retain();
-    }
+//    if(iter2 != m_allTextures.end()) {
+//        tex = iter2->second;
+//    }
+//    else {
+//        tex = new Texture();
+//        PictureData* image = PictureData::createRoundRect(r);
+//        tex->initWithImage(image);
+//        delete image;
+//        m_allTextures[pickKey] = tex;
+//        tex->setCacheKey(pickKey);
+//        tex->retain();
+//    }
     return tex;
 }//创建圆角矩形
 
 ImageInfo* GLCache::addFrame(int r)
 {
-    String pickKey = String::fromFormat("round%d",r);
-    auto iter = m_allImageInfos.find(pickKey);
-    if (iter != m_allImageInfos.end()) {
-        return iter->second;
-    }
-    auto iter2 = m_allTextures.find(pickKey);
+//    String pickKey = String::fromFormat("round%d",r);
+//    auto iter = m_allImageInfos.find(pickKey);
+//    if (iter != m_allImageInfos.end()) {
+//        return iter->second;
+//    }
+//    auto iter2 = m_allTextures.find(pickKey);
     Texture* tex=NULL;
-    if(iter2 != m_allTextures.end()) {
-        tex = iter2->second;
-    }
-    else {
-        tex = addTexture(r);
-    }
+//    if(iter2 != m_allTextures.end()) {
+//        tex = iter2->second;
+//    }
+//    else {
+//        tex = addTexture(r);
+//    }
     ImageInfo* frame = new ImageInfo();
     frame->setTexture(tex);
     
-    m_allImageInfos[pickKey] = frame;
-    frame->setCacheKey(pickKey);
-    frame->retain();
     return frame;
     
 }//创建圆角矩形
 
 void GLCache::removeImageInfoCache(ImageInfo* frame)
 {
-    m_allImageInfos.erase(frame->getCacheKey());
 }
 
 void GLCache::removeTextureCache(Texture* frame)

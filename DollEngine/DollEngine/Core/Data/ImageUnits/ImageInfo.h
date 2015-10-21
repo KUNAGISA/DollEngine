@@ -26,13 +26,14 @@ public:
     virtual void setOrginRect(float x,float y,float w,float h);
     float getWidth(){return m_orginRect.width;}
     float getHeight(){return m_orginRect.height;}
-    void toTexCoord(GLfloat* v);
+    void toDrawData(GLDrawData& data,DrawVertex& vex,bool flipX=false,bool flipY=false);
     
     PROPERTY(Texture*,Texture,m_texture);
     PROPERTY(bool, IsScale9,m_isScale9){m_isScale9=v;}
     PROPERTY_CONST(Scale9Config, Scale9, m_scale9){m_scale9=v;}
     PROPERTY_CONST(Size, DrawSize,m_drawSize){m_drawSize=v;}
     PROPERTY_CONST(Rect, OrginRect,m_orginRect){m_orginRect=v;}
+    PROPERTY_CONST(GradientColor, Color,m_color){m_color=v;}
     
 };
 DE_END

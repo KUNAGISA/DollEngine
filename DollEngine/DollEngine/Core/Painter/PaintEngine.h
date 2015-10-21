@@ -33,6 +33,7 @@ public:
     
     void initializeGL();
     void resizeGL(float desktopw,float desktoph);
+    void pushDrawData(GLDrawData& data);
     void paint(PaintConfig& config);
     
 public:
@@ -42,6 +43,7 @@ public:
     
 public:
     void initialize();
+    void checkDrawElement();
     void blendFunc(DrawBlendId src,DrawBlendId dst);
     
     void deleteFBO(DrawSizeI n, const DrawFBOId * framebuffers);
@@ -93,6 +95,8 @@ protected:
     map<String,PaintProgram*> m_allPrograms;
     map<String,Texture*> m_allTextures;
     bool m_initialized;
+    vector<GLDrawData> m_quads;
+    vector<GLushort> m_indexs;
 };
 
 DE_END

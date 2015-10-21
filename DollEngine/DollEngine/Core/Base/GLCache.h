@@ -34,7 +34,6 @@ public:
     
 protected:
     map<String,String > m_allPlist;
-    map<String,ImageInfo*> m_allImageInfos;
     map<String,Texture*> m_allTextures;
     
 };

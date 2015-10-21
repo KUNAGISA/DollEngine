@@ -29,12 +29,14 @@ void PaintEngine::initialize()
     
 }
 
+
 static DrawBlendId s_blendingSource = -1;
 static DrawBlendId s_blendingDest = -1;
 void PaintEngine::blendFunc(DrawBlendId src,DrawBlendId dst)
 {
     if (src != s_blendingSource || dst != s_blendingDest)
     {
+        checkDrawElement();
         s_blendingSource = src;
         s_blendingDest = dst;
         if (src == GL_ONE && dst == GL_ZERO)
@@ -106,6 +108,7 @@ DrawTexId PaintEngine::loadTexture(void* data, int width,int height)
     return m_textureId;
 }
 
+static DrawActiveTexId g_aid = GL_TEXTURE0;
 void PaintEngine::bindTexture(DrawActiveTexId aid,DrawTexId bid)
 {
     glActiveTexture(aid);
@@ -147,6 +150,7 @@ static GLuint s_currentProgramId=0;
 void PaintEngine::useProgram(DrawPrgId pId)
 {
     if (s_currentProgramId != pId) {
+        checkDrawElement();
         s_currentProgramId = pId;
         glUseProgram(pId);
         CHECK_GL_ERROR;

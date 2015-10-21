@@ -59,22 +59,27 @@ void ImageInfo::setOrginRect(float x,float y,float w,float h)
     m_orginRect.height = h;
 }
 
-void ImageInfo::toTexCoord(GLfloat* glCoord)
+void ImageInfo::toDrawData(GLDrawData& data,DrawVertex& vex,bool flipX,bool flipY)
 {
-    if (m_texture)
-    {
-        glCoord[0] = m_orginRect.x/m_texture->getWidth();
-        glCoord[1] = m_orginRect.y/m_texture->getHeight();
-        glCoord[2] = glCoord[0];
-        glCoord[3] = (m_orginRect.x+m_orginRect.height)/m_texture->getHeight();
-        glCoord[4] = (m_orginRect.y+m_orginRect.width)/m_texture->getWidth();
-        glCoord[5] = glCoord[3];
-        glCoord[6] = glCoord[4];
-        glCoord[7] = glCoord[1];
-    }
-    else {
-        memset(glCoord,0,sizeof(GLfloat*)*8);
-    }
+    //Vertex
+    
+    //Color
+    
+    //UV
+    float l=m_orginRect.x/getTexture()->getWidth();
+    float r=(m_orginRect.x+m_orginRect.width)/getTexture()->getWidth();
+    float t=flipY ?
+                (m_orginRect.y+m_orginRect.height)/getTexture()->getHeight():
+                m_orginRect.y/getTexture()->getHeight();
+    float b=flipY ?
+                m_orginRect.y/getTexture()->getHeight():
+                (m_orginRect.y+m_orginRect.height)/getTexture()->getHeight();
+    
+    data.lt.uv.v1 = data.lb.uv.v1 = l;
+    data.rt.uv.v1 = data.rb.uv.v1 = r;
+    data.lt.uv.v2 = data.rt.uv.v2 = t;
+    data.lb.uv.v2 = data.rb.uv.v2 = b;
+    
 }
 
 void ImageInfo::setTexture(Texture* tex)

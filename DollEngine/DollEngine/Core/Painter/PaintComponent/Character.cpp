@@ -33,17 +33,17 @@ void Character::setSizeToImageSize()
 {
     updateText();
     
-    if (m_allTextFrames.size() > 0) {
-        m_paintHeight = m_fontSize;
-        m_paintWidth = 0;
-        for (TextFrame* frame : m_allTextFrames) {
-            m_paintWidth += frame->getFont()->advance;
-        }
-    }
-    else {
-        m_paintWidth = 0;
-        m_paintHeight = 0;
-    }
+//    if (m_allTextFrames.size() > 0) {
+//        m_paintHeight = m_fontSize;
+//        m_paintWidth = 0;
+//        for (TextFrame* frame : m_allTextFrames) {
+//            m_paintWidth += frame->getFont()->advance;
+//        }
+//    }
+//    else {
+//        m_paintWidth = 0;
+//        m_paintHeight = 0;
+//    }
 }
 
 void Character::update()
@@ -74,9 +74,9 @@ void Character::update()
         PaintConfig config;
         flushPaintConfig(config);
         config.trans = &orgin;
-        config.frame = frame;
-        config.width = frame->getWidth();
-        config.height = frame->getHeight();
+        config.info = frame;
+//        config.width = frame->getWidth();
+//        config.height = frame->getHeight();
         PaintEngine::GetInstance()->paint(config);
         lastX += frame->getFont()->advance;
     }

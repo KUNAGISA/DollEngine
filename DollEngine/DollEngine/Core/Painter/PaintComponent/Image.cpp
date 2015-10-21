@@ -15,16 +15,14 @@
 DE_BEGIN
 
 Image::Image()
-:m_displayFrame(NULL)
-,m_paintHeight(0)
-,m_paintWidth(0)
+:m_info(NULL)
 ,m_blendSrc(GL_ONE)
 ,m_blendDst(GL_ONE_MINUS_SRC_ALPHA)
-,m_gradient(false)
-,m_color(0xffffffff)
 ,m_program(NULL)
 ,m_flipY(false)
-,m_opacity(0xff)
+,m_flipX(false)
+,m_startColor(0xffffffff)
+,m_startOpacity(0xff)
 ,m_endColor(0xffffffff)
 ,m_endOpacity(0xff)
 {
@@ -33,33 +31,42 @@ Image::Image()
 
 Image::~Image()
 {
-    SAFF_DELETE(m_displayFrame);
+    SAFF_DELETE(m_info);
 }
 
 bool Image::loadImages(const String& path,const String& plist)
 {
-    ImageInfo* frame = new ImageInfo();
-    if(frame->loadWithFile(path,plist)) {
-        setDisplayFrame(frame);
+    ImageInfo* info = new ImageInfo();
+    if(info->loadWithFile(path,plist)) {
+        setInfo(info);
         setSizeToImageSize();
         NEED_REDRAW;
         return true;
     }
     else {
-        delete frame;
+        delete info;
         return false;
     }
 }
 void Image::setDrawSize(float w,float h)
 {
-    if(m_displayFrame){
-        m_displayFrame->setDrawSize(w,h);
+    if(!m_info){
+        EM("尚未载入图片");
+        return;
     }
+    m_info->setDrawSize(w,h);
 }
 
 void Image::clipRect(float x,float y,float w,float h)
 {
-    
+    if(!m_info){
+        EM("尚未载入图片");
+        return;
+    }
+    if(w + x > m_info->getWidth()) w = m_info->getWidth()-x;
+    if(h + y > m_info->getHeight()) h = m_info->getHeight()-y;
+    Rect orgin = m_info->getOrginRect();
+    m_info->setOrginRect(orgin.x+x,orgin.y+y,w,h);
 }
 
 void Image::setScale9(float l,float t,float r,float b)
@@ -69,15 +76,15 @@ void Image::setScale9(float l,float t,float r,float b)
 
 void Image::setSizeToImageSize()
 {
-    if(m_displayFrame){
-        m_displayFrame->setDrawSize(m_displayFrame->getWidth(),m_displayFrame->getHeight());
+    if(m_info){
+        m_info->setDrawSize(m_info->getWidth(),m_info->getHeight());
     }
 }
 
 void Image::setIsScale9(bool v)
 {
-    if(m_displayFrame){
-        m_displayFrame->setIsScale9(v);
+    if(m_info){
+        m_info->setIsScale9(v);
     }
 }
 
@@ -86,98 +93,31 @@ void Image::setProgram(const String& name)
     m_program = PaintEngine::GetInstance()->getProgram(name);
 }
 
-void Image::setDisplayFrame(DE::ImageInfo *v)
+void Image::setInfo(DE::ImageInfo *v)
 {
-    SAFF_DELETE(m_displayFrame);
-    m_displayFrame = v;
+    SAFF_DELETE(m_info);
+    m_info = v;
 }
 
-
-void Image::setColor(uint32_t color)
+void Image::draw(Transform* trans)
 {
-    m_gradient = false;
-    m_color = color;
-    NEED_REDRAW;
-}
-
-void Image::setGradientColor(uint32_t start,uint32_t end,int vector)
-{
-    m_gradient = true;
-    m_realColor.vector = vector;
-    m_color = start;
-    m_endColor = end;
-    NEED_REDRAW;
-}
-
-void Image::setOpacity(GLubyte o)
-{
-    m_opacity = o;
-    if (m_gradient) {
-        m_endOpacity = o;
-    }
-    NEED_REDRAW;
-}
-
-void Image::update()
-{
-    if (!m_displayFrame) {
+    if (!m_info) {
         return;
     }
-    if (m_scale9) {
-        updateWithScale9();
-    }
-    else {
-        updateWithFrame();
-    }
-}
-
-void Image::updateWithScale9()
-{
     PaintConfig config;
-    flushPaintConfig(config);
-    Scale9Config scfg = {m_scale9L,m_scale9B,m_scale9R,m_scale9T};
-    config.scale9 = &scfg;
-    PaintEngine::GetInstance()->paint(config);
-}
-
-void Image::updateWithFrame()
-{
-    PaintConfig config;
+    config.trans = trans;
     flushPaintConfig(config);
     PaintEngine::GetInstance()->paint(config);
 }
+
 
 void Image::flushPaintConfig(PaintConfig& config)
 {
-    config.frame = m_displayFrame;
-    m_realColor.set(m_color);
-    m_realColor.a = m_opacity;
-//    if (getObject()) {
-//        config.trans = getObject()->getTransInWorld();
-//        m_realColor.multiply(getObject()->m_realColor);
-//    }
-//    else {
-//        config.trans = NULL;
-//    }
-    config.start = &m_realColor;
-    if (m_gradient) {
-        m_realColor.end.set(m_endColor);
-        m_realColor.end.a = m_endOpacity;
-//        if (getObject()) {
-//            m_realColor.end.multiply(getObject()->m_realColor);
-//        }
-        config.end = &m_realColor.end;
-        config.gradVector = m_realColor.vector;
-    }
-    else {
-        config.end = NULL;
-    }
+    config.info = m_info;
     config.program = m_program;
-    config.width = m_paintWidth;
-    config.height = m_paintHeight;
     config.blendSrc = m_blendSrc;
     config.blendDst = m_blendDst;
-    config.scale9 = NULL;
+    config.flipX = m_flipX;
     config.flipY = m_flipY;
 }
 

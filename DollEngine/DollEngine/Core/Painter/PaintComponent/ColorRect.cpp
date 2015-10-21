@@ -44,104 +44,104 @@ ColorRect::~ColorRect()
 
 bool ColorRect::loadImages(const String& path,const String& plist)
 {
-    ImageInfo* frame = GLCache::GetInstance()->addFrame(path);
-    if (frame) {
-        m_colorRect = false;
-        frame->saveRect();
-        setDisplayFrame(frame);
-        setSizeToImageSize();
-        NEED_REDRAW;
-        return true;
-    }
-    else {
+//    ImageInfo* frame = GLCache::GetInstance()->addFrame(path);
+//    if (frame) {
+//        m_colorRect = false;
+//        frame->saveRect();
+//        setDisplayFrame(frame);
+//        setSizeToImageSize();
+//        NEED_REDRAW;
+//        return true;
+//    }
+//    else {
         return false;
-    }
+//    }
 }
 
 bool ColorRect::setMargin(float l,float r,float t,float b)
 {
-    if (!m_displayFrame) {
-        return false;
-    }
-    if (!m_displayFrame->getCacheKey().empty()) {
-        ImageInfo* frame = new ImageInfo();
-        frame->setTexture(m_displayFrame->getTexture());
-        frame->setRect(m_displayFrame->getRect());
-        frame->saveRect();
-        setDisplayFrame(frame);
-    }
-    Rect rect(l*m_displayFrame->getOrginWidth(),
-              t*m_displayFrame->getOrginHeight(),
-              (1-l-r)*m_displayFrame->getOrginWidth(),
-              (1-t-b)*m_displayFrame->getOrginHeight());
-    m_displayFrame->setRect(rect);
-    setSizeToImageSize();
-    NEED_REDRAW;
+//    if (!m_displayFrame) {
+//        return false;
+//    }
+//    if (!m_displayFrame->getCacheKey().empty()) {
+//        ImageInfo* frame = new ImageInfo();
+//        frame->setTexture(m_displayFrame->getTexture());
+//        frame->setRect(m_displayFrame->getRect());
+//        frame->saveRect();
+//        setDisplayFrame(frame);
+//    }
+//    Rect rect(l*m_displayFrame->getOrginWidth(),
+//              t*m_displayFrame->getOrginHeight(),
+//              (1-l-r)*m_displayFrame->getOrginWidth(),
+//              (1-t-b)*m_displayFrame->getOrginHeight());
+//    m_displayFrame->setRect(rect);
+//    setSizeToImageSize();
+//    NEED_REDRAW;
     return true;
 }
 
 bool ColorRect::loadImageWithMargin(const String& path,float l,float r,float t,float b)
 {
-    ImageInfo* frame = GLCache::GetInstance()->addFrame(path);
-    Rect rect(l*frame->getWidth(),
-              t*frame->getHeight(),
-              (1-l-r)*frame->getWidth(),
-              (1-t-b)*frame->getHeight());
-    frame = GLCache::GetInstance()->addFrame(path,rect);
-    if (frame) {
-        m_colorRect = false;
-        frame->saveRect();
-        setDisplayFrame(frame);
-        setSizeToImageSize();
-        NEED_REDRAW;
-        return true;
-    }
-    else {
+//    ImageInfo* frame = GLCache::GetInstance()->addFrame(path);
+//    Rect rect(l*frame->getWidth(),
+//              t*frame->getHeight(),
+//              (1-l-r)*frame->getWidth(),
+//              (1-t-b)*frame->getHeight());
+//    frame = GLCache::GetInstance()->addFrame(path,rect);
+//    if (frame) {
+//        m_colorRect = false;
+//        frame->saveRect();
+//        setDisplayFrame(frame);
+//        setSizeToImageSize();
+//        NEED_REDRAW;
+//        return true;
+//    }
+//    else {
         return false;
-    }
+//    }
 }
 
 bool ColorRect::loadSize(int w,int h,int r)
 {
-    ImageInfo* frame = GLCache::GetInstance()->addFrame(r);
-    m_colorRect=true;
-    m_paintWidth = w;
-    m_paintHeight = h;
-    if (frame) {
-        setDisplayFrame(frame);
-        frame->saveRect();
-        setSizeToImageSize();
-        NEED_REDRAW;
-        return true;
-    }
-    else {
+//    ImageInfo* frame = GLCache::GetInstance()->addFrame(r);
+//    m_colorRect=true;
+//    m_paintWidth = w;
+//    m_paintHeight = h;
+//    if (frame) {
+//        setDisplayFrame(frame);
+//        frame->saveRect();
+//        setSizeToImageSize();
+//        NEED_REDRAW;
+//        return true;
+//    }
+//    else {
         return false;
-    }
+//    }
 }
 
 void ColorRect::setSizeToOrginSize()
 {
-    if (m_displayFrame) {
-        m_paintWidth = m_displayFrame->getOrginWidth();
-        m_paintHeight = m_displayFrame->getOrginHeight();
-    }
+//    if (m_displayFrame) {
+//        m_paintWidth = m_displayFrame->getOrginWidth();
+//        m_paintHeight = m_displayFrame->getOrginHeight();
+//    }
 }
 
 void ColorRect::setSizeToImageSize()
 {
-    if (m_colorRect) {
+//    if (m_colorRect) {
         
-    }
-    else {
-        if (m_displayFrame) {
-            m_paintWidth = m_displayFrame->getWidth();
-            m_paintHeight = m_displayFrame->getHeight();
-        }
-        else {
-            m_paintWidth = 0;
-            m_paintHeight = 0;
-        }
-    }
+//    }
+//    else {
+//        if (m_displayFrame) {
+//            m_paintWidth = m_displayFrame->getWidth();
+//            m_paintHeight = m_displayFrame->getHeight();
+//        }
+//        else {
+//            m_paintWidth = 0;
+//            m_paintHeight = 0;
+//        }
+//    }
 //    if(getObject()){
 //        getObject()->setWidth(m_paintWidth);
 //        getObject()->setHeight(m_paintHeight);
@@ -201,52 +201,52 @@ void ColorRect::update()
 
 void ColorRect::updateWithScale9()
 {
-    PaintConfig config;
-    flushPaintConfig(config);
-    Scale9Config scfg = {m_scale9L,m_scale9B,m_scale9R,m_scale9T};
-    config.scale9 = &scfg;
-    PaintEngine::GetInstance()->paint(config);
+//    PaintConfig config;
+//    flushPaintConfig(config);
+//    Scale9Config scfg = {m_scale9L,m_scale9B,m_scale9R,m_scale9T};
+//    config.scale9 = &scfg;
+//    PaintEngine::GetInstance()->paint(config);
 }
 
 void ColorRect::updateWithFrame()
 {
-    PaintConfig config;
-    flushPaintConfig(config);
-    PaintEngine::GetInstance()->paint(config);
+//    PaintConfig config;
+//    flushPaintConfig(config);
+//    PaintEngine::GetInstance()->paint(config);
 }
 
 void ColorRect::flushPaintConfig(PaintConfig& config)
 {
-    config.frame = m_displayFrame;
-    m_realColor.set(m_color);
-    m_realColor.a = m_opacity;
-//    if (getObject()) {
-//        config.trans = getObject()->getTransInWorld();
-//        m_realColor.multiply(getObject()->m_realColor);
+//    config.frame = m_displayFrame;
+//    m_realColor.set(m_color);
+//    m_realColor.a = m_opacity;
+////    if (getObject()) {
+////        config.trans = getObject()->getTransInWorld();
+////        m_realColor.multiply(getObject()->m_realColor);
+////    }
+////    else {
+////        config.trans = NULL;
+////    }
+//    config.start = &m_realColor;
+//    if (m_gradient) {
+//        m_realColor.end.set(m_endColor);
+//        m_realColor.end.a = m_endOpacity;
+////        if (getObject()) {
+////            m_realColor.end.multiply(getObject()->m_realColor);
+////        }
+//        config.end = &m_realColor.end;
+//        config.gradVector = m_realColor.vector;
 //    }
 //    else {
-//        config.trans = NULL;
+//        config.end = NULL;
 //    }
-    config.start = &m_realColor;
-    if (m_gradient) {
-        m_realColor.end.set(m_endColor);
-        m_realColor.end.a = m_endOpacity;
-//        if (getObject()) {
-//            m_realColor.end.multiply(getObject()->m_realColor);
-//        }
-        config.end = &m_realColor.end;
-        config.gradVector = m_realColor.vector;
-    }
-    else {
-        config.end = NULL;
-    }
-    config.program = m_program;
-    config.width = m_paintWidth;
-    config.height = m_paintHeight;
-    config.blendSrc = m_blendSrc;
-    config.blendDst = m_blendDst;
-    config.scale9 = NULL;
-    config.flipY = m_flipY;
+//    config.program = m_program;
+//    config.width = m_paintWidth;
+//    config.height = m_paintHeight;
+//    config.blendSrc = m_blendSrc;
+//    config.blendDst = m_blendDst;
+//    config.scale9 = NULL;
+//    config.flipY = m_flipY;
 }
 
 DE_END

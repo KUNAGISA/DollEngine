@@ -86,14 +86,14 @@ const char* GrowProgram::getShader_F()
 }
 
 
-void GrowProgram::actived(PaintConfig& config)
+void GrowProgram::beforeDraw(PaintConfig& config)
 {
     float dt = 0.75f;
-    setUniformValue("resolutionX", config.width);
-    setUniformValue("resolutionY", config.height);
+    setUniformValue("resolutionX", config.info->getWidth());
+    setUniformValue("resolutionY", config.info->getHeight());
     setUniformValue("blurRadius", dt*4);
     setUniformValue("sampleNum", dt);
-    NormalProgram::actived(config);
+    NormalProgram::beforeDraw(config);
 }
     //--------------------------------------------------------
     // Gaussian weighting:

@@ -123,7 +123,7 @@ GradientColor::GradientColor()
 }
 
 GradientColor::GradientColor(const Color& start, const Color& e)
-:Color(start),end(e),vector(0)
+:start(start),end(e),vector(-1)
 {
 }
 

@@ -25,15 +25,15 @@ RTT::~RTT()
     if (m_FBO) {
         PaintEngine::GetInstance()->deleteFBO(1, &m_FBO);
     }
-    SAFF_DELETE(m_displayFrame);
+    SAFF_DELETE(m_info);
 }
 
 
 bool RTT::begin(int w,int h,Image* bg)
 {
-    if (m_displayFrame) {
-        if (m_displayFrame->getTexture()->getWidth() != w ||
-            m_displayFrame->getTexture()->getHeight() != h) {
+    if (m_info) {
+        if (m_info->getTexture()->getWidth() != w ||
+            m_info->getTexture()->getHeight() != h) {
             ImageInfo* frame = new ImageInfo();
             Texture* tex = new Texture();
             if(!tex->initWithSize(w, h)){
@@ -41,11 +41,11 @@ bool RTT::begin(int w,int h,Image* bg)
                 delete frame;
                 return false;
             }
-            m_paintWidth = w;
-            m_paintHeight = h;
-            delete m_displayFrame;
-            m_displayFrame = frame;
-            m_displayFrame->setTexture(tex);
+//            m_paintWidth = w;
+//            m_paintHeight = h;
+            delete m_info;
+            m_info = frame;
+            m_info->setTexture(tex);
         }
     }
     else {
@@ -56,12 +56,12 @@ bool RTT::begin(int w,int h,Image* bg)
             delete frame;
             return false;
         }
-        m_paintWidth = w;
-        m_paintHeight = h;
-        m_displayFrame = frame;
-        m_displayFrame->setTexture(tex);
+//        m_paintWidth = w;
+//        m_paintHeight = h;
+        m_info = frame;
+        m_info->setTexture(tex);
     }
-    m_FBO = PaintEngine::GetInstance()->createFBO(m_displayFrame->getTexture()->getTextureId());
+    m_FBO = PaintEngine::GetInstance()->createFBO(m_info->getTexture()->getTextureId());
     
     PaintEngine::GetInstance()->resizeGL(PaintEngine::GetInstance()->getLayerWidth(),
                                       PaintEngine::GetInstance()->getLayerHeight());
@@ -70,7 +70,7 @@ bool RTT::begin(int w,int h,Image* bg)
     PaintEngine::GetInstance()->clearColor(GL_COLOR_BUFFER_BIT,1,1,1,1);
     
     if (bg) {
-        bg->update();
+//        bg->update();
     }
     return true;
 }

@@ -18,8 +18,8 @@ public:
     NormalProgram();
     ~NormalProgram();
     bool init();
-    void actived(PaintConfig& config);
-    void activedWithScale9(PaintConfig& config);
+    void beforeDraw(PaintConfig& config);
+    void beforeDrawWithScale9(PaintConfig& config);
     
 };
 DE_END

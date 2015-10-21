@@ -24,35 +24,28 @@ public:
     virtual ~Image();
 public:
     virtual bool loadImages(const String& path,const String& plist="");
-    virtual void freeImage(){SAFF_DELETE(m_displayFrame);}
+    virtual void freeImage(){SAFF_DELETE(m_info);}
     void setDrawSize(float w,float h);
     void clipRect(float x,float y,float w,float h);
     void setScale9(float l,float t,float r,float b);
     void setSizeToImageSize();
     void setIsScale9(bool v);
     void setProgram(const String& name);
+    
+    void draw(Transform* trans);
 public:
-    void update();
-    void updateWithScale9();
-    void updateWithFrame();
-    void setGradientColor(uint32_t start,uint32_t end,int vector);
-    void setOpacity(GLubyte o);
-    PROPERTY_RO(bool, Gradient, m_gradient);
     PROPERTY(GLenum, BlendSrc, m_blendSrc){m_blendSrc=v;NEED_REDRAW;}
     PROPERTY(GLenum, BlendDst, m_blendDst){m_blendDst=v;NEED_REDRAW;}
-    PROPERTY(ImageInfo*, DisplayFrame, m_displayFrame);
+    PROPERTY(ImageInfo*, Info, m_info);
     PROPERTY(PaintProgram*, Program, m_program){m_program=v;NEED_REDRAW;}
-    PROPERTY(float, PaintWidth, m_paintWidth){m_paintWidth=v;NEED_REDRAW;}
-    PROPERTY(float, PaintHeight, m_paintHeight){m_paintHeight=v;NEED_REDRAW;}
-    PROPERTY(bool, FlipY, m_flipY){m_flipY=v;}
-    PROPERTY(uint32_t, Color, m_color);
+    PROPERTY(bool, FlipX, m_flipX){m_flipX=v;NEED_REDRAW;}
+    PROPERTY(bool, FlipY, m_flipY){m_flipY=v;NEED_REDRAW;}
+    PROPERTY(uint32_t, StartColor, m_startColor){m_startColor=v;NEED_REDRAW;}
+    PROPERTY(uint32_t, EndColor, m_endColor){m_endColor=v;NEED_REDRAW;}
+    PROPERTY(GLubyte, StartOpacity, m_startOpacity){m_startOpacity=v;NEED_REDRAW;}
+    PROPERTY(GLubyte, EndOpacity, m_endOpacity){m_endOpacity=v;NEED_REDRAW;}
 protected:
     void flushPaintConfig(PaintConfig& config);
-protected:
-    GradientColor m_realColor;
-    uint32_t m_endColor;
-    GLubyte m_opacity;
-    GLubyte m_endOpacity;
 };
 
 DE_END

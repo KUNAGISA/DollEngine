@@ -84,7 +84,7 @@ void GLDrawData::setInnerRect(float l,float r,float b,float t)
     lb.uv.v2 = rb.uv.v2 = nb;
 }
 
-void GLDrawData::setStart(Color* color)
+void GLDrawData::setStartColor(Color* color)
 {
     GLfloat c[4];
     color->toColorF(c);
@@ -95,7 +95,7 @@ void GLDrawData::setStart(Color* color)
     memcpy(&rt.color, c, sizeof(rt.color));
 }
 
-void GLDrawData::setEnd(Color* color)
+void GLDrawData::setEndColor(Color* color)
 {
     GLfloat c[4];
     color->toColorF(c);

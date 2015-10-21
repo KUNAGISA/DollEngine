@@ -36,13 +36,14 @@ public:
     GLubyte a;
 };
 
-class GradientColor:public Color
+class GradientColor
 {
 public:
     GradientColor();
     GradientColor(const Color& start, const Color& e);
+    Color start;
     Color end;
-    int vector;
+    int vector; //0无渐变,1
 };
 
 
