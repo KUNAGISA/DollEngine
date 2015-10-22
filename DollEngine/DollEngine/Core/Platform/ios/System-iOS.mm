@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #include "System.h"
-#include "ImageData.h"
+#include "PictureData.h"
 #include "FileInfo.h"
 #include <ft2build.h>
 #include FT_FREETYPE_H
@@ -73,7 +73,7 @@ void* System::getFont(const String& fontName)
     }
 }
 
-ImageData* System::addText(const String& text,const String& fontName,int fontSize,FontData* fd)
+PictureData* System::addText(const String& text,const String& fontName,int fontSize,FontData* fd)
 {
     FT_Face face = (FT_Face)getFont(fontName);
     if (!face) {
@@ -122,7 +122,7 @@ ImageData* System::addText(const String& text,const String& fontName,int fontSiz
         }
     }
     
-    ImageData* image = new ImageData();
+    PictureData* image = new PictureData();
     image->setData(iodata);
     image->setWidth(width);
     image->setHeight(height);

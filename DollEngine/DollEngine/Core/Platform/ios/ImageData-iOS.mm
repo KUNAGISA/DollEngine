@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#include "ImageData.h"
+#include "PictureData.h"
 #include "Storages.h"
 
 DE_BEGIN
 
-bool ImageData::loadFromFile(const DE::String &fullPath)
+bool PictureData::loadFromFile(const DE::String &fullPath)
 {
     IOData* ioData = Storages::GetFileData(fullPath);
     if (ioData)

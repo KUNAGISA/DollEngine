@@ -7,8 +7,7 @@
 //
 
 #include "Character.h"
-#include "GLCache.h"
-#include "TextFrame.h"
+#include "CharacterInfo.h"
 #include "PaintEngine.h"
 
 DE_BEGIN
@@ -23,20 +22,20 @@ Character::Character()
 
 Character::~Character()
 {
-    for (TextFrame* frame : m_allTextFrames) {
+    for (CharacterInfo* frame : m_characterInfos) {
         delete frame;
     }
-    m_allTextFrames.clear();
+    m_characterInfos.clear();
 }
 
 void Character::setSizeToImageSize()
 {
     updateText();
     
-//    if (m_allTextFrames.size() > 0) {
+//    if (m_characterInfos.size() > 0) {
 //        m_paintHeight = m_fontSize;
 //        m_paintWidth = 0;
-//        for (TextFrame* frame : m_allTextFrames) {
+//        for (CharacterInfo* frame : m_characterInfos) {
 //            m_paintWidth += frame->getFont()->advance;
 //        }
 //    }
@@ -49,12 +48,12 @@ void Character::setSizeToImageSize()
 void Character::update()
 {
     setSizeToImageSize();
-    if (m_allTextFrames.size() == 0) {
+    if (m_characterInfos.size() == 0) {
         return;
     }
     
     float lastX=0;
-    for (TextFrame* frame : m_allTextFrames) {
+    for (CharacterInfo* frame : m_characterInfos) {
         FontData* font = frame->getFont();
         Transform orgin;
 //        if (getObject()) {
@@ -90,14 +89,14 @@ void Character::updateText()
     
     m_textChanged=false;
     
-    for (TextFrame* frame : m_allTextFrames) {
+    for (CharacterInfo* frame : m_characterInfos) {
         delete frame;
     }
-    m_allTextFrames.clear();
+    m_characterInfos.clear();
     for (int i=0;i!=m_text.size();++i) {
-        TextFrame* frame = GLCache::GetInstance()->addText(m_text[i], m_fontName, m_fontSize);
+        CharacterInfo* frame = PaintEngine::GetInstance()->addText(m_text[i], m_fontName, m_fontSize);
         if (frame) {
-            m_allTextFrames.push_back(frame);
+            m_characterInfos.push_back(frame);
         }
     }
 }

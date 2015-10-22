@@ -14,7 +14,7 @@
 
 DE_BEGIN
 
-class TextFrame;
+class CharacterInfo;
 
 class Character : public Image
 {
@@ -49,7 +49,7 @@ public:
     
 protected:
     bool m_textChanged;
-    vector<TextFrame*> m_allTextFrames;
+    vector<CharacterInfo*> m_characterInfos;
 };
 
 DE_END

@@ -1,22 +1,22 @@
 //
-//  TextFrame.cpp
+//  CharacterInfo.cpp
 //  DollEngine
 //
 //  Created by DollStudio on 15/5/16.
 //  Copyright (c) 2015年 DollStudio. All rights reserved.
 //
 
-#include "TextFrame.h"
+#include "CharacterInfo.h"
 
 
 DE_BEGIN
 
-TextFrame::TextFrame()
+CharacterInfo::CharacterInfo()
 {
     m_font = new FontData();
 }
 
-TextFrame::~TextFrame()
+CharacterInfo::~CharacterInfo()
 {
     SAFF_DELETE(m_font);
 }

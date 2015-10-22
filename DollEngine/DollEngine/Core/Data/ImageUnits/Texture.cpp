@@ -7,7 +7,6 @@
 //
 
 #include "Texture.h"
-#include "GLCache.h"
 #include "IOData.h"
 #include "PaintEngine.h"
 
@@ -24,7 +23,7 @@ Texture::Texture()
 
 Texture::~Texture()
 {
-    GLCache::GetInstance()->removeTextureCache(this);
+    PaintEngine::GetInstance()->removeTexture(this);
     if (m_textureId) {
         PaintEngine::GetInstance()->deleteTexture(1, &m_textureId);
     }

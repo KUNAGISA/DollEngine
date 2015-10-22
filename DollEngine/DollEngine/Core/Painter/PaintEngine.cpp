@@ -12,6 +12,7 @@
 #include "GrowProgram.h"
 #include "Texture.h"
 #include "Storages.h"
+#include "CharacterInfo.h"
 
 DE_BEGIN
 
@@ -134,6 +135,82 @@ Texture* PaintEngine::addTexture(const String& path)
         tex->retain();
     }
     return tex;
+}
+
+Texture* PaintEngine::addTexture(int r)
+{
+    //创建圆角矩形
+    String pickKey = String::fromFormat("round%d",r);
+    auto iter2 = m_allTextures.find(pickKey);
+    Texture* tex=NULL;
+    if(iter2 != m_allTextures.end()) {
+        tex = iter2->second;
+    }
+    else {
+        tex = new Texture();
+        PictureData* image = PictureData::createRoundRect(r);
+        tex->initWithImage(image);
+        delete image;
+        m_allTextures[pickKey] = tex;
+        tex->setCacheKey(pickKey);
+        tex->retain();
+    }
+    return tex;
+}
+
+CharacterInfo* PaintEngine::addText(const String& text,const String& fontName,int fontSize)
+{
+    //添加文字
+    String _fontName;
+    if (fontName.empty() || text.empty()) {
+        _fontName = DEFFONT;
+    }
+    else {
+        _fontName = fontName;
+    }
+
+    if (fontSize == 0 || text.empty()) {
+        fontSize = DEFFONTSIZE;
+    }
+    String key = System::GetKeyByFont(text,fontName,fontSize,0);
+    auto iter = m_allCharacterInfos.find(key);
+    if (iter != m_allCharacterInfos.end()) {
+        return iter->second;
+    }
+    
+    CharacterInfo* frame = new CharacterInfo();
+    Texture* tex= NULL;
+    auto iter2 = m_allTextures.find(key);
+    if(iter2 != m_allTextures.end()) {
+        tex = iter2->second;
+    }
+    else {
+
+        FontData* fd = new FontData();
+
+        PictureData* image = System::GetInstance()->addText(text, fontName, fontSize,fd);
+
+        tex = new Texture();
+        if(tex->initWithImage(image)) {
+            delete image;
+        }
+        else {
+            delete image;
+            delete tex;
+            delete frame;
+            delete fd;
+            return NULL;
+        }
+        m_allTextures[key] = tex;
+        tex->retain();
+        frame->setFont(fd);
+    }
+    return frame;
+}
+
+void PaintEngine::removeTexture(Texture* tex)
+{
+    m_allPrograms.erase(tex->getCacheKey());
 }
 
 static PaintProgram* g_curProgram = NULL;

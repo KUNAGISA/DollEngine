@@ -7,7 +7,6 @@
 //
 
 #include "Image.h"
-#include "GLCache.h"
 #include "System.h"
 #include "PaintEngine.h"
 #include "Storages.h"

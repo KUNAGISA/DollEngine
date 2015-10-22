@@ -17,6 +17,7 @@ DE_BEGIN
 class PictureData;
 class PaintProgram;
 class Texture;
+class CharacterInfo;
 
 #ifdef __QT__
 class PaintEngine : public QOpenGLFunctions_4_5_Core
@@ -40,7 +41,9 @@ public:
     void addProgram(String pm,PaintProgram*);
     PaintProgram* getProgram(String pm);
     Texture* addTexture(const String& path);
-    
+    Texture* addTexture(int r);//创建圆角矩形
+    CharacterInfo* addText(const String& text,const String& fontName,int fontSize);//添加文字
+    void removeTexture(Texture* tex);
 public:
     void initialize();
     void checkDrawElement();
@@ -94,6 +97,7 @@ public:
 protected:
     map<String,PaintProgram*> m_allPrograms;
     map<String,Texture*> m_allTextures;
+    map<String,CharacterInfo*> m_allCharacterInfos;
     bool m_initialized;
     vector<GLDrawData> m_quads;
     vector<GLushort> m_indexs;
