@@ -19,14 +19,8 @@ public:
     ColorRect();
     virtual ~ColorRect();
 public:
-    virtual bool loadImages(const String& path,const String& plist="");
-    virtual void freeImage(){SAFF_DELETE(m_displayFrame);}
-    virtual bool setMargin(float l,float r,float t,float b);
-    virtual bool loadImageWithMargin(const String& path,float l,float r,float t,float b);
     bool loadSize(int w,int h,int r);
-    virtual void setSizeToImageSize();
-    virtual void setSizeToOrginSize();
-    virtual void setProgram(const String& name);
+    void setSize(int w,int h);
 public:
     void update();
     void updateWithScale9();

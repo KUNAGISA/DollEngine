@@ -27,6 +27,7 @@ public:
     void set(GLubyte r,GLubyte g,GLubyte b,GLubyte a);
     void set(int r,int g,int b,int a);
     void set(uint32_t color);
+    void setRGB(uint32_t color);
     void toInt32(uint32_t& color);
     void toColorF(GLfloat* colorf);
     void multiply(const Color& v);

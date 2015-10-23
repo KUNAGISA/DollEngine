@@ -28,7 +28,7 @@ bool ImageInfo::loadWithFile(const String& path, const String& plist)
     if(plist.empty()){
         Texture* tex = PaintEngine::GetInstance()->addTexture(path);
         setTexture(tex);
-        setDrawSize(tex->getWidth(),tex->getHeight());
+        setPaintSize(tex->getWidth(),tex->getHeight());
         setOrginRect(0,0,tex->getWidth(),tex->getHeight());
     }
     else {
@@ -37,11 +37,6 @@ bool ImageInfo::loadWithFile(const String& path, const String& plist)
     return false;
 }
 
-void ImageInfo::setDrawSize(float w,float h)
-{
-    m_drawSize.width = w;
-    m_drawSize.height = h;
-}
 
 void ImageInfo::setScale9(float l,float t,float r,float b)
 {
@@ -59,11 +54,30 @@ void ImageInfo::setOrginRect(float x,float y,float w,float h)
     m_orginRect.height = h;
 }
 
-void ImageInfo::toDrawData(GLDrawData& data,DrawVertex& vex,bool flipX,bool flipY)
+void ImageInfo::toDrawData(GLDrawData& data,Transform* trans,bool flipX,bool flipY)
 {
     //Vertex
+    data.lb.vertex.v1 = data.lt.vertex.v1 = m_paintPos.x;
+    data.rb.vertex.v2 = data.lb.vertex.v2 = m_paintPos.y;
+    data.rb.vertex.v1 = data.rt.vertex.v1 = m_paintPos.x+m_paintSize.width;
+    data.lt.vertex.v2 = data.rt.vertex.v2 = m_paintPos.y+m_paintSize.height;
+    if (trans) {
+        trans->transTo(data.lb.vertex.v1, data.lb.vertex.v2, &data.lb.vertex);
+        trans->transTo(data.lt.vertex.v1, data.lt.vertex.v2, &data.lt.vertex);
+        trans->transTo(data.rb.vertex.v1, data.rb.vertex.v2, &data.rb.vertex);
+        trans->transTo(data.rt.vertex.v1, data.rt.vertex.v2, &data.rt.vertex);
+    }
     
     //Color
+    GLfloat c[4];
+    m_color.start.toColorF(c);
+    c[0] *= c[3];c[1] *= c[3];c[2] *= c[3];
+    memcpy(&data.lt.color, c, sizeof(GLV4F));
+    memcpy(&data.rt.color, c, sizeof(GLV4F));
+    m_color.end.toColorF(c);
+    c[0] *= c[3];c[1] *= c[3];c[2] *= c[3];
+    memcpy(&data.lb.color, c, sizeof(GLV4F));
+    memcpy(&data.rb.color, c, sizeof(GLV4F));
     
     //UV
     float l=m_orginRect.x/getTexture()->getWidth();
@@ -94,4 +108,11 @@ void ImageInfo::setTexture(Texture* tex)
     }
 }
 
+void ImageInfo::setColor(uint32_t start,uint32_t end,GLubyte so,GLubyte eo)
+{
+    m_color.start.setRGB(start);
+    m_color.start.a = so;
+    m_color.end.setRGB(end);
+    m_color.end.a = eo;
+}
 DE_END

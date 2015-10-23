@@ -20,6 +20,19 @@ public:
     float height;
 };
 
+class Point
+{
+public:
+    Point():x(0),y(0){}
+    Point(float x,float y){set(x,y);}
+    void set(float x,float y){
+        this->x = x;
+        this->y = y;
+    }
+    float x;
+    float y;
+};
+
 class Size
 {
 public:
@@ -82,25 +95,10 @@ class Transform;
 class Color;
 struct GLDrawData
 {
-    void setPos(float x, float y,float w,float h,Transform* trans);
-    void setFrameRect(float l,float t,float r,float b);
-    void setInnerRect(float l,float r,float b,float t);
-    void setStartColor(Color* color);
-    void setEndColor(Color* color);
-    
     GLVertex lt;
     GLVertex rt;
     GLVertex rb;
     GLVertex lb;
-};
-
-struct DrawVertex
-{
-    float x;
-    float y;
-    float w;
-    float h;
-    Transform* trans;
 };
 
 struct Scale9Config

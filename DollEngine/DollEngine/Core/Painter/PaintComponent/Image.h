@@ -25,14 +25,14 @@ public:
 public:
     virtual bool loadImages(const String& path,const String& plist="");
     virtual void freeImage(){SAFF_DELETE(m_info);}
-    void setDrawSize(float w,float h);
+    void setPaintSize(float w,float h);
     void clipRect(float x,float y,float w,float h);
     void setScale9(float l,float t,float r,float b);
     void setSizeToImageSize();
     void setIsScale9(bool v);
     void setProgram(const String& name);
     
-    void draw(Transform* trans);
+    void paint(Transform* trans);
 public:
     PROPERTY(GLenum, BlendSrc, m_blendSrc){m_blendSrc=v;NEED_REDRAW;}
     PROPERTY(GLenum, BlendDst, m_blendDst){m_blendDst=v;NEED_REDRAW;}

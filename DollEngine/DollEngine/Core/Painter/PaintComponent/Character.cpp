@@ -76,7 +76,7 @@ void Character::update()
         config.info = frame;
 //        config.width = frame->getWidth();
 //        config.height = frame->getHeight();
-        PaintEngine::GetInstance()->paint(config);
+        PaintEngine::GetInstance()->preparePaint(config);
         lastX += frame->getFont()->advance;
     }
 }

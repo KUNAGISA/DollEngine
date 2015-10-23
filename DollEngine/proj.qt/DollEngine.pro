@@ -147,7 +147,7 @@ SOURCES += main.cpp\
     ../DollEngine/Core/Data/FileUnits/IOData.cpp \
     ../DollEngine/Core/Data/ImageUnits/PictureData.cpp \
     ../DollEngine/Core/Data/ImageUnits/ImageInfo.cpp \
-    ../DollEngine/Core/Data/ImageUnits/TextFrame.cpp \
+    ../DollEngine/Core/Data/ImageUnits/CharacterInfo.cpp \
     ../DollEngine/Core/KAGParser/KAGController.cpp \
     ../DollEngine/Core/KAGParser/KAGLabel.cpp \
     ../DollEngine/Core/KAGParser/KAGParser.cpp \
@@ -178,7 +178,6 @@ SOURCES += main.cpp\
     ../DollEngine/Core/Painter/PaintComponent/RTT.cpp \
     ../DollEngine/Core/Data/ImageUnits/Texture.cpp \
     ../DollEngine/Core/Painter/PaintComponent/Image.cpp \
-    ../DollEngine/Core/Base/GLCache.cpp \
     ../DollEngine/Core/Painter/PaintComponent/ColorRect.cpp \
     ../DollEngine/Core/Data/ValueUnits/CoreStructs.cpp
 
@@ -266,7 +265,7 @@ HEADERS  += \
     ../DollEngine/Core/Data/FileUnits/IOData.h \
     ../DollEngine/Core/Data/ImageUnits/PictureData.h \
     ../DollEngine/Core/Data/ImageUnits/ImageInfo.h \
-    ../DollEngine/Core/Data/ImageUnits/TextFrame.h \
+    ../DollEngine/Core/Data/ImageUnits/CharacterInfo.h \
     ../DollEngine/Core/KAGParser/KAGController.h \
     ../DollEngine/Core/KAGParser/KAGLabel.h \
     ../DollEngine/Core/KAGParser/KAGParser.h \
@@ -296,7 +295,6 @@ HEADERS  += \
     ../DollEngine/Core/Base/Audio.h \ 
     ../DollEngine/Core/Data/ImageUnits/Texture.h \
     ../DollEngine/Core/Painter/PaintComponent/Image.h \
-    ../DollEngine/Core/Base/GLCache.h \
     ../DollEngine/Core/Painter/PaintComponent/ColorRect.h \
     ../DollEngine/Core/Data/ValueUnits/CoreStructs.h \
     ../DollEngine/Core/CoreTypes.h

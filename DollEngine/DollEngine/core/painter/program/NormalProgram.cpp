@@ -33,59 +33,60 @@ bool NormalProgram::init()
     return true;
 }
 
-void NormalProgram::beforeDraw(PaintConfig& config)
+void NormalProgram::preparePaint(PaintConfig& config)
 {
     config.info->getTexture()->bind();
     if (config.info->getIsScale9()) {
-        beforeDrawWithScale9(config);
+        preparePaintWithScale9(config);
         return;
     }
     
     GLDrawData quad;
-    DrawVertex vex = {0, 0, config.info->getWidth(), config.info->getHeight(),config.trans};
-    
-    config.info->toDrawData(quad,vex,config.flipX,config.flipY);
+    config.info->toDrawData(quad,config.trans,config.flipX,config.flipY);
     PaintEngine::GetInstance()->pushDrawData(quad);
 }
 
-void NormalProgram::beforeDrawWithScale9(PaintConfig& config)
+void NormalProgram::preparePaintWithScale9(PaintConfig& config)
 {
 //    GLDrawData quad;
 //    float frameW = config.info->getWidth();
 //    float frameH = config.info->getHeight();
+//    Scale9Config scale9 = config.info->getScale9();
+//    Size drawSize = config.info->getPaintSize();
 //    float vx[] = {
 //        0,
-//        frameW*config.scale9->l,
-//        config.width - frameW*(config.scale9->r)
+//        frameW*scale9.l,
+//        drawSize.width - frameW*scale9.r
 //    };
 //    float vy[] = {
 //        0,
-//        frameH*config.scale9->b,
-//        config.height - frameH*(config.scale9->t)
+//        frameH*scale9.b,
+//        drawSize.height - frameH*(scale9.t)
 //    };
 //    float vw[] = {
-//        frameW*config.scale9->l,
-//        config.width - frameW*(config.scale9->r+config.scale9->l),
-//        frameW*config.scale9->r
+//        frameW*scale9.l,
+//        drawSize.width - frameW*(scale9.r+scale9.l),
+//        frameW*scale9.r
 //    };
 //    float vh[] = {
-//        frameH*config.scale9->b,
-//        config.height - frameH*(config.scale9->b+config.scale9->t),
-//        frameH*config.scale9->t
+//        frameH*scale9.b,
+//        drawSize.height - frameH*(scale9.b+scale9.t),
+//        frameH*scale9.t
 //    };
 //    float fw [] = {
-//        0,1-config.scale9->l,
-//        config.scale9->l,config.scale9->r,
-//        1-config.scale9->r,0
+//        0,1-scale9.l,
+//        scale9.l,scale9.r,
+//        1-scale9.r,0
 //    };
 //    float fh [] = {
-//        0,1-config.scale9->b,
-//        config.scale9->b,config.scale9->t,
-//        1-config.scale9->t,0
+//        0,1-scale9.b,
+//        scale9.b,scale9.t,
+//        1-scale9.t,0
 //    };
 //    for (int i=0; i<9; ++i) {
 //        int iw = i%3;
 //        int ih = i/3;
+//        DrawVertex vex = {vx[iw], vy[ih], vw[iw], vh[ih],config.trans};
 //        quad.setPos(vx[iw], vy[ih], vw[iw], vh[ih],config.trans);
 //        quad.setStart(config.start);
 //        quad.setEnd(config.start);

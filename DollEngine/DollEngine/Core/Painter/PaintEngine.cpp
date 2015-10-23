@@ -213,15 +213,34 @@ void PaintEngine::removeTexture(Texture* tex)
     m_allPrograms.erase(tex->getCacheKey());
 }
 
-static PaintProgram* g_curProgram = NULL;
+void PaintEngine::preparePaint(PaintConfig& config)
+{
+    ImageInfo* info = config.info;
+    if (info &&
+        info->getTexture() &&
+        info->getTexture()->getTextureId() != 0)
+    {
+        if(m_curProgram != config.program ||
+                m_curBlendSrc != config.blendSrc ||
+                m_curBlendDst != config.blendDst){
+            
+            paint();
+            
+            m_curProgram = config.program;
+            blendFunc(config.blendSrc,config.blendDst);
+            useProgram(config.program->getProgramId());
+        }
+        config.program->preparePaint(config);
+    }
+}
 
-void PaintEngine::checkDrawElement()
+void PaintEngine::paint()
 {
     if (m_quads.size() == 0) {
         return;
     }
     
-    g_curProgram->setUniformValue("matrix", getGlobalTrans()->getMatrix());
+    m_curProgram->setUniformValue("matrix", getGlobalTrans()->getMatrix());
     bindVAO(0);
     
 #define kQuadSize sizeof(GLVertex)
@@ -252,19 +271,4 @@ void PaintEngine::checkDrawElement()
     m_indexs.clear();
 }
 
-void PaintEngine::paint(PaintConfig& config)
-{
-    ImageInfo* info = config.info;
-    if (info &&
-        info->getTexture() &&
-        info->getTexture()->getTextureId() != 0)
-    {
-        g_curProgram = config.program;
-        blendFunc(config.blendSrc,config.blendDst);
-        useProgram(config.program->getProgramId());
-        
-        
-        config.program->beforeDraw(config);
-    }
-}
 DE_END

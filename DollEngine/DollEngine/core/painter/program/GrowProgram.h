@@ -19,7 +19,7 @@ public:
     ~GrowProgram();
     virtual bool bind();
     const char* getShader_F();
-    virtual void beforeDraw(PaintConfig& config);
+    virtual void preparePaint(PaintConfig& config);
     
 };
 DE_END

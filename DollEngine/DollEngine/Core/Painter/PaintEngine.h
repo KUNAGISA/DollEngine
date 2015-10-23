@@ -35,7 +35,8 @@ public:
     void initializeGL();
     void resizeGL(float desktopw,float desktoph);
     void pushDrawData(GLDrawData& data);
-    void paint(PaintConfig& config);
+    void preparePaint(PaintConfig& config);
+    void paint();
     
 public:
     void addProgram(String pm,PaintProgram*);
@@ -46,7 +47,6 @@ public:
     void removeTexture(Texture* tex);
 public:
     void initialize();
-    void checkDrawElement();
     void blendFunc(DrawBlendId src,DrawBlendId dst);
     
     void deleteFBO(DrawSizeI n, const DrawFBOId * framebuffers);
@@ -101,6 +101,12 @@ protected:
     bool m_initialized;
     vector<GLDrawData> m_quads;
     vector<GLushort> m_indexs;
+    
+    
+    PaintProgram* m_curProgram;
+    DrawBlendId m_curBlendSrc;
+    DrawBlendId m_curBlendDst;
+    
 };
 
 DE_END

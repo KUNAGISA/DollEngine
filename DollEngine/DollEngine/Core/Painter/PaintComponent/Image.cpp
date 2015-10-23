@@ -47,13 +47,13 @@ bool Image::loadImages(const String& path,const String& plist)
         return false;
     }
 }
-void Image::setDrawSize(float w,float h)
+void Image::setPaintSize(float w,float h)
 {
     if(!m_info){
         EM("尚未载入图片");
         return;
     }
-    m_info->setDrawSize(w,h);
+    m_info->setPaintSize(w,h);
 }
 
 void Image::clipRect(float x,float y,float w,float h)
@@ -76,7 +76,7 @@ void Image::setScale9(float l,float t,float r,float b)
 void Image::setSizeToImageSize()
 {
     if(m_info){
-        m_info->setDrawSize(m_info->getWidth(),m_info->getHeight());
+        m_info->setPaintSize(m_info->getWidth(),m_info->getHeight());
     }
 }
 
@@ -98,7 +98,7 @@ void Image::setInfo(DE::ImageInfo *v)
     m_info = v;
 }
 
-void Image::draw(Transform* trans)
+void Image::paint(Transform* trans)
 {
     if (!m_info) {
         return;
@@ -106,13 +106,13 @@ void Image::draw(Transform* trans)
     PaintConfig config;
     config.trans = trans;
     flushPaintConfig(config);
-    PaintEngine::GetInstance()->paint(config);
+    PaintEngine::GetInstance()->preparePaint(config);
 }
-
 
 void Image::flushPaintConfig(PaintConfig& config)
 {
     config.info = m_info;
+    config.info->setColor(m_startColor,m_endColor,m_startOpacity,m_endOpacity);
     config.program = m_program;
     config.blendSrc = m_blendSrc;
     config.blendDst = m_blendDst;

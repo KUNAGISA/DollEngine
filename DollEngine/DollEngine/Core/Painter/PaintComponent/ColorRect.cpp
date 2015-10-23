@@ -33,71 +33,11 @@ ColorRect::ColorRect()
 ,m_endColor(0xffffffff)
 ,m_endOpacity(0xff)
 {
-    setProgram("normal");
 }
 
 ColorRect::~ColorRect()
 {
     delete m_displayFrame;
-}
-
-bool ColorRect::loadImages(const String& path,const String& plist)
-{
-//    ImageInfo* frame = GLCache::GetInstance()->addFrame(path);
-//    if (frame) {
-//        m_colorRect = false;
-//        frame->saveRect();
-//        setDisplayFrame(frame);
-//        setSizeToImageSize();
-//        NEED_REDRAW;
-//        return true;
-//    }
-//    else {
-        return false;
-//    }
-}
-
-bool ColorRect::setMargin(float l,float r,float t,float b)
-{
-//    if (!m_displayFrame) {
-//        return false;
-//    }
-//    if (!m_displayFrame->getCacheKey().empty()) {
-//        ImageInfo* frame = new ImageInfo();
-//        frame->setTexture(m_displayFrame->getTexture());
-//        frame->setRect(m_displayFrame->getRect());
-//        frame->saveRect();
-//        setDisplayFrame(frame);
-//    }
-//    Rect rect(l*m_displayFrame->getOrginWidth(),
-//              t*m_displayFrame->getOrginHeight(),
-//              (1-l-r)*m_displayFrame->getOrginWidth(),
-//              (1-t-b)*m_displayFrame->getOrginHeight());
-//    m_displayFrame->setRect(rect);
-//    setSizeToImageSize();
-//    NEED_REDRAW;
-    return true;
-}
-
-bool ColorRect::loadImageWithMargin(const String& path,float l,float r,float t,float b)
-{
-//    ImageInfo* frame = GLCache::GetInstance()->addFrame(path);
-//    Rect rect(l*frame->getWidth(),
-//              t*frame->getHeight(),
-//              (1-l-r)*frame->getWidth(),
-//              (1-t-b)*frame->getHeight());
-//    frame = GLCache::GetInstance()->addFrame(path,rect);
-//    if (frame) {
-//        m_colorRect = false;
-//        frame->saveRect();
-//        setDisplayFrame(frame);
-//        setSizeToImageSize();
-//        NEED_REDRAW;
-//        return true;
-//    }
-//    else {
-        return false;
-//    }
 }
 
 bool ColorRect::loadSize(int w,int h,int r)
@@ -116,41 +56,6 @@ bool ColorRect::loadSize(int w,int h,int r)
 //    else {
         return false;
 //    }
-}
-
-void ColorRect::setSizeToOrginSize()
-{
-//    if (m_displayFrame) {
-//        m_paintWidth = m_displayFrame->getOrginWidth();
-//        m_paintHeight = m_displayFrame->getOrginHeight();
-//    }
-}
-
-void ColorRect::setSizeToImageSize()
-{
-//    if (m_colorRect) {
-        
-//    }
-//    else {
-//        if (m_displayFrame) {
-//            m_paintWidth = m_displayFrame->getWidth();
-//            m_paintHeight = m_displayFrame->getHeight();
-//        }
-//        else {
-//            m_paintWidth = 0;
-//            m_paintHeight = 0;
-//        }
-//    }
-//    if(getObject()){
-//        getObject()->setWidth(m_paintWidth);
-//        getObject()->setHeight(m_paintHeight);
-//    }
-}
-
-
-void ColorRect::setProgram(const String& name)
-{
-    m_program = PaintEngine::GetInstance()->getProgram(name);
 }
 
 void ColorRect::setDisplayFrame(DE::ImageInfo *v)

@@ -39,7 +39,7 @@ public:
     PROPERTY_RO(GLuint, ProgramId, m_programId)
     
     virtual bool init(){return false;}
-    virtual void beforeDraw(PaintConfig& config){}
+    virtual void preparePaint(PaintConfig& config){}
 protected:
     vector<PaintShader*> m_shaders;
     map<const char*, GLint> m_allUniformIndex;

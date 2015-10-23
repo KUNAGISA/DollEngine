@@ -92,6 +92,13 @@ void Color::set(uint32_t color)
     a = color>>0;
 }
 
+void Color::setRGB(uint32_t color)
+{
+    r = color >> 16;
+    g = color >> 8;
+    b = color >> 0;
+}
+
 void Color::toInt32(uint32_t& color)
 {
     color = 0;
