@@ -29,8 +29,7 @@ public:
     
     PictureData* addText(const String& text,const String& fontName,int fontSize,FontData* fd);
     String addFont(const String& filePath);
-    void* getFont(const String& fontName);
-    void removeFont(const String& filePath);
+    void removeFont(const String& fontName);
     
     static String GetKeyByFont(const String& str,const String& fontName,int fontSize,int outlineSize) {
         return String::fromFormat("%s_%s_%d_%d",str.c_nstr(),fontName.c_nstr(),fontSize,outlineSize);
