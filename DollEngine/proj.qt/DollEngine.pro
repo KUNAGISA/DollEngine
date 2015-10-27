@@ -301,6 +301,5 @@ HEADERS  += \
 
 FORMS  += QtConsole.ui
 
-RESOURCES += \
-    font.qrc
+RESOURCES +=
 

@@ -93,6 +93,7 @@ String System::addFont(const String& path)
     FileInfo file(path);
     if (!file.exist()) {
         EM(ERROR_FILE_NOT_EXIST,path);
+        return L"";
     }
     auto iter = m_allFontPaths.find(file.absolutePath());
     if (iter == m_allFontPaths.end())

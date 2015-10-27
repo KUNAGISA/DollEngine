@@ -23,7 +23,7 @@
 using namespace DE;
 
 
-#define TJS_CATCH catch ( TJS::eTJSScriptError &e ){ DE::ScriptEngine::GetInstance()->catchError(&e);}
+#define TJS_CATCH catch ( TJS::eTJSError &e ){ DE::ScriptEngine::GetInstance()->catchError(&e);}
 
 
 #define TJS_EVENT_CALL(NAME,NUM,...) \
