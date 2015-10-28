@@ -24,6 +24,5 @@ void QtConsole::Print(const tjs_char *msg)
         return;
     }
     const char* t = DE::String(msg).c_nstr();
-    qDebug()<< t;
     ui->textEdit->append(t);
 }
