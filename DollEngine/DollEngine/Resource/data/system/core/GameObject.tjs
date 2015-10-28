@@ -1,0 +1,79 @@
+
+class GameObject
+{
+	//public
+	var transform = void;
+	var children = [];
+	
+	//private
+	var _needSortChildren = false;
+	function GameObject () {
+		transform = new Transform();
+	}
+
+	function finalize () {
+		for (var i = 0; i < children.count; i++) {
+			invalidate children[i];
+		}
+		children.clear();
+	}
+
+	function updateTransform () {
+		// body...
+	}
+
+	function visit () {
+		if(visible) {
+			if (_needSortChildren) {
+				children.sort(function (a,b) {
+					return a.absolute < b.absolute;
+				})
+				_needSortChildren = false;
+			}
+			updateTransform();
+			if(children.count == 0){
+				onPaint();
+			}
+			else {
+				var i = 0;
+				for (; i < children.count; ++i) {
+					if(children[i].absolute < 0) {
+						children[i].visit();
+					}
+					else {
+						break;
+					}
+				}
+				onPaint();
+				for (; i < children.count; ++i) {
+					children[i].visit();
+				}
+			}
+		}
+	}
+
+	function onPaint () {
+		
+	}
+
+	var _visible = true;
+	property visible{
+		setter(v) {
+			_visible = v;
+		}
+		getter {
+			return _visible;
+		}
+	}
+
+	var _absolute = 0;
+	property absolute{
+		setter(v) {
+			_absolute = v;
+			if(parent) parent._needSortChildren;
+		}
+		getter {
+			return _absolute;
+		}
+	}
+}
