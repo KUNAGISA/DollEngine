@@ -60,19 +60,25 @@ ScriptEngine::ScriptEngine()
 
 void ScriptEngine::catchError(void* error)
 {
-    TJS::eTJSScriptError& e = *(TJS::eTJSScriptError*)error;
-    ScriptEngine::Global()->OutputExceptionToConsole(e.GetMessage().AsStdString().c_str());
-    ScriptEngine::Global()->OutputExceptionToConsole(L"STACK:");
-    String tra = e.GetTrace().AsStdString();
-    size_t idx = tra.find(L"(");
-    while (idx!=String::npos) {
-        size_t idx2 = tra.find(L" <-- anonymous@",idx);
-        String sub = tra.substr(idx,idx2-idx);
-        ScriptEngine::Global()->OutputExceptionToConsole(sub.c_str());
-        if (idx2 == String::npos) {
-            break;
+    TJS::eTJSError* e0 = (TJS::eTJSError*)error;
+    TJS::eTJSScriptError* e1 = dynamic_cast<TJS::eTJSScriptError*>(e0);
+    if(e1){
+        ScriptEngine::Global()->OutputExceptionToConsole(e1->GetMessage().AsStdString().c_str());
+        ScriptEngine::Global()->OutputExceptionToConsole(L"STACK:");
+        String tra = e1->GetTrace().AsStdString();
+        size_t idx = tra.find(L"(");
+        while (idx!=String::npos) {
+            size_t idx2 = tra.find(L" <-- anonymous@",idx);
+            String sub = tra.substr(idx,idx2-idx);
+            ScriptEngine::Global()->OutputExceptionToConsole(sub.c_str());
+            if (idx2 == String::npos) {
+                break;
+            }
+            idx = tra.find(L"(",idx2);
         }
-        idx = tra.find(L"(",idx2);
+    }
+    else {
+        ScriptEngine::Global()->OutputExceptionToConsole(e0->GetMessage().AsStdString().c_str());
     }
     System::GetInstance()->setIsError(true);
 }
