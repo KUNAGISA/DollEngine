@@ -22,6 +22,7 @@ public:
         QWidget::setVisible(visible);
     }
     virtual bool getVisible(){return isVisible();}
+    virtual void keyReleaseEvent(QKeyEvent * event);
 private:
     Ui::QtConsole *ui;
 };

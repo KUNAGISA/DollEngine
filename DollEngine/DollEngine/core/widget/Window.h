@@ -22,20 +22,15 @@ public:
     Window();
     virtual ~Window();
     static Window* GetInstance();
-    virtual void onVisit(){}
-    void initialize(float w,float h,float s);
-    void onInitFinished();
-    void visit();
-//    void beginTransition(bool isblack);
-//    void transWithCrossFade(float dt);
-//    void transFinished();
+    virtual void setSize(int w,int h){m_width=w,m_height=h;}
+    
     PROPERTY(bool, Visible, m_visible){m_visible=v;}
     PROPERTY(bool, FullScreen, m_fullScreen){m_fullScreen=v;}
     PROPERTY_CONST(String, Title, m_title){m_title=v;}
+    
+    PROPERTY(int,Width,m_width){m_width=v;}
+    PROPERTY(int,Height,m_height){m_height=v;}
 protected:
-    void* m_deviceWindow;
-//    Painter* m_transBlack;
-//    RTT* m_transRTT;
 };
 
 DE_END

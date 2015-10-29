@@ -27,13 +27,13 @@ public:
         clear();
     }
     void add(tTJSVariant v){
-        String key = v.AsString()->operator const wchar_t *();
+        wstring key = v.AsString()->operator const wchar_t *();
         if(m_all.find(key)==m_all.end()){
             m_all[key] = v;
         }
     }
     void remove(tTJSVariant v){
-        String key = v.AsString()->operator const wchar_t *();
+        wstring key = v.AsString()->operator const wchar_t *();
         m_all.erase(key);
     }
     void clear(){
@@ -53,16 +53,12 @@ public:
     size_t count(){
         return m_all.size();
     }
-#ifdef __QT__
-    void toForeach(tTJSVariant v){
-#else
-    void foreach(tTJSVariant v){
-#endif
+    void foreachT(tTJSVariant v){
         iTJSDispatch2* objthis = v.AsObjectThisNoAddRef();
         iTJSDispatch2* f = v.AsObjectNoAddRef();
         tTJSInterCodeContext* func = dynamic_cast<tTJSInterCodeContext*>(f);
         if (func) {
-            map<String,tTJSVariant> tmp = m_all;
+            map<wstring,tTJSVariant> tmp = m_all;
             for (auto iter = tmp.begin();
                  iter != tmp.end(); ++iter)
             {
@@ -72,7 +68,7 @@ public:
         }
     }
 protected:
-    map<String,tTJSVariant> m_all;
+    map<wstring,tTJSVariant> m_all;
 };
 
 DE_END

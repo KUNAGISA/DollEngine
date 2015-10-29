@@ -1,6 +1,9 @@
 #ifndef SYSTEMDELEGATE_H
 #define SYSTEMDELEGATE_H
 
+#include "CoreTypes.h"
+
+DE_BEGIN
 
 class SystemDelegate
 {
@@ -15,5 +18,7 @@ public:
     virtual void onClick(float x,float y){}
 
 };
+
+DE_END
 
 #endif // SYSTEMDELEGATE_H

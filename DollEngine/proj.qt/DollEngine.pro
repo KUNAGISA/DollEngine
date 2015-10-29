@@ -28,7 +28,10 @@ INCLUDEPATH += \
 ../DollEngine/Core/Painter/Program \
 ../DollEngine/Core/Painter/PaintComponent \
 ../DollEngine/Core/Scripts \
-../DollEngine/Core/Scripts/TjsExtra \
+../DollEngine/Core/Scripts/TjsBind \
+../DollEngine/Core/Scripts/TjsBind/TjsClasses \
+../DollEngine/Core/Scripts/TjsBind/TjsExtra \
+../DollEngine/Core/Scripts/TjsBind/TjsSingleton \
 ../DollEngine/Core/Widget \
 ../DollEngine/Core/Interface \
 ../DollEngine/Lib/kazmath/include/kazmath \
@@ -39,7 +42,6 @@ INCLUDEPATH += \
 
 SOURCES += main.cpp\
     QtConsole.cpp \
-    QtWindow.cpp \
     ../DollEngine/Lib/msg/apple/MsgLoad.cpp \
     ../DollEngine/Lib/ncbind/ncbind.cpp \
     ../DollEngine/Lib/tjs2/tjs.cpp \
@@ -157,18 +159,11 @@ SOURCES += main.cpp\
     ../DollEngine/Core/Painter/Program/NormalProgram.cpp \
     ../DollEngine/Core/Painter/Program/PaintShader.cpp \
     ../DollEngine/Core/Painter/PaintEngine.cpp \
-    ../DollEngine/Core/Scripts/TjsExtra/TjsDictIterator.cpp \
-    ../DollEngine/Core/Scripts/TjsExtra/TjsSet.cpp \
     ../DollEngine/Core/Scripts/JsonParser.cpp \
     ../DollEngine/Core/Scripts/ScriptEngine.cpp \
-    ../DollEngine/Core/Scripts/TjsBind.cpp \
     ../DollEngine/Core/Widget/Window.cpp \
     ../DollEngine/Core/Widget/Console.cpp \
     ../DollEngine/Core/Platform/qt/PictureData-Qt.cpp \
-    ../DollEngine/Core/Scripts/TjsExtra/TjsScripts.cpp \
-    ../DollEngine/Core/Scripts/TjsExtra/TjsStorages.cpp \
-    ../DollEngine/Core/Scripts/TjsExtra/TjsSystem.cpp \
-    ../DollEngine/Core/Scripts/TjsExtra/TjsConsole.cpp \
     ../DollEngine/Core/Platform/qt/System-Qt.cpp \
     ../DollEngine/Core/Base/SystemDelegate.cpp \
     ../DollEngine/Core/Platform/qt/Audio-Qt.cpp \
@@ -179,11 +174,24 @@ SOURCES += main.cpp\
     ../DollEngine/Core/Data/ImageUnits/Texture.cpp \
     ../DollEngine/Core/Painter/PaintComponent/Image.cpp \
     ../DollEngine/Core/Painter/PaintComponent/ColorRect.cpp \
-    ../DollEngine/Core/Data/ValueUnits/CoreStructs.cpp
+    ../DollEngine/Core/Data/ValueUnits/CoreStructs.cpp \
+    ../DollEngine/Core/Scripts/TjsBind/TjsClasses/TjsAudio.cpp \
+    ../DollEngine/Core/Scripts/TjsBind/TjsClasses/TjsCharacter.cpp \
+    ../DollEngine/Core/Scripts/TjsBind/TjsClasses/TjsKAGController.cpp \
+    ../DollEngine/Core/Scripts/TjsBind/TjsClasses/TjsWindow.cpp \
+    ../DollEngine/Core/Scripts/TjsBind/TjsExtra/TjsDictIterator.cpp \
+    ../DollEngine/Core/Scripts/TjsBind/TjsExtra/TjsSet.cpp \
+    ../DollEngine/Core/Scripts/TjsBind/TjsSingleton/TjsConsole.cpp \
+    ../DollEngine/Core/Scripts/TjsBind/TjsSingleton/TjsScripts.cpp \
+    ../DollEngine/Core/Scripts/TjsBind/TjsSingleton/TjsStorages.cpp \
+    ../DollEngine/Core/Scripts/TjsBind/TjsSingleton/TjsSystem.cpp \
+    ../DollEngine/Core/Scripts/TjsBind/TjsBind.cpp \
+    ../DollEngine/Core/Scripts/TjsBind/TjsClasses/TjsImage.cpp \
+    QtWindow.cpp \
+    ../DollEngine/Core/Scripts/TjsBind/TjsClasses/TjsSystemDelegate.cpp
 
 HEADERS  += \
     QtConsole.h \
-    QtWindow.h \
     ../DollEngine/Lib/kazmath/include/kazmath/GL/mat4stack.h \
     ../DollEngine/Lib/kazmath/include/kazmath/GL/matrix.h \
     ../DollEngine/Lib/kazmath/include/kazmath/aabb.h \
@@ -278,28 +286,36 @@ HEADERS  += \
     ../DollEngine/Core/Painter/PaintComponent/Character.h \
     ../DollEngine/Core/Painter/PaintComponent/RTT.h\
     ../DollEngine/Core/Painter/PaintEngine.h \
-    ../DollEngine/Core/Scripts/TjsExtra/TjsDictIterator.h \
-    ../DollEngine/Core/Scripts/TjsExtra/TjsSet.h \
     ../DollEngine/Core/Scripts/JsonParser.h \
     ../DollEngine/Core/Scripts/ScriptEngine.h \
-    ../DollEngine/Core/Scripts/TjsBind.h \
     ../DollEngine/Core/Widget/Console.h \
     ../DollEngine/Core/Widget/Window.h \
     ../DollEngine/Core/CoreMacros.h \
     ../DollEngine/Core/Data/ValueUnits/CoreString.h \
-    ../DollEngine/Core/Scripts/TjsExtra/TjsScripts.h \
-    ../DollEngine/Core/Scripts/TjsExtra/TjsStorages.h \
-    ../DollEngine/Core/Scripts/TjsExtra/TjsSystem.h \
-    ../DollEngine/Core/Scripts/TjsExtra/TjsConsole.h \
     ../DollEngine/Core/Base/SystemDelegate.h \
     ../DollEngine/Core/Base/Audio.h \ 
     ../DollEngine/Core/Data/ImageUnits/Texture.h \
     ../DollEngine/Core/Painter/PaintComponent/Image.h \
     ../DollEngine/Core/Painter/PaintComponent/ColorRect.h \
     ../DollEngine/Core/Data/ValueUnits/CoreStructs.h \
-    ../DollEngine/Core/CoreTypes.h
+    ../DollEngine/Core/CoreTypes.h \
+    ../DollEngine/Core/Scripts/TjsBind/TjsClasses/TjsAudio.h \
+    ../DollEngine/Core/Scripts/TjsBind/TjsClasses/TjsCharacter.h \
+    ../DollEngine/Core/Scripts/TjsBind/TjsClasses/TjsKAGController.h \
+    ../DollEngine/Core/Scripts/TjsBind/TjsClasses/TjsWindow.h \
+    ../DollEngine/Core/Scripts/TjsBind/TjsExtra/TjsDictIterator.h \
+    ../DollEngine/Core/Scripts/TjsBind/TjsExtra/TjsSet.h \
+    ../DollEngine/Core/Scripts/TjsBind/TjsSingleton/TjsConsole.h \
+    ../DollEngine/Core/Scripts/TjsBind/TjsSingleton/TjsScripts.h \
+    ../DollEngine/Core/Scripts/TjsBind/TjsSingleton/TjsStorages.h \
+    ../DollEngine/Core/Scripts/TjsBind/TjsSingleton/TjsSystem.h \
+    ../DollEngine/Core/Scripts/TjsBind/TjsBind.h \
+    ../DollEngine/Core/Scripts/TjsBind/TjsClasses/TjsImage.h \
+    QtWindow.h \
+    ../DollEngine/Core/Scripts/TjsBind/TjsClasses/TjsSystemDelegate.h
 
-FORMS  += QtConsole.ui
+FORMS  += QtConsole.ui \
+    QtWindow.ui
 
 RESOURCES +=
 

@@ -1,9 +1,18 @@
 #include "QtWindow.h"
-#include "PaintEngine.h"
+#include "ui_QtWindow.h"
 
-QtWindow::QtWindow()
+DE_BEGIN
+
+QtWindow::QtWindow(QWidget *parent) :
+    QMainWindow(parent),
+    ui(new Ui::QtWindow)
 {
-    
+    ui->setupUi(this);
+}
+
+QtWindow::~QtWindow()
+{
+    delete ui;
 }
 
 void QtWindow::setTitle(const DE::String& v)
@@ -12,18 +21,33 @@ void QtWindow::setTitle(const DE::String& v)
     setWindowTitle(v.c_nstr());
 }
 
-void QtWindow::initializeGL()
+void QtWindow::setSize(int w, int h)
 {
-    QOpenGLWidget::initializeGL();
-    DE::PaintEngine::GetInstance();
+    Window::setSize(w,h);
+    QRect r = geometry();
+    r.setWidth(w);
+    r.setHeight(h);
+    setGeometry(r);
+    QDesktopWidget* desktop = QApplication::desktop();
+    move((desktop->width() - r.width())/2, (desktop->height() - r.height())/2);
 }
 
-void QtWindow::resizeGL(int w,int h)
+void QtWindow::setVisible(bool visible)
 {
-    QOpenGLWidget::resizeGL(w,h);
+    QMainWindow::setVisible(visible);
+    Window::setVisible(visible);
 }
 
-void QtWindow::paintGL()
+void QtWindow::keyReleaseEvent(QKeyEvent * event)
 {
-    QOpenGLWidget::paintGL();
+    if(event->matches(QKeySequence::Refresh)) {
+        qApp->exit( 0x88ff );
+    }
 }
+
+void QtWindow::closeEvent(QCloseEvent *)
+{
+    qApp->exit( 0 );
+}
+
+DE_END

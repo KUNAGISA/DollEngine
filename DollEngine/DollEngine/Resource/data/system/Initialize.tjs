@@ -35,5 +35,4 @@ else
     app = new Application();
 }
 
-app.process("first.ks");
-
+// app.process("first.ks");

@@ -1,0 +1,20 @@
+#ifndef TJSSYSTEMDELEGATE_H
+#define TJSSYSTEMDELEGATE_H
+
+#include "TjsBind.h"
+#include "SystemDelegate.h"
+
+
+TJS_NCB(SystemDelegate){}
+virtual void onMainLoop(){
+    TJS_EVENT_CALL(onMainLoop,0);
+}
+
+virtual void onMouseDown(float x,float y){}
+virtual void onMouseUp(float x,float y){}
+virtual void onMouseMove(float x,float y){}
+virtual void onClick(float x,float y){}
+
+};
+
+#endif // TJSSYSTEMDELEGATE_H

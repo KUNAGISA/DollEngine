@@ -1,0 +1,15 @@
+
+class Layer extends GameObject
+{
+	//public
+	var app;
+
+	//private
+	var _image;
+	function Layer (app,par) {
+		super.GameObject();
+		parent = par;
+		this.app = app;
+		_image = new Image();
+	}
+}

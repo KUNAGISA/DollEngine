@@ -2,11 +2,11 @@
 var g_AllControl = new Set();
 
 
-class Control extends Node
+class Control extends Layer
 {
 	function Control (par) 
 	{
-		super.Node(par);
+		super.Layer(par);
 		g_AllControl.add(this);
 		setAnchor(0.5,0.5);
 		_touch = new Touch();

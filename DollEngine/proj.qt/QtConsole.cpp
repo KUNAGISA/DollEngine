@@ -26,3 +26,10 @@ void QtConsole::Print(const tjs_char *msg)
     const char* t = DE::String(msg).c_nstr();
     ui->textEdit->append(t);
 }
+
+void QtConsole::keyReleaseEvent(QKeyEvent * event)
+{
+    if(event->matches(QKeySequence::Refresh)) {
+        qApp->exit( 0x88ff );
+    }
+}

@@ -26,4 +26,11 @@ class KAG extends Application
 			return history.enabled;
 		}
 	}
+
+	
+	////////////TAGHandlers/////////
+
+	var tagHandlers = %[
+
+	];
 }

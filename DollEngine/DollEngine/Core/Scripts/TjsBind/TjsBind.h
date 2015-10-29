@@ -127,44 +127,6 @@ return _self->ClassNames[0];\
 }\
 Tjs##CLASS():_self(NULL)
 
-#define TJS_NCB_COM(CLASS) TJS_NCB(CLASS){}\
-void setCompName(tTJSVariant v){\
-TJS_STRING(v,name)\
-Component::setCompName(name);\
-}\
-tTJSVariant getCompName(){\
-    return name.c_str();\
-} \
-tTJSVariant getObject() {\
-    auto obj = dynamic_cast<TjsGameObject*>(CLASS::getObject());\
-    if (obj) {\
-        return obj->_self;\
-    } else {\
-        return tTJSVariant();\
-    }\
-}\
-void setObject(tTJSVariant v){\
-    if (v.Type() == tvtVoid) {\
-        auto obj = dynamic_cast<TjsGameObject*>(CLASS::getObject());\
-        if(obj){\
-            obj->_self->Release();\
-        }\
-        CLASS::setObject(NULL);\
-        return;\
-    }\
-    TjsGameObject* obj = TJS_GET_OBJECT(TjsGameObject, v.AsObject());\
-    CLASS::setObject(obj);\
-}
-
-#define TJS_FACTORY_COM \
-TJS_FACTORY \
-NCB_METHOD(update);\
-NCB_PROPERTY(enabled, getEnabled, setEnabled); \
-NCB_PROPERTY(object,getObject,setObject); \
-NCB_PROPERTY(time, getTime, setTime);\
-NCB_PROPERTY(type, getType, setType);\
-NCB_PROPERTY(name, getCompName, setCompName);
-
 #define TJS_FACTORY \
 Factory(&TjsFactory::factory<ClassT>);\
 NCB_METHOD(getClass);

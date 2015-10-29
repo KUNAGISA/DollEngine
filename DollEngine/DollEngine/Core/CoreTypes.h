@@ -57,6 +57,8 @@ typedef GLsizei DrawSizeI;
 typedef GLclampf DrawClampF;
 typedef GLbitfield DrawMask;
 
+typedef wchar_t kagchar;
+
 DE_END
 
 

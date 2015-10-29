@@ -1,9 +1,9 @@
 
-class Label extends Node
+class Label extends Layer
 {
 	function Label (par) 
 	{
-		super.Node(par);
+		super.Layer(par);
 		this._font = new Character();
 		this._font.object = this;
 		this.setAnchor(0.5,0.5);

@@ -8,6 +8,7 @@
 
 #include "TjsSystem.h"
 #include "System.h"
+#include "TjsSystemDelegate.h"
 
 tjs_uint32 tTJSNC_System::ClassID = -1;
 tTJSNC_System::tTJSNC_System() : inherited(TJS_W("System"))
@@ -32,7 +33,29 @@ tTJSNC_System::tTJSNC_System() : inherited(TJS_W("System"))
         return TJS_S_OK;
     }
     TJS_END_NATIVE_STATIC_METHOD_DECL(/*func. name*/exit)
-    
+            
+    //----------------------------------------------------------------------
+    TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/setDelegate)
+    {
+        if(numparams < 1 ) {
+            return TJS_E_BADPARAMCOUNT;
+        }
+        if(DESystem->getDelegate()){
+            EM("SystemDelegate已经存在");
+            return TJS_E_FAIL;
+        }
+        else {
+            tTJSVariant& p = *param[0];
+            TjsSystemDelegate* obj = TJS_GET_OBJECT(TjsSystemDelegate,p.AsObject());
+            if(!obj){
+                return TJS_E_INVALIDPARAM;
+            }
+            DESystem->setDelegate(obj);
+        }
+        return TJS_S_OK;
+    }
+    TJS_END_NATIVE_STATIC_METHOD_DECL(/*func. name*/setDelegate)
+                    
     //--property
     
     //----------------------------------------------------------------------

@@ -1,9 +1,9 @@
 
-class Sprite extends Node
+class Sprite extends Layer
 {
 	function Sprite (par) 
 	{
-		super.Node(par);
+		super.Layer(par);
 		this._image = new Painter();
 		this._image.object = this;
 		this.setAnchor(0.5,0.5);
