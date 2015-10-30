@@ -22,9 +22,21 @@ Transform::~Transform()
 {
 }
 
-void Transform::copy(DE::Transform *src)
+void Transform::assign(DE::Transform *src)
 {
-    memcpy((void*)this, (void*)src, sizeof(Transform));
+    m_x = src->m_x;
+    m_y = src->m_y;
+    m_anchorX = src->m_anchorX;
+    m_anchorY = src->m_anchorY;
+    m_scaleX = src->m_scaleX;
+    m_scaleY = src->m_scaleY;
+    m_rotationX = src->m_rotationX;
+    m_rotationY = src->m_rotationY;
+    m_rotationZ = src->m_rotationZ;
+    m_width = src->m_width;
+    m_height = src->m_height;
+    m_matrix = src->m_matrix;
+    m_needFlush = true;
 }
 
 void Transform::transform(DE::Transform *v)

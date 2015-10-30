@@ -8,7 +8,9 @@
 
 #include "TjsSystem.h"
 #include "System.h"
+#include "PaintEngine.h"
 #include "TjsSystemDelegate.h"
+#include "TjsTransform.h"
 
 tjs_uint32 tTJSNC_System::ClassID = -1;
 tTJSNC_System::tTJSNC_System() : inherited(TJS_W("System"))
@@ -155,7 +157,38 @@ tTJSNC_System::tTJSNC_System() : inherited(TJS_W("System"))
         TJS_DENY_NATIVE_PROP_SETTER
     }
     TJS_END_NATIVE_STATIC_PROP_DECL(seconds)
-    
+            
+    TJS_BEGIN_NATIVE_PROP_DECL(globalTrans)
+    {
+        TJS_BEGIN_NATIVE_PROP_GETTER
+        {
+            DE::Transform* trans = DE::PaintEngine::GetInstance()->getGlobalTrans();
+            TjsTransform* gtrans = dynamic_cast<TjsTransform*>(trans);
+            if(trans&&!gtrans){
+                gtrans = new TjsTransform();
+                gtrans->Transform::assign(trans);
+                DE::PaintEngine::GetInstance()->setGlobalTrans(gtrans);
+            }
+            else if(!trans){
+                gtrans = new TjsTransform();
+                DE::PaintEngine::GetInstance()->setGlobalTrans(gtrans);
+            }
+            if(gtrans->_self){
+                *result = gtrans->_self;
+            }
+            else {
+                iTJSDispatch2* obj = TJS_CREATE_DISPATCH(TjsTransform,gtrans);
+                tTJSCustomObject* objself = dynamic_cast<tTJSCustomObject*>(obj);
+                gtrans->_self=objself;
+                *result = objself;
+            }
+            return TJS_S_OK;
+        }
+        TJS_END_NATIVE_PROP_GETTER
+        TJS_DENY_NATIVE_PROP_SETTER
+    }
+    TJS_END_NATIVE_STATIC_PROP_DECL(globalTrans)
+            
     
     TJS_NATIVE_PROP(debugMode,DESystem->getDebugMode(),DESystem->setDebugMode((int)param->AsInteger()))
     

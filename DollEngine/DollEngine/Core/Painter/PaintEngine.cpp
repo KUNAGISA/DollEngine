@@ -93,6 +93,18 @@ void PaintEngine::pushDrawData(GLDrawData& data)
     m_quads.push_back(data);
 }
 
+void PaintEngine::setGlobalTrans(Transform *v)
+{
+    if(m_globalTrans){
+        delete m_globalTrans;
+    }
+    m_globalTrans = v;
+}
+
+Transform* PaintEngine::getGlobalTrans()
+{
+    return m_globalTrans;
+}
 void PaintEngine::addProgram(String pm,PaintProgram* effect)
 {
     if(effect->init()) {

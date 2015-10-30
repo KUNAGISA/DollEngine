@@ -1,5 +1,6 @@
 #include "QtWindow.h"
 #include "ui_QtWindow.h"
+#include "PaintEngine.h"
 
 DE_BEGIN
 
@@ -8,6 +9,7 @@ QtWindow::QtWindow(QWidget *parent) :
     ui(new Ui::QtWindow)
 {
     ui->setupUi(this);
+    PaintEngine::GetInstance()->initializeGL();
 }
 
 QtWindow::~QtWindow()

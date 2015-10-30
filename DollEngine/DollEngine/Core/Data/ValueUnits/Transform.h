@@ -20,8 +20,8 @@ public:
     Transform();
     virtual ~Transform();
     
-    void copy(Transform* src);
-    void transform(Transform* v);
+    virtual void assign(Transform* src);
+    virtual void transform(Transform* v);
 public:
     void init();
     void flush();

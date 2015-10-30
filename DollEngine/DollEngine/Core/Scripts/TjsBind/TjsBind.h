@@ -133,7 +133,7 @@ NCB_METHOD(getClass);
 
 #define TJS_STRING(v,str) String str = v.AsStringNoAddRef()->operator const wchar_t *();
 
-#define TJS_GET_DISPATCH(TYPE,NODE) (ncbInstanceAdaptor<TYPE>::GetAdaptor((TYPE*)NODE))
+#define TJS_CREATE_DISPATCH(TYPE,NODE) (ncbInstanceAdaptor<TYPE>::CreateAdaptor((TYPE*)NODE))
 
 #define TJS_GET_OBJECT(TYPE,NODE) (ncbInstanceAdaptor<TYPE>::GetNativeInstance(NODE));
 

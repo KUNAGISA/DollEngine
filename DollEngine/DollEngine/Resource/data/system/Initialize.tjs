@@ -25,14 +25,14 @@ var f=%[];
 var sf=%[];
 
 var app;
-if(DEConfig.module.kag)
-{
-    app = new KAG();
-    global.kag = app;
-}
-else
-{
-    app = new Application();
-}
+// if(DEConfig.module.kag)
+// {
+//     app = new KAG();
+//     global.kag = app;
+// }
+// else
+// {
+//     app = new Application();
+// }
 
 // app.process("first.ks");

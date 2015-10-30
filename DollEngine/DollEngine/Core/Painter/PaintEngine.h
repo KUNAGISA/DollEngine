@@ -39,6 +39,9 @@ public:
     void paint();
     
 public:
+    Transform* m_globalTrans;
+    virtual void setGlobalTrans(Transform *v);
+    virtual Transform* getGlobalTrans();
     void addProgram(String pm,PaintProgram*);
     PaintProgram* getProgram(String pm);
     Texture* addTexture(const String& path);
@@ -86,8 +89,7 @@ public:
     void checkError();
     void checkProgramError(PaintProgram* program);
 public:
-    PROPERTY_RO(Transform*,GlobalTrans,m_globalTrans)
-    
+   
     PROPERTY(float,LayerWidth,m_layerWidth){m_layerWidth=v;}
     PROPERTY(float,LayerHeight,m_layerHeight){m_layerHeight=v;} //逻辑大小
     PROPERTY(float,LayerX,m_layerX){m_layerX=v;}

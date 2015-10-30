@@ -29,6 +29,7 @@ class Application extends SystemDelegate
 
 
 	function onMainLoop () {
+		window.onMainLoop();
 		
 	}
 

@@ -9,6 +9,7 @@ int main(int argc, char *argv[])
     DE::System::GetInstance()->startup();
     int v = a.exec();
     if(v == 0x88ff){
+        QProcess::execute("E:/GitHub/DollEngine/DollEngine/build.bat");
         QProcess::startDetached(qApp->applicationFilePath(), QStringList());
     }
     return 0;

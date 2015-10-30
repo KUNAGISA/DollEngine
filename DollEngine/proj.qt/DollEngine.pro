@@ -188,7 +188,8 @@ SOURCES += main.cpp\
     ../DollEngine/Core/Scripts/TjsBind/TjsBind.cpp \
     ../DollEngine/Core/Scripts/TjsBind/TjsClasses/TjsImage.cpp \
     QtWindow.cpp \
-    ../DollEngine/Core/Scripts/TjsBind/TjsClasses/TjsSystemDelegate.cpp
+    ../DollEngine/Core/Scripts/TjsBind/TjsClasses/TjsSystemDelegate.cpp \
+    ../DollEngine/Core/Scripts/TjsBind/TjsClasses/TjsTransform.cpp \
 
 HEADERS  += \
     QtConsole.h \
@@ -312,7 +313,8 @@ HEADERS  += \
     ../DollEngine/Core/Scripts/TjsBind/TjsBind.h \
     ../DollEngine/Core/Scripts/TjsBind/TjsClasses/TjsImage.h \
     QtWindow.h \
-    ../DollEngine/Core/Scripts/TjsBind/TjsClasses/TjsSystemDelegate.h
+    ../DollEngine/Core/Scripts/TjsBind/TjsClasses/TjsSystemDelegate.h \
+    ../DollEngine/Core/Scripts/TjsBind/TjsClasses/TjsTransform.h \
 
 FORMS  += QtConsole.ui \
     QtWindow.ui

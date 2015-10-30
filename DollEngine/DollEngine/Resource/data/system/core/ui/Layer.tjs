@@ -12,4 +12,13 @@ class Layer extends GameObject
 		this.app = app;
 		_image = new Image();
 	}
+
+	function setSize (w=void,h=void) {
+		width = w if w!==void;
+		height = h if h!==void;
+	}
+
+	property width {
+		
+	}
 }

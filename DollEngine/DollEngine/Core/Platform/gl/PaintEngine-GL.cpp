@@ -10,15 +10,15 @@ PaintEngine* PaintEngine::GetInstance()
     static PaintEngine* _instance=NULL;
     if(!_instance) {
         _instance = new PaintEngine();
-#ifdef __QT__
-        _instance->initializeOpenGLFunctions();
-#endif
     }
     return _instance;
 }
 
 void PaintEngine::initialize()
 {
+#ifdef __QT__
+    initializeOpenGLFunctions();
+#endif
     glEnable(GL_TEXTURE_2D);
     
     glDisable(GL_DEPTH_TEST);
