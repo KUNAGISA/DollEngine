@@ -14,6 +14,12 @@ PaintEngine* PaintEngine::GetInstance()
     return _instance;
 }
 
+void PaintEngine::setContext(void* context)
+{
+#ifdef __QT__
+    setOwningContext((QOpenGLContext*)context);
+#endif
+}
 void PaintEngine::initialize()
 {
 #ifdef __QT__

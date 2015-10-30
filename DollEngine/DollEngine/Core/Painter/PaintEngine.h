@@ -20,7 +20,7 @@ class Texture;
 class CharacterInfo;
 
 #ifdef __QT__
-class PaintEngine : public QOpenGLFunctions_4_5_Core
+class PaintEngine : public QOpenGLFunctions_3_0
 #else
 class PaintEngine
 #endif
@@ -37,7 +37,7 @@ public:
     void pushDrawData(GLDrawData& data);
     void preparePaint(PaintConfig& config);
     void paint();
-    
+    void setContext(void* context);
 public:
     Transform* m_globalTrans;
     virtual void setGlobalTrans(Transform *v);

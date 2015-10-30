@@ -118,7 +118,7 @@ return 0;\
 
 #elif defined(__QT__)
 #include <QtOpenGL>
-#include <QOpenGLFunctions_4_5_Core>
+#include <QOpenGLFunctions_3_0>
 #endif
 
 #define CHECK_GL_ERROR PaintEngine::GetInstance()->checkError();

@@ -1,6 +1,8 @@
 #include "QtWindow.h"
 #include "ui_QtWindow.h"
 #include "PaintEngine.h"
+#include <QSurfaceFormat>
+#include <QOpenGLContext>
 
 DE_BEGIN
 
@@ -9,6 +11,15 @@ QtWindow::QtWindow(QWidget *parent) :
     ui(new Ui::QtWindow)
 {
     ui->setupUi(this);
+    QOpenGLContext * context = new QOpenGLContext(ui->openGLWidget);
+    context->makeCurrent(NULL);
+    QSurfaceFormat format;
+    format.setVersion(3,0);
+    format.setProfile(QSurfaceFormat::CoreProfile);
+    context->setFormat(format);
+    PaintEngine::GetInstance()->setContext(context);
+    ui->openGLWidget->makeCurrent();
+    
     PaintEngine::GetInstance()->initializeGL();
 }
 
