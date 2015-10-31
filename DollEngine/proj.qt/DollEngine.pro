@@ -167,7 +167,6 @@ SOURCES += main.cpp\
     ../DollEngine/Core/Platform/qt/System-Qt.cpp \
     ../DollEngine/Core/Base/SystemDelegate.cpp \
     ../DollEngine/Core/Platform/qt/Audio-Qt.cpp \
-    ../DollEngine/Core/Platform/gl/PaintEngine-GL.cpp \
     ../DollEngine/Core/Painter/Program/PaintProgram.cpp \ 
     ../DollEngine/Core/Painter/PaintComponent/Character.cpp \
     ../DollEngine/Core/Painter/PaintComponent/RTT.cpp \

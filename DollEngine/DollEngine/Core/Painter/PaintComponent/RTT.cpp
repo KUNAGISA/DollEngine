@@ -63,7 +63,7 @@ bool RTT::begin(int w,int h,Image* bg)
     }
     m_FBO = PaintEngine::GetInstance()->createFBO(m_info->getTexture()->getTextureId());
     
-    PaintEngine::GetInstance()->resizeGL(PaintEngine::GetInstance()->getLayerWidth(),
+    PaintEngine::GetInstance()->resize(PaintEngine::GetInstance()->getLayerWidth(),
                                       PaintEngine::GetInstance()->getLayerHeight());
     
     PaintEngine::GetInstance()->switchFBO(&m_oldFBO,m_FBO);
@@ -78,7 +78,7 @@ bool RTT::begin(int w,int h,Image* bg)
 void RTT::end()
 {
     PaintEngine::GetInstance()->switchFBO(NULL,m_oldFBO);
-    PaintEngine::GetInstance()->resizeGL(System::GetInstance()->getDesktopWidth(),
+    PaintEngine::GetInstance()->resize(System::GetInstance()->getDesktopWidth(),
                                       System::GetInstance()->getDesktopHeight());
 }
 

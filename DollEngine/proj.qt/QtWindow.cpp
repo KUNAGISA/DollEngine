@@ -1,8 +1,44 @@
 #include "QtWindow.h"
 #include "ui_QtWindow.h"
 #include "PaintEngine.h"
-#include <QSurfaceFormat>
 #include <QOpenGLContext>
+
+GLWidget::GLWidget(QWidget *parent)
+    : QOpenGLWidget(parent)
+{
+}
+
+GLWidget::~GLWidget()
+{
+}
+
+
+void GLWidget::initializeGL()
+{
+    DE::PaintEngine::GetInstance()->initialize();
+}
+
+void GLWidget::paintGL()
+{
+    NEED_REDRAW;
+}
+
+void GLWidget::resizeGL(int width, int height)
+{
+    DE::PaintEngine::GetInstance()->resize(width,height);
+}
+
+void GLWidget::mousePressEvent(QMouseEvent *event)
+{
+}
+
+void GLWidget::mouseMoveEvent(QMouseEvent *event)
+{
+}
+
+void GLWidget::mouseReleaseEvent(QMouseEvent * /* event */)
+{
+}
 
 DE_BEGIN
 
@@ -11,16 +47,8 @@ QtWindow::QtWindow(QWidget *parent) :
     ui(new Ui::QtWindow)
 {
     ui->setupUi(this);
-    QOpenGLContext * context = new QOpenGLContext(ui->openGLWidget);
-    context->makeCurrent(NULL);
-    QSurfaceFormat format;
-    format.setVersion(3,0);
-    format.setProfile(QSurfaceFormat::CoreProfile);
-    context->setFormat(format);
-    PaintEngine::GetInstance()->setContext(context);
-    ui->openGLWidget->makeCurrent();
-    
-    PaintEngine::GetInstance()->initializeGL();
+    GLWidget* w = new GLWidget(NULL);
+    ui->gridLayout->addWidget(w);
 }
 
 QtWindow::~QtWindow()

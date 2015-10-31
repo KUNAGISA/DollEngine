@@ -20,24 +20,24 @@ class Texture;
 class CharacterInfo;
 
 #ifdef __QT__
-class PaintEngine : public QOpenGLFunctions_3_0
+class PaintEngine : protected QOpenGLFunctions_4_5_Core
+{
 #else
 class PaintEngine
-#endif
 {
+#endif
 public:
     static PaintEngine* GetInstance();
     PaintEngine();
-    ~PaintEngine();
+    virtual ~PaintEngine();
     
 public:
     
-    void initializeGL();
-    void resizeGL(float desktopw,float desktoph);
+    void initialize();
+    void resize(int desktopw,int desktoph);
     void pushDrawData(GLDrawData& data);
     void preparePaint(PaintConfig& config);
     void paint();
-    void setContext(void* context);
 public:
     Transform* m_globalTrans;
     virtual void setGlobalTrans(Transform *v);
@@ -49,7 +49,6 @@ public:
     CharacterInfo* addText(const String& text,const String& fontName,int fontSize);//添加文字
     void removeTexture(Texture* tex);
 public:
-    void initialize();
     void blendFunc(DrawBlendId src,DrawBlendId dst);
     
     void deleteFBO(DrawSizeI n, const DrawFBOId * framebuffers);
