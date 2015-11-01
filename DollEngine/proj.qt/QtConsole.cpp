@@ -8,6 +8,11 @@ QtConsole::QtConsole(QWidget *parent) :
 {
     ui->setupUi(this);
     Console::Instance = this;
+    QSettings set("def.dcfg",QSettings::IniFormat);
+    QVariant v = set.value("consoleRect");
+    if(!v.isNull()) {
+        setGeometry(v.toRect());
+    }
 }
 
 QtConsole::~QtConsole()

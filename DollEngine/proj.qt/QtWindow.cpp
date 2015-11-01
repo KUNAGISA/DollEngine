@@ -1,44 +1,9 @@
 #include "QtWindow.h"
 #include "ui_QtWindow.h"
 #include "PaintEngine.h"
+#include "System.h"
 #include <QOpenGLContext>
-
-GLWidget::GLWidget(QWidget *parent)
-    : QOpenGLWidget(parent)
-{
-}
-
-GLWidget::~GLWidget()
-{
-}
-
-
-void GLWidget::initializeGL()
-{
-    DE::PaintEngine::GetInstance()->initialize();
-}
-
-void GLWidget::paintGL()
-{
-    NEED_REDRAW;
-}
-
-void GLWidget::resizeGL(int width, int height)
-{
-    DE::PaintEngine::GetInstance()->resize(width,height);
-}
-
-void GLWidget::mousePressEvent(QMouseEvent *event)
-{
-}
-
-void GLWidget::mouseMoveEvent(QMouseEvent *event)
-{
-}
-
-void GLWidget::mouseReleaseEvent(QMouseEvent * /* event */)
-{
-}
+#include "Image.h"
 
 DE_BEGIN
 
@@ -47,8 +12,10 @@ QtWindow::QtWindow(QWidget *parent) :
     ui(new Ui::QtWindow)
 {
     ui->setupUi(this);
-    GLWidget* w = new GLWidget(NULL);
-    ui->gridLayout->addWidget(w);
+    
+    ui->gridLayout->addWidget(PaintEngine::GetInstance());
+    startTimer(15);
+    
 }
 
 QtWindow::~QtWindow()
@@ -91,4 +58,8 @@ void QtWindow::closeEvent(QCloseEvent *)
     qApp->exit( 0 );
 }
 
+void QtWindow::timerEvent(QTimerEvent *)
+{
+    PaintEngine::GetInstance()->update();
+}
 DE_END

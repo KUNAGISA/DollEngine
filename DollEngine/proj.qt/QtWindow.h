@@ -9,25 +9,6 @@ namespace Ui {
 class QtWindow;
 }
 
-class GLWidget : public QOpenGLWidget
-{
-    Q_OBJECT
-
-public:
-    explicit GLWidget(QWidget *parent = 0);
-    ~GLWidget();
-
-protected:
-    void initializeGL() Q_DECL_OVERRIDE;
-    void paintGL() Q_DECL_OVERRIDE;
-    void resizeGL(int width, int height) Q_DECL_OVERRIDE;
-    void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
-    void mouseMoveEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
-    void mouseReleaseEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
-
-private:
-};
-
 DE_BEGIN
 
 class QtWindow : public QMainWindow,public DE::Window
@@ -41,8 +22,11 @@ public:
     virtual void setTitle(const DE::String& v);
     void setSize(int w, int h);
     void setVisible(bool visible);
+    
+public:
     void keyReleaseEvent(QKeyEvent * event);
     void closeEvent(QCloseEvent *);
+    void timerEvent(QTimerEvent *);
 private:
     Ui::QtWindow *ui;
 };

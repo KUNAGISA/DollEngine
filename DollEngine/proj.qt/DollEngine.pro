@@ -16,304 +16,306 @@ CONFIG += c++11
 DEFINES += __QT__
 
 INCLUDEPATH += \
-../DollEngine/core \
-../DollEngine/Core/Base \
-../DollEngine/Core/Component \
-../DollEngine/Core/Data/ValueUnits \
-../DollEngine/Core/Data/FileUnits \
-../DollEngine/Core/Data/ImageUnits \
-../DollEngine/Core/EventManager \
-../DollEngine/Core/KAGParser \
-../DollEngine/Core/Painter \
-../DollEngine/Core/Painter/Program \
-../DollEngine/Core/Painter/PaintComponent \
-../DollEngine/Core/Scripts \
-../DollEngine/Core/Scripts/TjsBind \
-../DollEngine/Core/Scripts/TjsBind/TjsClasses \
-../DollEngine/Core/Scripts/TjsBind/TjsExtra \
-../DollEngine/Core/Scripts/TjsBind/TjsSingleton \
-../DollEngine/Core/Widget \
-../DollEngine/Core/Interface \
-../DollEngine/Lib/kazmath/include/kazmath \
-../DollEngine/Lib/kazmath/include/kazmath/GL \
-../DollEngine/Lib/ncbind \
-../DollEngine/Lib/onig \
-../DollEngine/Lib/tjs2 \
+../Classes/core \
+../Classes/Core/Base \
+../Classes/Core/Component \
+../Classes/Core/Data/ValueUnits \
+../Classes/Core/Data/FileUnits \
+../Classes/Core/Data/ImageUnits \
+../Classes/Core/EventManager \
+../Classes/Core/KAGParser \
+../Classes/Core/Painter \
+../Classes/Core/Painter/Program \
+../Classes/Core/Painter/PaintComponent \
+../Classes/Core/Scripts \
+../Classes/Core/Scripts/TjsBind \
+../Classes/Core/Scripts/TjsBind/TjsClasses \
+../Classes/Core/Scripts/TjsBind/TjsExtra \
+../Classes/Core/Scripts/TjsBind/TjsSingleton \
+../Classes/Core/Widget \
+../Classes/Core/Interface \
+../Classes/Lib/kazmath/include/kazmath \
+../Classes/Lib/kazmath/include/kazmath/GL \
+../Classes/Lib/ncbind \
+../Classes/Lib/onig \
+../Classes/Lib/tjs2 \
 
 SOURCES += main.cpp\
     QtConsole.cpp \
-    ../DollEngine/Lib/msg/apple/MsgLoad.cpp \
-    ../DollEngine/Lib/ncbind/ncbind.cpp \
-    ../DollEngine/Lib/tjs2/tjs.cpp \
-    ../DollEngine/Lib/tjs2/tjs.tab.cpp \
-    ../DollEngine/Lib/tjs2/tjsArray.cpp \
-    ../DollEngine/Lib/tjs2/tjsBinarySerializer.cpp \
-    ../DollEngine/Lib/tjs2/tjsByteCodeLoader.cpp \
-    ../DollEngine/Lib/tjs2/tjsCompileControl.cpp \
-    ../DollEngine/Lib/tjs2/tjsConfig.cpp \
-    ../DollEngine/Lib/tjs2/tjsConstArrayData.cpp \
-    ../DollEngine/Lib/tjs2/tjsDate.cpp \
-    ../DollEngine/Lib/tjs2/tjsdate.tab.cpp \
-    ../DollEngine/Lib/tjs2/tjsDateParser.cpp \
-    ../DollEngine/Lib/tjs2/tjsDebug.cpp \
-    ../DollEngine/Lib/tjs2/tjsDictionary.cpp \
-    ../DollEngine/Lib/tjs2/tjsDisassemble.cpp \
-    ../DollEngine/Lib/tjs2/tjsError.cpp \
-    ../DollEngine/Lib/tjs2/tjsException.cpp \
-    ../DollEngine/Lib/tjs2/tjsGlobalStringMap.cpp \
-    ../DollEngine/Lib/tjs2/tjsInterCodeExec.cpp \
-    ../DollEngine/Lib/tjs2/tjsInterCodeGen.cpp \
-    ../DollEngine/Lib/tjs2/tjsInterface.cpp \
-    ../DollEngine/Lib/tjs2/tjsLex.cpp \
-    ../DollEngine/Lib/tjs2/tjsMath.cpp \
-    ../DollEngine/Lib/tjs2/tjsMessage.cpp \
-    ../DollEngine/Lib/tjs2/tjsMT19937ar-cok.cpp \
-    ../DollEngine/Lib/tjs2/tjsNamespace.cpp \
-    ../DollEngine/Lib/tjs2/tjsNative.cpp \
-    ../DollEngine/Lib/tjs2/tjsObject.cpp \
-    ../DollEngine/Lib/tjs2/tjsObjectExtendable.cpp \
-    ../DollEngine/Lib/tjs2/tjsOctPack.cpp \
-    ../DollEngine/Lib/tjs2/tjspp.tab.cpp \
-    ../DollEngine/Lib/tjs2/tjsRandomGenerator.cpp \
-    ../DollEngine/Lib/tjs2/tjsRegExp.cpp \
-    ../DollEngine/Lib/tjs2/tjsScriptBlock.cpp \
-    ../DollEngine/Lib/tjs2/tjsScriptCache.cpp \
-    ../DollEngine/Lib/tjs2/tjsString.cpp \
-    ../DollEngine/Lib/tjs2/tjsUtils.cpp \
-    ../DollEngine/Lib/tjs2/tjsVariant.cpp \
-    ../DollEngine/Lib/tjs2/tjsVariantString.cpp \
-    ../DollEngine/Lib/kazmath/src/GL/mat4stack.c \
-    ../DollEngine/Lib/kazmath/src/GL/matrix.c \
-    ../DollEngine/Lib/kazmath/src/aabb.c \
-    ../DollEngine/Lib/kazmath/src/mat3.c \
-    ../DollEngine/Lib/kazmath/src/mat4.c \
-    ../DollEngine/Lib/kazmath/src/neon_matrix_impl.c \
-    ../DollEngine/Lib/kazmath/src/plane.c \
-    ../DollEngine/Lib/kazmath/src/quaternion.c \
-    ../DollEngine/Lib/kazmath/src/ray2.c \
-    ../DollEngine/Lib/kazmath/src/utility.c \
-    ../DollEngine/Lib/kazmath/src/vec2.c \
-    ../DollEngine/Lib/kazmath/src/vec3.c \
-    ../DollEngine/Lib/kazmath/src/vec4.c \
-    ../DollEngine/Lib/onig/enc/ascii.c \
-    ../DollEngine/Lib/onig/enc/big5.c \
-    ../DollEngine/Lib/onig/enc/cp1251.c \
-    ../DollEngine/Lib/onig/enc/euc_jp.c \
-    ../DollEngine/Lib/onig/enc/euc_kr.c \
-    ../DollEngine/Lib/onig/enc/euc_tw.c \
-    ../DollEngine/Lib/onig/enc/gb18030.c \
-    ../DollEngine/Lib/onig/enc/iso8859_1.c \
-    ../DollEngine/Lib/onig/enc/iso8859_10.c \
-    ../DollEngine/Lib/onig/enc/iso8859_11.c \
-    ../DollEngine/Lib/onig/enc/iso8859_13.c \
-    ../DollEngine/Lib/onig/enc/iso8859_14.c \
-    ../DollEngine/Lib/onig/enc/iso8859_15.c \
-    ../DollEngine/Lib/onig/enc/iso8859_16.c \
-    ../DollEngine/Lib/onig/enc/iso8859_2.c \
-    ../DollEngine/Lib/onig/enc/iso8859_3.c \
-    ../DollEngine/Lib/onig/enc/iso8859_4.c \
-    ../DollEngine/Lib/onig/enc/iso8859_5.c \
-    ../DollEngine/Lib/onig/enc/iso8859_6.c \
-    ../DollEngine/Lib/onig/enc/iso8859_7.c \
-    ../DollEngine/Lib/onig/enc/iso8859_8.c \
-    ../DollEngine/Lib/onig/enc/iso8859_9.c \
-    ../DollEngine/Lib/onig/enc/koi8.c \
-    ../DollEngine/Lib/onig/enc/koi8_r.c \
-    ../DollEngine/Lib/onig/enc/mktable.c \
-    ../DollEngine/Lib/onig/enc/sjis.c \
-    ../DollEngine/Lib/onig/enc/unicode.c \
-    ../DollEngine/Lib/onig/enc/utf16_be.c \
-    ../DollEngine/Lib/onig/enc/utf16_le.c \
-    ../DollEngine/Lib/onig/enc/utf32_be.c \
-    ../DollEngine/Lib/onig/enc/utf32_le.c \
-    ../DollEngine/Lib/onig/enc/utf8.c \
-    ../DollEngine/Lib/onig/regcomp.c \
-    ../DollEngine/Lib/onig/regenc.c \
-    ../DollEngine/Lib/onig/regerror.c \
-    ../DollEngine/Lib/onig/regexec.c \
-    ../DollEngine/Lib/onig/regext.c \
-    ../DollEngine/Lib/onig/reggnu.c \
-    ../DollEngine/Lib/onig/regparse.c \
-    ../DollEngine/Lib/onig/regposerr.c \
-    ../DollEngine/Lib/onig/regposix.c \
-    ../DollEngine/Lib/onig/regsyntax.c \
-    ../DollEngine/Lib/onig/regtrav.c \
-    ../DollEngine/Lib/onig/regversion.c \
-    ../DollEngine/Lib/onig/st.c \
-    ../DollEngine/Core/Base/Storages.cpp \
-    ../DollEngine/Core/Base/System.cpp \
-    ../DollEngine/Core/Data/ValueUnits/Color.cpp \
-    ../DollEngine/Core/Data/ValueUnits/Transform.cpp \
-    ../DollEngine/Core/Data/ValueUnits/CoreString.cpp \
-    ../DollEngine/Core/Data/FileUnits/FileInfo.cpp \
-    ../DollEngine/Core/Data/FileUnits/IOData.cpp \
-    ../DollEngine/Core/Data/ImageUnits/PictureData.cpp \
-    ../DollEngine/Core/Data/ImageUnits/ImageInfo.cpp \
-    ../DollEngine/Core/Data/ImageUnits/CharacterInfo.cpp \
-    ../DollEngine/Core/KAGParser/KAGController.cpp \
-    ../DollEngine/Core/KAGParser/KAGLabel.cpp \
-    ../DollEngine/Core/KAGParser/KAGParser.cpp \
-    ../DollEngine/Core/KAGParser/KAGStorage.cpp \
-    ../DollEngine/Core/KAGParser/KAGTag.cpp \
-    ../DollEngine/Core/Painter/Program/GrowProgram.cpp \
-    ../DollEngine/Core/Painter/Program/NormalProgram.cpp \
-    ../DollEngine/Core/Painter/Program/PaintShader.cpp \
-    ../DollEngine/Core/Painter/PaintEngine.cpp \
-    ../DollEngine/Core/Scripts/JsonParser.cpp \
-    ../DollEngine/Core/Scripts/ScriptEngine.cpp \
-    ../DollEngine/Core/Widget/Window.cpp \
-    ../DollEngine/Core/Widget/Console.cpp \
-    ../DollEngine/Core/Platform/qt/PictureData-Qt.cpp \
-    ../DollEngine/Core/Platform/qt/System-Qt.cpp \
-    ../DollEngine/Core/Base/SystemDelegate.cpp \
-    ../DollEngine/Core/Platform/qt/Audio-Qt.cpp \
-    ../DollEngine/Core/Painter/Program/PaintProgram.cpp \ 
-    ../DollEngine/Core/Painter/PaintComponent/Character.cpp \
-    ../DollEngine/Core/Painter/PaintComponent/RTT.cpp \
-    ../DollEngine/Core/Data/ImageUnits/Texture.cpp \
-    ../DollEngine/Core/Painter/PaintComponent/Image.cpp \
-    ../DollEngine/Core/Painter/PaintComponent/ColorRect.cpp \
-    ../DollEngine/Core/Data/ValueUnits/CoreStructs.cpp \
-    ../DollEngine/Core/Scripts/TjsBind/TjsClasses/TjsAudio.cpp \
-    ../DollEngine/Core/Scripts/TjsBind/TjsClasses/TjsCharacter.cpp \
-    ../DollEngine/Core/Scripts/TjsBind/TjsClasses/TjsKAGController.cpp \
-    ../DollEngine/Core/Scripts/TjsBind/TjsClasses/TjsWindow.cpp \
-    ../DollEngine/Core/Scripts/TjsBind/TjsExtra/TjsDictIterator.cpp \
-    ../DollEngine/Core/Scripts/TjsBind/TjsExtra/TjsSet.cpp \
-    ../DollEngine/Core/Scripts/TjsBind/TjsSingleton/TjsConsole.cpp \
-    ../DollEngine/Core/Scripts/TjsBind/TjsSingleton/TjsScripts.cpp \
-    ../DollEngine/Core/Scripts/TjsBind/TjsSingleton/TjsStorages.cpp \
-    ../DollEngine/Core/Scripts/TjsBind/TjsSingleton/TjsSystem.cpp \
-    ../DollEngine/Core/Scripts/TjsBind/TjsBind.cpp \
-    ../DollEngine/Core/Scripts/TjsBind/TjsClasses/TjsImage.cpp \
+    ../Classes/Lib/msg/apple/MsgLoad.cpp \
+    ../Classes/Lib/ncbind/ncbind.cpp \
+    ../Classes/Lib/tjs2/tjs.cpp \
+    ../Classes/Lib/tjs2/tjs.tab.cpp \
+    ../Classes/Lib/tjs2/tjsArray.cpp \
+    ../Classes/Lib/tjs2/tjsBinarySerializer.cpp \
+    ../Classes/Lib/tjs2/tjsByteCodeLoader.cpp \
+    ../Classes/Lib/tjs2/tjsCompileControl.cpp \
+    ../Classes/Lib/tjs2/tjsConfig.cpp \
+    ../Classes/Lib/tjs2/tjsConstArrayData.cpp \
+    ../Classes/Lib/tjs2/tjsDate.cpp \
+    ../Classes/Lib/tjs2/tjsdate.tab.cpp \
+    ../Classes/Lib/tjs2/tjsDateParser.cpp \
+    ../Classes/Lib/tjs2/tjsDebug.cpp \
+    ../Classes/Lib/tjs2/tjsDictionary.cpp \
+    ../Classes/Lib/tjs2/tjsDisassemble.cpp \
+    ../Classes/Lib/tjs2/tjsError.cpp \
+    ../Classes/Lib/tjs2/tjsException.cpp \
+    ../Classes/Lib/tjs2/tjsGlobalStringMap.cpp \
+    ../Classes/Lib/tjs2/tjsInterCodeExec.cpp \
+    ../Classes/Lib/tjs2/tjsInterCodeGen.cpp \
+    ../Classes/Lib/tjs2/tjsInterface.cpp \
+    ../Classes/Lib/tjs2/tjsLex.cpp \
+    ../Classes/Lib/tjs2/tjsMath.cpp \
+    ../Classes/Lib/tjs2/tjsMessage.cpp \
+    ../Classes/Lib/tjs2/tjsMT19937ar-cok.cpp \
+    ../Classes/Lib/tjs2/tjsNamespace.cpp \
+    ../Classes/Lib/tjs2/tjsNative.cpp \
+    ../Classes/Lib/tjs2/tjsObject.cpp \
+    ../Classes/Lib/tjs2/tjsObjectExtendable.cpp \
+    ../Classes/Lib/tjs2/tjsOctPack.cpp \
+    ../Classes/Lib/tjs2/tjspp.tab.cpp \
+    ../Classes/Lib/tjs2/tjsRandomGenerator.cpp \
+    ../Classes/Lib/tjs2/tjsRegExp.cpp \
+    ../Classes/Lib/tjs2/tjsScriptBlock.cpp \
+    ../Classes/Lib/tjs2/tjsScriptCache.cpp \
+    ../Classes/Lib/tjs2/tjsString.cpp \
+    ../Classes/Lib/tjs2/tjsUtils.cpp \
+    ../Classes/Lib/tjs2/tjsVariant.cpp \
+    ../Classes/Lib/tjs2/tjsVariantString.cpp \
+    ../Classes/Lib/kazmath/src/GL/mat4stack.c \
+    ../Classes/Lib/kazmath/src/GL/matrix.c \
+    ../Classes/Lib/kazmath/src/aabb.c \
+    ../Classes/Lib/kazmath/src/mat3.c \
+    ../Classes/Lib/kazmath/src/mat4.c \
+    ../Classes/Lib/kazmath/src/neon_matrix_impl.c \
+    ../Classes/Lib/kazmath/src/plane.c \
+    ../Classes/Lib/kazmath/src/quaternion.c \
+    ../Classes/Lib/kazmath/src/ray2.c \
+    ../Classes/Lib/kazmath/src/utility.c \
+    ../Classes/Lib/kazmath/src/vec2.c \
+    ../Classes/Lib/kazmath/src/vec3.c \
+    ../Classes/Lib/kazmath/src/vec4.c \
+    ../Classes/Lib/onig/enc/ascii.c \
+    ../Classes/Lib/onig/enc/big5.c \
+    ../Classes/Lib/onig/enc/cp1251.c \
+    ../Classes/Lib/onig/enc/euc_jp.c \
+    ../Classes/Lib/onig/enc/euc_kr.c \
+    ../Classes/Lib/onig/enc/euc_tw.c \
+    ../Classes/Lib/onig/enc/gb18030.c \
+    ../Classes/Lib/onig/enc/iso8859_1.c \
+    ../Classes/Lib/onig/enc/iso8859_10.c \
+    ../Classes/Lib/onig/enc/iso8859_11.c \
+    ../Classes/Lib/onig/enc/iso8859_13.c \
+    ../Classes/Lib/onig/enc/iso8859_14.c \
+    ../Classes/Lib/onig/enc/iso8859_15.c \
+    ../Classes/Lib/onig/enc/iso8859_16.c \
+    ../Classes/Lib/onig/enc/iso8859_2.c \
+    ../Classes/Lib/onig/enc/iso8859_3.c \
+    ../Classes/Lib/onig/enc/iso8859_4.c \
+    ../Classes/Lib/onig/enc/iso8859_5.c \
+    ../Classes/Lib/onig/enc/iso8859_6.c \
+    ../Classes/Lib/onig/enc/iso8859_7.c \
+    ../Classes/Lib/onig/enc/iso8859_8.c \
+    ../Classes/Lib/onig/enc/iso8859_9.c \
+    ../Classes/Lib/onig/enc/koi8.c \
+    ../Classes/Lib/onig/enc/koi8_r.c \
+    ../Classes/Lib/onig/enc/mktable.c \
+    ../Classes/Lib/onig/enc/sjis.c \
+    ../Classes/Lib/onig/enc/unicode.c \
+    ../Classes/Lib/onig/enc/utf16_be.c \
+    ../Classes/Lib/onig/enc/utf16_le.c \
+    ../Classes/Lib/onig/enc/utf32_be.c \
+    ../Classes/Lib/onig/enc/utf32_le.c \
+    ../Classes/Lib/onig/enc/utf8.c \
+    ../Classes/Lib/onig/regcomp.c \
+    ../Classes/Lib/onig/regenc.c \
+    ../Classes/Lib/onig/regerror.c \
+    ../Classes/Lib/onig/regexec.c \
+    ../Classes/Lib/onig/regext.c \
+    ../Classes/Lib/onig/reggnu.c \
+    ../Classes/Lib/onig/regparse.c \
+    ../Classes/Lib/onig/regposerr.c \
+    ../Classes/Lib/onig/regposix.c \
+    ../Classes/Lib/onig/regsyntax.c \
+    ../Classes/Lib/onig/regtrav.c \
+    ../Classes/Lib/onig/regversion.c \
+    ../Classes/Lib/onig/st.c \
+    ../Classes/Core/Base/Storages.cpp \
+    ../Classes/Core/Base/System.cpp \
+    ../Classes/Core/Data/ValueUnits/Color.cpp \
+    ../Classes/Core/Data/ValueUnits/Transform.cpp \
+    ../Classes/Core/Data/ValueUnits/CoreString.cpp \
+    ../Classes/Core/Data/FileUnits/FileInfo.cpp \
+    ../Classes/Core/Data/FileUnits/IOData.cpp \
+    ../Classes/Core/Data/ImageUnits/PictureData.cpp \
+    ../Classes/Core/Data/ImageUnits/ImageInfo.cpp \
+    ../Classes/Core/Data/ImageUnits/CharacterInfo.cpp \
+    ../Classes/Core/KAGParser/KAGController.cpp \
+    ../Classes/Core/KAGParser/KAGLabel.cpp \
+    ../Classes/Core/KAGParser/KAGParser.cpp \
+    ../Classes/Core/KAGParser/KAGStorage.cpp \
+    ../Classes/Core/KAGParser/KAGTag.cpp \
+    ../Classes/Core/Painter/Program/GrowProgram.cpp \
+    ../Classes/Core/Painter/Program/NormalProgram.cpp \
+    ../Classes/Core/Painter/Program/PaintShader.cpp \
+    ../Classes/Core/Painter/Program/SingleProgram.cpp \
+    ../Classes/Core/Painter/PaintEngine.cpp \
+    ../Classes/Core/Scripts/JsonParser.cpp \
+    ../Classes/Core/Scripts/ScriptEngine.cpp \
+    ../Classes/Core/Widget/Window.cpp \
+    ../Classes/Core/Widget/Console.cpp \
+    ../Classes/Core/Platform/qt/PictureData-Qt.cpp \
+    ../Classes/Core/Platform/qt/System-Qt.cpp \
+    ../Classes/Core/Base/SystemDelegate.cpp \
+    ../Classes/Core/Platform/qt/Audio-Qt.cpp \
+    ../Classes/Core/Painter/Program/PaintProgram.cpp \ 
+    ../Classes/Core/Painter/PaintComponent/Character.cpp \
+    ../Classes/Core/Painter/PaintComponent/RTT.cpp \
+    ../Classes/Core/Data/ImageUnits/Texture.cpp \
+    ../Classes/Core/Painter/PaintComponent/Image.cpp \
+    ../Classes/Core/Painter/PaintComponent/ColorRect.cpp \
+    ../Classes/Core/Data/ValueUnits/CoreStructs.cpp \
+    ../Classes/Core/Scripts/TjsBind/TjsClasses/TjsAudio.cpp \
+    ../Classes/Core/Scripts/TjsBind/TjsClasses/TjsCharacter.cpp \
+    ../Classes/Core/Scripts/TjsBind/TjsClasses/TjsKAGController.cpp \
+    ../Classes/Core/Scripts/TjsBind/TjsClasses/TjsWindow.cpp \
+    ../Classes/Core/Scripts/TjsBind/TjsExtra/TjsDictIterator.cpp \
+    ../Classes/Core/Scripts/TjsBind/TjsExtra/TjsSet.cpp \
+    ../Classes/Core/Scripts/TjsBind/TjsSingleton/TjsConsole.cpp \
+    ../Classes/Core/Scripts/TjsBind/TjsSingleton/TjsScripts.cpp \
+    ../Classes/Core/Scripts/TjsBind/TjsSingleton/TjsStorages.cpp \
+    ../Classes/Core/Scripts/TjsBind/TjsSingleton/TjsSystem.cpp \
+    ../Classes/Core/Scripts/TjsBind/TjsBind.cpp \
+    ../Classes/Core/Scripts/TjsBind/TjsClasses/TjsImage.cpp \
     QtWindow.cpp \
-    ../DollEngine/Core/Scripts/TjsBind/TjsClasses/TjsSystemDelegate.cpp \
-    ../DollEngine/Core/Scripts/TjsBind/TjsClasses/TjsTransform.cpp \
+    ../Classes/Core/Scripts/TjsBind/TjsClasses/TjsSystemDelegate.cpp \
+    ../Classes/Core/Scripts/TjsBind/TjsClasses/TjsTransform.cpp \
 
 HEADERS  += \
     QtConsole.h \
-    ../DollEngine/Lib/kazmath/include/kazmath/GL/mat4stack.h \
-    ../DollEngine/Lib/kazmath/include/kazmath/GL/matrix.h \
-    ../DollEngine/Lib/kazmath/include/kazmath/aabb.h \
-    ../DollEngine/Lib/kazmath/include/kazmath/kazmath.h \
-    ../DollEngine/Lib/kazmath/include/kazmath/mat3.h \
-    ../DollEngine/Lib/kazmath/include/kazmath/mat4.h \
-    ../DollEngine/Lib/kazmath/include/kazmath/neon_matrix_impl.h \
-    ../DollEngine/Lib/kazmath/include/kazmath/plane.h \
-    ../DollEngine/Lib/kazmath/include/kazmath/quaternion.h \
-    ../DollEngine/Lib/kazmath/include/kazmath/ray2.h \
-    ../DollEngine/Lib/kazmath/include/kazmath/utility.h \
-    ../DollEngine/Lib/kazmath/include/kazmath/vec2.h \
-    ../DollEngine/Lib/kazmath/include/kazmath/vec3.h \
-    ../DollEngine/Lib/kazmath/include/kazmath/vec4.h \
-    ../DollEngine/Lib/msg/apple/string_table_en.h \
-    ../DollEngine/Lib/msg/apple/string_table_jp.h \
-    ../DollEngine/Lib/msg/apple/string_table_resource.h \
-    ../DollEngine/Lib/ncbind/ncb_foreach.h \
-    ../DollEngine/Lib/ncbind/ncb_invoke.hpp \
-    ../DollEngine/Lib/ncbind/ncbind.hpp \
-    ../DollEngine/Lib/onig/config.h \
-    ../DollEngine/Lib/onig/oniggnu.h \
-    ../DollEngine/Lib/onig/onigposix.h \
-    ../DollEngine/Lib/onig/oniguruma.h \
-    ../DollEngine/Lib/onig/regenc.h \
-    ../DollEngine/Lib/onig/regint.h \
-    ../DollEngine/Lib/onig/regparse.h \
-    ../DollEngine/Lib/onig/st.h \
-    ../DollEngine/Lib/tjs2/tjs.h \
-    ../DollEngine/Lib/tjs2/tjs.tab.h \
-    ../DollEngine/Lib/tjs2/tjs.tab.hpp \
-    ../DollEngine/Lib/tjs2/tjsArray.h \
-    ../DollEngine/Lib/tjs2/tjsBinarySerializer.h \
-    ../DollEngine/Lib/tjs2/tjsByteCodeLoader.h \
-    ../DollEngine/Lib/tjs2/tjsCommHead.h \
-    ../DollEngine/Lib/tjs2/tjsCompileControl.h \
-    ../DollEngine/Lib/tjs2/tjsConfig.h \
-    ../DollEngine/Lib/tjs2/tjsConstArrayData.h \
-    ../DollEngine/Lib/tjs2/tjsDate.h \
-    ../DollEngine/Lib/tjs2/tjsdate.tab.h \
-    ../DollEngine/Lib/tjs2/tjsdate.tab.hpp \
-    ../DollEngine/Lib/tjs2/tjsDateParser.h \
-    ../DollEngine/Lib/tjs2/tjsDebug.h \
-    ../DollEngine/Lib/tjs2/tjsDictionary.h \
-    ../DollEngine/Lib/tjs2/tjsError.h \
-    ../DollEngine/Lib/tjs2/tjsErrorDefs.h \
-    ../DollEngine/Lib/tjs2/tjsErrorInc.h \
-    ../DollEngine/Lib/tjs2/tjsException.h \
-    ../DollEngine/Lib/tjs2/tjsGlobalStringMap.h \
-    ../DollEngine/Lib/tjs2/tjsHashSearch.h \
-    ../DollEngine/Lib/tjs2/tjsInterCodeExec.h \
-    ../DollEngine/Lib/tjs2/tjsInterCodeGen.h \
-    ../DollEngine/Lib/tjs2/tjsInterface.h \
-    ../DollEngine/Lib/tjs2/tjsLex.h \
-    ../DollEngine/Lib/tjs2/tjsMath.h \
-    ../DollEngine/Lib/tjs2/tjsMessage.h \
-    ../DollEngine/Lib/tjs2/tjsMT19937ar-cok.h \
-    ../DollEngine/Lib/tjs2/tjsNamespace.h \
-    ../DollEngine/Lib/tjs2/tjsNative.h \
-    ../DollEngine/Lib/tjs2/tjsObject.h \
-    ../DollEngine/Lib/tjs2/tjsObjectExtendable.h \
-    ../DollEngine/Lib/tjs2/tjsOctPack.h \
-    ../DollEngine/Lib/tjs2/tjspp.tab.h \
-    ../DollEngine/Lib/tjs2/tjspp.tab.hpp \
-    ../DollEngine/Lib/tjs2/tjsRandomGenerator.h \
-    ../DollEngine/Lib/tjs2/tjsRegExp.h \
-    ../DollEngine/Lib/tjs2/tjsScriptBlock.h \
-    ../DollEngine/Lib/tjs2/tjsScriptCache.h \
-    ../DollEngine/Lib/tjs2/tjsString.h \
-    ../DollEngine/Lib/tjs2/tjsTypes.h \
-    ../DollEngine/Lib/tjs2/tjsUtils.h \
-    ../DollEngine/Lib/tjs2/tjsVariant.h \
-    ../DollEngine/Lib/tjs2/tjsVariantString.h \
-    ../DollEngine/Core/Base/System.h \
-    ../DollEngine/Core/Base/Storages.h \
-    ../DollEngine/Core/Data/ValueUnits/Color.h \
-    ../DollEngine/Core/Data/ValueUnits/Transform.h \
-    ../DollEngine/Core/Data/FileUnits/FileInfo.h \
-    ../DollEngine/Core/Data/FileUnits/IOData.h \
-    ../DollEngine/Core/Data/ImageUnits/PictureData.h \
-    ../DollEngine/Core/Data/ImageUnits/ImageInfo.h \
-    ../DollEngine/Core/Data/ImageUnits/CharacterInfo.h \
-    ../DollEngine/Core/KAGParser/KAGController.h \
-    ../DollEngine/Core/KAGParser/KAGLabel.h \
-    ../DollEngine/Core/KAGParser/KAGParser.h \
-    ../DollEngine/Core/KAGParser/KAGStorage.h \
-    ../DollEngine/Core/KAGParser/KAGTag.h \
-    ../DollEngine/Core/Painter/Program/GrowProgram.h \
-    ../DollEngine/Core/Painter/Program/NormalProgram.h \
-    ../DollEngine/Core/Painter/Program/PaintShader.h \
-    ../DollEngine/Core/Painter/Program/PaintProgram.h \ 
-    ../DollEngine/Core/Painter/PaintComponent/Character.h \
-    ../DollEngine/Core/Painter/PaintComponent/RTT.h\
-    ../DollEngine/Core/Painter/PaintEngine.h \
-    ../DollEngine/Core/Scripts/JsonParser.h \
-    ../DollEngine/Core/Scripts/ScriptEngine.h \
-    ../DollEngine/Core/Widget/Console.h \
-    ../DollEngine/Core/Widget/Window.h \
-    ../DollEngine/Core/CoreMacros.h \
-    ../DollEngine/Core/Data/ValueUnits/CoreString.h \
-    ../DollEngine/Core/Base/SystemDelegate.h \
-    ../DollEngine/Core/Base/Audio.h \ 
-    ../DollEngine/Core/Data/ImageUnits/Texture.h \
-    ../DollEngine/Core/Painter/PaintComponent/Image.h \
-    ../DollEngine/Core/Painter/PaintComponent/ColorRect.h \
-    ../DollEngine/Core/Data/ValueUnits/CoreStructs.h \
-    ../DollEngine/Core/CoreTypes.h \
-    ../DollEngine/Core/Scripts/TjsBind/TjsClasses/TjsAudio.h \
-    ../DollEngine/Core/Scripts/TjsBind/TjsClasses/TjsCharacter.h \
-    ../DollEngine/Core/Scripts/TjsBind/TjsClasses/TjsKAGController.h \
-    ../DollEngine/Core/Scripts/TjsBind/TjsClasses/TjsWindow.h \
-    ../DollEngine/Core/Scripts/TjsBind/TjsExtra/TjsDictIterator.h \
-    ../DollEngine/Core/Scripts/TjsBind/TjsExtra/TjsSet.h \
-    ../DollEngine/Core/Scripts/TjsBind/TjsSingleton/TjsConsole.h \
-    ../DollEngine/Core/Scripts/TjsBind/TjsSingleton/TjsScripts.h \
-    ../DollEngine/Core/Scripts/TjsBind/TjsSingleton/TjsStorages.h \
-    ../DollEngine/Core/Scripts/TjsBind/TjsSingleton/TjsSystem.h \
-    ../DollEngine/Core/Scripts/TjsBind/TjsBind.h \
-    ../DollEngine/Core/Scripts/TjsBind/TjsClasses/TjsImage.h \
+    ../Classes/Lib/kazmath/include/kazmath/GL/mat4stack.h \
+    ../Classes/Lib/kazmath/include/kazmath/GL/matrix.h \
+    ../Classes/Lib/kazmath/include/kazmath/aabb.h \
+    ../Classes/Lib/kazmath/include/kazmath/kazmath.h \
+    ../Classes/Lib/kazmath/include/kazmath/mat3.h \
+    ../Classes/Lib/kazmath/include/kazmath/mat4.h \
+    ../Classes/Lib/kazmath/include/kazmath/neon_matrix_impl.h \
+    ../Classes/Lib/kazmath/include/kazmath/plane.h \
+    ../Classes/Lib/kazmath/include/kazmath/quaternion.h \
+    ../Classes/Lib/kazmath/include/kazmath/ray2.h \
+    ../Classes/Lib/kazmath/include/kazmath/utility.h \
+    ../Classes/Lib/kazmath/include/kazmath/vec2.h \
+    ../Classes/Lib/kazmath/include/kazmath/vec3.h \
+    ../Classes/Lib/kazmath/include/kazmath/vec4.h \
+    ../Classes/Lib/msg/apple/string_table_en.h \
+    ../Classes/Lib/msg/apple/string_table_jp.h \
+    ../Classes/Lib/msg/apple/string_table_resource.h \
+    ../Classes/Lib/ncbind/ncb_foreach.h \
+    ../Classes/Lib/ncbind/ncb_invoke.hpp \
+    ../Classes/Lib/ncbind/ncbind.hpp \
+    ../Classes/Lib/onig/config.h \
+    ../Classes/Lib/onig/oniggnu.h \
+    ../Classes/Lib/onig/onigposix.h \
+    ../Classes/Lib/onig/oniguruma.h \
+    ../Classes/Lib/onig/regenc.h \
+    ../Classes/Lib/onig/regint.h \
+    ../Classes/Lib/onig/regparse.h \
+    ../Classes/Lib/onig/st.h \
+    ../Classes/Lib/tjs2/tjs.h \
+    ../Classes/Lib/tjs2/tjs.tab.h \
+    ../Classes/Lib/tjs2/tjs.tab.hpp \
+    ../Classes/Lib/tjs2/tjsArray.h \
+    ../Classes/Lib/tjs2/tjsBinarySerializer.h \
+    ../Classes/Lib/tjs2/tjsByteCodeLoader.h \
+    ../Classes/Lib/tjs2/tjsCommHead.h \
+    ../Classes/Lib/tjs2/tjsCompileControl.h \
+    ../Classes/Lib/tjs2/tjsConfig.h \
+    ../Classes/Lib/tjs2/tjsConstArrayData.h \
+    ../Classes/Lib/tjs2/tjsDate.h \
+    ../Classes/Lib/tjs2/tjsdate.tab.h \
+    ../Classes/Lib/tjs2/tjsdate.tab.hpp \
+    ../Classes/Lib/tjs2/tjsDateParser.h \
+    ../Classes/Lib/tjs2/tjsDebug.h \
+    ../Classes/Lib/tjs2/tjsDictionary.h \
+    ../Classes/Lib/tjs2/tjsError.h \
+    ../Classes/Lib/tjs2/tjsErrorDefs.h \
+    ../Classes/Lib/tjs2/tjsErrorInc.h \
+    ../Classes/Lib/tjs2/tjsException.h \
+    ../Classes/Lib/tjs2/tjsGlobalStringMap.h \
+    ../Classes/Lib/tjs2/tjsHashSearch.h \
+    ../Classes/Lib/tjs2/tjsInterCodeExec.h \
+    ../Classes/Lib/tjs2/tjsInterCodeGen.h \
+    ../Classes/Lib/tjs2/tjsInterface.h \
+    ../Classes/Lib/tjs2/tjsLex.h \
+    ../Classes/Lib/tjs2/tjsMath.h \
+    ../Classes/Lib/tjs2/tjsMessage.h \
+    ../Classes/Lib/tjs2/tjsMT19937ar-cok.h \
+    ../Classes/Lib/tjs2/tjsNamespace.h \
+    ../Classes/Lib/tjs2/tjsNative.h \
+    ../Classes/Lib/tjs2/tjsObject.h \
+    ../Classes/Lib/tjs2/tjsObjectExtendable.h \
+    ../Classes/Lib/tjs2/tjsOctPack.h \
+    ../Classes/Lib/tjs2/tjspp.tab.h \
+    ../Classes/Lib/tjs2/tjspp.tab.hpp \
+    ../Classes/Lib/tjs2/tjsRandomGenerator.h \
+    ../Classes/Lib/tjs2/tjsRegExp.h \
+    ../Classes/Lib/tjs2/tjsScriptBlock.h \
+    ../Classes/Lib/tjs2/tjsScriptCache.h \
+    ../Classes/Lib/tjs2/tjsString.h \
+    ../Classes/Lib/tjs2/tjsTypes.h \
+    ../Classes/Lib/tjs2/tjsUtils.h \
+    ../Classes/Lib/tjs2/tjsVariant.h \
+    ../Classes/Lib/tjs2/tjsVariantString.h \
+    ../Classes/Core/Base/System.h \
+    ../Classes/Core/Base/Storages.h \
+    ../Classes/Core/Data/ValueUnits/Color.h \
+    ../Classes/Core/Data/ValueUnits/Transform.h \
+    ../Classes/Core/Data/FileUnits/FileInfo.h \
+    ../Classes/Core/Data/FileUnits/IOData.h \
+    ../Classes/Core/Data/ImageUnits/PictureData.h \
+    ../Classes/Core/Data/ImageUnits/ImageInfo.h \
+    ../Classes/Core/Data/ImageUnits/CharacterInfo.h \
+    ../Classes/Core/KAGParser/KAGController.h \
+    ../Classes/Core/KAGParser/KAGLabel.h \
+    ../Classes/Core/KAGParser/KAGParser.h \
+    ../Classes/Core/KAGParser/KAGStorage.h \
+    ../Classes/Core/KAGParser/KAGTag.h \
+    ../Classes/Core/Painter/Program/GrowProgram.h \
+    ../Classes/Core/Painter/Program/NormalProgram.h \
+    ../Classes/Core/Painter/Program/PaintShader.h \
+    ../Classes/Core/Painter/Program/PaintProgram.h \ 
+    ../Classes/Core/Painter/Program/SingleProgram.h \
+    ../Classes/Core/Painter/PaintComponent/Character.h \
+    ../Classes/Core/Painter/PaintComponent/RTT.h\
+    ../Classes/Core/Painter/PaintEngine.h \
+    ../Classes/Core/Scripts/JsonParser.h \
+    ../Classes/Core/Scripts/ScriptEngine.h \
+    ../Classes/Core/Widget/Console.h \
+    ../Classes/Core/Widget/Window.h \
+    ../Classes/Core/CoreMacros.h \
+    ../Classes/Core/Data/ValueUnits/CoreString.h \
+    ../Classes/Core/Base/SystemDelegate.h \
+    ../Classes/Core/Base/Audio.h \ 
+    ../Classes/Core/Data/ImageUnits/Texture.h \
+    ../Classes/Core/Painter/PaintComponent/Image.h \
+    ../Classes/Core/Painter/PaintComponent/ColorRect.h \
+    ../Classes/Core/Data/ValueUnits/CoreStructs.h \
+    ../Classes/Core/CoreTypes.h \
+    ../Classes/Core/Scripts/TjsBind/TjsClasses/TjsAudio.h \
+    ../Classes/Core/Scripts/TjsBind/TjsClasses/TjsCharacter.h \
+    ../Classes/Core/Scripts/TjsBind/TjsClasses/TjsKAGController.h \
+    ../Classes/Core/Scripts/TjsBind/TjsClasses/TjsWindow.h \
+    ../Classes/Core/Scripts/TjsBind/TjsExtra/TjsDictIterator.h \
+    ../Classes/Core/Scripts/TjsBind/TjsExtra/TjsSet.h \
+    ../Classes/Core/Scripts/TjsBind/TjsSingleton/TjsConsole.h \
+    ../Classes/Core/Scripts/TjsBind/TjsSingleton/TjsScripts.h \
+    ../Classes/Core/Scripts/TjsBind/TjsSingleton/TjsStorages.h \
+    ../Classes/Core/Scripts/TjsBind/TjsSingleton/TjsSystem.h \
+    ../Classes/Core/Scripts/TjsBind/TjsBind.h \
+    ../Classes/Core/Scripts/TjsBind/TjsClasses/TjsImage.h \
     QtWindow.h \
-    ../DollEngine/Core/Scripts/TjsBind/TjsClasses/TjsSystemDelegate.h \
-    ../DollEngine/Core/Scripts/TjsBind/TjsClasses/TjsTransform.h \
+    ../Classes/Core/Scripts/TjsBind/TjsClasses/TjsSystemDelegate.h \
+    ../Classes/Core/Scripts/TjsBind/TjsClasses/TjsTransform.h \
 
 FORMS  += QtConsole.ui \
     QtWindow.ui

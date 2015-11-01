@@ -1,0 +1,126 @@
+
+class GameObject
+{
+	//public
+	var transform = void;
+	var children = [];
+	
+	//private
+	var _needSortChildren = false;
+	var _transInWorld = void;
+
+	function GameObject () {
+		transform = new Transform();
+		_transInWorld = new Transform();
+	}
+
+	function finalize () {
+		invalidate transform;
+		invalidate _transInWorld;
+		for (var i = 0; i < children.count; i++) {
+			invalidate children[i];
+		}
+		children.clear();
+	}
+
+	function updateTransform () {
+		transform.flush();
+		if(parent) {
+			_transInWorld.assign(parent._transInWorld);
+		}
+		else {
+			_transInWorld.init();
+		}
+		_transInWorld.transform(transform);
+		_transInWorld.width = transform.width;
+		_transInWorld.height = transform.height;
+	}
+
+	function visit () {
+		if(visible) {
+			if (_needSortChildren) {
+				children.sort(function (a,b) {
+					return a.absolute < b.absolute;
+				});
+				_needSortChildren = false;
+			}
+			updateTransform();
+			if(children.count == 0){
+				onPaint();
+			}
+			else {
+				var i = 0;
+				for (; i < children.count; ++i) {
+					if(children[i].absolute < 0) {
+						children[i].visit();
+					}
+					else {
+						break;
+					}
+				}
+				onPaint();
+				for (; i < children.count; ++i) {
+					children[i].visit();
+				}
+			}
+		}
+	}
+
+
+	/***
+	*事件
+	*/
+
+	function onPaint () {
+		
+	}
+
+	/***
+	*属性
+	*/
+
+	property width {
+		setter(v) {
+			
+		}
+	}
+
+	var _visible = true;
+	property visible{
+		setter(v) {
+			_visible = v;
+		}
+		getter {
+			return _visible;
+		}
+	}
+
+	var _absolute = 0;
+	property absolute{
+		setter(v) {
+			_absolute = v;
+			if(parent) parent._needSortChildren;
+		}
+		getter {
+			return _absolute;
+		}
+	}
+
+	var _parent = null;
+	property parent {
+		setter(v) {
+			if(_parent) {
+				_parent.children.remove(this);
+				_parent._needSortChildren = true;
+			}
+			_parent = v;
+			if(_parent) {
+				_parent.children.add(this);
+				_parent._needSortChildren = true;
+			}
+		}
+		getter {
+			return _parent;
+		}
+	}
+}

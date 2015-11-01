@@ -1,0 +1,60 @@
+
+class Layer extends GameObject
+{
+	//public
+	var app;
+
+	//private
+	var _image;
+	function Layer (app,par) {
+		super.GameObject();
+		parent = par;
+		this.app = app;
+		_image = new Image();
+	}
+
+	function loadImages (path) {
+		_image.loadImages(path,"");
+		setSizeToImageSize();
+	}
+
+	function setSizeToImageSize () {
+		setSize(_image.paintWidth,_image.paintHeight);
+	}
+
+	function setSize (w=void,h=void) {
+		width = w if w!==void;
+		height = h if h!==void;
+	}
+
+	function onPaint () {
+		_image.paint(_transInWorld);
+	}
+
+	property width {
+	    setter(v) {
+	    	transform.width = v;
+	    }
+	    getter {
+	    	return transform.width;
+	    }
+	}
+
+	property width {
+	    setter(v) {
+	    	transform.width = v;
+	    }
+	    getter {
+	    	return transform.width;
+	    }
+	}
+
+	property height {
+	    setter(v) {
+	    	transform.height = v;
+	    }
+	    getter {
+	    	return transform.height;
+	    }
+	}
+}

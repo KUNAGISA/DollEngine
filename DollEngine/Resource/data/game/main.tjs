@@ -1,0 +1,3 @@
+
+var lay = new Layer(app,app.sysbase);
+lay.loadImages("alice.png");

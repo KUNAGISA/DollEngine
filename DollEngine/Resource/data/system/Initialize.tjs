@@ -1,0 +1,39 @@
+
+var print = Console.log;
+var em = Console.throwMsg;
+
+var DEConfig = Scripts.jsonStorage("Config.json");
+
+System.debugMode = DEConfig.debugMode;
+
+{
+    var count = DEConfig.scripts.count;
+    for (var i = 0; i < count; i++) {
+        var file = DEConfig.scripts[i];
+        print("LOAD %s",file);
+        Scripts.execStorage(file);
+    };
+    count = DEConfig.autoPaths.count;
+    for (var i = 0; i < count; i++) {
+        var path = DEConfig.autoPaths[i];
+        Storages.addAutoPath(path);
+    };
+}
+
+var tf=%[];
+var f=%[];
+var sf=%[];
+
+var app;
+if(DEConfig.module.kag)
+{
+    app = new KAG();
+    global.kag = app;
+// app.process("first.ks");
+}
+else
+{
+    app = new Application();
+    Scripts.execStorage("main.tjs");
+}
+
