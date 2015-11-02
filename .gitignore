@@ -1,12 +1,14 @@
 
-DollEngine/DollEngine/Resource/data/bgimage/
-DollEngine/DollEngine/Resource/data/bgm/
-DollEngine/DollEngine/Resource/data/fgimage/
-DollEngine/DollEngine/Resource/data/image/
-DollEngine/DollEngine/Resource/data/scenario/
-DollEngine/DollEngine/Resource/data/sound/
-DollEngine/DollEngine/Resource/data/uicfg/
+DollEngine/Resource/data/bgimage/
+DollEngine/Resource/data/bgm/
+DollEngine/Resource/data/fgimage/
+DollEngine/Resource/data/image/
+DollEngine/Resource/data/scenario/
+DollEngine/Resource/data/sound/
+DollEngine/Resource/data/uicfg/
 DollEngine/DerivedData/
 
 DollEngine/build-DollEngine-Desktop_Qt_5_5_0_MinGW_32bit-Debug
 DollEngine/build-DollEngine-Desktop_Qt_5_5_0_MinGW_32bit-Release
+
+青州行

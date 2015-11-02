@@ -35,33 +35,33 @@ static WindowDelegate* s_instance=nil;
 
 DE_BEGIN
 
-void Window::initialize(float w, float h,float s)
-{
-    if (!m_deviceWindow) {
-        if (w < 120) {
-            w = 120;
-        }
-        if (h < 120) {
-            h = 120;
-        }
-        s_window = [[UIWindow alloc] initWithFrame: [[UIScreen mainScreen] bounds]];
-
-        m_deviceWindow = (__bridge void*)s_window;
+//void Window::initialize(float w, float h,float s)
+//{
+////    if (!m_deviceWindow) {
+//        if (w < 120) {
+//            w = 120;
+//        }
+//        if (h < 120) {
+//            h = 120;
+//        }
+//        s_window = [[UIWindow alloc] initWithFrame: [[UIScreen mainScreen] bounds]];
+//
+////        m_deviceWindow = (__bridge void*)s_window;
+////
+////        DEOpenGLView* glView = [[DEOpenGLView alloc]initWithFrame:rc];
+////        s_window.contentView = glView;
+////        s_window.releasedWhenClosed = YES;
+//        [s_window center];
+//        [s_window becomeFirstResponder];
 //        
-//        DEOpenGLView* glView = [[DEOpenGLView alloc]initWithFrame:rc];
-//        s_window.contentView = glView;
-//        s_window.releasedWhenClosed = YES;
-        [s_window center];
-        [s_window becomeFirstResponder];
-        
-        //        [s_window makeKeyAndOrderFront:[WindowDelegate GetInstance]];
-//        [s_window setAcceptsMouseMovedEvents:NO];
-//        [s_window makeMainWindow];
-//        
-//        s_window.delegate = [WindowDelegate GetInstance];
-
-    }
-}
+//        //        [s_window makeKeyAndOrderFront:[WindowDelegate GetInstance]];
+////        [s_window setAcceptsMouseMovedEvents:NO];
+////        [s_window makeMainWindow];
+////        
+////        s_window.delegate = [WindowDelegate GetInstance];
+//
+////    }
+//}
 
 
 DE_END

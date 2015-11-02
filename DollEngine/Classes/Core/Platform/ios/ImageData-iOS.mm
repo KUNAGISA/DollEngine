@@ -22,7 +22,7 @@ bool PictureData::loadFromFile(const DE::String &fullPath)
         
         data = [NSData dataWithBytes:ioData->getBuffer() length:ioData->getSize()];
         cgImage = [[UIImage imageWithData:data] CGImage];
-        delete [] ioData;
+        delete ioData;
         setWidth(CGImageGetWidth(cgImage));
         setHeight(CGImageGetHeight(cgImage));
         CGImageAlphaInfo info = CGImageGetAlphaInfo(cgImage);

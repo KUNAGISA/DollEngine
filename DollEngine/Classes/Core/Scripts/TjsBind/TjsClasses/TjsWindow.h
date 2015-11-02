@@ -10,12 +10,15 @@
 #define __DollEngine__TjsWindow__
 
 #include "TjsBind.h"
+#ifdef __QT__
 #include "QtWindow.h"
-
-TJS_NCB(QtWindow){}
+#else
+#include "Window.h"
+#endif
+TJS_NCB(Window){}
 void setTitle(tTJSVariant v){
     TJS_STRING(v, str);
-    QtWindow::setTitle(str);
+    Window::setTitle(str);
 }
 tTJSVariant getTitle(){
     return m_title.c_str();

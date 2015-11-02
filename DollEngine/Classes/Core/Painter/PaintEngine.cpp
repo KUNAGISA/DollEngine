@@ -31,27 +31,27 @@ PaintEngine* PaintEngine::GetInstance()
     return _instance;
 }
 
-#ifdef __QT__
-
-PaintEngine::PaintEngine() :  
-   m_layerHeight(0)
-  ,m_layerWidth(0)
-  ,m_layerX(0)
-  ,m_layerY(0)
-  ,m_layerZoom(0)
-  ,m_initialized(false)
- ,m_curTexture(-1)
- ,m_curBlendDst(-1)
- ,m_curBlendSrc(-1)
- ,m_curProgram(NULL)
-{  
+PaintEngine::PaintEngine() :
+m_layerHeight(0)
+,m_layerWidth(0)
+,m_layerX(0)
+,m_layerY(0)
+,m_layerZoom(0)
+,m_initialized(false)
+,m_curTexture(-1)
+,m_curBlendDst(-1)
+,m_curBlendSrc(-1)
+,m_curProgram(NULL)
+{
     m_globalTrans = new Transform();
-}  
-  
-PaintEngine::~PaintEngine()  
-{  
-    SAFF_DELETE(m_globalTrans);  
-}  
+}
+
+PaintEngine::~PaintEngine()
+{
+    SAFF_DELETE(m_globalTrans);
+}
+
+#ifdef __QT__
 
 static QVector<GLfloat> vertData;
 static const float coords[4][3] = 
@@ -189,6 +189,7 @@ void PaintEngine::resizeGL(int width, int height)
 //    QOpenGLWidget::resizeGL(width,height);
 //    DE::PaintEngine::GetInstance()->resize(width,height);
 }
+
 
 #endif
 

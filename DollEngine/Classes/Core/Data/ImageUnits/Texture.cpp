@@ -31,7 +31,8 @@ Texture::~Texture()
 
 bool Texture::initWithImage(PictureData* image)
 {
-    setTextureId(PaintEngine::GetInstance()->loadTexture(image->getData()->getBuffer(),image->getWidth(),image->getHeight()));
+    DrawTexId tex =PaintEngine::GetInstance()->loadTexture(image->getData()->getBuffer(),image->getWidth(),image->getHeight());
+    setTextureId(tex);
     setWidth(image->getWidth());
     setHeight(image->getHeight());
     return true;

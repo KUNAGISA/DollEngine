@@ -53,37 +53,34 @@ float System::getDesktopWidth()
 {
     return [[UIScreen mainScreen] bounds].size.width;
 }
+
 float System::getDesktopHeight()
 {
     return [[UIScreen mainScreen] bounds].size.height;
 }
 
 
-void* System::getFont(const String& fontName)
-{
-    auto iter = m_allFonts.find(fontName);
-    if (iter != m_allFonts.end()) {
-        return iter->second;
-    }
-    else {
-        if (fontName == DEFFONT) {
-            addFont("WenQuanYiMicroHei.ttc");
-        }
-        return NULL;
-    }
-}
-
 PictureData* System::addText(const String& text,const String& fontName,int fontSize,FontData* fd)
 {
-    FT_Face face = (FT_Face)getFont(fontName);
-    if (!face) {
-        face = (FT_Face)getFont(DEFFONT);
+    FT_Face face;
+    auto iter = m_allFonts.find(fontName);
+    if (iter != m_allFonts.end()) {
+        face = (FT_Face)iter->second;
+    }
+    else {
+        iter = m_allFonts.find(DEFFONT);
+        if(iter == m_allFonts.end()) {
+            addFont("WenQuanYiMicroHei.ttc");
+            iter = m_allFonts.find(DEFFONT);
+        }
+        face = (FT_Face)iter->second;
     }
     unsigned short charcode = text[0];
     FT_UInt graphIdx = FT_Get_Char_Index(face, (FT_ULong)charcode);
     if (graphIdx == 0)
     {
-        face = (FT_Face)getFont(DEFFONT);
+        iter = m_allFonts.find(DEFFONT);
+        face = (FT_Face)iter->second;
         graphIdx = FT_Get_Char_Index(face, charcode);
     }
     FT_Error ft_err = FT_Set_Char_Size(face,

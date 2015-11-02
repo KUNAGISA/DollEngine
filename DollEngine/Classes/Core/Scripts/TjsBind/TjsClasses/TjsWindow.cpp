@@ -9,7 +9,7 @@
 #include "TjsWindow.h"
 
 
-NCB_REGISTER_CLASS_DIFFER(Window,TjsQtWindow)
+NCB_REGISTER_CLASS_DIFFER(Window,TjsWindow)
 {
     TJS_FACTORY
     NCB_METHOD(initialize);

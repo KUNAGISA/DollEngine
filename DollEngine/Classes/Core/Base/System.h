@@ -29,6 +29,7 @@ public:
     
     PictureData* addText(const String& text,const String& fontName,int fontSize,FontData* fd);
     String addFont(const String& filePath);
+
     void removeFont(const String& fontName);
     
     static String GetKeyByFont(const String& str,const String& fontName,int fontSize,int outlineSize) {
