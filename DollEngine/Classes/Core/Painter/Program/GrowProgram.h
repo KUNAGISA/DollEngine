@@ -17,7 +17,7 @@ class GrowProgram : public NormalProgram
 public:
     GrowProgram();
     ~GrowProgram();
-    virtual bool bind();
+    virtual void bind();
     const char* getShader_F();
     virtual void preparePaint(PaintConfig& config);
     

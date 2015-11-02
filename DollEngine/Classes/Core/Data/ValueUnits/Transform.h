@@ -29,6 +29,7 @@ public:
     bool pointInside(float x,float y,float& ox,float& oy);
 public:
     const kmMat4& getMatrix(){return m_matrix;}
+    float* getData(){return m_matrix.mat;}
     void setRotation(float v){m_rotationX=m_rotationY=m_rotationZ=v;m_needFlush=true;}
     float getRotation(){return m_rotationX;}
     void setScale(float v){m_scaleX=m_scaleY=v;m_needFlush=true;}

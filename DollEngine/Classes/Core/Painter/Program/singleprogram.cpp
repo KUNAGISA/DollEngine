@@ -1,4 +1,5 @@
 #include "singleprogram.h"
+#include "PaintEngine.h"
 
 DE_BEGIN
 
@@ -7,28 +8,40 @@ SingleProgram::SingleProgram()
     
 }
 
+bool SingleProgram::init()
+{
+    addShader(SHADER_TYPE_VERTEX,getShader_V());
+    addShader(SHADER_TYPE_FRAGMENT,getShader_F());
+    
+    if(link()) {
+        bind();
+        return true;
+    }
+    return false;
+}
+
 const char* SingleProgram::getShader_V()
 {
     return
-    "attribute highp vec4 vertex;\n"
-    "attribute mediump vec4 texCoord;\n"
-    "varying mediump vec4 texc;\n"
-    "uniform mediump mat4 matrix;\n"
+    "attribute vec4 a_position;\n"
+    "attribute vec4 a_texCoord;\n"
+    "varying vec4 texc;\n"
+    "uniform mat4 matrix;\n"
     "void main(void)\n"
     "{\n"
-    "    gl_Position = matrix * vertex;\n"
-    "    texc = texCoord;\n"
+    "    gl_Position = matrix * a_position;\n"
+    "    texc = a_texCoord;\n"
     "}\n";
 }
 
 const char* SingleProgram::getShader_F()
 {
     return
-    "uniform sampler2D texture;\n"
-    "varying mediump vec4 texc;\n"
+    "uniform sampler2D tex_fore;\n"
+    "varying vec4 texc;\n"
     "void main(void)\n"
     "{\n"
-    "    gl_FragColor = texture2D(texture, texc.st);\n"
+    "    gl_FragColor = texture2D(tex_fore, texc.st);\n"
     "}\n";
 
 }

@@ -27,10 +27,11 @@ bool NormalProgram::init()
     addShader(SHADER_TYPE_VERTEX,getShader_V());
     addShader(SHADER_TYPE_FRAGMENT,getShader_F());
     
-    PaintEngine::GetInstance()->linkProgram(m_programId);
-    
-    bind();
-    return true;
+    if(link()) {
+        bind();
+        return true;
+    }
+    return false;
 }
 
 void NormalProgram::preparePaint(PaintConfig& config)

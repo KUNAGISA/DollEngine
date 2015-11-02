@@ -21,7 +21,7 @@ GrowProgram::~GrowProgram()
     
 }
 
-bool GrowProgram::bind()
+void GrowProgram::bind()
 {
     int index =PaintEngine::GetInstance()->getUniform(m_programId,"resolutionX");
     if (index != -1) m_allUniformIndex["resolutionX"]=index;
@@ -34,7 +34,7 @@ bool GrowProgram::bind()
     
     index =PaintEngine::GetInstance()->getUniform(m_programId,"sampleNum");
     if (index != -1) m_allUniformIndex["sampleNum"]=index;
-    return NormalProgram::bind();
+    NormalProgram::bind();
 }
 
 const char* GrowProgram::getShader_F()

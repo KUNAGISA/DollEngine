@@ -74,42 +74,45 @@ void PaintProgram::addShader(SHADER_TYPE type,const char* code)
     CHECK_GL_ERROR;
 }
 
-bool PaintProgram::bind()
+bool PaintProgram::link()
 {
     PaintEngine::GetInstance()->bindAttribute(m_programId, "a_position",PROGRAM_VERTEX_ATTRIBUTE);
     PaintEngine::GetInstance()->bindAttribute(m_programId,"a_color",PROGRAM_COLOR_ATTRIBUTE);
     PaintEngine::GetInstance()->bindAttribute(m_programId,"a_texCoord",PROGRAM_TEXCOORD_ATTRIBUTE);
     //    bind(PROGRAM_OPACITY_ATTRIBUTE,"a_opacity");
-    if(!PaintEngine::GetInstance()->linkProgram(m_programId))
-    {
-        return false;
-    }
     PaintEngine::GetInstance()->bindAttribute(m_programId,"tex_fore",PROGRAM_TEXTURE_ATTRIBUTE);
     PaintEngine::GetInstance()->bindAttribute(m_programId,"tex_back",PROGRAM_TEXTURE_ATTRIBUTE);
     PaintEngine::GetInstance()->bindAttribute(m_programId,"texture_fbo",PROGRAM_FBO_ATTRIBUTE);
     PaintEngine::GetInstance()->bindAttribute(m_programId,"matrix",PROGRAM_MATRIX_ATTRIBUTE);
+    if(!PaintEngine::GetInstance()->linkProgram(m_programId)) {
+        return false;
+    }
+    return true;
+}
+
+void PaintProgram::bind()
+{
     
     int index = PaintEngine::GetInstance()->getUniform(m_programId,"tex_fore");
-    if (index != -1) m_allUniformIndex["tex_fore"]=index;
+    if (index != -1) m_allUniformIndex[L"tex_fore"]=index;
     
     index = PaintEngine::GetInstance()->getUniform(m_programId,"tex_back");
-    if (index != -1) m_allUniformIndex["tex_back"]=index;
+    if (index != -1) m_allUniformIndex[L"tex_back"]=index;
     
     index = PaintEngine::GetInstance()->getUniform(m_programId, "texture_fbo");
-    if (index != -1) m_allUniformIndex["texture_fbo"]=index;
+    if (index != -1) m_allUniformIndex[L"texture_fbo"]=index;
     
     index = PaintEngine::GetInstance()->getUniform(m_programId,"matrix");
-    if (index != -1) m_allUniformIndex["matrix"]=index;
+    if (index != -1) m_allUniformIndex[L"matrix"]=index;
     
     PaintEngine::GetInstance()->useProgram(m_programId);
-    setUniformValue("tex_fore",0);
+    setUniformValue(L"tex_fore",0);
     CHECK_GL_ERROR;
-    return true;
 }
 
 
 
-void PaintProgram::setUniformValue(const char* name,GLfloat value)
+void PaintProgram::setUniformValue(const String& name,GLfloat value)
 {
     auto iter = m_allUniformIndex.find(name);
     if(iter != m_allUniformIndex.end())
@@ -117,7 +120,7 @@ void PaintProgram::setUniformValue(const char* name,GLfloat value)
     CHECK_PROGRAM_ERROR(this);
 }
 
-void PaintProgram::setUniformValue(const char* name,GLint value)
+void PaintProgram::setUniformValue(const String& name,GLint value)
 {
     auto iter = m_allUniformIndex.find(name);
     if(iter != m_allUniformIndex.end())
@@ -125,7 +128,7 @@ void PaintProgram::setUniformValue(const char* name,GLint value)
     CHECK_PROGRAM_ERROR(this);
 }
 
-void PaintProgram::setUniformValue(const char* name,GLuint value)
+void PaintProgram::setUniformValue(const String& name,GLuint value)
 {
     auto iter = m_allUniformIndex.find(name);
     if(iter != m_allUniformIndex.end())
@@ -133,7 +136,7 @@ void PaintProgram::setUniformValue(const char* name,GLuint value)
     CHECK_PROGRAM_ERROR(this);
 }
 
-void PaintProgram::setUniformValue(const char* name,const Size& value)
+void PaintProgram::setUniformValue(const String& name,const Size& value)
 {
     auto iter = m_allUniformIndex.find(name);
     if(iter != m_allUniformIndex.end())
@@ -146,12 +149,22 @@ void PaintProgram::setUniformValue(const char* name,const Size& value)
     CHECK_PROGRAM_ERROR(this);
 }
 
-void PaintProgram::setUniformValue(const char* name,const kmMat4& value)
+void PaintProgram::setUniformValue(const String& name,const kmMat4& value)
 {
     auto iter = m_allUniformIndex.find(name);
     if(iter != m_allUniformIndex.end())
     {
         PaintEngine::GetInstance()->setUniformMatrix4fv(iter->second, 1,GL_FALSE,(GLfloat*)value.mat);
+    }
+    CHECK_PROGRAM_ERROR(this);
+}
+
+void PaintProgram::setUniformValue(const String& name, GLfloat* value)
+{
+    auto iter = m_allUniformIndex.find(name);
+    if(iter != m_allUniformIndex.end())
+    {
+        PaintEngine::GetInstance()->setUniformMatrix4fv(iter->second, 1,GL_FALSE,value);
     }
     CHECK_PROGRAM_ERROR(this);
 }
