@@ -22,7 +22,7 @@ public:
     Window();
     virtual ~Window();
     static Window* GetInstance();
-    void initialize(int w,int h);
+    virtual void setLayerSize(int w,int h);
     virtual void setSize(int w,int h){m_width=w,m_height=h;}
     void beforeMainLoop();
     void afterMainLoop();

@@ -122,7 +122,7 @@ return 0;\
 #include <GL/gl.h>
 #endif
 
-#define CHECK_GL_ERROR PaintEngine::GetInstance()->checkError();
+#define CHECK_GL_ERROR DE::PaintEngine::GetInstance()->checkError();
 #define CHECK_PROGRAM_ERROR(ID) PaintEngine::GetInstance()->checkProgramError(ID);
 
 #endif

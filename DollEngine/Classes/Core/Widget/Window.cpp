@@ -22,6 +22,8 @@ Window* Window::GetInstance()
 Window::Window()
 :m_visible(false)
 ,m_fullScreen(false)
+,m_height(1)
+,m_width(1)
 {
     s_instance = this;
 }
@@ -30,11 +32,10 @@ Window::~Window()
 {
 }
 
-void Window::initialize(int w,int h)
+void Window::setLayerSize(int w,int h)
 {
     PaintEngine::GetInstance()->setLayerWidth(w);
     PaintEngine::GetInstance()->setLayerHeight(h);
-    setSize(w,h);
 }
 
 void Window::beforeMainLoop()

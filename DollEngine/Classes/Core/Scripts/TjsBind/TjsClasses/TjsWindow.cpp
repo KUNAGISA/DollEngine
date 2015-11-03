@@ -8,11 +8,14 @@
 
 #include "TjsWindow.h"
 
-
-NCB_REGISTER_CLASS_DIFFER(Window,TjsWindow)
+#ifdef __QT__
+NCB_REGISTER_CLASS_DIFFER(Window,TjsQtWindow)
+#else
+NCB_REGISTER_CLASS_DIFFER(Window,TjsiOSWindow)
+#endif
 {
     TJS_FACTORY
-    NCB_METHOD(initialize);
+    NCB_METHOD(setLayerSize);
     NCB_METHOD(setSize);
     NCB_METHOD(beforeMainLoop);
     NCB_METHOD(afterMainLoop);

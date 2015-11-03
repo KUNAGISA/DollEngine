@@ -21,13 +21,17 @@ class PaintProgram
 {
 public:
     PaintProgram();
-    ~PaintProgram();
+    virtual ~PaintProgram();
     virtual const char* getShader_V();
     virtual const char* getShader_F();
-    void addShader(SHADER_TYPE type,const char* code);
+    virtual bool init();
+    virtual bool initShader();
+    virtual void initShaderAttrib(){}
     virtual bool link();
-    virtual void bind();
+    virtual void bind(){}
+    virtual void preparePaint(PaintConfig& config){}
 public:
+    bool addShader(SHADER_TYPE type,const char* code);
     size_t getShaderCount(){return m_shaders.size();}
     PaintShader* getShader(int idx){return m_shaders[idx];}
     void setUniformValue(const String& name,GLfloat value);
@@ -39,9 +43,6 @@ public:
     
 public:
     PROPERTY_RO(GLuint, ProgramId, m_programId)
-    
-    virtual bool init(){return false;}
-    virtual void preparePaint(PaintConfig& config){}
 protected:
     vector<PaintShader*> m_shaders;
     map<String, GLint> m_allUniformIndex;

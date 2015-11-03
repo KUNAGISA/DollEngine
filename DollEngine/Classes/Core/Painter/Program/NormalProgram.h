@@ -17,7 +17,8 @@ class NormalProgram : public PaintProgram
 public:
     NormalProgram();
     ~NormalProgram();
-    bool init();
+    void initShaderAttrib();
+    void bind();
     void preparePaint(PaintConfig& config);
     void preparePaintWithScale9(PaintConfig& config);
     

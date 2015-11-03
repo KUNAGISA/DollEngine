@@ -64,51 +64,55 @@ const char* PaintProgram::getShader_F()
     "}";
 }
 
-void PaintProgram::addShader(SHADER_TYPE type,const char* code)
+bool PaintProgram::addShader(SHADER_TYPE type,const char* code)
 {
     PaintShader* obj = new PaintShader();
     obj->setType(type);
-    obj->compileShaderCode(code);
+    if(!obj->compileShaderCode(code))
+    {
+        delete obj;
+        return false;
+    }
     m_shaders.push_back(obj);
     PaintEngine::GetInstance()->attachShader(m_programId,obj->getId());
+    return true;
+}
+
+bool PaintProgram::init()
+{
+    if(!initShader()){
+        return false;
+    }
     CHECK_GL_ERROR;
+    initShaderAttrib();
+    CHECK_GL_ERROR;
+    if(!link()){
+        return false;
+    }
+    bind();
+    CHECK_GL_ERROR;
+    return true;
+}
+
+bool PaintProgram::initShader()
+{
+    if(!addShader(SHADER_TYPE_VERTEX,getShader_V())) {
+        return false;
+    }
+    if(!addShader(SHADER_TYPE_FRAGMENT,getShader_F())){
+        return false;
+    }
+    return true;
 }
 
 bool PaintProgram::link()
 {
-    PaintEngine::GetInstance()->bindAttribute(m_programId, "a_position",PROGRAM_VERTEX_ATTRIBUTE);
-    PaintEngine::GetInstance()->bindAttribute(m_programId,"a_color",PROGRAM_COLOR_ATTRIBUTE);
-    PaintEngine::GetInstance()->bindAttribute(m_programId,"a_texCoord",PROGRAM_TEXCOORD_ATTRIBUTE);
-    //    bind(PROGRAM_OPACITY_ATTRIBUTE,"a_opacity");
-    PaintEngine::GetInstance()->bindAttribute(m_programId,"tex_fore",PROGRAM_TEXTURE_ATTRIBUTE);
-    PaintEngine::GetInstance()->bindAttribute(m_programId,"tex_back",PROGRAM_TEXTURE_ATTRIBUTE);
-    PaintEngine::GetInstance()->bindAttribute(m_programId,"texture_fbo",PROGRAM_FBO_ATTRIBUTE);
-    PaintEngine::GetInstance()->bindAttribute(m_programId,"matrix",PROGRAM_MATRIX_ATTRIBUTE);
     if(!PaintEngine::GetInstance()->linkProgram(m_programId)) {
         return false;
     }
     return true;
 }
 
-void PaintProgram::bind()
-{
-    
-    int index = PaintEngine::GetInstance()->getUniform(m_programId,"tex_fore");
-    if (index != -1) m_allUniformIndex[L"tex_fore"]=index;
-    
-    index = PaintEngine::GetInstance()->getUniform(m_programId,"tex_back");
-    if (index != -1) m_allUniformIndex[L"tex_back"]=index;
-    
-    index = PaintEngine::GetInstance()->getUniform(m_programId, "texture_fbo");
-    if (index != -1) m_allUniformIndex[L"texture_fbo"]=index;
-    
-    index = PaintEngine::GetInstance()->getUniform(m_programId,"matrix");
-    if (index != -1) m_allUniformIndex[L"matrix"]=index;
-    
-    PaintEngine::GetInstance()->useProgram(m_programId);
-    setUniformValue(L"tex_fore",0);
-    CHECK_GL_ERROR;
-}
 
 
 

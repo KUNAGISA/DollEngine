@@ -28,12 +28,14 @@ protected:
     virtual void resizeGL(int w, int h);
     void makeObject();
     
-    Texture *textures;
     QOpenGLShaderProgram *program;
     QOpenGLBuffer vbo;
 #else
 class PaintEngine
 {
+public:
+    void makeObject();
+    virtual void paintGL();
 #endif
 public:
     static PaintEngine* GetInstance();

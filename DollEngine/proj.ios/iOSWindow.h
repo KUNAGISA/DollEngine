@@ -6,10 +6,11 @@
 //  Copyright (c) 2015年 DollStudio. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 
 #ifndef __DollEngine__iOSWindow__
 #define __DollEngine__iOSWindow__
+
+#include "Window.h"
 
 DE_BEGIN
 
@@ -20,9 +21,10 @@ public:
 	virtual ~iOSWindow();
 
     void setVisible(bool visible);
-    
+    void setSize(int w,int h);
 protected:
-	void* m_iosWindow;
+    void* m_iosWindow;
+    void* m_iosViewCtl;
 };
 
 DE_END

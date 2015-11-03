@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../Classes/Core/Painter/PaintEngine.cpp"
-            timestampString = "468171847.711335"
+            timestampString = "468256775.150441"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "544"
-            endingLineNumber = "544"
-            landmarkName = "PaintEngine::loadTexture(void* data, int width,int height)"
+            startingLineNumber = "748"
+            endingLineNumber = "748"
+            landmarkName = "PaintEngine::checkError()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

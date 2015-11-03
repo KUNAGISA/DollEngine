@@ -22,16 +22,29 @@ NormalProgram::~NormalProgram()
     
 }
 
-bool NormalProgram::init()
+void NormalProgram::initShaderAttrib()
 {
-    addShader(SHADER_TYPE_VERTEX,getShader_V());
-    addShader(SHADER_TYPE_FRAGMENT,getShader_F());
+    PaintEngine::GetInstance()->bindAttribute(m_programId, "a_position",PROGRAM_VERTEX_ATTRIBUTE);
+    PaintEngine::GetInstance()->bindAttribute(m_programId,"a_color",PROGRAM_COLOR_ATTRIBUTE);
+    PaintEngine::GetInstance()->bindAttribute(m_programId,"a_texCoord",PROGRAM_TEXCOORD_ATTRIBUTE);
+//    PaintEngine::GetInstance()->bindAttribute(m_programId,"tex_fore",PROGRAM_TEXTURE_ATTRIBUTE);
+//    PaintEngine::GetInstance()->bindAttribute(m_programId,"matrix",PROGRAM_MATRIX_ATTRIBUTE);
     
-    if(link()) {
-        bind();
-        return true;
-    }
-    return false;
+}
+
+void NormalProgram::bind()
+{
+    int index = PaintEngine::GetInstance()->getUniform(m_programId,"matrix");
+    if (index != -1)
+        m_allUniformIndex[L"matrix"]=index;
+    
+    index = PaintEngine::GetInstance()->getUniform(m_programId,"tex_fore");
+    if (index != -1)
+        m_allUniformIndex[L"tex_fore"]=index;
+    
+    PaintEngine::GetInstance()->useProgram(m_programId);
+    setUniformValue(L"tex_fore",0);
+    CHECK_GL_ERROR;
 }
 
 void NormalProgram::preparePaint(PaintConfig& config)

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B801662A1BE8D7A400C9BD72 /* iOSWindow.mm in Sources */ = {isa = PBXBuildFile; fileRef = B80166291BE8D7A400C9BD72 /* iOSWindow.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B80166621BE8DCF500C9BD72 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B80166611BE8DCF500C9BD72 /* UIKit.framework */; };
+		B80166641BE8DE7100C9BD72 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B80166631BE8DE7100C9BD72 /* GLKit.framework */; };
 		B85123451BE7B0CF00D94A06 /* Storages.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B851213D1BE7B0CF00D94A06 /* Storages.cpp */; };
 		B85123461BE7B0CF00D94A06 /* System.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B851213F1BE7B0CF00D94A06 /* System.cpp */; };
 		B85123471BE7B0CF00D94A06 /* SystemDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B85121411BE7B0CF00D94A06 /* SystemDelegate.cpp */; };
@@ -32,11 +35,9 @@
 		B851235E1BE7B0CF00D94A06 /* NormalProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B85121781BE7B0CF00D94A06 /* NormalProgram.cpp */; };
 		B851235F1BE7B0CF00D94A06 /* PaintProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B851217A1BE7B0CF00D94A06 /* PaintProgram.cpp */; };
 		B85123601BE7B0CF00D94A06 /* PaintShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B851217C1BE7B0CF00D94A06 /* PaintShader.cpp */; };
-		B85123611BE7B0CF00D94A06 /* singleprogram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B851217E1BE7B0CF00D94A06 /* singleprogram.cpp */; };
 		B85123621BE7B0CF00D94A06 /* Audio-iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = B85121821BE7B0CF00D94A06 /* Audio-iOS.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		B85123631BE7B0CF00D94A06 /* ImageData-iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = B85121831BE7B0CF00D94A06 /* ImageData-iOS.mm */; };
 		B85123641BE7B0CF00D94A06 /* System-iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = B85121841BE7B0CF00D94A06 /* System-iOS.mm */; };
-		B85123651BE7B0CF00D94A06 /* Window-iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = B85121851BE7B0CF00D94A06 /* Window-iOS.mm */; };
 		B851236E1BE7B0CF00D94A06 /* JsonParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B85121911BE7B0CF00D94A06 /* JsonParser.cpp */; };
 		B851236F1BE7B0CF00D94A06 /* ScriptEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B85121931BE7B0CF00D94A06 /* ScriptEngine.cpp */; };
 		B85123701BE7B0CF00D94A06 /* TjsBind.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B85121961BE7B0CF00D94A06 /* TjsBind.cpp */; };
@@ -168,12 +169,14 @@
 		B8F393F81BC68E70002EB3CC /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B8F390E31BC68E6F002EB3CC /* Info.plist */; };
 		B8F393F91BC68E70002EB3CC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8F390E41BC68E6F002EB3CC /* LaunchScreen.xib */; };
 		B8F393FA1BC68E70002EB3CC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F390E51BC68E6F002EB3CC /* main.m */; };
-		B8F393FB1BC68E70002EB3CC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8F390E61BC68E6F002EB3CC /* Main.storyboard */; };
-		B8F393FC1BC68E70002EB3CC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F390E81BC68E6F002EB3CC /* ViewController.m */; };
 		B8F39B391BC6B26A002EB3CC /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8F39B381BC6B26A002EB3CC /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B80166281BE8D7A400C9BD72 /* iOSWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSWindow.h; sourceTree = "<group>"; };
+		B80166291BE8D7A400C9BD72 /* iOSWindow.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = iOSWindow.mm; sourceTree = "<group>"; };
+		B80166611BE8DCF500C9BD72 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		B80166631BE8DE7100C9BD72 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/System/Library/Frameworks/GLKit.framework; sourceTree = DEVELOPER_DIR; };
 		B8261DCB1ADC05430017767B /* DollEngineIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DollEngineIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B851213C1BE7B0CF00D94A06 /* Audio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Audio.h; sourceTree = "<group>"; };
 		B851213D1BE7B0CF00D94A06 /* Storages.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Storages.cpp; sourceTree = "<group>"; };
@@ -228,12 +231,9 @@
 		B851217B1BE7B0CF00D94A06 /* PaintProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaintProgram.h; sourceTree = "<group>"; };
 		B851217C1BE7B0CF00D94A06 /* PaintShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PaintShader.cpp; sourceTree = "<group>"; };
 		B851217D1BE7B0CF00D94A06 /* PaintShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaintShader.h; sourceTree = "<group>"; };
-		B851217E1BE7B0CF00D94A06 /* singleprogram.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = singleprogram.cpp; sourceTree = "<group>"; };
-		B851217F1BE7B0CF00D94A06 /* singleprogram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = singleprogram.h; sourceTree = "<group>"; };
 		B85121821BE7B0CF00D94A06 /* Audio-iOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "Audio-iOS.mm"; sourceTree = "<group>"; };
 		B85121831BE7B0CF00D94A06 /* ImageData-iOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "ImageData-iOS.mm"; sourceTree = "<group>"; };
 		B85121841BE7B0CF00D94A06 /* System-iOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "System-iOS.mm"; sourceTree = "<group>"; };
-		B85121851BE7B0CF00D94A06 /* Window-iOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "Window-iOS.mm"; sourceTree = "<group>"; };
 		B85121911BE7B0CF00D94A06 /* JsonParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JsonParser.cpp; sourceTree = "<group>"; };
 		B85121921BE7B0CF00D94A06 /* JsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JsonParser.h; sourceTree = "<group>"; };
 		B85121931BE7B0CF00D94A06 /* ScriptEngine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ScriptEngine.cpp; sourceTree = "<group>"; };
@@ -548,9 +548,6 @@
 		B8F390E31BC68E6F002EB3CC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B8F390E41BC68E6F002EB3CC /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		B8F390E51BC68E6F002EB3CC /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		B8F390E61BC68E6F002EB3CC /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		B8F390E71BC68E6F002EB3CC /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		B8F390E81BC68E6F002EB3CC /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		B8F39B381BC6B26A002EB3CC /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
@@ -559,6 +556,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B80166641BE8DE7100C9BD72 /* GLKit.framework in Frameworks */,
+				B80166621BE8DCF500C9BD72 /* UIKit.framework in Frameworks */,
 				B8D15A0D1BC94CD600D37D81 /* libz.dylib in Frameworks */,
 				B8F39B391BC6B26A002EB3CC /* AVFoundation.framework in Frameworks */,
 				B89F267F1B5E87B40081CA6C /* OpenGLES.framework in Frameworks */,
@@ -573,7 +572,7 @@
 			isa = PBXGroup;
 			children = (
 				B851213A1BE7B0CF00D94A06 /* Core */,
-				B85121BA1BE7B0CF00D94A06 /* lib */,
+				B85121BA1BE7B0CF00D94A06 /* Lib */,
 			);
 			name = Classes;
 			path = ../Classes;
@@ -703,8 +702,6 @@
 				B851217B1BE7B0CF00D94A06 /* PaintProgram.h */,
 				B851217C1BE7B0CF00D94A06 /* PaintShader.cpp */,
 				B851217D1BE7B0CF00D94A06 /* PaintShader.h */,
-				B851217E1BE7B0CF00D94A06 /* singleprogram.cpp */,
-				B851217F1BE7B0CF00D94A06 /* singleprogram.h */,
 			);
 			path = Program;
 			sourceTree = "<group>";
@@ -723,7 +720,6 @@
 				B85121821BE7B0CF00D94A06 /* Audio-iOS.mm */,
 				B85121831BE7B0CF00D94A06 /* ImageData-iOS.mm */,
 				B85121841BE7B0CF00D94A06 /* System-iOS.mm */,
-				B85121851BE7B0CF00D94A06 /* Window-iOS.mm */,
 			);
 			path = ios;
 			sourceTree = "<group>";
@@ -810,7 +806,7 @@
 			path = Widget;
 			sourceTree = "<group>";
 		};
-		B85121BA1BE7B0CF00D94A06 /* lib */ = {
+		B85121BA1BE7B0CF00D94A06 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
 				B85121BB1BE7B0CF00D94A06 /* freetype2 */,
@@ -820,7 +816,7 @@
 				B85122B91BE7B0CF00D94A06 /* onig */,
 				B85122F01BE7B0CF00D94A06 /* tjs2 */,
 			);
-			path = lib;
+			path = Lib;
 			sourceTree = "<group>";
 		};
 		B85121BB1BE7B0CF00D94A06 /* freetype2 */ = {
@@ -1291,6 +1287,8 @@
 		B8D365FA1B06350F00E627A7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B80166631BE8DE7100C9BD72 /* GLKit.framework */,
+				B80166611BE8DCF500C9BD72 /* UIKit.framework */,
 				B8D15A091BC811FC00D37D81 /* libz.dylib */,
 				B8F39B381BC6B26A002EB3CC /* AVFoundation.framework */,
 				B89F267E1B5E87B40081CA6C /* OpenGLES.framework */,
@@ -1301,6 +1299,8 @@
 		B8F390DB1BC68E6F002EB3CC /* proj.ios */ = {
 			isa = PBXGroup;
 			children = (
+				B80166281BE8D7A400C9BD72 /* iOSWindow.h */,
+				B80166291BE8D7A400C9BD72 /* iOSWindow.mm */,
 				B8F390DC1BC68E6F002EB3CC /* AppDelegateIOS.h */,
 				B8F390DD1BC68E6F002EB3CC /* AppDelegateIOS.mm */,
 				B8F390E11BC68E6F002EB3CC /* DollEnginePrefixiOS.pch */,
@@ -1308,9 +1308,6 @@
 				B8F390E31BC68E6F002EB3CC /* Info.plist */,
 				B8F390E41BC68E6F002EB3CC /* LaunchScreen.xib */,
 				B8F390E51BC68E6F002EB3CC /* main.m */,
-				B8F390E61BC68E6F002EB3CC /* Main.storyboard */,
-				B8F390E71BC68E6F002EB3CC /* ViewController.h */,
-				B8F390E81BC68E6F002EB3CC /* ViewController.m */,
 			);
 			name = proj.ios;
 			sourceTree = "<group>";
@@ -1323,8 +1320,8 @@
 			buildConfigurationList = B8261DEF1ADC05430017767B /* Build configuration list for PBXNativeTarget "DollEngineIOS" */;
 			buildPhases = (
 				B8261DC81ADC05430017767B /* Frameworks */,
-				B8261DC71ADC05430017767B /* Sources */,
 				B8261DC91ADC05430017767B /* Resources */,
+				B8261DC71ADC05430017767B /* Sources */,
 			);
 			buildRules = (
 			);
@@ -1375,7 +1372,6 @@
 				B851239B1BE7B0D000D94A06 /* readme.txt in Resources */,
 				B8F393F91BC68E70002EB3CC /* LaunchScreen.xib in Resources */,
 				B85123831BE7B0D000D94A06 /* ChangeLog in Resources */,
-				B8F393FB1BC68E70002EB3CC /* Main.storyboard in Resources */,
 				B851246D1BE7BB9300D94A06 /* data in Resources */,
 				B8F393F81BC68E70002EB3CC /* Info.plist in Resources */,
 				B85123841BE7B0D000D94A06 /* CMakeLists.txt in Resources */,
@@ -1498,7 +1494,6 @@
 				B85123521BE7B0CF00D94A06 /* Transform.cpp in Sources */,
 				B85123EC1BE7B0D000D94A06 /* tjsScriptCache.cpp in Sources */,
 				B85123701BE7B0CF00D94A06 /* TjsBind.cpp in Sources */,
-				B85123611BE7B0CF00D94A06 /* singleprogram.cpp in Sources */,
 				B85123511BE7B0CF00D94A06 /* CoreStructs.cpp in Sources */,
 				B85123E11BE7B0D000D94A06 /* tjsMessage.cpp in Sources */,
 				B85123DC1BE7B0D000D94A06 /* tjsInterCodeExec.cpp in Sources */,
@@ -1532,9 +1527,7 @@
 				B85123C71BE7B0D000D94A06 /* regtrav.c in Sources */,
 				B85123761BE7B0CF00D94A06 /* TjsTransform.cpp in Sources */,
 				B851237D1BE7B0CF00D94A06 /* TjsSystem.cpp in Sources */,
-				B85123651BE7B0CF00D94A06 /* Window-iOS.mm in Sources */,
 				B85123AE1BE7B0D000D94A06 /* iso8859_5.c in Sources */,
-				B8F393FC1BC68E70002EB3CC /* ViewController.m in Sources */,
 				B85123771BE7B0CF00D94A06 /* TjsWindow.cpp in Sources */,
 				B85123B41BE7B0D000D94A06 /* koi8_r.c in Sources */,
 				B85123711BE7B0CF00D94A06 /* TjsAudio.cpp in Sources */,
@@ -1542,6 +1535,7 @@
 				B85123621BE7B0CF00D94A06 /* Audio-iOS.mm in Sources */,
 				B85123D31BE7B0D000D94A06 /* tjsdate.tab.cpp in Sources */,
 				B851235E1BE7B0CF00D94A06 /* NormalProgram.cpp in Sources */,
+				B801662A1BE8D7A400C9BD72 /* iOSWindow.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1563,7 +1557,7 @@
 					"$(PROJECT_DIR)/../Classes/Lib/freetype2/include/ios",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1585,7 +1579,7 @@
 					"$(PROJECT_DIR)/../Classes/Lib/freetype2/include/ios",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

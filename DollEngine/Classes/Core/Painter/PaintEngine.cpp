@@ -15,7 +15,6 @@
 #include "Storages.h"
 #include "PaintComponent/Image.h"
 #include "CharacterInfo.h"
-#include "SingleProgram.h"
 
 
 DE_BEGIN
@@ -32,8 +31,8 @@ PaintEngine* PaintEngine::GetInstance()
 }
 
 PaintEngine::PaintEngine() :
-m_layerHeight(0)
-,m_layerWidth(0)
+m_layerHeight(1)
+,m_layerWidth(1)
 ,m_layerX(0)
 ,m_layerY(0)
 ,m_layerZoom(0)
@@ -51,39 +50,16 @@ PaintEngine::~PaintEngine()
     SAFF_DELETE(m_globalTrans);
 }
 
+static Texture *textures;
+static vector<GLfloat> vertData;
+static const float coords[4][3] =
+{ { -1, -1, 0 }, { +1, -1, 0 }, { +1, +1, 0 }, { -1, +1, 0 } }
+;
+
+static const GLubyte colors[4][4] =
+{ { 0xff,0xff,0xff,0xff }, {  0xff,0xff,0xff,0xff}, { 0xff,0xff,0xff,0xff }, { 0xff,0xff,0xff,0xff} }
+;
 #ifdef __QT__
-
-static QVector<GLfloat> vertData;
-static const float coords[4][3] = 
-    { { -1, -1, 0 }, { +1, -1, 0 }, { +1, +1, 0 }, { -1, +1, 0 } }
-;
-
-static const GLubyte colors[4][4] = 
-    { { 0xff,0xff,0xff,0xff }, {  0xff,0xff,0xff,0xff}, { 0xff,0xff,0xff,0xff }, { 0xff,0xff,0xff,0xff} }
-;
-void PaintEngine::makeObject()
-{
-    String fullpath = Storages::GetInstance()->getFullPath(L"alice.png");
-
-    textures = new Texture();
-    PictureData* p = new PictureData();
-    p->loadFromFile(fullpath);
-    textures->initWithImage(p);
-    vertData.clear();
-        for (int j = 0; j < 4; ++j) {
-            // vertex position
-            vertData.append(0.5* coords[j][0]);
-            vertData.append(0.5* coords[j][1]);
-            vertData.append(0.5* coords[j][2]);
-            // texture coordinate
-            vertData.append(j == 0 || j == 3);
-            vertData.append(j == 0 || j == 1);
-        }
-
-    vbo.create();
-    vbo.bind();
-    vbo.allocate(vertData.constData(), vertData.count() * sizeof(GLfloat));
-}
 
 static Image* g_img;
 void PaintEngine::initializeGL()
@@ -150,6 +126,39 @@ void PaintEngine::initializeGL()
 //    program->setUniformValue("tex_fore", 0);
 }
 
+void PaintEngine::resizeGL(int width, int height)
+{
+    int side = qMin(width, height);
+    glViewport((width - side) / 2, (height - side) / 2, side, side);
+//    if(height == 0) height = 1;
+//    QOpenGLWidget::resizeGL(width,height);
+//    DE::PaintEngine::GetInstance()->resize(width,height);
+}
+
+
+#endif
+
+void PaintEngine::makeObject()
+{
+    String fullpath = Storages::GetInstance()->getFullPath(L"alice.png");
+    
+    textures = new Texture();
+    PictureData* p = new PictureData();
+    p->loadFromFile(fullpath);
+    textures->initWithImage(p);
+    vertData.clear();
+    for (int j = 0; j < 4; ++j) {
+        // vertex position
+        vertData.push_back(0.5* coords[j][0]);
+        vertData.push_back(0.5* coords[j][1]);
+        vertData.push_back(0.5* coords[j][2]);
+        // texture coordinate
+        vertData.push_back(j == 0 || j == 3);
+        vertData.push_back(j == 0 || j == 1);
+    }
+    
+}
+
 void PaintEngine::paintGL()
 {
     glClearColor(0,0,0,1);
@@ -169,37 +178,25 @@ void PaintEngine::paintGL()
     vertexAttribPointer(PROGRAM_COLOR_ATTRIBUTE, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(GLubyte)*4, (void*) colors);
     vertexAttribPointer(PROGRAM_TEXCOORD_ATTRIBUTE, 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*2,(void*) coords);
     
-//    program->setUniformValue("matrix", t);
-//    program->enableAttributeArray(PROGRAM_VERTEX_ATTRIBUTE);
-//    program->enableAttributeArray(PROGRAM_COLOR_ATTRIBUTE);
-//    program->enableAttributeArray(PROGRAM_TEXCOORD_ATTRIBUTE);
-//    program->setAttributeBuffer(PROGRAM_VERTEX_ATTRIBUTE, GL_FLOAT, 0, 3, 5 * sizeof(GLfloat));
-//    program->setAttributeBuffer(PROGRAM_COLOR_ATTRIBUTE, GL_FLOAT, 0, 3, 5 * sizeof(GLfloat));
-//    program->setAttributeBuffer(PROGRAM_TEXCOORD_ATTRIBUTE, GL_FLOAT, 3 * sizeof(GLfloat), 2, 5 * sizeof(GLfloat));
+    //    program->setUniformValue("matrix", t);
+    //    program->enableAttributeArray(PROGRAM_VERTEX_ATTRIBUTE);
+    //    program->enableAttributeArray(PROGRAM_COLOR_ATTRIBUTE);
+    //    program->enableAttributeArray(PROGRAM_TEXCOORD_ATTRIBUTE);
+    //    program->setAttributeBuffer(PROGRAM_VERTEX_ATTRIBUTE, GL_FLOAT, 0, 3, 5 * sizeof(GLfloat));
+    //    program->setAttributeBuffer(PROGRAM_COLOR_ATTRIBUTE, GL_FLOAT, 0, 3, 5 * sizeof(GLfloat));
+    //    program->setAttributeBuffer(PROGRAM_TEXCOORD_ATTRIBUTE, GL_FLOAT, 3 * sizeof(GLfloat), 2, 5 * sizeof(GLfloat));
     textures->bind();
     glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
     CHECK_GL_ERROR;
 }
 
-void PaintEngine::resizeGL(int width, int height)
-{
-    int side = qMin(width, height);
-    glViewport((width - side) / 2, (height - side) / 2, side, side);
-//    if(height == 0) height = 1;
-//    QOpenGLWidget::resizeGL(width,height);
-//    DE::PaintEngine::GetInstance()->resize(width,height);
-}
-
-
-#endif
-
 void PaintEngine::initialize()
 {
     if (!m_initialized) {
         m_initialized = true;
-
+#ifdef __QT__
         glEnable(GL_TEXTURE_2D);
-
+#endif
         glDisable(GL_DEPTH_TEST);
 
         clearColor(GL_COLOR_BUFFER_BIT,0,0,0,0);
@@ -211,7 +208,6 @@ void PaintEngine::initialize()
                  Window::GetInstance()->getHeight() );
         addProgram(L"normal", new NormalProgram());
         addProgram(L"grow", new GrowProgram());
-        addProgram(L"single", new SingleProgram());
     }
 }
 
@@ -246,13 +242,10 @@ void PaintEngine::resize(int deviceWidth,int deviceHeight)
         setLayerY(layerY);
         
         setLayerZoom(layerZoom);
-//#ifdef OS_MAC
-//        glViewport((width - side) / 2, (height - side) / 2, side, side);
+#ifdef __QT__
         glViewport(0,0,deviceWidth,deviceHeight);
-//        glOrtho(-1, 1, -1, 1, -1, 1);
-//        glMatrixMode(GL_PROJECTION);
-//        glLoadIdentity();
-//#endif
+#endif
+        CHECK_GL_ERROR;
         NEED_REDRAW;
     }
 }
@@ -260,12 +253,12 @@ void PaintEngine::resize(int deviceWidth,int deviceHeight)
 void PaintEngine::beforeMainLoop()
 {
     
-    clearColor(GL_COLOR_BUFFER_BIT,0.7,0.3,0.14,0);
+    clearColor(GL_COLOR_BUFFER_BIT,0,0,0,0);
 }
 
 void PaintEngine::afterMainLoop()
 {
-//    paint();
+    paint();
 }
 
 void PaintEngine::pushDrawData(GLDrawData& data)
@@ -291,6 +284,7 @@ void PaintEngine::addProgram(String pm,PaintProgram* effect)
         m_allPrograms[pm] = effect;
     }
     else {
+        DM("Program %s 加载失败",pm.c_nstr());
         delete effect;
     }
 }
@@ -427,7 +421,6 @@ void PaintEngine::preparePaint(PaintConfig& config)
         }
         config.program->preparePaint(config);
     }
-    paint();
 }
 
 void PaintEngine::paint()
@@ -437,9 +430,9 @@ void PaintEngine::paint()
     }
     bindVAO(0);
     bindTexture(GL_TEXTURE0,m_curTexture);
-    getGlobalTrans()->setX(0);
-    getGlobalTrans()->setY(0);
-    getGlobalTrans()->setScale(2);
+//    getGlobalTrans()->setX(-1);
+//    getGlobalTrans()->setY(-1);
+//    getGlobalTrans()->setScale(1.0/1024.0f);
     getGlobalTrans()->flush();
     m_curProgram->setUniformValue("matrix", getGlobalTrans()->getMatrix());
 #define kQuadSize sizeof(GLVertex)
@@ -462,8 +455,8 @@ void PaintEngine::paint()
         m_indexs.push_back(i*4+3);
         m_indexs.push_back(i*4);
     }
-//    drawElements(GL_TRIANGLES, m_quads.size()*2*3, GL_UNSIGNED_SHORT, m_indexs.data());
-    glDrawArrays(GL_TRIANGLE_FAN, 0, size);
+    drawElements(GL_TRIANGLES, m_quads.size()*2*3, GL_UNSIGNED_SHORT, m_indexs.data());
+//    glDrawArrays(GL_TRIANGLE_FAN, 0, size);
     
     CHECK_GL_ERROR;
     m_quads.clear();
@@ -541,6 +534,7 @@ void PaintEngine::clearColor(DrawMask mask,DrawClampF red,DrawClampF green,DrawC
 
 DrawTexId PaintEngine::loadTexture(void* data, int width,int height)
 {
+    CHECK_GL_ERROR;
     DrawTexId m_textureId;
     glGenTextures(1,&m_textureId);
     glBindTexture(GL_TEXTURE_2D,m_textureId);
@@ -587,6 +581,14 @@ bool PaintEngine::linkProgram(DrawPrgId pId)
     glGetProgramiv(pId, GL_LINK_STATUS, &status);
     CHECK_GL_ERROR;
     if (status == 0) {
+        GLint logLength;
+        glGetProgramiv(pId, GL_INFO_LOG_LENGTH, &logLength);
+        if (logLength > 0) {
+            GLchar *log = (GLchar *)malloc(logLength);
+            glGetProgramInfoLog(pId, logLength, &logLength, log);
+            DM("Program link log:\n%s", log);
+            free(log);
+        }
         return false;
     }
     return true;
@@ -607,6 +609,7 @@ void PaintEngine::deleteProgram(DrawPrgId pId)
 
 DrawShaderId PaintEngine::createShader(GLenum type,const char* code)
 {
+    CHECK_GL_ERROR;
     DrawShaderId m_id = glCreateShader(type);
     CHECK_GL_ERROR;
     if (m_id)
@@ -646,6 +649,7 @@ DrawShaderId PaintEngine::createShader(GLenum type,const char* code)
 void PaintEngine::attachShader(DrawPrgId pId,DrawShaderId sId)
 {
     glAttachShader(pId,sId);
+    CHECK_GL_ERROR;
 }
 
 void PaintEngine::detachShader(DrawPrgId pId,DrawShaderId sId)

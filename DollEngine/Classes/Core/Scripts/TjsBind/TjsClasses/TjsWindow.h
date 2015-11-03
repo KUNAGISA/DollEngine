@@ -12,14 +12,19 @@
 #include "TjsBind.h"
 #ifdef __QT__
 #include "QtWindow.h"
-#else
-#include "Window.h"
-#endif
-TJS_NCB(Window){}
+TJS_NCB(QtWindow){}
 void setTitle(tTJSVariant v){
     TJS_STRING(v, str);
-    Window::setTitle(str);
+    QtWindow::setTitle(str);
 }
+#else
+#include "iOSWindow.h"
+TJS_NCB(iOSWindow){}
+void setTitle(tTJSVariant v){
+    TJS_STRING(v, str);
+    iOSWindow::setTitle(str);
+}
+#endif
 tTJSVariant getTitle(){
     return m_title.c_str();
 }

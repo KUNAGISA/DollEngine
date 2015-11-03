@@ -39,16 +39,16 @@ bool PictureData::loadFromFile(const DE::String &fullPath)
         imgData->initWithSize(getWidth() * getHeight() * 4);
         colorSpace = CGColorSpaceCreateDeviceRGB();
         CGContextRef context = CGBitmapContextCreate(imgData->getBuffer(),
-                                                     this->getWidth(),
-                                                     this->getHeight(),
-                                                     this->getBufferPitch(),
-                                                     4 * this->getWidth(),
+                                                     (size_t)this->getWidth(),
+                                                     (size_t)this->getHeight(),
+                                                     8,
+                                                     (size_t)(4 * this->getWidth()),
                                                      colorSpace,
-                                                     info | kCGBitmapByteOrder32Big);
+                                                     info|kCGBitmapByteOrder32Big);
         
         CGContextClearRect(context, CGRectMake(0, 0, this->getWidth(), this->getHeight()));
         CGContextDrawImage(context, CGRectMake(0, 0, this->getWidth(), this->getHeight()), cgImage);
-        
+        setData(imgData);
         CGContextRelease(context);
         CFRelease(colorSpace);
         return true;

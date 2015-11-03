@@ -14,7 +14,7 @@ class Application extends SystemDelegate
 		super.SystemDelegate();
 
 		window = new Window();
-		window.initialize(DEConfig.device.width,DEConfig.device.height);
+		window.setLayerSize(DEConfig.device.width,DEConfig.device.height);
 		window.setSize(DEConfig.device.width*DEConfig.device.scale,DEConfig.device.height*DEConfig.device.scale);
 		window.visible = true;
 		window.title = DEConfig.game.title;
