@@ -4,6 +4,8 @@
 #include "System.h"
 #include <QOpenGLContext>
 #include "Image.h"
+#include <QtOpenGL>
+#include <QOpenGLFunctions>
 
 DE_BEGIN
 

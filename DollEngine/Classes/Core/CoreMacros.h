@@ -117,9 +117,8 @@ return 0;\
 #define glReleaseShaderCompiler(xxx)
 
 #elif defined(__QT__)
-#include <QtOpenGL>
-#include <QOpenGLFunctions_4_5_Core>
 #include <GL/gl.h>
+#include <GL/glext.h>
 #endif
 
 #define CHECK_GL_ERROR DE::PaintEngine::GetInstance()->checkError();

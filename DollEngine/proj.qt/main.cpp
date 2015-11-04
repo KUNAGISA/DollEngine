@@ -1,6 +1,8 @@
 #include "System.h"
 #include <QApplication>
 #include <QDebug>
+#include <QSettings>
+#include <QProcess>
 #include "QtConsole.h"
 #include "Console.h"
 

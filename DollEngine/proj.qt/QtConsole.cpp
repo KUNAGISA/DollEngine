@@ -1,6 +1,8 @@
 #include "QtConsole.h"
 #include "ui_QtConsole.h"
 #include "System.h"
+#include <QSettings>
+#include <QKeyEvent>
 
 QtConsole::QtConsole(QWidget *parent) :
     QWidget(parent),
