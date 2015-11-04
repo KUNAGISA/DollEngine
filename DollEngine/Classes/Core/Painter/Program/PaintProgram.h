@@ -16,7 +16,7 @@
 
 DE_BEGIN
 
-
+class PaintEngine;
 class PaintProgram
 {
 public:
@@ -46,7 +46,7 @@ public:
 protected:
     vector<PaintShader*> m_shaders;
     map<String, GLint> m_allUniformIndex;
-    
+    PaintEngine* m_engine;
     
 //    GLuint              m_pBuffersVBO[2]; //0: vertex  1: indices
 //    vector<GLushort>           m_pIndices;

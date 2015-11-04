@@ -12,6 +12,9 @@
 #include "CoreTypes.h"
 #include "Transform.h"
 
+#ifdef __QT__
+#include <QOpenGLFunctions>
+#endif
 DE_BEGIN
 
 class PictureData;
@@ -20,22 +23,11 @@ class Texture;
 class CharacterInfo;
 
 #ifdef __QT__
-class PaintEngine :public QOpenGLWidget,  protected QOpenGLFunctions
+class PaintEngine : protected QOpenGLFunctions
 {
-protected: 
-    virtual void initializeGL();
-    virtual void paintGL();
-    virtual void resizeGL(int w, int h);
-    void makeObject();
-    
-    QOpenGLShaderProgram *program;
-    QOpenGLBuffer vbo;
 #else
 class PaintEngine
 {
-public:
-    void makeObject();
-    virtual void paintGL();
 #endif
 public:
     static PaintEngine* GetInstance();
@@ -45,7 +37,7 @@ public:
 public:
     
     void initialize();
-    void resize(int desktopw,int desktoph);
+    void resize(float deviceW,float deviceH);
     void beforeMainLoop();
     void afterMainLoop();
     void pushDrawData(GLDrawData& data);

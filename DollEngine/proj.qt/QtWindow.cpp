@@ -7,21 +7,53 @@
 #include <QtOpenGL>
 #include <QOpenGLFunctions>
 
+
+class GLWidget : public QOpenGLWidget
+{
+public:
+    GLWidget():QOpenGLWidget(NULL){
+        
+    }
+    
+    void initializeGL(){
+        QOpenGLWidget::initializeGL();
+        DE::PaintEngine::GetInstance()->initialize();
+    }
+    
+    void resizeGL(int w,int h) {
+        if(w == 0) w = 1;
+        if(h == 0) h = 1;
+        DE::Window::GetInstance()->Window::setSize(w,h);
+        DE::PaintEngine::GetInstance()->resize(w,h);
+    }
+    
+    void paintGL(){
+        DE::SystemDelegate* delegate = DE::System::GetInstance()->getDelegate();
+        if(delegate){
+            delegate->onMainLoop();
+        }
+    }
+};
+
+
 DE_BEGIN
+
+
 
 QtWindow::QtWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::QtWindow)
 {
     ui->setupUi(this);
-    
-    ui->gridLayout->addWidget(PaintEngine::GetInstance());
+    glWidget = new GLWidget();
+    ui->gridLayout->addWidget(glWidget);
     startTimer(15);
     
 }
 
 QtWindow::~QtWindow()
 {
+    delete glWidget;
     delete ui;
 }
 
@@ -62,6 +94,6 @@ void QtWindow::closeEvent(QCloseEvent *)
 
 void QtWindow::timerEvent(QTimerEvent *)
 {
-    PaintEngine::GetInstance()->update();
+    glWidget->update();
 }
 DE_END

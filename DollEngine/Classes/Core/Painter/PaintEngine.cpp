@@ -16,7 +16,6 @@
 #include "PaintComponent/Image.h"
 #include "CharacterInfo.h"
 
-
 DE_BEGIN
 
 
@@ -50,151 +49,12 @@ PaintEngine::~PaintEngine()
     SAFF_DELETE(m_globalTrans);
 }
 
-static Texture *textures;
-static vector<GLfloat> vertData;
-static const float coords[4][3] =
-{ { -1, -1, 0 }, { +1, -1, 0 }, { +1, +1, 0 }, { -1, +1, 0 } }
-;
-
-static const GLubyte colors[4][4] =
-{ { 0xff,0xff,0xff,0xff }, {  0xff,0xff,0xff,0xff}, { 0xff,0xff,0xff,0xff }, { 0xff,0xff,0xff,0xff} }
-;
-#ifdef __QT__
-
-static Image* g_img;
-void PaintEngine::initializeGL()
-{
-    initializeOpenGLFunctions();
-    initialize();
-//    g_img = new Image();
-//    g_img->loadImages(L"alice.png");
-    
-    
-    makeObject();
-
-//    glEnable(GL_DEPTH_TEST);
-//    glEnable(GL_CULL_FACE);
-
-//#define PROGRAM_VERTEX_ATTRIBUTE 0
-//#define PROGRAM_TEXCOORD_ATTRIBUTE 1
-//#define PROGRAM_COLOR_ATTRIBUTE 2
-    
-//    QOpenGLShader *vshader = new QOpenGLShader(QOpenGLShader::Vertex, this);
-//    const char *vsrc =
-//            "uniform mat4 matrix;"
-//            "attribute vec4 a_position;"
-//            "attribute vec2 a_texCoord;"
-//            "attribute vec4 a_color;"
-//            "\n#ifdef GL_ES\n"
-//            "varying lowp vec4 v_fragmentColor;"
-//            "varying mediump vec2 v_texCoord;"
-//            "\n#else\n"
-//            "varying vec4 v_fragmentColor;"
-//            "varying vec2 v_texCoord;"
-//            "\n#endif\n"
-//            "void main()"
-//            "{"
-//            "gl_Position = matrix * a_position;"
-//            "v_fragmentColor = a_color;"
-//            "v_texCoord = a_texCoord;"
-//            "}";
-//    vshader->compileSourceCode(vsrc);
-
-//    QOpenGLShader *fshader = new QOpenGLShader(QOpenGLShader::Fragment, this);
-//    const char *fsrc =
-//            "#ifdef GL_ES\n"
-//            "precision lowp float;"
-//            "\n#endif\n"
-//            "varying vec4 v_fragmentColor;"
-//            "varying vec2 v_texCoord;"
-//            "uniform sampler2D tex_fore;"
-//            "void main()"
-//            "{"
-//            "gl_FragColor = v_fragmentColor * texture2D(tex_fore, v_texCoord);"
-//            "}";
-//    fshader->compileSourceCode(fsrc);
-
-//    program = new QOpenGLShaderProgram;
-//    program->addShader(vshader);
-//    program->addShader(fshader);
-//    program->bindAttributeLocation("a_position", PROGRAM_VERTEX_ATTRIBUTE);
-//    program->bindAttributeLocation("a_color", PROGRAM_COLOR_ATTRIBUTE);
-//    program->bindAttributeLocation("a_texCoord", PROGRAM_TEXCOORD_ATTRIBUTE);
-//    program->link();
-
-//    program->bind();
-//    program->setUniformValue("tex_fore", 0);
-}
-
-void PaintEngine::resizeGL(int width, int height)
-{
-    int side = qMin(width, height);
-    glViewport((width - side) / 2, (height - side) / 2, side, side);
-//    if(height == 0) height = 1;
-//    QOpenGLWidget::resizeGL(width,height);
-//    DE::PaintEngine::GetInstance()->resize(width,height);
-}
-
-
-#endif
-
-void PaintEngine::makeObject()
-{
-    String fullpath = Storages::GetInstance()->getFullPath(L"alice.png");
-    
-    textures = new Texture();
-    PictureData* p = new PictureData();
-    p->loadFromFile(fullpath);
-    textures->initWithImage(p);
-    vertData.clear();
-    for (int j = 0; j < 4; ++j) {
-        // vertex position
-        vertData.push_back(0.5* coords[j][0]);
-        vertData.push_back(0.5* coords[j][1]);
-        vertData.push_back(0.5* coords[j][2]);
-        // texture coordinate
-        vertData.push_back(j == 0 || j == 3);
-        vertData.push_back(j == 0 || j == 1);
-    }
-    
-}
-
-void PaintEngine::paintGL()
-{
-    glClearColor(0,0,0,1);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    m_globalTrans->setX(0);
-    m_globalTrans->setY(0);
-    m_globalTrans->setScale(1);
-    m_globalTrans->flush();
-    
-    m_curProgram = getProgram(L"normal");
-    useProgram(m_curProgram->getProgramId());
-    
-    m_curProgram->setUniformValue(L"matrix",m_globalTrans->getMatrix());
-    enableVertexAttribs(VERTEX_ATTRIB_FLAG_POS_COLOR_TEX);
-    
-    vertexAttribPointer(PROGRAM_VERTEX_ATTRIBUTE, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*3, (void*) vertData.data());
-    vertexAttribPointer(PROGRAM_COLOR_ATTRIBUTE, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(GLubyte)*4, (void*) colors);
-    vertexAttribPointer(PROGRAM_TEXCOORD_ATTRIBUTE, 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat)*2,(void*) coords);
-    
-    //    program->setUniformValue("matrix", t);
-    //    program->enableAttributeArray(PROGRAM_VERTEX_ATTRIBUTE);
-    //    program->enableAttributeArray(PROGRAM_COLOR_ATTRIBUTE);
-    //    program->enableAttributeArray(PROGRAM_TEXCOORD_ATTRIBUTE);
-    //    program->setAttributeBuffer(PROGRAM_VERTEX_ATTRIBUTE, GL_FLOAT, 0, 3, 5 * sizeof(GLfloat));
-    //    program->setAttributeBuffer(PROGRAM_COLOR_ATTRIBUTE, GL_FLOAT, 0, 3, 5 * sizeof(GLfloat));
-    //    program->setAttributeBuffer(PROGRAM_TEXCOORD_ATTRIBUTE, GL_FLOAT, 3 * sizeof(GLfloat), 2, 5 * sizeof(GLfloat));
-    textures->bind();
-    glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
-    CHECK_GL_ERROR;
-}
-
 void PaintEngine::initialize()
 {
     if (!m_initialized) {
         m_initialized = true;
 #ifdef __QT__
+        initializeOpenGLFunctions();
         glEnable(GL_TEXTURE_2D);
 #endif
         glDisable(GL_DEPTH_TEST);
@@ -211,7 +71,7 @@ void PaintEngine::initialize()
     }
 }
 
-void PaintEngine::resize(int deviceWidth,int deviceHeight)
+void PaintEngine::resize(float deviceWidth,float deviceHeight)
 {
     if (m_initialized) {
         float layerWidth = getLayerWidth();
@@ -433,7 +293,7 @@ void PaintEngine::paint()
 //    getGlobalTrans()->setX(-1);
 //    getGlobalTrans()->setY(-1);
 //    getGlobalTrans()->setScale(1.0/1024.0f);
-    getGlobalTrans()->flush();
+//    getGlobalTrans()->flush();
     m_curProgram->setUniformValue("matrix", getGlobalTrans()->getMatrix());
 #define kQuadSize sizeof(GLVertex)
     long offset = (long)m_quads.data();

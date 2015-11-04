@@ -14,14 +14,14 @@ DE_BEGIN
 PaintShader::PaintShader()
 :m_id(0)
 {
-    
+    m_engine = PaintEngine::GetInstance();
 }
 
 PaintShader::~PaintShader()
 {
     if (m_id)
     {
-        PaintEngine::GetInstance()->deleteShader(m_id);
+        m_engine->deleteShader(m_id);
     }
 }
 
@@ -30,10 +30,10 @@ bool PaintShader::compileShaderCode(const char* code)
     switch (m_type)
     {
         case SHADER_TYPE_FRAGMENT:
-            m_id = PaintEngine::GetInstance()->createShader(GL_FRAGMENT_SHADER,code);
+            m_id = m_engine->createShader(GL_FRAGMENT_SHADER,code);
             break;
         case SHADER_TYPE_VERTEX:
-            m_id = PaintEngine::GetInstance()->createShader(GL_VERTEX_SHADER,code);
+            m_id = m_engine->createShader(GL_VERTEX_SHADER,code);
             break;
         default:
             break;

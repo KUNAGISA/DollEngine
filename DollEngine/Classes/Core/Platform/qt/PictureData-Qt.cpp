@@ -7,6 +7,7 @@
 //
 
 #include <QImage>
+#include <QGLWidget>
 #include "PictureData.h"
 #include "IOData.h"
 #include "Storages.h"

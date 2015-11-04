@@ -13,18 +13,19 @@ DE_BEGIN
 
 PaintProgram::PaintProgram()
 {
-    m_programId = PaintEngine::GetInstance()->createProgram();
+    m_engine = PaintEngine::GetInstance();
+    m_programId = m_engine->createProgram();
 }
 
 PaintProgram::~PaintProgram()
 {
     for (PaintShader* obj : m_shaders)
     {
-        PaintEngine::GetInstance()->detachShader(m_programId,obj->getId());
+        m_engine->detachShader(m_programId,obj->getId());
         delete obj;
     }
     m_shaders.clear();
-    PaintEngine::GetInstance()->deleteProgram(m_programId);
+    m_engine->deleteProgram(m_programId);
 }
 
 const char* PaintProgram::getShader_V()
@@ -74,7 +75,7 @@ bool PaintProgram::addShader(SHADER_TYPE type,const char* code)
         return false;
     }
     m_shaders.push_back(obj);
-    PaintEngine::GetInstance()->attachShader(m_programId,obj->getId());
+    m_engine->attachShader(m_programId,obj->getId());
     return true;
 }
 
@@ -107,7 +108,7 @@ bool PaintProgram::initShader()
 
 bool PaintProgram::link()
 {
-    if(!PaintEngine::GetInstance()->linkProgram(m_programId)) {
+    if(!m_engine->linkProgram(m_programId)) {
         return false;
     }
     return true;
@@ -120,7 +121,7 @@ void PaintProgram::setUniformValue(const String& name,GLfloat value)
 {
     auto iter = m_allUniformIndex.find(name);
     if(iter != m_allUniformIndex.end())
-        PaintEngine::GetInstance()->setUniform1f(iter->second, value);
+        m_engine->setUniform1f(iter->second, value);
     CHECK_PROGRAM_ERROR(this);
 }
 
@@ -128,7 +129,7 @@ void PaintProgram::setUniformValue(const String& name,GLint value)
 {
     auto iter = m_allUniformIndex.find(name);
     if(iter != m_allUniformIndex.end())
-        PaintEngine::GetInstance()->setUniform1i(iter->second, value);
+        m_engine->setUniform1i(iter->second, value);
     CHECK_PROGRAM_ERROR(this);
 }
 
@@ -136,7 +137,7 @@ void PaintProgram::setUniformValue(const String& name,GLuint value)
 {
     auto iter = m_allUniformIndex.find(name);
     if(iter != m_allUniformIndex.end())
-        PaintEngine::GetInstance()->setUniform1i(iter->second, value);
+        m_engine->setUniform1i(iter->second, value);
     CHECK_PROGRAM_ERROR(this);
 }
 
@@ -148,7 +149,7 @@ void PaintProgram::setUniformValue(const String& name,const Size& value)
         float v[2];
         v[0] = value.width;
         v[1] = value.height;
-        PaintEngine::GetInstance()->setUniform2fv(iter->second,2,(GLfloat*)&value);
+        m_engine->setUniform2fv(iter->second,2,(GLfloat*)&value);
     }
     CHECK_PROGRAM_ERROR(this);
 }
@@ -158,7 +159,7 @@ void PaintProgram::setUniformValue(const String& name,const kmMat4& value)
     auto iter = m_allUniformIndex.find(name);
     if(iter != m_allUniformIndex.end())
     {
-        PaintEngine::GetInstance()->setUniformMatrix4fv(iter->second, 1,GL_FALSE,(GLfloat*)value.mat);
+        m_engine->setUniformMatrix4fv(iter->second, 1,GL_FALSE,(GLfloat*)value.mat);
     }
     CHECK_PROGRAM_ERROR(this);
 }
@@ -168,7 +169,7 @@ void PaintProgram::setUniformValue(const String& name, GLfloat* value)
     auto iter = m_allUniformIndex.find(name);
     if(iter != m_allUniformIndex.end())
     {
-        PaintEngine::GetInstance()->setUniformMatrix4fv(iter->second, 1,GL_FALSE,value);
+        m_engine->setUniformMatrix4fv(iter->second, 1,GL_FALSE,value);
     }
     CHECK_PROGRAM_ERROR(this);
 }

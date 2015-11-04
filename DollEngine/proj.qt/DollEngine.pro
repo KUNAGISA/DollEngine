@@ -158,7 +158,6 @@ SOURCES += main.cpp\
     ../Classes/Core/Painter/Program/GrowProgram.cpp \
     ../Classes/Core/Painter/Program/NormalProgram.cpp \
     ../Classes/Core/Painter/Program/PaintShader.cpp \
-    ../Classes/Core/Painter/Program/SingleProgram.cpp \
     ../Classes/Core/Painter/PaintEngine.cpp \
     ../Classes/Core/Scripts/JsonParser.cpp \
     ../Classes/Core/Scripts/ScriptEngine.cpp \
@@ -284,7 +283,6 @@ HEADERS  += \
     ../Classes/Core/Painter/Program/NormalProgram.h \
     ../Classes/Core/Painter/Program/PaintShader.h \
     ../Classes/Core/Painter/Program/PaintProgram.h \ 
-    ../Classes/Core/Painter/Program/SingleProgram.h \
     ../Classes/Core/Painter/PaintComponent/Character.h \
     ../Classes/Core/Painter/PaintComponent/RTT.h\
     ../Classes/Core/Painter/PaintEngine.h \

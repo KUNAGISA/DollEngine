@@ -18,7 +18,7 @@ enum SHADER_TYPE
     SHADER_TYPE_VERTEX = 0,
     SHADER_TYPE_FRAGMENT
 };
-
+class PaintEngine;
 class PaintShader
 {
 public:
@@ -28,6 +28,7 @@ public:
     
     PROPERTY(GLuint, Id, m_id){m_id=v;}
     PROPERTY(SHADER_TYPE, Type, m_type){m_type=v;}
+    PaintEngine* m_engine;
 };
 
 DE_END

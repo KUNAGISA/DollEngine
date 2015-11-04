@@ -5,6 +5,10 @@
 #include "PictureData.h"
 #include <QCoreApplication>
 #include <QFontDatabase>
+#include <QApplication>
+#include <QDesktopWidget>
+#include <QPainter>
+#include <QPen>
 
 DE_BEGIN
 

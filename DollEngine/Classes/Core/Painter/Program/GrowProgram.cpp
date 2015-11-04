@@ -23,16 +23,16 @@ GrowProgram::~GrowProgram()
 
 void GrowProgram::bind()
 {
-    int index =PaintEngine::GetInstance()->getUniform(m_programId,"resolutionX");
+    int index =m_engine->getUniform(m_programId,"resolutionX");
     if (index != -1) m_allUniformIndex["resolutionX"]=index;
     
-    index =PaintEngine::GetInstance()->getUniform(m_programId,"resolutionY");
+    index =m_engine->getUniform(m_programId,"resolutionY");
     if (index != -1) m_allUniformIndex["resolutionY"]=index;
     
-    index =PaintEngine::GetInstance()->getUniform(m_programId,"blurRadius");
+    index =m_engine->getUniform(m_programId,"blurRadius");
     if (index != -1) m_allUniformIndex["blurRadius"]=index;
     
-    index =PaintEngine::GetInstance()->getUniform(m_programId,"sampleNum");
+    index =m_engine->getUniform(m_programId,"sampleNum");
     if (index != -1) m_allUniformIndex["sampleNum"]=index;
     NormalProgram::bind();
 }

@@ -9,6 +9,7 @@ namespace Ui {
 class QtWindow;
 }
 
+class GLWidget;
 DE_BEGIN
 
 class QtWindow : public QMainWindow,public DE::Window
@@ -29,6 +30,7 @@ public:
     void timerEvent(QTimerEvent *);
 private:
     Ui::QtWindow *ui;
+    GLWidget* glWidget;
 };
 
 DE_END

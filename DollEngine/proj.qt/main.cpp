@@ -5,6 +5,7 @@
 #include <QProcess>
 #include "QtConsole.h"
 #include "Console.h"
+#include "PaintEngine.h"
 
 int main(int argc, char *argv[])
 {

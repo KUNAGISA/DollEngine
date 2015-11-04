@@ -81,6 +81,11 @@ void ImageInfo::toDrawData(GLDrawData& data,Transform* trans,bool flipX,bool fli
     memcpy(&data.rb.color, c, sizeof(GLV4F));
     
     //UV
+#ifdef __QT__
+    //这里因为qt加载模式与ios不同导致图片倒置，所以需要颠倒一下UV；
+    flipY = !flipY;
+#endif
+    
     float l=m_orginRect.x/getTexture()->getWidth();
     float r=(m_orginRect.x+m_orginRect.width)/getTexture()->getWidth();
     float t=flipY ?

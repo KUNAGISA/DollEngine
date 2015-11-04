@@ -24,25 +24,25 @@ NormalProgram::~NormalProgram()
 
 void NormalProgram::initShaderAttrib()
 {
-    PaintEngine::GetInstance()->bindAttribute(m_programId, "a_position",PROGRAM_VERTEX_ATTRIBUTE);
-    PaintEngine::GetInstance()->bindAttribute(m_programId,"a_color",PROGRAM_COLOR_ATTRIBUTE);
-    PaintEngine::GetInstance()->bindAttribute(m_programId,"a_texCoord",PROGRAM_TEXCOORD_ATTRIBUTE);
-//    PaintEngine::GetInstance()->bindAttribute(m_programId,"tex_fore",PROGRAM_TEXTURE_ATTRIBUTE);
-//    PaintEngine::GetInstance()->bindAttribute(m_programId,"matrix",PROGRAM_MATRIX_ATTRIBUTE);
+    m_engine->bindAttribute(m_programId, "a_position",PROGRAM_VERTEX_ATTRIBUTE);
+    m_engine->bindAttribute(m_programId,"a_color",PROGRAM_COLOR_ATTRIBUTE);
+    m_engine->bindAttribute(m_programId,"a_texCoord",PROGRAM_TEXCOORD_ATTRIBUTE);
+//    m_engine->bindAttribute(m_programId,"tex_fore",PROGRAM_TEXTURE_ATTRIBUTE);
+//    m_engine->bindAttribute(m_programId,"matrix",PROGRAM_MATRIX_ATTRIBUTE);
     
 }
 
 void NormalProgram::bind()
 {
-    int index = PaintEngine::GetInstance()->getUniform(m_programId,"matrix");
+    int index = m_engine->getUniform(m_programId,"matrix");
     if (index != -1)
         m_allUniformIndex[L"matrix"]=index;
     
-    index = PaintEngine::GetInstance()->getUniform(m_programId,"tex_fore");
+    index = m_engine->getUniform(m_programId,"tex_fore");
     if (index != -1)
         m_allUniformIndex[L"tex_fore"]=index;
     
-    PaintEngine::GetInstance()->useProgram(m_programId);
+    m_engine->useProgram(m_programId);
     setUniformValue(L"tex_fore",0);
     CHECK_GL_ERROR;
 }
@@ -57,7 +57,7 @@ void NormalProgram::preparePaint(PaintConfig& config)
     
     GLDrawData quad;
     config.info->toDrawData(quad,config.trans,config.flipX,config.flipY);
-    PaintEngine::GetInstance()->pushDrawData(quad);
+    m_engine->pushDrawData(quad);
 }
 
 void NormalProgram::preparePaintWithScale9(PaintConfig& config)
