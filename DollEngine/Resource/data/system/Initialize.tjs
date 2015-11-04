@@ -1,6 +1,7 @@
 
 var print = Console.log;
 var em = Console.throwMsg;
+var assert = Console.assertMsg;
 
 var DEConfig = Scripts.jsonStorage("Config.json");
 

@@ -1,0 +1,38 @@
+class Timeline
+{
+	var currentTime = 0;//Timeline启动了多少时间，单位ms
+	var duration = 1000; //时间线长度，单位ms
+	var object;
+	var _params = %[];
+	function Timeline (obj) {
+		object = obj;
+	}
+
+	function setKeyframe (param, keyTime, keyValue) {
+		if(typeof(object[param]) == "undefined") {
+			return;
+		}
+		if(typeof(object[param]) == "Object") {
+			dm("属性"+param+"不能被Timeline使用");
+			return;
+		}
+		if(keyTime < 0 || keyTime >= duration) {
+			dm("Timeline不接受时间线之外的关键帧");
+		}
+		if(_params[param] == void) {
+			_params[param] = [];
+		}
+		_params[param].add([keyTime,keyValue]);
+	}
+
+	function start () {
+		foreach(_params,function (key,value) {
+			value.sort(function (a,b) {
+				return a[0] < b[0];
+			});
+			if(value[0][0] != 0) {
+				value.insert(0,[0,this.object[key]]);
+			}
+		} incontextof this);
+	}
+}

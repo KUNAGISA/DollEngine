@@ -45,6 +45,7 @@ public:
     static Console* GetInstance(){
         return Console::Instance;
     }
+    void assertMsg(void* v,const String& msg);
     void log(const String& text);
     void throwMsg(const String& v);
     void throwMsg(DEBUG_MSG msg,const String& v1);

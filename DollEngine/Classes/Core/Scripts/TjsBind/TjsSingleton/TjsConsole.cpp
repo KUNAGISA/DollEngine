@@ -27,7 +27,7 @@ tTJSNC_Console::tTJSNC_Console() : inherited(TJS_W("Console"))
     {
         if ( numparams <1 ) return TJS_E_BADPARAMCOUNT ;
         tTJSVariantString *res;
-        res = TJSFormatString(param[0]->AsString()->operator const wchar_t *(), numparams-1, &param[1]);
+        res = TJSFormatString(param[0]->AsStringNoAddRef()->operator const wchar_t *(), numparams-1, &param[1]);
         DE::String dg = L"【TJS】: ";
         if(res) {
             dg += (const tjs_char*)*res;
@@ -56,7 +56,55 @@ tTJSNC_Console::tTJSNC_Console() : inherited(TJS_W("Console"))
         return TJS_S_OK;
     }
     TJS_END_NATIVE_STATIC_METHOD_DECL(/*func. name*/throwMsg)
-    
+            
+    //----------------------------------------------------------------------
+    TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/assertMsg)
+    {
+        if ( numparams > 2 ) return TJS_E_BADPARAMCOUNT ;
+        if(numparams == 0){
+            DE::Console::GetInstance()->assertMsg(NULL,L"");
+        }
+        tTJSVariant* v1 = param[0];
+        if(v1){
+            bool ret = true;
+            if(v1->Type() == tvtVoid) {
+                ret = false;
+            }
+            else if(v1->Type() == tvtObject) {
+                if(!v1->AsObjectNoAddRef()) {
+                    ret = false;
+                }
+            }
+            else if(v1->Type() == tvtString){
+                if(v1->AsStringNoAddRef()->GetLength() == 0){
+                    ret = false;
+                }
+            }
+            else if(v1->Type() == tvtReal){
+                if(v1->AsReal() == 0.0f){
+                    ret = false;
+                }
+            }
+            else {
+                if(v1->AsInteger() == 0){
+                    ret = false;
+                }
+            }
+            if(ret == false) {
+                String msg;
+                if(numparams == 2){
+                    msg = param[1]->AsStringNoAddRef()->operator const wchar_t *();
+                }
+                DE::Console::GetInstance()->assertMsg(NULL,msg);
+            }
+        }
+        else {
+            DE::Console::GetInstance()->assertMsg(NULL,L"");
+        }
+        return TJS_S_OK;
+    }
+    TJS_END_NATIVE_STATIC_METHOD_DECL(/*func. name*/assertMsg)
+            
     //--property
     
     //----------------------------------------------------------------------

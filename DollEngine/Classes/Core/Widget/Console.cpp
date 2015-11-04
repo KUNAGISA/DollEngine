@@ -14,6 +14,18 @@ DE_BEGIN
 
 DE::Console* DE::Console::Instance = NULL;
 
+void Console::assertMsg(void* v,const String& msg)
+{
+    if(v == 0){
+        if(msg.empty()){
+            throwMsg(L"未知断言");
+        }
+        else {
+            throwMsg(msg);
+        }
+    }
+}
+
 void Console::log(const String& text)
 {
     ScriptEngine::Global()->OutputToConsole(text.c_str());

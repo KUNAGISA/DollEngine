@@ -10,8 +10,15 @@ class Application extends SystemDelegate
 	var needRedraw;
 	var needRetouch;
 
+	//private
+	var _enabledTimers;
+	var _lastSeconds;
+
 	function Application () {
 		super.SystemDelegate();
+
+		_lastSeconds = System.seconds;
+		_enabledTimers = global.Timer.g_enabledTimers;
 
 		window = new Window();
 		window.setLayerSize(DEConfig.device.width,DEConfig.device.height);
@@ -29,8 +36,30 @@ class Application extends SystemDelegate
 		invalidate window;
 	}
 
+	function update () {
+		var nSeconds = System.seconds;
+		var dt = (nSeconds - _lastSeconds)*1000;
+		updateTimer(dt);
+		updateTimeLine(dt);
+		_lastSeconds = nSeconds;
+	}
+
+	function updateTimer (dt) {
+		_enabledTimers.foreach(function (timer) {
+			timer.activeTime += this[0];
+			if(timer.activeTime >= timer.interval) {
+				timer.activeTime -= timer.interval;
+				timer.onTimer();
+			}
+		} incontextof [dt]) ;
+	}
+
+	function updateTimeLine (dt) {
+		// body...
+	}
 
 	function onMainLoop () {
+		update();
 		window.beforeMainLoop();
 		sysbase.visit();
 		window.afterMainLoop();

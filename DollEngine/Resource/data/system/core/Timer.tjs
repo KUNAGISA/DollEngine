@@ -1,15 +1,20 @@
 
-class Timer extends COMTimer
+class Timer
 {
-	var data = void;
+	var data = void; //Timer触发的方法需要的数据
+	var handler = void; //Timer触发的方法
+	var activeCount = 0; //从计时器启动开始执行过的次数
+	var activeTime = 0; //从计时器启动开始经过的时间，单位ms
+	var interval = 1000;//计时器触发间隔，单位ms
+	var count = -1; //计时器执行次数
 	function Timer (handler=void,data=void)
 	{
-		super.COMTimer();
-		this.time = 0;
-		this.type = COMP_UPDATE;
-		this.name = "Timer";
-		this._handler = handler;
+		this.handler = handler;
 		this.data = data;
+	}
+
+	function finalize () {
+		enabled = false;
 	}
 
 	function onTimer () 
@@ -17,44 +22,33 @@ class Timer extends COMTimer
 		if (this.handler) {
 			this.handler(this,this.data);
 		}
-		if (this._count>=0) {
-			if (this.activeCount >= this._count) {
+		activeCount++;
+		if (this.count>=0) {
+			if (activeCount >= this.count) {
 				invalidate this;
 			}
 		}
 	}
 
-	var _count=-1;//循环有限次数
-	property count{
-	    setter(v) {
-	    	//setter
-	    	this._count = v;
+	var _enabled = false;
+	property enabled {
+		setter(v) {
+			if(_enabled != v){
+				if(v){
+					activeCount = 0;
+					activeTime = 0;
+					global.Timer.g_enabledTimers.add(this);
+				}
+				else {
+					global.Timer.g_enabledTimers.remove(this);
+				}
+				_enabled = v;
+			}
 		}
 		getter {
-	    	//getter
-			return this._count;
-		}
-	}
-
-	property interval{
-	    setter(v) {
-	    	super.interval = v/1000;
-		}
-		getter {
-	    	//getter
-			return super.interval/1000;
-		}
-	}
-
-	var _handler=void;
-	property handler{
-	    setter(v) {
-	    	//setter
-	    	this._handler = v;
-		}
-		getter {
-	    	//getter
-			return this._handler;
+			return _enabled;
 		}
 	}
 }
+
+global.Timer.g_enabledTimers = new Set();
