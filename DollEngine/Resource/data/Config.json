@@ -3,7 +3,6 @@
 		"system/core/Functions.tjs",
 		"system/core/Application.tjs",
 		"system/core/HttpClient.tjs",
-		"system/core/TagHandlers.tjs",
 		"system/core/Timer.tjs",
 		"system/core/History.tjs",
 		"system/core/SoundBuffer.tjs",
@@ -33,6 +32,8 @@
 		"system/extra/ui/UICreator.tjs",
 		"system/extra/ui/UIReader.tjs",
 		"system/extra/kag/KAG.tjs",
+		"system/extra/kag/TagHandlers.tjs",
+		"system/extra/kag/BaseLayer.tjs",
 		"system/extra/kag/GraphicLayer.tjs",
 		"system/extra/kag/MessageLayer.tjs",
 		"system/extra/kag/WordLayer.tjs"
@@ -56,7 +57,7 @@
 	},
 	"debugMode" : 3,
 	"module" : {
-		"kag" : false
+		"kag" : true
 	},
 	"game" : {
 		"title" : "DollEngine beta v0.0.1",

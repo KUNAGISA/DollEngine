@@ -14,7 +14,7 @@ class TagHandlers extends KAGController
 		tagTimer.enabled = false;
 	}
 
-	function process (storage="",label="") 
+	function jumpStorage (storage="",label="") 
 	{
 		if(this.stepInLabel(storage,label,false)) {
 			return true;

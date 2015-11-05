@@ -64,6 +64,8 @@ String Storages::getFullPath(const String& storage)
     if (storage.empty()) {
         return "";
     }
+    if(access(storage.c_nstr(), 0) == 0)
+        return storage;
     if (storage[0] == L'/')
     {
         if(access(storage.c_nstr(), 0) == 0)

@@ -2,18 +2,35 @@
 class KAG extends Application
 {
 	//图层控制
-	var fore;//表层
+	var fore = %[];//表层
+	var back = [];//里层配置
 
 	//存档控制
-
+	var history;
 
 	//剧本控制
+	var tagManager;
+
 	var allskip = 1;// 0 已读跳过 1 skip时全部跳过
 	var bookMarkDates = [];//存档
+	
 	function KAG () 
 	{
 		super.Application();
-		this.fore = this.world;
+		fore.base = new BaseLayer(this,sysbase);
+
+		fore.layers = [];
+		fore.messages = [];
+
+		tagManager = new TagHandlers(this);
+
+		history = new History();
+
+	}
+
+	function process (storage, label) {
+		tagManager.jumpStorage(storage,label);
+		tagManager.execTags();
 	}
 
 	property historyWriteEnabled{

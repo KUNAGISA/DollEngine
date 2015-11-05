@@ -1,8 +1,8 @@
 
 class BaseLayer extends Layer
 {
-	function BaseLayer (app) {
-		super.Layer(app,null);
+	function BaseLayer (app,lay) {
+		super.Layer(app,lay);
 		setSize(app.window.width,app.window.height);
 	}
 }

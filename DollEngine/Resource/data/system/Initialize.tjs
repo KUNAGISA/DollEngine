@@ -30,7 +30,7 @@ if(DEConfig.module.kag)
 {
     app = new KAG();
     global.kag = app;
-// app.process("first.ks");
+    app.process("first.ks");
 }
 else
 {
