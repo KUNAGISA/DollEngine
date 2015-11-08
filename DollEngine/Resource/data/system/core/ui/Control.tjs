@@ -4,9 +4,9 @@ var g_AllControl = new Set();
 
 class Control extends Layer
 {
-	function Control (par) 
+	function Control (app,par) 
 	{
-		super.Layer(par);
+		super.Layer(app,par);
 		g_AllControl.add(this);
 		setAnchor(0.5,0.5);
 		_touch = new Touch();
@@ -109,6 +109,16 @@ class Control extends Layer
 	    	//getter
 			return _touch.ignore;
 		}
+	}
+
+	var _enabled = void;
+	property enabled {
+	    setter(v) {
+	    	_enabled = v;
+	    }
+	    getter {
+	    	return _enabled;
+	    }
 	}
 }
 

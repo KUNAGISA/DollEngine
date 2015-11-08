@@ -148,7 +148,7 @@ class TagHandlers extends KAGController
 
 property mp{
 	getter {
-		return System.main.tagManager.getMacroParams();
+		return kag.tagManager.getMacroParams();
 	}
 }
 

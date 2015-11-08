@@ -38,6 +38,17 @@ bool ImageInfo::loadWithFile(const String& path, const String& plist)
     return false;
 }
 
+bool ImageInfo::loadWithSize(int w,int h,int r)
+{
+    Texture* tex = PaintEngine::GetInstance()->addTexture(r);
+    if(!tex) {
+        return false;
+    }
+    setTexture(tex);
+    setPaintSize(w,h);
+    setOrginRect(0,0,tex->getWidth(),tex->getHeight());
+    return true;
+}
 
 void ImageInfo::setScale9(float l,float t,float r,float b)
 {
@@ -81,10 +92,6 @@ void ImageInfo::toDrawData(GLDrawData& data,Transform* trans,bool flipX,bool fli
     memcpy(&data.rb.color, c, sizeof(GLV4F));
     
     //UV
-#ifdef __QT__
-    //这里因为qt加载模式与ios不同导致图片倒置，所以需要颠倒一下UV；
-    flipY = !flipY;
-#endif
     
     float l=m_orginRect.x/getTexture()->getWidth();
     float r=(m_orginRect.x+m_orginRect.width)/getTexture()->getWidth();

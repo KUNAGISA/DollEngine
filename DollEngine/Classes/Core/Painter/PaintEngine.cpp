@@ -158,7 +158,21 @@ Texture* PaintEngine::addTexture(const String& path)
 {
     String fullPath = Storages::GetInstance()->getFullPath(path);
     if(fullPath.empty()){
-        EM(ERROR_FILE_NOT_EXIST,path);
+        if(path.find(L'.') == String::npos) {
+            fullPath = Storages::GetInstance()->getFullPath(path+L".png");
+            if(fullPath.empty()) {
+                fullPath = Storages::GetInstance()->getFullPath(path+L".jpg");
+                if(fullPath.empty()) {
+                    fullPath = Storages::GetInstance()->getFullPath(path+L".jpeg");
+                    if(fullPath.empty()) {
+                        EM(ERROR_FILE_NOT_EXIST,path);
+                    }
+                }
+            }
+        }
+        else {
+            EM(ERROR_FILE_NOT_EXIST,path);
+        }
     }
     auto iter2 = m_allTextures.find(fullPath);
     Texture* tex=NULL;

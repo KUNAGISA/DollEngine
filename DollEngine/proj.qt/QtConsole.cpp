@@ -40,3 +40,8 @@ void QtConsole::keyReleaseEvent(QKeyEvent * event)
         qApp->exit( 0x88ff );
     }
 }
+
+void QtConsole::find(const QString& f,QTextDocument::FindFlag flag)
+{
+    ui->textEdit->find(f,flag);
+}

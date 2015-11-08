@@ -2,9 +2,9 @@ class UILayer extends Layer
 {
 	var names = %[];
 	var data = void;//初始化时传入的参数
-	function UILayer (par) 
+	function UILayer (app,par) 
 	{
-		super.Layer(par);
+		super.Layer(app,par);
 		this.setAnchor(0,0);
 	}
 

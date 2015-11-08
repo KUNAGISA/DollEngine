@@ -15,14 +15,14 @@ DE_BEGIN
 
 Image::Image()
 :m_info(NULL)
-,m_blendSrc(GL_ONE)
+,m_blendSrc(GL_SRC_ALPHA)
 ,m_blendDst(GL_ONE_MINUS_SRC_ALPHA)
 ,m_program(NULL)
 ,m_flipY(false)
 ,m_flipX(false)
-,m_startColor(0xffffffff)
+,m_startColor(0xffffff)
 ,m_startOpacity(0xff)
-,m_endColor(0xffffffff)
+,m_endColor(0xffffff)
 ,m_endOpacity(0xff)
 {
     setProgram("normal");
@@ -51,7 +51,7 @@ bool Image::loadImages(const String& path,const String& plist)
 void Image::setPaintSize(float w,float h)
 {
     if(!m_info){
-        EM("尚未载入图片");
+        DM("[setPaintSize]尚未载入图片");
         return;
     }
     m_info->setPaintSize(w,h);
@@ -60,7 +60,7 @@ void Image::setPaintSize(float w,float h)
 void Image::clipRect(float x,float y,float w,float h)
 {
     if(!m_info){
-        EM("尚未载入图片");
+        DM("[clipRect]尚未载入图片");
         return;
     }
     if(w + x > m_info->getPaintWidth()) w = m_info->getPaintWidth()-x;

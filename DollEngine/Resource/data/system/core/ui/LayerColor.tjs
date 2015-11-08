@@ -1,9 +1,10 @@
 class LayerColor extends Sprite
 {
-	function LayerColor (par) 
+	function LayerColor (app,par) 
 	{
-		super.Sprite(par);
-		this.round = 0;
+		super.Sprite(app,par);
+		invalidate _image;
+		_image = new ColorRect();
 		this.setAnchor(0,0);
 	}
 
@@ -15,19 +16,14 @@ class LayerColor extends Sprite
 		this.height = h if h !== void;
 	}
 
-	var _round=void;
 	property round{
 	    setter(v) {
 	    	//setter
-	    	var pw = this._image.paintWidth;
-	    	var ph = this._image.paintHeight;
-			this._image.loadSize(2,2,v);
-			this.setSize(pw,ph);
-	    	this._round = v;
+	    	this._image.r = v;
 		}
 		getter {
 	    	//getter
-			return this._round;
+			return this._image.r;
 		}
 	}
 

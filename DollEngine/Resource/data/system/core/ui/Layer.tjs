@@ -3,6 +3,7 @@ class Layer extends GameObject
 {
 	//public
 	var app;
+	var font;
 
 	//private
 	var _image;
@@ -10,6 +11,7 @@ class Layer extends GameObject
 		super.GameObject();
 		parent = par;
 		this.app = app;
+		font = new Font();
 		_image = new Image();
 	}
 
@@ -25,6 +27,17 @@ class Layer extends GameObject
 	function setSize (w=void,h=void) {
 		width = w if w!==void;
 		height = h if h!==void;
+	}
+
+	function setPos (x=void,y=void,w=void,h=void) {
+		this.x = x if x!==void;
+		this.y = y if y!==void;
+		setSize(w,h);
+	}
+
+	function setAnchor (x=void,y=void) {
+		anchorX = x if x!==void;
+		anchorY = y if y!==void;
 	}
 
 	function onPaint () {

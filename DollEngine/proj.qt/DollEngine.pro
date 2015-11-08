@@ -186,9 +186,12 @@ SOURCES += main.cpp\
     ../Classes/Core/Scripts/TjsBind/TjsSingleton/TjsSystem.cpp \
     ../Classes/Core/Scripts/TjsBind/TjsBind.cpp \
     ../Classes/Core/Scripts/TjsBind/TjsClasses/TjsImage.cpp \
+    ../Classes/Core/Scripts/TjsBind/TjsClasses/TjsColorRect.cpp \
     QtWindow.cpp \
     ../Classes/Core/Scripts/TjsBind/TjsClasses/TjsSystemDelegate.cpp \
     ../Classes/Core/Scripts/TjsBind/TjsClasses/TjsTransform.cpp \
+    ../Classes/Core/Scripts/TjsBind/TjsClasses/TjsRTT.cpp \
+    ConsoleFind.cpp
 
 HEADERS  += \
     QtConsole.h \
@@ -311,12 +314,16 @@ HEADERS  += \
     ../Classes/Core/Scripts/TjsBind/TjsSingleton/TjsSystem.h \
     ../Classes/Core/Scripts/TjsBind/TjsBind.h \
     ../Classes/Core/Scripts/TjsBind/TjsClasses/TjsImage.h \
+    ../Classes/Core/Scripts/TjsBind/TjsClasses/TjsColorRect.h \
     QtWindow.h \
     ../Classes/Core/Scripts/TjsBind/TjsClasses/TjsSystemDelegate.h \
     ../Classes/Core/Scripts/TjsBind/TjsClasses/TjsTransform.h \
+    ../Classes/Core/Scripts/TjsBind/TjsClasses/TjsRTT.h \
+    ConsoleFind.h
 
 FORMS  += QtConsole.ui \
-    QtWindow.ui
+    QtWindow.ui \
+    ConsoleFind.ui
 
 RESOURCES +=
 

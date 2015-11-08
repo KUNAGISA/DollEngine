@@ -5,6 +5,9 @@ class Application extends SystemDelegate
 	var window;
 	var sysbase;
 
+	var status = %[];
+	var deffont = %[]; //默认字体设置
+	var deffontChanged = true;//默认字体是否有过变化
 
 	//property
 	var needRedraw;
@@ -13,12 +16,14 @@ class Application extends SystemDelegate
 	//private
 	var _enabledTimers;
 	var _lastSeconds;
+	var _transRTT;
 
 	function Application () {
 		super.SystemDelegate();
 
 		_lastSeconds = System.seconds;
 		_enabledTimers = global.Timer.g_enabledTimers;
+		initStatus();
 
 		window = new Window();
 		window.setLayerSize(DEConfig.device.width,DEConfig.device.height);
@@ -35,6 +40,27 @@ class Application extends SystemDelegate
 	function finalize () {
 		invalidate window;
 	}
+
+	function initStatus () {
+	}
+
+	/*场景过渡效果*/
+	function sceneTransition (type, time, params*) {
+		if(_transRTT) {
+			dm("场景正在过渡");
+			return;
+		}
+		// _transRTT = new RTT();
+		// _transRTT.begin(sysbase.width,sysbase.height);
+		// sysbase.visit();
+		// _transRTT.end();
+		this["sceneTrans"+type](time, params*);
+	}
+
+	function sceneTransCrossFade (time) {
+		
+	}
+	/*帧刷新*/
 
 	function update () {
 		var nSeconds = System.seconds;
@@ -62,6 +88,9 @@ class Application extends SystemDelegate
 		update();
 		window.beforeMainLoop();
 		sysbase.visit();
+		// if(_transRTT) {
+		// 	_transRTT.paint(sysbase._transInWorld);
+		// }
 		window.afterMainLoop();
 	}
 

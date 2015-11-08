@@ -121,7 +121,7 @@ void KAGTag::print(bool cond)
     if (!cond) {
         str += L" [COND FALSE] ";
     }
-    
+    DE::Console::GetInstance()->log(str);
 }
 
 DE_END

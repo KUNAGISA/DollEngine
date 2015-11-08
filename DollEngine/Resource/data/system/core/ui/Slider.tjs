@@ -10,9 +10,9 @@ class Slider extends Control
 	var min=0;
 	var max=100;
 	var vertical=false;
-	function Slider (par) 
+	function Slider (app,par) 
 	{
-		super.Control(par);
+		super.Control(app,par);
 		baseImage = new ProgressBar(this);
 		baseImage.setAnchor(0.5,0.5);
 		sliderBtn = new Button(this);

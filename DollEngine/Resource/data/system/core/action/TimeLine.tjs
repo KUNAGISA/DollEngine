@@ -35,4 +35,7 @@ class Timeline
 			}
 		} incontextof this);
 	}
+
+	function update () {
+	}
 }

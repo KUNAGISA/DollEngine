@@ -1,9 +1,9 @@
 
 class Label extends Layer
 {
-	function Label (par) 
+	function Label (app,par) 
 	{
-		super.Layer(par);
+		super.Layer(app,par);
 		this._font = new Character();
 		this._font.object = this;
 		this.setAnchor(0.5,0.5);
@@ -49,11 +49,4 @@ class Label extends Layer
 		}
 	}
 
-	var _font=void;
-	property font{
-		getter {
-	    	//getter
-			return this._font;
-		}
-	}
 }

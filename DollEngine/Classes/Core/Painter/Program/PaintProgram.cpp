@@ -61,7 +61,7 @@ const char* PaintProgram::getShader_F()
     "uniform sampler2D tex_fore;"
     "void main()"
     "{"
-    "gl_FragColor = v_fragmentColor * texture2D(tex_fore, v_texCoord);"
+    "gl_FragColor = v_fragmentColor* texture2D(tex_fore, v_texCoord);"
     "}";
 }
 

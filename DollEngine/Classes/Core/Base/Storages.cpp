@@ -66,77 +66,70 @@ String Storages::getFullPath(const String& storage)
     }
     if(access(storage.c_nstr(), 0) == 0)
         return storage;
-    if (storage[0] == L'/')
+    
+    auto cache_iter = m_searchPathsCache.find(storage);
+    if (cache_iter != m_searchPathsCache.end())
     {
-        if(access(storage.c_nstr(), 0) == 0)
-            return storage;
+        return cache_iter->second;
     }
     else
     {
-        auto cache_iter = m_searchPathsCache.find(storage);
-        if (cache_iter != m_searchPathsCache.end())
+        String temp_path = System::GetInstance()->getPatchPath()+storage;
+        if (access(temp_path.c_nstr(),0) == 0)
         {
-            return cache_iter->second;
+            m_searchPathsCache[storage] = temp_path;
+            return temp_path;
         }
-        else
+        temp_path = System::GetInstance()->getSaveDataPath()+storage;
+        if (access(temp_path.c_nstr(),0) == 0)
         {
-            String temp_path = System::GetInstance()->getPatchPath()+storage;
+            m_searchPathsCache[storage] = temp_path;
+            return temp_path;
+        }
+        temp_path = System::GetInstance()->getDataPath()+storage;
+        if (access(temp_path.c_nstr(),0) == 0)
+        {
+            m_searchPathsCache[storage] = temp_path;
+            return temp_path;
+        }
+        temp_path = System::GetInstance()->getAppPath()+storage;
+        if (access(temp_path.c_nstr(),0) == 0)
+        {
+            m_searchPathsCache[storage] = temp_path;
+            return temp_path;
+        }
+        auto auto_iter = m_autoPaths.begin();
+        for (; auto_iter != m_autoPaths.end(); ++auto_iter)
+        {
+            temp_path = System::GetInstance()->getPatchPath()+(*auto_iter)+storage;
             if (access(temp_path.c_nstr(),0) == 0)
             {
                 m_searchPathsCache[storage] = temp_path;
                 return temp_path;
             }
-            temp_path = System::GetInstance()->getSaveDataPath()+storage;
+        }
+        auto_iter = m_autoPaths.begin();
+        for (; auto_iter != m_autoPaths.end(); ++auto_iter)
+        {
+            temp_path = System::GetInstance()->getSaveDataPath()+(*auto_iter)+storage;
             if (access(temp_path.c_nstr(),0) == 0)
             {
                 m_searchPathsCache[storage] = temp_path;
                 return temp_path;
             }
-            temp_path = System::GetInstance()->getDataPath()+storage;
+        }
+        auto_iter = m_autoPaths.begin();
+        for (; auto_iter != m_autoPaths.end(); ++auto_iter)
+        {
+            temp_path = System::GetInstance()->getDataPath()+(*auto_iter)+storage;
             if (access(temp_path.c_nstr(),0) == 0)
             {
                 m_searchPathsCache[storage] = temp_path;
                 return temp_path;
-            }
-            temp_path = System::GetInstance()->getAppPath()+storage;
-            if (access(temp_path.c_nstr(),0) == 0)
-            {
-                m_searchPathsCache[storage] = temp_path;
-                return temp_path;
-            }
-            auto auto_iter = m_autoPaths.begin();
-            for (; auto_iter != m_autoPaths.end(); ++auto_iter)
-            {
-                temp_path = System::GetInstance()->getPatchPath()+(*auto_iter)+storage;
-                if (access(temp_path.c_nstr(),0) == 0)
-                {
-                    m_searchPathsCache[storage] = temp_path;
-                    return temp_path;
-                }
-            }
-            auto_iter = m_autoPaths.begin();
-            for (; auto_iter != m_autoPaths.end(); ++auto_iter)
-            {
-                temp_path = System::GetInstance()->getSaveDataPath()+(*auto_iter)+storage;
-                if (access(temp_path.c_nstr(),0) == 0)
-                {
-                    m_searchPathsCache[storage] = temp_path;
-                    return temp_path;
-                }
-            }
-            auto_iter = m_autoPaths.begin();
-            for (; auto_iter != m_autoPaths.end(); ++auto_iter)
-            {
-                temp_path = System::GetInstance()->getDataPath()+(*auto_iter)+storage;
-                if (access(temp_path.c_nstr(),0) == 0)
-                {
-                    m_searchPathsCache[storage] = temp_path;
-                    return temp_path;
-                }
             }
         }
     }
-    return "";
+    return L"";
 }
 
 void Storages::removeAutoPath(const String& storage)

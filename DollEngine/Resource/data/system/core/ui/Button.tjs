@@ -9,17 +9,17 @@ class Button extends Control
 		storage : void, //跳转的脚本
 		target : void, //跳转的脚本的标签
 	];
-	function Button (par) 
+	function Button (app,par) 
 	{
-		super.Control(par);
-		this.imageBase = new global.Node(this);
-		this._normalImage = new Sprite(this.imageBase);
-		this._selectImage = new Sprite(this.imageBase);
-		this._disableImage = new Sprite(this.imageBase);
+		super.Control(app,par);
+		this.imageBase = new global.GameObject();
+		this._normalImage = new Sprite(app,this.imageBase);
+		this._selectImage = new Sprite(app,this.imageBase);
+		this._disableImage = new Sprite(app,this.imageBase);
 		this._selectImage.visible=false;
 		this._normalImage.visible=true;
 		this._disableImage.visible=false;
-		_title = new Label(this.imageBase);
+		_title = new Label(app,this.imageBase);
 		_title.setAnchor(0.5,0.5);
 		_title.absolute = 1;
 		_title.visible = false;
@@ -176,12 +176,12 @@ class Button extends Control
 	property graphicImage{
 	    setter(v) {
 	    	//setter
-	    	this._normalImage.loadImageWithMargin(v,0,2/3,0,0);
-	    	this.setSize(this._normalImage.width,this._normalImage.height);
-	    	this.imageBase.x = this.width/2;
-	    	this.imageBase.y = this.height/2;
-	    	this._selectImage.loadImageWithMargin(v,1/3,1/3,0,0);
-	    	this._disableImage.loadImageWithMargin(v,0,2/3,0,0);
+	    	// this._normalImage.loadImageWithMargin(v,0,2/3,0,0);
+	    	// this.setSize(this._normalImage.width,this._normalImage.height);
+	    	// this.imageBase.x = this.width/2;
+	    	// this.imageBase.y = this.height/2;
+	    	// this._selectImage.loadImageWithMargin(v,1/3,1/3,0,0);
+	    	// this._disableImage.loadImageWithMargin(v,0,2/3,0,0);
 		}
 	}
 

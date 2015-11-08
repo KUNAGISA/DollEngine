@@ -20,6 +20,7 @@ public:
     ~ImageInfo();
     
     bool loadWithFile(const String& path, const String& plist="");
+    bool loadWithSize(int w,int h,int r);
     
     void setSizeToOrginSize(){m_paintSize.set(m_orginRect.width,m_orginRect.height);}
     virtual void setPaintSize(float w,float h){m_paintSize.width = w;m_paintSize.height = h;}

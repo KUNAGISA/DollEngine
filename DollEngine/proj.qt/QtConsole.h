@@ -2,6 +2,7 @@
 #define QTCONSOLE_H
 
 #include <QWidget>
+#include <QTextEdit>
 #include "Console.h"
 #include "CoreString.h"
 
@@ -23,6 +24,7 @@ public:
     }
     virtual bool getVisible(){return isVisible();}
     virtual void keyReleaseEvent(QKeyEvent * event);
+    void find(const QString& f,QTextDocument::FindFlag flag);
 private:
     Ui::QtConsole *ui;
 };

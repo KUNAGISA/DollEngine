@@ -1,0 +1,24 @@
+class Touch
+{
+	var object;
+	var swallow = false;
+	var enabled = true;
+	function Touch (obj) {
+		object = obj;
+	}
+
+	function onMouseDown (x,y) {
+	}
+
+	function onMouseUp (x,y) {
+		
+	}
+
+	function onMouseMove (x,y) {
+		
+	}
+
+	function onClick (x,y) {
+		
+	}
+}

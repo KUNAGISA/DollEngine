@@ -1,8 +1,9 @@
 
-class BaseLayer extends Layer
+class BaseLayer extends GraphicLayer
 {
-	function BaseLayer (app,lay) {
-		super.Layer(app,lay);
+	function BaseLayer (app,lay) 
+	{
+		super.GraphicLayer(app,lay);
 		setSize(app.window.width,app.window.height);
 	}
 }

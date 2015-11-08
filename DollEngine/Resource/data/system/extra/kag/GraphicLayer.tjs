@@ -1,9 +1,9 @@
 
 class GraphicLayer extends Sprite
 {
-	function GraphicLayer (par) 
+	function GraphicLayer (app,par) 
 	{
-		super.Sprite(par);
+		super.Sprite(app,par);
 		this.setAnchor(0,1);
 	}
 	

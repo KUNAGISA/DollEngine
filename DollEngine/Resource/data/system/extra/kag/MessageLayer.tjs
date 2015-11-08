@@ -29,11 +29,11 @@ class MessageLayer extends UILayer
 		lineSpacing : 10,//行距
 		wordSpacing : 0,//字间距
 	];
-	function MessageLayer (par) 
+	function MessageLayer (app,par) 
 	{
-		super.UILayer(par);
+		super.UILayer(app,par);
 		setAnchor(0,1);
-		frameImage = new Sprite(this);
+		frameImage = new Sprite(app,this);
 		frameImage.visible = false;
 		frameImage.setAnchor(0,1);
 		frameImage.absolute = -3;
@@ -46,7 +46,7 @@ class MessageLayer extends UILayer
 		_sw1.swallow = true;
 		_sw1.enabled = true;
 
-		frameColor = new LayerColor(this);
+		frameColor = new LayerColor(app,this);
 		frameColor.visible = false;
 		frameColor.absolute = -3;
 		_sw2 = new Touch();
@@ -58,11 +58,11 @@ class MessageLayer extends UILayer
 		_sw2.swallow = true;
 		_sw2.enabled = true;
 
-		chLayer = new WordLayer(this);
+		chLayer = new WordLayer(app,this);
 		chLayer.visible = true;
 		chLayer.absolute = -2;
 
-		controlLayer = new global.Node(this);
+		controlLayer = new global.Layer(app,this);
 		controlLayer.visible = true;
 		controlLayer.absolute = -1;
 
@@ -188,7 +188,7 @@ class MessageLayer extends UILayer
 		if (elm.name == void) {
 			elm.name = "_num_"+uiIndex;
 		}
-		var node = new Button(controlLayer);
+		var node = new Button(app,controlLayer);
 		node.issystem = elm.issys===void?false:elm.issys;
 		if (node.issystem) {
 			syscontrol[elm.name] = node;
@@ -227,7 +227,7 @@ class MessageLayer extends UILayer
 		if (elm.name == void) {
 			elm.name = "_num_"+uiIndex;
 		}
-		var node = new Slider(controlLayer);
+		var node = new Slider(app,controlLayer);
 		node.issystem = elm.issys===void?false:elm.issys;
 		if (node.issystem) {
 			syscontrol[elm.name] = node;
@@ -261,7 +261,7 @@ class MessageLayer extends UILayer
 
 	function addText (text,x,y) 
 	{
-		var node = new Label(chLayer);
+		var node = new Label(app,chLayer);
 		node.setAnchor(0,1);
 		//这里还要设置文字属性
 		node.font.size = font.size;

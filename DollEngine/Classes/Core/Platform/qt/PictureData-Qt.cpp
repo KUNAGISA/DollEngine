@@ -7,7 +7,6 @@
 //
 
 #include <QImage>
-#include <QGLWidget>
 #include "PictureData.h"
 #include "IOData.h"
 #include "Storages.h"
@@ -24,7 +23,7 @@ bool PictureData::loadFromFile(const DE::String &fullPath)
     setHeight(image.height());
     IOData* imgData = new IOData();
     imgData->initWithSize(getWidth() * getHeight() * 4);
-    QImage imagegl = QGLWidget::convertToGLFormat(image);
+    QImage imagegl = image.convertToFormat(QImage::Format_RGBA8888);
     memcpy(imgData->getBuffer(),imagegl.bits(),imgData->getSize());
     setData(imgData);
     return true;

@@ -1,0 +1,10 @@
+class Font
+{
+	function Font () {
+		
+	}
+
+	function mapPrerenderedFont (path) {
+		dm("失效的API:mapPrerenderedFont");
+	}
+}

@@ -17,6 +17,10 @@ class GameObject
 	function finalize () {
 		invalidate transform;
 		invalidate _transInWorld;
+		removeAllChildren();
+	}
+
+	function removeAllChildren () {
 		for (var i = 0; i < children.count; i++) {
 			invalidate children[i];
 		}
@@ -75,6 +79,26 @@ class GameObject
 		
 	}
 
+	function onHitTest (obj,x,y) {
+		//测试碰撞
+	}
+
+	function onMouseDown (x,y) {
+		
+	}
+
+	function onMouseUp (x,y) {
+		
+	}
+
+	function onMouseMove (x,y) {
+		
+	}
+
+	function onClick (x,y) {
+		
+	}
+	
 	/***
 	*属性
 	*/
@@ -112,6 +136,24 @@ class GameObject
 	    }
 	    getter {
 	    	return transform.y;
+	    }
+	}
+
+	property anchorX {
+	    setter(v) {
+	    	transform.anchorX = v;
+	    }
+	    getter {
+	    	return transform.anchorX;
+	    }
+	}
+
+	property anchorY {
+	    setter(v) {
+	    	transform.anchorY = v;
+	    }
+	    getter {
+	    	return transform.anchorY;
 	    }
 	}
 
