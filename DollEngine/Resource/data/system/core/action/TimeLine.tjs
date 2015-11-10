@@ -1,28 +1,30 @@
 class Timeline
 {
 	var currentTime = 0;//Timeline启动了多少时间，单位ms
-	var duration = 1000; //时间线长度，单位ms
 	var object;
 	var _params = %[];
-	function Timeline (obj) {
+	var _app;
+	function Timeline (app,obj) {
 		object = obj;
+		_app = app;
 	}
 
-	function setKeyframe (param, keyTime, keyValue) {
+	function finalize () {
+	}
+
+	function setKeyframe (param, startValue, endValue, duration, startTime=0) {
 		if(typeof(object[param]) == "undefined") {
+			dm("属性"+param+"不存在");
 			return;
 		}
 		if(typeof(object[param]) == "Object") {
 			dm("属性"+param+"不能被Timeline使用");
 			return;
 		}
-		if(keyTime < 0 || keyTime >= duration) {
-			dm("Timeline不接受时间线之外的关键帧");
-		}
 		if(_params[param] == void) {
 			_params[param] = [];
 		}
-		_params[param].add([keyTime,keyValue]);
+		_params[param].add([startTime,duration,startValue,endValue]);
 	}
 
 	function start () {
@@ -30,12 +32,30 @@ class Timeline
 			value.sort(function (a,b) {
 				return a[0] < b[0];
 			});
-			if(value[0][0] != 0) {
-				value.insert(0,[0,this.object[key]]);
-			}
+			value.add(0);
 		} incontextof this);
+		currentTime = 0;
 	}
 
-	function update () {
+	function update (dt) {
+		currentTime+=dt;
+		foreach(_params,function (param,timelineData) {
+			var idx = timelineData[-1];
+			if(idx >= timelineData.count-1){
+				return;
+			}
+			var arr = timelineData[idx];
+			var ct = currentTime - arr[0];
+			var ft = ct/arr[1];
+			if(ft >= 1) {
+				timelineData[-1] = ++idx;
+				ft = 1;
+			}
+			setParamValue(param, ft, arr[2], arr[3]);
+		} incontextof this)
+	}
+
+	function setParamValue (param, ft, sv, ev) {
+		object[param] = (ev-sv)*ft + sv;
 	}
 }

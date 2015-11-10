@@ -24,7 +24,7 @@ public:
     }
     virtual bool getVisible(){return isVisible();}
     virtual void keyReleaseEvent(QKeyEvent * event);
-    void find(const QString& f,QTextDocument::FindFlag flag);
+    void find(const QString& f,QTextDocument::FindFlags flag);
 private:
     Ui::QtConsole *ui;
 };

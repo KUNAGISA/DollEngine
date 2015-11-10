@@ -24,18 +24,6 @@ DRAG_FREE = 3;
 
 /***********字典操作************/
 
-function foreach (dict, func) 
-{
-    if (!dict) {
-        return;
-    }
-    var iter = new DictIterator();
-    iter.begin(dict);
-    while(iter.next()) {
-        func(iter.key,iter.value);
-    }
-}
-
 function merger (dst, src) 
 {
     foreach(src, function (key,value) 

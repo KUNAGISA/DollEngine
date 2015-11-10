@@ -3,6 +3,8 @@
 #include "System.h"
 #include <QSettings>
 #include <QKeyEvent>
+#include <QDebug>
+#include "ConsoleFind.h"
 
 QtConsole::QtConsole(QWidget *parent) :
     QWidget(parent),
@@ -25,7 +27,8 @@ QtConsole::~QtConsole()
 void QtConsole::Print(const tjs_char *msg)
 {
     if(DE::System::GetInstance()->getDebugMode() > 0){
-        show();
+        if(!isVisible())
+            show();
     }
     else {
         return;
@@ -39,9 +42,26 @@ void QtConsole::keyReleaseEvent(QKeyEvent * event)
     if(event->matches(QKeySequence::Refresh)) {
         qApp->exit( 0x88ff );
     }
+    else if(event->matches(QKeySequence::Find)) {
+        ConsoleFind::GetInstance(this)->show();
+        ConsoleFind::GetInstance(this)->raise();
+    }
 }
 
-void QtConsole::find(const QString& f,QTextDocument::FindFlag flag)
+void QtConsole::find(const QString& f,QTextDocument::FindFlags flag)
 {
-    ui->textEdit->find(f,flag);
+    bool ret = ui->textEdit->find(f,flag);
+    if(ret == false){
+        QTextCursor cur = ui->textEdit->textCursor();
+        if(flag & QTextDocument::FindBackward) {
+            cur.movePosition(QTextCursor::End);
+            ui->textEdit->setTextCursor(cur);
+            ui->textEdit->find(f,flag);
+        }
+        else {
+            cur.movePosition(QTextCursor::Start);
+            ui->textEdit->setTextCursor(cur);
+            ui->textEdit->find(f,flag);
+        }
+    }
 }

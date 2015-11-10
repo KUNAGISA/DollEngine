@@ -12,6 +12,7 @@
 #include "TjsStorages.h"
 #include "TjsScripts.h"
 #include "TjsConsole.h"
+#include "TjsDictIterator.h"
 #include "System.h"
 #ifdef __QT__
 #include "QtConsole.h"
@@ -19,6 +20,34 @@
 #include "Console.h"
 #endif
 DE_BEGIN
+
+TJS_NATIVE_FUNCTION_BEGIN(TJSForeach)
+
+if(numparams < 2) return TJS_E_BADPARAMCOUNT;
+
+tTJSVariant* dict = param[0];
+tTJSVariant* func = param[1];
+if(dict == NULL || func == NULL || dict->AsObjectNoAddRef() == NULL || func->AsObjectNoAddRef() == NULL) {
+    return TJS_E_INVALIDPARAM;
+}
+
+TjsDictIterator iter;
+iter.begin(dict);
+while(iter.next()){
+    iTJSDispatch2* incontext = func->AsObjectThisNoAddRef();
+    iTJSDispatch2* f = func->AsObjectNoAddRef();
+    tTJSInterCodeContext* func = dynamic_cast<tTJSInterCodeContext*>(f);
+    if (func) {
+        tTJSVariant v1 = iter.key();
+        tTJSVariant v2;
+        tTJSVariant_BITCOPY(v2,iter.value());
+        tTJSVariant* params[2] = {&v1,&v2};
+        func->FuncCall(0,NULL,NULL,NULL,2,params,incontext);
+    }
+}
+TJS_NATIVE_FUNCTION_END
+
+
 
 static TJS::tTJS* s_tjs = NULL;
 
@@ -41,6 +70,7 @@ ScriptEngine::ScriptEngine()
         TJS_REGIST_CLASS(Scripts)
         TJS_REGIST_CLASS(Console)
         
+        TJS_REGIST_FUNCTION(TJSForeach, "foreach")
         
         TVPLoadMessage();
         //        REGIST_TJS_FUNCTION(TJSConsoleShow,"__console_show")
