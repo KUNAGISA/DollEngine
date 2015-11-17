@@ -31,6 +31,10 @@ NCB_REGISTER_CLASS_DIFFER(Image, TjsImage)
     NCB_METHOD_DIFFER(setProgram, setProgramTJS);
     NCB_PROPERTY(paintWidth,getPaintWidth,setPaintWidth);
     NCB_PROPERTY(paintHeight,getPaintHeight,setPaintHeight);
+    NCB_PROPERTY(startOpacity,getStartOpacity,setStartOpacity);
+    NCB_PROPERTY(endOpacity,getEndOpacity,setEndOpacity);
+    NCB_PROPERTY(startColor,getStartColor,setStartColor);
+    NCB_PROPERTY(endColor,getEndColor,setEndColor);
 //    NCB_PROPERTY(scale9,getScale9,setScale9);
 //    NCB_PROPERTY(scale9B,getScale9B,setScale9B);
 //    NCB_PROPERTY(scale9L,getScale9L,setScale9L);

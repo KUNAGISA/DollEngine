@@ -17,12 +17,15 @@ class Application extends SystemDelegate
 	var _enabledTimers;
 	var _lastSeconds;
 	var _transRTT;
+	var _allTimelines;
+	var _allAsyncTriggers = [];
 
 	function Application () {
 		super.SystemDelegate();
 
 		_lastSeconds = System.seconds;
 		_enabledTimers = global.Timer.g_enabledTimers;
+		_allTimelines = new Set();
 		initStatus();
 
 		window = new Window();
@@ -47,18 +50,20 @@ class Application extends SystemDelegate
 	/*场景过渡效果*/
 	function sceneTransition (type, time, params*) {
 		if(_transRTT) {
-			dm("场景正在过渡");
+			dm("【Application sceneTransition】场景正在过渡");
 			return;
 		}
-		// _transRTT = new RTT();
-		// _transRTT.begin(sysbase.width,sysbase.height);
-		// sysbase.visit();
-		// _transRTT.end();
+		dm("【Application sceneTransition】场景开始过渡，预计耗时",time,,System.seconds);
+		_transRTT = new RTTLayer(this,null);
+		_transRTT.draw(sysbase);
 		this["sceneTrans"+type](time, params*);
 	}
 
 	function sceneTransCrossFade (time) {
-		
+		// var tl = new Timeline(this,_transRTT);
+		// tl.setKeyframe("opacity",255,0,time);
+		// tl.onTimelineFinished = onSceneTransFinished;
+		// tl.start();
 	}
 	/*帧刷新*/
 
@@ -81,17 +86,40 @@ class Application extends SystemDelegate
 	}
 
 	function updateTimeLine (dt) {
-		// body...
+		_allTimelines.foreach(function (tl) {
+			tl.update(this[0]);
+		} incontextof [dt]);
 	}
 
 	function onMainLoop () {
 		update();
 		window.beforeMainLoop();
-		sysbase.visit();
-		// if(_transRTT) {
-		// 	_transRTT.paint(sysbase._transInWorld);
-		// }
+		// sysbase.visit();
+		if(_transRTT) {
+			_transRTT.visit();
+		}
 		window.afterMainLoop();
+		onAsyncTrigger();
+	}
+
+	function onSceneTransFinished () {
+		// invalidate _transRTT;
+		// _transRTT = void;
+		dm("【Application sceneTransition】场景过渡完毕",System.seconds);
+	}
+
+	function onAsyncTrigger () {
+		for (var i = 0; i < _allAsyncTriggers.count; i++) {
+			var func = _allAsyncTriggers[i][0];
+			var elm = _allAsyncTriggers[i][1];
+			if(elm){
+				func(elm*);
+			}
+			else {
+				func();
+			}
+		};
+		_allAsyncTriggers.clear();
 	}
 
 	function onMouseDown (x,y) {

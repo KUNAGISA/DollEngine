@@ -18,11 +18,10 @@ public:
     TjsDictIterator();
     ~TjsDictIterator();
     void begin(tTJSVariant root);//刚刚被设置的时候,都是定位于begin的
-    void begin(tTJSVariant* root);//刚刚被设置的时候,都是定位于begin的
     bool atEnd();
     bool next();//当移动后等于end时,return false
-    const tjs_char * key();
-    tTJSVariant_S& value();
+    tTJSVariant key();
+    tTJSVariant value();
 private:
     tTJSDictionaryObject* m_root_dict;
     tTJSDictionaryObject::tTJSSymbolData * m_root_iter;

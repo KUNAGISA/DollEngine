@@ -58,8 +58,10 @@ public:
     void blendFunc(DrawBlendId src,DrawBlendId dst);
     
     void deleteFBO(DrawSizeI n, const DrawFBOId * framebuffers);
-    DrawFBOId createFBO(DrawTexId texId );
-    void switchFBO(DrawFBOId* oldFBO,DrawFBOId newFBO);
+    void createFBO(DrawTexId texId,DrawOldFBOId* oldFBO, DrawFBOId* fbo );
+    void switchFBO(DrawOldFBOId* oldFBO,DrawFBOId newFBO);
+    
+    PictureData* getPictureByRTT(Texture* tex,DrawFBOId fbo);
     
     void clearColor(DrawMask mask,DrawClampF red,DrawClampF green,DrawClampF blue,DrawClampF alpha);
     

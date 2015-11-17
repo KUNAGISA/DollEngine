@@ -369,26 +369,25 @@ void PaintEngine::deleteFBO(DrawSizeI n, const DrawFBOId * framebuffers)
     glDeleteFramebuffers(n,framebuffers);
 }
 
-DrawFBOId PaintEngine::createFBO(DrawTexId texId )
+void PaintEngine::createFBO(DrawTexId texId,DrawOldFBOId* oldFBO, DrawFBOId* fbo )
 {
-    DrawFBOId newFBO;
-    DrawFBOId oldFBO;
+    glGetIntegerv(GL_FRAMEBUFFER_BINDING, oldFBO);
+    
     GLint oldRBO;
-    glGetIntegerv(GL_FRAMEBUFFER_BINDING, (GLint*)(&oldFBO));
     glGetIntegerv(GL_RENDERBUFFER_BINDING, &oldRBO);
-
-    glGenFramebuffers(1, &newFBO);
-    glBindFramebuffer(GL_FRAMEBUFFER, newFBO);
-
+    
+    glGenFramebuffers(1, fbo);
+    glBindFramebuffer(GL_FRAMEBUFFER, *fbo);
+    
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texId, 0);
+    
     ASSERT(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE);
-
+    
     glBindRenderbuffer(GL_RENDERBUFFER, oldRBO);
-    glBindFramebuffer(GL_FRAMEBUFFER, oldFBO);
-    return newFBO;
+    glBindFramebuffer(GL_FRAMEBUFFER, *oldFBO);
 }
 
-void PaintEngine::switchFBO(DrawFBOId* oldFBO,DrawFBOId newFBO)
+void PaintEngine::switchFBO(DrawOldFBOId* oldFBO,DrawFBOId newFBO)
 {
     if(oldFBO){
         glGetIntegerv(GL_FRAMEBUFFER_BINDING, (GLint*)oldFBO);
@@ -397,13 +396,33 @@ void PaintEngine::switchFBO(DrawFBOId* oldFBO,DrawFBOId newFBO)
     CHECK_GL_ERROR;
 }
 
+PictureData* PaintEngine::getPictureByRTT(Texture* tex,DrawFBOId _FBO)
+{
+    int savedBufferWidth = tex->getWidth();
+    int savedBufferHeight = tex->getHeight();
+    IOData* data = new IOData();
+    data->initWithSize(savedBufferWidth*savedBufferHeight*4);
+    GLint _oldFBO;
+    glGetIntegerv(GL_FRAMEBUFFER_BINDING, &_oldFBO);
+    glBindFramebuffer(GL_FRAMEBUFFER, _FBO);
+    
+    glPixelStorei(GL_PACK_ALIGNMENT, 1);
+    glReadPixels(0,0,savedBufferWidth, savedBufferHeight,GL_RGBA,GL_UNSIGNED_BYTE, data->getBuffer());
+    glBindFramebuffer(GL_FRAMEBUFFER, _oldFBO);
+    PictureData* picture = new PictureData();
+    picture->setWidth(savedBufferWidth);
+    picture->setHeight(savedBufferHeight);
+    picture->setData(data);
+    return picture;
+}
+
 void PaintEngine::clearColor(DrawMask mask,DrawClampF red,DrawClampF green,DrawClampF blue,DrawClampF alpha)
 {
+    glClearColor(red,green,blue,alpha);
     if(mask!=0)
     {
         glClear(mask);
     }
-    glClearColor(red,green,blue,alpha);
 }
 
 DrawTexId PaintEngine::loadTexture(void* data, int width,int height)

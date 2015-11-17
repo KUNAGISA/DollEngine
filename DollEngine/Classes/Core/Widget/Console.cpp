@@ -97,5 +97,15 @@ void Console::throwMsg(DEBUG_MSG error,int p1,const String& p2)
     TJS_eTJSError(msg);
 }
 
+void Console::evalScripts(const String& v)
+{
+    try {
+        tTJSVariant ret;
+        ScriptEngine::GetInstance()->eval(v,&ret);
+        ret.ToString();
+        Print(ret.AsStringNoAddRef()->operator const tjs_char *());
+    }
+    TJS_CATCH
+}
 
 DE_END

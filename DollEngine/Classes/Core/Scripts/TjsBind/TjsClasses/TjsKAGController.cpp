@@ -83,6 +83,9 @@ int TjsKAGController::doTag()
             return -2;
         }
     }
+    if(this->m_storage->fileName == L"title.ks"){
+        KAGTag * tag = m_label->allTags[m_tagIndex];
+    }
     KAGTag * tag = m_label->allTags[m_tagIndex];
     if (tag->name == L"macro") {
         wstring macroname = tag->getValue(L"name");

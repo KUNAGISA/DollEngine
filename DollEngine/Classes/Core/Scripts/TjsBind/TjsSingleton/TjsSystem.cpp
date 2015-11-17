@@ -57,6 +57,18 @@ tTJSNC_System::tTJSNC_System() : inherited(TJS_W("System"))
         return TJS_S_OK;
     }
     TJS_END_NATIVE_STATIC_METHOD_DECL(/*func. name*/setDelegate)
+            
+    //----------------------------------------------------------------------
+    TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/getDelegate)
+    {
+        TjsSystemDelegate* delegate = dynamic_cast<TjsSystemDelegate*>(DESystem->getDelegate());
+        if(delegate){
+            *result = delegate->_self;
+            return TJS_S_OK;
+        }
+        return TJS_S_OK;
+    }
+    TJS_END_NATIVE_STATIC_METHOD_DECL(/*func. name*/getDelegate)
                     
     //--property
     

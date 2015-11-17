@@ -46,6 +46,7 @@ enum PROGRAM_TYPE
 
 
 typedef GLuint DrawFBOId;//fbo手柄
+typedef GLint DrawOldFBOId;//fbo手柄
 typedef GLuint DrawTexId;//贴图手柄
 typedef GLuint DrawActiveTexId;//生效的贴图
 typedef GLuint DrawPrgId; //program

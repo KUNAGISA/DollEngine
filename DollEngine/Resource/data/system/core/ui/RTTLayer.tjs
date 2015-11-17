@@ -1,0 +1,15 @@
+class RTTLayer extends Layer
+{
+	function RTTLayer (app,par) {
+		super.Layer(...);
+		invalidate _image;
+		_image = new RTT();
+	}
+
+	function draw (lay) {
+		_image.begin(lay.width,lay.height);
+		lay.visit();
+		_image.end();
+		setSizeToImageSize();
+	}
+}

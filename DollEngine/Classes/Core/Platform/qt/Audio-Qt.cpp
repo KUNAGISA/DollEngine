@@ -35,7 +35,9 @@ bool Audio::preload(const String& path)
         m_object = new QMediaPlayer();
     }
     m_fullPath = Storages::GetInstance()->getFullPath(path);
-    AUDIO_OBJ->setMedia(QUrl(m_fullPath.c_nstr()));
+    QMediaPlaylist* playList = new QMediaPlaylist();
+    playList->addMedia(QUrl(m_fullPath.c_nstr()));
+    AUDIO_OBJ->setPlaylist(playList);
     AUDIO_OBJ->stop();
     setVolume(m_volume);
     setMuted(m_muted);
@@ -87,22 +89,15 @@ void Audio::fadeTo(float dut,int tarVol)
 }
 
 
-void Audio::setLoop(int v)
+void Audio::setLoop(bool v)
 {
     m_loop = v;
     if(!m_object) return;
-    if(v < 0){
+    if(v){
         AUDIO_OBJ->playlist()->setPlaybackMode(QMediaPlaylist::CurrentItemInLoop);
     }
     else {
-        if(v == 0){
-            v = 1;
-        }
-        AUDIO_OBJ->playlist()->clear();
-        for(int i=0;i<v;++i)
-        {
-            AUDIO_OBJ->playlist()->load(QUrl(m_fullPath.c_nstr()));
-        }
+        AUDIO_OBJ->playlist()->setPlaybackMode(QMediaPlaylist::CurrentItemOnce);
     }
 }
 

@@ -4,12 +4,17 @@ class GameObject
 	//public
 	var transform = void;
 	var children = [];
+	var parent;
 	
 	//private
 	var _needSortChildren = false;
 	var _transInWorld = void;
 
-	function GameObject () {
+	function GameObject (par) {
+		parent = par;
+		if(parent) {
+			parent.children.add(this);
+		}
 		transform = new Transform();
 		_transInWorld = new Transform();
 	}
@@ -17,6 +22,9 @@ class GameObject
 	function finalize () {
 		invalidate transform;
 		invalidate _transInWorld;
+		if(parent)
+			parent.children.remove(this);
+		parent = void;
 		removeAllChildren();
 	}
 

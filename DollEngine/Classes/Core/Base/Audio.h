@@ -20,7 +20,7 @@ public:
     void fadeTo(float dut,int tarVol);
 public:
     bool getPlaying();
-    PROPERTY(int, Loop, m_loop);
+    PROPERTY(bool, Loop, m_loop);
     PROPERTY(float, Volume, m_volume);
     PROPERTY(bool, Muted,m_muted);
     PROPERTY(int, Position,m_position);

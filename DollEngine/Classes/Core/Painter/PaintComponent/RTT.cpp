@@ -45,6 +45,8 @@ bool RTT::begin(int w,int h)
             delete m_info;
             m_info = frame;
             m_info->setTexture(tex);
+            setPaintSize(w,h);
+            PaintEngine::GetInstance()->createFBO(m_info->getTexture()->getTextureId(),&m_oldFBO,&m_FBO);
         }
     }
     else {
@@ -57,14 +59,15 @@ bool RTT::begin(int w,int h)
         }
         m_info = frame;
         m_info->setTexture(tex);
+        setPaintSize(w,h);
+        PaintEngine::GetInstance()->createFBO(m_info->getTexture()->getTextureId(),&m_oldFBO,&m_FBO);
     }
-    m_FBO = PaintEngine::GetInstance()->createFBO(m_info->getTexture()->getTextureId());
     
     PaintEngine::GetInstance()->resize(PaintEngine::GetInstance()->getLayerWidth(),
                                       PaintEngine::GetInstance()->getLayerHeight());
     
     PaintEngine::GetInstance()->switchFBO(&m_oldFBO,m_FBO);
-    PaintEngine::GetInstance()->clearColor(GL_COLOR_BUFFER_BIT,1,1,1,1);
+    PaintEngine::GetInstance()->clearColor(GL_COLOR_BUFFER_BIT,1,0,0,1);
     
     return true;
 }
@@ -74,6 +77,12 @@ void RTT::end()
     PaintEngine::GetInstance()->switchFBO(NULL,m_oldFBO);
     PaintEngine::GetInstance()->resize(Window::GetInstance()->getWidth(),
                                       Window::GetInstance()->getHeight());
+    
+}
+
+void RTT::paint(Transform* trans)
+{
+    Image::paint(trans);
 }
 
 DE_END

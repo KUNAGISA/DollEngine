@@ -28,7 +28,7 @@ class KAG extends Application
 		fore.layers = [];
 		fore.messages = [];
 
-		tagManager = new TagHandlers(this);
+		tagManager = new TagManager(this);
 
 		history = new History();
 
@@ -36,9 +36,9 @@ class KAG extends Application
 
 	function initStatus () {
 		super.initStatus();
+		status.transReady = false; //是否进行过trans准备（backlay）
 		status.transDuration = 0;//trans的过渡时长
 		status.transT = 0;//当前trans到多少时间
-		status.transReady = false; //是否进行过trans准备（backlay）
 		status.uiPage = 'fore', //UI控件将被创建在back层还是fore层
 
 		status.delay = 200;//文字显示速度
@@ -207,6 +207,11 @@ class KAG extends Application
 		status.transReady = false;
 	}
 
+	function onSceneTransFinished () {
+		super.onSceneTransFinished();
+		tagManager.doNext();
+	}
+
 	/*TAG控制*/
 
 	function checkElm (elm,arr) 
@@ -229,7 +234,6 @@ class KAG extends Application
 
 	function process (storage, label) {
 		tagManager.jumpStorage(storage,label);
-		tagManager.execTags();
 	}
 
 	/*******TAG部分*******/
@@ -652,7 +656,7 @@ class KAG extends Application
 			elm.time = 1000 if elm.time===void;
 			this.transWithMethod(elm.method, elm.time);
 			this.status.waitClickMode = WAIT_CLICK_TRANS;
-			return elm.time;
+			return -2;
 		} incontextof this,
 
 		move : function (elm) 

@@ -20,10 +20,14 @@ public:
     ~RTT();
     
     bool begin(int w,int h);
+    virtual void paint(Transform* trans);
     void end();
+    
+    void setOpacity(int v){m_startOpacity=m_endOpacity=v;NEED_REDRAW}
+    int getOpacity(){return m_startOpacity;}
 protected:
     DrawFBOId m_FBO;
-    DrawFBOId m_oldFBO;
+    DrawOldFBOId m_oldFBO;
 };
 
 DE_END

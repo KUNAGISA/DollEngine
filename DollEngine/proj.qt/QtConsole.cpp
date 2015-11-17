@@ -65,3 +65,15 @@ void QtConsole::find(const QString& f,QTextDocument::FindFlags flag)
         }
     }
 }
+
+void QtConsole::on_lineEdit_returnPressed()
+{
+    evalScripts(ui->lineEdit->text().toStdWString());
+    ui->lineEdit->setText("");
+}
+
+void QtConsole::on_pushButton_clicked()
+{
+    evalScripts(ui->lineEdit->text().toStdWString());
+    ui->lineEdit->setText("");
+}

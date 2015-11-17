@@ -4,9 +4,7 @@ var em = Console.throwMsg;
 var assert = Console.assertMsg;
 
 var DEConfig = Scripts.jsonStorage("Config.json");
-foreach(DEConfig,function (key,value){
-    print(key+"="+string(value));
-});
+
 System.debugMode = DEConfig.debugMode;
 
 {

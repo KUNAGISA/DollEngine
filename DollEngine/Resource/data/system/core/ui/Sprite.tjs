@@ -31,12 +31,6 @@ class Sprite extends Layer
 		// return ret;
 	}
 
-	function freeImage () 
-	{
-		this._image.freeImage();
-	}
-
-
 	function setColorF (fr,fg,fb,fa) 
 	{
 		this._image.setColor(Units.colorBy4F(...));

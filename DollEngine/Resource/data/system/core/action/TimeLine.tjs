@@ -1,6 +1,7 @@
 class Timeline
 {
 	var currentTime = 0;//Timeline启动了多少时间，单位ms
+	var duration = 0;//整个timeline持续了多久，单位ms
 	var object;
 	var _params = %[];
 	var _app;
@@ -10,31 +11,41 @@ class Timeline
 	}
 
 	function finalize () {
+		_app._allTimelines.remove(this);
 	}
 
-	function setKeyframe (param, startValue, endValue, duration, startTime=0) {
+	function setKeyframe (param, startValue, endValue, dut, startTime=0) {
+		if (typeof(object) != "Object") {
+			dm("【Timeline setKeyframe】请设置Object对象");
+			return;
+		};
 		if(typeof(object[param]) == "undefined") {
-			dm("属性"+param+"不存在");
+			dm("【Timeline setKeyframe】属性"+param+"不存在");
 			return;
 		}
 		if(typeof(object[param]) == "Object") {
-			dm("属性"+param+"不能被Timeline使用");
+			dm("【Timeline setKeyframe】属性"+param+"不能被Timeline使用");
 			return;
 		}
 		if(_params[param] == void) {
 			_params[param] = [];
 		}
-		_params[param].add([startTime,duration,startValue,endValue]);
+		_params[param].add([startTime,dut,startValue,endValue]);
 	}
 
 	function start () {
+		duration = 0;
 		foreach(_params,function (key,value) {
 			value.sort(function (a,b) {
 				return a[0] < b[0];
 			});
+			if(duration < (+value[-1][0])+(+value[-1][1])) {
+				duration = (+value[-1][0])+(+value[-1][1]);
+			}
 			value.add(0);
 		} incontextof this);
 		currentTime = 0;
+		_app._allTimelines.add(this);
 	}
 
 	function update (dt) {
@@ -52,10 +63,21 @@ class Timeline
 				ft = 1;
 			}
 			setParamValue(param, ft, arr[2], arr[3]);
-		} incontextof this)
+		} incontextof this);
+		if(currentTime >= duration) {
+			onTimelineFinished();
+			invalidate this;
+		}
+	}
+
+	function onTimelineFinished () {
+		
 	}
 
 	function setParamValue (param, ft, sv, ev) {
+		if (typeof(object) != "Object") {
+			return;
+		};
 		object[param] = (ev-sv)*ft + sv;
 	}
 }

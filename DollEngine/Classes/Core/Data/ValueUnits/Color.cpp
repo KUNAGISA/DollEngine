@@ -124,6 +124,13 @@ void Color::multiply(const Color& v)
     a *= v.a/255.0f;
 }
 
+void Color::setRealOpacity(GLubyte v)
+{
+    r *= v/255.0f;
+    g *= v/255.0f;
+    b *= v/255.0f;
+}
+
 GradientColor::GradientColor()
 :end(0xffffffff),vector(0)
 {

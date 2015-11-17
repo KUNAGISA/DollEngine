@@ -31,6 +31,7 @@ public:
     void toInt32(uint32_t& color);
     void toColorF(GLfloat* colorf);
     void multiply(const Color& v);
+    void setRealOpacity(GLubyte v);
     GLubyte r;
     GLubyte g;
     GLubyte b;

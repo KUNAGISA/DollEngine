@@ -54,6 +54,7 @@ public:
     virtual void Print(const tjs_char *msg){
         printf("%s\n",String(msg).c_nstr());
     }
+    void evalScripts(const String& v);
     virtual void setVisible(bool v){}
     virtual bool getVisible(){return false;}
 };

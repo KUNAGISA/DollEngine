@@ -32,17 +32,16 @@ if(dict == NULL || func == NULL || dict->AsObjectNoAddRef() == NULL || func->AsO
 }
 
 TjsDictIterator iter;
-iter.begin(dict);
+iter.begin(*dict);
 while(iter.next()){
     iTJSDispatch2* incontext = func->AsObjectThisNoAddRef();
     iTJSDispatch2* f = func->AsObjectNoAddRef();
-    tTJSInterCodeContext* func = dynamic_cast<tTJSInterCodeContext*>(f);
+    tTJSInterCodeContext* func2 = dynamic_cast<tTJSInterCodeContext*>(f);
     if (func) {
         tTJSVariant v1 = iter.key();
-        tTJSVariant v2;
-        tTJSVariant_BITCOPY(v2,iter.value());
+        tTJSVariant v2 = iter.value();
         tTJSVariant* params[2] = {&v1,&v2};
-        func->FuncCall(0,NULL,NULL,NULL,2,params,incontext);
+        func2->FuncCall(0,NULL,NULL,NULL,2,params,incontext);
     }
 }
 TJS_NATIVE_FUNCTION_END

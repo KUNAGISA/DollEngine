@@ -25,6 +25,11 @@ public:
     virtual bool getVisible(){return isVisible();}
     virtual void keyReleaseEvent(QKeyEvent * event);
     void find(const QString& f,QTextDocument::FindFlags flag);
+private slots:
+    void on_lineEdit_returnPressed();
+    
+    void on_pushButton_clicked();
+    
 private:
     Ui::QtConsole *ui;
 };

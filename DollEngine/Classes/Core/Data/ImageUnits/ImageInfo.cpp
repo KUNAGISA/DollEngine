@@ -127,5 +127,7 @@ void ImageInfo::setColor(uint32_t start,uint32_t end,GLubyte so,GLubyte eo)
     m_color.start.a = so;
     m_color.end.setRGB(end);
     m_color.end.a = eo;
+    m_color.start.setRealOpacity(so);
+    m_color.end.setRealOpacity(eo);
 }
 DE_END

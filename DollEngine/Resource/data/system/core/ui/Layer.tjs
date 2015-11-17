@@ -8,16 +8,26 @@ class Layer extends GameObject
 	//private
 	var _image;
 	function Layer (app,par) {
-		super.GameObject();
-		parent = par;
+		super.GameObject(par);
 		this.app = app;
 		font = new Font();
 		_image = new Image();
 	}
 
+	function finalize () {
+		invalidate font;
+		invalidate _image;
+		super.finalize();
+	}
+
 	function loadImages (path) {
 		_image.loadImages(path,"");
 		setSizeToImageSize();
+	}
+
+	function freeImage () 
+	{
+		this._image.freeImage();
 	}
 
 	function setSizeToImageSize () {
@@ -41,7 +51,21 @@ class Layer extends GameObject
 	}
 
 	function onPaint () {
+		// dm(_image);
 		_image.paint(_transInWorld);
 	}
 
+	var _opacity = 255;
+	property opacity {
+	    setter(v) {
+	    	if(_opacity != v) {
+		    	_opacity = v;
+		    	_image.startOpacity = v;
+		    	_image.endOpacity = v;
+	    	}
+	    }
+	    getter {
+	    	return _opacity;
+	    }
+	}
 }

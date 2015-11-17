@@ -1,22 +1,20 @@
 
-class TagHandlers extends KAGController
+class TagManager extends KAGController
 {
-	var tagTimer = void;
 	var macroParams = [];
-	var tagHandlers;
+	var handlers;
 	var owner;
-	function TagHandlers (app) 
+	function TagManager (app) 
 	{
 		super.KAGController();
 		this.owner = app;
-		tagHandlers = app.tagHandlers;
-		tagTimer = new Timer();
-		tagTimer.enabled = false;
+		handlers = app.tagHandlers;
 	}
 
 	function jumpStorage (storage="",label="") 
 	{
 		if(this.stepInLabel(storage,label,false)) {
+			var at = new AsyncTrigger(execTags);
 			return true;
 		}
 		else {
@@ -28,6 +26,7 @@ class TagHandlers extends KAGController
 	function callStorage (storage="",label="") 
 	{
 		if(this.stepInLabel(storage,label,true)) {
+			var at = new AsyncTrigger(execTags);
 			return true;
 		}
 		else {
@@ -38,31 +37,27 @@ class TagHandlers extends KAGController
 
 	function execTags () 
 	{
-		var isjump = false;
+		// var isjump = false;
 		while(true){
 			var time = doTag();
-			if (time == -2) {
-				//停止，或等待点击
+			if (time < 0) {
+				// dm("停止，或等待点击，或跳转");
 				return;
 			}
-			else if(time == -1) {
-				//即将跳转
-				isjump = true;
-				break;
-			}
+			// else if(time == -1) {
+			// 	//即将跳转
+			// 	isjump = true;
+			// 	break;
+			// }
 			else if(time > 0){
 				waitTime(time);
 				return;
 			}
 			stepNext();
 		}
-		if (isjump) {
-			this.execTags();
-			// action.async(function () 
-			// {
-			// 	this.execTags();
-			// } incontextof this);
-		}
+		// if (isjump) {
+		// 	var at = new AsyncTrigger(execTags);
+		// }
 	}
 
 	function onExecute (name,params) 
@@ -73,7 +68,7 @@ class TagHandlers extends KAGController
 		}
 		if (name == "return") {
 			if(this.stepOutLabel()){
-				this.stepNext();
+				doNext();
 			}
 			else {
 				em("不对应的return或endmacro");
@@ -83,16 +78,16 @@ class TagHandlers extends KAGController
 		if (name == "endmacro") {
 			this.macroParams.erase(this.macroParams.count-1);
 			if(this.stepOutLabel()){
-				this.stepNext();
+				doNext();
 			}
 			else {
 				em("不对应的return或endmacro");
 			}
 			return -1;
 		}
-		if(typeof this.tagHandlers[name] != "undefined")
+		if(typeof this.handlers[name] != "undefined")
 		{
-			var time = this.tagHandlers[name](params);
+			var time = this.handlers[name](params);
 			owner.status.clickToNext = false;
 			if(time == void || time == 0) {
 				return 0;
@@ -106,6 +101,7 @@ class TagHandlers extends KAGController
 			if(this.stepInLabel("MACRO",name,true))
 			{
 				this.macroParams.add(params);
+				doNext();
 				return -1; //即将jump
 			}
 			else
@@ -118,22 +114,16 @@ class TagHandlers extends KAGController
 
 	function doNext () 
 	{
-		this.tagTimer.enabled = false;
 		stepNext();
-		Scripts.addAsyncFunction(this.execTags);
+		var at = new AsyncTrigger(execTags);
 	}
 
 	function waitTime (time) 
 	{
-		tagTimer.time = 0;
-		tagTimer.interval = time;
-		tagTimer.enabled = true;
-		tagTimer.handler = function () 
-		{
-			tagTimer.enabled = false;
-			stepNext();
-			execTags();
-		} incontextof this;
+		var timer = new Timer(doNext);
+		timer.interval = time;
+		timer.enabled = true;
+		timer.count = 1;
 	}
 
 	function getMacroParams () 

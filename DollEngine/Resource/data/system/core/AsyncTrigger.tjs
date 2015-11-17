@@ -1,0 +1,6 @@
+class AsyncTrigger
+{
+	function AsyncTrigger (callback, elm*) {
+		System.getDelegate()._allAsyncTriggers.add([callback,elm]);
+	}
+}
