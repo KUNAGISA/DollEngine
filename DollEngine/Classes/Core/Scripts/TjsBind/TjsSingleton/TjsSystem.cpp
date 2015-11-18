@@ -35,45 +35,42 @@ tTJSNC_System::tTJSNC_System() : inherited(TJS_W("System"))
         return TJS_S_OK;
     }
     TJS_END_NATIVE_STATIC_METHOD_DECL(/*func. name*/exit)
-            
-    //----------------------------------------------------------------------
-    TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/setDelegate)
-    {
-        if(numparams < 1 ) {
-            return TJS_E_BADPARAMCOUNT;
-        }
-        if(DESystem->getDelegate()){
-            EM("SystemDelegate已经存在");
-            return TJS_E_FAIL;
-        }
-        else {
-            tTJSVariant& p = *param[0];
-            TjsSystemDelegate* obj = TJS_GET_OBJECT(TjsSystemDelegate,p.AsObject());
-            if(!obj){
-                return TJS_E_INVALIDPARAM;
-            }
-            DESystem->setDelegate(obj);
-        }
-        return TJS_S_OK;
-    }
-    TJS_END_NATIVE_STATIC_METHOD_DECL(/*func. name*/setDelegate)
-            
-    //----------------------------------------------------------------------
-    TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/getDelegate)
-    {
-        TjsSystemDelegate* delegate = dynamic_cast<TjsSystemDelegate*>(DESystem->getDelegate());
-        if(delegate){
-            *result = delegate->_self;
-            return TJS_S_OK;
-        }
-        return TJS_S_OK;
-    }
-    TJS_END_NATIVE_STATIC_METHOD_DECL(/*func. name*/getDelegate)
-                    
+                  
     //--property
     
     //----------------------------------------------------------------------
-    
+            
+    TJS_BEGIN_NATIVE_PROP_DECL(delegate)
+    {
+        TJS_BEGIN_NATIVE_PROP_GETTER
+        {
+            TjsSystemDelegate* delegate = dynamic_cast<TjsSystemDelegate*>(DESystem->getDelegate());
+            if(delegate){
+                *result = delegate->_self;
+                return TJS_S_OK;
+            }
+            return TJS_S_OK;
+        }
+        TJS_END_NATIVE_PROP_GETTER
+        TJS_BEGIN_NATIVE_PROP_SETTER
+        {
+            if(DESystem->getDelegate()){
+                EM("SystemDelegate已经存在");
+                return TJS_E_FAIL;
+            }
+            else {
+                TjsSystemDelegate* obj = TJS_GET_OBJECT(TjsSystemDelegate,param->AsObjectNoAddRef());
+                if(!obj){
+                    return TJS_E_INVALIDPARAM;
+                }
+                DESystem->setDelegate(obj);
+            }
+            return TJS_S_OK;
+        }
+        TJS_END_NATIVE_PROP_SETTER
+    }
+    TJS_END_NATIVE_STATIC_PROP_DECL(delegate)
+            
     TJS_BEGIN_NATIVE_PROP_DECL(appPath)
     {
         TJS_BEGIN_NATIVE_PROP_GETTER

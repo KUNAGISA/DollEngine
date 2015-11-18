@@ -1,7 +1,6 @@
 {
 	"scripts" : [
 		"system/core/Functions.tjs",
-		"system/core/AsyncTrigger.tjs",
 		"system/core/Application.tjs",
 		"system/core/HttpClient.tjs",
 		"system/core/Timer.tjs",

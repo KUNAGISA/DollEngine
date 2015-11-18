@@ -38,7 +38,7 @@ bool Image::loadImages(const String& path,const String& plist)
     ImageInfo* info = new ImageInfo();
     if(info->loadWithFile(path,plist)) {
         setInfo(info);
-        setSizeToOrginSize();
+        resetPaintSize();
         NEED_REDRAW;
         return true;
     }
@@ -63,10 +63,8 @@ void Image::clipRect(float x,float y,float w,float h)
         DM("[clipRect]尚未载入图片");
         return;
     }
-    if(w + x > m_info->getPaintWidth()) w = m_info->getPaintWidth()-x;
-    if(h + y > m_info->getPaintHeight()) h = m_info->getPaintHeight()-y;
-    Rect orgin = m_info->getOrginRect();
-    m_info->setOrginRect(orgin.x+x,orgin.y+y,w,h);
+    m_info->clipRect(x,y,w,h);
+    resetPaintSize();
 }
 
 void Image::setScale9(float l,float t,float r,float b)
@@ -74,10 +72,10 @@ void Image::setScale9(float l,float t,float r,float b)
     
 }
 
-void Image::setSizeToOrginSize()
+void Image::resetPaintSize()
 {
     if(m_info){
-        m_info->setSizeToOrginSize();
+        m_info->resetPaintSize();
     }
 }
 

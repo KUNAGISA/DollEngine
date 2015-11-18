@@ -29,7 +29,6 @@ RTT::~RTT()
     SAFF_DELETE(m_info);
 }
 
-
 bool RTT::begin(int w,int h)
 {
     if (m_info && m_info->getTexture()) {
@@ -78,7 +77,6 @@ void RTT::end()
     PaintEngine::GetInstance()->switchFBO(NULL,m_oldFBO);
     PaintEngine::GetInstance()->resize(Window::GetInstance()->getWidth(),
                                       Window::GetInstance()->getHeight());
-    
 }
 
 void RTT::paint(Transform* trans)

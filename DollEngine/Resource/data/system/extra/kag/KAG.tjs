@@ -4,6 +4,7 @@ class KAG extends Application
 	//图层控制
 	var fore = %[];//表层
 	var back = [];//里层配置
+	var currentLayer = "message0";
 
 	//存档控制
 	var history;

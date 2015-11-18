@@ -4,20 +4,15 @@ var g_AllControl = new Set();
 
 class Control extends Layer
 {
+	var _touch;
 	function Control (app,par) 
 	{
 		super.Layer(app,par);
 		g_AllControl.add(this);
 		setAnchor(0.5,0.5);
-		_touch = new Touch();
-		_touch.object = this;
-		enabled = true;
-		_touch.onMouseDown = onMouseDown;
-		_touch.onMouseMove = onMouseMove;
-		_touch.onMouseUp = onMouseUp;
-		_touch.onClick = onClick;
+		_touch = new Touch(this);
 		_touch.swallow = true;
-		_touch.enabled = true;
+		enabled = true;
 	}
 
 	function finalize () 
@@ -31,29 +26,28 @@ class Control extends Layer
 	{
 		g_AllControl.foreach(function(value){
 			if (!value.issystem) {
-			    value.enabled = false;
+			    value.ignore = true;
 			}
 		});
 	}
 	
-	function onTouchUpdate () 
+	function updateTouches () 
 	{
 		if (enabled) {
-			_touch.addToManager();
+			_touch.listen();
 			for (var i = 0; i < children.count; i++) {
-				children[i].onTouchUpdate();
+				children[i].updateTouches();
 			};
 		}
 	}
 
 	function onMouseDown (x,y) 
 	{
-		if (System.main.status.waitClickMode == WAIT_CLICK_TRANS||
-			System.main.status.locklink) {
+		if (app.status.waitClickMode == WAIT_CLICK_TRANS||
+			app.status.locklink) {
 			//trans中或locklink时
 			_touch.ignore = true;
 		}
-		dm(_touch.ignore);
 	}
 
 	function onMouseMove (x,y) 
@@ -66,7 +60,6 @@ class Control extends Layer
 
 	function onClick (x,y) 
 	{
-		// body...
 	}
 
 	var _touch=void;

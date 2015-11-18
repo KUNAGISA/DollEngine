@@ -2,14 +2,12 @@
 class Layer extends GameObject
 {
 	//public
-	var app;
 	var font;
 
 	//private
 	var _image;
 	function Layer (app,par) {
-		super.GameObject(par);
-		this.app = app;
+		super.GameObject(app,par);
 		font = new Font();
 		_image = new Image();
 	}
@@ -21,13 +19,22 @@ class Layer extends GameObject
 	}
 
 	function loadImages (path) {
-		_image.loadImages(path,"");
-		setSizeToImageSize();
+		if(_image.loadImages(path,""))
+		{
+			setSizeToImageSize();
+			return true;
+		}
+		return false;
 	}
 
 	function freeImage () 
 	{
 		this._image.freeImage();
+	}
+
+	function clipRect (x,y,w,h) {
+		_image.clipRect(x,y,w,h);
+		setSizeToImageSize();
 	}
 
 	function setSizeToImageSize () {
@@ -51,7 +58,6 @@ class Layer extends GameObject
 	}
 
 	function onPaint () {
-		// dm(_image);
 		_image.paint(_transInWorld);
 	}
 

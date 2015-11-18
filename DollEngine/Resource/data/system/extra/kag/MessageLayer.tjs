@@ -25,7 +25,7 @@ class MessageLayer extends UILayer
 
 	var font = %[
 		size : 22,
-		face : "WenQuanYi Micro Hei",
+		face : "",
 		lineSpacing : 10,//行距
 		wordSpacing : 0,//字间距
 	];
@@ -83,17 +83,17 @@ class MessageLayer extends UILayer
 		super.finalize();
 	}
 
-	function onTouchUpdate () 
+	function updateTouches () 
 	{
 		if (enabled) {
 			if (frameImage.visible) {
-				_sw1.addToManager();
+				_sw1.listen();
 			}
 			if (frameColor.visible) {
-				_sw2.addToManager();
+				_sw2.listen();
 			}
 			for (var i = 0; i < children.count; i++) {
-				children[i].onTouchUpdate();
+				children[i].updateTouches();
 			};
 		}
 	}
@@ -197,11 +197,10 @@ class MessageLayer extends UILayer
 			names[elm.name] = node;
 		}
 		if (elm.graphic) {
-			node.graphicImage = elm.graphic;
+			node.loadGraphic(elm.graphic);
 		}
 		else {
-			node.normalImage = elm.normal;
-			node.selectImage = elm.on;
+			node.loadButtons(elm.normal,elm.on);
 		}
 		if (elm.title) {
 			node.title = elm.title;

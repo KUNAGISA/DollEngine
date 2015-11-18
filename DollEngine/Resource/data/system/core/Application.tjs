@@ -19,9 +19,12 @@ class Application extends SystemDelegate
 	var _transRTT;
 	var _allTimelines;
 	var _allAsyncTriggers = [];
+	var _allTouches = [];
+	var _triggerTouches = [];
 
 	function Application () {
 		super.SystemDelegate();
+
 
 		_lastSeconds = System.seconds;
 		_enabledTimers = global.Timer.g_enabledTimers;
@@ -39,9 +42,9 @@ class Application extends SystemDelegate
 
 		_transRTT = new RTTLayer(this,null);
 		_transRTT.draw(sysbase);
-		_transRTT.opacity=0;
+		_transRTT.visible=false;
 		
-		System.setDelegate(this);
+		System.delegate = this;
 	}
 
 	function finalize () {
@@ -53,13 +56,14 @@ class Application extends SystemDelegate
 
 	/*场景过渡效果*/
 	function sceneTransition (type, time, params*) {
-		if(_transRTT) {
-			dm("【Application sceneTransition】场景正在过渡");
+		if(_transRTT.visible) {
+			dm("【过渡效果】场景正在过渡中");
 			return;
 		}
-		dm("【Application sceneTransition】场景开始过渡，预计耗时",time,,System.seconds);
+		dm("【过渡效果】场景开始过渡，预计耗时",time);
 		_transRTT.draw(sysbase);
-		_transRTT.opacity=255;
+		_transRTT.opacity = 255;
+		_transRTT.visible = true;
 		this["sceneTrans"+type](time, params*);
 	}
 
@@ -67,7 +71,7 @@ class Application extends SystemDelegate
 		var tl = new Timeline(this,_transRTT);
 		tl.setKeyframe("opacity",255,0,time);
 		tl.onTimelineFinished = onSceneTransFinished;
-		new AsyncTrigger(tl.start);
+		asyncTrigger(tl.start,void,tl);
 	}
 	/*帧刷新*/
 
@@ -98,8 +102,10 @@ class Application extends SystemDelegate
 	function onMainLoop () {
 		update();
 		window.beforeMainLoop();
+		_allTouches.clear();
+		sysbase.updateTouches();
 		sysbase.visit();
-		if(_transRTT.opacity > 0) {
+		if(_transRTT.visible) {
 			_transRTT.visit();
 		}
 		window.afterMainLoop();
@@ -107,8 +113,8 @@ class Application extends SystemDelegate
 	}
 
 	function onSceneTransFinished () {
-		_transRTT.opacity = 0;
-		dm("【Application sceneTransition】场景过渡完毕",System.seconds);
+		_transRTT.visible = false;
+		dm("【过渡效果】场景过渡完毕");
 	}
 
 	function onAsyncTrigger () {
@@ -126,18 +132,58 @@ class Application extends SystemDelegate
 	}
 
 	function onMouseDown (x,y) {
-		
+		_triggerTouches.clear();
+		if (_allTouches.count > 0) {
+			var temp = [];
+			temp.assign(_allTouches);
+			var outPos = %[];
+			for (var i = temp.count-1; i >= 0; --i) {
+				var touch = temp[i];
+				if (touch.ignore) {
+					continue;
+				}
+				if (touch.pointInside(x,y,outPos)) {
+					if(touch.onMouseDown(outPos.x,outPos.y)) {
+						_triggerTouches.add(touch);
+						if (touch.swallow) {
+							return;
+						}
+					}
+				}
+			}
+		}
 	}
 
 	function onMouseUp (x,y) {
-		
+		if (_triggerTouches.count > 0) {
+			var outPos = %[];
+			for (var i = 0; i < _triggerTouches.count; i++) {
+				var touch = _triggerTouches[i];
+				touch.pointInside(x,y,outPos);
+				touch.onMouseUp(outPos.x,outPos.y);
+			};
+		};
 	}
 
 	function onMouseMove (x,y) {
-		
+		if (_triggerTouches.count > 0) {
+			var outPos = %[];
+			for (var i = 0; i < _triggerTouches.count; i++) {
+				var touch = _triggerTouches[i];
+				touch.pointInside(x,y,outPos);
+				touch.onMouseMove(outPos.x,outPos.y);
+			};
+		};
 	}
 
 	function onClick (x,y) {
-		
+		if (_triggerTouches.count > 0) {
+			var outPos = %[];
+			for (var i = 0; i < _triggerTouches.count; i++) {
+				var touch = _triggerTouches[i];
+				touch.pointInside(x,y,outPos);
+				touch.onClick(outPos.x,outPos.y);
+			};
+		};
 	}
 }

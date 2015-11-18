@@ -162,6 +162,10 @@ function getExistSoundPath (path)
 
 /***********动作操作************/
 
+function asyncTrigger (func,elm,obj) {
+    System.delegate._allAsyncTriggers.add([func,elm,obj]);
+}
+
 var action = %[];
 action.array = function (arr) 
 {

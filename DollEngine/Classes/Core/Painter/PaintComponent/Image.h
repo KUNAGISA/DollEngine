@@ -26,9 +26,9 @@ public:
     virtual bool loadImages(const String& path,const String& plist="");
     virtual void freeImage(){SAFF_DELETE(m_info);}
     void setPaintSize(float w,float h);
+    void resetPaintSize();
     void clipRect(float x,float y,float w,float h);
     void setScale9(float l,float t,float r,float b);
-    void setSizeToOrginSize();
     void setIsScale9(bool v);
     void setProgram(const String& name);
     virtual void paint(Transform* trans);

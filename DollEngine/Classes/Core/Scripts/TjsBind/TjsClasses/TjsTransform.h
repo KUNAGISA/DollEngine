@@ -22,8 +22,8 @@ bool pointInsideTJS(float x,float y,tTJSVariant v)
     bool ret = Transform::pointInside(x,y,ox,oy);
     tTJSDictionaryObject* object = dynamic_cast<tTJSDictionaryObject*>(v.AsObjectNoAddRef());
     if(object){
-        tTJSVariant tox=ox;
-        tTJSVariant toy=oy;
+        tTJSVariant tox=round(ox);
+        tTJSVariant toy=round(oy);
         object->PropSet(TJS_MEMBERENSURE,L"x",NULL,&tox,object);
         object->PropSet(TJS_MEMBERENSURE,L"y",NULL,&toy,object);
     }

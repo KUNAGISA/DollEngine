@@ -14,7 +14,7 @@ class TagManager extends KAGController
 	function jumpStorage (storage="",label="") 
 	{
 		if(this.stepInLabel(storage,label,false)) {
-			var at = new AsyncTrigger(execTags);
+			asyncTrigger(execTags);
 			return true;
 		}
 		else {
@@ -26,7 +26,7 @@ class TagManager extends KAGController
 	function callStorage (storage="",label="") 
 	{
 		if(this.stepInLabel(storage,label,true)) {
-			var at = new AsyncTrigger(execTags);
+			asyncTrigger(execTags);
 			return true;
 		}
 		else {
@@ -56,7 +56,7 @@ class TagManager extends KAGController
 			stepNext();
 		}
 		// if (isjump) {
-		// 	var at = new AsyncTrigger(execTags);
+		// 	asyncTrigger(execTags);
 		// }
 	}
 
@@ -115,7 +115,7 @@ class TagManager extends KAGController
 	function doNext () 
 	{
 		stepNext();
-		var at = new AsyncTrigger(execTags);
+		asyncTrigger(execTags);
 	}
 
 	function waitTime (time) 

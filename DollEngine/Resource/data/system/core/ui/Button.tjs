@@ -1,7 +1,6 @@
 
 class Button extends Control
 {
-	var imageBase = void;
 	var clickData = %[
 		exp : "", //点击时执行的表达式
 		se : '', //点击时的音效
@@ -9,53 +8,75 @@ class Button extends Control
 		storage : void, //跳转的脚本
 		target : void, //跳转的脚本的标签
 	];
+	var _imageBase = void;
+	var _normalImage;
+	var _selectImage;
+	var _disableImage;
+
 	function Button (app,par) 
 	{
 		super.Control(app,par);
-		this.imageBase = new global.GameObject();
-		this._normalImage = new Sprite(app,this.imageBase);
-		this._selectImage = new Sprite(app,this.imageBase);
-		this._disableImage = new Sprite(app,this.imageBase);
-		this._selectImage.visible=false;
-		this._normalImage.visible=true;
-		this._disableImage.visible=false;
-		_title = new Label(app,this.imageBase);
-		_title.setAnchor(0.5,0.5);
-		_title.absolute = 1;
-		_title.visible = false;
+		_imageBase = new global.GameObject(app,this);
+		_normalImage = new Sprite(app,_imageBase);
+		_selectImage = new Sprite(app,_imageBase);
+		_disableImage = new Sprite(app,_imageBase);
+		_normalImage.visible=true;
+		_selectImage.visible=false;
+		_disableImage.visible=false;
+		// _title = new Label(app,_imageBase);
+		// _title.setAnchor(0.5,0.5);
+		// _title.absolute = 1;
+		// _title.visible = false;
 	}
 
-	function loadImages (graphic) 
+	function loadGraphic (graphic) 
 	{
-		graphicImage = graphic;
+		if(this._normalImage.loadImages(graphic))
+		{
+			this._selectImage.loadImages(graphic);
+			var w = this._normalImage.width/3;
+			var h = this._normalImage.height;
+			this._normalImage.clipRect(0,0,w,h);
+			this._selectImage.clipRect(w,0,w,h);
+			setSizeToImageSize();
+		}
 	}
 
 	function loadButtons (normal,select) 
 	{
-		normalImage = normal;
+		this._normalImage.loadImages(normal);
 		if (select) {
-			selectImage = select;
+			this._selectImage.loadImages(select);
 		}
+		else {
+			this._selectImage.loadImages(normal);
+			this._selectImage.startColor = 0x888888;
+			this._selectImage.endColor = 0x888888;
+		}
+		setSizeToImageSize();
+	}
+
+	function setSizeToImageSize () {
+		setSize(_normalImage.width,_normalImage.height);
+		_imageBase.x = _normalImage.width/2;
+		_imageBase.y = _normalImage.height/2;
 	}
 
 	function setImageSize (w,h) 
 	{
-    	this.setSize(...);
-    	this.imageBase.x = this.width/2;
-    	this.imageBase.y = this.height/2;
-		this._normalImage.setImageSize(w,h,true);
-		this._selectImage.setImageSize(w,h,true);
-		this._disableImage.setImageSize(w,h,true);
+    	setSize(...);
+    	_imageBase.x = width/2;
+    	_imageBase.y = height/2;
+		_normalImage.setImageSize(w,h,true);
+		_selectImage.setImageSize(w,h,true);
+		_disableImage.setImageSize(w,h,true);
 	}
 
 	function onMouseDown (x,y) 
 	{
 		super.onMouseDown(x,y);
-		if(!this.ignore){
-			this._selectImage.visible=true;
-			this._normalImage.visible=false;
-			_title.color = _titleColorSelect;
-		}
+		this._selectImage.visible=true;
+		this._normalImage.visible=false;
 	}
 
 	function onMouseUp (x,y) 
@@ -63,7 +84,7 @@ class Button extends Control
 		super.onMouseUp(x,y);
 		this._selectImage.visible=false;
 		this._normalImage.visible=true;
-		_title.color = _titleColor;
+		// _title.color = _titleColor;
 		if (x>=0 && y>=0 && x<=this.width&&y<=this.height) {
 			this.exception();
 		}
@@ -76,19 +97,21 @@ class Button extends Control
 			exp += this.clickData.exp;
 			exp += ";";
 		}
+		var needDisabled = false;
 		if (this.clickData.storage || this.clickData.target) {
-			exp += "System.main.process(\"";
+			exp += "System.delegate.process(\"";
 			exp += this.clickData.storage;
 			exp += "\",\"";
 			exp += this.clickData.target;
 			exp += "\");";
+			needDisabled = true;
 		}
 		if (exp != "") {
-			Scripts.addAsyncFunction(function (){
-				Scripts.eval(this[0]);
-			} incontextof [exp]);
+			asyncTrigger(Scripts.eval,[exp]);
 		}
-		disableAfterClick();
+		if (needDisabled) {
+			disableAfterClick();
+		}
 	}
 
 	property disabled{
@@ -110,78 +133,6 @@ class Button extends Control
 		getter {
 	    	//getter
 			return super.disabled;
-		}
-	}
-
-	var _normalImage=void;
-	property normalImage{
-	    setter(v) {
-	    	//setter
-	    	if (typeof v == 'Object' &&
-	    		v instanceof 'Array') {
-		    	this._normalImage.loadImages(v[0],v[1]);
-		    	this.setSize(this._normalImage.width,this._normalImage.height);
-		    	this.imageBase.x = this.width/2;
-		    	this.imageBase.y = this.height/2;
-			}
-			else if(typeof v == 'String'){
-				this._normalImage.loadImages(v);
-		    	this.setSize(this._normalImage.width,this._normalImage.height);
-		    	this.imageBase.x = this.width/2;
-		    	this.imageBase.y = this.height/2;
-			}
-		}
-		getter {
-	    	//getter
-			return this._normalImage;
-		}
-	}
-
-	var _selectImage=void;
-	property selectImage{
-	    setter(v) {
-	    	//setter
-	    	if (typeof v == 'Object' &&
-	    		v instanceof 'Array') {
-		    	this._selectImage.loadImages(v[0],v[1]);
-			}
-			else if(typeof v == 'String'){
-				this._selectImage.loadImages(v);
-			}
-		}
-		getter {
-	    	//getter
-			return this._selectImage;
-		}
-	}
-
-	var _disableImage=void;
-	property disableImage{
-	    setter(v) {
-	    	//setter
-	    	if (typeof v == 'Object' &&
-	    		v instanceof 'Array') {
-		    	this._disableImage.loadImages(v[0],v[1]);
-			}
-			else if(typeof v == 'String'){
-				this._disableImage.loadImages(v);
-			}
-		}
-		getter {
-	    	//getter
-			return this._disableImage;
-		}
-	}
-
-	property graphicImage{
-	    setter(v) {
-	    	//setter
-	    	// this._normalImage.loadImageWithMargin(v,0,2/3,0,0);
-	    	// this.setSize(this._normalImage.width,this._normalImage.height);
-	    	// this.imageBase.x = this.width/2;
-	    	// this.imageBase.y = this.height/2;
-	    	// this._selectImage.loadImageWithMargin(v,1/3,1/3,0,0);
-	    	// this._disableImage.loadImageWithMargin(v,0,2/3,0,0);
 		}
 	}
 

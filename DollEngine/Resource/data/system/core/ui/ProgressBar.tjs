@@ -36,7 +36,7 @@ class ProgressBar extends Sprite
 	    	if (v>100) v=100;
 	    	if (v<0) v=0;
 	    	this._value = v;
-    		this._image.setSizeToOrginSize();
+    		this._image.setSizeToImageSize();
 	    	if(this.start == 'left' && this.end == 'right'){
 	    		var ow = this._image.paintWidth;
 	    		this._image.setMargin(0,1-v/100,0,0);

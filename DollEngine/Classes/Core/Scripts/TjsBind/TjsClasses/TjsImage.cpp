@@ -23,6 +23,7 @@ NCB_REGISTER_CLASS_DIFFER(Image, TjsImage)
     NCB_METHOD(loadImages);
     NCB_METHOD(freeImage);
     NCB_METHOD(paint);
+    NCB_METHOD(clipRect);
 //    NCB_METHOD(setSizeToImageSize);
 //    NCB_METHOD(setColor);
 //    NCB_METHOD(setGradientColor);

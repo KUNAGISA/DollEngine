@@ -10,6 +10,8 @@
 
 class GLWidget : public QOpenGLWidget
 {
+    bool isClick;
+    bool mouseEnabled;
 public:
     GLWidget():QOpenGLWidget(NULL){
         
@@ -33,6 +35,58 @@ public:
             delegate->onMainLoop();
         }
     }
+    
+    void mousePressEvent(QMouseEvent *event)
+    {
+        isClick = true;
+        mouseEnabled = true;
+        QPoint pos = event->pos();
+        float x = pos.x() - DE::PaintEngine::GetInstance()->getLayerX();
+        float y = pos.y() - DE::PaintEngine::GetInstance()->getLayerY();
+        x /= DE::PaintEngine::GetInstance()->getLayerZoom();
+        y /= DE::PaintEngine::GetInstance()->getLayerZoom();
+        if(x < 0 || 
+           y < 0 ||
+           x > DE::PaintEngine::GetInstance()->getLayerWidth()||
+           y > DE::PaintEngine::GetInstance()->getLayerHeight()){
+            mouseEnabled = false;
+            return;
+        }
+        y = DE::PaintEngine::GetInstance()->getLayerHeight() - y;
+        DE::System::GetInstance()->getDelegate()->onMouseDown(x,y);
+    }
+    
+    void mouseMoveEvent(QMouseEvent *event)
+    {
+        if(mouseEnabled){
+            QPoint pos = event->pos();
+            float x = pos.x() - DE::PaintEngine::GetInstance()->getLayerX();
+            float y = pos.y() - DE::PaintEngine::GetInstance()->getLayerY();
+            x /= DE::PaintEngine::GetInstance()->getLayerZoom();
+            y /= DE::PaintEngine::GetInstance()->getLayerZoom();
+            isClick = false;
+            y = DE::PaintEngine::GetInstance()->getLayerHeight() - y;
+            DE::System::GetInstance()->getDelegate()->onMouseMove(x,y);
+        }
+    }
+    
+    void mouseReleaseEvent(QMouseEvent *event)
+    {
+        if(mouseEnabled){
+            QPoint pos = event->pos();
+            float x = pos.x() - DE::PaintEngine::GetInstance()->getLayerX();
+            float y = pos.y() - DE::PaintEngine::GetInstance()->getLayerY();
+            x /= DE::PaintEngine::GetInstance()->getLayerZoom();
+            y /= DE::PaintEngine::GetInstance()->getLayerZoom();
+            
+            y = DE::PaintEngine::GetInstance()->getLayerHeight() - y;
+            DE::System::GetInstance()->getDelegate()->onMouseUp(x,y);
+            if(isClick){
+                DE::System::GetInstance()->getDelegate()->onClick(x,y);
+            }
+        }
+    }
+    
 };
 
 
@@ -96,4 +150,5 @@ void QtWindow::timerEvent(QTimerEvent *)
 {
     glWidget->update();
 }
+
 DE_END

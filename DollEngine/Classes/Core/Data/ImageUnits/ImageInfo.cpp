@@ -8,6 +8,7 @@
 
 #include "ImageInfo.h"
 #include "PaintEngine.h"
+#include "System.h"
 #include "Texture.h"
 
 DE_BEGIN
@@ -50,6 +51,13 @@ bool ImageInfo::loadWithSize(int w,int h,int r)
     return true;
 }
 
+void ImageInfo::resetPaintSize()
+{
+    m_paintSize.width = m_clipRect.width;
+    m_paintSize.height = m_clipRect.height;
+    NEED_REDRAW;
+}
+
 void ImageInfo::setScale9(float l,float t,float r,float b)
 {
     m_scale9.l = l;
@@ -64,15 +72,39 @@ void ImageInfo::setOrginRect(float x,float y,float w,float h)
     m_orginRect.y = y;
     m_orginRect.width = w;
     m_orginRect.height = h;
+    m_clipRect.x = 0;
+    m_clipRect.y = 0;
+    m_clipRect.width = w;
+    m_clipRect.height = h;
+    NEED_REDRAW;
+}
+
+void ImageInfo::clipRect(float x,float y,float w,float h)
+{
+    if(x < 0) x = 0;
+    if(x > m_orginRect.width) x = m_orginRect.width;
+    if(y < 0) y = 0;
+    if(y > m_orginRect.height) y = m_orginRect.height;
+    
+    if(w < 0) w = 0;
+    if(w > m_orginRect.width-x) w = m_orginRect.width-x;
+    if(h < 0) h = 0;
+    if(h > m_orginRect.height-y) h = m_orginRect.height-y;
+    
+    m_clipRect.x = x;
+    m_clipRect.y = y;
+    m_clipRect.width = w;
+    m_clipRect.height = h;
+    NEED_REDRAW;
 }
 
 void ImageInfo::toDrawData(GLDrawData& data,Transform* trans,bool flipX,bool flipY)
 {
     //Vertex
-    data.lb.vertex.v1 = data.lt.vertex.v1 = m_paintPos.x;
-    data.rb.vertex.v2 = data.lb.vertex.v2 = m_paintPos.y;
-    data.rb.vertex.v1 = data.rt.vertex.v1 = m_paintPos.x+m_paintSize.width;
-    data.lt.vertex.v2 = data.rt.vertex.v2 = m_paintPos.y+m_paintSize.height;
+    data.lb.vertex.v1 = data.lt.vertex.v1 = 0;
+    data.rb.vertex.v2 = data.lb.vertex.v2 = 0;
+    data.rb.vertex.v1 = data.rt.vertex.v1 = m_paintSize.width;
+    data.lt.vertex.v2 = data.rt.vertex.v2 = m_paintSize.height;
     if (trans) {
         trans->transTo(data.lb.vertex.v1, data.lb.vertex.v2, &data.lb.vertex);
         trans->transTo(data.lt.vertex.v1, data.lt.vertex.v2, &data.lt.vertex);
@@ -93,10 +125,10 @@ void ImageInfo::toDrawData(GLDrawData& data,Transform* trans,bool flipX,bool fli
     
     //UV
     
-    float l=m_orginRect.x/getTexture()->getWidth();
-    float r=(m_orginRect.x+m_orginRect.width)/getTexture()->getWidth();
+    float l= (m_orginRect.x+m_clipRect.x)/getTexture()->getWidth();
+    float r= (m_orginRect.x+m_clipRect.x+m_clipRect.width)/getTexture()->getWidth();
     float t=flipY ?
-                (m_orginRect.y+m_orginRect.height)/getTexture()->getHeight():
+                (m_orginRect.y+m_clipRect.y+m_clipRect.height)/getTexture()->getHeight():
                 m_orginRect.y/getTexture()->getHeight();
     float b=flipY ?
                 m_orginRect.y/getTexture()->getHeight():
@@ -117,7 +149,7 @@ void ImageInfo::setTexture(Texture* tex)
     m_texture = tex;
     if(m_texture) {
         m_texture->retain();
-        setOrginRect(Rect(0,0,m_texture->getWidth(),m_texture->getHeight()));
+        setOrginRect(0,0,m_texture->getWidth(),m_texture->getHeight());
     }
 }
 
