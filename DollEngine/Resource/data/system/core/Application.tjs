@@ -36,6 +36,10 @@ class Application extends SystemDelegate
 
 		sysbase = new Layer(this,null);
 		sysbase.setSize(window.width,window.height);
+
+		_transRTT = new RTTLayer(this,null);
+		_transRTT.draw(sysbase);
+		_transRTT.opacity=0;
 		
 		System.setDelegate(this);
 	}
@@ -54,8 +58,8 @@ class Application extends SystemDelegate
 			return;
 		}
 		dm("【Application sceneTransition】场景开始过渡，预计耗时",time,,System.seconds);
-		_transRTT = new RTTLayer(this,null);
 		_transRTT.draw(sysbase);
+		_transRTT.opacity=255;
 		this["sceneTrans"+type](time, params*);
 	}
 
@@ -63,7 +67,7 @@ class Application extends SystemDelegate
 		var tl = new Timeline(this,_transRTT);
 		tl.setKeyframe("opacity",255,0,time);
 		tl.onTimelineFinished = onSceneTransFinished;
-		tl.start();
+		new AsyncTrigger(tl.start);
 	}
 	/*帧刷新*/
 
@@ -95,7 +99,7 @@ class Application extends SystemDelegate
 		update();
 		window.beforeMainLoop();
 		sysbase.visit();
-		if(_transRTT) {
+		if(_transRTT.opacity > 0) {
 			_transRTT.visit();
 		}
 		window.afterMainLoop();
@@ -103,8 +107,7 @@ class Application extends SystemDelegate
 	}
 
 	function onSceneTransFinished () {
-		invalidate _transRTT;
-		_transRTT = void;
+		_transRTT.opacity = 0;
 		dm("【Application sceneTransition】场景过渡完毕",System.seconds);
 	}
 
