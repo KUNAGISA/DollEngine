@@ -2,6 +2,7 @@
 	"scripts" : [
 		"system/core/Functions.tjs",
 		"system/core/Application.tjs",
+		"system/core/EventCenter.tjs",
 		"system/core/HttpClient.tjs",
 		"system/core/Timer.tjs",
 		"system/core/Touch.tjs",

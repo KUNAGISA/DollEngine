@@ -1,0 +1,18 @@
+class EventCenter
+{
+	function EventCenter () {
+		
+	}
+
+	function trigger (name) {
+		// body...
+	}
+}
+
+EventCenter._instance = void;
+EventCenter.GetInstance = function () {
+	if(!global.EventCenter._instance) {
+		global.EventCenter._instance = new EventCenter();
+	}
+	return global.EventCenter._instance;
+};

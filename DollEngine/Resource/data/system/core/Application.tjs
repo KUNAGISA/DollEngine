@@ -4,6 +4,7 @@ class Application extends SystemDelegate
 	///public
 	var window;
 	var sysbase;
+	var conductor;
 
 	var status = %[];
 	var deffont = %[]; //默认字体设置
@@ -36,6 +37,8 @@ class Application extends SystemDelegate
 		window.setSize(DEConfig.device.width*DEConfig.device.scale,DEConfig.device.height*DEConfig.device.scale);
 		window.visible = true;
 		window.title = DEConfig.game.title;
+
+		conductor = EventCenter.GetInstance();
 
 		sysbase = new Layer(this,null);
 		sysbase.setSize(window.width,window.height);
