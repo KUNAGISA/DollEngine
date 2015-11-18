@@ -15,6 +15,7 @@
 #include "Storages.h"
 #include "PaintComponent/Image.h"
 #include "CharacterInfo.h"
+#include <QDebug>
 
 DE_BEGIN
 
@@ -393,6 +394,14 @@ void PaintEngine::switchFBO(DrawOldFBOId* oldFBO,DrawFBOId newFBO)
         glGetIntegerv(GL_FRAMEBUFFER_BINDING, (GLint*)oldFBO);
     }
     glBindFramebuffer(GL_FRAMEBUFFER, newFBO);
+    qDebug()<<"--------";
+    if(oldFBO) {
+        qDebug()<< (*oldFBO);
+    }
+    else {
+        qDebug()<< "null";
+    }
+    qDebug()<< newFBO;
     CHECK_GL_ERROR;
 }
 
@@ -639,6 +648,7 @@ void PaintEngine::checkError()
     GLint v = glGetError();
     if(v){
         DM("OpenGL 出错:%x\n%s",v);
+        EM("不知道哪里出问题了");
     }
 }
 

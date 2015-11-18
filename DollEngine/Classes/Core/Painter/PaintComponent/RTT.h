@@ -19,7 +19,8 @@ public:
     RTT();
     ~RTT();
     
-    bool begin(int w,int h);
+    void init(int w,int h);
+    bool begin(float r,float g,float b,float a);
     virtual void paint(Transform* trans);
     void end();
     

@@ -39,12 +39,9 @@ class Application extends SystemDelegate
 
 		sysbase = new Layer(this,null);
 		sysbase.setSize(window.width,window.height);
-
-		_transRTT = new RTTLayer(this,null);
-		_transRTT.draw(sysbase);
-		_transRTT.visible=false;
 		
 		System.delegate = this;
+
 	}
 
 	function finalize () {
@@ -56,11 +53,16 @@ class Application extends SystemDelegate
 
 	/*场景过渡效果*/
 	function sceneTransition (type, time, params*) {
-		if(_transRTT.visible) {
+		if(_transRTT&&_transRTT.visible) {
 			dm("【过渡效果】场景正在过渡中");
 			return;
 		}
 		dm("【过渡效果】场景开始过渡，预计耗时",time);
+		if (!_transRTT) {		
+			_transRTT = new RTTLayer(this,null);
+			_transRTT.setSize(sysbase.width,sysbase.height);
+			_transRTT.visible = false;
+		}
 		_transRTT.draw(sysbase);
 		_transRTT.opacity = 255;
 		_transRTT.visible = true;
@@ -105,7 +107,7 @@ class Application extends SystemDelegate
 		_allTouches.clear();
 		sysbase.updateTouches();
 		sysbase.visit();
-		if(_transRTT.visible) {
+		if(_transRTT&&_transRTT.visible) {
 			_transRTT.visit();
 		}
 		window.afterMainLoop();

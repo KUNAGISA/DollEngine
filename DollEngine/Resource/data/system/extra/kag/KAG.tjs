@@ -162,6 +162,7 @@ class KAG extends Application
 		for (var i = 0; i < fore.messages.count; i++) {
 			fore.messages[i].clearEr(true);
 		};
+		fore.base.freeImage();
 	}
 
 

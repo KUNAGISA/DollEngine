@@ -6,8 +6,12 @@ class RTTLayer extends Layer
 		_image = new RTT();
 	}
 
+	function setSize(w,h) {
+		_image.init(w,h);
+	}
+
 	function draw (lay) {
-		_image.begin(lay.width,lay.height);
+		_image.begin(0,0,0,1);
 		lay.visit();
 		_image.end();
 		setSizeToImageSize();

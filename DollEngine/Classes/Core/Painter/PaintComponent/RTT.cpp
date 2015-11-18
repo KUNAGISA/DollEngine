@@ -11,6 +11,7 @@
 #include "Image.h"
 #include "System.h"
 #include "Window.h"
+#include <QDebug>
 
 DE_BEGIN
 
@@ -29,17 +30,17 @@ RTT::~RTT()
     SAFF_DELETE(m_info);
 }
 
-bool RTT::begin(int w,int h)
+void RTT::init(int w,int h)
 {
     if (m_info && m_info->getTexture()) {
-        if (m_info->getTexture()->getWidth() != getPaintWidth() ||
-            m_info->getTexture()->getHeight() != getPaintHeight()) {
+        if (m_info->getTexture()->getWidth() != w ||
+            m_info->getTexture()->getHeight() != h) {
             ImageInfo* frame = new ImageInfo();
             Texture* tex = new Texture();
             if(!tex->initWithSize(w, h)){
                 delete tex;
                 delete frame;
-                return false;
+                return;
             }
             delete m_info;
             m_info = frame;
@@ -54,19 +55,22 @@ bool RTT::begin(int w,int h)
         if(!tex->initWithSize(w, h)){
             delete tex;
             delete frame;
-            return false;
+            return ;
         }
         m_info = frame;
         m_info->setTexture(tex);
         setPaintSize(w,h);
         PaintEngine::GetInstance()->createFBO(m_info->getTexture()->getTextureId(),&m_oldFBO,&m_FBO);
     }
+}
+
+bool RTT::begin(float r,float g,float b,float a)
+{
     
     PaintEngine::GetInstance()->resize(PaintEngine::GetInstance()->getLayerWidth(),
                                       PaintEngine::GetInstance()->getLayerHeight());
-    
     PaintEngine::GetInstance()->switchFBO(&m_oldFBO,m_FBO);
-    PaintEngine::GetInstance()->clearColor(GL_COLOR_BUFFER_BIT,0,0,0,1);
+    PaintEngine::GetInstance()->clearColor(GL_COLOR_BUFFER_BIT,r,g,b,a);
     
     return true;
 }

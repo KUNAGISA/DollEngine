@@ -101,7 +101,7 @@ class TagManager extends KAGController
 			if(this.stepInLabel("MACRO",name,true))
 			{
 				this.macroParams.add(params);
-				doNext();
+				asyncTrigger(execTags);
 				return -1; //即将jump
 			}
 			else

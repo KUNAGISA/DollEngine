@@ -11,6 +11,7 @@ void TjsRTT::paint(tTJSVariant trans)
 NCB_REGISTER_CLASS_DIFFER(RTT, TjsRTT)
 {
     TJS_FACTORY
+    NCB_METHOD(init);
     NCB_METHOD(begin);
     NCB_METHOD(end);
     NCB_METHOD(paint);
