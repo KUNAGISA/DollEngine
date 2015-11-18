@@ -18,7 +18,7 @@ class TagManager extends KAGController
 			return true;
 		}
 		else {
-			em("跳转%s:%s失败",storage,label);
+			printf("跳转%s:%s失败",storage,label);
 			return false;
 		}
 	}
@@ -30,7 +30,7 @@ class TagManager extends KAGController
 			return true;
 		}
 		else {
-			em("呼叫%s:%s失败",storage,label);
+			printf("呼叫%s:%s失败",storage,label);
 			return false;
 		}
 	}
@@ -106,7 +106,7 @@ class TagManager extends KAGController
 			}
 			else
 			{
-				print("未找到指令"+name);
+				dm("未找到指令"+name);
 				return 0;
 			}
 		}

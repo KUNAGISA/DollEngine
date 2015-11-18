@@ -38,7 +38,6 @@ KAGStorage* KAGParser::loadScenario(const String& filepath)
         fullpath = Storages::GetInstance()->getFullPath(filepath);
         if (fullpath.empty())
         {
-            EM(ERROR_FILE_NOT_EXIST,filepath.c_nstr());
             return NULL;
         }
     }

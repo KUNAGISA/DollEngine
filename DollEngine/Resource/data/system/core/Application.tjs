@@ -60,10 +60,10 @@ class Application extends SystemDelegate
 	}
 
 	function sceneTransCrossFade (time) {
-		// var tl = new Timeline(this,_transRTT);
-		// tl.setKeyframe("opacity",255,0,time);
-		// tl.onTimelineFinished = onSceneTransFinished;
-		// tl.start();
+		var tl = new Timeline(this,_transRTT);
+		tl.setKeyframe("opacity",255,0,time);
+		tl.onTimelineFinished = onSceneTransFinished;
+		tl.start();
 	}
 	/*帧刷新*/
 
@@ -94,7 +94,7 @@ class Application extends SystemDelegate
 	function onMainLoop () {
 		update();
 		window.beforeMainLoop();
-		// sysbase.visit();
+		sysbase.visit();
 		if(_transRTT) {
 			_transRTT.visit();
 		}
@@ -103,8 +103,8 @@ class Application extends SystemDelegate
 	}
 
 	function onSceneTransFinished () {
-		// invalidate _transRTT;
-		// _transRTT = void;
+		invalidate _transRTT;
+		_transRTT = void;
 		dm("【Application sceneTransition】场景过渡完毕",System.seconds);
 	}
 

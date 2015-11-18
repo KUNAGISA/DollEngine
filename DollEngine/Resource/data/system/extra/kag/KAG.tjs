@@ -287,7 +287,7 @@ class KAG extends Application
 		waitclick : function (elm) 
 		{
 			this.status.waitClickMode = WAIT_CLICK_TIME;
-			return -2;
+			return -1;
 		} incontextof this,
 
 		wt : function (elm) 
@@ -307,7 +307,7 @@ class KAG extends Application
 
 		s : function (elm) 
 		{
-			return -2;
+			return -1;
 		} incontextof this,
 
 		clickskip : function (elm) 
@@ -333,7 +333,7 @@ class KAG extends Application
 				return;
 			}
 			this.status.waitClickMode = WAIT_CLICK_L;
-			return -2;
+			return -1;
 		} incontextof this,
 
 		p : function (elm) 
@@ -344,7 +344,7 @@ class KAG extends Application
 				return;
 			}
 			this.status.waitClickMode = WAIT_CLICK_P;
-			return -2;
+			return -1;
 		} incontextof this,
 
 		/*******音频控制*******/
@@ -401,7 +401,7 @@ class KAG extends Application
 			}
 			if (typeof this.world.names[elm.layer] != 'undefined') {
 				em('重复的UI %s',elm.layer);
-				return -2;
+				return -1;
 			}
 			var uipath = Storages.getFullPath(elm.storage);
 			if (!uipath) {
@@ -457,7 +457,7 @@ class KAG extends Application
 			}
 			if (!(lay instanceof "Sprite")) {
 				em("image指令只能操作Sprite类对象");
-				return -2;
+				return -1;
 			}
 			lay.freeImage();
 		} incontextof this,
@@ -500,7 +500,7 @@ class KAG extends Application
 			}
 			else {
 				em("position指令只能操作MessageLayer类对象");
-				return -2;
+				return -1;
 			}
 		} incontextof this,
 
@@ -538,7 +538,7 @@ class KAG extends Application
 				if (!app.status.clickToNext) {
 					this.status.waitClickMode = WAIT_CLICK_P;
 					this.status.isClickSkip = false;
-					return -2;
+					return -1;
 				}
 				else {
 					lay.clearWord();
@@ -617,7 +617,7 @@ class KAG extends Application
 			if (pos[2] == true) {
 				this.status.waitClickMode = WAIT_CLICK_P;//点击等待换页
 				this.status.isClickSkip = false;
-				return -2;
+				return -1;
 			}
 			if (this.status.nowait || this.status.isClickSkip) {
 				return 0;
@@ -656,7 +656,7 @@ class KAG extends Application
 			elm.time = 1000 if elm.time===void;
 			this.transWithMethod(elm.method, elm.time);
 			this.status.waitClickMode = WAIT_CLICK_TRANS;
-			return -2;
+			return -1;
 		} incontextof this,
 
 		move : function (elm) 

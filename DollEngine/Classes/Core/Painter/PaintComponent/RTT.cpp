@@ -67,13 +67,14 @@ bool RTT::begin(int w,int h)
                                       PaintEngine::GetInstance()->getLayerHeight());
     
     PaintEngine::GetInstance()->switchFBO(&m_oldFBO,m_FBO);
-    PaintEngine::GetInstance()->clearColor(GL_COLOR_BUFFER_BIT,1,0,0,1);
+    PaintEngine::GetInstance()->clearColor(GL_COLOR_BUFFER_BIT,0,0,0,1);
     
     return true;
 }
 
 void RTT::end()
 {
+    PaintEngine::GetInstance()->paint();
     PaintEngine::GetInstance()->switchFBO(NULL,m_oldFBO);
     PaintEngine::GetInstance()->resize(Window::GetInstance()->getWidth(),
                                       Window::GetInstance()->getHeight());
