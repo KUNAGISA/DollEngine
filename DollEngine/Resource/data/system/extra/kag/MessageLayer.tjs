@@ -23,12 +23,6 @@ class MessageLayer extends UILayer
 
 	var uiIndex = 0;
 
-	var font = %[
-		size : 22,
-		face : "",
-		lineSpacing : 10,//行距
-		wordSpacing : 0,//字间距
-	];
 	function MessageLayer (app,par) 
 	{
 		super.UILayer(app,par);

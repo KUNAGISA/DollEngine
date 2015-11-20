@@ -14,6 +14,8 @@
 
 TJS_NCB(Character){}
 
+void paint(tTJSVariant trans);
+
 void setText(tTJSVariant v){
     TJS_STRING(v, str);
     Character::setText(str);

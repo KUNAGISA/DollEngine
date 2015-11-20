@@ -23,6 +23,7 @@ public:
     ~Character();
     
     virtual void setSizeToImageSize();
+    virtual void paint(Transform *trans);
 public:
     PROPERTY_CONST(String, FontName, m_fontName){
         if(m_fontName!=v){

@@ -1,5 +1,9 @@
 class Font
 {
+	var size = 22;
+	var face = "";
+	var lineSpacing = 10;//行距
+	var wordSpacing = 0;//字间距
 	function Font () {
 		
 	}

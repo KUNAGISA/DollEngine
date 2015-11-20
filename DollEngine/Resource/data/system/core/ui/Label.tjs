@@ -4,21 +4,15 @@ class Label extends Layer
 	function Label (app,par) 
 	{
 		super.Layer(app,par);
-		this._font = new Character();
-		this._font.object = this;
+		invalidate this._image;
+		this._image = new Character();
 		this.setAnchor(0.5,0.5);
 	}
 
 	function setSizeToImageSize () 
 	{
-		this._font.setSizeToImageSize();
-		this.width = this._font.paintWidth;
-		this.height = this._font.paintHeight;
-	}
-
-	function onPaint () 
-	{
-		this._font.update();
+		this._image.setSizeToImageSize();
+		super.setSizeToImageSize();
 	}
 
 	var _text=void;
@@ -26,7 +20,7 @@ class Label extends Layer
 	    setter(v) {
 	    	//setter
 	    	if(this._text != v){
-	    		this._font.text = v;
+	    		this._image.text = v;
 		    	this._text = v;
 	    	}
 		}
@@ -41,7 +35,7 @@ class Label extends Layer
 	    setter(v) {
 	    	//setter
 	    	this._color = v;
-	    	this._font.setColor(v);
+	    	this._image.setColor(v);
 		}
 		getter {
 	    	//getter

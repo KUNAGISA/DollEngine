@@ -18,10 +18,12 @@ Character::Character()
 ,m_fontName(DEFFONT)
 ,m_text("")
 {
+    m_info = new ImageInfo();
 }
 
 Character::~Character()
 {
+    delete m_info;
     for (CharacterInfo* frame : m_characterInfos) {
         delete frame;
     }
@@ -31,22 +33,22 @@ Character::~Character()
 void Character::setSizeToImageSize()
 {
     updateText();
-    
-//    if (m_characterInfos.size() > 0) {
-//        m_paintHeight = m_fontSize;
-//        m_paintWidth = 0;
-//        for (CharacterInfo* frame : m_characterInfos) {
-//            m_paintWidth += frame->getFont()->advance;
-//        }
-//    }
-//    else {
-//        m_paintWidth = 0;
-//        m_paintHeight = 0;
-//    }
+    if (m_characterInfos.size() > 0) {
+        m_info->setPaintSize(0,m_fontSize);
+        float w = 0;
+        for (CharacterInfo* frame : m_characterInfos) {
+            w += frame->getFont()->advance;
+        }
+        m_info->setPaintSize(w,m_fontSize);
+    }
+    else {
+        m_info->setPaintSize(0,0);
+    }
 }
 
-void Character::update()
+void Character::paint(Transform* trans)
 {
+    updateText();
     setSizeToImageSize();
     if (m_characterInfos.size() == 0) {
         return;
@@ -56,9 +58,10 @@ void Character::update()
     for (CharacterInfo* frame : m_characterInfos) {
         FontData* font = frame->getFont();
         Transform orgin;
-//        if (getObject()) {
-//            orgin.copy(getObject()->getTransInWorld());
-//        }
+        if(trans) {
+            orgin.assign(trans);
+        }
+        
         Transform offst;
         offst.setX(lastX + font->bearingX);
         float y = -(frame->getPaintHeight()-font->bearingY);
