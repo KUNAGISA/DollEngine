@@ -394,14 +394,6 @@ void PaintEngine::switchFBO(DrawOldFBOId* oldFBO,DrawFBOId newFBO)
         glGetIntegerv(GL_FRAMEBUFFER_BINDING, (GLint*)oldFBO);
     }
     glBindFramebuffer(GL_FRAMEBUFFER, newFBO);
-    qDebug()<<"--------";
-    if(oldFBO) {
-        qDebug()<< (*oldFBO);
-    }
-    else {
-        qDebug()<< "null";
-    }
-    qDebug()<< newFBO;
     CHECK_GL_ERROR;
 }
 

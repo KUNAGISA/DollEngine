@@ -154,18 +154,16 @@ class MessageLayer extends UILayer
 	{
 		clearWord();
 		var syses = [];
-		for (var i = 0; i < controlLayer.children.count; ++i) {
+		for (var i = controlLayer.children.count-1; i >= 0; --i) {
 			var control = controlLayer.children[i];
-			if(sys && control.issystem)
+			if(sys && control.isSysControl)
 			{
-				syses.add(control);
+				continue;
 			}
 			else {
 				invalidate control;
 			}
 		};
-		controlLayer.children.clear();
-		controlLayer.children = syses;
 		names = %[];
 		links.clear();
 		uiIndex = 0;
@@ -189,8 +187,8 @@ class MessageLayer extends UILayer
 			elm.name = "_num_"+uiIndex;
 		}
 		var node = new Button(app,controlLayer);
-		node.issystem = elm.issys===void?false:elm.issys;
-		if (node.issystem) {
+		node.isSysControl = elm.issys===void?false:elm.issys;
+		if (node.isSysControl) {
 			syscontrol[elm.name] = node;
 		}
 		else {
@@ -227,8 +225,8 @@ class MessageLayer extends UILayer
 			elm.name = "_num_"+uiIndex;
 		}
 		var node = new Slider(app,controlLayer);
-		node.issystem = elm.issys===void?false:elm.issys;
-		if (node.issystem) {
+		node.isSysControl = elm.issys===void?false:elm.issys;
+		if (node.isSysControl) {
 			syscontrol[elm.name] = node;
 		}
 		else {

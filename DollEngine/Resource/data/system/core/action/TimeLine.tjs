@@ -30,6 +30,9 @@ class Timeline
 		if(_params[param] == void) {
 			_params[param] = [];
 		}
+		if (startValue === void) {
+			startValue = object[param];
+		}
 		_params[param].add([startTime,dut,startValue,endValue]);
 	}
 
@@ -48,6 +51,11 @@ class Timeline
 		_app._allTimelines.add(this);
 	}
 
+	function stop () {
+		currentTime = duration;
+		update(0);
+	}
+
 	function update (dt) {
 		currentTime+=dt;
 		foreach(_params,function (param,timelineData) {
@@ -62,6 +70,9 @@ class Timeline
 				timelineData[-1] = ++idx;
 				ft = 1;
 			}
+			if (ft < 0) {
+				return;
+			};
 			setParamValue(param, ft, arr[2], arr[3]);
 		} incontextof this);
 		if(currentTime >= duration) {

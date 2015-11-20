@@ -25,7 +25,7 @@ class Control extends Layer
 	function disableAfterClick () 
 	{
 		g_AllControl.foreach(function(value){
-			if (!value.issystem) {
+			if (!value.isSysControl) {
 			    value.ignore = true;
 			}
 		});
@@ -81,15 +81,15 @@ class Control extends Layer
 		}
 	}
 
-	var _issystem=false;//是否是系统控件（不受er/cm指令清除
-	property issystem{
+	var _isSysControl=false;//是否是系统控件（不受er/cm指令清除
+	property isSysControl{
 	    setter(v) {
 	    	//setter
-	    	_issystem = v;
+	    	_isSysControl = v;
 		}
 		getter {
 	    	//getter
-			return _issystem;
+			return _isSysControl;
 		}
 	}
 	

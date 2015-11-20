@@ -11,6 +11,7 @@ class KAG extends Application
 
 	//剧本控制
 	var tagManager;
+	var moveWaits = [];//当前移动指令的timeline
 
 	//音频管理
 	var bgmBuffer = void;
@@ -38,8 +39,7 @@ class KAG extends Application
 	function initStatus () {
 		super.initStatus();
 		status.transReady = false; //是否进行过trans准备（backlay）
-		status.transDuration = 0;//trans的过渡时长
-		status.transT = 0;//当前trans到多少时间
+
 		status.uiPage = 'fore', //UI控件将被创建在back层还是fore层
 
 		status.delay = 200;//文字显示速度
@@ -215,6 +215,35 @@ class KAG extends Application
 	}
 
 	/*TAG控制*/
+
+	function clickToNext () 
+	{
+		this.status.clickToNext = true;
+		this.tagManager.doNext();
+	}
+
+	function clickToNextCh () 
+	{
+		var lay = getCurrentLayer();
+		if (!lay) {
+			dm("指令l在点击时，当前图层应该是表层");
+			return;
+		}
+		clickToNext();
+	}
+
+	function clickToNextPage () 
+	{
+		var lay = getCurrentLayer();
+		if (!lay) {
+			dm("指令p在点击时，当前图层应该是表层");
+			return;
+		}
+		lay.clearWord();
+		lay.locateX = 0;
+		lay.locateY = 0;
+		clickToNext();
+	}
 
 	function checkElm (elm,arr) 
 	{
@@ -445,6 +474,7 @@ class KAG extends Application
 			var y = +lay.parent.height - elm.top;
 			lay.setPos(x,y);
 			lay.scale = 1;
+			lay.opacity = elm.opacity if elm.opacity!==void;
 			lay.visible = elm.visible if elm.visible!==void;
 			lay.absolute = elm.index if elm.index!==void;
 		} incontextof this,
@@ -669,16 +699,16 @@ class KAG extends Application
 				this.mergerBack('move',elm);
 				return;
 			}
-			var time = 1;
+			var time = 1000;
 			if (elm.time!==void) {
-				time = elm.time/1000;
+				time = elm.time;
 			}
 			var path = elm.path;
 			path = path.substr(1,path.length-2);
-			var paths = path.split(")(");
+			var paths = path.split(")(",,true);
 
 			//瞬间处理
-			if (elm.time == 0) {
+			if (time == 0) {
 				var cfg = paths[-1].split(",");
 				lay.setPos(cfg[0],lay.parent.height-cfg[1]);
 				lay.opacity = cfg[2];
@@ -688,24 +718,34 @@ class KAG extends Application
 			//持续一段时间的处理
 			var arr1 = [];
 			var arr2 = [];
+			var timeline = new Timeline(this,lay);
+			var startTime = 0;
 			for (var i = 0; i < paths.count; i++) {
 				var cfg = paths[i].split(",");
-				var y = lay.parent.height - cfg[1];
-				var mv = new MoveTo(lay,time/paths.count,+cfg[0],y);
-				var fd = new FadeTo(lay,time/paths.count,+cfg[2]);
-				arr1.add(mv);
-				arr2.add(fd);
-			};
-			var s1 = new Sequence(arr1);
-			var s2 = new Sequence(arr2);
-			var s3 = new Spawn([s1,s2]);
-			s3.onActionEnded = function () 
-			{
-				this[0].moveWaits.remove(this[1]);
-			}incontextof [this,s3];
-			this.moveWaits.add(s3);
-			lay.runAction(s3);
+				cfg[1] = lay.parent.height - cfg[1];
+				var lastcfg;
+				if (i == 0) {
+					lastcfg = [lay.x,lay.y,lay.opacity];
+				}
+				else {
+					lastcfg = paths[i-1].split(",");
+					lastcfg[1] = lay.parent.height - lastcfg[1];
+				}
+				var dut = time/paths.count;
+				// dm('==========',paths[i]);
+				// dm(cfg*);
+				// dm(lastcfg*);
+				timeline.setKeyframe("x",+lastcfg[0],+cfg[0],dut, startTime);
+				timeline.setKeyframe("y",+lastcfg[1],+cfg[1],dut, startTime);
+				timeline.setKeyframe("opacity",+lastcfg[2],+cfg[2],dut, startTime);
 
+				startTime += dut;
+			};
+			timeline.onTimelineFinished = function () {
+				this[0].moveWaits.remove(this[1]);
+			} incontextof [this,timeline];
+			moveWaits.add(timeline);
+			timeline.start();
 		} incontextof this,
 
 		action : function (elm) 
@@ -772,16 +812,86 @@ class KAG extends Application
 				return 0;
 			}
 			else {
-				var act = this.moveWaits[0];
-				if (!isvalid act) {
+				var timeline = this.moveWaits[0];
+				if (!isvalid timeline) {
 					this.moveWaits.erase(0);
 					return 0;
 				}
-				var t = Math.max(0,(act.duration - act.time));
+				var t = Math.max(0,(timeline.duration - timeline.currentTime));
 				this.moveWaits.erase(0);
 				this.status.waitClickMode = WAIT_CLICK_MOVE;
-				return t*1000;
+				return t;
 			}
 		} incontextof this,
 	];
+
+
+	function onMouseDown (x,y) {
+
+		switch(this.status.waitClickMode) {
+			case WAIT_CLICK_NONE:
+			break;
+			case WAIT_CLICK_WORD:
+			{
+				//等待文字
+				this.status.isClickSkip = true;
+			}
+			break;
+			case WAIT_CLICK_MOVE:
+			{
+				//等待move
+				// for (var i = this.moveWaits.count - 1; i >= 0; i--) {
+				// 	var act = this.moveWaits[i];
+				// 	if (isvalid act) {
+				// 		act.update(1);
+				// 		act.onActionEnded();
+				// 		invalidate act;
+				// 	}
+				// }
+				// this.moveWaits.clear();
+				// this.tagManager.doNext();
+			}
+			break;
+			case WAIT_CLICK_TRANS:
+			{
+				//等待trans
+				skipTransition();
+			}
+			break;
+			case WAIT_CLICK_TIME:
+			{
+				//等待时间
+				clickToNext();
+			}
+			break;
+			case WAIT_CLICK_L:
+			{
+				//等待点击继续文字
+				clickToNextCh();
+			}
+			break;
+			case WAIT_CLICK_P:
+			{
+				//等待点击换页
+				clickToNextPage();
+			}
+			break;
+			case WAIT_CLICK_ACTION:
+			{
+				//等待动作结束
+				// for (var i = this.actionWaits.count - 1; i >= 0; i--) {
+				// 	var act = this.actionWaits[i];
+				// 	if (isvalid act) {
+				// 		act.update(1);
+				// 		act.onActionEnded();
+				// 		invalidate act;
+				// 	}
+				// }
+				// this.actionWaits.clear();
+				// this.tagManager.doNext();
+			}
+			break;
+		}
+		super.onMouseDown(x,y);
+	}
 }

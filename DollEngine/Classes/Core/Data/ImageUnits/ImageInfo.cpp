@@ -115,11 +115,11 @@ void ImageInfo::toDrawData(GLDrawData& data,Transform* trans,bool flipX,bool fli
     //Color
     GLfloat c[4];
     m_color.start.toColorF(c);
-    c[0] *= c[3];c[1] *= c[3];c[2] *= c[3];
+//    c[0] *= c[3];c[1] *= c[3];c[2] *= c[3];
     memcpy(&data.lt.color, c, sizeof(GLV4F));
     memcpy(&data.rt.color, c, sizeof(GLV4F));
     m_color.end.toColorF(c);
-    c[0] *= c[3];c[1] *= c[3];c[2] *= c[3];
+//    c[0] *= c[3];c[1] *= c[3];c[2] *= c[3];
     memcpy(&data.lb.color, c, sizeof(GLV4F));
     memcpy(&data.rb.color, c, sizeof(GLV4F));
     

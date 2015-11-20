@@ -104,7 +104,9 @@ class Button extends Control
 			exp += "\",\"";
 			exp += this.clickData.target;
 			exp += "\");";
-			needDisabled = true;
+			if (!isSysControl) {
+				needDisabled = true;
+			};
 		}
 		if (exp != "") {
 			asyncTrigger(Scripts.eval,[exp]);

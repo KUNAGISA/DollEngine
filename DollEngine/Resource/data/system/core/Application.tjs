@@ -18,6 +18,7 @@ class Application extends SystemDelegate
 	var _enabledTimers;
 	var _lastSeconds;
 	var _transRTT;
+	var _transTimeline;
 	var _allTimelines;
 	var _allAsyncTriggers = [];
 	var _allTouches = [];
@@ -52,11 +53,12 @@ class Application extends SystemDelegate
 	}
 
 	function initStatus () {
+		status.transitioning = false;//场景过渡中
 	}
 
 	/*场景过渡效果*/
 	function sceneTransition (type, time, params*) {
-		if(_transRTT&&_transRTT.visible) {
+		if(status.transitioning) {
 			dm("【过渡效果】场景正在过渡中");
 			return;
 		}
@@ -69,15 +71,31 @@ class Application extends SystemDelegate
 		_transRTT.draw(sysbase);
 		_transRTT.opacity = 255;
 		_transRTT.visible = true;
+
+		status.transitioning = true;
 		this["sceneTrans"+type](time, params*);
 	}
 
 	function sceneTransCrossFade (time) {
-		var tl = new Timeline(this,_transRTT);
-		tl.setKeyframe("opacity",255,0,time);
-		tl.onTimelineFinished = onSceneTransFinished;
-		asyncTrigger(tl.start,void,tl);
+		_transTimeline = new Timeline(this,_transRTT);
+		_transTimeline.setKeyframe("opacity",255,0,time);
+		_transTimeline.onTimelineFinished = onSceneTransFinished;
+		asyncTrigger(_transTimeline.start);
 	}
+
+	function skipTransition () {
+		if (_transTimeline) {
+			_transTimeline.stop();
+		}
+	}
+
+	function onSceneTransFinished () {
+		_transRTT.visible = false;
+		_transTimeline = void;
+		status.transitioning = false;
+		dm("【过渡效果】场景过渡完毕");
+	}
+
 	/*帧刷新*/
 
 	function update () {
@@ -110,16 +128,11 @@ class Application extends SystemDelegate
 		_allTouches.clear();
 		sysbase.updateTouches();
 		sysbase.visit();
-		if(_transRTT&&_transRTT.visible) {
+		if(status.transitioning) {
 			_transRTT.visit();
 		}
 		window.afterMainLoop();
 		onAsyncTrigger();
-	}
-
-	function onSceneTransFinished () {
-		_transRTT.visible = false;
-		dm("【过渡效果】场景过渡完毕");
 	}
 
 	function onAsyncTrigger () {

@@ -15,7 +15,7 @@ DE_BEGIN
 
 Image::Image()
 :m_info(NULL)
-,m_blendSrc(GL_SRC_ALPHA)
+,m_blendSrc(GL_ONE)
 ,m_blendDst(GL_ONE_MINUS_SRC_ALPHA)
 ,m_program(NULL)
 ,m_flipY(false)
