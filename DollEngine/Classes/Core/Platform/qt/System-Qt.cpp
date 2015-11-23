@@ -58,18 +58,25 @@ float System::getDesktopHeight()
 
 PictureData* System::addText(const String& text,const String& fontName,int fontSize,FontData* fd)
 {
-    QFont font;
-    font.setPointSize(fontSize);
     auto iter = m_allFonts.find(fontName);
-    String fl = fontName;
     if (iter == m_allFonts.end()) {
         iter = m_allFonts.find(DEFFONT);
-        fl = DEFFONT;
+        if(iter == m_allFonts.end()){
+            return NULL;
+        }
     }
-    font.setFamily(fl.c_nstr());
+    int findex = (int)iter->second;
+    QStringList strList = QFontDatabase::applicationFontFamilies(findex);
+    if(strList.size() == 0) {
+        return NULL;
+    }
+    QString fl = strList.at(0);
+    QFont font;
+    font.setPointSize(fontSize);
+    font.setFamily(fl);
     QFontMetrics metric(font);
-    
-    QImage img(metric.width(text.c_nstr()),metric.height(),QImage::Format_RGBA8888);
+    int w = metric.width(text.c_nstr());
+    QImage img(w,metric.height(),QImage::Format_RGBA8888);
     QPainter painter(&img);
     painter.setCompositionMode(QPainter::CompositionMode_DestinationOver);
     

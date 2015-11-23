@@ -97,7 +97,8 @@ void Character::updateText()
     }
     m_characterInfos.clear();
     for (int i=0;i!=m_text.size();++i) {
-        CharacterInfo* frame = PaintEngine::GetInstance()->addText(m_text[i], m_fontName, m_fontSize);
+        String t = m_text.substr(i,1);
+        CharacterInfo* frame = PaintEngine::GetInstance()->addText(t, m_fontName, m_fontSize);
         if (frame) {
             m_characterInfos.push_back(frame);
         }

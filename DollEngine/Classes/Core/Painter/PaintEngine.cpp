@@ -15,7 +15,6 @@
 #include "Storages.h"
 #include "PaintComponent/Image.h"
 #include "CharacterInfo.h"
-#include <QDebug>
 
 DE_BEGIN
 
