@@ -644,6 +644,7 @@ class KAG extends Application
 				return;
 			}
 			var pos = lay.addText(elm.text,lay.locateX,lay.locateY);
+			dm(pos*);
 			lay.locateX = pos[0];
 			lay.locateY = pos[1];
 			if (pos[2] == true) {

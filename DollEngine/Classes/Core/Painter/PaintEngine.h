@@ -107,7 +107,7 @@ public:
 protected:
     map<String,PaintProgram*> m_allPrograms;
     map<String,Texture*> m_allTextures;
-    map<String,CharacterInfo*> m_allCharacterInfos;
+    map<String,FontData*> m_allFontDatas;
     vector<GLDrawData> m_quads;
     vector<GLushort> m_indexs;
     

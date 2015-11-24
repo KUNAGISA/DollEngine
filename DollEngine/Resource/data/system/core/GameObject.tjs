@@ -207,4 +207,14 @@ class GameObject
 			return _parent;
 		}
 	}
+
+	property window {
+		setter(v) {
+			app = v;
+		}
+		getter {
+			return app;
+		}
+	}
+	
 }

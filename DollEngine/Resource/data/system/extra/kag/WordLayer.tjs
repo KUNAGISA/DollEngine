@@ -1,9 +1,9 @@
 
 class WordLayer extends Layer
 {
-	function WordLayer (par) 
+	function WordLayer (app,par) 
 	{
-		super.Layer(par);
+		super.Layer(app,par);
 	}
 
 	function clearWord () 

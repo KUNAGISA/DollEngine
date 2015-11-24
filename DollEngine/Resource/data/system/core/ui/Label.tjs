@@ -15,18 +15,20 @@ class Label extends Layer
 		super.setSizeToImageSize();
 	}
 
-	var _text=void;
+	function onPaint () {
+		_image.fontSize = font.size;
+		// dm(111,_image,_transInWorld,_image.paint);
+		_image.paint(_transInWorld);
+	}
+
 	property text{
 	    setter(v) {
 	    	//setter
-	    	if(this._text != v){
-	    		this._image.text = v;
-		    	this._text = v;
-	    	}
+    		this._image.text = v;
 		}
 		getter {
 	    	//getter
-			return this._text;
+			return this._image.text;
 		}
 	}
 

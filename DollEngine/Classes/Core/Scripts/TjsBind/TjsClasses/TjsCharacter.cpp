@@ -14,16 +14,17 @@ void TjsCharacter::paint(tTJSVariant trans)
 {
     if(m_info == NULL) return;
     TjsTransform* obj = TJS_GET_OBJECT(TjsTransform,trans.AsObjectNoAddRef());
-    TjsCharacter::paint(obj);
+    Character::paint(obj);
 }
 
 NCB_REGISTER_CLASS_DIFFER(Character, TjsCharacter)
 {
     TJS_FACTORY
     NCB_METHOD(setSizeToImageSize);
+    NCB_METHOD(paint);
     NCB_PROPERTY(fontName,getFontName,setFontName);
     NCB_PROPERTY(text,getText,setText);
-    NCB_PROPERTY(paintWidth,getPaintWidth,setPaintWidth);
+    NCB_PROPERTY(fontSize,getFontSize,setFontSize);
     NCB_PROPERTY(paintWidth,getPaintWidth,setPaintWidth);
     NCB_PROPERTY(paintHeight,getPaintHeight,setPaintHeight);
     NCB_PROPERTY(startOpacity,getStartOpacity,setStartOpacity);

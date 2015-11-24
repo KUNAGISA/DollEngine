@@ -58,18 +58,45 @@ float System::getDesktopHeight()
 
 PictureData* System::addText(const String& text,const String& fontName,int fontSize,FontData* fd)
 {
-    QFont font;
-    font.setPointSize(fontSize);
+    if(text.empty()) {
+        return NULL;
+    } 
     auto iter = m_allFonts.find(fontName);
-    String fl = fontName;
     if (iter == m_allFonts.end()) {
         iter = m_allFonts.find(DEFFONT);
-        fl = DEFFONT;
     }
-    font.setFamily(fl.c_nstr());
+    int nindex = (int)iter->second;
+    QStringList fls = QFontDatabase::applicationFontFamilies(nindex);
+    if(fls.size() == 0){
+        return NULL;
+    }
+    QString fl = fls.at(0);
+    QFont font;
+    font.setPointSize(fontSize);
+    font.setFamily(fl);
+    QString txt = text.c_nstr();
     QFontMetrics metric(font);
+    QRect rect = metric.boundingRect(txt);
+    int w = rect.width();
+    if(w == 0){
+        return NULL;
+    }
+    for(int i=0;i<txt.size();++i) {
+        QChar ch = txt.at(i);
+        int r = metric.rightBearing(ch);
+        int l = metric.leftBearing(ch);
+        fd->advance += (r-l);
+        if(i == 0) {
+            fd->bearingX = metric.leftBearing(ch);//图片应该的orgin偏移量
+        }
+//        fd->bearingY = metric.descent();
+    }
+//    fd->advance = metric.averageCharWidth();
+//    fd->bearingX = metric.minLeftBearing();//图片应该的orgin偏移量
+    fd->bearingY = metric.descent();  
     
-    QImage img(metric.width(text.c_nstr()),metric.height(),QImage::Format_RGBA8888);
+    QImage img(w,rect.height(),QImage::Format_RGBA8888_Premultiplied);
+    img.fill(0);
     QPainter painter(&img);
     painter.setCompositionMode(QPainter::CompositionMode_DestinationOver);
     
@@ -79,8 +106,6 @@ PictureData* System::addText(const String& text,const String& fontName,int fontS
     painter.setPen(pen);
     
     painter.drawText(img.rect(),Qt::AlignCenter,text.c_nstr());
-    
-    
     
     PictureData* data = new PictureData();
     data->setWidth(img.width());

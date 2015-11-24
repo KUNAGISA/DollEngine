@@ -69,10 +69,9 @@ void Character::paint(Transform* trans)
         offst.setAnchorX(0);
         offst.setAnchorY(0);
         offst.flush();
+        orgin.transform(&offst);
         orgin.setWidth(frame->getPaintWidth());
         orgin.setHeight(frame->getPaintHeight());
-        orgin.transform(&offst);
-        
         PaintConfig config;
         flushPaintConfig(config);
         config.trans = &orgin;
@@ -80,7 +79,7 @@ void Character::paint(Transform* trans)
 //        config.width = frame->getWidth();
 //        config.height = frame->getHeight();
         PaintEngine::GetInstance()->preparePaint(config);
-        lastX += frame->getFont()->advance;
+        lastX += font->advance;
     }
 }
 
@@ -97,7 +96,8 @@ void Character::updateText()
     }
     m_characterInfos.clear();
     for (int i=0;i!=m_text.size();++i) {
-        CharacterInfo* frame = PaintEngine::GetInstance()->addText(m_text[i], m_fontName, m_fontSize);
+        String t = m_text.substr(i,1);
+        CharacterInfo* frame = PaintEngine::GetInstance()->addText(t, m_fontName, m_fontSize);
         if (frame) {
             m_characterInfos.push_back(frame);
         }
