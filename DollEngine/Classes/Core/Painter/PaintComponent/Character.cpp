@@ -69,10 +69,9 @@ void Character::paint(Transform* trans)
         offst.setAnchorX(0);
         offst.setAnchorY(0);
         offst.flush();
+        orgin.transform(&offst);
         orgin.setWidth(frame->getPaintWidth());
         orgin.setHeight(frame->getPaintHeight());
-        orgin.transform(&offst);
-        
         PaintConfig config;
         flushPaintConfig(config);
         config.trans = &orgin;
@@ -80,7 +79,7 @@ void Character::paint(Transform* trans)
 //        config.width = frame->getWidth();
 //        config.height = frame->getHeight();
         PaintEngine::GetInstance()->preparePaint(config);
-        lastX += frame->getFont()->advance;
+        lastX += font->advance;
     }
 }
 

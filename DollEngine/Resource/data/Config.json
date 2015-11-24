@@ -59,7 +59,7 @@
 		"height" : 640,
 		"scale" : 1
 	},
-	"debugMode" : 3,
+	"debugMode" : 4,
 	"module" : {
 		"kag" : true
 	},

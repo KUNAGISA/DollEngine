@@ -33,7 +33,7 @@ public:
     void removeFont(const String& fontName);
     
     static String GetKeyByFont(const String& str,const String& fontName,int fontSize,int outlineSize) {
-        return String::fromFormat("%s_%s_%d_%d",str.c_nstr(),fontName.c_nstr(),fontSize,outlineSize);
+        return String::fromFormat(L"%ls_%ls_%d_%d",str.c_str(),fontName.c_str(),fontSize,outlineSize);
     }
     
     int64_t getMilliSeconds();

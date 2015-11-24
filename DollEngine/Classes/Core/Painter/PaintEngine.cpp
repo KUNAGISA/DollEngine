@@ -221,8 +221,11 @@ Texture* PaintEngine::addTexture(int r)
 CharacterInfo* PaintEngine::addText(const String& text,const String& fontName,int fontSize)
 {
     //添加文字
+    if(text.empty()){
+        return NULL;
+    }
     String _fontName;
-    if (fontName.empty() || text.empty()) {
+    if (fontName.empty()) {
         _fontName = DEFFONT;
     }
     else {
@@ -233,9 +236,13 @@ CharacterInfo* PaintEngine::addText(const String& text,const String& fontName,in
         fontSize = DEFFONTSIZE;
     }
     String key = System::GetKeyByFont(text,fontName,fontSize,0);
-    auto iter = m_allCharacterInfos.find(key);
-    if (iter != m_allCharacterInfos.end()) {
-        return iter->second;
+    FontData* fd = NULL;
+    auto iter = m_allFontDatas.find(key);
+    if (iter != m_allFontDatas.end()) {
+        fd = iter->second;
+    }
+    else {
+        fd = new FontData();
     }
     
     CharacterInfo* frame = new CharacterInfo();
@@ -245,11 +252,12 @@ CharacterInfo* PaintEngine::addText(const String& text,const String& fontName,in
         tex = iter2->second;
     }
     else {
-
-        FontData* fd = new FontData();
-
         PictureData* image = System::GetInstance()->addText(text, fontName, fontSize,fd);
-
+        if(!image){
+            delete fd;
+            delete frame;
+            return NULL;
+        }
         tex = new Texture();
         if(tex->initWithImage(image)) {
             delete image;
@@ -262,9 +270,14 @@ CharacterInfo* PaintEngine::addText(const String& text,const String& fontName,in
             return NULL;
         }
         m_allTextures[key] = tex;
+        m_allFontDatas[key] = fd;
+        tex->setCacheKey(key);
         tex->retain();
-        frame->setFont(fd);
     }
+    frame->setTexture(tex);
+    frame->setFont(fd);
+    frame->setPaintSize(tex->getWidth(),tex->getHeight());
+    frame->setOrginRect(0,0,tex->getWidth(),tex->getHeight());
     return frame;
 }
 
