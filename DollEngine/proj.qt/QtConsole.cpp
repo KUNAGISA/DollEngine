@@ -3,7 +3,6 @@
 #include "System.h"
 #include <QSettings>
 #include <QKeyEvent>
-#include <QDebug>
 #include "ConsoleFind.h"
 
 QtConsole::QtConsole(QWidget *parent) :

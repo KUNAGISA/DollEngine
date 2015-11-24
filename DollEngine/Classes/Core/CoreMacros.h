@@ -120,6 +120,7 @@ return 0;\
 #include <GL/gl.h>
 #define GL_GLEXT_PROTOTYPES
 #include <GL/glext.h>
+#include <QDebug>
 #endif
 
 #define CHECK_GL_ERROR DE::PaintEngine::GetInstance()->checkError();

@@ -5,6 +5,10 @@ class LayerColor extends Sprite
 		super.Sprite(app,par);
 		invalidate _image;
 		_image = new ColorRect();
+		if(!_image.loadSize(2,2,0))
+		{
+			dm("faild");
+		}
 		this.setAnchor(0,0);
 	}
 
@@ -24,62 +28,6 @@ class LayerColor extends Sprite
 		getter {
 	    	//getter
 			return this._image.r;
-		}
-	}
-
-	property color{
-	    setter(v) {
-	    	//setter
-	    	this._image.color = v;
-		}
-		getter {
-	    	//getter
-			return this._image.color;
-		}
-	}
-
-	var _startColor=0;
-	property startColor{
-	    setter(v) {
-	    	//setter
-	    	this._startColor = v;
-	    	this._image.setGradientColor(this._startColor,this._endColor,this._gradVector);
-		}
-		getter {
-	    	//getter
-			return this._startColor;
-		}
-	}
-
-	var _endColor=0;
-	property endColor{
-	    setter(v) {
-	    	//setter
-	    	this._endColor = v;
-	    	this._image.setGradientColor(this._startColor,this._endColor,this._gradVector);
-		}
-		getter {
-	    	//getter
-			return this._endColor;
-		}
-	}
-
-	var _gradVector=0;
-	/****
-	0 Start在上，end在下
-	1 Start在下，end在上
-	2 Start在左，end在右
-	3 Start在右，end在左
-	****/
-	property gradVector{
-	    setter(v) {
-	    	//setter
-	    	this._gradVector = v;
-	    	this._image.setGradientColor(this._startColor,this._endColor,this._gradVector);
-		}
-		getter {
-	    	//getter
-			return this._gradVector;
 		}
 	}
 }

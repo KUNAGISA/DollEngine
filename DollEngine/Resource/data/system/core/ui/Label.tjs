@@ -6,7 +6,7 @@ class Label extends Layer
 		super.Layer(app,par);
 		invalidate this._image;
 		this._image = new Character();
-		this.setAnchor(0.5,0.5);
+		this.setAnchor(0,0);
 	}
 
 	function setSizeToImageSize () 
@@ -16,7 +16,6 @@ class Label extends Layer
 	}
 
 	function onPaint () {
-		_image.fontSize = font.size;
 		// dm(111,_image,_transInWorld,_image.paint);
 		_image.paint(_transInWorld);
 	}
@@ -32,17 +31,13 @@ class Label extends Layer
 		}
 	}
 
-	var _color=void;
-	property color{
+	property fontSize {
 	    setter(v) {
-	    	//setter
-	    	this._color = v;
-	    	this._image.setColor(v);
-		}
-		getter {
-	    	//getter
-			return this._color;
-		}
+	    	_image.fontSize = v;
+	    	font.size = v;
+	    }
+	    getter {
+	    	return font.size;
+	    }
 	}
-
 }

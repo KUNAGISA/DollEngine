@@ -11,7 +11,6 @@
 #include "Image.h"
 #include "System.h"
 #include "Window.h"
-#include <QDebug>
 
 DE_BEGIN
 

@@ -4,6 +4,7 @@ class WordLayer extends Layer
 	function WordLayer (app,par) 
 	{
 		super.Layer(app,par);
+		setAnchor(0,1);
 	}
 
 	function clearWord () 

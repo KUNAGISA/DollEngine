@@ -19,6 +19,7 @@ class KAG extends Application
 
 	//状态数据
 	var allskip = 1;// 0 已读跳过 1 skip时全部跳过
+	var autoMode = 0;
 	var bookMarkDates = [];//存档
 	
 	function KAG () 
@@ -133,6 +134,16 @@ class KAG extends Application
 				lay = fore.messages[msgIdx];
 				if(!lay){
 					lay = new MessageLayer(this,fore.base);
+					// with(DEConfig.game.message) {
+					// 	lay.setPosition(%[
+					// 			width : .width,
+					// 			height : .height,
+					// 			marginl : .marginLRTB[0],
+					// 			marginr : .marginLRTB[1],
+					// 			margint : .marginLRTB[2],
+					// 			marginb : .marginLRTB[3],
+					// 		]);
+					// }
 					lay.absolute=1000000+1000*msgIdx;
 					fore.messages[msgIdx] = lay;
 				}
@@ -644,7 +655,6 @@ class KAG extends Application
 				return;
 			}
 			var pos = lay.addText(elm.text,lay.locateX,lay.locateY);
-			dm(pos*);
 			lay.locateX = pos[0];
 			lay.locateY = pos[1];
 			if (pos[2] == true) {
@@ -657,6 +667,17 @@ class KAG extends Application
 			}
 			this.status.waitClickMode = WAIT_CLICK_WORD;
 			return this.status.delay;
+		} incontextof this,
+
+		font : function (elm)
+		{
+			var lay = this.getCurrentLayer();
+			if(!lay) {
+				this.mergerBack('font',elm);
+				return;
+			}
+			lay.font.color = elm.color;
+			lay.font.size = elm.size;
 		} incontextof this,
 
 		slider : function (elm) 

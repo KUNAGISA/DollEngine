@@ -74,4 +74,18 @@ class Layer extends GameObject
 	    	return _opacity;
 	    }
 	}
+	
+	var _color=void;
+	property color{
+	    setter(v) {
+	    	//setter
+	    	this._color = v;
+	    	this._image.startColor = this._image.endColor = v;
+		}
+		getter {
+	    	//getter
+			return this._color;
+		}
+	}
+
 }

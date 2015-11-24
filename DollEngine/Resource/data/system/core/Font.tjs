@@ -4,6 +4,8 @@ class Font
 	var face = "";
 	var lineSpacing = 10;//行距
 	var wordSpacing = 0;//字间距
+	var color = 0xffffff;
+	var opacity = 0xff;
 	function Font () {
 		
 	}

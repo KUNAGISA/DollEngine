@@ -5,6 +5,7 @@
 #include "ColorRect.h"
 
 TJS_NCB(ColorRect){}
+void paint(tTJSVariant trans);
 };
 
 

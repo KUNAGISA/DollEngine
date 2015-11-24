@@ -58,27 +58,7 @@ float System::getDesktopHeight()
 
 PictureData* System::addText(const String& text,const String& fontName,int fontSize,FontData* fd)
 {
-<<<<<<< HEAD
-    auto iter = m_allFonts.find(fontName);
-    if (iter == m_allFonts.end()) {
-        iter = m_allFonts.find(DEFFONT);
-        if(iter == m_allFonts.end()){
-            return NULL;
-        }
-    }
-    int findex = (int)iter->second;
-    QStringList strList = QFontDatabase::applicationFontFamilies(findex);
-    if(strList.size() == 0) {
-        return NULL;
-    }
-    QString fl = strList.at(0);
-    QFont font;
-    font.setPointSize(fontSize);
-    font.setFamily(fl);
-    QFontMetrics metric(font);
-    int w = metric.width(text.c_nstr());
-    QImage img(w,metric.height(),QImage::Format_RGBA8888);
-=======
+
     if(text.empty()) {
         return NULL;
     } 
@@ -106,7 +86,7 @@ PictureData* System::addText(const String& text,const String& fontName,int fontS
         QChar ch = txt.at(i);
         int r = metric.rightBearing(ch);
         int l = metric.leftBearing(ch);
-        fd->advance += (r-l);
+        fd->advance += metric.charWidth(txt,0);
         if(i == 0) {
             fd->bearingX = metric.leftBearing(ch);//图片应该的orgin偏移量
         }
@@ -114,11 +94,11 @@ PictureData* System::addText(const String& text,const String& fontName,int fontS
     }
 //    fd->advance = metric.averageCharWidth();
 //    fd->bearingX = metric.minLeftBearing();//图片应该的orgin偏移量
-    fd->bearingY = metric.descent();  
+    fd->bearingY = metric.ascent()-1;
     
     QImage img(w,rect.height(),QImage::Format_RGBA8888_Premultiplied);
     img.fill(0);
->>>>>>> e245759b40580155d7b31cec664e0b25eb932be1
+    
     QPainter painter(&img);
     painter.setCompositionMode(QPainter::CompositionMode_DestinationOver);
     

@@ -42,6 +42,7 @@ class MessageLayer extends UILayer
 
 		frameColor = new LayerColor(app,this);
 		frameColor.visible = false;
+		frameColor.setAnchor(0,1);
 		frameColor.absolute = -3;
 		_sw2 = new Touch();
 		_sw2.object = frameColor;
@@ -57,6 +58,7 @@ class MessageLayer extends UILayer
 		chLayer.absolute = -2;
 
 		controlLayer = new global.Layer(app,this);
+		controlLayer.setAnchor(0,1);
 		controlLayer.visible = true;
 		controlLayer.absolute = -1;
 
@@ -103,25 +105,24 @@ class MessageLayer extends UILayer
 		margin.r = elm.marginr if elm.marginr!==void;
 		margin.t = elm.margint if elm.margint!==void;
 		margin.b = elm.marginb if elm.marginb!==void;
+
+		var tx = margin.l;
+		var ty = height - margin.t;
+		var tw = width - margin.l - margin.r;
+		var th = height - margin.b - margin.t;
 		if (elm.frame) {
 			frameColor.visible = false;
 			frameImage.loadImages(elm.frame);
-			frameImage.y = height;
+			frameImage.y = ty;
 			frameImage.visible = true;
 			frameImage.opacity = elm.opacity if elm.opacity !== void;
 		}
 		else {
 			frameImage.visible = false;
 			if (elm.color !== void) {
-				var x = (elm.marginl===void?0:elm.marginl);
-				var y = (elm.marginb===void?0:elm.marginb);
-				var w = width - frameColor.x - (elm.marginr===void?0:elm.marginr);
-				var h = height - frameColor.y - (elm.margint===void?0:elm.margint);
 
 				frameColor.color = elm.color;
-				frameColor.x = x;
-				frameColor.y = y;
-				frameColor.setSize(w,h);
+				frameColor.setPos(tx,ty,tw,th);
 				frameColor.visible = true;
 				frameColor.opacity = elm.opacity if elm.opacity !== void;
 			}
@@ -129,12 +130,9 @@ class MessageLayer extends UILayer
 				frameColor.visible=false;
 			}
 		}
-		chLayer.x = margin.l;
-		chLayer.y = margin.b;
-		chLayer.width = width - chLayer.x - margin.r;
-		chLayer.height = height - chLayer.y - margin.t;
+		chLayer.setPos(tx,ty,tw,th);
 		chLayer.refreshWord();
-		controlLayer.setPos(chLayer.x,chLayer.y,chLayer.width,chLayer.height);
+		controlLayer.setPos(tx,ty,tw,th);
 	}
 
 	function clearWord () 
@@ -250,25 +248,26 @@ class MessageLayer extends UILayer
 		++uiIndex;
 	}
 
-	function addText (text,x,y) 
+	function addText (text,tx,ty) 
 	{
 		var node = new Label(app,chLayer);
 		node.setAnchor(0,1);
 		//这里还要设置文字属性
-		node.font.size = font.size;
+		node.fontSize = font.size;
 		node.text = text;
 		node.setSizeToImageSize();
-		node.x = x;
-		node.y = node.parent.height-y;
+		node.x = tx;
+		node.y = node.parent.height-ty;
+		node.color = font.color;
 		//这里需要另加字间距
-		x += node.width+font.wordSpacing;
-		if (x+node.width > chLayer.width) {
-			x = 0;
-			y += font.size+font.lineSpacing;
-			if (y + font.size > chLayer.height) {
+		tx += node.width+font.wordSpacing;
+		if (tx+node.width > chLayer.width) {
+			tx = 0;
+			ty += font.size+font.lineSpacing;
+			if (ty + font.size > chLayer.height) {
 				return [0,0,true];
 			}
 		}
-		return [x,y,false];
+		return [tx,ty,false];
 	}
 }

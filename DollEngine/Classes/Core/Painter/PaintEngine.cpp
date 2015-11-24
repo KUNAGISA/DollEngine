@@ -57,6 +57,7 @@ void PaintEngine::initialize()
         initializeOpenGLFunctions();
         glEnable(GL_TEXTURE_2D);
 #endif
+        glEnable(GL_BLEND);
         glDisable(GL_DEPTH_TEST);
 
         clearColor(GL_COLOR_BUFFER_BIT,0,0,0,0);
@@ -112,7 +113,6 @@ void PaintEngine::resize(float deviceWidth,float deviceHeight)
 
 void PaintEngine::beforeMainLoop()
 {
-    
     clearColor(GL_COLOR_BUFFER_BIT,0,0,0,0);
 }
 

@@ -4,6 +4,7 @@ class BaseLayer extends GraphicLayer
 	function BaseLayer (app,lay) 
 	{
 		super.GraphicLayer(app,lay);
-		setSize(app.window.width,app.window.height);
+		setAnchor(0,1);
+		setPos(0,lay.height,app.window.width,app.window.height);
 	}
 }
