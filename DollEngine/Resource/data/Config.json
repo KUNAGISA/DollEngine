@@ -65,5 +65,9 @@
 	},
 	"game" : {
 		"title" : "DollEngine beta v0.0.1",
+		"deffont" : {
+			"face" : "DroidSansFallback.ttf",
+			"size" : 22
+		}
 	}
 }

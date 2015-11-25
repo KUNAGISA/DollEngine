@@ -224,9 +224,15 @@ CharacterInfo* PaintEngine::addText(const String& text,const String& fontName,in
     if(text.empty()){
         return NULL;
     }
+    const String& defFN = System::GetInstance()->getDefFontName();
+    if(defFN.empty()) {
+        DM("尚未加载字体文件");
+        //TODO: 这里未来加载系统字体
+        return NULL;
+    }
     String _fontName;
     if (fontName.empty()) {
-        _fontName = DEFFONT;
+        _fontName = defFN;
     }
     else {
         _fontName = fontName;
@@ -252,7 +258,7 @@ CharacterInfo* PaintEngine::addText(const String& text,const String& fontName,in
         tex = iter2->second;
     }
     else {
-        PictureData* image = System::GetInstance()->addText(text, fontName, fontSize,fd);
+        PictureData* image = PictureData::addText(text, fontName, fontSize,fd);
         if(!image){
             delete fd;
             delete frame;

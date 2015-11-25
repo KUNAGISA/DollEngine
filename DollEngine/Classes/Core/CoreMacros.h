@@ -27,8 +27,7 @@
 using namespace std;
 
 #define PI 3.14159265358979323846264338327950288
-#define DEFFONT L"WenQuanYi Micro Hei"
-#define DEFFONTSIZE 24
+#define DEFFONTSIZE 14
 #define DM(...) DE::Console::GetInstance()->log(DE::String::fromFormat(__VA_ARGS__))
 #define EM DE::Console::GetInstance()->throwMsg
 #define ASSERT assert

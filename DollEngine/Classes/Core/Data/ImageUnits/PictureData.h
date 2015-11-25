@@ -33,6 +33,7 @@ public:
     virtual ~PictureData();
     bool loadFromFile(const String& fullPath);
     static PictureData* createRoundRect(int r);//创建一个圆角矩形的数据
+    static PictureData* addText(const String& text,const String& fontName,int fontSize,FontData* fd);
 public:
     PROPERTY(IOData*, Data, m_data){m_data=v;}
     PROPERTY(int, Width, m_width){m_width=v;}

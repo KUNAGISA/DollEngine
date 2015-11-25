@@ -6,6 +6,7 @@ var assert = Console.assertMsg;
 var DEConfig = Scripts.jsonStorage("Config.json");
 
 System.debugMode = DEConfig.debugMode;
+System.addFont(DEConfig.game.deffont.face);
 
 {
     var count = DEConfig.scripts.count;

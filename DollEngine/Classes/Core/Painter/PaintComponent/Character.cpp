@@ -15,7 +15,7 @@ DE_BEGIN
 Character::Character()
 :m_textChanged(false)
 ,m_fontSize(DEFFONTSIZE)
-,m_fontName(DEFFONT)
+,m_fontName(L"")
 ,m_text("")
 {
     m_info = new ImageInfo();

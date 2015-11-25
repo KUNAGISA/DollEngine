@@ -27,8 +27,8 @@ public:
     void startup(); //脚本入口
     
     
-    PictureData* addText(const String& text,const String& fontName,int fontSize,FontData* fd);
     String addFont(const String& filePath);
+    void* getFont(const String& fontName);
 
     void removeFont(const String& fontName);
     
@@ -54,13 +54,14 @@ public:
     float getDesktopWidth();
     float getDesktopHeight();
     
-    
+    const String& getDefFontName(){return m_defFontName;}
     static bool NeedRedraw;
     static bool NeedSortTouches;
     
 protected:
     map<String, void*> m_allFonts;
     map<String, String> m_allFontPaths;
+    String m_defFontName;
 };
 
 DE_END

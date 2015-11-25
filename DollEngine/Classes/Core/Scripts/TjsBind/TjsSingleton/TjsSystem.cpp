@@ -35,7 +35,21 @@ tTJSNC_System::tTJSNC_System() : inherited(TJS_W("System"))
         return TJS_S_OK;
     }
     TJS_END_NATIVE_STATIC_METHOD_DECL(/*func. name*/exit)
-                  
+            
+    //----------------------------------------------------------------------
+    TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/addFont)
+    {
+        if(numparams < 1) return TJS_E_BADPARAMCOUNT;
+        tTJSVariant* v = param[0];
+        DE::String fpath = v->AsString()->operator const tjs_char *();
+        DE::String fname = DE::System::GetInstance()->addFont(fpath);
+        
+        if(fname.empty()) {
+            return TJS_E_FAIL;
+        }
+        return TJS_S_OK;
+    }
+    TJS_END_NATIVE_STATIC_METHOD_DECL(/*func. name*/addFont)
     //--property
     
     //----------------------------------------------------------------------
