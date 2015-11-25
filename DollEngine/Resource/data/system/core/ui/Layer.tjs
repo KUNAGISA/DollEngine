@@ -6,6 +6,8 @@ class Layer extends GameObject
 
 	//private
 	var _image;
+	var _imagePath;
+	var _clipRect;
 	function Layer (app,par) {
 		super.GameObject(app,par);
 		font = new Font();
@@ -21,6 +23,7 @@ class Layer extends GameObject
 	function loadImages (path) {
 		if(_image.loadImages(path,""))
 		{
+			_imagePath = path;
 			setSizeToImageSize();
 			return true;
 		}
@@ -29,10 +32,12 @@ class Layer extends GameObject
 
 	function freeImage () 
 	{
+		_imagePath = void;
 		this._image.freeImage();
 	}
 
 	function clipRect (x,y,w,h) {
+		_clipRect = [x,y,w,h];
 		_image.clipRect(x,y,w,h);
 		setSizeToImageSize();
 	}
@@ -59,6 +64,28 @@ class Layer extends GameObject
 
 	function onPaint () {
 		_image.paint(_transInWorld);
+	}
+
+	function onSave () {
+		var dict = super.onSave();
+		with(dict){
+			.className = "Layer";
+			.imagePath = _imagePath;
+			.opacity = opacity;
+			.color = color;
+			.clipRect = _clipRect;
+		}
+		return dict;
+	}
+
+	function onLoad (dict) {
+		super.onLoad(dict);
+		with(dict){
+			loadImages(.imagePath) if .imagePath != void;
+			opacity = .opacity;
+			color = .color;
+			clipRect(.clipRect*) if .clipRect != void;
+		}
 	}
 
 	var _opacity = 255;

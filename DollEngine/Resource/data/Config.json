@@ -68,6 +68,7 @@
 		"deffont" : {
 			"face" : "DroidSansFallback.ttf",
 			"size" : 22
-		}
+		},
+		"saveDataPath" : "savedata/bookmark_%d.save"
 	}
 }

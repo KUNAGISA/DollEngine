@@ -1,6 +1,7 @@
 
-class MessageLayer extends UILayer
+class MessageLayer extends Layer
 {
+	var messageIndex = void;//在messages里的index
 	var frameImage = void;//message层的背景
 	var frameColor = void;//message层的颜色
 	var chLayer = void;//message层的文字层
@@ -9,7 +10,7 @@ class MessageLayer extends UILayer
 	var _sw2;//当frame有值时用来遮罩点击
 
 	var names = %[]; //用于存放control
-	var syscontrol = %[]; //用于存放syscontrol
+	var buttons = %[]; //用于存放syscontrol
 	var links = []; //用于存放文字链接
 
 	var locateX = 0;
@@ -25,7 +26,7 @@ class MessageLayer extends UILayer
 
 	function MessageLayer (app,par) 
 	{
-		super.UILayer(app,par);
+		super.Layer(app,par);
 		setAnchor(0,1);
 		frameImage = new Sprite(app,this);
 		frameImage.visible = false;
@@ -172,6 +173,45 @@ class MessageLayer extends UILayer
 		return true;
 	}
 
+	function onSave () {
+		var dict = super.onSave();
+		with(dict){
+			.className = "MessageLayer";
+			.frameImage = frameImage.onSave();
+			.frameColor = frameColor.onSave();
+			.ch = chLayer.onSave();
+			.names = [];
+			for (var i = 0; i < controlLayer.children.count; i++) {
+				.names.add(controlLayer[i].children.onSave());
+			}
+		}
+		return dict;
+	}
+
+	function onLoad (dict) {
+		super.onLoad(dict);
+		with(dict){
+			frameImage.onLoad(.frameImage);
+			frameColor.onLoad(.frameColor);
+			chLayer.removeAllChildren();
+			chLayer.onLoad(.ch);
+			controlLayer.removeAllChildren();
+			buttons = %[];
+			names = %[];
+			for (var i = 0; i < .names.count; i++) {
+				var data = .names[i];
+				var node = new global[data.className](app,controlLayer);
+				node.onLoad(data);
+				if (node.isSysControl) {
+					buttons[node.name] = node;
+				}
+				else {
+					names[node.name] = node;
+				}
+			};
+		}
+	}
+
 	/********控件创建********/
 	function addButton (elm) 
 	{
@@ -179,9 +219,10 @@ class MessageLayer extends UILayer
 			elm.name = "_num_"+uiIndex;
 		}
 		var node = new Button(app,controlLayer);
+		node.name = elm.name;
 		node.isSysControl = elm.issys===void?false:elm.issys;
 		if (node.isSysControl) {
-			syscontrol[elm.name] = node;
+			buttons[elm.name] = node;
 		}
 		else {
 			names[elm.name] = node;
@@ -217,9 +258,10 @@ class MessageLayer extends UILayer
 			elm.name = "_num_"+uiIndex;
 		}
 		var node = new Slider(app,controlLayer);
+		node.name = elm.name;
 		node.isSysControl = elm.issys===void?false:elm.issys;
 		if (node.isSysControl) {
-			syscontrol[elm.name] = node;
+			buttons[elm.name] = node;
 		}
 		else {
 			names[elm.name] = node;

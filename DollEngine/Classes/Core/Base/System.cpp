@@ -28,15 +28,12 @@ void System::startup()
     System::GetInstance();
     ScriptEngine::GetInstance();
     try{
-        addFont("WenQuanYiMicroHei.ttc");
-        
         String code;
         code.loadFromFile("startup.tjs");
         ScriptEngine::GetInstance()->pushFile("【GLOBAL】");
         ScriptEngine::GetInstance()->pushFile("startup.tjs");
         ScriptEngine::GetInstance()->exec(code, NULL);
         ScriptEngine::GetInstance()->popFile();
-        
     }
     TJS_CATCH
 }

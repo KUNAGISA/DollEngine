@@ -1,10 +1,19 @@
 
 class GraphicLayer extends Layer
 {
+	var graphicIndex = void;
 	function GraphicLayer (app,par) 
 	{
 		super.Layer(app,par);
 		this.setAnchor(0,1);
 	}
 	
+
+	function onSave () {
+		var dict = super.onSave();
+		with(dict){
+			.className = "GraphicLayer";
+		}
+		return dict;
+	}
 }

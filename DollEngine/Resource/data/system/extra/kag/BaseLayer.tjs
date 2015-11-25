@@ -7,4 +7,12 @@ class BaseLayer extends GraphicLayer
 		setAnchor(0,1);
 		setPos(0,lay.height,app.window.width,app.window.height);
 	}
+
+	function onSave () {
+		var dict = super.onSave();
+		with(dict){
+			.className = "BaseLayer";
+		}
+		return dict;
+	}
 }

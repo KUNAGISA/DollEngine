@@ -7,6 +7,7 @@ class GameObject
 	var parent;
 	var app;
 	var enabled = true;
+	var name;
 	
 	//private
 	var _needSortChildren = false;
@@ -109,6 +110,35 @@ class GameObject
 	function onHitTest (x,y) {
 		//当鼠标在该对象身上按下的时候检查是否需要触发点击事件
 		return true;
+	}
+
+	function onSave () {
+		var dict = %[];
+		with(dict) {
+			.className = "GameObject";
+			.x = x;
+			.y = y;
+			.width = width;
+			.height = height;
+			.anchorX = anchorX;
+			.anchorY = anchorY;
+			.visible = visible;
+			.absolute = absolute;
+		}
+		return dict;
+	}
+
+	function onLoad (dict) {
+		with(dict) {
+			x = .x;
+			y = .y;
+			width = .width;
+			height = .height;
+			anchorX = .anchorX;
+			anchorY = .anchorY;
+			visible = .visible;
+			absolute = .absolute;
+		}
 	}
 	
 	/***

@@ -278,6 +278,60 @@ class KAG extends Application
 		tagManager.jumpStorage(storage,label);
 	}
 
+	/*******存档读档部分*******/
+
+	function getBookMarkPageName (index) {
+		var path = DEConfig.game.saveDataPath.sprintf(index);
+		return path;
+	}
+
+	function saveData (index) {
+		var data = %[];
+		data.f = f;
+		var base = fore.base.onSave();
+		var layers = [];
+		var messages = [];
+		for (var i = 0; i < fore.layers.count; i++) {
+			var lay = fore.layers[i];
+			if(lay){
+				layers.add(lay.onSave());
+			}
+		};
+		for (var i = 0; i < fore.messages.count; i++) {
+			var lay = fore.messages[i];
+			if(lay){
+				messages.add(lay.onSave());
+			}
+		}
+		data.base = base;
+		data.layers = layers;
+		data.messages = messages;
+
+		var name = getBookMarkPageName(index);
+		(Dictionary.saveStruct incontextof data)(name);
+	}
+
+	function loadData (index) {
+		var name = getBookMarkPageName(index);
+		var data = Scripts.evalStorage(name);
+		if(!data){
+			dm("未找到该存档");
+			return;
+		}
+		f = data.f;
+		clearLayers();
+		fore.base.onLoad(data.base);
+		for (var i = 0; i < data.layers.length; i++) {
+			var lay = getLayerByElm(%[layer:i, page:"fore"]);
+			lay.onLoad(data.layers[i]);
+		}
+		for (var i = 0; i < data.messages.length; i++) {
+			var lay = getLayerByElm(%[layer:"message"+i, page:"fore"]);
+			lay.onLoad(data.messages[i]);
+		}
+	}
+
+
 	/*******TAG部分*******/
 	var tagHandlers = %[
 
