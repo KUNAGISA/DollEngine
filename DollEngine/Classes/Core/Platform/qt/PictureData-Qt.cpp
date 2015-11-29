@@ -62,9 +62,10 @@ PictureData* PictureData::addText(const String& text,const String& fontName,int 
         QChar ch = txt.at(i);
         int r = metric.rightBearing(ch);
         int l = metric.leftBearing(ch);
+        qDebug()<<txt<<metric.charWidth(txt,0)<<fd->advance << l;
         fd->advance += metric.charWidth(txt,0);
         if(i == 0) {
-            fd->bearingX = metric.leftBearing(ch);//图片应该的orgin偏移量
+            fd->bearingX = -l;//图片应该的orgin偏移量
         }
     }
     fd->bearingY = metric.ascent()-1;
@@ -80,7 +81,7 @@ PictureData* PictureData::addText(const String& text,const String& fontName,int 
     painter.setFont(font);
     painter.setPen(pen);
     
-    painter.drawText(img.rect(),Qt::AlignCenter,text.c_nstr());
+    painter.drawText(img.rect(),Qt::AlignLeft|Qt::AlignTop,txt,&out);
     
     PictureData* data = new PictureData();
     data->setWidth(img.width());

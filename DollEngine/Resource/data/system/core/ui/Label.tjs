@@ -4,14 +4,18 @@ class Label extends Layer
 	function Label (app,par) 
 	{
 		super.Layer(app,par);
-		invalidate this._image;
-		this._image = new Character();
-		this.setAnchor(0,0);
+		invalidate _image;
+		_image = new Character();
+		setAnchor(0,0);
+	}
+
+	function finalize () {
+		super.finalize();
 	}
 
 	function setSizeToImageSize () 
 	{
-		this._image.setSizeToImageSize();
+		_image.setSizeToImageSize();
 		super.setSizeToImageSize();
 	}
 
@@ -23,11 +27,11 @@ class Label extends Layer
 	property text{
 	    setter(v) {
 	    	//setter
-    		this._image.text = v;
+    		_image.text = v;
 		}
 		getter {
 	    	//getter
-			return this._image.text;
+			return _image.text;
 		}
 	}
 

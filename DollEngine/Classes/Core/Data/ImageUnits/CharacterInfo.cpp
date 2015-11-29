@@ -12,13 +12,12 @@
 DE_BEGIN
 
 CharacterInfo::CharacterInfo()
+    :m_font(NULL)
 {
-    m_font = new FontData();
 }
 
 CharacterInfo::~CharacterInfo()
 {
-    SAFF_DELETE(m_font);
 }
 
 

@@ -552,10 +552,6 @@ class KAG extends Application
 				this.mergerBack('freeimage',elm);
 				return;
 			}
-			if (!(lay instanceof "Sprite")) {
-				em("image指令只能操作Sprite类对象");
-				return -1;
-			}
 			lay.freeImage();
 		} incontextof this,
 

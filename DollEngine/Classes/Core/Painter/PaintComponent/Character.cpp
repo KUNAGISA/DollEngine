@@ -23,8 +23,8 @@ Character::Character()
 
 Character::~Character()
 {
-    delete m_info;
     for (CharacterInfo* frame : m_characterInfos) {
+        std::cout<<"delete " <<frame->getTexture()->getCacheKey().c_nstr() <<std::endl;
         delete frame;
     }
     m_characterInfos.clear();
@@ -34,22 +34,22 @@ void Character::setSizeToImageSize()
 {
     updateText();
     if (m_characterInfos.size() > 0) {
-        m_info->setPaintSize(0,m_fontSize);
         float w = 0;
         for (CharacterInfo* frame : m_characterInfos) {
             w += frame->getFont()->advance;
         }
-        m_info->setPaintSize(w,m_fontSize);
+        setPaintSize(w,m_fontSize);
     }
     else {
-        m_info->setPaintSize(0,0);
+        setPaintSize(0,0);
     }
 }
 
 void Character::paint(Transform* trans)
 {
-    updateText();
-    setSizeToImageSize();
+    if(m_textChanged) {
+        setSizeToImageSize();
+    }
     if (m_characterInfos.size() == 0) {
         return;
     }

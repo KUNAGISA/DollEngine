@@ -116,3 +116,7 @@ class Layer extends GameObject
 	}
 
 }
+
+if(DEConfig.module.kag){
+	global.KAGLayer = global.Layer;
+}

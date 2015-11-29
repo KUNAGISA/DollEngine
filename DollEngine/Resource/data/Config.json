@@ -64,10 +64,10 @@
 		"kag" : true
 	},
 	"game" : {
-		"title" : "DollEngine beta v0.0.1",
+		"title" : "幽冥录贰-冯家二少 for DollEngine beta v0.0.1",
 		"deffont" : {
 			"face" : "DroidSansFallback.ttf",
-			"size" : 22
+			"size" : 16
 		},
 		"saveDataPath" : "savedata/bookmark_%d.save"
 	}

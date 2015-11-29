@@ -241,7 +241,7 @@ CharacterInfo* PaintEngine::addText(const String& text,const String& fontName,in
     if (fontSize == 0 || text.empty()) {
         fontSize = DEFFONTSIZE;
     }
-    String key = System::GetKeyByFont(text,fontName,fontSize,0);
+    String key = System::GetKeyByFont(text,_fontName,fontSize,0);
     FontData* fd = NULL;
     auto iter = m_allFontDatas.find(key);
     if (iter != m_allFontDatas.end()) {
@@ -258,7 +258,7 @@ CharacterInfo* PaintEngine::addText(const String& text,const String& fontName,in
         tex = iter2->second;
     }
     else {
-        PictureData* image = PictureData::addText(text, fontName, fontSize,fd);
+        PictureData* image = PictureData::addText(text, _fontName, fontSize,fd);
         if(!image){
             delete fd;
             delete frame;

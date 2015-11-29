@@ -33,12 +33,12 @@ void QtConsole::Print(const tjs_char *msg)
         return;
     }
     const char* t = DE::String(msg).c_nstr();
+    QString dt = t;
     if(DE::System::GetInstance()->getDebugMode() > 3) {
-        QString dt = t;
         
-        qDebug()<<dt.toStdString().c_str();
+        qDebug()<<dt;
     }
-    ui->textEdit->append(t);
+    ui->textEdit->append(dt);
 }
 
 void QtConsole::keyReleaseEvent(QKeyEvent * event)
