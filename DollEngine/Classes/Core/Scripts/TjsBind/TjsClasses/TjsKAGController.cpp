@@ -215,6 +215,33 @@ int TjsKAGController::doTag()
     return (int)result.AsInteger();
 }
 
+tTJSVariant TjsKAGController::saveStack()
+{
+    tTJSArrayObject* datas = (tTJSArrayObject*)TJSCreateArrayObject();
+    
+    stack<KAGStack> tempStack = m_stack;
+    KAGStack cur={m_storage,m_label,m_tagIndex};
+    tempStack.push(cur);
+    for(const KAGStack& stack : tempStack) {
+        tTJSVariant storagePath = stack.storage->fullPath.c_str();
+        tTJSVariant labelKey = stack.label->key.c_str();
+        tTJSVariant tagIndex = stack.tagIndex;
+        
+        TJS_GET_NATIVE_INSTANCE(/* var. name */ni, /* var. type */tTJSArrayNI);
+        datas->Add(ni, storagePath);
+        datas->Add(ni, labelKey);
+        datas->Add(ni, tagIndex);
+    }
+    return datas;
+}
+
+bool TjsKAGController::loadStack(tTJSVariant v)
+{
+    tTJSArrayObject* datas = dynamic_cast<tTJSArrayObject*>(v.AsObjectNoAddRef());
+    if(!datas) {
+        return false;
+    }
+}
 
 NCB_REGISTER_CLASS_DIFFER(KAGController, TjsKAGController)
 {
@@ -223,4 +250,6 @@ NCB_REGISTER_CLASS_DIFFER(KAGController, TjsKAGController)
     NCB_METHOD(stepOutLabel);
     NCB_METHOD(stepNext);
     NCB_METHOD(stepInLabel);
+    NCB_METHOD(saveStack);
+    NCB_METHOD(loadStack);
 };

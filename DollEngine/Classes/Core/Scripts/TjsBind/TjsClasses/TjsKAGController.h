@@ -25,6 +25,9 @@ bool stepInLabel(tTJSVariant storage, tTJSVariant label, bool iscall)
     if(v22)v2=v22;
     return KAGController::stepInLabel(v1, v2, iscall);
 }
+
+tTJSVariant saveStack();
+bool loadStack(tTJSVariant v);
 protected:
 stack<wstring> m_ifKey;
 };
