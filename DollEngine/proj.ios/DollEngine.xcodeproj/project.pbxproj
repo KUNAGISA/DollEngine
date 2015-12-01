@@ -163,6 +163,8 @@
 		B851246B1BE7B94300D94A06 /* WenQuanYiMicroHei.ttc in Resources */ = {isa = PBXBuildFile; fileRef = B85124681BE7B94300D94A06 /* WenQuanYiMicroHei.ttc */; };
 		B851246D1BE7BB9300D94A06 /* data in Resources */ = {isa = PBXBuildFile; fileRef = B851246C1BE7BB9300D94A06 /* data */; };
 		B89F267F1B5E87B40081CA6C /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B89F267E1B5E87B40081CA6C /* OpenGLES.framework */; };
+		B8A7BEC81C0DEFA100EC1256 /* TjsColorRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8A7BEC41C0DEFA100EC1256 /* TjsColorRect.cpp */; };
+		B8A7BEC91C0DEFA100EC1256 /* TjsRTT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8A7BEC61C0DEFA100EC1256 /* TjsRTT.cpp */; };
 		B8D15A0D1BC94CD600D37D81 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B8D15A091BC811FC00D37D81 /* libz.dylib */; };
 		B8F393F61BC68E70002EB3CC /* AppDelegateIOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = B8F390DD1BC68E6F002EB3CC /* AppDelegateIOS.mm */; };
 		B8F393F71BC68E70002EB3CC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8F390E21BC68E6F002EB3CC /* Images.xcassets */; };
@@ -540,6 +542,10 @@
 		B85124681BE7B94300D94A06 /* WenQuanYiMicroHei.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = WenQuanYiMicroHei.ttc; sourceTree = "<group>"; };
 		B851246C1BE7BB9300D94A06 /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = data; sourceTree = "<group>"; };
 		B89F267E1B5E87B40081CA6C /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/System/Library/Frameworks/OpenGLES.framework; sourceTree = DEVELOPER_DIR; };
+		B8A7BEC41C0DEFA100EC1256 /* TjsColorRect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TjsColorRect.cpp; sourceTree = "<group>"; };
+		B8A7BEC51C0DEFA100EC1256 /* TjsColorRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsColorRect.h; sourceTree = "<group>"; };
+		B8A7BEC61C0DEFA100EC1256 /* TjsRTT.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TjsRTT.cpp; sourceTree = "<group>"; };
+		B8A7BEC71C0DEFA100EC1256 /* TjsRTT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsRTT.h; sourceTree = "<group>"; };
 		B8D15A091BC811FC00D37D81 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/usr/lib/libz.dylib; sourceTree = DEVELOPER_DIR; };
 		B8F390DC1BC68E6F002EB3CC /* AppDelegateIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegateIOS.h; sourceTree = "<group>"; };
 		B8F390DD1BC68E6F002EB3CC /* AppDelegateIOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegateIOS.mm; sourceTree = "<group>"; };
@@ -751,6 +757,10 @@
 		B85121981BE7B0CF00D94A06 /* TjsClasses */ = {
 			isa = PBXGroup;
 			children = (
+				B8A7BEC41C0DEFA100EC1256 /* TjsColorRect.cpp */,
+				B8A7BEC51C0DEFA100EC1256 /* TjsColorRect.h */,
+				B8A7BEC61C0DEFA100EC1256 /* TjsRTT.cpp */,
+				B8A7BEC71C0DEFA100EC1256 /* TjsRTT.h */,
 				B85121991BE7B0CF00D94A06 /* TjsAudio.cpp */,
 				B851219A1BE7B0CF00D94A06 /* TjsAudio.h */,
 				B851219B1BE7B0CF00D94A06 /* TjsCharacter.cpp */,
@@ -1486,6 +1496,7 @@
 				B851237B1BE7B0CF00D94A06 /* TjsScripts.cpp in Sources */,
 				B851238D1BE7B0D000D94A06 /* utility.c in Sources */,
 				B85123451BE7B0CF00D94A06 /* Storages.cpp in Sources */,
+				B8A7BEC81C0DEFA100EC1256 /* TjsColorRect.cpp in Sources */,
 				B85123851BE7B0D000D94A06 /* mat4stack.c in Sources */,
 				B85123C91BE7B0D000D94A06 /* st.c in Sources */,
 				B851234D1BE7B0CF00D94A06 /* PictureData.cpp in Sources */,
@@ -1531,6 +1542,7 @@
 				B85123771BE7B0CF00D94A06 /* TjsWindow.cpp in Sources */,
 				B85123B41BE7B0D000D94A06 /* koi8_r.c in Sources */,
 				B85123711BE7B0CF00D94A06 /* TjsAudio.cpp in Sources */,
+				B8A7BEC91C0DEFA100EC1256 /* TjsRTT.cpp in Sources */,
 				B85123A51BE7B0D000D94A06 /* iso8859_10.c in Sources */,
 				B85123621BE7B0CF00D94A06 /* Audio-iOS.mm in Sources */,
 				B85123D31BE7B0D000D94A06 /* tjsdate.tab.cpp in Sources */,
