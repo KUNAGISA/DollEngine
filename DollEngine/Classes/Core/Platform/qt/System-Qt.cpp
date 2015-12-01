@@ -87,18 +87,6 @@ String System::addFont(const String& path)
     return iter->second;
 }
 
-void* System::getFont(const String& fontName)
-{
-    if(m_defFontName.empty()){
-        return NULL;
-    }
-    auto iter = m_allFonts.find(fontName);
-    if (iter == m_allFonts.end()) {
-        iter = m_allFonts.find(m_defFontName);
-    }
-    return iter->second;
-}
-
 void System::removeFont(const String& fontName)
 {
     auto iter = m_allFonts.find(fontName);

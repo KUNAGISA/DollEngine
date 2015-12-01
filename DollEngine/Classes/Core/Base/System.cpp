@@ -57,5 +57,17 @@ void System::setDebugMode(int v)
     m_debugMode = v;
 }
 
+void* System::getFont(const String& fontName)
+{
+    if(m_defFontName.empty()){
+        return NULL;
+    }
+    auto iter = m_allFonts.find(fontName);
+    if (iter == m_allFonts.end()) {
+        iter = m_allFonts.find(m_defFontName);
+    }
+    return iter->second;
+}
+
 
 DE_END
