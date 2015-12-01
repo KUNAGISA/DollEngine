@@ -5,7 +5,7 @@ class BaseLayer extends GraphicLayer
 	{
 		super.GraphicLayer(app,lay);
 		setAnchor(0,1);
-		setPos(0,lay.height,app.window.width,app.window.height);
+		setPos(0,lay.height,app.sysbase.width,app.sysbase.height);
 	}
 
 	function onSave () {

@@ -38,6 +38,16 @@ void Window::setLayerSize(int w,int h)
     PaintEngine::GetInstance()->setLayerHeight(h);
 }
 
+float Window::getLayerWidth()
+{
+    return PaintEngine::GetInstance()->getLayerWidth();
+}
+
+float Window::getLayerHeight()
+{
+    return PaintEngine::GetInstance()->getLayerHeight();
+}
+
 void Window::beforeMainLoop()
 {
     PaintEngine::GetInstance()->beforeMainLoop();
@@ -47,6 +57,13 @@ void Window::afterMainLoop()
 {
     PaintEngine::GetInstance()->afterMainLoop();
 }
+
+void Window::setSize(int w, int h)
+{
+    m_width = w;
+    m_height = h;
+}
+
 DE_END
 
 

@@ -23,7 +23,9 @@ public:
     virtual ~Window();
     static Window* GetInstance();
     virtual void setLayerSize(int w,int h);
-    virtual void setSize(int w,int h){m_width=w,m_height=h;}
+    float getLayerWidth();
+    float getLayerHeight();
+    virtual void setSize(int w,int h);
     void beforeMainLoop();
     void afterMainLoop();
     

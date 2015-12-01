@@ -24,4 +24,6 @@ NCB_REGISTER_CLASS_DIFFER(Window,TjsiOSWindow)
     NCB_PROPERTY(visible, getVisible, setVisible);
     NCB_PROPERTY_RO(width, getWidth);
     NCB_PROPERTY_RO(height, getHeight);
+    NCB_PROPERTY_RO(layerWidth, getLayerWidth);
+    NCB_PROPERTY_RO(layerHeight, getLayerHeight);
 }

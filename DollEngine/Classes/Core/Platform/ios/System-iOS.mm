@@ -51,12 +51,14 @@ System::~System()
 
 float System::getDesktopWidth()
 {
-    return [[UIScreen mainScreen] bounds].size.width;
+    float w = [[UIScreen mainScreen] bounds].size.width*[UIScreen mainScreen].scale;
+    return w;
 }
 
 float System::getDesktopHeight()
 {
-    return [[UIScreen mainScreen] bounds].size.height;
+    float h = [[UIScreen mainScreen] bounds].size.height*[UIScreen mainScreen].scale;
+    return h;
 }
 
 

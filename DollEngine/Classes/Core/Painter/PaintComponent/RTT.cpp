@@ -65,7 +65,6 @@ void RTT::init(int w,int h)
 
 bool RTT::begin(float r,float g,float b,float a)
 {
-    
     PaintEngine::GetInstance()->resize(PaintEngine::GetInstance()->getLayerWidth(),
                                       PaintEngine::GetInstance()->getLayerHeight());
     PaintEngine::GetInstance()->switchFBO(&m_oldFBO,m_FBO);
@@ -78,6 +77,7 @@ void RTT::end()
 {
     PaintEngine::GetInstance()->paint();
     PaintEngine::GetInstance()->switchFBO(NULL,m_oldFBO);
+    
     PaintEngine::GetInstance()->resize(Window::GetInstance()->getWidth(),
                                       Window::GetInstance()->getHeight());
 }

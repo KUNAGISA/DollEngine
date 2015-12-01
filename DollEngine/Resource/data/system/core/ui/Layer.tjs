@@ -49,6 +49,7 @@ class Layer extends GameObject
 	function setSize (w=void,h=void) {
 		width = w if w!==void;
 		height = h if h!==void;
+
 	}
 
 	function setPos (x=void,y=void,w=void,h=void) {

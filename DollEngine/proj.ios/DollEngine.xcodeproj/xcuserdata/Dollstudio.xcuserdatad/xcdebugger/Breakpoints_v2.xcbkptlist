@@ -14,8 +14,22 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "748"
-            endingLineNumber = "748"
-            landmarkName = "PaintEngine::checkError()"
+            endingLineNumber = "748">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../Classes/Core/Scripts/TjsBind/TjsClasses/TjsRTT.cpp"
+            timestampString = "470682629.183853"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "9"
+            endingLineNumber = "9"
+            landmarkName = "TjsRTT::paint(tTJSVariant trans)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
