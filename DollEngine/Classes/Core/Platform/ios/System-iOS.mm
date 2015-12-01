@@ -60,80 +60,6 @@ float System::getDesktopHeight()
 }
 
 
-PictureData* System::addText(const String& text,const String& fontName,int fontSize,FontData* fd)
-{
-    FT_Face face;
-    auto iter = m_allFonts.find(fontName);
-    if (iter != m_allFonts.end()) {
-        face = (FT_Face)iter->second;
-    }
-    else {
-        iter = m_allFonts.find(DEFFONT);
-        if(iter == m_allFonts.end()) {
-            addFont("WenQuanYiMicroHei.ttc");
-            iter = m_allFonts.find(DEFFONT);
-        }
-        face = (FT_Face)iter->second;
-    }
-    unsigned short charcode = text[0];
-    FT_UInt graphIdx = FT_Get_Char_Index(face, (FT_ULong)charcode);
-    if (graphIdx == 0)
-    {
-        iter = m_allFonts.find(DEFFONT);
-        face = (FT_Face)iter->second;
-        graphIdx = FT_Get_Char_Index(face, charcode);
-    }
-    FT_Error ft_err = FT_Set_Char_Size(face,
-                                       fontSize*64,
-                                       fontSize*64,
-                                       72,72);
-    if(ft_err) {
-        return NULL;
-    }
-    ft_err = FT_Load_Glyph(face, graphIdx, FT_LOAD_DEFAULT);
-    if(ft_err) {
-        return NULL;
-    }
-    if (face->glyph->format != FT_GLYPH_FORMAT_BITMAP)
-    {
-        ft_err = FT_Render_Glyph(face->glyph,FT_RENDER_MODE_NORMAL);
-        if(ft_err) {
-            return NULL;
-        }
-    }
-    
-    int width = face->glyph->bitmap.width;
-    int height = face->glyph->bitmap.rows;
-    
-    Rect rect;
-    rect.width = width;
-    rect.height = height;
-    
-    IOData* iodata = new IOData();
-    iodata->initWithSize(width*height*4);
-    for (int x=0; x<width; ++x) {
-        for (int y=0; y<height; ++y) {
-            int idx = y*width*4 + x*4;
-            unsigned char* color = face->glyph->bitmap.buffer + y*width + x;
-            memset(iodata->getBuffer() + idx, *color, 4);
-        }
-    }
-    
-    PictureData* image = new PictureData();
-    image->setData(iodata);
-    image->setWidth(width);
-    image->setHeight(height);
-    
-    fd->advance = (int)(face->glyph->metrics.horiAdvance/64);
-    fd->bearingX = (int)(face->glyph->metrics.horiBearingX/64);
-    fd->bearingY = (int)(face->glyph->metrics.horiBearingY/64);
-    fd->yMin = (int)(face->bbox.yMin/64);
-    fd->yMax = (int)(face->bbox.yMax/64);
-    fd->xMin = (int)(face->bbox.xMin/64);
-    fd->xMax = (int)(face->bbox.xMax/64);
-    return image;
-}
-
 String System::addFont(const String& path)
 {
     FileInfo file(path);
@@ -158,7 +84,13 @@ String System::addFont(const String& path)
         if (iter2 == m_allFonts.end())
         {
             m_allFonts[face->family_name] = face;
-            DM("新增自定义字体:%s",face->family_name);
+            if (m_defFontName.empty()) {
+                m_defFontName = face->family_name;
+                DM("新增自定义字体:%s(默认字体)",face->family_name);
+            }
+            else {
+                DM("新增自定义字体:%s",face->family_name);
+            }
             return face->family_name;
         }
         FT_Done_Face(face);

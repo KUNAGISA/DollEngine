@@ -44,6 +44,7 @@ while(iter.next()){
         func2->FuncCall(0,NULL,NULL,NULL,2,params,incontext);
     }
 }
+return TJS_S_OK;
 TJS_NATIVE_FUNCTION_END
 
 

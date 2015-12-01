@@ -70,14 +70,19 @@ void Audio::stop(int fadeMS)
     [player stop];
 }
 
-void Audio::setLoop(int v)
+void Audio::setLoop(bool v)
 {
     m_loop = v;
     AVAudioPlayer* player = (__bridge AVAudioPlayer*)m_object;
     if(!player){
         return;
     }
-    player.numberOfLoops = v;
+    if(v){
+        player.numberOfLoops = -1;
+    }
+    else {
+        player.numberOfLoops = 1;
+    }
 }
 
 void Audio::setVolume(float v)

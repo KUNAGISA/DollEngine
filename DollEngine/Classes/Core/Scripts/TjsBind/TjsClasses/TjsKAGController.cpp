@@ -261,7 +261,7 @@ bool TjsKAGController::loadStack(tTJSVariant v)
         
         KAGStorage* storage = KAGParser::GetInstance()->loadScenario(storagePath.AsStringNoAddRef()->operator const tjs_char *());
         KAGLabel* label = storage->getLabel(labelKey.AsStringNoAddRef()->operator const tjs_char *());
-        KAGStack cur = {storage, label, tagIndex.AsInteger()};
+        KAGStack cur = {storage, label, (int)tagIndex.AsInteger()};
         m_stack.push_back(cur);
     }
     return true;

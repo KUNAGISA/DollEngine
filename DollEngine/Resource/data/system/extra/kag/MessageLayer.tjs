@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 class MessageLayer extends Layer
 {
@@ -313,3 +314,320 @@ class MessageLayer extends Layer
 		return [tx,ty,false];
 	}
 }
+=======
+
+class MessageLayer extends Layer
+{
+	var messageIndex = void;//在messages里的index
+	var frameImage = void;//message层的背景
+	var frameColor = void;//message层的颜色
+	var chLayer = void;//message层的文字层
+	var controlLayer = void;//message层的控件层
+	var _sw1;//当frame有值时用来遮罩点击
+	var _sw2;//当frame有值时用来遮罩点击
+
+	var names = %[]; //用于存放control
+	var buttons = %[]; //用于存放syscontrol
+	var links = []; //用于存放文字链接
+
+	var locateX = 0;
+	var locateY = 0;
+	var margin = %[
+		l : 0,
+		r : 0,
+		t : 0,
+		b : 0,
+	];
+
+	var uiIndex = 0;
+
+	function MessageLayer (app,par) 
+	{
+		super.Layer(app,par);
+		setAnchor(0,1);
+		frameImage = new Sprite(app,this);
+		frameImage.visible = false;
+		frameImage.setAnchor(0,1);
+		frameImage.absolute = -3;
+		_sw1 = new Touch();
+		_sw1.object = frameImage;
+		_sw1.onMouseDown = function (x,y){
+			if(opacity < 16)
+				_sw1.ignore=true;
+		} incontextof this;
+		_sw1.swallow = true;
+		_sw1.enabled = true;
+
+		frameColor = new LayerColor(app,this);
+		frameColor.visible = false;
+		frameColor.setAnchor(0,1);
+		frameColor.absolute = -3;
+		_sw2 = new Touch();
+		_sw2.object = frameColor;
+		_sw2.onMouseDown = function (x,y){
+			if(opacity < 16)
+				_sw2.ignore=true;
+		} incontextof this;
+		_sw2.swallow = true;
+		_sw2.enabled = true;
+
+		chLayer = new WordLayer(app,this);
+		chLayer.visible = true;
+		chLayer.absolute = -2;
+
+		controlLayer = new global.Layer(app,this);
+		controlLayer.setAnchor(0,1);
+		controlLayer.visible = true;
+		controlLayer.absolute = -1;
+
+		setPosition(%[
+				left:0,
+				top:0,
+				width:par.width,
+				height:par.height,
+				color:void,
+				opacity:255
+			]);
+	}
+
+	function finalize () 
+	{
+		invalidate _sw1;
+		invalidate _sw2;
+		super.finalize();
+	}
+
+	function updateTouches () 
+	{
+		if (enabled) {
+			if (frameImage.visible) {
+				_sw1.listen();
+			}
+			if (frameColor.visible) {
+				_sw2.listen();
+			}
+			for (var i = 0; i < children.count; i++) {
+				children[i].updateTouches();
+			};
+		}
+	}
+
+	function setPosition (elm) 
+	{
+		x = elm.left if elm.left !== void;
+		y = parent.height-elm.top if elm.top !== void;
+		width = elm.width if elm.width !== void;
+		height = elm.height if elm.height !== void;
+		visible = elm.visible if elm.visible!==void;
+		margin.l = elm.marginl if elm.marginl!==void;
+		margin.r = elm.marginr if elm.marginr!==void;
+		margin.t = elm.margint if elm.margint!==void;
+		margin.b = elm.marginb if elm.marginb!==void;
+
+		var tx = margin.l;
+		var ty = height - margin.t;
+		var tw = width - margin.l - margin.r;
+		var th = height - margin.b - margin.t;
+		if (elm.frame) {
+			frameColor.visible = false;
+			frameImage.loadImages(elm.frame);
+			frameImage.y = ty;
+			frameImage.visible = true;
+			frameImage.opacity = elm.opacity if elm.opacity !== void;
+		}
+		else {
+			frameImage.visible = false;
+			if (elm.color !== void) {
+
+				frameColor.color = elm.color;
+				frameColor.setPos(tx,ty,tw,th);
+				frameColor.visible = true;
+				frameColor.opacity = elm.opacity if elm.opacity !== void;
+			}
+			else {
+				frameColor.visible=false;
+			}
+		}
+		chLayer.setPos(tx,ty,tw,th);
+		chLayer.refreshWord();
+		controlLayer.setPos(tx,ty,tw,th);
+	}
+
+	function clearWord () 
+	{
+		chLayer.clearWord();
+		locateX = 0;
+		locateY = 0;
+	}
+
+	function clearEr (sys=false) 
+	{
+		clearWord();
+		var syses = [];
+		for (var i = controlLayer.children.count-1; i >= 0; --i) {
+			var control = controlLayer.children[i];
+			if(sys && control.isSysControl)
+			{
+				continue;
+			}
+			else {
+				invalidate control;
+			}
+		};
+		names = %[];
+		links.clear();
+		uiIndex = 0;
+	}
+
+	function locateChangeLine () 
+	{
+		locateX = 0;
+		locateY += font.size+font.lineSpacing;
+		if (locateY+font.size>chLayer.height) {
+			locateY=0;
+			return false;
+		}
+		return true;
+	}
+
+	function onSave () {
+		var dict = super.onSave();
+		with(dict){
+			.className = "MessageLayer";
+			.frameImage = frameImage.onSave();
+			.frameColor = frameColor.onSave();
+			.ch = chLayer.onSave();
+			.names = [];
+			for (var i = 0; i < controlLayer.children.count; i++) {
+				.names.add(controlLayer[i].children.onSave());
+			}
+		}
+		return dict;
+	}
+
+	function onLoad (dict) {
+		super.onLoad(dict);
+		with(dict){
+			frameImage.onLoad(.frameImage);
+			frameColor.onLoad(.frameColor);
+			chLayer.removeAllChildren();
+			chLayer.onLoad(.ch);
+			controlLayer.removeAllChildren();
+			buttons = %[];
+			names = %[];
+			for (var i = 0; i < .names.count; i++) {
+				var data = .names[i];
+				var node = new global[data.className](app,controlLayer);
+				node.onLoad(data);
+				if (node.isSysControl) {
+					buttons[node.name] = node;
+				}
+				else {
+					names[node.name] = node;
+				}
+			};
+		}
+	}
+
+	/********控件创建********/
+	function addButton (elm) 
+	{
+		if (elm.name == void) {
+			elm.name = "_num_"+uiIndex;
+		}
+		var node = new Button(app,controlLayer);
+		node.name = elm.name;
+		node.isSysControl = elm.issys===void?false:elm.issys;
+		if (node.isSysControl) {
+			buttons[elm.name] = node;
+		}
+		else {
+			names[elm.name] = node;
+		}
+		if (elm.graphic) {
+			node.loadGraphic(elm.graphic);
+		}
+		else {
+			node.loadButtons(elm.normal,elm.on);
+		}
+		if (elm.title) {
+			node.title = elm.title;
+			node.titleColor = elm.color if elm.color!==void;
+		}
+		node.setAnchor(0,1);
+		node.x = +elm.x;
+		node.y = node.parent.height-elm.y;
+		node.enabled = elm.enabled if elm.enabled!==void;
+
+		node.clickData.exp = elm.exp if elm.exp!==void;
+		node.clickData.se = elm.se if elm.se!==void;
+		node.clickData.sebuf = elm.sebuf if elm.sebuf!==void;
+		node.clickData.callback = elm.callback if elm.callback!==void;
+		node.clickData.storage = elm.storage if elm.storage!==void;
+		node.clickData.target = elm.target if elm.target!==void;
+
+		++uiIndex;
+	}
+
+	function addSlider (elm) 
+	{
+		if (elm.name == void) {
+			elm.name = "_num_"+uiIndex;
+		}
+		var node = new Slider(app,controlLayer);
+		node.name = elm.name;
+		node.isSysControl = elm.issys===void?false:elm.issys;
+		if (node.isSysControl) {
+			buttons[elm.name] = node;
+		}
+		else {
+			names[elm.name] = node;
+		}
+		node.setAnchor(0,1);
+		node.x = +elm.x;
+		node.y = node.parent.height-elm.y-12+6;
+		node.enabled = elm.enabled if elm.enabled!==void;
+		if (elm.base) {
+			node.loadBase(elm.base);
+		}
+		if (elm.graphic) {
+			node.loadTabs(elm.graphic);
+		}
+		else {
+			node.loadTabs(elm.normal,elm.on);
+		}
+		node.onChangeFunc = Scripts.eval(elm.onchangefunc) if elm.onchangefunc!==void;
+		node.dragWidth = +elm.width if elm.width!==void;
+		node.dragHeight = +elm.height if elm.height!==void;
+		node.step = +elm.step if elm.step!==void;
+		node.min = +elm.min if elm.min!==void;
+		node.max = +elm.max if elm.max!==void;
+		node.vertical = elm.vertical if elm.vertical!==void;
+		node.position = elm.position===void?100:+elm.position;
+		++uiIndex;
+	}
+
+	function addText (text,tx,ty) 
+	{
+		var node = new Label(app,chLayer);
+		node.setAnchor(0,1);
+		//这里还要设置文字属性
+		node.fontSize = font.size;
+		node.text = text;
+		node.setSizeToImageSize();
+		node.x = tx;
+		node.y = node.parent.height-ty;
+		node.color = font.color;
+		//这里需要另加字间距
+		tx += node.width+font.wordSpacing;
+		if (tx+node.width > chLayer.width) {
+			tx = 0;
+			ty += font.size+font.lineSpacing;
+			if (ty + font.size > chLayer.height) {
+				return [0,0,true];
+			}
+		}
+		return [tx,ty,false];
+	}
+}
+>>>>>>> origin/master
