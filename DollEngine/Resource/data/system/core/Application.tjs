@@ -157,6 +157,9 @@ class Application extends SystemDelegate
 			var outPos = %[];
 			for (var i = temp.count-1; i >= 0; --i) {
 				var touch = temp[i];
+				if (!isvalid touch) {
+					continue;
+				};
 				if (touch.ignore) {
 					continue;
 				}

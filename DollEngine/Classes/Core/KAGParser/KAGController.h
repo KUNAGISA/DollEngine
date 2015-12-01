@@ -40,7 +40,7 @@ protected:
     KAGStorage* m_storage;
     KAGLabel* m_label;
     int m_tagIndex;
-    stack<KAGStack> m_stack;
+    vector<KAGStack> m_stack;
 };
 
 DE_END

@@ -50,7 +50,7 @@ bool KAGController::stepInLabel(const String& file, const String& label, bool is
     if (iscall) {
         if (m_storage) {
             KAGStack stack={m_storage,m_label,m_tagIndex};
-            m_stack.push(stack);
+            m_stack.push_back(stack);
         }
     }
     m_storage = storage;
@@ -64,11 +64,11 @@ bool KAGController::stepOutLabel()
     if (m_stack.size() == 0) {
         return false;
     }
-    KAGStack stack = m_stack.top();
+    KAGStack stack = m_stack.back();
     m_storage = stack.storage;
     m_label = stack.label;
     m_tagIndex = stack.tagIndex;
-    m_stack.pop();
+    m_stack.pop_back();
    
     printLabel();
     return true;

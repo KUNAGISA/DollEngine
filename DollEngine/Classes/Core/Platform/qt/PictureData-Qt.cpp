@@ -81,7 +81,7 @@ PictureData* PictureData::addText(const String& text,const String& fontName,int 
     painter.setFont(font);
     painter.setPen(pen);
     
-    painter.drawText(img.rect(),Qt::AlignLeft|Qt::AlignTop,txt,&out);
+    painter.drawText(img.rect(),Qt::AlignLeft|Qt::AlignTop,txt);
     
     PictureData* data = new PictureData();
     data->setWidth(img.width());

@@ -49,6 +49,12 @@ public:
         m_fileStack.pop();
     }
     
+    void clearFile()
+    {
+        while(!m_fileStack.empty()) {
+            m_fileStack.pop();
+        }
+    }
 protected:
     vector<AsyncFunction> m_allAsyncFunctions;
     stack<String> m_fileStack;

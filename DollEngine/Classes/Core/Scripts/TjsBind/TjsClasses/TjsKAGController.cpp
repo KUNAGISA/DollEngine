@@ -219,18 +219,21 @@ tTJSVariant TjsKAGController::saveStack()
 {
     tTJSArrayObject* datas = (tTJSArrayObject*)TJSCreateArrayObject();
     
-    stack<KAGStack> tempStack = m_stack;
+    vector<KAGStack> tempStack = m_stack;
     KAGStack cur={m_storage,m_label,m_tagIndex};
-    tempStack.push(cur);
+    tempStack.push_back(cur);
+    int idx = 0;
     for(const KAGStack& stack : tempStack) {
         tTJSVariant storagePath = stack.storage->fullPath.c_str();
         tTJSVariant labelKey = stack.label->key.c_str();
         tTJSVariant tagIndex = stack.tagIndex;
         
-        TJS_GET_NATIVE_INSTANCE(/* var. name */ni, /* var. type */tTJSArrayNI);
-        datas->Add(ni, storagePath);
-        datas->Add(ni, labelKey);
-        datas->Add(ni, tagIndex);
+        datas->PropSetByNum(TJS_MEMBERENSURE,idx,&storagePath,NULL);
+        ++idx;
+        datas->PropSetByNum(TJS_MEMBERENSURE,idx,&labelKey,NULL);
+        ++idx;
+        datas->PropSetByNum(TJS_MEMBERENSURE,idx,&tagIndex,NULL);
+        ++idx;
     }
     return datas;
 }
@@ -241,6 +244,27 @@ bool TjsKAGController::loadStack(tTJSVariant v)
     if(!datas) {
         return false;
     }
+    int count = datas->Count;
+    if(count%3!=0){
+        return false;
+    }
+    DE::ScriptEngine::GetInstance()->clearFile();
+    
+    m_stack.clear();
+    for(int i = 0; i < count; i+= 3) {
+        tTJSVariant storagePath;
+        datas->PropGetByNum(TJS_MEMBERENSURE,i,&storagePath,NULL);
+        tTJSVariant labelKey;
+        datas->PropGetByNum(TJS_MEMBERENSURE,i+1,&labelKey,NULL);
+        tTJSVariant tagIndex;
+        datas->PropGetByNum(TJS_MEMBERENSURE,i+2,&tagIndex,NULL);
+        
+        KAGStorage* storage = KAGParser::GetInstance()->loadScenario(storagePath.AsStringNoAddRef()->operator const tjs_char *());
+        KAGLabel* label = storage->getLabel(labelKey.AsStringNoAddRef()->operator const tjs_char *());
+        KAGStack cur = {storage, label, tagIndex.AsInteger()};
+        m_stack.push_back(cur);
+    }
+    return true;
 }
 
 NCB_REGISTER_CLASS_DIFFER(KAGController, TjsKAGController)
