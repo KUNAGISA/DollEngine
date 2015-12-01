@@ -28,7 +28,7 @@ bool PictureData::loadFromFile(const DE::String &fullPath)
     setHeight(image.height());
     IOData* imgData = new IOData();
     imgData->initWithSize(getWidth() * getHeight() * 4);
-    QImage imagegl = image.convertToFormat(QImage::Format_RGBA8888);
+    QImage imagegl = image.convertToFormat(QImage::Format_RGBA8888_Premultiplied);
     memcpy(imgData->getBuffer(),imagegl.bits(),imgData->getSize());
     setData(imgData);
     return true;
@@ -62,7 +62,6 @@ PictureData* PictureData::addText(const String& text,const String& fontName,int 
         QChar ch = txt.at(i);
         int r = metric.rightBearing(ch);
         int l = metric.leftBearing(ch);
-        qDebug()<<txt<<metric.charWidth(txt,0)<<fd->advance << l;
         fd->advance += metric.charWidth(txt,0);
         if(i == 0) {
             fd->bearingX = -l;//图片应该的orgin偏移量
@@ -70,7 +69,7 @@ PictureData* PictureData::addText(const String& text,const String& fontName,int 
     }
     fd->bearingY = metric.ascent()-1;
     
-    QImage img(w,rect.height(),QImage::Format_RGBA8888);
+    QImage img(w,rect.height(),QImage::Format_RGBA8888_Premultiplied);
     img.fill(0);
     
     QPainter painter(&img);

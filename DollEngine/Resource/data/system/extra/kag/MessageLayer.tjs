@@ -114,7 +114,7 @@ class MessageLayer extends Layer
 		if (elm.frame) {
 			frameColor.visible = false;
 			frameImage.loadImages(elm.frame);
-			frameImage.y = ty;
+			frameImage.y = height;
 			frameImage.visible = true;
 			frameImage.opacity = elm.opacity if elm.opacity !== void;
 		}
@@ -299,7 +299,7 @@ class MessageLayer extends Layer
 		node.text = text;
 		node.setSizeToImageSize();
 		node.x = tx;
-		node.y = node.parent.height-ty;
+		node.y = node.parent.height-ty-font.lineSpacing;
 		node.color = font.color;
 		//这里需要另加字间距
 		tx += node.width+font.wordSpacing;
