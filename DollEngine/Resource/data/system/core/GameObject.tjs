@@ -115,15 +115,12 @@ class GameObject
 	function onSave () {
 		var dict = %[];
 		with(dict) {
-			.className = "GameObject";
-			.x = x;
-			.y = y;
-			.width = width;
-			.height = height;
-			.anchorX = anchorX;
-			.anchorY = anchorY;
-			.visible = visible;
-			.absolute = absolute;
+			.x = (int)x;
+			.y = (int)y;
+			.width = (int)width;
+			.height = (int)height;
+			.visible = visible if visible == false;
+			.absolute = (int)absolute if absolute != 0;
 		}
 		return dict;
 	}
@@ -134,10 +131,8 @@ class GameObject
 			y = .y;
 			width = .width;
 			height = .height;
-			anchorX = .anchorX;
-			anchorY = .anchorY;
-			visible = .visible;
-			absolute = .absolute;
+			visible = .visible if .visible!==void;
+			absolute = .absolute if .absolute!==void;
 		}
 	}
 	

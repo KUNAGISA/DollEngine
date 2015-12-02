@@ -244,7 +244,7 @@ bool TjsKAGController::loadStack(tTJSVariant v)
     if(!datas) {
         return false;
     }
-    int count = datas->Count;
+    int count = TJSGetArrayElementCount(datas);
     if(count%3!=0){
         return false;
     }

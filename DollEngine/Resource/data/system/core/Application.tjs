@@ -7,8 +7,11 @@ class Application extends SystemDelegate
 	var conductor;
 
 	var status = %[];
-	var deffont = %[]; //默认字体设置
-	var deffontChanged = true;//默认字体是否有过变化
+	var deffont = %[
+		size : DEConfig.game.deffont.size,
+		color : 0xffffff,
+		face : DEConfig.game.deffont.face,
+	]; //默认字体设置
 
 	//property
 	var needRedraw;

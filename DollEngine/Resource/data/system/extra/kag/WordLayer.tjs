@@ -16,4 +16,5 @@ class WordLayer extends Layer
 	{
 		//根据界面大小重新刷新文字位置
 	}
+
 }

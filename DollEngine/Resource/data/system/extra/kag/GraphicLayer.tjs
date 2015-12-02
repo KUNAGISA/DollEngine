@@ -8,12 +8,4 @@ class GraphicLayer extends Layer
 		this.setAnchor(0,1);
 	}
 	
-
-	function onSave () {
-		var dict = super.onSave();
-		with(dict){
-			.className = "GraphicLayer";
-		}
-		return dict;
-	}
 }

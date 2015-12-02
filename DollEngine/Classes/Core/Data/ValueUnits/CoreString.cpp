@@ -38,6 +38,8 @@ static const int g_maxLen = 16*1024-1;
 static char g_tmpStr[g_maxLen+1];
 static wchar_t g_tmpWStr[g_maxLen+1];
 
+static string g_target;
+
 String String::fromFormat(const char* format,...)
 {
     va_list args;
@@ -141,32 +143,15 @@ bool String::saveToFile(const String& fullpath)
         DM(L"目标文件夹不存在或没有写入权限:%ls",fullpath.c_str());
         return false;
     }
-    size_t t = fwrite(c_str(), size(), sizeof(wchar_t), fp);
+    utf8Value();
+    size_t t = fwrite(g_target.c_str(), g_target.size(), sizeof(char), fp);
+    fclose(fp);
     if(t <= 0) {
         return false;
     }
     return true;
 }
 
-bool String::appendToFile(const String& fullpath)
-{
-    if(fullpath.empty()){
-        return false;
-    }
-    
-    FILE * fp = fopen(fullpath.c_nstr(), "ab+");
-    if (!fp) {
-        DM(L"目标文件夹不存在或没有写入权限:%ls",fullpath.c_str());
-        return false;
-    }
-    size_t t = fwrite(c_str(), sizeof(wchar_t), size(), fp);
-    qDebug()<<c_nstr()<<t;
-    
-    if(t <= 0) {
-        return false;
-    }
-    return true;
-}
 
 String& String::assign(const char* src)
 {
@@ -323,10 +308,6 @@ double String::doubleValue()
     return 0;
 }
 
-
-
-
-static string g_target;
 string String::utf8Value() const
 {
     g_target.clear();

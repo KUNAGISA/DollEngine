@@ -70,11 +70,10 @@ class Layer extends GameObject
 	function onSave () {
 		var dict = super.onSave();
 		with(dict){
-			.className = "Layer";
-			.imagePath = _imagePath;
-			.opacity = opacity;
-			.color = color;
-			.clipRect = _clipRect;
+			.imagePath = _imagePath if _imagePath;
+			.opacity = opacity if opacity!=255;
+			.color = color if color!=0xffffff;
+			.clipRect = _clipRect if _clipRect;
 		}
 		return dict;
 	}
@@ -83,8 +82,8 @@ class Layer extends GameObject
 		super.onLoad(dict);
 		with(dict){
 			loadImages(.imagePath) if .imagePath != void;
-			opacity = .opacity;
-			color = .color;
+			opacity = .opacity if .opacity !==void;
+			color = .color if .color!==void;
 			clipRect(.clipRect*) if .clipRect != void;
 		}
 	}

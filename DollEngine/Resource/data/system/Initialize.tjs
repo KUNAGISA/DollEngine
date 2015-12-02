@@ -3,7 +3,7 @@ var print = Console.log;
 var em = Console.throwMsg;
 var assert = Console.assertMsg;
 
-var DEConfig = Scripts.jsonStorage("Config.json");
+var DEConfig = Scripts.evalStorage("Config.tjs");
 
 System.debugMode = DEConfig.debugMode;
 System.addFont(DEConfig.game.deffont.face);

@@ -33,7 +33,6 @@ public:
 public:
     bool loadFromFile(const String& path);
     bool saveToFile(const String& fullpath);
-    bool appendToFile(const String& fullpath);
     String& assign(const char* v);
     String& assign(char* src,size_type l);
     String& assign(wchar_t* v,size_type l);

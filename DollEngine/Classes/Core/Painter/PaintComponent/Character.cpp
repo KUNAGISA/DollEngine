@@ -24,7 +24,6 @@ Character::Character()
 Character::~Character()
 {
     for (CharacterInfo* frame : m_characterInfos) {
-        std::cout<<"delete " <<frame->getTexture()->getCacheKey().c_nstr() <<std::endl;
         delete frame;
     }
     m_characterInfos.clear();

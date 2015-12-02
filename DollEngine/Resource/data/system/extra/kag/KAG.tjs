@@ -1,4 +1,14 @@
 
+var SKIP_NONE = 0;
+var SKIP_CLICK = 1;
+var SKIP_PAGE  = 2;
+var SKIP_STOP  = 3;
+var SKIP_FAST  = 4;
+var SKIP_LABEL = 5;
+var SKIP_CANCEL = 6;
+var SKIP_FORCE  = 7;
+
+
 class KAG extends Application
 {
 	//图层控制
@@ -20,7 +30,9 @@ class KAG extends Application
 	//状态数据
 	var allskip = 1;// 0 已读跳过 1 skip时全部跳过
 	var autoMode = 0;
-	var bookMarkDates = [];//存档
+	var skipMode = SKIP_NONE;
+	var fullScreen = false;
+	var bookMarkDates = [];//存档日期
 	var tempLockSnapShot; //临时存储的档案
 	
 	function KAG () 
@@ -297,11 +309,17 @@ class KAG extends Application
 			if(lay){
 				layers.add(lay.onSave());
 			}
+			else {
+				layers.add(0);
+			}
 		};
 		for (var i = 0; i < fore.messages.count; i++) {
 			var lay = fore.messages[i];
 			if(lay){
 				messages.add(lay.onSave());
+			}
+			else {
+				messages.add(0);
 			}
 		}
 		data.base = base;
@@ -339,10 +357,12 @@ class KAG extends Application
 		clearLayers();
 		fore.base.onLoad(data.base);
 		for (var i = 0; i < data.layers.length; i++) {
+			if (data.layers[i] == 0) {continue;}
 			var lay = getLayerByElm(%[layer:i, page:"fore"]);
 			lay.onLoad(data.layers[i]);
 		}
 		for (var i = 0; i < data.messages.length; i++) {
+			if (data.messages[i] == 0) {continue;}
 			var lay = getLayerByElm(%[layer:"message"+i, page:"fore"]);
 			lay.onLoad(data.messages[i]);
 		}
@@ -350,7 +370,7 @@ class KAG extends Application
 		tagManager.loadStack(data.tags);
 
 		if(tagManager.stepOutLabel()){
-			asyncTrigger(tagManager.doNext);
+			tagManager.doNext();
 		}
 	}
 
@@ -416,7 +436,6 @@ class KAG extends Application
 		deffont : function (elm) 
 		{
 			merger(this.deffont,elm);
-			this.deffontChanged = true;
 		} incontextof this,
 
 		history : function (elm) 
@@ -710,8 +729,7 @@ class KAG extends Application
 				this.mergerBack('locate',elm);
 				return;
 			}
-			lay.locateX = elm.x if elm.x!==void;
-			lay.locateY = elm.y if elm.y!==void;
+			lay.setLocate(elm);
 		} incontextof this,
 
 		button : function (elm) 
@@ -738,10 +756,8 @@ class KAG extends Application
 				this.mergerBack('ch',elm);
 				return;
 			}
-			var pos = lay.addText(elm.text,lay.locateX,lay.locateY);
-			lay.locateX = pos[0];
-			lay.locateY = pos[1];
-			if (pos[2] == true) {
+			var changePage = lay.addText(elm.text);
+			if (changePage) {
 				this.status.waitClickMode = WAIT_CLICK_P;//点击等待换页
 				this.status.isClickSkip = false;
 				return -1;
@@ -760,8 +776,7 @@ class KAG extends Application
 				this.mergerBack('font',elm);
 				return;
 			}
-			lay.font.color = elm.color;
-			lay.font.size = elm.size;
+			lay.setFont(elm);
 		} incontextof this,
 
 		slider : function (elm) 

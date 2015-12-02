@@ -22,6 +22,8 @@ class MessageLayer extends Layer
 		b : 0,
 	];
 
+	var _commands = [];//用于存档
+
 	var uiIndex = 0;
 
 	function MessageLayer (app,par) 
@@ -95,6 +97,52 @@ class MessageLayer extends Layer
 		}
 	}
 
+	function saveCommand (name, elm) {
+		if (name == "addText") {
+			if (_commands.count > 0 && _commands[-1][0] == "addText") {
+				_commands[-1][1] += elm;
+				return;
+			};
+		};
+		_commands.add([name,elm]);
+	}
+
+	function clearWord () 
+	{
+		chLayer.clearWord();
+	}
+
+	function clearEr (sys=false) 
+	{
+		clearWord();
+		resetFont();
+		var syses = [];
+		for (var i = controlLayer.children.count-1; i >= 0; --i) {
+			var control = controlLayer.children[i];
+			if(sys && control.isSysControl)
+			{
+				continue;
+			}
+			else {
+				invalidate control;
+			}
+		};
+		names = %[];
+		links.clear();
+		uiIndex = 0;
+
+		var tmp = [];
+		for (var i = 0; i < _commands.count; i++) {
+			var command = _commands[i];
+			if(command[0] != "addText" && command[1].issys){
+				tmp.add(command);
+			}
+		};
+		_commands.clear();
+		_commands = tmp;
+		setLocate(%[x:0,y:0]);
+	}
+
 	function setPosition (elm) 
 	{
 		x = elm.left if elm.left !== void;
@@ -136,30 +184,20 @@ class MessageLayer extends Layer
 		controlLayer.setPos(tx,ty,tw,th);
 	}
 
-	function clearWord () 
-	{
-		chLayer.clearWord();
-		locateX = 0;
-		locateY = 0;
+	function setLocate (elm) {
+		locateX = elm.x if elm.x !== void;
+		locateY = elm.y if elm.y !== void;
+		saveCommand("setLocate",elm);
 	}
 
-	function clearEr (sys=false) 
-	{
-		clearWord();
-		var syses = [];
-		for (var i = controlLayer.children.count-1; i >= 0; --i) {
-			var control = controlLayer.children[i];
-			if(sys && control.isSysControl)
-			{
-				continue;
-			}
-			else {
-				invalidate control;
-			}
-		};
-		names = %[];
-		links.clear();
-		uiIndex = 0;
+	function setFont (elm) {
+		font.size = elm.size;
+		font.color = elm.color;
+		saveCommand("setFont",elm);
+	}
+
+	function resetFont () {
+		setFont(app.deffont);
 	}
 
 	function locateChangeLine () 
@@ -174,41 +212,52 @@ class MessageLayer extends Layer
 	}
 
 	function onSave () {
-		var dict = super.onSave();
-		with(dict){
-			.className = "MessageLayer";
-			.frameImage = frameImage.onSave();
-			.frameColor = frameColor.onSave();
-			.ch = chLayer.onSave();
-			.names = [];
-			for (var i = 0; i < controlLayer.children.count; i++) {
-				.names.add(controlLayer[i].children.onSave());
+		var dict = %[
+			position : %[],
+		];
+		with(dict.position){
+			.left = (int)x;
+			.top = (int)(parent.height-y);
+			.width = (int)width;
+			.height = (int)height;
+			.marginl = (int)margin.l if (int)margin.l != 0;
+			.marginr = (int)margin.r if (int)margin.r != 0;
+			.margint = (int)margin.t if (int)margin.t != 0;
+			.marginb = (int)margin.b if (int)margin.b != 0;
+			.visible = visible if visible==false;
+			if (frameImage.visible) {
+				.frame = frameImage._imagePath;
+				.opacity = (int)frameImage.opacity;
+			}
+			else if(frameColor.visible) {
+				.frame = "";
+				.opacity = (int)frameColor.opacity;
+				.color = (int)frameColor.color;
+			}
+			else {
+				.frame = "";
 			}
 		}
+		dict.commands = [];
+		dict.commands.assignStruct(_commands);
+
 		return dict;
 	}
 
 	function onLoad (dict) {
-		super.onLoad(dict);
-		with(dict){
-			frameImage.onLoad(.frameImage);
-			frameColor.onLoad(.frameColor);
-			chLayer.removeAllChildren();
-			chLayer.onLoad(.ch);
-			controlLayer.removeAllChildren();
-			buttons = %[];
-			names = %[];
-			for (var i = 0; i < .names.count; i++) {
-				var data = .names[i];
-				var node = new global[data.className](app,controlLayer);
-				node.onLoad(data);
-				if (node.isSysControl) {
-					buttons[node.name] = node;
+		setPosition(dict.position);
+		clearEr();
+		for (var i = 0; i < dict.commands.length; i++) {
+			var command = dict.commands[i];
+			dm(command[0]);
+			if (command[0] == "addText") {
+				var str = command[1];
+				for (var k = 0; k < str.length; k++) {
+					addText(str[k]);
 				}
-				else {
-					names[node.name] = node;
-				}
+				continue;
 			};
+			this[command[0]](command[1]);
 		}
 	}
 
@@ -250,48 +299,53 @@ class MessageLayer extends Layer
 		node.clickData.target = elm.target if elm.target!==void;
 
 		++uiIndex;
+		saveCommand("addButton",elm);
 	}
 
 	function addSlider (elm) 
 	{
-		if (elm.name == void) {
-			elm.name = "_num_"+uiIndex;
-		}
-		var node = new Slider(app,controlLayer);
-		node.name = elm.name;
-		node.isSysControl = elm.issys===void?false:elm.issys;
-		if (node.isSysControl) {
-			buttons[elm.name] = node;
-		}
-		else {
-			names[elm.name] = node;
-		}
-		node.setAnchor(0,1);
-		node.x = +elm.x;
-		node.y = node.parent.height-elm.y-12+6;
-		node.enabled = elm.enabled if elm.enabled!==void;
-		if (elm.base) {
-			node.loadBase(elm.base);
-		}
-		if (elm.graphic) {
-			node.loadTabs(elm.graphic);
-		}
-		else {
-			node.loadTabs(elm.normal,elm.on);
-		}
-		node.onChangeFunc = Scripts.eval(elm.onchangefunc) if elm.onchangefunc!==void;
-		node.dragWidth = +elm.width if elm.width!==void;
-		node.dragHeight = +elm.height if elm.height!==void;
-		node.step = +elm.step if elm.step!==void;
-		node.min = +elm.min if elm.min!==void;
-		node.max = +elm.max if elm.max!==void;
-		node.vertical = elm.vertical if elm.vertical!==void;
-		node.position = elm.position===void?100:+elm.position;
-		++uiIndex;
+		// if (elm.name == void) {
+		// 	elm.name = "_num_"+uiIndex;
+		// }
+		// var node = new Slider(app,controlLayer);
+		// node.name = elm.name;
+		// node.isSysControl = elm.issys===void?false:elm.issys;
+		// if (node.isSysControl) {
+		// 	buttons[elm.name] = node;
+		// }
+		// else {
+		// 	names[elm.name] = node;
+		// }
+		// node.setAnchor(0,1);
+		// node.x = +elm.x;
+		// node.y = node.parent.height-elm.y-12+6;
+		// node.enabled = elm.enabled if elm.enabled!==void;
+		// if (elm.base) {
+		// 	node.loadBase(elm.base);
+		// }
+		// if (elm.graphic) {
+		// 	node.loadTabs(elm.graphic);
+		// }
+		// else {
+		// 	node.loadTabs(elm.normal,elm.on);
+		// }
+		// node.onChangeFunc = Scripts.eval(elm.onchangefunc) if elm.onchangefunc!==void;
+		// node.dragWidth = +elm.width if elm.width!==void;
+		// node.dragHeight = +elm.height if elm.height!==void;
+		// node.step = +elm.step if elm.step!==void;
+		// node.min = +elm.min if elm.min!==void;
+		// node.max = +elm.max if elm.max!==void;
+		// node.vertical = elm.vertical if elm.vertical!==void;
+		// node.position = elm.position===void?100:+elm.position;
+		// ++uiIndex;
+		saveCommand("addSlider",elm);
 	}
 
-	function addText (text,tx,ty) 
+	function addText (text) 
 	{
+		saveCommand("addText",text);
+		var tx = locateX;
+		var ty = locateY;
 		var node = new Label(app,chLayer);
 		node.setAnchor(0,1);
 		//这里还要设置文字属性
@@ -299,7 +353,8 @@ class MessageLayer extends Layer
 		node.text = text;
 		node.setSizeToImageSize();
 		node.x = tx;
-		node.y = node.parent.height-ty-font.lineSpacing;
+		node.y = chLayer.height-ty-font.lineSpacing;
+		dm(tx,ty,node.width,font.size,font.wordSpacing);
 		node.color = font.color;
 		//这里需要另加字间距
 		tx += node.width+font.wordSpacing;
@@ -307,9 +362,13 @@ class MessageLayer extends Layer
 			tx = 0;
 			ty += font.size+font.lineSpacing;
 			if (ty + font.size > chLayer.height) {
-				return [0,0,true];
+				locateX = 0;
+				locateY = 0;
+				return true;
 			}
 		}
-		return [tx,ty,false];
+		locateX = tx;
+		locateY = ty;
+		return false;
 	}
 }

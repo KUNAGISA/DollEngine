@@ -50,18 +50,14 @@ TJS_NATIVE_FUNCTION_END
 
 void TJS_INTF_METHOD DE_TJSTextWriteStream::Write(const tTJSString & targ)
 {
-    if(path.find(DE::System::GetInstance()->getSaveDataPath()) == String::npos) {
-        path = System::GetInstance()->getSaveDataPath() + path;
-    }
-    str = targ.c_str();
-    str.appendToFile(path);
+    str.append(targ.c_str());
 }
 
 void TJS_INTF_METHOD DE_TJSTextWriteStream::Destruct(){
-//    if(path.find(DE::System::GetInstance()->getSaveDataPath()) == String::npos) {
-//        path = System::GetInstance()->getSaveDataPath() + path;
-//    }
-//    str.saveToFile(path);
+    if(path.find(DE::System::GetInstance()->getSaveDataPath()) == String::npos) {
+        path = System::GetInstance()->getSaveDataPath() + path;
+    }
+    str.saveToFile(path);
     delete this;
 }
 
