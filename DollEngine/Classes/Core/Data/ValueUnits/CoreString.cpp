@@ -130,6 +130,44 @@ bool String::loadFromFile(const String& path)
     return true;
 }
 
+bool String::saveToFile(const String& fullpath)
+{
+    if(fullpath.empty()){
+        return false;
+    }
+    
+    FILE * fp = fopen(fullpath.c_nstr(), "wb");
+    if (!fp) {
+        DM(L"目标文件夹不存在或没有写入权限:%ls",fullpath.c_str());
+        return false;
+    }
+    size_t t = fwrite(c_str(), size(), sizeof(wchar_t), fp);
+    if(t <= 0) {
+        return false;
+    }
+    return true;
+}
+
+bool String::appendToFile(const String& fullpath)
+{
+    if(fullpath.empty()){
+        return false;
+    }
+    
+    FILE * fp = fopen(fullpath.c_nstr(), "ab+");
+    if (!fp) {
+        DM(L"目标文件夹不存在或没有写入权限:%ls",fullpath.c_str());
+        return false;
+    }
+    size_t t = fwrite(c_str(), sizeof(wchar_t), size(), fp);
+    qDebug()<<c_nstr()<<t;
+    
+    if(t <= 0) {
+        return false;
+    }
+    return true;
+}
+
 String& String::assign(const char* src)
 {
     clear();

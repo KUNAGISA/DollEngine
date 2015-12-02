@@ -14,6 +14,7 @@
 #include "TjsConsole.h"
 #include "TjsDictIterator.h"
 #include "System.h"
+#include "Storages.h"
 #ifdef __QT__
 #include "QtConsole.h"
 #else
@@ -47,7 +48,22 @@ while(iter.next()){
 return TJS_S_OK;
 TJS_NATIVE_FUNCTION_END
 
+void TJS_INTF_METHOD DE_TJSTextWriteStream::Write(const tTJSString & targ)
+{
+    if(path.find(DE::System::GetInstance()->getSaveDataPath()) == String::npos) {
+        path = System::GetInstance()->getSaveDataPath() + path;
+    }
+    str = targ.c_str();
+    str.appendToFile(path);
+}
 
+void TJS_INTF_METHOD DE_TJSTextWriteStream::Destruct(){
+//    if(path.find(DE::System::GetInstance()->getSaveDataPath()) == String::npos) {
+//        path = System::GetInstance()->getSaveDataPath() + path;
+//    }
+//    str.saveToFile(path);
+    delete this;
+}
 
 static TJS::tTJS* s_tjs = NULL;
 
@@ -61,6 +77,7 @@ ScriptEngine::ScriptEngine()
     if (!s_tjs)
     {
         s_tjs = new tTJS();
+        
         TJSEnableDebugMode=true;
         tTJSVariant val;
         iTJSDispatch2 *dsp;

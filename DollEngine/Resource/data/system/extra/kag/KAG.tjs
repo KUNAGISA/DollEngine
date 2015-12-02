@@ -21,6 +21,7 @@ class KAG extends Application
 	var allskip = 1;// 0 已读跳过 1 skip时全部跳过
 	var autoMode = 0;
 	var bookMarkDates = [];//存档
+	var tempLockSnapShot; //临时存储的档案
 	
 	function KAG () 
 	{
@@ -285,7 +286,7 @@ class KAG extends Application
 		return path;
 	}
 
-	function saveData (index) {
+	function locksnapshot (saveImg = false, saveTemp = true) {
 		var data = %[];
 		data.f = f;
 		var base = fore.base.onSave();
@@ -307,15 +308,31 @@ class KAG extends Application
 		data.layers = layers;
 		data.messages = messages;
 
+		data.tags = tagManager.saveStack();
+
+		if (saveTemp) {
+			tempLockSnapShot = data;
+		}
+		return data;
+	}
+
+	function saveData (index, isask=false) {
+		var data;
+		if (!tempLockSnapShot) {
+			data = locksnapshot(false,false);
+		}
+		else {
+			data = tempLockSnapShot;
+		}
 		var name = getBookMarkPageName(index);
 		(Dictionary.saveStruct incontextof data)(name);
 	}
 
-	function loadData (index) {
+	function loadData (index, isask=false) {
 		var name = getBookMarkPageName(index);
 		var data = Scripts.evalStorage(name);
 		if(!data){
-			dm("未找到该存档");
+			dm("存档不存在，编号:",index);
 			return;
 		}
 		f = data.f;
@@ -328,6 +345,12 @@ class KAG extends Application
 		for (var i = 0; i < data.messages.length; i++) {
 			var lay = getLayerByElm(%[layer:"message"+i, page:"fore"]);
 			lay.onLoad(data.messages[i]);
+		}
+
+		tagManager.loadStack(data.tags);
+
+		if(tagManager.stepOutLabel()){
+			asyncTrigger(tagManager.doNext);
 		}
 	}
 
@@ -479,6 +502,17 @@ class KAG extends Application
 			var se = this.getSE(elm.buf);
 			se.preload(elm.storage);
 			se.play(elm.loop,false);
+		} incontextof this,
+
+		/*******存档读档*******/
+
+		save : function (elm) {
+			saveData(elm.place,elm.ask);
+		} incontextof this,
+
+		load : function (elm) {
+			loadData(elm.place,elm.ask);
+			return -1;
 		} incontextof this,
 
 		/*******界面控制*******/

@@ -69,6 +69,6 @@
 			"face" : "DroidSansFallback.ttf",
 			"size" : 16
 		},
-		"saveDataPath" : "savedata/bookmark_%d.save"
+		"saveDataPath" : "bookmark_%d.save"
 	}
 }

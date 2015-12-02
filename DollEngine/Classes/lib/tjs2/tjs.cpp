@@ -9,6 +9,8 @@
 // "tTJS" script language API class implementation
 //---------------------------------------------------------------------------
 
+#include "ScriptEngine.h"
+
 #include "tjsCommHead.h"
 
 #include <map>
@@ -586,10 +588,20 @@ void tTJS::CompileScript( const tjs_char *script, class tTJSBinaryStream* output
 //---------------------------------------------------------------------------
 iTJSTextReadStream * TJSDefCreateTextStreamForRead(const tTJSString &name,
 	const tTJSString &mode)
-{ return NULL; }
+{ 
+    DE::DE_TJSTextReadStream* stream = new DE::DE_TJSTextReadStream();
+    stream->path = name.c_str();
+    stream->mode = mode.c_str();
+    return stream;
+}
 iTJSTextWriteStream * TJSDefCreateTextStreamForWrite(const tTJSString &name,
 	const tTJSString &mode)
-{ return NULL; }
+{ 
+    DE::DE_TJSTextWriteStream* stream = new DE::DE_TJSTextWriteStream();
+    stream->path = name.c_str();
+    stream->mode = mode.c_str();
+    return stream;
+}
 tTJSBinaryStream * TJSDefCreateBinaryStreamForRead(const tTJSString &name,
 	const tTJSString &mode)
 { return NULL; }

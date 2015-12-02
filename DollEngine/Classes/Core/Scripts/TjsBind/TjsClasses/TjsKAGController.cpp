@@ -228,11 +228,11 @@ tTJSVariant TjsKAGController::saveStack()
         tTJSVariant labelKey = stack.label->key.c_str();
         tTJSVariant tagIndex = stack.tagIndex;
         
-        datas->PropSetByNum(TJS_MEMBERENSURE,idx,&storagePath,NULL);
+        datas->PropSetByNum(TJS_MEMBERENSURE,idx,&storagePath,datas);
         ++idx;
-        datas->PropSetByNum(TJS_MEMBERENSURE,idx,&labelKey,NULL);
+        datas->PropSetByNum(TJS_MEMBERENSURE,idx,&labelKey,datas);
         ++idx;
-        datas->PropSetByNum(TJS_MEMBERENSURE,idx,&tagIndex,NULL);
+        datas->PropSetByNum(TJS_MEMBERENSURE,idx,&tagIndex,datas);
         ++idx;
     }
     return datas;
@@ -253,13 +253,14 @@ bool TjsKAGController::loadStack(tTJSVariant v)
     m_stack.clear();
     for(int i = 0; i < count; i+= 3) {
         tTJSVariant storagePath;
-        datas->PropGetByNum(TJS_MEMBERENSURE,i,&storagePath,NULL);
+        datas->PropGetByNum(TJS_MEMBERENSURE,i,&storagePath,datas);
         tTJSVariant labelKey;
-        datas->PropGetByNum(TJS_MEMBERENSURE,i+1,&labelKey,NULL);
+        datas->PropGetByNum(TJS_MEMBERENSURE,i+1,&labelKey,datas);
         tTJSVariant tagIndex;
-        datas->PropGetByNum(TJS_MEMBERENSURE,i+2,&tagIndex,NULL);
+        datas->PropGetByNum(TJS_MEMBERENSURE,i+2,&tagIndex,datas);
         
         KAGStorage* storage = KAGParser::GetInstance()->loadScenario(storagePath.AsStringNoAddRef()->operator const tjs_char *());
+        ScriptEngine::GetInstance()->pushFile(storage->fileName);
         KAGLabel* label = storage->getLabel(labelKey.AsStringNoAddRef()->operator const tjs_char *());
         KAGStack cur = {storage, label, (int)tagIndex.AsInteger()};
         m_stack.push_back(cur);

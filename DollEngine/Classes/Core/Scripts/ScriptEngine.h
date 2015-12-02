@@ -19,6 +19,29 @@ namespace TJS{
 
 DE_BEGIN
 
+class DE_TJSTextReadStream : public iTJSTextReadStream
+{
+public:
+    String path;
+    String mode;
+    virtual tjs_uint TJS_INTF_METHOD Read(tTJSString & targ, tjs_uint size) {
+        DE::String str;
+        str.loadFromFile(path);
+        targ = str.c_str();
+    }
+    virtual void TJS_INTF_METHOD Destruct(){delete this;}
+};
+
+class DE_TJSTextWriteStream : public iTJSTextWriteStream
+{
+public:
+    String path;
+    String str;
+    String mode;
+    virtual void TJS_INTF_METHOD Write(const tTJSString & targ);
+    virtual void TJS_INTF_METHOD Destruct();
+};
+
 struct AsyncFunction
 {
     int priority;

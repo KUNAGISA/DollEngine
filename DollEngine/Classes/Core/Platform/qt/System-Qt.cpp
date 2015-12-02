@@ -7,6 +7,7 @@
 #include <QApplication>
 #include <QFontDatabase>
 #include <QDesktopWidget>
+#include <QDir>
 
 DE_BEGIN
 
@@ -28,10 +29,18 @@ System::System()
     //SaveData path
     m_saveDataPath = QCoreApplication::applicationDirPath().toStdString();
     m_saveDataPath += L"/savedata/";
+    QDir dir(m_saveDataPath.c_nstr());
+    if(!dir.exists()) {
+        dir.mkdir(m_saveDataPath.c_nstr());
+    }
     
     //Patch path
     m_patchPath = QCoreApplication::applicationDirPath().toStdString();
     m_patchPath += L"/patch/";
+    QDir dir2(m_patchPath.c_nstr());
+    if(!dir2.exists()) {
+        dir2.mkdir(m_patchPath.c_nstr());
+    }
 }
 
 System::~System()
