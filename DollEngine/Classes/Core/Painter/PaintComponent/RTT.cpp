@@ -82,6 +82,30 @@ void RTT::end()
                                       Window::GetInstance()->getHeight());
 }
 
+bool RTT::saveToFile(const String& path,int tw, int th)
+{
+    if(!m_info || !m_info->getTexture()) {
+        return false;
+    }
+    int w = m_info->getTexture()->getWidth();
+    int h = m_info->getTexture()->getHeight();
+    if(tw <= 0) tw = w;
+    if(th <= 0) th = h;
+    IOData* data = new IOData();
+    
+    data->initWithSize(w*h*4);
+    
+    PaintEngine::GetInstance()->switchFBO(&m_oldFBO,m_FBO);
+    PaintEngine::GetInstance()->readPixmap(w,h,data->getBuffer());
+    PaintEngine::GetInstance()->switchFBO(NULL,m_oldFBO);
+    
+    PictureData picture;
+    picture.setData(data);
+    picture.setWidth(w);
+    picture.setHeight(h);
+    return picture.saveImage(path,tw,th);
+}
+
 void RTT::paint(Transform* trans)
 {
     Image::paint(trans);

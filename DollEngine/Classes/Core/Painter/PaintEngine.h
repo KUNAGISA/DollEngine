@@ -61,6 +61,7 @@ public:
     void createFBO(DrawTexId texId,DrawOldFBOId* oldFBO, DrawFBOId* fbo );
     void switchFBO(DrawOldFBOId* oldFBO,DrawFBOId newFBO);
     
+    void readPixmap(int w,int h,void* data);
     PictureData* getPictureByRTT(Texture* tex,DrawFBOId fbo);
     
     void clearColor(DrawMask mask,DrawClampF red,DrawClampF green,DrawClampF blue,DrawClampF alpha);

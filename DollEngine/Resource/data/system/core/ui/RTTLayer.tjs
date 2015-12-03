@@ -16,4 +16,8 @@ class RTTLayer extends Layer
 		_image.end();
 		setSizeToImageSize();
 	}
+
+	function save (path) {
+		return _image.saveToFile(path,0,0);
+	}
 }

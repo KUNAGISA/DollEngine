@@ -6,6 +6,7 @@
 
 TJS_NCB(RTT){}
 void paint(tTJSVariant trans);
+bool saveToFile(tTJSVariant path,tTJSVariant w,tTJSVariant h);
 };
 
 

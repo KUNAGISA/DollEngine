@@ -11,6 +11,7 @@
 #include <QPainter>
 #include <QPen>
 #include <QApplication>
+#include <QBitmap>
 #include "PictureData.h"
 #include "IOData.h"
 #include "Storages.h"
@@ -32,6 +33,24 @@ bool PictureData::loadFromFile(const DE::String &fullPath)
     memcpy(imgData->getBuffer(),imagegl.bits(),imgData->getSize());
     setData(imgData);
     return true;
+}
+
+bool PictureData::saveImage(const String& path, int w, int h)
+{
+    String fullpath;
+    if(path.find(System::GetInstance()->getSaveDataPath()) == String::npos) {
+        fullpath = System::GetInstance()->getSaveDataPath()+path;
+    }
+    else {
+        fullpath = path;
+    }
+    
+    QImage img(QSize(m_width,m_height),QImage::Format_RGBA8888_Premultiplied);
+    uchar* bits = img.bits();
+    memcpy(bits,m_data->getBuffer(),m_data->getSize());
+    QImage timg = img.mirrored();
+    bool ret = timg.save(fullpath.c_nstr(),"PNG");
+    return ret;
 }
 
 PictureData* PictureData::addText(const String& text,const String& fontName,int fontSize,FontData* fd)

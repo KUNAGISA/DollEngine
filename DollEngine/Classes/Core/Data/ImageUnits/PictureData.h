@@ -32,6 +32,7 @@ public:
     PictureData();
     virtual ~PictureData();
     bool loadFromFile(const String& fullPath);
+    bool saveImage(const String& path, int w, int h);
     static PictureData* createRoundRect(int r);//创建一个圆角矩形的数据
     static PictureData* addText(const String& text,const String& fontName,int fontSize,FontData* fd);
 public:

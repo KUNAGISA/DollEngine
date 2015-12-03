@@ -415,6 +415,12 @@ void PaintEngine::switchFBO(DrawOldFBOId* oldFBO,DrawFBOId newFBO)
     CHECK_GL_ERROR;
 }
 
+void PaintEngine::readPixmap(int w,int h,void* data)
+{
+    glPixelStorei(GL_PACK_ALIGNMENT, 1);
+    glReadPixels(0,0,w, h,GL_RGBA,GL_UNSIGNED_BYTE, data);
+}
+
 PictureData* PaintEngine::getPictureByRTT(Texture* tex,DrawFBOId _FBO)
 {
     int savedBufferWidth = tex->getWidth();

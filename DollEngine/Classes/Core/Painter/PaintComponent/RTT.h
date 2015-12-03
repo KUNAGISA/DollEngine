@@ -24,6 +24,8 @@ public:
     virtual void paint(Transform* trans);
     void end();
     
+    virtual bool saveToFile(const String& path,int w=0, int h=0);
+    
     void setOpacity(int v){m_startOpacity=m_endOpacity=v;NEED_REDRAW}
     int getOpacity(){return m_startOpacity;}
 protected:

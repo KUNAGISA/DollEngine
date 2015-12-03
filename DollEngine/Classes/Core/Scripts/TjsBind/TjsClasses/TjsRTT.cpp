@@ -8,6 +8,13 @@ void TjsRTT::paint(tTJSVariant trans)
     TjsTransform* obj = TJS_GET_OBJECT(TjsTransform,trans.AsObjectNoAddRef());
     RTT::paint(obj);
 }
+
+bool TjsRTT::saveToFile(tTJSVariant v1,tTJSVariant w,tTJSVariant h)
+{
+    TJS_STRING(v1, path);
+    return RTT::saveToFile(path,w.AsInteger(),h.AsInteger());
+}
+
 NCB_REGISTER_CLASS_DIFFER(RTT, TjsRTT)
 {
     TJS_FACTORY
@@ -15,6 +22,7 @@ NCB_REGISTER_CLASS_DIFFER(RTT, TjsRTT)
     NCB_METHOD(begin);
     NCB_METHOD(end);
     NCB_METHOD(paint);
+    NCB_METHOD(saveToFile);
     NCB_PROPERTY(opacity,getOpacity,setOpacity);
     NCB_PROPERTY(paintWidth,getPaintWidth,setPaintWidth);
     NCB_PROPERTY(paintHeight,getPaintHeight,setPaintHeight);
