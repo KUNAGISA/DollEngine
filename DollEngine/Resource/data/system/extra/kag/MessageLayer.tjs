@@ -304,40 +304,38 @@ class MessageLayer extends Layer
 
 	function addSlider (elm) 
 	{
-		// if (elm.name == void) {
-		// 	elm.name = "_num_"+uiIndex;
-		// }
-		// var node = new Slider(app,controlLayer);
-		// node.name = elm.name;
-		// node.isSysControl = elm.issys===void?false:elm.issys;
-		// if (node.isSysControl) {
-		// 	buttons[elm.name] = node;
-		// }
-		// else {
-		// 	names[elm.name] = node;
-		// }
-		// node.setAnchor(0,1);
-		// node.x = +elm.x;
-		// node.y = node.parent.height-elm.y-12+6;
-		// node.enabled = elm.enabled if elm.enabled!==void;
-		// if (elm.base) {
-		// 	node.loadBase(elm.base);
-		// }
-		// if (elm.graphic) {
-		// 	node.loadTabs(elm.graphic);
-		// }
-		// else {
-		// 	node.loadTabs(elm.normal,elm.on);
-		// }
-		// node.onChangeFunc = Scripts.eval(elm.onchangefunc) if elm.onchangefunc!==void;
-		// node.dragWidth = +elm.width if elm.width!==void;
-		// node.dragHeight = +elm.height if elm.height!==void;
-		// node.step = +elm.step if elm.step!==void;
-		// node.min = +elm.min if elm.min!==void;
-		// node.max = +elm.max if elm.max!==void;
-		// node.vertical = elm.vertical if elm.vertical!==void;
-		// node.position = elm.position===void?100:+elm.position;
-		// ++uiIndex;
+		if (elm.name == void) {
+			elm.name = "_num_"+uiIndex;
+		}
+		var node = new Slider(app,controlLayer);
+		node.name = elm.name;
+		node.isSysControl = elm.issys===void?false:elm.issys;
+		if (node.isSysControl) {
+			buttons[elm.name] = node;
+		}
+		else {
+			names[elm.name] = node;
+		}
+		node.setAnchor(0,1);
+		node.x = +elm.x;
+		node.y = node.parent.height-elm.y-12+6;
+		node.enabled = elm.enabled if elm.enabled!==void;
+		node.vertical = elm.vertical if elm.vertical!==void;
+		if (elm.base) {
+			node.loadBase(elm.base);
+		}
+		if (elm.graphic) {
+			node.loadTabs(elm.graphic);
+		}
+		else {
+			node.loadTabs(elm.normal,elm.on);
+		}
+		node.onChangeFunc = Scripts.eval(elm.onchangefunc) if elm.onchangefunc!==void;
+		node.step = +elm.step if elm.step!==void;
+		node.min = +elm.min if elm.min!==void;
+		node.max = +elm.max if elm.max!==void;
+		node.position = elm.position===void?100:+elm.position;
+		++uiIndex;
 		saveCommand("addSlider",elm);
 	}
 

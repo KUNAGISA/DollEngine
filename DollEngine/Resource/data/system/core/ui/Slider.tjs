@@ -10,12 +10,19 @@ class Slider extends Control
 	var min=0;
 	var max=100;
 	var vertical=false;
+	var mode = "inner"; //滑动条的模式
+	//inner是滑块内嵌于槽中
+	//center是滑块中心对齐于槽边缘
+
+	var _dragLeft;
+	var _dragRight;
+
 	function Slider (app,par) 
 	{
 		super.Control(app,par);
-		baseImage = new ProgressBar(this);
+		baseImage = new ProgressBar(app,this);
 		baseImage.setAnchor(0.5,0.5);
-		sliderBtn = new Button(this);
+		sliderBtn = new Button(app,this);
 		sliderBtn.enabled = false;
 		sliderBtn.setAnchor(0.5,0.5);
 	}
@@ -23,8 +30,7 @@ class Slider extends Control
 	function loadBase (path) 
 	{
 		baseImage.loadImages(path);
-		setSize(baseImage.width,baseImage.height);
-		baseImage.setPos(baseImage.width/2,baseImage.height/2);
+		updateMode();
 	}
 
 	function loadTabs (path,select) 
@@ -33,32 +39,37 @@ class Slider extends Control
 			sliderBtn.loadButtons(path,select);
 		}
 		else {
-			sliderBtn.loadImages(path);
+			sliderBtn.loadGraphic(path);
+		}
+		updateMode();
+	}
+
+	function updateMode () {
+		if (mode == "inner") {
+			setSize(baseImage.width,baseImage.height);
+			baseImage.setPos(width/2,height/2);
+			_dragLeft = sliderBtn.width/2;
+			_dragRight = _dragLeft + baseImage.width - sliderBtn.width;
+		}
+		else {
+			setSize(baseImage.width+sliderBtn.width,baseImage.height);
+			baseImage.setPos(width/2,height/2);
+			_dragLeft = width/2 - baseImage.width/2;
+			_dragRight = _dragLeft + baseImage.width;
 		}
 	}
 
 	function updateBtnPos (x,y) 
 	{
-		if (vertical) {
-			if (y < _dragBottom) y=_dragBottom;
-			if (y > _dragTop) y=_dragTop;
-			baseImage.value = y*100/height;
-			sliderBtn.y = y;
-			sliderBtn.x = width/2;
-	    	var p = (y-_dragBottom)/(_dragTop-_dragBottom);
-	    	p = p*(max-min)+min;
-			onChangeFunc(p);
-		}
-		else {
-			if (x < _dragLeft) x=_dragLeft;
-			if (x > _dragRight) x=_dragRight;
-			baseImage.value = x*100/width;
-			sliderBtn.x = x;
-			sliderBtn.y = height/2;
-	    	var p = (x-_dragLeft)/(_dragRight-_dragLeft);
-	    	p = p*(max-min)+min;
-			onChangeFunc(p);
-		}
+		if (x < _dragLeft) x=_dragLeft;
+		if (x > _dragRight) x=_dragRight;
+		var w = _dragRight - _dragLeft;
+		sliderBtn.x = x;
+		sliderBtn.y = height/2;
+    	var p = (x-_dragLeft)/w;
+		baseImage.value = p*100;
+    	var tp = p*(max-min)+min;
+		onChangeFunc(tp);
 	}
 
 	function onChangeFunc (pos) 
@@ -89,7 +100,7 @@ class Slider extends Control
 		updateBtnPos(x,y);
 	}
 
-	var _position=void;
+	var _position=100;
 	property position{
 	    setter(v) {
 	    	var pos = (v-min)/(max-min);
@@ -104,36 +115,6 @@ class Slider extends Control
 		getter {
 	    	//getter
 			return this._position;
-		}
-	}
-
-	var _dragLeft=0;
-	var _dragRight=0;
-	var _dragWidth=0;
-	property dragWidth{
-	    setter(v) {
-	    	_dragLeft = (width-v)/2;
-	    	_dragRight = _dragLeft+v;
-	    	this._dragWidth = v;
-		}
-		getter {
-	    	//getter
-			return this._dragWidth;
-		}
-	}
-
-	var _dragTop=0;
-	var _dragBottom=0;
-	var _dragHeight=0;
-	property dragHeight{
-	    setter(v) {
-	    	_dragBottom = (height-v)/2;
-	    	_dragTop = _dragBottom+v;
-	    	this._dragHeight = v;
-		}
-		getter {
-	    	//getter
-			return this._dragHeight;
 		}
 	}
 

@@ -20,6 +20,18 @@ class Layer extends GameObject
 		super.finalize();
 	}
 
+	function updateTransform () {
+		super.updateTransform();
+		if (parent) {
+			_realOpacity = parent._realOpacity * _opacity/255;
+	    	_image.startOpacity = _realOpacity;
+	    	_image.endOpacity = _realOpacity;
+		}
+		else {
+			_realOpacity = _opacity;
+		}
+	}
+
 	function loadImages (path) {
 		if(_image.loadImages(path,""))
 		{
@@ -91,11 +103,9 @@ class Layer extends GameObject
 	var _opacity = 255;
 	property opacity {
 	    setter(v) {
-	    	if(_opacity != v) {
-		    	_opacity = v;
-		    	_image.startOpacity = v;
-		    	_image.endOpacity = v;
-	    	}
+	    	if (v > 255) {v = 255;}
+	    	if (v < 0) {v = 0;}
+	    	_opacity = v;
 	    }
 	    getter {
 	    	return _opacity;

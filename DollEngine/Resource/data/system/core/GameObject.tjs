@@ -12,6 +12,7 @@ class GameObject
 	//private
 	var _needSortChildren = false;
 	var _transInWorld = void;
+	var _realOpacity = 255;
 
 	function GameObject (app,par) {
 		assert(app,"GameObject必须存在app属性");

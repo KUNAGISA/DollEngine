@@ -1,9 +1,19 @@
 
-class ProgressBar extends Sprite
+class ProgressBar extends Layer
 {
+	var barImage;
 	function ProgressBar (app,par) 
 	{
-		super.Sprite(app,par);
+		super.Layer(app,par);
+		barImage = new global.Layer(app,this);
+		barImage.setAnchor(0,0);
+	}
+
+	function loadImages (path) {
+		var ret = barImage.loadImages(path);
+		if (!ret) {return false;}
+		setSize(barImage.width,barImage.height);
+		return true;
 	}
 
 	var _start='left';
@@ -36,16 +46,12 @@ class ProgressBar extends Sprite
 	    	if (v>100) v=100;
 	    	if (v<0) v=0;
 	    	this._value = v;
-    		this._image.setSizeToImageSize();
 	    	if(this.start == 'left' && this.end == 'right'){
-	    		var ow = this._image.paintWidth;
-	    		this._image.setMargin(0,1-v/100,0,0);
-	    		this.width = ow;
+	    		barImage.clipRect(0,0,width*v/100,height);
 	    	}
 	    	else if(this.start == 'right' && this.end == 'left'){
-	    		var ow = this._image.paintWidth;
-	    		this._image.setMargin(1-v/100,0,0,0);
-	    		this.width = ow;
+	    		var ow = width*v/100;
+	    		this._image.clipRect(width - ow ,0,ow,height);
 	    	}
 		}
 		getter {
