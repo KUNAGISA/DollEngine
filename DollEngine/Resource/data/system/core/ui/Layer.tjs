@@ -1,13 +1,18 @@
+var htMask = 0;
 
 class Layer extends GameObject
 {
 	//public
 	var font;
 
+	var hitType;
+	var hitThreshold;
+
 	//private
 	var _image;
 	var _imagePath;
 	var _clipRect;
+	var _fillImage;
 	function Layer (app,par) {
 		super.GameObject(app,par);
 		font = new Font();
@@ -22,14 +27,8 @@ class Layer extends GameObject
 
 	function updateTransform () {
 		super.updateTransform();
-		if (parent) {
-			_realOpacity = parent._realOpacity * _opacity/255;
-	    	_image.startOpacity = _realOpacity;
-	    	_image.endOpacity = _realOpacity;
-		}
-		else {
-			_realOpacity = _opacity;
-		}
+    	_image.startOpacity = _realOpacity;
+    	_image.endOpacity = _realOpacity;
 	}
 
 	function loadImages (path) {
@@ -100,16 +99,23 @@ class Layer extends GameObject
 		}
 	}
 
-	var _opacity = 255;
-	property opacity {
-	    setter(v) {
-	    	if (v > 255) {v = 255;}
-	    	if (v < 0) {v = 0;}
-	    	_opacity = v;
-	    }
-	    getter {
-	    	return _opacity;
-	    }
+	function hasWheel () {
+		return false;
+	}
+
+	function fillRect (x,y,w,h,color) {
+		dm("失效的API:fillRect");
+	}
+
+	function drawText (dx,dy,text,dcolor) {
+		var lb = new Label(app,this);
+		lb.setAnchor(0,1);
+		lb.fontSize = font.size;
+		lb.text = text;
+		lb.setSizeToImageSize();
+		lb.x = dx;
+		lb.y = height-dy;
+		lb.color = dcolor;
 	}
 	
 	var _color=void;

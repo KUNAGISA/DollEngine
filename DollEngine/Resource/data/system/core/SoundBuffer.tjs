@@ -19,7 +19,7 @@ class BGMBuffer extends SoundBuffer
 		super.SoundBuffer();
 	}
 
-	function play (loop=true,fade=true) 
+	function play (loop=true,fade=0) 
 	{
 		super.play(...);
 	}
@@ -33,7 +33,7 @@ class SEBuffer extends SoundBuffer
 		super.SoundBuffer();
 	}
 
-	function play (loop=false,fade=false) 
+	function play (loop=false,fade=0) 
 	{
 		super.play(...);
 	}

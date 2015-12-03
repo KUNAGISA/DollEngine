@@ -188,7 +188,7 @@ class UICreator
 
     function create_CCSprite (owner,parent,properties,customProperties,hd) 
     {
-        var node = new Sprite(parent);
+        var node = new Layer(parent);
         node.loadImages(properties.spriteFrame[1],properties.spriteFrame[0]);
         return node;
     }

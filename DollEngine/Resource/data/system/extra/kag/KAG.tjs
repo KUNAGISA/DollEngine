@@ -24,8 +24,8 @@ class KAG extends Application
 	var moveWaits = [];//当前移动指令的timeline
 
 	//音频管理
-	var bgmBuffer = void;
-	var seBuffers = %[];
+	var bgm = void;
+	var se = %[];
 
 	//状态数据
 	var allskip = 1;// 0 已读跳过 1 skip时全部跳过
@@ -75,6 +75,10 @@ class KAG extends Application
 		dm("【Application status initialized】");
 	}
 
+	function add (object) {
+		// body...
+	}
+
 	property historyWriteEnabled{
 	    setter(v) {
 	    	//setter
@@ -90,19 +94,19 @@ class KAG extends Application
 
 	function getBGM () 
 	{
-		if (this.bgmBuffer == void) {
-			this.bgmBuffer = new BGMBuffer();
+		if (this.bgm == void) {
+			this.bgm = new BGMBuffer();
 		}
-		return this.bgmBuffer;
+		return this.bgm;
 	}
 
 	function getSE (buf=0) 
 	{
-		var se = this.seBuffers[buf];
+		var se = this.se[buf];
 		if (se == void) {
 			se = new SEBuffer();
 			se.buf = buf;
-			this.seBuffers[buf] = se;
+			this.se[buf] = se;
 		}
 		return se;
 	}
@@ -184,7 +188,7 @@ class KAG extends Application
 			fore.layers[i].freeImage();
 		};
 		for (var i = 0; i < fore.messages.count; i++) {
-			fore.messages[i].clearEr(true);
+			fore.messages[i].clearLayer();
 		};
 		fore.base.freeImage();
 	}
@@ -287,8 +291,12 @@ class KAG extends Application
 		this.back.add([tag,telm]);
 	}
 
-	function process (storage, label) {
-		tagManager.jumpStorage(storage,label);
+	function process (storage, target) {
+		tagManager.jumpStorage(storage,target);
+	}
+
+	function callExtraConductor (storage, target) {
+		this.tagManager.callStorage(storage,target);
 	}
 
 	/*******存档读档部分*******/
@@ -406,7 +414,7 @@ class KAG extends Application
 		/*******剧本控制*******/
 		call : function (elm) 
 		{
-			this.tagManager.callStorage(elm.storage,elm.target);
+			callExtraConductor(elm.storage,elm.target);
 			return -1;
 		} incontextof this,
 

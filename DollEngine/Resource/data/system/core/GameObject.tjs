@@ -46,9 +46,11 @@ class GameObject
 		transform.flush();
 		if(parent) {
 			_transInWorld.assign(parent._transInWorld);
+			_realOpacity = parent._realOpacity * _opacity/255;
 		}
 		else {
 			_transInWorld.init();
+			_realOpacity = _opacity;
 		}
 		_transInWorld.transform(transform);
 		_transInWorld.width = transform.width;
@@ -214,6 +216,18 @@ class GameObject
 		getter {
 			return _absolute;
 		}
+	}
+
+	var _opacity = 255;
+	property opacity {
+	    setter(v) {
+	    	if (v > 255) {v = 255;}
+	    	if (v < 0) {v = 0;}
+	    	_opacity = v;
+	    }
+	    getter {
+	    	return _opacity;
+	    }
 	}
 
 	var _parent = null;

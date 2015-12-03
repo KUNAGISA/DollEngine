@@ -13,4 +13,13 @@ class Font
 	function mapPrerenderedFont (path) {
 		dm("失效的API:mapPrerenderedFont");
 	}
+
+	property height {
+	    setter(v) {
+	    	size = v;
+	    }
+	    getter {
+	    	return size;
+	    }
+	}
 }

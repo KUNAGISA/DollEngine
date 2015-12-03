@@ -27,6 +27,7 @@ Character::~Character()
         delete frame;
     }
     m_characterInfos.clear();
+    delete m_info;
 }
 
 void Character::setSizeToImageSize()
@@ -56,6 +57,7 @@ void Character::paint(Transform* trans)
     float lastX=0;
     for (CharacterInfo* frame : m_characterInfos) {
         FontData* font = frame->getFont();
+        frame->setColor(m_startColor,m_endColor,m_startOpacity,m_endOpacity);
         Transform orgin;
         if(trans) {
             orgin.assign(trans);

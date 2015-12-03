@@ -48,6 +48,7 @@ bool Audio::preload(const String& path)
 void Audio::play(bool isloop,int fadeMS)
 {
     if(!m_object) return;
+    setLoop(isloop);
     if(fadeMS == 0){
         AUDIO_OBJ->play();
         onPlay();

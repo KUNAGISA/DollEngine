@@ -1,8 +1,8 @@
-class LayerColor extends Sprite
+class LayerColor extends Layer
 {
 	function LayerColor (app,par) 
 	{
-		super.Sprite(app,par);
+		super.Layer(app,par);
 		invalidate _image;
 		_image = new ColorRect();
 		if(!_image.loadSize(2,2,0))

@@ -59,6 +59,10 @@ class Application extends SystemDelegate
 		status.transitioning = false;//场景过渡中
 	}
 
+	function close () {
+		asyncTrigger(System.exit);
+	}
+
 	/*场景过渡效果*/
 	function sceneTransition (type, time, params*) {
 		if(status.transitioning) {

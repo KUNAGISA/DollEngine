@@ -17,9 +17,12 @@ class Button extends Control
 	{
 		super.Control(app,par);
 		_imageBase = new global.GameObject(app,this);
-		_normalImage = new Sprite(app,_imageBase);
-		_selectImage = new Sprite(app,_imageBase);
-		_disableImage = new Sprite(app,_imageBase);
+		_normalImage = new global.Layer(app,_imageBase);
+		_selectImage = new global.Layer(app,_imageBase);
+		_disableImage = new global.Layer(app,_imageBase);
+		_normalImage.setAnchor(0.5,0.5);
+		_selectImage.setAnchor(0.5,0.5);
+		_disableImage.setAnchor(0.5,0.5);
 		_normalImage.visible=true;
 		_selectImage.visible=false;
 		_disableImage.visible=false;
@@ -27,6 +30,10 @@ class Button extends Control
 		// _title.setAnchor(0.5,0.5);
 		// _title.absolute = 1;
 		// _title.visible = false;
+	}
+
+	function loadImages (graphic) {
+		return loadGraphic(graphic);
 	}
 
 	function loadGraphic (graphic) 
@@ -215,4 +222,19 @@ class Button extends Control
 			return _titleColorDisable;
 		}
 	}
+}
+
+
+if(DEConfig.module.kag){
+class LinkButtonLayer extends Button
+{
+	function LinkButtonLayer (app,par) {
+		super.Button(...);
+		setAnchor(0,1);
+	}
+
+	function setPos (x,y) {
+		super.setPos(x,parent.height-y);
+	}
+}
 }

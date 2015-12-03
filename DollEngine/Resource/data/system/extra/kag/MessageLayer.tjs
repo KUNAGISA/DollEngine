@@ -30,10 +30,13 @@ class MessageLayer extends Layer
 	{
 		super.Layer(app,par);
 		setAnchor(0,1);
-		frameImage = new Sprite(app,this);
+		frameImage = new global.Layer(app,this);
 		frameImage.visible = false;
 		frameImage.setAnchor(0,1);
 		frameImage.absolute = -3;
+		frameImage.onPaint = function () {
+			global.Layer.onPaint();
+		} incontextof frameImage;
 		_sw1 = new Touch();
 		_sw1.object = frameImage;
 		_sw1.onMouseDown = function (x,y){
@@ -119,7 +122,7 @@ class MessageLayer extends Layer
 		var syses = [];
 		for (var i = controlLayer.children.count-1; i >= 0; --i) {
 			var control = controlLayer.children[i];
-			if(sys && control.isSysControl)
+			if(!sys && control.isSysControl)
 			{
 				continue;
 			}
@@ -134,13 +137,21 @@ class MessageLayer extends Layer
 		var tmp = [];
 		for (var i = 0; i < _commands.count; i++) {
 			var command = _commands[i];
-			if(command[0] != "addText" && command[1].issys){
+			if(command[0] != "addText" && (!sys && command[1].issys) ){
 				tmp.add(command);
 			}
 		};
 		_commands.clear();
 		_commands = tmp;
 		setLocate(%[x:0,y:0]);
+	}
+
+	function clearLayer () {
+		clearEr(true);
+		frameImage.freeImage();
+		frameImage.visible = false;
+		frameColor.visible = false;
+		_commands.clear();
 	}
 
 	function setPosition (elm) 
@@ -352,7 +363,6 @@ class MessageLayer extends Layer
 		node.setSizeToImageSize();
 		node.x = tx;
 		node.y = chLayer.height-ty-font.lineSpacing;
-		dm(tx,ty,node.width,font.size,font.wordSpacing);
 		node.color = font.color;
 		//这里需要另加字间距
 		tx += node.width+font.wordSpacing;

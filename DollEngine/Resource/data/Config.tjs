@@ -17,7 +17,6 @@
 		"system/core/ui/Layer.tjs",
 		"system/core/ui/UILayer.tjs",
 		"system/core/ui/RTTLayer.tjs",
-		"system/core/ui/Sprite.tjs",
 		"system/core/ui/Label.tjs",
 		"system/core/ui/LayerColor.tjs",
 		"system/core/ui/Control.tjs",

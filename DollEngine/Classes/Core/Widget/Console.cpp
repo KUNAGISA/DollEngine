@@ -101,9 +101,16 @@ void Console::evalScripts(const String& v)
 {
     try {
         tTJSVariant ret;
+        Print(v.c_str());
         ScriptEngine::GetInstance()->eval(v,&ret);
         ret.ToString();
-        Print(ret.AsStringNoAddRef()->operator const tjs_char *());
+        const tjs_char* data = ret.AsStringNoAddRef()->operator const tjs_char *();
+        if(data == NULL) {
+            Print(L"(void)");
+        }
+        else {
+            Print(data);
+        }
     }
     TJS_CATCH
 }
