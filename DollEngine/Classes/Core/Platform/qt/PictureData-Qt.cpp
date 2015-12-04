@@ -48,8 +48,15 @@ bool PictureData::saveImage(const String& path, int w, int h)
     QImage img(QSize(m_width,m_height),QImage::Format_RGBA8888_Premultiplied);
     uchar* bits = img.bits();
     memcpy(bits,m_data->getBuffer(),m_data->getSize());
-    QImage timg = img.mirrored();
-    bool ret = timg.save(fullpath.c_nstr(),"PNG");
+    QImage retImg;
+    if(m_width == w && m_height == h){
+        retImg = img.mirrored();
+    }
+    else {
+        QImage retImg2 = img.scaled(w,h,Qt::IgnoreAspectRatio,Qt::SmoothTransformation);
+        retImg = retImg2.mirrored();
+    }
+    bool ret = retImg.save(fullpath.c_nstr(),"PNG");
     return ret;
 }
 

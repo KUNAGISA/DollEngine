@@ -12,6 +12,7 @@ class Button extends Control
 	var _normalImage;
 	var _selectImage;
 	var _disableImage;
+	var _title=void;
 
 	function Button (app,par) 
 	{
@@ -26,10 +27,10 @@ class Button extends Control
 		_normalImage.visible=true;
 		_selectImage.visible=false;
 		_disableImage.visible=false;
-		// _title = new Label(app,_imageBase);
-		// _title.setAnchor(0.5,0.5);
-		// _title.absolute = 1;
-		// _title.visible = false;
+		_title = new Label(app,_imageBase);
+		_title.setAnchor(0.5,0.5);
+		_title.absolute = 1;
+		_title.visible = false;
 	}
 
 	function loadImages (graphic) {
@@ -81,7 +82,10 @@ class Button extends Control
 
 	function onMouseDown (x,y) 
 	{
-		super.onMouseDown(x,y);
+		var ret = super.onMouseDown(x,y);
+		if(!ret) {
+			return false;
+		}
 		this._selectImage.visible=true;
 		this._normalImage.visible=false;
 	}
@@ -111,15 +115,9 @@ class Button extends Control
 			exp += "\",\"";
 			exp += this.clickData.target;
 			exp += "\");";
-			if (!isSysControl) {
-				needDisabled = true;
-			};
 		}
 		if (exp != "") {
 			asyncTrigger(Scripts.eval,[exp]);
-		}
-		if (needDisabled) {
-			disableAfterClick();
 		}
 	}
 
@@ -145,44 +143,10 @@ class Button extends Control
 		}
 	}
 
-	var _title=void;
 	property title{
-	    setter(v) {
-	    	//setter
-	    	if (v == "") {
-	    		_title.visible = false;
-	    	}
-	    	else {
-	    		_title.visible = true;
-	    	}
-	    	_title.text = v;
-			_title.setSizeToImageSize();
-		}
 		getter {
 	    	//getter
-			return _title.text;
-		}
-	}
-
-	property titleFace{
-	    setter(v) {
-	    	//setter
-	    	_title.font.face = v;
-		}
-		getter {
-	    	//getter
-			return _title.font.face;
-		}
-	}
-
-	property titleSize{
-	    setter(v) {
-	    	//setter
-	    	_title.font.size = v;
-		}
-		getter {
-	    	//getter
-			return _title.font.size;
+			return _title;
 		}
 	}
 

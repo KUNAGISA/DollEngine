@@ -1,73 +1,23 @@
 
-var g_AllControl = new Set();
-
-
 class Control extends Layer
 {
-	var _touch;
 	function Control (app,par) 
 	{
 		super.Layer(app,par);
-		g_AllControl.add(this);
 		setAnchor(0.5,0.5);
-		_touch = new Touch(this);
-		_touch.swallow = true;
-		enabled = true;
+		control = true;
 	}
 
 	function finalize () 
 	{
-		g_AllControl.remove(this);
-		invalidate _touch;
 		super.finalize();
 	}
 
-	function disableAfterClick () 
-	{
-		g_AllControl.foreach(function(value){
-			if (!value.isSysControl) {
-			    value.ignore = true;
-			}
-		});
-	}
-	
-	function updateTouches () 
-	{
-		if (enabled) {
-			_touch.listen();
-			for (var i = 0; i < children.count; i++) {
-				children[i].updateTouches();
-			};
+	function onMouseDown (x,y) {
+		if (app.status.lockLink) {
+			return false;
 		}
-	}
-
-	function onMouseDown (x,y) 
-	{
-		if (app.status.waitClickMode == WAIT_CLICK_TRANS||
-			app.status.locklink) {
-			//trans中或locklink时
-			_touch.ignore = true;
-		}
-	}
-
-	function onMouseMove (x,y) 
-	{
-	}
-
-	function onMouseUp (x,y) 
-	{
-	}
-
-	function onClick (x,y) 
-	{
-	}
-
-	var _touch=void;
-	property touch{
-		getter {
-	    	//getter
-			return _touch;
-		}
+		return true;
 	}
 
 	property disabled{
@@ -81,37 +31,17 @@ class Control extends Layer
 		}
 	}
 
-	var _isSysControl=false;//是否是系统控件（不受er/cm指令清除
-	property isSysControl{
+	var _issys=false;//是否是系统控件（不受er/cm指令清除
+	property issys{
 	    setter(v) {
 	    	//setter
-	    	_isSysControl = v;
+	    	_issys = v;
 		}
 		getter {
 	    	//getter
-			return _isSysControl;
+			return _issys;
 		}
 	}
 	
-	property ignore{
-	    setter(v) {
-	    	//setter
-	    	_touch.ignore = v;
-		}
-		getter {
-	    	//getter
-			return _touch.ignore;
-		}
-	}
-
-	var _enabled = void;
-	property enabled {
-	    setter(v) {
-	    	_enabled = v;
-	    }
-	    getter {
-	    	return _enabled;
-	    }
-	}
 }
 

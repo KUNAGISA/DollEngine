@@ -48,6 +48,7 @@ void QtConsole::keyReleaseEvent(QKeyEvent * event)
     }
     else if(event->matches(QKeySequence::Find)) {
         ConsoleFind::GetInstance(this)->show();
+        ConsoleFind::GetInstance(this)->focusEdit();
         ConsoleFind::GetInstance(this)->raise();
     }
 }
@@ -80,4 +81,9 @@ void QtConsole::on_pushButton_clicked()
 {
     evalScripts(ui->lineEdit->text().toStdWString());
     ui->lineEdit->setText("");
+}
+
+void QtConsole::on_pushButton_2_clicked()
+{
+    ui->textEdit->setText("");
 }

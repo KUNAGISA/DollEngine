@@ -79,11 +79,12 @@ class Slider extends Control
 
 	function onMouseDown (x,y) 
 	{
-		super.onMouseDown(...);
-		sliderBtn.onMouseDown(...);
-		if (!this._touch.ignore) {
-			updateBtnPos(x,y);
+		var ret = super.onMouseDown(x,y);
+		if(!ret) {
+			return false;
 		}
+		sliderBtn.onMouseDown(...);
+		updateBtnPos(x,y);
 	}
 
 	function onMouseMove (x,y) 

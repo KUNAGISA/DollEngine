@@ -5,7 +5,6 @@
 		"system/core/EventCenter.tjs",
 		"system/core/HttpClient.tjs",
 		"system/core/Timer.tjs",
-		"system/core/Touch.tjs",
 		"system/core/Font.tjs",
 		"system/core/GameObject.tjs",
 		"system/core/SoundBuffer.tjs",
@@ -68,6 +67,7 @@
 			"face" => "DroidSansFallback.ttf", //默认字体
 			"size" => 16, //默认字体大小
 		],
-		"saveDataPath" => "bookmark_%d.save" //存档命名格式
+		"saveThumbWidth" => 124, //-1表示不启用存档缩略图
+		"saveDataPath" => "bookmark_%d" //存档命名格式
 	]
 ]

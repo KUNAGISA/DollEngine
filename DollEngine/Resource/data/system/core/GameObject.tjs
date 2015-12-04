@@ -1,4 +1,4 @@
-
+var g_globalZOrder = 0;
 class GameObject
 {
 	//public
@@ -6,13 +6,15 @@ class GameObject
 	var children = [];
 	var parent;
 	var app;
-	var enabled = true;
+	var enabled = true;//是否允许本层或子层接受点击
+	var swallow = true;//是否拦截点击
 	var name;
 	
 	//private
 	var _needSortChildren = false;
 	var _transInWorld = void;
 	var _realOpacity = 255;
+	var _globalZOrder = 0;
 
 	function GameObject (app,par) {
 		assert(app,"GameObject必须存在app属性");
@@ -26,6 +28,7 @@ class GameObject
 	}
 
 	function finalize () {
+		control = false;
 		invalidate transform;
 		invalidate _transInWorld;
 		if(parent)
@@ -57,20 +60,6 @@ class GameObject
 		_transInWorld.height = transform.height;
 	}
 
-	function updateTouches () {
-		if (enabled) {
-			if (_needSortChildren) {
-				children.sort(function (a,b) {
-					return a.absolute < b.absolute;
-				});
-				_needSortChildren = false;
-			}
-			for (var i = 0; i < children.count; i++) {
-				children[i].updateTouches();
-			};
-		}
-	}
-
 	function visit () {
 		if(visible) {
 			if (_needSortChildren) {
@@ -81,6 +70,7 @@ class GameObject
 			}
 			updateTransform();
 			if(children.count == 0){
+				_globalZOrder = g_globalZOrder++;
 				onPaint();
 			}
 			else {
@@ -93,12 +83,17 @@ class GameObject
 						break;
 					}
 				}
+				_globalZOrder = g_globalZOrder++;
 				onPaint();
 				for (; i < children.count; ++i) {
 					children[i].visit();
 				}
 			}
 		}
+	}
+
+	function pointInside (x,y,dict) {
+		return _transInWorld.pointInside(x,y,dict);
 	}
 
 
@@ -113,6 +108,19 @@ class GameObject
 	function onHitTest (x,y) {
 		//当鼠标在该对象身上按下的时候检查是否需要触发点击事件
 		return true;
+	}
+
+	function onMouseDown (x,y) {
+		return true;
+	}
+
+	function onMouseUp (x,y) {
+	}
+
+	function onMouseMove (x,y) {
+	}
+
+	function onClick (x,y) {
 	}
 
 	function onSave () {
@@ -257,4 +265,21 @@ class GameObject
 		}
 	}
 	
+	var _control = false;
+	property control {
+	    setter(v) {
+	    	if (_control != v) {
+		    	_control = v;
+	    		if (v) {
+	    			app._allTouches.add(this);
+	    		}
+	    		else {
+	    			app._allTouches.remove(this);
+	    		}
+	    	};
+	    }
+	    getter {
+	    	return _control;
+	    }
+	}
 }

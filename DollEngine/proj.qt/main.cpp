@@ -12,6 +12,7 @@ int main(int argc, char *argv[])
     
     DE::System::GetInstance()->startup();
     int v = a.exec();
+    delete DE::System::GetInstance();
     if(DE::Console::GetInstance()) {
         QSettings set("def.dcfg",QSettings::IniFormat);
         QRect rect = ((QtConsole*)DE::Console::GetInstance())->geometry();

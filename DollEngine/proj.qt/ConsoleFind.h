@@ -24,6 +24,7 @@ public:
         return g_instance;
     }
     QtConsole* console;
+    void focusEdit();
 private slots:
     void on_findup_clicked();
     

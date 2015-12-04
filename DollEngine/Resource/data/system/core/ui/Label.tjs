@@ -28,6 +28,7 @@ class Label extends Layer
 	    setter(v) {
 	    	//setter
     		_image.text = v;
+    		setSizeToImageSize();
 		}
 		getter {
 	    	//getter

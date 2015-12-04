@@ -9,6 +9,7 @@ class SystemDelegate
 {
 public:
     SystemDelegate();
+    virtual ~SystemDelegate(){}
     
     virtual void onMainLoop(){}
     

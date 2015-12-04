@@ -45,6 +45,7 @@ System::System()
 
 System::~System()
 {
+    SAFF_DELETE(m_delegate);
 }
 
 float System::getDesktopWidth()

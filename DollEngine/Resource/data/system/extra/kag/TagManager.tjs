@@ -4,11 +4,17 @@ class TagManager extends KAGController
 	var macroParams = [];
 	var handlers;
 	var owner;
+	var _waitTimer;
 	function TagManager (app) 
 	{
 		super.KAGController();
 		this.owner = app;
 		handlers = app.tagHandlers;
+	}
+
+	function finalize () {
+		if (_waitTimer) {invalidate _waitTimer;}
+		super.finalize();
 	}
 
 	function jumpStorage (storage="",label="") 
@@ -114,16 +120,18 @@ class TagManager extends KAGController
 
 	function doNext () 
 	{
+		_waitTimer.enabled = false;
 		stepNext();
 		asyncTrigger(execTags);
 	}
 
 	function waitTime (time) 
 	{
-		var timer = new Timer(doNext);
-		timer.interval = time;
-		timer.enabled = true;
-		timer.count = 1;
+		if (!_waitTimer) {
+			_waitTimer = new Timer(doNext);
+		};
+		_waitTimer.interval = time;
+		_waitTimer.enabled = true;
 	}
 
 	function getMacroParams () 

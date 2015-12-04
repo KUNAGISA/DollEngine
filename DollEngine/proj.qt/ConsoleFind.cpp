@@ -14,6 +14,11 @@ ConsoleFind::~ConsoleFind()
     delete ui;
 }
 
+void ConsoleFind::focusEdit()
+{
+    ui->findText->setFocus();
+}
+
 void ConsoleFind::on_findup_clicked()
 {
     if(ui->caseSensitively->isChecked()){

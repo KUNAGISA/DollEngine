@@ -59,7 +59,7 @@ class KAG extends Application
 		status.delay = 200;//文字显示速度
 		status.nowait = false; //是否瞬间显示文本/按钮
 		status.clickskip = false; //是否允许点击略过
-		status.locklink = false; //禁止Message层的按钮被点击
+		status.lockLink = false; //禁止Message层的按钮被点击
 		/*
 		0 不等待
 		1 等待文字
@@ -244,6 +244,75 @@ class KAG extends Application
 
 	/*TAG控制*/
 
+	function checkClickSkip () {
+		switch(this.status.waitClickMode) {
+			case WAIT_CLICK_NONE:
+			{
+			}
+			break;
+			case WAIT_CLICK_WORD:
+			{
+				//等待文字
+				this.status.isClickSkip = true;
+			}
+			break;
+			case WAIT_CLICK_MOVE:
+			{
+				//等待move
+				// for (var i = this.moveWaits.count - 1; i >= 0; i--) {
+				// 	var act = this.moveWaits[i];
+				// 	if (isvalid act) {
+				// 		act.update(1);
+				// 		act.onActionEnded();
+				// 		invalidate act;
+				// 	}
+				// }
+				// this.moveWaits.clear();
+				// this.tagManager.doNext();
+			}
+			break;
+			case WAIT_CLICK_TRANS:
+			{
+				//等待trans
+				skipTransition();
+			}
+			break;
+			case WAIT_CLICK_TIME:
+			{
+				//等待时间
+				clickToNext();
+			}
+			break;
+			case WAIT_CLICK_L:
+			{
+				//等待点击继续文字
+				clickToNextCh();
+			}
+			break;
+			case WAIT_CLICK_P:
+			{
+				//等待点击换页
+				clickToNextPage();
+			}
+			break;
+			case WAIT_CLICK_ACTION:
+			{
+				//等待动作结束
+				// for (var i = this.actionWaits.count - 1; i >= 0; i--) {
+				// 	var act = this.actionWaits[i];
+				// 	if (isvalid act) {
+				// 		act.update(1);
+				// 		act.onActionEnded();
+				// 		invalidate act;
+				// 	}
+				// }
+				// this.actionWaits.clear();
+				// this.tagManager.doNext();
+			}
+			break;
+		}
+	}
+
 	function clickToNext () 
 	{
 		this.status.clickToNext = true;
@@ -306,7 +375,12 @@ class KAG extends Application
 		return path;
 	}
 
-	function locksnapshot (saveImg = false, saveTemp = true) {
+	function getBookMarkFileNameAtNum (index) {
+		var path = DEConfig.game.saveDataPath.sprintf(index);
+		return path;
+	}
+
+	function locksnapshot ( saveTemp = true) {
 		var data = %[];
 		data.f = f;
 		var base = fore.base.onSave();
@@ -339,24 +413,48 @@ class KAG extends Application
 		if (saveTemp) {
 			tempLockSnapShot = data;
 		}
+
+		if(DEConfig.game.saveThumbWidth > 0) {
+			var thumbRtt = new RTT();
+			thumbRtt.init(sysbase.width,sysbase.height);
+			thumbRtt.begin(0,0,0,1);
+			sysbase.visit();
+			thumbRtt.end();
+			data.thumbRtt = thumbRtt;
+		}
 		return data;
+	}
+
+	function unlocksnapshot () {
+		if(tempLockSnapShot && tempLockSnapShot.thumbRtt) {
+			invalidate tempLockSnapShot.thumbRtt;
+		}
+		tempLockSnapShot = void;
 	}
 
 	function saveData (index, isask=false) {
 		var data;
 		if (!tempLockSnapShot) {
-			data = locksnapshot(false,false);
+			data = locksnapshot(false);
 		}
 		else {
 			data = tempLockSnapShot;
 		}
 		var name = getBookMarkPageName(index);
-		(Dictionary.saveStruct incontextof data)(name);
+		if (data.thumbRtt) {
+			var thumbWidth = DEConfig.game.saveThumbWidth;
+			var thumbHeight = int(thumbWidth * sysbase.height / sysbase.width);
+			data.thumbRtt.saveToFile(name+".png",thumbWidth,thumbHeight);
+			invalidate data.thumbRtt;
+			data.thumbRtt = void;
+			delete data.thumbRtt;
+		};
+		(Dictionary.saveStruct incontextof data)(name+".save");
 	}
 
 	function loadData (index, isask=false) {
 		var name = getBookMarkPageName(index);
-		var data = Scripts.evalStorage(name);
+		var data = Scripts.evalStorage(name+".save");
 		if(!data){
 			dm("存档不存在，编号:",index);
 			return;
@@ -453,6 +551,7 @@ class KAG extends Application
 
 		s : function (elm) 
 		{
+			this.status.waitClickMode = WAIT_CLICK_NONE;
 			return -1;
 		} incontextof this,
 
@@ -463,12 +562,12 @@ class KAG extends Application
 
 		locklink : function (elm) 
 		{
-			this.status.locklink = true;
+			this.status.lockLink = true;
 		} incontextof this,
 
 		unlocklink : function (elm) 
 		{
-			this.status.locklink = false;
+			this.status.lockLink = false;
 		} incontextof this,
 
 		l : function (elm) 
@@ -506,10 +605,15 @@ class KAG extends Application
 			se.pan = elm.pan if elm.pan!==void;
 		} incontextof this,
 
+		xchgbgm : function (elm) {
+			
+		} incontextof this,
+
 		fadeinbgm : function (elm) 
 		{
-			checkElm(elm,['storage','time']);
+			checkElm(elm,['storage']);
 			elm.loop = true if elm.loop===void;
+			elm.time = 1000 if elm.time===void;
 			var bgm = this.getBGM();
 			bgm.preload(elm.storage);
 			bgm.fadeTime = elm.time/1000;
@@ -540,6 +644,14 @@ class KAG extends Application
 		load : function (elm) {
 			loadData(elm.place,elm.ask);
 			return -1;
+		} incontextof this,
+
+		locksnapshot : function (elm) {
+			locksnapshot(true);
+		} incontextof this,
+
+		unlocksnapshot : function (elm) {
+			unlocksnapshot();
 		} incontextof this,
 
 		/*******界面控制*******/
@@ -956,71 +1068,8 @@ class KAG extends Application
 
 
 	function onMouseDown (x,y) {
-
-		switch(this.status.waitClickMode) {
-			case WAIT_CLICK_NONE:
-			break;
-			case WAIT_CLICK_WORD:
-			{
-				//等待文字
-				this.status.isClickSkip = true;
-			}
-			break;
-			case WAIT_CLICK_MOVE:
-			{
-				//等待move
-				// for (var i = this.moveWaits.count - 1; i >= 0; i--) {
-				// 	var act = this.moveWaits[i];
-				// 	if (isvalid act) {
-				// 		act.update(1);
-				// 		act.onActionEnded();
-				// 		invalidate act;
-				// 	}
-				// }
-				// this.moveWaits.clear();
-				// this.tagManager.doNext();
-			}
-			break;
-			case WAIT_CLICK_TRANS:
-			{
-				//等待trans
-				skipTransition();
-			}
-			break;
-			case WAIT_CLICK_TIME:
-			{
-				//等待时间
-				clickToNext();
-			}
-			break;
-			case WAIT_CLICK_L:
-			{
-				//等待点击继续文字
-				clickToNextCh();
-			}
-			break;
-			case WAIT_CLICK_P:
-			{
-				//等待点击换页
-				clickToNextPage();
-			}
-			break;
-			case WAIT_CLICK_ACTION:
-			{
-				//等待动作结束
-				// for (var i = this.actionWaits.count - 1; i >= 0; i--) {
-				// 	var act = this.actionWaits[i];
-				// 	if (isvalid act) {
-				// 		act.update(1);
-				// 		act.onActionEnded();
-				// 		invalidate act;
-				// 	}
-				// }
-				// this.actionWaits.clear();
-				// this.tagManager.doNext();
-			}
-			break;
-		}
-		super.onMouseDown(x,y);
+		if (_triggerTouches.count == 0) {
+			checkClickSkip();
+		};
 	}
 }

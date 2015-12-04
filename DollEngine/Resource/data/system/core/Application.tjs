@@ -5,6 +5,10 @@ class Application extends SystemDelegate
 	var window;
 	var sysbase;
 	var conductor;
+	var enabled = true;
+	var swallow = true;
+	var visible = true;
+	var parent = void;
 
 	var status = %[];
 	var deffont = %[
@@ -27,6 +31,8 @@ class Application extends SystemDelegate
 	var _allTouches = [];
 	var _triggerTouches = [];
 
+	var _globalZOrder = -1;
+
 	function Application () {
 		super.SystemDelegate();
 
@@ -34,6 +40,8 @@ class Application extends SystemDelegate
 		_lastSeconds = System.seconds;
 		_enabledTimers = global.Timer.g_enabledTimers;
 		_allTimelines = new Set();
+		_allTouches.add(this);
+
 		initStatus();
 
 		window = new Window();
@@ -52,11 +60,20 @@ class Application extends SystemDelegate
 	}
 
 	function finalize () {
+		if (_transRTT) {
+			invalidate _transRTT;
+		}
+		(Dictionary.saveStruct incontextof sf)("sf.db");
 		invalidate window;
+		super.finalize();
 	}
 
 	function initStatus () {
 		status.transitioning = false;//场景过渡中
+		var fullpath = Storages.getFullPath("sf.db");
+		if (fullpath && fullpath.length > 0) {
+			global.sf = Scripts.evalStorage("sf.db");
+		}
 	}
 
 	function close () {
@@ -103,6 +120,9 @@ class Application extends SystemDelegate
 		dm("【过渡效果】场景过渡完毕");
 	}
 
+	function pointInside (x,y,dict) {
+		return sysbase.pointInside(x,y,dict);
+	}
 	/*帧刷新*/
 
 	function update () {
@@ -133,9 +153,11 @@ class Application extends SystemDelegate
 	function onMainLoop () {
 		update();
 		window.beforeMainLoop();
-		_allTouches.clear();
-		sysbase.updateTouches();
+		g_globalZOrder = 0;
 		sysbase.visit();
+		_allTouches.sort(function (a,b) {
+			return a._globalZOrder < b._globalZOrder;
+		});
 		if(status.transitioning) {
 			_transRTT.visit();
 		}
@@ -157,62 +179,105 @@ class Application extends SystemDelegate
 		_allAsyncTriggers.clear();
 	}
 
-	function onMouseDown (x,y) {
+	function onCheckMouseDown (x,y) {
 		_triggerTouches.clear();
+		var outPos = %[];
 		if (_allTouches.count > 0) {
 			var temp = [];
 			temp.assign(_allTouches);
-			var outPos = %[];
 			for (var i = temp.count-1; i >= 0; --i) {
-				var touch = temp[i];
-				if (!isvalid touch) {
-					continue;
-				};
-				if (touch.ignore) {
-					continue;
-				}
-				if (touch.pointInside(x,y,outPos)) {
-					if(touch.onMouseDown(outPos.x,outPos.y)) {
-						_triggerTouches.add(touch);
-						if (touch.swallow) {
-							return;
+				var object = temp[i];
+				if (isvalid object && object.enabled && object.visible) {
+					var temp = object.parent;
+					var __enabled = true;
+					while(temp) {
+						if (temp.enabled && temp.visible) {
+							temp = temp.parent;
+						}
+						else {
+							__enabled = false;
+							break;
+						}
+					}
+					if (!__enabled) {
+						continue;
+					};
+					if (object.pointInside(x,y,outPos)) {
+						var ret = object.onMouseDown(outPos.x,outPos.y);
+						if(ret || ret === void) {
+							_triggerTouches.add(object);
+							if (object.swallow) {
+								break;
+							}
 						}
 					}
 				}
 			}
 		}
+		if (sysbase.pointInside(x,y,outPos)) {
+			this.onMouseDown(outPos.x,outPos.y);
+		}
+	}
+
+	function onCheckMouseUp (x,y) {
+		var outPos = %[];
+		if (_triggerTouches.count > 0) {
+			for (var i = 0; i < _triggerTouches.count; i++) {
+				var object = _triggerTouches[i];
+				if (!isvalid object) {
+					continue;
+				};
+				object.pointInside(x,y,outPos);
+				object.onMouseUp(outPos.x,outPos.y);
+			};
+		};
+		sysbase.pointInside(x,y,outPos);
+		this.onMouseUp(outPos.x,outPos.y);
+	}
+
+	function onCheckMouseMove (x,y) {
+		var outPos = %[];
+		if (_triggerTouches.count > 0) {
+			var outPos = %[];
+			for (var i = 0; i < _triggerTouches.count; i++) {
+				var object = _triggerTouches[i];
+				if (!isvalid object) {
+					continue;
+				};
+				object.pointInside(x,y,outPos);
+				object.onMouseMove(outPos.x,outPos.y);
+			};
+		};
+		sysbase.pointInside(x,y,outPos);
+		this.onMouseMove(outPos.x,outPos.y);
+	}
+
+	function onCheckClick (x,y) {
+		var outPos = %[];
+		if (_triggerTouches.count > 0) {
+			for (var i = 0; i < _triggerTouches.count; i++) {
+				var object = _triggerTouches[i];
+				if (!isvalid object) {
+					continue;
+				};
+				object.pointInside(x,y,outPos);
+				object.onClick(outPos.x,outPos.y);
+			};
+		};
+		sysbase.pointInside(x,y,outPos);
+		this.onClick(outPos.x,outPos.y);
+	}
+
+	function onMouseDown (x,y) {
+		return true;
 	}
 
 	function onMouseUp (x,y) {
-		if (_triggerTouches.count > 0) {
-			var outPos = %[];
-			for (var i = 0; i < _triggerTouches.count; i++) {
-				var touch = _triggerTouches[i];
-				touch.pointInside(x,y,outPos);
-				touch.onMouseUp(outPos.x,outPos.y);
-			};
-		};
 	}
 
 	function onMouseMove (x,y) {
-		if (_triggerTouches.count > 0) {
-			var outPos = %[];
-			for (var i = 0; i < _triggerTouches.count; i++) {
-				var touch = _triggerTouches[i];
-				touch.pointInside(x,y,outPos);
-				touch.onMouseMove(outPos.x,outPos.y);
-			};
-		};
 	}
 
 	function onClick (x,y) {
-		if (_triggerTouches.count > 0) {
-			var outPos = %[];
-			for (var i = 0; i < _triggerTouches.count; i++) {
-				var touch = _triggerTouches[i];
-				touch.pointInside(x,y,outPos);
-				touch.onClick(outPos.x,outPos.y);
-			};
-		};
 	}
 }

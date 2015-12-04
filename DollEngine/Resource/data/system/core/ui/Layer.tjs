@@ -5,8 +5,7 @@ class Layer extends GameObject
 	//public
 	var font;
 
-	var hitType;
-	var hitThreshold;
+	var hitType = htMask;
 
 	//private
 	var _image;
@@ -131,6 +130,23 @@ class Layer extends GameObject
 		}
 	}
 
+	var _hitThreshold = 16;
+	property hitThreshold {
+	    setter(v) {
+	    	if (_hitThreshold != v) {
+		    	_hitThreshold = v;
+		    	if (v < 1) {
+		    		control = true;
+		    	}
+		    	else {
+		    		control = false;
+		    	}
+	    	};
+	    }
+	    getter {
+	    	return _hitThreshold;
+	    }
+	}
 }
 
 if(DEConfig.module.kag){

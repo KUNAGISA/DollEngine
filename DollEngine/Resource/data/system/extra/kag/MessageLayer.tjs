@@ -6,8 +6,6 @@ class MessageLayer extends Layer
 	var frameColor = void;//message层的颜色
 	var chLayer = void;//message层的文字层
 	var controlLayer = void;//message层的控件层
-	var _sw1;//当frame有值时用来遮罩点击
-	var _sw2;//当frame有值时用来遮罩点击
 
 	var names = %[]; //用于存放control
 	var buttons = %[]; //用于存放syscontrol
@@ -37,27 +35,20 @@ class MessageLayer extends Layer
 		frameImage.onPaint = function () {
 			global.Layer.onPaint();
 		} incontextof frameImage;
-		_sw1 = new Touch();
-		_sw1.object = frameImage;
-		_sw1.onMouseDown = function (x,y){
-			if(opacity < 16)
-				_sw1.ignore=true;
-		} incontextof this;
-		_sw1.swallow = true;
-		_sw1.enabled = true;
 
 		frameColor = new LayerColor(app,this);
 		frameColor.visible = false;
 		frameColor.setAnchor(0,1);
 		frameColor.absolute = -3;
-		_sw2 = new Touch();
-		_sw2.object = frameColor;
-		_sw2.onMouseDown = function (x,y){
-			if(opacity < 16)
-				_sw2.ignore=true;
+
+		frameImage.control = true;
+		frameImage.onMouseDown = function () {
+			app.checkClickSkip();
+			app.status.waitClickMode = WAIT_CLICK_NONE;
+			return true;
 		} incontextof this;
-		_sw2.swallow = true;
-		_sw2.enabled = true;
+		frameColor.control = true;
+		frameColor.onMouseDown = frameImage.onMouseDown;
 
 		chLayer = new WordLayer(app,this);
 		chLayer.visible = true;
@@ -85,21 +76,6 @@ class MessageLayer extends Layer
 		super.finalize();
 	}
 
-	function updateTouches () 
-	{
-		if (enabled) {
-			if (frameImage.visible) {
-				_sw1.listen();
-			}
-			if (frameColor.visible) {
-				_sw2.listen();
-			}
-			for (var i = 0; i < children.count; i++) {
-				children[i].updateTouches();
-			};
-		}
-	}
-
 	function saveCommand (name, elm) {
 		if (name == "addText") {
 			if (_commands.count > 0 && _commands[-1][0] == "addText") {
@@ -122,7 +98,7 @@ class MessageLayer extends Layer
 		var syses = [];
 		for (var i = controlLayer.children.count-1; i >= 0; --i) {
 			var control = controlLayer.children[i];
-			if(!sys && control.isSysControl)
+			if(!sys && control.issys)
 			{
 				continue;
 			}
@@ -222,6 +198,11 @@ class MessageLayer extends Layer
 		return true;
 	}
 
+	function onMouseDown (x,y) {
+		app.checkClickSkip(x,y);
+		return false;
+	}
+
 	function onSave () {
 		var dict = %[
 			position : %[],
@@ -280,8 +261,8 @@ class MessageLayer extends Layer
 		}
 		var node = new Button(app,controlLayer);
 		node.name = elm.name;
-		node.isSysControl = elm.issys===void?false:elm.issys;
-		if (node.isSysControl) {
+		node.issys = elm.issys===void?false:elm.issys;
+		if (node.issys) {
 			buttons[elm.name] = node;
 		}
 		else {
@@ -320,8 +301,8 @@ class MessageLayer extends Layer
 		}
 		var node = new Slider(app,controlLayer);
 		node.name = elm.name;
-		node.isSysControl = elm.issys===void?false:elm.issys;
-		if (node.isSysControl) {
+		node.issys = elm.issys===void?false:elm.issys;
+		if (node.issys) {
 			buttons[elm.name] = node;
 		}
 		else {
@@ -360,7 +341,6 @@ class MessageLayer extends Layer
 		//这里还要设置文字属性
 		node.fontSize = font.size;
 		node.text = text;
-		node.setSizeToImageSize();
 		node.x = tx;
 		node.y = chLayer.height-ty-font.lineSpacing;
 		node.color = font.color;
