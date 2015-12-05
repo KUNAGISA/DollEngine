@@ -18,7 +18,7 @@ DE_BEGIN
 class KAGLabel
 {
 public:
-    KAGLabel():isMacro(false),storage(NULL),nextLabel(NULL){}
+    KAGLabel():isMacro(false),storage(NULL),nextLabel(NULL),hasName(false){}
     ~KAGLabel(){
         for(KAGTag* tag : allTags)
         {
@@ -34,6 +34,7 @@ public:
     KAGStorage* storage;
     String key;
     String name;
+    bool hasName;
     vector<KAGTag*> allTags;
     bool isMacro;
     KAGLabel* nextLabel;

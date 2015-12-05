@@ -55,6 +55,9 @@ bool KAGController::stepInLabel(const String& file, const String& label, bool is
     }
     m_storage = storage;
     m_label = lb;
+    if(m_label->hasName && m_label->name.length() > 0) {
+        m_lastTarget = m_label->name;
+    }
     m_tagIndex = 0;
     printLabel();
     return true;
@@ -67,6 +70,9 @@ bool KAGController::stepOutLabel()
     KAGStack stack = m_stack.back();
     m_storage = stack.storage;
     m_label = stack.label;
+    if(m_label->hasName && m_label->name.length() > 0) {
+        m_lastTarget = m_label->name;
+    }
     m_tagIndex = stack.tagIndex;
     m_stack.pop_back();
    
@@ -83,6 +89,9 @@ bool KAGController::stepNext()
                 return false;
             }
             m_label = m_label->nextLabel;
+            if(m_label->hasName && m_label->name.length() > 0) {
+                m_lastTarget = m_label->name;
+            }
             m_tagIndex = 0;
             printLabel();
         }
@@ -109,4 +118,5 @@ void KAGController::printLabel()
                                    m_tagIndex);
     DM(dm.c_str());
 }
+
 DE_END

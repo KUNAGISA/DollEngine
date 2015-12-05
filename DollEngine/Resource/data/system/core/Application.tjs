@@ -33,6 +33,8 @@ class Application extends SystemDelegate
 
 	var _globalZOrder = -1;
 
+	var _cacheData = %[];
+
 	function Application () {
 		super.SystemDelegate();
 
@@ -54,6 +56,7 @@ class Application extends SystemDelegate
 
 		sysbase = new Layer(this,null);
 		sysbase.setSize(window.layerWidth,window.layerHeight);
+		sysbase.name = "sysbase";
 		
 		System.delegate = this;
 
@@ -63,17 +66,24 @@ class Application extends SystemDelegate
 		if (_transRTT) {
 			invalidate _transRTT;
 		}
-		(Dictionary.saveStruct incontextof sf)("sf.db");
+		_cacheData.sf = sf;
+		(Dictionary.saveStruct incontextof _cacheData)("cache.db");
 		invalidate window;
 		super.finalize();
 	}
 
 	function initStatus () {
 		status.transitioning = false;//场景过渡中
-		var fullpath = Storages.getFullPath("sf.db");
+		var fullpath = Storages.getFullPath("cache.db");
 		if (fullpath && fullpath.length > 0) {
-			global.sf = Scripts.evalStorage("sf.db");
+			_cacheData = Scripts.evalStorage("cache.db");
 		}
+		else {
+			_cacheData = %[
+				sf : %[],
+			];
+		}
+		global.sf = _cacheData.sf;
 	}
 
 	function close () {

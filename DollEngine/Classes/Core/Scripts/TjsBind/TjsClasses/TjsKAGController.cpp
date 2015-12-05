@@ -277,4 +277,5 @@ NCB_REGISTER_CLASS_DIFFER(KAGController, TjsKAGController)
     NCB_METHOD(stepInLabel);
     NCB_METHOD(saveStack);
     NCB_METHOD(loadStack);
+    NCB_PROPERTY_RO(lastTarget,getLastTargetTJS);
 };

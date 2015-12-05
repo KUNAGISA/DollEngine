@@ -33,6 +33,7 @@ class KAG extends Application
 	var skipMode = SKIP_NONE;
 	var fullScreen = false;
 	var bookMarkDates = [];//存档日期
+	var bookMarkNames = [];//存档标题
 	var tempLockSnapShot; //临时存储的档案
 	
 	function KAG () 
@@ -40,6 +41,7 @@ class KAG extends Application
 		super.Application();
 
 		fore.base = new BaseLayer(this,sysbase);
+		fore.base.name = "base";
 
 		fore.layers = [];
 		fore.messages = [];
@@ -72,6 +74,8 @@ class KAG extends Application
 		status.waitClickMode = WAIT_CLICK_NONE;
 		status.isClickSkip = false;//是否点击之后skip动画中
 		status.clickToNext = false;//是否刚刚点击继续过（用于过滤r）
+
+		initBookMarkDates();
 		dm("【Application status initialized】");
 	}
 
@@ -161,6 +165,7 @@ class KAG extends Application
 					// 			marginb : .marginLRTB[3],
 					// 		]);
 					// }
+					lay.name = "message"+msgIdx;
 					lay.absolute=1000000+1000*msgIdx;
 					fore.messages[msgIdx] = lay;
 				}
@@ -173,6 +178,7 @@ class KAG extends Application
 				lay = fore.layers[layIdx];
 				if(!lay){
 					lay = new GraphicLayer(this,fore.base);
+					lay.name = "layer"+msgIdx;
 					lay.absolute=1000*layIdx;
 					fore.layers[layIdx] = lay;
 				}
@@ -191,6 +197,7 @@ class KAG extends Application
 			fore.messages[i].clearLayer();
 		};
 		fore.base.freeImage();
+		status.lockLink = false;
 	}
 
 
@@ -370,9 +377,21 @@ class KAG extends Application
 
 	/*******存档读档部分*******/
 
-	function getBookMarkPageName (index) {
-		var path = DEConfig.game.saveDataPath.sprintf(index);
-		return path;
+	function initBookMarkDates () {
+		bookMarkDates.clear();
+		bookMarkNames.clear();
+		if (!_cacheData.bookMarkDatas) {
+			_cacheData.bookMarkDatas = [];
+		}
+		else {
+			for (var i = 0; i < _cacheData.bookMarkDatas.count; i++) {
+				var data = _cacheData.bookMarkDatas[i];
+				if(data) {
+					bookMarkDates[i] = data.date;
+					bookMarkNames[i] = data.name;
+				}
+			}
+		}
 	}
 
 	function getBookMarkFileNameAtNum (index) {
@@ -409,6 +428,9 @@ class KAG extends Application
 		data.messages = messages;
 
 		data.tags = tagManager.saveStack();
+		data.bookmark = %[
+			name : tagManager.lastTarget
+		];
 
 		if (saveTemp) {
 			tempLockSnapShot = data;
@@ -432,6 +454,12 @@ class KAG extends Application
 		tempLockSnapShot = void;
 	}
 
+	function setBookMarkData (index,data) {
+		_cacheData.bookMarkDatas[index] = data;
+		bookMarkDates[index] = data.date;
+		bookMarkNames[index] = data.name;
+	}
+
 	function saveData (index, isask=false) {
 		var data;
 		if (!tempLockSnapShot) {
@@ -440,20 +468,27 @@ class KAG extends Application
 		else {
 			data = tempLockSnapShot;
 		}
-		var name = getBookMarkPageName(index);
-		if (data.thumbRtt) {
+		var tdata = %[];
+		(Dictionary.assignStruct incontextof tdata)(data);
+
+		var name = getBookMarkFileNameAtNum(index);
+		tdata.bookmark.storage = name;
+		var date = new Date();
+		tdata.bookmark.date = "%d/%d/%d %d:%d:%d".sprintf(date.getYear(),date.getMonth(),date.getDate(),date.getHours(),date.getMinutes(),date.getSeconds());
+		if (tdata.thumbRtt) {
 			var thumbWidth = DEConfig.game.saveThumbWidth;
 			var thumbHeight = int(thumbWidth * sysbase.height / sysbase.width);
-			data.thumbRtt.saveToFile(name+".png",thumbWidth,thumbHeight);
-			invalidate data.thumbRtt;
-			data.thumbRtt = void;
-			delete data.thumbRtt;
+			tdata.thumbRtt.saveToFile(name+".png",thumbWidth,thumbHeight);
+			invalidate tdata.thumbRtt;
+			tdata.thumbRtt = void;
+			delete tdata.thumbRtt;
 		};
-		(Dictionary.saveStruct incontextof data)(name+".save");
+		(Dictionary.saveStruct incontextof tdata)(name+".save");
+		setBookMarkData(index,tdata.bookmark);
 	}
 
 	function loadData (index, isask=false) {
-		var name = getBookMarkPageName(index);
+		var name = getBookMarkFileNameAtNum(index);
 		var data = Scripts.evalStorage(name+".save");
 		if(!data){
 			dm("存档不存在，编号:",index);

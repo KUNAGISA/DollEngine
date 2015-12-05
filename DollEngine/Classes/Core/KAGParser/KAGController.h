@@ -27,7 +27,7 @@ class KAGController
 {
 public:
     KAGController();
-    ~KAGController();
+    virtual ~KAGController();
     
     bool stepInLabel(const String& storage, const String& label, bool iscall);
     bool stepOutLabel();
@@ -36,9 +36,12 @@ public:
     
     void printLabel();
     
+    String getLastTarget(){return m_lastTarget;}
+    
 protected:
     KAGStorage* m_storage;
     KAGLabel* m_label;
+    String m_lastTarget;
     int m_tagIndex;
     vector<KAGStack> m_stack;
 };

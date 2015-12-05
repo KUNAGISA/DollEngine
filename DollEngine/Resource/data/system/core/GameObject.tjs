@@ -93,7 +93,8 @@ class GameObject
 	}
 
 	function pointInside (x,y,dict) {
-		return _transInWorld.pointInside(x,y,dict);
+		var ret = _transInWorld.pointInside(x,y,dict);
+		return ret;
 	}
 
 

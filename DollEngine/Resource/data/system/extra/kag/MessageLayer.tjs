@@ -32,6 +32,7 @@ class MessageLayer extends Layer
 		frameImage.visible = false;
 		frameImage.setAnchor(0,1);
 		frameImage.absolute = -3;
+		frameImage.name = "frameImage";
 		frameImage.onPaint = function () {
 			global.Layer.onPaint();
 		} incontextof frameImage;
@@ -40,6 +41,7 @@ class MessageLayer extends Layer
 		frameColor.visible = false;
 		frameColor.setAnchor(0,1);
 		frameColor.absolute = -3;
+		frameColor.name = "frameColor";
 
 		frameImage.control = true;
 		frameImage.onMouseDown = function () {

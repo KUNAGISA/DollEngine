@@ -61,7 +61,7 @@ KAGStorage* KAGParser::loadScenario(const String& filepath)
     m_parseLine=1;
     m_isScripts=false;
     createStorage(filepath,fullpath);
-    createLabel(L"_def_",L"");
+    createLabel(L"_def_",L"",false);
     
     while (ntext)
     {
@@ -133,20 +133,20 @@ void KAGParser::endMacro()
 wchar_t* KAGParser::parseLine(wchar_t* text,bool is_scripts)
 {
     bool _is_note = false;
-    while (text && *text)//*text != '\0' && *text != '\n' && *text != '\r')
+    while (text && *text)//*text != L'\0' && *text != L'\n' && *text != L'\r')
     {
         if (m_errorLine!=0) {
             return NULL;
         }
-        if (*text == '\r' && *(text+1) != '\n')
+        if (*text == L'\r' && *(text+1) != L'\n')
         {
-            *text = '\n';
+            *text = L'\n';
         }
-        else if (*text == '\r' && *(text+1) == '\n')
+        else if (*text == L'\r' && *(text+1) == L'\n')
         {
             ++text;
         }
-        if (*text == '\n')
+        if (*text == L'\n')
         {
             ++m_parseLine;
         }
@@ -175,7 +175,7 @@ wchar_t* KAGParser::parseLine(wchar_t* text,bool is_scripts)
         }
         if (_is_note)
         {
-            if (*text == '\n')
+            if (*text == L'\n')
             {
                 return ++text;
             }
@@ -184,22 +184,22 @@ wchar_t* KAGParser::parseLine(wchar_t* text,bool is_scripts)
         }
         switch (*text)
         {
-            case '\0':
+            case L'\0':
                 return NULL;
                 break;
-            case '\n':
-            case '\r':
+            case L'\n':
+            case L'\r':
                 return ++text;
                 break;
-            case '*':
+            case L'*':
                 return parseLabel(text);
                 break;
-            case '@':
+            case L'@':
                 text = parseTagAt(text+1);
                 break;
-            case '[':
+            case L'[':
             {
-                if (*(text+1) != '[') {
+                if (*(text+1) != L'[') {
                     text = parseTag(text+1,false);
                 }
                 else
@@ -208,7 +208,7 @@ wchar_t* KAGParser::parseLine(wchar_t* text,bool is_scripts)
                 }
             }
                 break;
-            case ';':
+            case L';':
             {
                 _is_note = true;
                 ++text;
@@ -245,7 +245,7 @@ wchar_t* KAGParser::parseLabel(wchar_t* text)
     while (true)
     {
         if (*ntext < 0x21||
-            *ntext == '|')
+            *ntext == L'|')
         {
             if (key == L"*")
             {
@@ -259,8 +259,10 @@ wchar_t* KAGParser::parseLabel(wchar_t* text)
         ++ntext;
     }
     ntext = parseEmpty(ntext);
-    if (*ntext == '|')
+    bool hasname = false;
+    if (*ntext == L'|')
     {
+        hasname = true;
         ++ntext;
         while (true)
         {
@@ -272,7 +274,7 @@ wchar_t* KAGParser::parseLabel(wchar_t* text)
             ++ntext;
         }
     }
-    createLabel(key, name);
+    createLabel(key, name,hasname);
     return ntext;
 }
 
@@ -314,7 +316,7 @@ wchar_t* KAGParser::parseTag(wchar_t* text,bool is_at)
         }
         else
         {
-            if(*ntext == ']') ++text;
+            if(*ntext == L']') ++text;
             break;
         }
     }
@@ -326,7 +328,7 @@ wchar_t* KAGParser::parseTagName(wchar_t* text,bool is_at)
     wchar_t* ntext = text;
     while (true)
     {
-        if (is_at == false&&*ntext == ']')
+        if (is_at == false&&*ntext == L']')
         {
             return ntext;
         }
@@ -346,7 +348,7 @@ wchar_t* KAGParser::parseTagParamKey(wchar_t* text,bool is_at)
     wchar_t* ntext = text;
     while (true)
     {
-        if (*ntext < 0x21 || *ntext == '=' || *ntext == ']')
+        if (*ntext < 0x21 || *ntext == L'=' || *ntext == L']')
         {
             return ntext;
         }
@@ -360,12 +362,12 @@ wchar_t* KAGParser::parseTagParamKey(wchar_t* text,bool is_at)
 wchar_t* KAGParser::parseTagParamValue(wchar_t* text,bool is_at,String& value,bool& entity,bool& macroarg)
 {
     wchar_t* ntext = text;
-    if (*ntext == '\0' || *ntext == '\n' || *ntext == '\r')
+    if (*ntext == L'\0' || *ntext == L'\n' || *ntext == L'\r')
     {
         value = L"true";
         return text;
     }
-    else if (*ntext == '=')
+    else if (*ntext == L'=')
     {
         ++ntext;
         ntext = parseEmpty(ntext);
@@ -375,22 +377,22 @@ wchar_t* KAGParser::parseTagParamValue(wchar_t* text,bool is_at,String& value,bo
         value = L"true";
         return text;
     }
-    if (*ntext == '%') {
+    if (*ntext == L'%') {
         macroarg = true;
     }
-    if (*ntext == '&') {
+    if (*ntext == L'&') {
         entity = true;
     }
     while (true)
     {
-        if (*ntext == '\\') {
+        if (*ntext == L'\\') {
             value.push_back(*ntext);
             ++ntext;
             value.push_back(*ntext);
             ++ntext;
             continue;
         }
-        if (*ntext == '\'' || *ntext == '"')
+        if (*ntext == L'\'' || *ntext == L'"')
         {
             String str;
             ntext = parseString(ntext,str,entity);
@@ -400,7 +402,7 @@ wchar_t* KAGParser::parseTagParamValue(wchar_t* text,bool is_at,String& value,bo
             value.append(str);
             continue;
         }
-        if (*ntext == '\0' || *ntext == '\n' || *ntext == '\r') {
+        if (*ntext == L'\0' || *ntext == L'\n' || *ntext == L'\r') {
             if (is_at) {
                 if (value.size() == 0) value = L"true";
                 return ntext;
@@ -411,7 +413,7 @@ wchar_t* KAGParser::parseTagParamValue(wchar_t* text,bool is_at,String& value,bo
                 return NULL;
             }
         }
-        else if ((*ntext == ']' && !is_at) || *ntext < 0x21) {
+        else if ((*ntext == L']' && !is_at) || *ntext < 0x21) {
             if (value.size() == 0) value = L"true";
             return ntext;
         }
@@ -426,7 +428,7 @@ wchar_t* KAGParser::parseEmpty(wchar_t* text)
 {
     while (true)
     {
-        if (*text == '\0' || *text == '\n' || *text == '\r')
+        if (*text == L'\0' || *text == L'\n' || *text == L'\r')
         {
             return text;
         }
@@ -449,20 +451,20 @@ wchar_t* KAGParser::parseString(wchar_t* text,String& str,bool& entity)
     ++text;
     while (true)
     {
-        if (*text == '\0' || *text == '\n' || *text == '\r')
+        if (*text == L'\0' || *text == L'\n' || *text == L'\r')
         {
             m_errorInfo = ERROR_KAG_VALUE_STRING_ENDED;
             m_errorLine = m_parseLine;
             return NULL;
         }
-        if (*text == '\\') {
+        if (*text == L'\\') {
             str.push_back(*text);
             ++text;
             str.push_back(*text);
             ++text;
             continue;
         }
-        if (*text == '\'' || *text == '\"') {
+        if (*text == L'\'' || *text == L'\"') {
             if (*text == start_ch) {
                 str.push_back(*text);
                 ++text;
@@ -535,13 +537,14 @@ void KAGParser::createStorage(const String& file,const String& fullpath)
     m_tag=NULL;
 }
 
-void KAGParser::createLabel(const String& key,const String& name)
+void KAGParser::createLabel(const String& key,const String& name, bool hasname)
 {
     KAGLabel* lastLabel = m_label;
     m_label=new KAGLabel();
     m_label->key=key;
     m_storage->addLabel(m_label);
     m_label->name=name;
+    m_label->hasName = hasname;
     m_label->storage = m_storage;
     if (lastLabel)
     {

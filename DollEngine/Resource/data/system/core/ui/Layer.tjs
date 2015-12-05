@@ -12,6 +12,8 @@ class Layer extends GameObject
 	var _imagePath;
 	var _clipRect;
 	var _fillImage;
+
+	var _drawTexts = [];
 	function Layer (app,par) {
 		super.GameObject(app,par);
 		font = new Font();
@@ -104,6 +106,9 @@ class Layer extends GameObject
 
 	function fillRect (x,y,w,h,color) {
 		dm("失效的API:fillRect");
+		for (var i = 0; i < _drawTexts.count; i++) {
+			invalidate _drawTexts[i];
+		};
 	}
 
 	function drawText (dx,dy,text,dcolor) {
@@ -115,6 +120,7 @@ class Layer extends GameObject
 		lb.x = dx;
 		lb.y = height-dy;
 		lb.color = dcolor;
+		_drawTexts.add(lb);
 	}
 	
 	var _color=void;

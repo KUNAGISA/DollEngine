@@ -58,7 +58,7 @@ protected:
 protected:
     wchar_t* containText(wchar_t* text, const wchar_t* data,bool is_end);
     void createStorage(const String& file,const String& fullpath);
-    void createLabel(const String& key,const String& name);
+    void createLabel(const String& key,const String& name,bool hasname);
     void createTag(const String& name);
 protected:
     int m_errorLine;

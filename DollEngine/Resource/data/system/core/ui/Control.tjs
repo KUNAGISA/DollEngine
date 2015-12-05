@@ -17,6 +17,13 @@ class Control extends Layer
 		if (app.status.lockLink) {
 			return false;
 		}
+		if (app.status.waitClickMode == WAIT_CLICK_WORD ||
+			app.status.waitClickMode == WAIT_CLICK_MOVE ||
+			app.status.waitClickMode == WAIT_CLICK_TRANS ||
+			app.status.waitClickMode == WAIT_CLICK_TIME ||
+			app.status.waitClickMode == WAIT_CLICK_ACTION) {
+			return false;
+		};
 		return true;
 	}
 

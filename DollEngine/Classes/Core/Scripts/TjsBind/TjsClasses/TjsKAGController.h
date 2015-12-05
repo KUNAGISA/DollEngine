@@ -27,6 +27,10 @@ bool stepInLabel(tTJSVariant storage, tTJSVariant label, bool iscall)
 }
 
 tTJSVariant saveStack();
+tTJSVariant getLastTargetTJS(){
+    tTJSVariant ret = getLastTarget().c_str();
+    return ret;
+}
 bool loadStack(tTJSVariant v);
 protected:
 stack<wstring> m_ifKey;
