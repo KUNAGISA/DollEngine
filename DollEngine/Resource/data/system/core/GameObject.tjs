@@ -206,6 +206,33 @@ class GameObject
 	    }
 	}
 
+	property scale {
+	    setter(v) {
+	    	transform.scale = v;
+	    }
+	    getter {
+	    	return transform.scale;
+	    }
+	}
+
+	property scaleX {
+	    setter(v) {
+	    	transform.scaleX = v;
+	    }
+	    getter {
+	    	return transform.scaleX;
+	    }
+	}
+
+	property scaleY {
+	    setter(v) {
+	    	transform.scaleY = v;
+	    }
+	    getter {
+	    	return transform.scaleY;
+	    }
+	}
+
 	var _visible = true;
 	property visible{
 		setter(v) {
@@ -220,7 +247,7 @@ class GameObject
 	property absolute{
 		setter(v) {
 			_absolute = v;
-			if(parent) parent._needSortChildren;
+			if(parent) parent._needSortChildren=true;
 		}
 		getter {
 			return _absolute;

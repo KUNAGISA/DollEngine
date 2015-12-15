@@ -187,41 +187,28 @@ class KAG extends Application
 		}
 	}
 
+	function hideMessages (v = false) {
+		for (var i = 0; i < fore.messages.count; i++) {
+			if (fore.messages[i]) {
+				fore.messages[i].visible = v;
+			};
+		};
+	}
 
 	function clearLayers () 
 	{
 		for (var i = 0; i < fore.layers.count; i++) {
-			fore.layers[i].freeImage();
+			if (fore.layers[i]) {
+				fore.layers[i].freeImage();
+			}
 		};
 		for (var i = 0; i < fore.messages.count; i++) {
-			fore.messages[i].clearLayer();
+			if (fore.messages[i]) {
+				fore.messages[i].clearLayer();
+			};
 		};
 		fore.base.freeImage();
 		status.lockLink = false;
-	}
-
-
-	function resetLayerCount(layName,count)
-	{
-		if(count < fore[layName].count) {
-			for (var i = fore[layName].count - 1; i >= count; i--) {
-				invalidate fore[layName][i];
-			}
-			fore[layName].count = count;
-		}
-		if(count > fore[layName].count) {
-			var className;
-			if(layName == "layers") {
-				className = "GraphicLayer";
-			}
-			else {
-				className = "MessageLayer";
-			}
-			for(var i = count-fore[layName].count; i >= 0; i--) {
-				var layer = new global[className](this,this.fore.base);
-				fore[layName].add(layer);
-			}
-		}
 	}
 
 	/*效果控制*/
@@ -399,7 +386,24 @@ class KAG extends Application
 		return path;
 	}
 
-	function locksnapshot ( saveTemp = true) {
+	function locksnapshot () {
+		var data = tempLockSnapShot;
+		if (!data) {
+			saveTempData();
+			data = tempLockSnapShot;
+		};
+		if(DEConfig.game.saveThumbWidth > 0) {
+			var thumbRtt = new RTT();
+			thumbRtt.init(sysbase.width,sysbase.height);
+			thumbRtt.begin(0,0,0,1);
+			sysbase.visit();
+			thumbRtt.end();
+			data.thumbRtt = thumbRtt;
+		}
+		return data;
+	}
+
+	function saveTempData () {
 		var data = %[];
 		data.f = f;
 		var base = fore.base.onSave();
@@ -426,25 +430,15 @@ class KAG extends Application
 		data.base = base;
 		data.layers = layers;
 		data.messages = messages;
+		data.current = currentLayer;
+		data.macroParams = [];
+		data.macroParams.assignStruct(tagManager.macroParams);
 
 		data.tags = tagManager.saveStack();
 		data.bookmark = %[
 			name : tagManager.lastTarget
 		];
-
-		if (saveTemp) {
-			tempLockSnapShot = data;
-		}
-
-		if(DEConfig.game.saveThumbWidth > 0) {
-			var thumbRtt = new RTT();
-			thumbRtt.init(sysbase.width,sysbase.height);
-			thumbRtt.begin(0,0,0,1);
-			sysbase.visit();
-			thumbRtt.end();
-			data.thumbRtt = thumbRtt;
-		}
-		return data;
+		tempLockSnapShot = data;
 	}
 
 	function unlocksnapshot () {
@@ -461,11 +455,9 @@ class KAG extends Application
 	}
 
 	function saveData (index, isask=false) {
-		var data;
+		var data = tempLockSnapShot;
 		if (!tempLockSnapShot) {
-			data = locksnapshot(false);
-		}
-		else {
+			saveTempData();
 			data = tempLockSnapShot;
 		}
 		var tdata = %[];
@@ -496,6 +488,8 @@ class KAG extends Application
 		}
 		f = data.f;
 		clearLayers();
+		currentLayer = data.current;
+		this.status.uiPage = "fore";
 		fore.base.onLoad(data.base);
 		for (var i = 0; i < data.layers.length; i++) {
 			if (data.layers[i] == 0) {continue;}
@@ -510,8 +504,9 @@ class KAG extends Application
 
 		tagManager.loadStack(data.tags);
 
+		tagManager.macroParams = data.macroParams;
 		if(tagManager.stepOutLabel()){
-			tagManager.doNext();
+			asyncTrigger(tagManager.execTags);
 		}
 	}
 
@@ -613,6 +608,7 @@ class KAG extends Application
 				return;
 			}
 			this.status.waitClickMode = WAIT_CLICK_L;
+			saveTempData();
 			return -1;
 		} incontextof this,
 
@@ -624,6 +620,7 @@ class KAG extends Application
 				return;
 			}
 			this.status.waitClickMode = WAIT_CLICK_P;
+			saveTempData();
 			return -1;
 		} incontextof this,
 
@@ -691,8 +688,16 @@ class KAG extends Application
 
 		/*******界面控制*******/
 		laycount : function (elm) {
-			resetLayerCount("layers", elm.layer) if elm.layer!==void;
-			resetLayerCount("messages", elm.messages) if elm.messages!==void;
+			if (elm.layer !== void) {
+				for (var i = 0; i < elm.layer; i++) {
+					this.getLayerByElm(%[layer:i,page:"fore"]);
+				}
+			}
+			if (elm.messages !== void) {
+				for (var i = 0; i < elm.messages; i++) {
+					this.getLayerByElm(%[layer:"message"+i,page:"fore"]);
+				}
+			};
 		} incontextof this,
 
 		//创建界面@ui storage=xx layer=xx page=xx visible=xx data=xx
@@ -742,7 +747,9 @@ class KAG extends Application
 				this.mergerBack('image',elm);
 				return;
 			}
-			lay.loadImages(elm.storage);
+			if(!lay.loadImages(elm.storage)) {
+				dm("[image]加载资源"+elm.storage+"失败");
+			}
 			var x = elm.left;
 			var y = +lay.parent.height - elm.top;
 			lay.setPos(x,y);
@@ -781,6 +788,7 @@ class KAG extends Application
 				this.mergerBack('layopt',elm);
 				return;
 			}
+			lay.scale = elm.zoom/100 if elm.zoom!==void;
 			lay.visible = elm.visible if elm.visible!==void;
 			lay.x = elm.left if elm.left!==void;
 			lay.y = lay.parent.height - elm.top if elm.top!==void;
