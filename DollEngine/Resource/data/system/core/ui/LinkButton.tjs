@@ -56,12 +56,14 @@ class LinkButton extends Control
 				if(dict.x >= rect[0] && dict.x <= rect[0]+rect[2] &&
 					dict.y >= rect[1]-rect[3] && dict.y <= rect[1] )
 				{
-					dict.x -= rect[0];
-					dict.y -= rect[1]-rect[3];
+					dict.x = 0;
+					dict.y = 0;
 					return true;
 				}
 			}
 		}
+		dict.x = -1;
+		dict.y = -1;
 		return false;
 	}
 
@@ -81,7 +83,30 @@ class LinkButton extends Control
 		for (var i = _selectImages.length - 1; i >= 0; i--) {
 			_selectImages[i].visible = false;
 		};
+		if (x==0 && y==0) {
+			dm(11111111);
+			this.exception();
+		}
 	}
 
+	function exception () 
+	{
+		var exp = "";
+		if (this.clickData.exp) {
+			exp += this.clickData.exp;
+			exp += ";";
+		}
+		var needDisabled = false;
+		if (this.clickData.storage || this.clickData.target) {
+			exp += "System.delegate.process(\"";
+			exp += this.clickData.storage;
+			exp += "\",\"";
+			exp += this.clickData.target;
+			exp += "\");";
+		}
+		if (exp != "") {
+			asyncTrigger(Scripts.eval,[exp]);
+		}
+	}
 
 }
