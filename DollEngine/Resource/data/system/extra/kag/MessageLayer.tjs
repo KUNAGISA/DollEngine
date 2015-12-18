@@ -21,6 +21,7 @@ class MessageLayer extends Layer
 	];
 
 	var _commands = [];//用于存档
+	var _curLinkButton = void;
 
 	var uiIndex = 0;
 
@@ -108,6 +109,7 @@ class MessageLayer extends Layer
 				invalidate control;
 			}
 		};
+		_curLinkButton = void;
 		names = %[];
 		links.clear();
 		uiIndex = 0;
@@ -346,6 +348,10 @@ class MessageLayer extends Layer
 		node.x = tx;
 		node.y = chLayer.height-ty-font.lineSpacing;
 		node.color = font.color;
+
+		if (_curLinkButton) {
+			_curLinkButton.addTextRect(node.x,node.y+3,node.width,font.size+6,font.wordSpacing);
+		};
 		//这里需要另加字间距
 		tx += node.width+font.wordSpacing;
 		if (tx+node.width > chLayer.width) {
@@ -360,5 +366,39 @@ class MessageLayer extends Layer
 		locateX = tx;
 		locateY = ty;
 		return false;
+	}
+
+	function addLink (elm) {
+
+		if (elm.name == void) {
+			elm.name = "_num_"+uiIndex;
+		}
+		var node = new LinkButton(app,controlLayer);
+		node.name = elm.name;
+		node.issys = elm.issys===void?false:elm.issys;
+		if (node.issys) {
+			buttons[elm.name] = node;
+		}
+		else {
+			names[elm.name] = node;
+		}
+		node.x=0;
+		node.y=0;
+		node.setAnchor(0,0);
+
+		_curLinkButton = node;
+		++uiIndex;
+
+		saveCommand("addLink",elm);
+	}
+
+	function endLink (elm) {
+		if (!_curLinkButton) {
+			dm("无效的link");
+			return;
+		};
+		_curLinkButton.end();
+		_curLinkButton = void;
+		saveCommand("endLink",elm);
 	}
 }
