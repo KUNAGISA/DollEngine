@@ -129,10 +129,10 @@ void ImageInfo::toDrawData(GLDrawData& data,Transform* trans,bool flipX,bool fli
     float r= (m_orginRect.x+m_clipRect.x+m_clipRect.width)/getTexture()->getWidth();
     float t=flipY ?
                 (m_orginRect.y+m_clipRect.y+m_clipRect.height)/getTexture()->getHeight():
-                m_orginRect.y/getTexture()->getHeight();
+                (m_orginRect.y+m_clipRect.y)/getTexture()->getHeight();
     float b=flipY ?
-                m_orginRect.y/getTexture()->getHeight():
-                (m_orginRect.y+m_orginRect.height)/getTexture()->getHeight();
+                (m_orginRect.y+m_clipRect.y)/getTexture()->getHeight():
+                (m_orginRect.y+m_clipRect.y+m_clipRect.height)/getTexture()->getHeight();
     
     data.lt.uv.v1 = data.lb.uv.v1 = l;
     data.rt.uv.v1 = data.rb.uv.v1 = r;

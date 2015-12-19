@@ -27,7 +27,6 @@ Character::~Character()
         delete frame;
     }
     m_characterInfos.clear();
-    delete m_info;
 }
 
 void Character::setSizeToImageSize()

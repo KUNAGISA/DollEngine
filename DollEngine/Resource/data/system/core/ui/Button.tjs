@@ -15,6 +15,9 @@ class Button extends Control
 	var _title=void;
 
 	var animTimer;
+	var animCount;
+	var _animIndex=0;
+	var _animOrginHeight=0;
 
 	function Button (app,par) 
 	{
@@ -55,7 +58,10 @@ class Button extends Control
 			var h = this._normalImage.height;
 			this._normalImage.clipRect(0,0,w,h);
 			this._selectImage.clipRect(w,0,w,h);
+			this._normalImage.cRect = [0,0,w,h];
+			this._selectImage.cRect = [w,0,w,h];
 			setSizeToImageSize();
+			_animOrginHeight = height;
 		}
 	}
 
@@ -71,16 +77,36 @@ class Button extends Control
 			this._selectImage.endColor = 0x888888;
 		}
 		setSizeToImageSize();
+		this._normalImage.cRect = [0,0,width,height];
+		this._selectImage.cRect = [0,0,width,height];
+		_animOrginHeight = height;
 	}
 
 	function setAnimation (count, interval) {
+		if (count==0) {
+			return;
+		};
 		if (!animTimer) {
 			animTimer = new Timer(animationUpdate);
 		};
+		animTimer.interval = interval;
+		animCount = count;
+		_animIndex = 0;
+		animationUpdate();
+		setSizeToImageSize();
+		animTimer.enabled = true;
 	}
 
 	function animationUpdate () {
-		
+		if (_animIndex >= animCount) {
+			_animIndex = 0;
+		}
+		var h = _animOrginHeight / animCount;
+		var nrect = this._normalImage.cRect;
+		var srect = this._selectImage.cRect;
+		this._normalImage.clipRect(nrect[0], nrect[1]+h*_animIndex, nrect[2], h);
+		this._selectImage.clipRect(srect[0], srect[1]+h*_animIndex, srect[2], h);
+		++_animIndex;
 	}
 
 	function setSizeToImageSize () {

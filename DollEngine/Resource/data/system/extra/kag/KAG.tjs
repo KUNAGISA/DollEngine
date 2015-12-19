@@ -641,6 +641,16 @@ class KAG extends Application
 			
 		} incontextof this,
 
+		pausebgm : function (elm) {
+			var bgm = this.getBGM();
+			bgm.pause();
+		} incontextof this,
+
+		resumebgm : function (elm) {
+			var bgm = getBGM();
+			bgm.resume();
+		} incontextof this,
+
 		fadeinbgm : function (elm) 
 		{
 			checkElm(elm,['storage']);

@@ -287,6 +287,13 @@ class MessageLayer extends Layer
 		node.y = node.parent.height-elm.y;
 		node.enabled = elm.enabled if elm.enabled!==void;
 
+		if (elm.animcount != void) {
+			if (elm.animtime == void) {
+				elm.animtime = 200;
+			}
+			node.setAnimation(elm.animcount, +elm.animtime);
+		};
+
 		node.clickData.exp = elm.exp if elm.exp!==void;
 		node.clickData.se = elm.se if elm.se!==void;
 		node.clickData.sebuf = elm.sebuf if elm.sebuf!==void;
