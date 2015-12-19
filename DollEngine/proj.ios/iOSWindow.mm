@@ -16,6 +16,8 @@
 @interface OpenGLController : GLKViewController {
     GLuint defaultFramebuffer_;
     GLuint colorRenderbuffer_;
+    BOOL isClick_;
+    BOOL mouseEnabled_;
 }
 
 +(OpenGLController*)GetInstance;
@@ -95,7 +97,7 @@ static OpenGLController* s_instance=nil;
 //        self.view = nil;
 //        
 //        [self tearDownGL];
-//        
+//
 //        if ([EAGLContext currentContext] == self.context) {
 //            [EAGLContext setCurrentContext:nil];
 //        }
@@ -109,6 +111,103 @@ static OpenGLController* s_instance=nil;
     return YES;
 }
 
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    mouseEnabled_ = YES;
+    isClick_ = YES;
+    NSEnumerator * enumerator = [touches objectEnumerator];
+    UITouch *touch;
+    
+    while (touch = [enumerator nextObject]) {
+        break;
+    }
+    CGPoint pos = [touch locationInView:self.view];
+    float s = [UIScreen mainScreen].scale;
+    pos.x *= s;
+    pos.y *= s;
+    float x = pos.x - DE::PaintEngine::GetInstance()->getLayerX();
+    float y = pos.y - DE::PaintEngine::GetInstance()->getLayerY();
+    x /= DE::PaintEngine::GetInstance()->getLayerZoom();
+    y /= DE::PaintEngine::GetInstance()->getLayerZoom();
+    if(x < 0 ||
+       y < 0 ||
+       x > DE::PaintEngine::GetInstance()->getLayerWidth()||
+       y > DE::PaintEngine::GetInstance()->getLayerHeight()){
+        mouseEnabled_ = NO;
+        return;
+    }
+    y = DE::PaintEngine::GetInstance()->getLayerHeight() - y;
+    DE::System::GetInstance()->getDelegate()->onMouseDown(x,y);
+    return;
+}
+
+- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    if(mouseEnabled_) {
+        NSEnumerator * enumerator = [touches objectEnumerator];
+        UITouch *touch;
+        while (touch = [enumerator nextObject]) {
+            break;
+        }
+        CGPoint pos = [touch locationInView:self.view];
+        float s = [UIScreen mainScreen].scale;
+        pos.x *= s;
+        pos.y *= s;
+        float x = pos.x - DE::PaintEngine::GetInstance()->getLayerX();
+        float y = pos.y - DE::PaintEngine::GetInstance()->getLayerY();
+        x /= DE::PaintEngine::GetInstance()->getLayerZoom();
+        y /= DE::PaintEngine::GetInstance()->getLayerZoom();
+        isClick_ = NO;
+        y = DE::PaintEngine::GetInstance()->getLayerHeight() - y;
+        DE::System::GetInstance()->getDelegate()->onMouseMove(x,y);
+    }
+}
+
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    if(mouseEnabled_) {
+        NSEnumerator * enumerator = [touches objectEnumerator];
+        UITouch *touch;
+        while (touch = [enumerator nextObject]) {
+            break;
+        }
+        CGPoint pos = [touch locationInView:self.view];
+        float s = [UIScreen mainScreen].scale;
+        pos.x *= s;
+        pos.y *= s;
+        float x = pos.x - DE::PaintEngine::GetInstance()->getLayerX();
+        float y = pos.y - DE::PaintEngine::GetInstance()->getLayerY();
+        x /= DE::PaintEngine::GetInstance()->getLayerZoom();
+        y /= DE::PaintEngine::GetInstance()->getLayerZoom();
+        y = DE::PaintEngine::GetInstance()->getLayerHeight() - y;
+        DE::System::GetInstance()->getDelegate()->onMouseUp(x,y);
+        if (isClick_) {
+            DE::System::GetInstance()->getDelegate()->onClick(x,y);
+        }
+    }
+}
+
+- (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    if(mouseEnabled_) {
+        NSEnumerator * enumerator = [touches objectEnumerator];
+        UITouch *touch;
+        while (touch = [enumerator nextObject]) {
+            break;
+        }
+        CGPoint pos = [touch locationInView:self.view];
+        float s = [UIScreen mainScreen].scale;
+        pos.x *= s;
+        pos.y *= s;
+        float x = pos.x - DE::PaintEngine::GetInstance()->getLayerX();
+        float y = pos.y - DE::PaintEngine::GetInstance()->getLayerY();
+        x /= DE::PaintEngine::GetInstance()->getLayerZoom();
+        y /= DE::PaintEngine::GetInstance()->getLayerZoom();
+        isClick_ = NO;
+        y = DE::PaintEngine::GetInstance()->getLayerHeight() - y;
+        DE::System::GetInstance()->getDelegate()->onMouseUp(x,y);
+    }
+}
 
 #pragma mark - GLKView and GLKViewController delegate methods
 

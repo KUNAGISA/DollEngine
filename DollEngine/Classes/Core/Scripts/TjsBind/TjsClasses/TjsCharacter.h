@@ -21,14 +21,14 @@ void setText(tTJSVariant v){
     Character::setText(str);
 }
 tTJSVariant getText(){
-    return m_text.c_str();
+    return m_text.c_wstr();
 }
 void setFontName(tTJSVariant v){
     TJS_STRING(v, str);
     Character::setFontName(str);
 }
 tTJSVariant getFontName(){
-    return m_fontName.c_str();
+    return m_fontName.c_wstr();
 }
 
 };

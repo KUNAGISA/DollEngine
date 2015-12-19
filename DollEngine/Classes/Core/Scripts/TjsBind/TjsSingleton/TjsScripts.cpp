@@ -48,7 +48,10 @@ tTJSNC_Scripts::tTJSNC_Scripts() : inherited(TJS_W("Scripts"))
     {
         DE::String path = (*param[0]).GetString();
         DE::String code;
-        code.loadFromFile(path);
+        if(!code.loadFromFile(path)) {
+            DM(L"文件加载失败");
+            return TJS_E_FAIL;
+        }
         DE::ScriptEngine::GetInstance()->pushFile(path);
         DE::ScriptEngine::GetInstance()->exec(code, result);
         DE::ScriptEngine::GetInstance()->popFile();
@@ -60,7 +63,10 @@ tTJSNC_Scripts::tTJSNC_Scripts() : inherited(TJS_W("Scripts"))
     {
         DE::String path = (*param[0]).GetString();
         DE::String code;
-        code.loadFromFile(path);
+        if(!code.loadFromFile(path)) {
+            DM(L"文件加载失败");
+            return TJS_E_FAIL;
+        }
         DE::ScriptEngine::GetInstance()->pushFile(path);
         DE::ScriptEngine::GetInstance()->eval(code, result);
         DE::ScriptEngine::GetInstance()->popFile();
@@ -72,8 +78,11 @@ tTJSNC_Scripts::tTJSNC_Scripts() : inherited(TJS_W("Scripts"))
     {
         DE::String path = (*param[0]).GetString();
         DE::String code;
-        code.loadFromFile(path);
-        *result = JsonParser::GetInstance()->fromJsonString(code.c_str());
+        if(!code.loadFromFile(path)) {
+            DM(L"文件加载失败");
+            return TJS_E_FAIL;
+        }
+        *result = JsonParser::GetInstance()->fromJsonString(code.c_wstr());
         return TJS_S_OK;
     }
     TJS_END_NATIVE_STATIC_METHOD_DECL(/*func. name*/jsonStorage)
@@ -85,32 +94,6 @@ tTJSNC_Scripts::tTJSNC_Scripts() : inherited(TJS_W("Scripts"))
         return TJS_S_OK;
     }
     TJS_END_NATIVE_STATIC_METHOD_DECL(/*func. name*/json)
-    
-    TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/addAsyncFunction)
-    {
-        if (numparams<1) {
-            return TJS_E_BADPARAMCOUNT;
-        }
-        iTJSDispatch2* f = (param[0])->AsObjectNoAddRef();
-        iTJSDispatch2* objthis = (param[0])->AsObjectThisNoAddRef();
-        tTJSInterCodeContext* func = dynamic_cast<tTJSInterCodeContext*>(f);
-        if (!func) {
-            return TJS_E_INVALIDTYPE;
-        }
-        tTVInteger p = 0;
-        if (numparams >= 2) {
-            p = param[1]->AsInteger();
-        }
-        AsyncFunction af;
-        af.priority = p;
-        af.objthis = objthis;
-        af.handler = func;
-        DE::ScriptEngine::GetInstance()->addAsyncFunction(af);
-        return TJS_S_OK;
-    }
-    TJS_END_NATIVE_STATIC_METHOD_DECL(/*func. name*/addAsyncFunction)
-    
-    
     
     //--property
     

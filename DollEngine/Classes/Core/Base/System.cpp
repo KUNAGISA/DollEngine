@@ -25,11 +25,13 @@ bool System::NeedSortTouches=true;
 
 void System::startup()
 {
-    System::GetInstance();
     ScriptEngine::GetInstance();
     try{
         String code;
-        code.loadFromFile("startup.tjs");
+        if(!code.loadFromFile("Startup.tjs")) {
+            DM(L"Startup.tjs启动失败！");
+            return;
+        }
         ScriptEngine::GetInstance()->pushFile("【GLOBAL】");
         ScriptEngine::GetInstance()->pushFile("startup.tjs");
         ScriptEngine::GetInstance()->exec(code, NULL);

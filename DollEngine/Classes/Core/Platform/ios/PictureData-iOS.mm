@@ -124,5 +124,40 @@ PictureData* PictureData::addText(const String& text,const String& fontName,int 
     return image;
 }
 
+bool PictureData::saveImage(const DE::String &path, int w, int h)
+{
+    String fullpath;
+    if (path.find(System::GetInstance()->getSaveDataPath()) == String::npos) {
+        fullpath = System::GetInstance()->getSaveDataPath() + path;
+    }
+    else {
+        fullpath = path;
+    }
+    
+    CGBitmapInfo bitmapInfo = kCGImageAlphaPremultipliedLast;
+    CGDataProviderRef provider = CGDataProviderCreateWithData(NULL, getData()->getBuffer(), getData()->getSize(), NULL);
+    CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
+    CGImageRef iref = CGImageCreate(m_width, m_height, 8, 32, 4*m_width, colorSpaceRef, bitmapInfo, provider, NULL, false, kCGRenderingIntentDefault);
+    
+    UIImage* image = [UIImage imageWithCGImage:iref scale:1 orientation:UIImageOrientationDownMirrored];
+    CGImageRelease(iref);
+    CGColorSpaceRelease(colorSpaceRef);
+    CGDataProviderRelease(provider);
+    
+    UIGraphicsBeginImageContext(CGSizeMake(w, h));
+    [image drawInRect:CGRectMake(0, 0, w, h)];
+    UIImage* outImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    NSData* data;
+    data = UIImagePNGRepresentation(outImage);
+    BOOL ret = [data writeToFile:[NSString stringWithUTF8String:fullpath.c_nstr()] atomically:YES];
+    if (ret == NO) {
+        return false;
+    }
+    
+    return true;
+}
+
 DE_END
 

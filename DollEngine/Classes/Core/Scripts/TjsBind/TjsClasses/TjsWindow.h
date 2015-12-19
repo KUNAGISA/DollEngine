@@ -26,7 +26,7 @@ void setTitle(tTJSVariant v){
 }
 #endif
 tTJSVariant getTitle(){
-    return m_title.c_str();
+    return m_title.c_wstr();
 }
 
 };

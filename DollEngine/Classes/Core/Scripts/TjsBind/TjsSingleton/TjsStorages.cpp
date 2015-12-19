@@ -33,7 +33,7 @@ tTJSNC_Storages::tTJSNC_Storages() : inherited(TJS_W("Storages"))
     TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/getFullPath)
     {
         DE::String fullPath = DE::Storages::GetInstance()->getFullPath((*param[0]).GetString());
-        *result = fullPath.c_str();
+        *result = fullPath.c_wstr();
         return TJS_S_OK;
     }
     TJS_END_NATIVE_STATIC_METHOD_DECL(/*func. name*/getFullPath)

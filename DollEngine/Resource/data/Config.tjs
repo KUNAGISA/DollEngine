@@ -8,7 +8,7 @@
 		"system/core/Font.tjs",
 		"system/core/GameObject.tjs",
 		"system/core/SoundBuffer.tjs",
-		"system/core/action/Timeline.tjs",
+		"system/core/action/TimeLine.tjs",
 		"system/core/action/ActionManager.tjs",
 		"system/core/action/Action.tjs",
 		"system/core/action/ActionEase.tjs",

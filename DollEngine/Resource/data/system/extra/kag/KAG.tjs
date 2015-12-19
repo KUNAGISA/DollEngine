@@ -29,12 +29,13 @@ class KAG extends Application
 
 	//状态数据
 	var allskip = 1;// 0 已读跳过 1 skip时全部跳过
-	var autoMode = 0;
+	var autoMode = false;
 	var skipMode = SKIP_NONE;
 	var fullScreen = false;
 	var bookMarkDates = [];//存档日期
 	var bookMarkNames = [];//存档标题
 	var tempLockSnapShot; //临时存储的档案
+	var tempSaveData;//l或p所临时存储的界面
 	
 	function KAG () 
 	{
@@ -74,6 +75,7 @@ class KAG extends Application
 		status.waitClickMode = WAIT_CLICK_NONE;
 		status.isClickSkip = false;//是否点击之后skip动画中
 		status.clickToNext = false;//是否刚刚点击继续过（用于过滤r）
+		status.locksnapshot = false;//是否存档画面锁定
 
 		initBookMarkDates();
 		dm("【Application status initialized】");
@@ -399,9 +401,13 @@ class KAG extends Application
 		return path;
 	}
 
-	function locksnapshot ( saveTemp = true) {
-		var data = %[];
-		data.f = f;
+	function saveTempScreen () 
+	{
+		if (status.locksnapshot) {
+			return;
+		}
+		tempSaveData = %[];
+		tempSaveData.f = f;
 		var base = fore.base.onSave();
 		var layers = [];
 		var messages = [];
@@ -423,35 +429,36 @@ class KAG extends Application
 				messages.add(0);
 			}
 		}
-		data.base = base;
-		data.layers = layers;
-		data.messages = messages;
+		tempSaveData.base = base;
+		tempSaveData.layers = layers;
+		tempSaveData.messages = messages;
+		tempSaveData.current = currentLayer;
 
-		data.tags = tagManager.saveStack();
-		data.bookmark = %[
+		tempSaveData.tags = tagManager.saveStack();
+		tempSaveData.bookmark = %[
 			name : tagManager.lastTarget
 		];
+	}
 
-		if (saveTemp) {
-			tempLockSnapShot = data;
-		}
+	function locksnapshot (data, islock=true) {
+		status.locksnapshot = islock;
 
-		if(DEConfig.game.saveThumbWidth > 0) {
-			var thumbRtt = new RTT();
-			thumbRtt.init(sysbase.width,sysbase.height);
-			thumbRtt.begin(0,0,0,1);
-			sysbase.visit();
-			thumbRtt.end();
+		if(data && DEConfig.game.saveThumbWidth > 0) {
+			var thumbRtt = new RTTLayer(this,null);
+			thumbRtt.initSize(sysbase.width,sysbase.height);
+			thumbRtt.visible = false;
+			thumbRtt.draw(sysbase);
 			data.thumbRtt = thumbRtt;
 		}
-		return data;
 	}
 
 	function unlocksnapshot () {
-		if(tempLockSnapShot && tempLockSnapShot.thumbRtt) {
-			invalidate tempLockSnapShot.thumbRtt;
+		if(tempSaveData && tempSaveData.thumbRtt) {
+			invalidate tempSaveData.thumbRtt;
+			tempSaveData.thumbRtt = void;
+			delete tempSaveData.thumbRtt;
 		}
-		tempLockSnapShot = void;
+		status.locksnapshot = false;
 	}
 
 	function setBookMarkData (index,data) {
@@ -461,15 +468,13 @@ class KAG extends Application
 	}
 
 	function saveData (index, isask=false) {
-		var data;
-		if (!tempLockSnapShot) {
-			data = locksnapshot(false);
+		if (!status.locksnapshot) {
+			saveTempScreen();
+			locksnapshot(tempSaveData,false);
 		}
-		else {
-			data = tempLockSnapShot;
-		}
+
 		var tdata = %[];
-		(Dictionary.assignStruct incontextof tdata)(data);
+		(Dictionary.assignStruct incontextof tdata)(tempSaveData);
 
 		var name = getBookMarkFileNameAtNum(index);
 		tdata.bookmark.storage = name;
@@ -478,7 +483,7 @@ class KAG extends Application
 		if (tdata.thumbRtt) {
 			var thumbWidth = DEConfig.game.saveThumbWidth;
 			var thumbHeight = int(thumbWidth * sysbase.height / sysbase.width);
-			tdata.thumbRtt.saveToFile(name+".png",thumbWidth,thumbHeight);
+			tdata.thumbRtt.save(name+".png",thumbWidth,thumbHeight);
 			invalidate tdata.thumbRtt;
 			tdata.thumbRtt = void;
 			delete tdata.thumbRtt;
@@ -507,6 +512,7 @@ class KAG extends Application
 			var lay = getLayerByElm(%[layer:"message"+i, page:"fore"]);
 			lay.onLoad(data.messages[i]);
 		}
+		currentLayer = data.current;
 
 		tagManager.loadStack(data.tags);
 
@@ -587,6 +593,7 @@ class KAG extends Application
 		s : function (elm) 
 		{
 			this.status.waitClickMode = WAIT_CLICK_NONE;
+			saveTempScreen();
 			return -1;
 		} incontextof this,
 
@@ -613,6 +620,7 @@ class KAG extends Application
 				return;
 			}
 			this.status.waitClickMode = WAIT_CLICK_L;
+			saveTempScreen();
 			return -1;
 		} incontextof this,
 
@@ -624,6 +632,7 @@ class KAG extends Application
 				return;
 			}
 			this.status.waitClickMode = WAIT_CLICK_P;
+			saveTempScreen();
 			return -1;
 		} incontextof this,
 
@@ -641,7 +650,7 @@ class KAG extends Application
 		} incontextof this,
 
 		xchgbgm : function (elm) {
-			
+			tagHandlers.fadeinbgm(elm);
 		} incontextof this,
 
 		fadeinbgm : function (elm) 
@@ -682,7 +691,10 @@ class KAG extends Application
 		} incontextof this,
 
 		locksnapshot : function (elm) {
-			locksnapshot(true);
+			if(!tempSaveData) {
+				saveTempScreen();
+			}
+			locksnapshot(tempSaveData);
 		} incontextof this,
 
 		unlocksnapshot : function (elm) {
@@ -835,15 +847,9 @@ class KAG extends Application
 				this.mergerBack('r',elm);
 				return;
 			}
-			if (!lay.locateChangeLine()) {
-				if (!app.status.clickToNext) {
-					this.status.waitClickMode = WAIT_CLICK_P;
-					this.status.isClickSkip = false;
-					return -1;
-				}
-				else {
-					lay.clearWord();
-				}
+			var ret = lay.changeLine();
+			if (ret == -1) {
+				return -1;
 			}
 			if (this.status.nowait) {
 				return 0;

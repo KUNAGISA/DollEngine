@@ -36,7 +36,7 @@
 		B851235F1BE7B0CF00D94A06 /* PaintProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B851217A1BE7B0CF00D94A06 /* PaintProgram.cpp */; };
 		B85123601BE7B0CF00D94A06 /* PaintShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B851217C1BE7B0CF00D94A06 /* PaintShader.cpp */; };
 		B85123621BE7B0CF00D94A06 /* Audio-iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = B85121821BE7B0CF00D94A06 /* Audio-iOS.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		B85123631BE7B0CF00D94A06 /* ImageData-iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = B85121831BE7B0CF00D94A06 /* ImageData-iOS.mm */; };
+		B85123631BE7B0CF00D94A06 /* PictureData-iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = B85121831BE7B0CF00D94A06 /* PictureData-iOS.mm */; };
 		B85123641BE7B0CF00D94A06 /* System-iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = B85121841BE7B0CF00D94A06 /* System-iOS.mm */; };
 		B851236E1BE7B0CF00D94A06 /* JsonParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B85121911BE7B0CF00D94A06 /* JsonParser.cpp */; };
 		B851236F1BE7B0CF00D94A06 /* ScriptEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B85121931BE7B0CF00D94A06 /* ScriptEngine.cpp */; };
@@ -162,6 +162,7 @@
 		B851246A1BE7B94300D94A06 /* IOData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B85124661BE7B94300D94A06 /* IOData.cpp */; };
 		B851246B1BE7B94300D94A06 /* WenQuanYiMicroHei.ttc in Resources */ = {isa = PBXBuildFile; fileRef = B85124681BE7B94300D94A06 /* WenQuanYiMicroHei.ttc */; };
 		B851246D1BE7BB9300D94A06 /* data in Resources */ = {isa = PBXBuildFile; fileRef = B851246C1BE7BB9300D94A06 /* data */; };
+		B85D35A31C13519F00DC5EC2 /* logo1136.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B85D35A21C13519F00DC5EC2 /* logo1136.jpg */; };
 		B89F267F1B5E87B40081CA6C /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B89F267E1B5E87B40081CA6C /* OpenGLES.framework */; };
 		B8A7BEC81C0DEFA100EC1256 /* TjsColorRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8A7BEC41C0DEFA100EC1256 /* TjsColorRect.cpp */; };
 		B8A7BEC91C0DEFA100EC1256 /* TjsRTT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8A7BEC61C0DEFA100EC1256 /* TjsRTT.cpp */; };
@@ -234,7 +235,7 @@
 		B851217C1BE7B0CF00D94A06 /* PaintShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PaintShader.cpp; sourceTree = "<group>"; };
 		B851217D1BE7B0CF00D94A06 /* PaintShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaintShader.h; sourceTree = "<group>"; };
 		B85121821BE7B0CF00D94A06 /* Audio-iOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "Audio-iOS.mm"; sourceTree = "<group>"; };
-		B85121831BE7B0CF00D94A06 /* ImageData-iOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "ImageData-iOS.mm"; sourceTree = "<group>"; };
+		B85121831BE7B0CF00D94A06 /* PictureData-iOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "PictureData-iOS.mm"; sourceTree = "<group>"; };
 		B85121841BE7B0CF00D94A06 /* System-iOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "System-iOS.mm"; sourceTree = "<group>"; };
 		B85121911BE7B0CF00D94A06 /* JsonParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JsonParser.cpp; sourceTree = "<group>"; };
 		B85121921BE7B0CF00D94A06 /* JsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JsonParser.h; sourceTree = "<group>"; };
@@ -541,6 +542,7 @@
 		B85124671BE7B94300D94A06 /* IOData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IOData.h; sourceTree = "<group>"; };
 		B85124681BE7B94300D94A06 /* WenQuanYiMicroHei.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = WenQuanYiMicroHei.ttc; sourceTree = "<group>"; };
 		B851246C1BE7BB9300D94A06 /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = data; sourceTree = "<group>"; };
+		B85D35A21C13519F00DC5EC2 /* logo1136.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = logo1136.jpg; sourceTree = "<group>"; };
 		B89F267E1B5E87B40081CA6C /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/System/Library/Frameworks/OpenGLES.framework; sourceTree = DEVELOPER_DIR; };
 		B8A7BEC41C0DEFA100EC1256 /* TjsColorRect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TjsColorRect.cpp; sourceTree = "<group>"; };
 		B8A7BEC51C0DEFA100EC1256 /* TjsColorRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsColorRect.h; sourceTree = "<group>"; };
@@ -724,7 +726,7 @@
 			isa = PBXGroup;
 			children = (
 				B85121821BE7B0CF00D94A06 /* Audio-iOS.mm */,
-				B85121831BE7B0CF00D94A06 /* ImageData-iOS.mm */,
+				B85121831BE7B0CF00D94A06 /* PictureData-iOS.mm */,
 				B85121841BE7B0CF00D94A06 /* System-iOS.mm */,
 			);
 			path = ios;
@@ -1314,6 +1316,7 @@
 				B8F390DC1BC68E6F002EB3CC /* AppDelegateIOS.h */,
 				B8F390DD1BC68E6F002EB3CC /* AppDelegateIOS.mm */,
 				B8F390E11BC68E6F002EB3CC /* DollEnginePrefixiOS.pch */,
+				B85D35A21C13519F00DC5EC2 /* logo1136.jpg */,
 				B8F390E21BC68E6F002EB3CC /* Images.xcassets */,
 				B8F390E31BC68E6F002EB3CC /* Info.plist */,
 				B8F390E41BC68E6F002EB3CC /* LaunchScreen.xib */,
@@ -1353,6 +1356,7 @@
 				TargetAttributes = {
 					B8261DCA1ADC05430017767B = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = 2P626CSN9E;
 					};
 				};
 			};
@@ -1386,6 +1390,7 @@
 				B8F393F81BC68E70002EB3CC /* Info.plist in Resources */,
 				B85123841BE7B0D000D94A06 /* CMakeLists.txt in Resources */,
 				B8F393F71BC68E70002EB3CC /* Images.xcassets in Resources */,
+				B85D35A31C13519F00DC5EC2 /* logo1136.jpg in Resources */,
 				B851246B1BE7B94300D94A06 /* WenQuanYiMicroHei.ttc in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1419,7 +1424,7 @@
 				B85123781BE7B0CF00D94A06 /* TjsDictIterator.cpp in Sources */,
 				B85123AA1BE7B0D000D94A06 /* iso8859_16.c in Sources */,
 				B85123D41BE7B0D000D94A06 /* tjsDateParser.cpp in Sources */,
-				B85123631BE7B0CF00D94A06 /* ImageData-iOS.mm in Sources */,
+				B85123631BE7B0CF00D94A06 /* PictureData-iOS.mm in Sources */,
 				B85123AB1BE7B0D000D94A06 /* iso8859_2.c in Sources */,
 				B85123C31BE7B0D000D94A06 /* regparse.c in Sources */,
 				B85124691BE7B94300D94A06 /* FileInfo.cpp in Sources */,
@@ -1558,7 +1563,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = DollEnginePrefixiOS.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1576,6 +1583,7 @@
 					"$(PROJECT_DIR)/../Classes/Lib/freetype2/prebuilt/ios",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "557486e4-bf3c-4993-96a4-c457c10e4899";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1584,7 +1592,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = DollEnginePrefixiOS.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1598,6 +1608,7 @@
 					"$(PROJECT_DIR)/../Classes/Lib/freetype2/prebuilt/ios",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "557486e4-bf3c-4993-96a4-c457c10e4899";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};

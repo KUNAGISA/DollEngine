@@ -106,6 +106,7 @@ void ScriptEngine::catchError(void* error)
     TJS::eTJSError* e0 = (TJS::eTJSError*)error;
     TJS::eTJSScriptError* e1 = dynamic_cast<TJS::eTJSScriptError*>(e0);
     if(e1){
+        ScriptEngine::Global()->OutputExceptionToConsole(L"【ERROR】");
         ScriptEngine::Global()->OutputExceptionToConsole(e1->GetMessage().AsStdString().c_str());
         ScriptEngine::Global()->OutputExceptionToConsole(L"STACK:");
         String tra = e1->GetTrace().AsStdString();
@@ -113,7 +114,7 @@ void ScriptEngine::catchError(void* error)
         while (idx!=String::npos) {
             size_t idx2 = tra.find(L" <-- anonymous@",idx);
             String sub = tra.substr(idx,idx2-idx);
-            ScriptEngine::Global()->OutputExceptionToConsole(sub.c_str());
+            ScriptEngine::Global()->OutputExceptionToConsole(sub.c_wstr());
             if (idx2 == String::npos) {
                 break;
             }
@@ -150,41 +151,6 @@ bool ScriptEngine::exec(const String& code,void* ret)
     }
     TJS_CATCH
     return false;
-}
-
-void ScriptEngine::doAsyncFunctions()
-{
-    if (m_allAsyncFunctions.size() == 0) {
-        return;
-    }
-    vector<AsyncFunction> tmp = m_allAsyncFunctions;
-    std::sort(tmp.begin(), tmp.end(),
-              [](const AsyncFunction& a, const AsyncFunction& b){
-                  return a.priority < b.priority;
-              });
-    m_allAsyncFunctions.clear();
-    
-    try {
-        for (auto iter = tmp.begin();
-             iter != tmp.end(); ++iter)
-        {
-            AsyncFunction& t = *iter;
-            t.handler->FuncCall(0, NULL, NULL, NULL, 0, NULL, t.objthis);
-            t.handler->Release();
-            if (t.objthis) {
-                t.objthis->Release();
-            }
-        }
-    }TJS_CATCH
-}
-
-void ScriptEngine::addAsyncFunction(const AsyncFunction& func)
-{
-    func.handler->AddRef();
-    if (func.objthis) {
-        func.objthis->AddRef();
-    }
-    m_allAsyncFunctions.push_back(func);
 }
 
 

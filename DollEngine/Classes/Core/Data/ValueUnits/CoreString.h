@@ -52,7 +52,9 @@ public:
     double doubleValue();
     double floatValue();
     string utf8Value() const;
+    wstring unicodeValue() const;
     const char* c_nstr() const;
+    const wchar_t* c_wstr() const;
 };
 
 

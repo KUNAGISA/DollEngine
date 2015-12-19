@@ -26,8 +26,11 @@ public:
     String mode;
     virtual tjs_uint TJS_INTF_METHOD Read(tTJSString & targ, tjs_uint size) {
         DE::String str;
-        str.loadFromFile(path);
-        targ = str.c_str();
+        if(!str.loadFromFile(path)) {
+            return TJS_E_FAIL;
+        }
+        targ = str.c_wstr();
+        return TJS_S_OK;
     }
     virtual void TJS_INTF_METHOD Destruct(){delete this;}
 };
@@ -42,13 +45,6 @@ public:
     virtual void TJS_INTF_METHOD Destruct();
 };
 
-struct AsyncFunction
-{
-    int priority;
-    TJS::iTJSDispatch2* objthis;
-    TJS::tTJSInterCodeContext* handler;
-};
-
 class ScriptEngine
 {
 public:
@@ -58,8 +54,6 @@ public:
     virtual bool eval(const String& code,void* ret);
     virtual bool exec(const String& code,void* ret);
     virtual void catchError(void* error);
-    void doAsyncFunctions();
-    void addAsyncFunction(const AsyncFunction& func);
     
     String topFile(){return m_fileStack.top();}
     void pushFile(const String& path)
@@ -79,7 +73,6 @@ public:
         }
     }
 protected:
-    vector<AsyncFunction> m_allAsyncFunctions;
     stack<String> m_fileStack;
 };
 

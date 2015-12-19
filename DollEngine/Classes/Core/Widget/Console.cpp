@@ -28,7 +28,8 @@ void Console::assertMsg(void* v,const String& msg)
 
 void Console::log(const String& text)
 {
-    ScriptEngine::Global()->OutputToConsole(text.c_str());
+    if(text.length() == 0) return;
+    ScriptEngine::Global()->OutputToConsole(text.c_wstr());
 }
 
 void Console::throwMsg(const String& v)
@@ -73,7 +74,7 @@ void Console::throwMsg(DEBUG_MSG error,int p1,const String& p2)
             msg = String::fromFormat(L"(#%d)Tag没有结尾，可能缺少 ] ，请检查",p1);
             break;
         case ERROR_KAG_LABEL_FIND_FAIL:
-            msg = String::fromFormat(L"(#%d)未找到名为%ls的标签",p1,p2.c_str());
+            msg = String::fromFormat(L"(#%d)未找到名为%ls的标签",p1,p2.c_wstr());
             break;
         case ERROR_KAG_TAG_FIND_FAIL:
             msg = String::fromFormat(L"(#%d)未找到名为%ls的指令",p1);
@@ -101,7 +102,7 @@ void Console::evalScripts(const String& v)
 {
     try {
         tTJSVariant ret;
-        Print(v.c_str());
+        Print(v.c_wstr());
         ScriptEngine::GetInstance()->eval(v,&ret);
         ret.ToString();
         const tjs_char* data = ret.AsStringNoAddRef()->operator const tjs_char *();

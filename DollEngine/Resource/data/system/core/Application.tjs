@@ -66,8 +66,7 @@ class Application extends SystemDelegate
 		if (_transRTT) {
 			invalidate _transRTT;
 		}
-		_cacheData.sf = sf;
-		(Dictionary.saveStruct incontextof _cacheData)("cache.db");
+		saveSFlags();
 		invalidate window;
 		super.finalize();
 	}
@@ -89,6 +88,11 @@ class Application extends SystemDelegate
 	function close () {
 		asyncTrigger(System.exit);
 	}
+
+    function saveSFlags () {
+        _cacheData.sf = sf;
+        (Dictionary.saveStruct incontextof _cacheData)("cache.db");
+    }
 
 	/*场景过渡效果*/
 	function sceneTransition (type, time, params*) {
@@ -138,7 +142,7 @@ class Application extends SystemDelegate
 	function update () {
 		var nSeconds = System.seconds;
 		var dt = (nSeconds - _lastSeconds)*1000;
-        dt = 1000/60;
+        //dt = 1000/60;
 		updateTimer(dt);
 		updateTimeLine(dt);
 		_lastSeconds = nSeconds;

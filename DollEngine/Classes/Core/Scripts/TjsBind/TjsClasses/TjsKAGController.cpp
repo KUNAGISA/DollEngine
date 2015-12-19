@@ -83,9 +83,6 @@ int TjsKAGController::doTag()
             return -2;
         }
     }
-    if(this->m_storage->fileName == L"title.ks"){
-        KAGTag * tag = m_label->allTags[m_tagIndex];
-    }
     KAGTag * tag = m_label->allTags[m_tagIndex];
     if (tag->name == L"macro") {
         wstring macroname = tag->getValue(L"name");
@@ -198,12 +195,12 @@ int TjsKAGController::doTag()
     tag->print();
     ScriptEngine::GetInstance()->pushFile(tag->storage->fileName);
     tTJSDictionaryObject* params = (tTJSDictionaryObject*)TJSCreateDictionaryObject();
-    tTJSVariant name = tag->name.c_str();
+    tTJSVariant name = tag->name.c_wstr();
     for (auto iter = tag->params.begin();
          iter != tag->params.end(); ++iter)
     {
         KAGTagParamValue& kv = *iter;
-        tTJSVariant key = kv.key.c_str();
+        tTJSVariant key = kv.key.c_wstr();
         tTJSVariant ret;
         GetTagParamValue(kv,ret);
         params->PropSet(TJS_MEMBERENSURE,key.GetString(),NULL,&ret,params);
@@ -220,12 +217,12 @@ tTJSVariant TjsKAGController::saveStack()
     tTJSArrayObject* datas = (tTJSArrayObject*)TJSCreateArrayObject();
     
     vector<KAGStack> tempStack = m_stack;
-    KAGStack cur={m_storage,m_label,m_tagIndex};
+    KAGStack cur={m_storage,m_label,m_tagIndex-1};
     tempStack.push_back(cur);
     int idx = 0;
     for(const KAGStack& stack : tempStack) {
-        tTJSVariant storagePath = stack.storage->fullPath.c_str();
-        tTJSVariant labelKey = stack.label->key.c_str();
+        tTJSVariant storagePath = stack.storage->fullPath.c_wstr();
+        tTJSVariant labelKey = stack.label->key.c_wstr();
         tTJSVariant tagIndex = stack.tagIndex;
         
         datas->PropSetByNum(TJS_MEMBERENSURE,idx,&storagePath,datas);

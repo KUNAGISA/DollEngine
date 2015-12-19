@@ -10,6 +10,7 @@
 #include "Storages.h"
 #include "IOData.h"
 
+
 DE_BEGIN
 
 unsigned int utf8_len_for_table[256] =
@@ -55,8 +56,11 @@ String String::fromFormat(const wchar_t* format,...)
     va_list args;
     memset(g_tmpWStr, 0, sizeof(g_tmpWStr));
     va_start(args, format);
-    vswprintf(g_tmpWStr,g_maxLen, format, args);
+    int ret = vswprintf(g_tmpWStr,g_maxLen, format, args);
     va_end(args);
+    if (ret == -1 && wcslen(format) > 0) {
+        return String(format)+L"无法格式化";
+    }
     return String(g_tmpWStr);
 }
 
@@ -97,17 +101,20 @@ String::String(const String& v)
 
 String::String(int v)
 {
-
+    String v2 = String::fromFormat(L"%d",v);
+    wstring::assign(v2);
 }
 
 String::String(double v)
 {
-
+    String v2 = String::fromFormat(L"%f",v);
+    wstring::assign(v2);
 }
 
 String::String(int64_t v)
 {
-
+    String v2 = String::fromFormat(L"%lld",v);
+    wstring::assign(v2);
 }
 
 String::~String()
@@ -140,7 +147,7 @@ bool String::saveToFile(const String& fullpath)
     
     FILE * fp = fopen(fullpath.c_nstr(), "wb");
     if (!fp) {
-        DM(L"目标文件夹不存在或没有写入权限:%ls",fullpath.c_str());
+        DM(L"目标文件夹不存在或没有写入权限:%ls",fullpath.c_wstr());
         return false;
     }
     utf8Value();
@@ -372,10 +379,20 @@ string String::utf8Value() const
     return g_target;
 }
 
-const char* String::c_nstr() const
+wstring String::unicodeValue() const
 {
-    return utf8Value().c_str();
+    return c_str();
 }
 
+const char* String::c_nstr() const
+{
+    utf8Value();
+    return g_target.c_str();
+}
+
+const wchar_t* String::c_wstr() const
+{
+    return c_str();
+}
 
 DE_END

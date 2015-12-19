@@ -16,7 +16,7 @@ tTJSVariant JsonParser::fromJsonFile(const String& path)
     String code;
     if(code.loadFromFile(path))
     {
-        return fromJsonString(code.c_str());
+        return fromJsonString(code.c_wstr());
     }
     return tTJSVariant();
 }
@@ -118,7 +118,7 @@ wchar_t* JsonParser::dictWithString(wchar_t* str,tTJSVariant& _out)
             EM("JSON语法错误");
             return NULL;
         }
-        obj->PropSet(TJS_MEMBERENSURE, key.c_str(), NULL, &value, obj);
+        obj->PropSet(TJS_MEMBERENSURE, key.c_wstr(), NULL, &value, obj);
         str = emptyWithString(str);
         if (!str) {
             EM("JSON语法错误");

@@ -35,13 +35,33 @@ Audio::~Audio()
 
 bool Audio::preload(const String& path)
 {
+    if (path.empty()) {
+        return false;
+    }
+    String fullPath = Storages::GetInstance()->getFullPath(path);
+    if(fullPath.empty()){
+        if(path.find(L'.') == String::npos) {
+            fullPath = Storages::GetInstance()->getFullPath(path+L".mp3");
+            if(fullPath.empty()) {
+                fullPath = Storages::GetInstance()->getFullPath(path+L".wav");
+                if(fullPath.empty()) {
+                    EM(ERROR_FILE_NOT_EXIST,path);
+                    return false;
+                }
+            }
+        }
+        else {
+            EM(ERROR_FILE_NOT_EXIST,path);
+            return false;
+        }
+    }
     if (m_object) {
         AVAudioPlayer* player = (__bridge AVAudioPlayer*)m_object;
         [player stop];
         [player release];
     }
-    AVAudioPlayer* player = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL URLWithString:[NSString stringWithUTF8String:path.c_nstr()]] error:nil];
-    
+    AVAudioPlayer* player = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL URLWithString:[NSString stringWithUTF8String:fullPath.c_nstr()]] error:nil];
+    [player stop];
     m_object = (__bridge AVAudioPlayer*)player;
     if (m_object) {
         return true;
@@ -55,10 +75,10 @@ void Audio::play(bool isloop,int fadeMS)
     if(!player){
         return;
     }
-    [player play];
     setLoop(isloop);
     setMuted(m_muted);
     setVolume(m_volume);
+    [player play];
 }
 
 void Audio::stop(int fadeMS)
@@ -81,7 +101,7 @@ void Audio::setLoop(bool v)
         player.numberOfLoops = -1;
     }
     else {
-        player.numberOfLoops = 1;
+        player.numberOfLoops = 0;
     }
 }
 

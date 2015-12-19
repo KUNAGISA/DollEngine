@@ -34,12 +34,11 @@ System::System()
     m_appPath += L"/";
     
     //SaveData path
-    m_saveDataPath = [[NSBundle mainBundle] resourcePath].UTF8String;
-    m_saveDataPath += L"/savedata/";
+    m_saveDataPath = [NSHomeDirectory()stringByAppendingPathComponent:@"Documents"].UTF8String;
+    m_saveDataPath += L"/";
     
     //Patch path
-    m_patchPath = [[NSBundle mainBundle] resourcePath].UTF8String;
-    m_patchPath += L"/patch/";
+    m_patchPath = m_saveDataPath;
 
     FT_Init_FreeType(&g_fontLibrary);
 }
@@ -72,7 +71,7 @@ String System::addFont(const String& path)
     if (iter == m_allFontPaths.end())
     {
         FT_Face face;
-        FT_Error ft_err = FT_New_Face(g_fontLibrary, file.absolutePath().utf8Value().c_str(), 0, &face);
+        FT_Error ft_err = FT_New_Face(g_fontLibrary, file.absolutePath().c_nstr(), 0, &face);
         if (ft_err) {
             EM(ERROR_ADDFONT_FAILD);
         }

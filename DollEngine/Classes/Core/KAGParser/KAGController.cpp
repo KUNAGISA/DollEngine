@@ -111,12 +111,11 @@ void KAGController::printLabel()
         m_label->isMacro) {
         return;
     }
-    String dm = String::fromFormat(L"\n========%ls(%ls|%ls)#%d========",
-                                   m_storage->fileName.c_str(),
-                                   m_label->key.c_str(),
-                                   m_label->name.c_str(),
-                                   m_tagIndex);
-    DM(dm.c_str());
+    
+    DM(L"\n========%ls(%ls)#%d========",
+       m_storage->fileName.c_wstr(),
+       m_label->key.c_wstr(),
+       m_tagIndex);
 }
 
 DE_END

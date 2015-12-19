@@ -55,7 +55,7 @@ KAGStorage* KAGParser::loadScenario(const String& filepath)
         m_errorLine = -1;
         return NULL;
     }
-    wchar_t* ntext = (wchar_t*)kagcode.c_str();
+    wchar_t* ntext = (wchar_t*)kagcode.c_wstr();
     
     m_errorLine=0;
     m_parseLine=1;

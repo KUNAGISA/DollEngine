@@ -179,6 +179,21 @@ class MessageLayer extends Layer
 		saveCommand("setLocate",elm);
 	}
 
+	function changeLine (elm) 
+	{
+		saveCommand("changeLine",%[]);
+		if (!locateChangeLine()) {
+			if (!app.status.clickToNext) {
+				app.status.waitClickMode = WAIT_CLICK_P;
+				app.status.isClickSkip = false;
+				return -1;
+			}
+			else {
+				clearWord();
+			}
+		}
+	}
+
 	function setFont (elm) {
 		font.size = elm.size;
 		font.color = elm.color;
@@ -232,6 +247,8 @@ class MessageLayer extends Layer
 				.frame = "";
 			}
 		}
+		dict.locateX = locateX;
+		dict.locateY = locateY;
 		dict.commands = [];
 		dict.commands.assignStruct(_commands);
 
@@ -253,6 +270,8 @@ class MessageLayer extends Layer
 			};
 			this[command[0]](command[1]);
 		}
+		locateX = dict.locateX;
+		locateY = dict.locateY;
 	}
 
 	/********控件创建********/
