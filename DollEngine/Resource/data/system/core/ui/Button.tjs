@@ -14,6 +14,8 @@ class Button extends Control
 	var _disableImage;
 	var _title=void;
 
+	var animTimer;
+
 	function Button (app,par) 
 	{
 		super.Control(app,par);
@@ -31,6 +33,13 @@ class Button extends Control
 		_title.setAnchor(0.5,0.5);
 		_title.absolute = 1;
 		_title.visible = false;
+	}
+
+	function finalize() {
+		if(animTimer) {
+			invalidate animTimer;
+		}
+		super.finalize();
 	}
 
 	function loadImages (graphic) {
@@ -62,6 +71,16 @@ class Button extends Control
 			this._selectImage.endColor = 0x888888;
 		}
 		setSizeToImageSize();
+	}
+
+	function setAnimation (count, interval) {
+		if (!animTimer) {
+			animTimer = new Timer(animationUpdate);
+		};
+	}
+
+	function animationUpdate () {
+		
 	}
 
 	function setSizeToImageSize () {

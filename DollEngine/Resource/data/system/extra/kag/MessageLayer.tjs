@@ -174,8 +174,8 @@ class MessageLayer extends Layer
 	}
 
 	function setLocate (elm) {
-		locateX = elm.x if elm.x !== void;
-		locateY = elm.y if elm.y !== void;
+		locateX = +elm.x if elm.x !== void;
+		locateY = +elm.y if elm.y !== void;
 		saveCommand("setLocate",elm);
 	}
 
