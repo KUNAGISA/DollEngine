@@ -35,10 +35,12 @@ void Character::setSizeToImageSize()
     updateText();
     if (m_characterInfos.size() > 0) {
         float w = 0;
+        float h = 0;
         for (CharacterInfo* frame : m_characterInfos) {
             w += frame->getFont()->advance;
+            h = max(h,(float)frame->getPaintHeight()-frame->getFont()->yMin);
         }
-        setPaintSize(w,m_fontSize);
+        setPaintSize(w,h);
     }
     else {
         setPaintSize(0,0);
@@ -65,7 +67,7 @@ void Character::paint(Transform* trans)
         
         Transform offst;
         offst.setX(lastX + font->bearingX);
-        float y = -(frame->getPaintHeight()-font->bearingY);
+        float y = (frame->getPaintHeight()-font->bearingY);
         offst.setY(y);
         offst.setAnchorX(0);
         offst.setAnchorY(0);

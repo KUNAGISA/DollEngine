@@ -895,6 +895,24 @@ class KAG extends Application
 			lay.setLocate(elm);
 		} incontextof this,
 
+		link : function (elm) {
+			var lay = this.getCurrentLayer();
+			if(!lay) {
+				this.mergerBack('link',elm);
+				return;
+			}
+			lay.addLink(elm);
+		} incontextof this,
+
+		endlink : function (elm) {
+			var lay = this.getCurrentLayer();
+			if(!lay) {
+				this.mergerBack('endlink',elm);
+				return;
+			}
+			lay.endLink(elm);
+		} incontextof this,
+
 		button : function (elm) 
 		{
 			var lay = this.getCurrentLayer();

@@ -1,0 +1,112 @@
+class LinkButton extends Control
+{
+	var clickData = %[
+		exp : "", //点击时执行的表达式
+		se : '', //点击时的音效
+		sebuf : '',//点击时的音效音轨的编号
+		storage : void, //跳转的脚本
+		target : void, //跳转的脚本的标签
+	];
+
+	var _links = [];
+	var _selectImages = [];
+
+	function LinkButton (app,par) {
+		super.Control(...);
+		this.width = par.width;
+		this.height = par.height;
+	}
+
+	function addTextRect (x,y,w,h,wordspace) {
+		if (_links.count == 0) {
+			_links.add([x,y,w,h]);
+		}
+		else {
+			var toplink = _links[-1];
+			if (toplink[1] == y &&
+				toplink[0] + toplink[2] + wordspace == x) {
+				toplink[2] += wordspace+w;
+			}
+			else {
+				_links.add([x,y,w,h]);
+			}
+		}
+	}
+
+	function end () {
+		for (var i = _links.count - 1; i >= 0; i--) {
+			var rect = _links[i];
+			var lay = new LayerColor(app,this);
+			lay.x = rect[0];
+			lay.y = rect[1];
+			lay.setSize(rect[2],rect[3]);
+			lay.color = 0x8888ff;
+			lay.opacity = 128;
+			lay.setAnchor(0,1);
+			lay.visible = false;
+			this._selectImages.add(lay);
+		};
+	}
+
+	function pointInside (x,y,dict) {
+		var ret = parent.pointInside(x,y,dict);
+		if (ret) {
+			for (var i = _links.count - 1; i >= 0; i--) {
+				var rect = _links[i];
+				if(dict.x >= rect[0] && dict.x <= rect[0]+rect[2] &&
+					dict.y >= rect[1]-rect[3] && dict.y <= rect[1] )
+				{
+					dict.x = 0;
+					dict.y = 0;
+					return true;
+				}
+			}
+		}
+		dict.x = -1;
+		dict.y = -1;
+		return false;
+	}
+
+	function onMouseDown (x,y) 
+	{
+		var ret = super.onMouseDown(x,y);
+		if(!ret) {
+			return false;
+		}
+		for (var i = _selectImages.length - 1; i >= 0; i--) {
+			_selectImages[i].visible = true;
+		};
+	}
+
+	function onMouseUp (x,y) {
+		super.onMouseUp(x,y);
+		for (var i = _selectImages.length - 1; i >= 0; i--) {
+			_selectImages[i].visible = false;
+		};
+		if (x==0 && y==0) {
+			dm(11111111);
+			this.exception();
+		}
+	}
+
+	function exception () 
+	{
+		var exp = "";
+		if (this.clickData.exp) {
+			exp += this.clickData.exp;
+			exp += ";";
+		}
+		var needDisabled = false;
+		if (this.clickData.storage || this.clickData.target) {
+			exp += "System.delegate.process(\"";
+			exp += this.clickData.storage;
+			exp += "\",\"";
+			exp += this.clickData.target;
+			exp += "\");";
+		}
+		if (exp != "") {
+			asyncTrigger(Scripts.eval,[exp]);
+		}
+	}
+
+}
