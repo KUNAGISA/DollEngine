@@ -32,10 +32,6 @@ class Button extends Control
 		_normalImage.visible=true;
 		_selectImage.visible=false;
 		_disableImage.visible=false;
-		_title = new Label(app,_imageBase);
-		_title.setAnchor(0.5,0.5);
-		_title.absolute = 1;
-		_title.visible = false;
 	}
 
 	function finalize() {
@@ -190,7 +186,12 @@ class Button extends Control
 
 	property title{
 		getter {
-	    	//getter
+			if (!_title) {
+				_title = new Label(app,_imageBase);
+				_title.setAnchor(0.5,0.5);
+				_title.absolute = 1;
+				_title.visible = false;
+			}
 			return _title;
 		}
 	}

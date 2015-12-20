@@ -84,7 +84,6 @@ class LinkButton extends Control
 			_selectImages[i].visible = false;
 		};
 		if (x==0 && y==0) {
-			dm(11111111);
 			this.exception();
 		}
 	}

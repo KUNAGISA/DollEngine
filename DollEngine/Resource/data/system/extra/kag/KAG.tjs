@@ -34,7 +34,6 @@ class KAG extends Application
 	var fullScreen = false;
 	var bookMarkDates = [];//存档日期
 	var bookMarkNames = [];//存档标题
-	var tempLockSnapShot; //临时存储的档案
 	var tempSaveData;//l或p所临时存储的界面
 	
 	function KAG () 
@@ -389,11 +388,12 @@ class KAG extends Application
 	}
 
 	function locksnapshot () {
-		var data = tempLockSnapShot;
+		var data = tempSaveData;
 		if (!data) {
 			saveTempData();
-			data = tempLockSnapShot;
+			data = tempSaveData;
 		};
+		status.locksnapshot = true;
 		if(DEConfig.game.saveThumbWidth > 0) {
 			var thumbRtt = new RTT();
 			thumbRtt.init(sysbase.width,sysbase.height);
@@ -405,7 +405,19 @@ class KAG extends Application
 		return data;
 	}
 
+	function unlocksnapshot () {
+		if(tempSaveData && tempSaveData.thumbRtt) {
+			invalidate tempSaveData.thumbRtt;
+			tempSaveData.thumbRtt = void;
+			delete tempSaveData.thumbRtt;
+		}
+		status.locksnapshot = false;
+	}
+
 	function saveTempData () {
+		if (status.locksnapshot) {
+			return;
+		}
 		var data = %[];
 		data.f = f;
 		var base = fore.base.onSave();
@@ -436,20 +448,11 @@ class KAG extends Application
 		data.macroParams = [];
 		data.macroParams.assignStruct(tagManager.macroParams);
 
-		tempSaveData.tags = tagManager.saveStack();
-		tempSaveData.bookmark = %[
+		data.tags = tagManager.saveStack();
+		data.bookmark = %[
 			name : tagManager.lastTarget
 		];
-		tempLockSnapShot = data;
-	}
-
-	function unlocksnapshot () {
-		if(tempSaveData && tempSaveData.thumbRtt) {
-			invalidate tempSaveData.thumbRtt;
-			tempSaveData.thumbRtt = void;
-			delete tempSaveData.thumbRtt;
-		}
-		status.locksnapshot = false;
+		tempSaveData = data;
 	}
 
 	function setBookMarkData (index,data) {
@@ -459,10 +462,8 @@ class KAG extends Application
 	}
 
 	function saveData (index, isask=false) {
-		var data = tempLockSnapShot;
-		if (!tempLockSnapShot) {
+		if (!tempSaveData) {
 			saveTempData();
-			data = tempLockSnapShot;
 		}
 
 		var tdata = %[];
@@ -485,6 +486,7 @@ class KAG extends Application
 	}
 
 	function loadData (index, isask=false) {
+		tempSaveData = void;
 		var name = getBookMarkFileNameAtNum(index);
 		var data = Scripts.evalStorage(name+".save");
 		if(!data){
@@ -588,7 +590,7 @@ class KAG extends Application
 		s : function (elm) 
 		{
 			this.status.waitClickMode = WAIT_CLICK_NONE;
-			saveTempScreen();
+			saveTempData();
 			return -1;
 		} incontextof this,
 
@@ -696,10 +698,7 @@ class KAG extends Application
 		} incontextof this,
 
 		locksnapshot : function (elm) {
-			if(!tempSaveData) {
-				saveTempScreen();
-			}
-			locksnapshot(tempSaveData);
+			locksnapshot();
 		} incontextof this,
 
 		unlocksnapshot : function (elm) {

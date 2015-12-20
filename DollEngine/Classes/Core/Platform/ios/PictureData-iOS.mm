@@ -121,6 +121,8 @@ PictureData* PictureData::addText(const String& text,const String& fontName,int 
     fd->yMax = (int)(face->bbox.yMax/64);
     fd->xMin = (int)(face->bbox.xMin/64);
     fd->xMax = (int)(face->bbox.xMax/64);
+    fd->width = (int)(face->glyph->metrics.width);
+    fd->height = (int)(face->glyph->metrics.height);
     return image;
 }
 

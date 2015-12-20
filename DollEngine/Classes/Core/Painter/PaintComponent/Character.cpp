@@ -37,7 +37,7 @@ void Character::setSizeToImageSize()
         float h = 0;
         for (CharacterInfo* frame : m_characterInfos) {
             w += frame->getFont()->advance;
-            h = max(h,(float)frame->getPaintHeight()-frame->getFont()->yMin);
+            h = max(h,(float)frame->getFont()->bearingY);
         }
         setPaintSize(w,h);
     }
@@ -67,13 +67,13 @@ void Character::paint(Transform* trans)
         Transform offst;
         offst.setX(lastX + font->bearingX);
         float y = (frame->getPaintHeight()-font->bearingY);
-        offst.setY(y);
+        offst.setY(-y-font->yMin);
         offst.setAnchorX(0);
-        offst.setAnchorY(0);
+        offst.setAnchorY(1);
         offst.flush();
         orgin.transform(&offst);
         orgin.setWidth(frame->getPaintWidth());
-        orgin.setHeight(frame->getPaintHeight());
+        orgin.setHeight(frame->getPaintHeight()+font->yMax);
         PaintConfig config;
         flushPaintConfig(config);
         config.trans = &orgin;

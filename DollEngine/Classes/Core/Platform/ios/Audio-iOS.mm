@@ -90,6 +90,24 @@ void Audio::stop(int fadeMS)
     [player stop];
 }
 
+void Audio::pause()
+{
+    AVAudioPlayer* player = (__bridge AVAudioPlayer*)m_object;
+    if(!player){
+        return;
+    }
+    [player pause];
+}
+
+void Audio::resume()
+{
+    AVAudioPlayer* player = (__bridge AVAudioPlayer*)m_object;
+    if(!player){
+        return;
+    }
+    [player playAtTime:player.duration];
+}
+
 void Audio::setLoop(bool v)
 {
     m_loop = v;

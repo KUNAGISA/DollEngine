@@ -16,6 +16,7 @@ class Slider extends Control
 
 	var _dragLeft;
 	var _dragRight;
+	var _positionChanged = false;
 
 	function Slider (app,par) 
 	{
@@ -25,6 +26,7 @@ class Slider extends Control
 		sliderBtn = new Button(app,this);
 		sliderBtn.enabled = false;
 		sliderBtn.setAnchor(0.5,0.5);
+		position = 100;
 	}
 
 	function loadBase (path) 
@@ -59,6 +61,17 @@ class Slider extends Control
 		}
 	}
 
+	function updatePosition () 
+	{
+    	var pos = (_position-min)/(max-min);
+    	if(vertical){
+    		updateBtnPos(0,height*pos);
+    	}
+    	else {
+    		updateBtnPos((_dragRight-_dragLeft)*pos+_dragLeft,0);
+    	}
+	}
+
 	function updateBtnPos (x,y) 
 	{
 		if (x < _dragLeft) x=_dragLeft;
@@ -68,13 +81,22 @@ class Slider extends Control
 		sliderBtn.y = height/2;
     	var p = (x-_dragLeft)/w;
 		baseImage.value = p*100;
-    	var tp = p*(max-min)+min;
-		onChangeFunc(tp);
+    	_position = p*(max-min)+min;
+		onChangeFunc(_position);
+		_positionChanged = false;
 	}
 
 	function onChangeFunc (pos) 
 	{
 		
+	}
+
+	function visit () 
+	{
+		if (_positionChanged) {
+			updatePosition();
+		}
+		super.visit();
 	}
 
 	function onMouseDown (x,y) 
@@ -104,14 +126,8 @@ class Slider extends Control
 	var _position=100;
 	property position{
 	    setter(v) {
-	    	var pos = (v-min)/(max-min);
-	    	if(vertical){
-	    		updateBtnPos(0,height*pos);
-	    	}
-	    	else {
-	    		updateBtnPos(width*pos,0);
-	    	}
 	    	this._position = v;
+	    	_positionChanged = true;
 		}
 		getter {
 	    	//getter

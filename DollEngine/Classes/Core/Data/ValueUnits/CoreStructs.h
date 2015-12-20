@@ -49,11 +49,14 @@ class FontData
 {
 public:
     FontData()
-    :xMin(0),xMax(0),yMin(0),yMax(0),advance(0),bearingX(0),bearingY(0),outlineSize(0){}
+    :xMin(0),xMax(0),yMin(0),yMax(0),width(0),height(0),advance(0),bearingX(0),bearingY(0),outlineSize(0){}
     int xMin;//左右宽高与orgin的偏移量
     int xMax;
     int yMin;
     int yMax;
+    
+    int width;//文字的逻辑高
+    int height;//文字的逻辑宽
     
     int advance;//字间距
     

@@ -45,4 +45,11 @@ class Label extends Layer
 	    	return font.size;
 	    }
 	}
+
+	property advanceY{
+		getter {
+	    	//getter
+			return this._image.advanceY;
+		}
+	}
 }
