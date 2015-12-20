@@ -13,6 +13,8 @@ NCB_REGISTER_CLASS_DIFFER(Audio, TjsAudio)
     TJS_FACTORY
     NCB_METHOD(preload);
     NCB_METHOD(play);
+    NCB_METHOD(pause);
+    NCB_METHOD(resume);
     NCB_METHOD(stop);
     NCB_PROPERTY(loop, getLoop, setLoop);
     NCB_PROPERTY(volume, getVolume, setVolume);
