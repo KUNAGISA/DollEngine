@@ -17,6 +17,16 @@ class LinkButton extends Control
 		this.height = par.height;
 	}
 
+	function startOne (x,y) {
+		_links.add([x,y,0,0]);
+	}
+
+	function setTextSize (w,h) {
+		var toplink = _links[-1];
+		toplink[2] = w;
+		toplink[3] = h;
+	}
+
 	function addTextRect (x,y,w,h,wordspace) {
 		if (_links.count == 0) {
 			_links.add([x,y,w,h]);
