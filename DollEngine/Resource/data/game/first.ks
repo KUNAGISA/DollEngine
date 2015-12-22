@@ -1,2 +1,5 @@
 [wait time=200]
-测试[link]测试测试测试测试测试[endlink]
+[position layer=message0 page=fore left=0 top=0 width=800 height=600 marginl=0 marginr=0 margint=0 marginb=0 visible=true frame="" opacity=0]
+[current layer=message0 page=fore][er]
+[waitclick]测,试[link]测试测试[font size=32]测试测[r],试测试[endlink]
+[s]

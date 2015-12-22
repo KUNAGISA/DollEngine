@@ -201,8 +201,8 @@ class MessageLayer extends Layer
 	}
 
 	function setFont (elm) {
-		font.size = elm.size;
-		font.color = elm.color;
+		font.size = +elm.size if elm.size !== void;
+		font.color = +elm.color if elm.color !== void;
 		saveCommand("setFont",elm);
 	}
 
