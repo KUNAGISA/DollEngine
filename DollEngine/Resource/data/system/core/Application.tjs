@@ -82,7 +82,7 @@ class Application extends SystemDelegate
 				sf : %[],
 			];
 		}
-		global.sf = _cacheData.sf;
+		merger(global.sf,_cacheData.sf);
 	}
 
 	function close () {

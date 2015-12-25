@@ -9,9 +9,6 @@
 		"system/core/GameObject.tjs",
 		"system/core/SoundBuffer.tjs",
 		"system/core/action/TimeLine.tjs",
-		"system/core/action/ActionManager.tjs",
-		"system/core/action/Action.tjs",
-		"system/core/action/ActionEase.tjs",
 		"system/core/action/TagActions.tjs",
 		"system/core/ui/Layer.tjs",
 		"system/core/ui/UILayer.tjs",
@@ -51,6 +48,7 @@
 		"bgm",
 		"fgimage",
 		"image",
+		"iosimage",
 		"sound"
 	],
 	"device" => %[

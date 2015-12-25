@@ -78,6 +78,10 @@ class Button extends Control
 		_animOrginHeight = height;
 	}
 
+	function loadDisable (path) {
+		this._disableImage.loadImages(path);
+	}
+
 	function setAnimation (count, interval) {
 		if (count==0) {
 			return;
@@ -168,14 +172,16 @@ class Button extends Control
 	    	if (super.disabled != v) {
 	    		super.disabled = v;
 	    		this._disableImage.visible = v;
-	    		this._selectImage.visible = !v;
-	    		this._normalImage.visible = !v;
-	    		if (v) {
-	    			_title.color = _titleColorDisable;
-	    		}
-	    		else {
-	    			_title.color = _titleColor;
-	    		}
+	    		this._selectImage.visible = false;
+	    		this._normalImage.visible = true;
+	    		if (_title) {
+		    		if (v) {
+		    			_title.color = _titleColorDisable;
+		    		}
+		    		else {
+		    			_title.color = _titleColor;
+		    		}
+	    		};
 	    	}
 		}
 		getter {

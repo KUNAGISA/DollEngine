@@ -298,6 +298,9 @@ class MessageLayer extends Layer
 		else {
 			node.loadButtons(elm.normal,elm.on);
 		}
+		if (elm.disable) {
+			node.loadDisable(elm.disable);
+		};
 		if (elm.title) {
 			node.title = elm.title;
 			node.titleColor = elm.color if elm.color!==void;

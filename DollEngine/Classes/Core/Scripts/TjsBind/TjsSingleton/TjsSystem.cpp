@@ -132,6 +132,31 @@ tTJSNC_System::tTJSNC_System() : inherited(TJS_W("System"))
         TJS_DENY_NATIVE_PROP_SETTER
     }
     TJS_END_NATIVE_STATIC_PROP_DECL(patchPath)
+            
+    TJS_BEGIN_NATIVE_PROP_DECL(platformName)
+    {
+        TJS_BEGIN_NATIVE_PROP_GETTER
+        {
+            *result = DESystem->getPlatformName();
+            return TJS_S_OK;
+        }
+        TJS_END_NATIVE_PROP_GETTER
+        TJS_DENY_NATIVE_PROP_SETTER
+    }
+    TJS_END_NATIVE_STATIC_PROP_DECL(platformName)
+            
+    TJS_BEGIN_NATIVE_PROP_DECL(versionInformation)
+    {
+        TJS_BEGIN_NATIVE_PROP_GETTER
+        {
+            *result = ENGINE_VERSION;
+            return TJS_S_OK;
+        }
+        TJS_END_NATIVE_PROP_GETTER
+        TJS_DENY_NATIVE_PROP_SETTER
+    }
+    TJS_END_NATIVE_STATIC_PROP_DECL(versionInformation)
+    
     
     TJS_BEGIN_NATIVE_PROP_DECL(desktopWidth)
     {

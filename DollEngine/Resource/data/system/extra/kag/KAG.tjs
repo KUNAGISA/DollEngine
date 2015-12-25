@@ -15,6 +15,7 @@ class KAG extends Application
 	var fore = %[];//表层
 	var back = [];//里层配置
 	var currentLayer = "message0";
+	var current;
 
 	//存档控制
 	var history;
@@ -843,6 +844,7 @@ class KAG extends Application
 				this.status.uiPage = 'fore';
 			}
 			this.currentLayer = elm.layer;
+			current = getCurrentLayer();
 		} incontextof this,
 
 		er : function (elm) 
@@ -1063,34 +1065,34 @@ class KAG extends Application
 			timeline.start();
 		} incontextof this,
 
-		action : function (elm) 
-		{
-			this.checkElm(elm,['layer','module']);
-			var lay = this.getLayerByElm(elm);
-			if(!lay) {
-				this.mergerBack('action',elm);
-				return;
-			}
-			var time = 1;
-			if (elm.time!==void) {
-				time = elm.time/1000;
-			}
-			var act;
-			if(TagActions[elm.module]){
-				act = TagActions[elm.module](lay,time,elm);
-			}
-			else {
-				dm("未实现的tag action",elm.module);
-				return;
-			}
-			act.target = lay;
-			act.onActionEnded = function () 
-			{
-				this[0].actionWaits.remove(this[1]);
-			} incontextof [this,act];
-			this.actionWaits.add(act);
-			lay.runAction(act);
-		} incontextof this,
+		// action : function (elm) 
+		// {
+		// 	this.checkElm(elm,['layer','module']);
+		// 	var lay = this.getLayerByElm(elm);
+		// 	if(!lay) {
+		// 		this.mergerBack('action',elm);
+		// 		return;
+		// 	}
+		// 	var time = 1;
+		// 	if (elm.time!==void) {
+		// 		time = elm.time/1000;
+		// 	}
+		// 	var act;
+		// 	if(TagActions[elm.module]){
+		// 		act = TagActions[elm.module](lay,time,elm);
+		// 	}
+		// 	else {
+		// 		dm("未实现的tag action",elm.module);
+		// 		return;
+		// 	}
+			// act.target = lay;
+			// act.onActionEnded = function () 
+			// {
+			// 	this[0].actionWaits.remove(this[1]);
+			// } incontextof [this,act];
+			// this.actionWaits.add(act);
+			// lay.runAction(act);
+		// } incontextof this,
 
 		wact : function (elm) 
 		{
@@ -1145,5 +1147,13 @@ class KAG extends Application
 		if (_triggerTouches.count == 0) {
 			checkClickSkip();
 		};
+	}
+
+	function addHook () {
+		dm("失效的API:addHook");
+	}
+
+	function removeHook () {
+		dm("失效的API:removeHook");
 	}
 }

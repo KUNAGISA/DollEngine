@@ -26,6 +26,10 @@
 
 using namespace std;
 
+#define ENGINE_VERSION L"DollEngine v0.01.15.1225 Alpha Copyright (c) 2015 DollStudio. All rights reserved."
+
+///////////////////////////
+
 #define PI 3.14159265358979323846264338327950288
 #define DEFFONTSIZE 14
 #define DM(...) DE::Console::GetInstance()->log(DE::String::fromFormat(__VA_ARGS__))

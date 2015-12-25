@@ -156,5 +156,10 @@ class Layer extends GameObject
 }
 
 if(DEConfig.module.kag){
-	global.KAGLayer = global.Layer;
+class KAGLayer extends Layer
+{
+	function KAGLayer (app,par) {
+		super.Layer(...);
+	}
+}
 }

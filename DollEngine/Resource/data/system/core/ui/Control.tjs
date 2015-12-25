@@ -14,6 +14,9 @@ class Control extends Layer
 	}
 
 	function onMouseDown (x,y) {
+		if (_disabled) {
+			return false;
+		};
 		if (app.status.lockLink) {
 			return false;
 		}
@@ -27,15 +30,14 @@ class Control extends Layer
 		return true;
 	}
 
-	property disabled{
+	var _disabled = false;
+	property disabled {
 	    setter(v) {
-	    	//setter
-	    	_touch.enabled = !v;
-		}
-		getter {
-	    	//getter
-			return !_touch.enabled;
-		}
+	    	_disabled = v;
+	    }
+	    getter {
+	    	return _disabled;
+	    }
 	}
 
 	var _issys=false;//是否是系统控件（不受er/cm指令清除

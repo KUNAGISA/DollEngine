@@ -23,6 +23,8 @@ System::System()
 ,m_isError(false)
 ,m_delegate(NULL)
 {
+    m_platformName = L"iOS";
+	
     System::NeedRedraw = true;
     System::NeedSortTouches = true;
     //Data path

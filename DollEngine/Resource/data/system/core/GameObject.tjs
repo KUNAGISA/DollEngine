@@ -207,6 +207,34 @@ class GameObject
 	    }
 	}
 
+	property left {
+		setter(v) {
+			x = v;
+		}
+		getter {
+			return x;
+		}
+	}
+
+	property top {
+	    setter(v) {
+	    	if (parent) {
+	    		y = parent.height - v;
+	    	}
+	    	else {
+	    		y = DEConfig.device.height - v;
+	    	}
+	    }
+	    getter {
+	    	if (parent) {
+	    		return parent.height - y;
+	    	}
+	    	else {
+	    		return DEConfig.device.height - y;
+	    	}
+	    }
+	}
+
 	property scale {
 	    setter(v) {
 	    	transform.scale = v;

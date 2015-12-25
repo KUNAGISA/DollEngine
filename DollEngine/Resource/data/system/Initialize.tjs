@@ -3,6 +3,8 @@ var print = Console.log;
 var em = Console.throwMsg;
 var assert = Console.assertMsg;
 
+print(System.versionInformation);
+
 var DEConfig = Scripts.evalStorage("Config.tjs");
 
 System.debugMode = DEConfig.debugMode;
@@ -25,6 +27,8 @@ System.addFont(DEConfig.game.deffont.face);
 var tf=%[];
 var f=%[];
 var sf=%[];
+
+sf.DollEngine = true;
 
 var app;
 if(DEConfig.module.kag)

@@ -18,6 +18,15 @@ System::System()
 {
     System::NeedRedraw = true;
     System::NeedSortTouches = true;
+    
+#ifdef Q_OS_WIN32
+    m_platformName = L"Win32";
+#endif
+    
+#ifdef Q_OS_MAC
+    m_platformName = L"MacOS";
+#endif
+    
     //Data path
     m_dataPath = QCoreApplication::applicationDirPath().toStdString();
     m_dataPath += L"/data/";
