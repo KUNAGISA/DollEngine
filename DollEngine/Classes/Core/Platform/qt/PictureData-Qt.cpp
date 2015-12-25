@@ -62,7 +62,7 @@ bool PictureData::saveImage(const String& path, int w, int h)
 
 PictureData* PictureData::addText(const String& text,const String& fontName,int fontSize,FontData* fd)
 {
-    if(text.empty()) {
+    if(text.empty() || fontSize == 0) {
         return NULL;
     }
     //在之前调用的地方判断过defname是否存在了
@@ -75,9 +75,11 @@ PictureData* PictureData::addText(const String& text,const String& fontName,int 
     
     QString fl = fls.at(0);
     QFont font;
-    font.setPointSize(fontSize);
+    
+    font.setPixelSize(fontSize);
     font.setFamily(fl);
     QString txt = text.c_nstr();
+
     QFontMetrics metric(font);
     QRect rect = metric.boundingRect(txt);
     int w = rect.width();
@@ -86,14 +88,15 @@ PictureData* PictureData::addText(const String& text,const String& fontName,int 
     }
     for(int i=0;i<txt.size();++i) {
         QChar ch = txt.at(i);
-        int r = metric.rightBearing(ch);
         int l = metric.leftBearing(ch);
         fd->advance += metric.charWidth(txt,0);
         if(i == 0) {
             fd->bearingX = -l;//图片应该的orgin偏移量
         }
     }
-    fd->bearingY = metric.ascent()-1;
+    int h = rect.height();
+    fd->bearingY = metric.ascent();
+    fd->yMin = -(rect.y()+h-1);
     
     QImage img(w,rect.height(),QImage::Format_RGBA8888_Premultiplied);
     img.fill(0);

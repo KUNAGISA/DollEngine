@@ -17,29 +17,17 @@ class LinkButton extends Control
 		this.height = par.height;
 	}
 
-	function addTextRect (x,y,w,h,wordspace) {
-		if (_links.count == 0) {
-			_links.add([x,y,w,h]);
-		}
-		else {
-			var toplink = _links[-1];
-			if (toplink[1] == y &&
-				toplink[0] + toplink[2] + wordspace == x) {
-				toplink[2] += wordspace+w;
-			}
-			else {
-				_links.add([x,y,w,h]);
-			}
-		}
+	function addText (label) {
+		_links.add(label);
 	}
 
 	function end () {
 		for (var i = _links.count - 1; i >= 0; i--) {
-			var rect = _links[i];
+			var lb = _links[i];
 			var lay = new LayerColor(app,this);
-			lay.x = rect[0];
-			lay.y = rect[1];
-			lay.setSize(rect[2],rect[3]);
+			lay.x = lb.x;
+			lay.y = lb.y;
+			lay.setSize(lb.width,lb.height);
 			lay.color = 0x8888ff;
 			lay.opacity = 128;
 			lay.setAnchor(0,1);
@@ -52,9 +40,9 @@ class LinkButton extends Control
 		var ret = parent.pointInside(x,y,dict);
 		if (ret) {
 			for (var i = _links.count - 1; i >= 0; i--) {
-				var rect = _links[i];
-				if(dict.x >= rect[0] && dict.x <= rect[0]+rect[2] &&
-					dict.y >= rect[1]-rect[3] && dict.y <= rect[1] )
+				var lb = _links[i];
+				if(dict.x >= lb.x && dict.x <= lb.x+lb.width &&
+					dict.y >= lb.y-lb.height && dict.y <= lb.y )
 				{
 					dict.x = 0;
 					dict.y = 0;

@@ -3,6 +3,9 @@ class WordLayer extends Layer
 {
 	var _labels = [];
 	var _curLabel;
+	var _curLinkButton;
+	var _curLineHeight=0;
+	var _curLine = [];
 	function WordLayer (app,par) 
 	{
 		super.Layer(app,par);
@@ -13,7 +16,10 @@ class WordLayer extends Layer
 	{
 		this.removeAllChildren();
 		_labels.clear();
+		_curLine.clear();
+		_curLinkButton = void;
 		_curLabel = void;
+		_curLineHeight = 0;
 	}
 
 	function refreshWord () 
@@ -21,40 +27,75 @@ class WordLayer extends Layer
 		//根据界面大小重新刷新文字位置
 	}
 
+	function startLink (link) {
+		if (_curLinkButton) {
+			dm("link未结束不可以增加新的link");
+			return false;
+		};
+		_curLinkButton = link;
+		_curLabel = void;
+		return true;
+	}
+
+	function endLink () {
+		if (_curLinkButton) {
+			if (_curLabel) {
+				_curLinkButton.addText(_curLabel);
+			};
+		}
+		else {
+			dm("无效的link");
+			return;
+		}
+		if (_curLabel) {
+			_curLine.add(_curLabel);
+		};
+		_curLinkButton.end();
+		_curLinkButton = void;
+		_curLabel = void;
+	}
+
 	function addText (text,locateX,locateY,_font) 
 	{
 		if (text == "") {
 			return;
 		}
+		var lastX = _curLabel?_curLabel.x+_curLabel.width:locateX;
 		if (_curLabel == void ||
 			_font.size != _curLabel.fontSize ||
 			_font.color != _curLabel.color) 
 		{
+			if (_curLabel && _curLinkButton) {
+				_curLinkButton.addText(_curLabel);
+			}
 			var node = new Label(app,this);
 			_labels.add(node);
 			node.setAnchor(0,1);
 			node.fontSize = _font.size;
-			node.x = locateX;
+			node.x = lastX;
 			node.y = height-locateY;//-_font.lineSpacing;
 			node.color = _font.color;
+			_curLine.add(node);
 			_curLabel = node;
 		}
 		//这里还要设置文字属性
 		_curLabel.text += text;
-
-		// _curChLineHeight = Math.max(node.height,_curChLineHeight);
-
-		// if (_curLinkButton) {
-		// 	_curLinkButton.addTextRect(node.x,node.y+3,node.width,font.size+6,font.wordSpacing);
-		// };
+		if (_curLineHeight != _curLabel.height) {
+			_curLineHeight = Math.max(_curLineHeight,_curLabel.height);
+			for (var i = _curLine.count - 1; i >= 0; i--) {
+				var lb = _curLine[i];
+				lb.y = height - locateY - (_curLineHeight-lb.height);
+			};
+		};
 
 		//这里需要另加字间距
-		locateX = _curLabel.width;
-		if (locateX + _font.size > this.width) {
-			return changeLine(locateX,locateY,_font);
+		lastX = _curLabel.x+_curLabel.width;
+		if (lastX + _font.size > this.width) {
+			var ret = changeLine(lastX,locateY,_font);
+			return ret;
 		}
 		return %[
-			x : locateX,
+			x : lastX,
 			y : locateY,
 			changePage : false
 		];
@@ -62,11 +103,15 @@ class WordLayer extends Layer
 
 	function changeLine (locateX,locateY,_font) 
 	{
-		var h = _curLabel ? _curLabel.height : _font.size;
+		if (_curLabel && _curLinkButton) {
+			_curLinkButton.addText(_curLabel);
+		}
+		var h = _curLabel ? _curLineHeight : _font.size;
 		locateX = 0;
 		locateY += h+_font.lineSpacing;
+		_curLine.clear();
 		_curLabel = void;
-		// _curChLineHeight = 0;
+		_curLineHeight = 0;
 		if (locateY > this.height) {
 			return %[
 				x : 0,

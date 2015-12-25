@@ -201,8 +201,8 @@ class MessageLayer extends Layer
 	}
 
 	function setFont (elm) {
-		font.size = elm.size;
-		font.color = elm.color;
+		font.size = +elm.size if elm.size !== void;
+		font.color = +elm.color if elm.color !== void;
 		saveCommand("setFont",elm);
 	}
 
@@ -377,11 +377,14 @@ class MessageLayer extends Layer
 	}
 
 	function addLink (elm) {
-
 		if (elm.name == void) {
 			elm.name = "_num_"+uiIndex;
 		}
 		var node = new LinkButton(app,controlLayer);
+		if (!chLayer.startLink(node)) {
+			invalidate node;
+			return;
+		};
 		node.name = elm.name;
 		node.issys = elm.issys===void?false:elm.issys;
 		if (node.issys) {
@@ -394,19 +397,17 @@ class MessageLayer extends Layer
 		node.y=0;
 		node.setAnchor(0,0);
 
-		_curLinkButton = node;
 		++uiIndex;
 
 		saveCommand("addLink",elm);
 	}
 
 	function endLink (elm) {
-		if (!_curLinkButton) {
-			dm("无效的link");
-			return;
-		};
-		_curLinkButton.end();
-		_curLinkButton = void;
-		saveCommand("endLink",elm);
+		if(!chLayer.endLink()){
+
+		}
+		else {
+			saveCommand("endLink",elm);
+		}
 	}
 }
