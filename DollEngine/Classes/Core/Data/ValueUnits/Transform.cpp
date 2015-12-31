@@ -36,12 +36,30 @@ void Transform::assign(DE::Transform *src)
     m_width = src->m_width;
     m_height = src->m_height;
     m_matrix = src->m_matrix;
+    m_scissorRect = src->m_scissorRect;
     m_needFlush = true;
 }
 
 void Transform::transform(DE::Transform *v)
 {
     kmMat4Multiply(&m_matrix,&m_matrix,&v->m_matrix);
+}
+
+void Transform::setScissor(int x,int y,int w,int h)
+{
+    m_scissorRect.set(x,y,w,h);
+}
+
+void Transform::scissorBegin()
+{
+    glEnable(GL_SCISSOR_TEST);
+    float x = m_matrix.mat[];
+    glScissor(m_scissorRect.x,m_scissorRect.y,m_scissorRect.width,m_scissorRect.height);
+}
+
+void Transform::scissorEnd()
+{
+    glDisable(GL_SCISSOR_TEST);
 }
 
 void Transform::init()

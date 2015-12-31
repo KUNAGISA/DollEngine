@@ -5,6 +5,7 @@ class TagManager extends KAGController
 	var handlers;
 	var owner;
 	var _waitTimer;
+	var _waitClickStack = [];
 	function TagManager (app) 
 	{
 		super.KAGController();
@@ -32,6 +33,7 @@ class TagManager extends KAGController
 	function callStorage (storage="",label="") 
 	{
 		if(stepInLabel(storage,label,true)) {
+			_waitClickStack.add(owner.status.waitClickMode);
 			asyncTrigger(execTags);
 			return true;
 		}
@@ -44,23 +46,28 @@ class TagManager extends KAGController
 	function execTags () 
 	{
 		// var isjump = false;
-		while(true){
-			var time = doTag();
-			if (time < 0) {
-				// dm("停止，或等待点击，或跳转");
-				return;
+			while(true){
+				try {
+					var time = doTag();
+					if (time < 0) {
+						// dm("停止，或等待点击，或跳转");
+						return;
+					}
+					// else if(time == -1) {
+					// 	//即将跳转
+					// 	isjump = true;
+					// 	break;
+					// }
+					else if(time > 0){
+						waitTime(time);
+						return;
+					}
+					stepNext();
+				}
+				catch(e){
+					return;
+				}
 			}
-			// else if(time == -1) {
-			// 	//即将跳转
-			// 	isjump = true;
-			// 	break;
-			// }
-			else if(time > 0){
-				waitTime(time);
-				return;
-			}
-			stepNext();
-		}
 		// if (isjump) {
 		// 	asyncTrigger(execTags);
 		// }
@@ -68,29 +75,45 @@ class TagManager extends KAGController
 
 	function onExecute (name,params) 
 	{
-		owner.status.waitClickMode = WAIT_CLICK_NONE;
 		if (owner.status.isClickSkip && name != 'ch' && name != 'locate' && name != 'r') {
 			owner.status.isClickSkip = false;
 		}
 		if (name == "return") {
-			if(stepOutLabel()){
-				doNext();
+			if (params.storage != void || params.target != void) {
+				dm("return 带storage或target是一个未完成的功能");
+				return -1;
+				// clearStep();
+				// jumpStorage(params.storage,params.target);
 			}
 			else {
-				em("不对应的return或endmacro");
+				if(stepOutLabel()){
+					if (_waitClickStack[-1] == WAIT_CLICK_NONE) {
+						doNext();
+					}
+					owner.status.waitClickMode = _waitClickStack[-1];
+					_waitClickStack.erase(_waitClickStack.count-1);
+				}
+				else {
+					em("不对应的return或endmacro");
+				}
+				return -1;
 			}
-			return -1;
 		}
 		if (name == "endmacro") {
 			macroParams.erase(macroParams.count-1);
 			if(stepOutLabel()){
-				doNext();
+				if (_waitClickStack[-1] == WAIT_CLICK_NONE) {
+					doNext();
+				}
+				owner.status.waitClickMode = _waitClickStack[-1];
+				_waitClickStack.erase(_waitClickStack.count-1);
 			}
 			else {
 				em("不对应的return或endmacro");
 			}
 			return -1;
 		}
+		owner.status.waitClickMode = WAIT_CLICK_NONE;
 		if(typeof handlers[name] != "undefined")
 		{
 			var time = handlers[name](params);
@@ -106,6 +129,7 @@ class TagManager extends KAGController
 		{
 			if(stepInLabel("MACRO",name,true))
 			{
+				_waitClickStack.add(owner.status.waitClickMode);
 				macroParams.add(params);
 				asyncTrigger(execTags);
 				return -1; //即将jump

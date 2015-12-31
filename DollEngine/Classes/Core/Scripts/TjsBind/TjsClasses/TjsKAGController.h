@@ -15,6 +15,13 @@
 #include "KAGController.h"
 
 TJS_NCB(KAGController){}
+
+enum IF_KEY {
+    DOING=0,
+    TOELSE,
+    TOEND
+};
+
 int doTag();
 bool stepInLabel(tTJSVariant storage, tTJSVariant label, bool iscall)
 {
@@ -33,7 +40,7 @@ tTJSVariant getLastTargetTJS(){
 }
 bool loadStack(tTJSVariant v);
 protected:
-stack<wstring> m_ifKey;
+vector<IF_KEY> m_ifKey;
 };
 
 #endif /* defined(__DollEngine__TjsKAGController__) */

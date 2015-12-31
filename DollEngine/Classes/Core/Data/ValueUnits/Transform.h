@@ -22,6 +22,10 @@ public:
     
     virtual void assign(Transform* src);
     virtual void transform(Transform* v);
+    
+    void setScissor(int x,int y,int w,int h);
+    void scissorBegin();
+    void scissorEnd();
 public:
     void init();
     void flush();
@@ -50,6 +54,7 @@ public:
 protected:
     kmMat4 m_matrix;
     bool m_needFlush;
+    Rect m_scissorRect;
 };
 
 

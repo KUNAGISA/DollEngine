@@ -659,6 +659,17 @@ void PaintEngine::drawElements(GLenum mode,GLsizei count,GLenum type,const GLvoi
     glDrawElements(mode,count,type,indices);
 }
 
+void PaintEngine::scissorBegin(int x,int y,int w,int h)
+{
+    glEnable(GL_SCISSOR_TEST);
+    glScissor(x,y,w,h);
+}
+
+void PaintEngine::scissorEnd()
+{
+    glDisable(GL_SCISSOR_TEST);
+}
+
 void PaintEngine::checkError()
 {
     GLint v = glGetError();

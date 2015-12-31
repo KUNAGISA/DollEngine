@@ -1,18 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<<<<<<< HEAD
-<!-- Written by QtCreator 3.4.2, 2015-12-21T22:09:13. -->
+<!-- Written by QtCreator 3.4.2, 2015-12-29T22:20:35. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
   <value type="QByteArray">{b3da66b1-4f4c-4c8a-8cbc-6972f4ce4d03}</value>
-=======
-<!-- Written by QtCreator 3.4.2, 2015-12-22T17:40:44. -->
-<qtcreator>
- <data>
-  <variable>EnvironmentId</variable>
-  <value type="QByteArray">{f31e3610-801f-4072-9dcf-b128fe206094}</value>
->>>>>>> origin/master
  </data>
  <data>
   <variable>ProjectExplorer.Project.ActiveTarget</variable>

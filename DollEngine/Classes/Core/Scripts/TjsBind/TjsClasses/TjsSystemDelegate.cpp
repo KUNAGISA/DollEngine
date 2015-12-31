@@ -3,5 +3,5 @@
 
 NCB_REGISTER_CLASS_DIFFER(SystemDelegate, TjsSystemDelegate)
 {
-    TJS_FACTORY
+    TJS_FACTORY;
 };

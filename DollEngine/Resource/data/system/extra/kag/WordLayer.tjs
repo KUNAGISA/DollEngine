@@ -112,7 +112,7 @@ class WordLayer extends Layer
 		_curLine.clear();
 		_curLabel = void;
 		_curLineHeight = 0;
-		if (locateY > this.height) {
+		if (locateY+_font.size > this.height) {
 			return %[
 				x : 0,
 				y : 0,

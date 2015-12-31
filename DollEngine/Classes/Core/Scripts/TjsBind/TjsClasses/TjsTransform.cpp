@@ -7,6 +7,8 @@ NCB_REGISTER_CLASS_DIFFER(Transform, TjsTransform)
     NCB_METHOD(transform);
     NCB_METHOD(init);
     NCB_METHOD(flush);
+    NCB_METHOD(scissorBegin);
+    NCB_METHOD(scissorEnd);
     NCB_METHOD_DIFFER(pointInside,pointInsideTJS);
     NCB_PROPERTY( x, getX, setX);
     NCB_PROPERTY( y, getY, setY);

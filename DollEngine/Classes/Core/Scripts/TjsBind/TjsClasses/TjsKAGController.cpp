@@ -78,12 +78,17 @@ static void GetTagParamsValue(KAGTag* tag,const wstring& key,tTJSVariant &value)
 int TjsKAGController::doTag()
 {
     if (m_tagIndex >= m_label->allTags.size()) {
+        if(m_ifKey.size() > 0) {
+            EM(ERROR_KAG_IF_FAIL);
+            return -2;
+        }
         if(!stepNext())
         {
             return -2;
         }
     }
     KAGTag * tag = m_label->allTags[m_tagIndex];
+    
     if (tag->name == L"macro") {
         wstring macroname = tag->getValue(L"name");
         KAGParser::GetInstance()->startMacro(macroname);
@@ -111,11 +116,11 @@ int TjsKAGController::doTag()
         tTJSVariant cond;
         try {
             ScriptEngine::Global()->EvalExpression( ret, &cond);
-        }TJS_CATCH
+        }TJS_CATCH_RETURN(m_ifKey.clear();return -2;)
         if (cond.operator bool()) {
         }
         else {
-            tag->print();
+            tag->print(false);
             return 0;
         }
     }
@@ -127,12 +132,12 @@ int TjsKAGController::doTag()
         tTJSVariant cond;
         try {
             ScriptEngine::Global()->EvalExpression( ret, &cond);
-        }TJS_CATCH
+        }TJS_CATCH_RETURN(m_ifKey.clear();return -2;)
         if (cond.operator bool()) {
-            m_ifKey.push(L"doing");
+            m_ifKey.push_back(DOING);
         }
         else{
-            m_ifKey.push(L"toelse");
+            m_ifKey.push_back(TOELSE);
         }
         return 0;
     }
@@ -140,18 +145,20 @@ int TjsKAGController::doTag()
     {
         tag->print();
         if (m_ifKey.size() > 0) {
-            if (m_ifKey.top() == L"doing") {
-                m_ifKey.top() = L"toend";
+            if (m_ifKey.back() == DOING) {
+                m_ifKey.back() = TOEND;
             }
-            else if(m_ifKey.top() == L"toelse"){
-                m_ifKey.top() = L"doing";
+            else if(m_ifKey.back() == TOELSE){
+                m_ifKey.back() = DOING;
             }
-            else if (m_ifKey.top() == L"toend"){
+            else if (m_ifKey.back() == TOEND){
             }
             return 0;
         }
         else {
             EM(ERROR_KAG_IF_FAIL, tag->line);
+            m_ifKey.clear();
+            return -2;
         }
     }
     else if (tag->name == L"elsif")
@@ -161,23 +168,25 @@ int TjsKAGController::doTag()
         GetTagParamsValue(tag,L"exp",ret);
         if (m_ifKey.size() == 0) {
             EM(ERROR_KAG_IF_FAIL, tag->line);
+            m_ifKey.clear();
+            return -2;
         }
         else
         {
-            if (m_ifKey.top() == L"doing") {
-                m_ifKey.top() = L"toend";
+            if (m_ifKey.back() == DOING) {
+                m_ifKey.back() = TOEND;
             }
-            else if(m_ifKey.top() == L"toelse"){
+            else if(m_ifKey.back() == TOELSE){
                 tTJSVariant cond;
                 try {
                     ScriptEngine::Global()->EvalExpression( ret, &cond);
-                }TJS_CATCH
+                }TJS_CATCH_RETURN(m_ifKey.clear();return -2;)
                 if (cond.operator bool()) {
-                    m_ifKey.top() = L"doing";
+                    m_ifKey.back() = DOING;
                 }
                 return 0;
             }
-            else if (m_ifKey.top() == L"toend"){
+            else if (m_ifKey.back() == TOEND){
                 return 0;
             }
             return 0;
@@ -186,11 +195,22 @@ int TjsKAGController::doTag()
     else if (tag->name == L"endif")
     {
         tag->print();
-        m_ifKey.pop();
+        m_ifKey.pop_back();
         return 0;
     }
-    if (m_ifKey.size()>0 && (m_ifKey.top() == L"toend" || m_ifKey.top() == L"toelse")) {
-        return 0;
+    if(m_ifKey.size() > 0) {
+        bool isskip=false;
+        for(auto iter = m_ifKey.begin();
+            iter != m_ifKey.end();++iter) {
+            if((*iter) != DOING) {
+                isskip = true;
+                break;
+            }
+        }
+        if(isskip) {
+            tag->print(false);
+            return 0;
+        }
     }
     tag->print();
     ScriptEngine::GetInstance()->pushFile(tag->storage->fileName);

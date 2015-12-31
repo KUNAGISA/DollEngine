@@ -31,6 +31,12 @@ return _self->ClassNames[0];
 TjsSystemDelegate():_self(NULL){}
 
 virtual void onMainLoop(){
+    static ttstr eventName(TJS_W(onMainLoop));
+    tTJSVariant* param[] = {};
+    tTJSVariant result;
+    try{
+    _self->FuncCall(0, eventName.c_str(), eventName.GetHint(), &result, NUM, param, _self);\
+    }TJS_CATCH
     TJS_EVENT_CALL(onMainLoop,0);
 }
 

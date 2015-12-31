@@ -94,6 +94,9 @@ public:
     
     void drawElements(GLenum mode,GLsizei count,GLenum type,const GLvoid *indices);
     
+    void scissorBegin(int x,int y,int w,int h);
+    void scissorEnd();
+    
     void checkError();
     void checkProgramError(PaintProgram* program);
 public:

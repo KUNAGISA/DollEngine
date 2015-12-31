@@ -76,6 +76,7 @@ class KAG extends Application
 		status.isClickSkip = false;//是否点击之后skip动画中
 		status.clickToNext = false;//是否刚刚点击继续过（用于过滤r）
 		status.locksnapshot = false;//是否存档画面锁定
+		status.isClickShowMessages = false;//是否点击以后显示messages
 
 		initBookMarkDates();
 		dm("【Application status initialized】");
@@ -189,12 +190,15 @@ class KAG extends Application
 		}
 	}
 
-	function hideMessages (v = false) {
+	function hideMessages (v = false, isclickshow=false) {
 		for (var i = 0; i < fore.messages.count; i++) {
 			if (fore.messages[i]) {
 				fore.messages[i].visible = v;
 			};
 		};
+		if (!v) {
+			status.isClickShowMessages = isclickshow;
+		}
 	}
 
 	function clearLayers () 
@@ -448,7 +452,7 @@ class KAG extends Application
 		data.current = currentLayer;
 		data.macroParams = [];
 		data.macroParams.assignStruct(tagManager.macroParams);
-
+		data.waitClickMode = status.waitClickMode;
 		data.tags = tagManager.saveStack();
 		data.bookmark = %[
 			name : tagManager.lastTarget
@@ -477,7 +481,7 @@ class KAG extends Application
 		if (tdata.thumbRtt) {
 			var thumbWidth = DEConfig.game.saveThumbWidth;
 			var thumbHeight = int(thumbWidth * sysbase.height / sysbase.width);
-			tdata.thumbRtt.save(name+".png",thumbWidth,thumbHeight);
+			tdata.thumbRtt.saveToFile(name+".png",thumbWidth,thumbHeight);
 			invalidate tdata.thumbRtt;
 			tdata.thumbRtt = void;
 			delete tdata.thumbRtt;
@@ -510,12 +514,15 @@ class KAG extends Application
 			lay.onLoad(data.messages[i]);
 		}
 		currentLayer = data.current;
+		status.waitClickMode = data.waitClickMode;
 
 		tagManager.loadStack(data.tags);
 
 		tagManager.macroParams = data.macroParams;
 		if(tagManager.stepOutLabel()){
-			asyncTrigger(tagManager.execTags);
+			if (status.waitClickMode == WAIT_CLICK_NONE) {
+				asyncTrigger(tagManager.doNext);
+			}
 		}
 	}
 
@@ -591,7 +598,6 @@ class KAG extends Application
 		s : function (elm) 
 		{
 			this.status.waitClickMode = WAIT_CLICK_NONE;
-			saveTempData();
 			return -1;
 		} incontextof this,
 
@@ -1145,6 +1151,11 @@ class KAG extends Application
 
 	function onMouseDown (x,y) {
 		if (_triggerTouches.count == 0) {
+			if (status.isClickShowMessages) {
+				status.isClickShowMessages = false;
+				hideMessages(true);
+				return;
+			}
 			checkClickSkip();
 		};
 	}

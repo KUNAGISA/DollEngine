@@ -17,7 +17,8 @@ public:
     virtual void onMouseUp(float x,float y){}
     virtual void onMouseMove(float x,float y){}
     virtual void onClick(float x,float y){}
-
+protected:
+    vector<Rect> m_scissorRect;
 };
 
 DE_END
