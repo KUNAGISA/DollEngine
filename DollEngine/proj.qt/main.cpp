@@ -19,7 +19,11 @@ int main(int argc, char *argv[])
         set.setValue("consoleRect",rect);
     }
     if(v == 0x88ff){
+#ifdef Q_OS_WIN
         QProcess::execute("E:/GitHub/DollEngine/DollEngine/build.bat");
+#elif defined(Q_OS_MAC)
+        QProcess::execute("/Users/Dollstudio/DollStudio/gitProject/krGL/DollEngine/DollEngine/build.sh");
+#endif
         QProcess::startDetached(qApp->applicationFilePath(), QStringList());
     }
     return 0;

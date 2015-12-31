@@ -53,7 +53,7 @@ void Transform::setScissor(int x,int y,int w,int h)
 void Transform::scissorBegin()
 {
     glEnable(GL_SCISSOR_TEST);
-    float x = m_matrix.mat[];
+//    float x = m_matrix.mat[];
     glScissor(m_scissorRect.x,m_scissorRect.y,m_scissorRect.width,m_scissorRect.height);
 }
 

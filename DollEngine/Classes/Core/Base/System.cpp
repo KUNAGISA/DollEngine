@@ -28,12 +28,12 @@ void System::startup()
     ScriptEngine::GetInstance();
     try{
         String code;
-        if(!code.loadFromFile("Startup.tjs")) {
+        if(!code.loadFromFile(L"Startup.tjs")) {
             DM(L"Startup.tjs启动失败！");
             return;
         }
-        ScriptEngine::GetInstance()->pushFile("【GLOBAL】");
-        ScriptEngine::GetInstance()->pushFile("startup.tjs");
+        ScriptEngine::GetInstance()->pushFile(L"【GLOBAL】");
+        ScriptEngine::GetInstance()->pushFile(L"startup.tjs");
         ScriptEngine::GetInstance()->exec(code, NULL);
         ScriptEngine::GetInstance()->popFile();
     }

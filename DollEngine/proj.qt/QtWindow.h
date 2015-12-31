@@ -19,11 +19,14 @@ class QtWindow : public QMainWindow,public DE::Window
 public:
     explicit QtWindow(QWidget *parent = 0);
     ~QtWindow();
+    static QtWindow* GetInstance();
     
     virtual void setTitle(const DE::String& v);
     void setSize(int w, int h);
     void setVisible(bool visible);
     
+    void stopTimer();
+    void startTimer();
 public:
     void keyReleaseEvent(QKeyEvent * event);
     void closeEvent(QCloseEvent *);
@@ -31,6 +34,7 @@ public:
 private:
     Ui::QtWindow *ui;
     GLWidget* glWidget;
+    int timer;
 };
 
 DE_END

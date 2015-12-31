@@ -13,7 +13,8 @@ TEMPLATE = app
 
 CONFIG += c++11 
 
-DEFINES += __QT__
+DEFINES += __QT__ \
+UNICODE
 
 INCLUDEPATH += \
 ../Classes/core \

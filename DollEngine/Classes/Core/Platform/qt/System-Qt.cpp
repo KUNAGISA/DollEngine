@@ -8,6 +8,7 @@
 #include <QFontDatabase>
 #include <QDesktopWidget>
 #include <QDir>
+#include "QtWindow.h"
 
 DE_BEGIN
 
@@ -30,10 +31,12 @@ System::System()
     //Data path
     m_dataPath = QCoreApplication::applicationDirPath().toStdString();
     m_dataPath += L"/data/";
+    //printf("Data path:%s\n",m_dataPath.c_nstr());
     
     //App path
     m_appPath = QCoreApplication::applicationDirPath().toStdString();
     m_appPath += L"/";
+    //printf("App path:%s\n",m_appPath.c_nstr());
     
     //SaveData path
     m_saveDataPath = QCoreApplication::applicationDirPath().toStdString();
@@ -42,6 +45,7 @@ System::System()
     if(!dir.exists()) {
         dir.mkdir(m_saveDataPath.c_nstr());
     }
+    //printf("SaveData path:%s\n",m_saveDataPath.c_nstr());
     
     //Patch path
     m_patchPath = QCoreApplication::applicationDirPath().toStdString();
@@ -50,10 +54,12 @@ System::System()
     if(!dir2.exists()) {
         dir2.mkdir(m_patchPath.c_nstr());
     }
+    //printf("Patch path:%s\n",m_patchPath.c_nstr());
 }
 
 System::~System()
 {
+    stopMainLoop();
     SAFF_DELETE(m_delegate);
 }
 
@@ -116,9 +122,19 @@ void System::removeFont(const String& fontName)
                 break;
             }
         }
-        QFontDatabase::removeApplicationFont((int)iter->second);
+        QFontDatabase::removeApplicationFont((uintptr_t)iter->second);
         m_allFonts.erase(fontName);
     }
+}
+
+void System::stopMainLoop()
+{
+    QtWindow::GetInstance()->stopTimer();
+}
+
+void System::startMainLoop()
+{
+    QtWindow::GetInstance()->startTimer();
 }
 
 DE_END

@@ -80,12 +80,20 @@ class MessageLayer extends Layer
 		super.finalize();
 	}
 
-	function visit () {
-
-		app.scissorBegin(100,100,800,400);
-		super.visit();
-		app.scissorEnd();
-	}
+	// function visit () {
+	// 	if(visible) {
+	// 		if (_needSortChildren) {
+	// 			children.sort(function (a,b) {
+	// 				return a.absolute < b.absolute;
+	// 			});
+	// 			_needSortChildren = false;
+	// 		}
+	// 		updateTransform();
+	// 		_transInWorld.scissorBegin(100,100,800,400);
+	// 		super.visit();
+	// 		_transInWorld.scissorEnd();
+	// 	}
+	// }
 
 	function saveCommand (name, elm) {
 		if (name == "addText") {

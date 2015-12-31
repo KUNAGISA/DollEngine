@@ -3,7 +3,7 @@
 
 #include "TjsBind.h"
 #include "SystemDelegate.h"
-
+#include "System.h"
 
 class TjsSystemDelegate : public DE::SystemDelegate
 {
@@ -31,13 +31,14 @@ return _self->ClassNames[0];
 TjsSystemDelegate():_self(NULL){}
 
 virtual void onMainLoop(){
-    static ttstr eventName(TJS_W(onMainLoop));
+    static ttstr eventName(TJS_W("onMainLoop"));
     tTJSVariant* param[] = {};
     tTJSVariant result;
     try{
-    _self->FuncCall(0, eventName.c_str(), eventName.GetHint(), &result, NUM, param, _self);\
-    }TJS_CATCH
-    TJS_EVENT_CALL(onMainLoop,0);
+        _self->FuncCall(0, eventName.c_str(), eventName.GetHint(), &result, 0, param, _self);
+    }TJS_CATCH_RETURN(
+                DE::System::GetInstance()->stopMainLoop();
+            )
 }
 
 virtual void onMouseDown(float x,float y){

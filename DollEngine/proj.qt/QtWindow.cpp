@@ -92,21 +92,28 @@ public:
 
 DE_BEGIN
 
-
+static QtWindow* g_instance=NULL;
+QtWindow* QtWindow::GetInstance()
+{
+    return g_instance;
+}
 
 QtWindow::QtWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::QtWindow)
+    ui(new Ui::QtWindow),
+    timer(0)
 {
+    g_instance = this;
     ui->setupUi(this);
     glWidget = new GLWidget();
     ui->gridLayout->addWidget(glWidget);
-    startTimer(15);
+    startTimer();
     
 }
 
 QtWindow::~QtWindow()
 {
+    stopTimer();
     delete glWidget;
     delete ui;
 }
@@ -134,9 +141,22 @@ void QtWindow::setVisible(bool visible)
     Window::setVisible(visible);
 }
 
+void QtWindow::stopTimer()
+{
+    killTimer(timer);
+    timer = 0;
+}
+
+void QtWindow::startTimer()
+{
+    if(timer==0){
+        timer = QMainWindow::startTimer(16);
+    }
+}
+
 void QtWindow::keyReleaseEvent(QKeyEvent * event)
 {
-    if(event->matches(QKeySequence::Refresh)) {
+    if(event->matches(QKeySequence::Refresh) || event->key() == Qt::Key_F5) {
         qApp->exit( 0x88ff );
     }
 }

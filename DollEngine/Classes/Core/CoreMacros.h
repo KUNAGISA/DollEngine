@@ -120,9 +120,8 @@ return 0;\
 #define glReleaseShaderCompiler(xxx)
 
 #elif defined(__QT__)
-#include <GL/gl.h>
+#include <QtOpenGL>
 #define GL_GLEXT_PROTOTYPES
-#include <GL/glext.h>
 #include <QDebug>
 #endif
 

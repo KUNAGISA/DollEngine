@@ -23,7 +23,7 @@
 using namespace DE;
 
 
-#define TJS_CATCH_RETURN(RETURN) catch ( TJS::eTJSError &e ){ DE::ScriptEngine::GetInstance()->catchError(&e);}catch (...) {DM("未知错误");RETURN}
+#define TJS_CATCH_RETURN(RETURN) catch ( TJS::eTJSError &e ){ DE::ScriptEngine::GetInstance()->catchError(&e);RETURN}catch (...) {DM("未知错误");RETURN}
 #define TJS_CATCH TJS_CATCH_RETURN()
 
 #define TJS_EVENT_CALL(NAME,NUM,...) \

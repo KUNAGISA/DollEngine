@@ -66,7 +66,7 @@ PictureData* PictureData::addText(const String& text,const String& fontName,int 
         return NULL;
     }
     //在之前调用的地方判断过defname是否存在了
-    int nindex = (int)System::GetInstance()->getFont(fontName);
+    uintptr_t nindex = (uintptr_t)System::GetInstance()->getFont(fontName);
     
     QStringList fls = QFontDatabase::applicationFontFamilies(nindex);
     if(fls.size() == 0){

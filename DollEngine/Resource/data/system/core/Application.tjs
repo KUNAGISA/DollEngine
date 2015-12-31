@@ -63,9 +63,16 @@ class Application extends SystemDelegate
 	}
 
 	function finalize () {
+		if (_transTimeline) {
+			invalidate _transTimeline;
+			_transTimeline = void;
+		}
 		if (_transRTT) {
 			invalidate _transRTT;
+			_transRTT = void;
 		}
+		_allTimelines.clear();
+		_allTouches.clear();
 		saveSFlags();
 		invalidate window;
 		super.finalize();
