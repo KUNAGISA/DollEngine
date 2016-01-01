@@ -19,7 +19,9 @@ class iOSWindow : public Window
 public:
 	iOSWindow();
 	virtual ~iOSWindow();
-
+    static iOSWindow* GetInstance();
+    
+    void mainLoopEnabled(bool v);
     void setVisible(bool visible);
     void setSize(int w,int h);
 protected:

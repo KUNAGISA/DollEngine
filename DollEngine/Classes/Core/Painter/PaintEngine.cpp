@@ -93,19 +93,21 @@ void PaintEngine::resize(float deviceWidth,float deviceHeight)
             layerY = 0;
         }
         
-        m_globalTrans->setX(layerX*2.0f/deviceWidth-1);
-        m_globalTrans->setY(layerY*2.0f/deviceHeight-1);
-        m_globalTrans->setScaleX(2.0f/deviceWidth * layerZoom);
-        m_globalTrans->setScaleY(2.0f/deviceHeight * layerZoom);
-        m_globalTrans->flush();
+        Transform* trans = m_globalTrans;
+        trans->setWidth(layerWidth);
+        trans->setHeight(layerHeight);
+        trans->setX(layerX*2.0f/deviceWidth-1);
+        trans->setY(layerY*2.0f/deviceHeight-1);
+        trans->setScaleX(2.0f/deviceWidth * layerZoom);
+        trans->setScaleY(2.0f/deviceHeight * layerZoom);
+        trans->flush();
         
         setLayerX(layerX);
         setLayerY(layerY);
         
         setLayerZoom(layerZoom);
-#ifdef __QT__
+        
         glViewport(0,0,deviceWidth,deviceHeight);
-#endif
         CHECK_GL_ERROR;
         NEED_REDRAW;
     }
@@ -126,18 +128,7 @@ void PaintEngine::pushDrawData(GLDrawData& data)
     m_quads.push_back(data);
 }
 
-void PaintEngine::setGlobalTrans(Transform *v)
-{
-    if(m_globalTrans){
-        delete m_globalTrans;
-    }
-    m_globalTrans = v;
-}
 
-Transform* PaintEngine::getGlobalTrans()
-{
-    return m_globalTrans;
-}
 void PaintEngine::addProgram(String pm,PaintProgram* effect)
 {
     if(effect->init()) {
@@ -323,11 +314,8 @@ void PaintEngine::paint()
     }
     bindVAO(0);
     bindTexture(GL_TEXTURE0,m_curTexture);
-//    getGlobalTrans()->setX(-1);
-//    getGlobalTrans()->setY(-1);
-//    getGlobalTrans()->setScale(1.0/1024.0f);
-//    getGlobalTrans()->flush();
-    m_curProgram->setUniformValue("matrix", getGlobalTrans()->getMatrix());
+    
+    m_curProgram->setUniformValue("matrix", m_globalTrans->getMatrix());
 #define kQuadSize sizeof(GLVertex)
     long offset = (long)m_quads.data();
     enableVertexAttribs(VERTEX_ATTRIB_FLAG_POS_COLOR_TEX);

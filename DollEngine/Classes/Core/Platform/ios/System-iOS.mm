@@ -10,6 +10,7 @@
 #include "System.h"
 #include "PictureData.h"
 #include "FileInfo.h"
+#include "iOSWindow.h"
 #include <ft2build.h>
 #include FT_FREETYPE_H
 
@@ -116,6 +117,16 @@ void System::removeFont(const String& fontName)
         FT_Done_Face((FT_Face)iter->second);
         m_allFonts.erase(fontName);
     }
+}
+
+void System::startMainLoop()
+{
+    iOSWindow::GetInstance()->mainLoopEnabled(true);
+}
+
+void System::stopMainLoop()
+{
+    iOSWindow::GetInstance()->mainLoopEnabled(false);
 }
 
 DE_END

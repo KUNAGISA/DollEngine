@@ -45,9 +45,6 @@ public:
     void paint();
     void testPaint();
 public:
-    Transform* m_globalTrans;
-    virtual void setGlobalTrans(Transform *v);
-    virtual Transform* getGlobalTrans();
     void addProgram(String pm,PaintProgram*);
     PaintProgram* getProgram(String pm);
     Texture* addTexture(const String& path);
@@ -108,6 +105,7 @@ public:
     PROPERTY(float,LayerZoom,m_layerZoom){m_layerZoom=v;}
     
     PROPERTY_RO(bool,IsInitialized,m_initialized)
+    PROPERTY_RO(Transform*,GlobalTrans,m_globalTrans)
 protected:
     map<String,PaintProgram*> m_allPrograms;
     map<String,Texture*> m_allTextures;

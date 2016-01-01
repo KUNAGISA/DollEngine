@@ -12,6 +12,7 @@
 #include "System.h"
 #include "SystemDelegate.h"
 
+static bool g_loopEnabled = true;
 
 @interface OpenGLController : GLKViewController {
     GLuint defaultFramebuffer_;
@@ -213,9 +214,11 @@ static OpenGLController* s_instance=nil;
 
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
 {
-    DE::SystemDelegate* delegate = DE::System::GetInstance()->getDelegate();
-    if(delegate) {
-        delegate->onMainLoop();
+    if(g_loopEnabled){
+        DE::SystemDelegate* delegate = DE::System::GetInstance()->getDelegate();
+        if(delegate) {
+            delegate->onMainLoop();
+        }
     }
 }
 
@@ -224,8 +227,16 @@ static OpenGLController* s_instance=nil;
 
 DE_BEGIN
 
+static iOSWindow* g_window = NULL;
+
+iOSWindow* iOSWindow::GetInstance()
+{
+    return g_window;
+}
+
 iOSWindow::iOSWindow()
 {
+    g_window = this;
 	UIWindow* window = [[UIWindow alloc] initWithFrame: [[UIScreen mainScreen] bounds]];
     setWidth(window.frame.size.width);
     setHeight(window.frame.size.height);
@@ -258,6 +269,11 @@ iOSWindow::~iOSWindow()
     GLKViewController* ctl = (__bridge GLKViewController*)m_iosViewCtl;
     [window release];
     [ctl release];
+}
+
+void iOSWindow::mainLoopEnabled(bool v)
+{
+    g_loopEnabled = v;
 }
 
 void iOSWindow::setVisible(bool v)
