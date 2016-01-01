@@ -321,6 +321,8 @@ class MessageLayer extends Layer
 			node.titleColor = elm.color if elm.color!==void;
 		}
 		node.setAnchor(0,1);
+		elm.x = locateX if elm.x === void;
+		elm.y = locateY if elm.y === void;
 		node.x = +elm.x;
 		node.y = node.parent.height-elm.y;
 		node.enabled = elm.enabled if elm.enabled!==void;
@@ -358,6 +360,8 @@ class MessageLayer extends Layer
 			names[elm.name] = node;
 		}
 		node.setAnchor(0,1);
+		elm.x = locateX if elm.x === void;
+		elm.y = locateY if elm.y === void;
 		node.x = +elm.x;
 		node.y = node.parent.height-elm.y-12+6;
 		node.enabled = elm.enabled if elm.enabled!==void;

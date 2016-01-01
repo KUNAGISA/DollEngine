@@ -1,0 +1,153 @@
+
+class List extends Layer
+{
+	var cellCreateHandler;//创建cell的回调函数
+	var vertical = true;//滑动方向
+
+	var _contentLayer = void;
+	var _cells = %[];
+	var _unusedCells = [];
+	var _topCellIndex = 0;
+	var _bottomCellIndex = 0;
+	var _cellWidth = 0;
+	var _cellHeight = 64;
+
+	function List (app,par) 
+	{
+		super.Layer(...);
+		_contentLayer = new global.Layer(app,this);
+		_contentLayer.setAnchor(0,1);
+	}
+
+	function setCellSize (w,h) 
+	{
+		_cellWidth = w if w !== void;
+		_cellHeight = h if h !== void;
+	}
+
+	function updateContent () 
+	{
+		var offset = -_contentLayer.top;
+		var maxY = _contentLayer.height - offset;
+		var minY = maxY - height;
+		if (_datas.count == 0) {
+			foreach(_cells,function(key,value){
+			    invalidate value;
+			});
+			_cells = %[];
+			return;
+		}
+		//获得当前最底下的那个
+		while(true){
+			var minData = _datas[_bottomCellIndex];
+			if (minData.cellPosY < minY) {
+				break;
+			}
+			if (_bottomCellIndex+1>=_datas.count) {
+				break;
+			}
+			++_bottomCellIndex;
+		}
+
+		//获得当前最上边的那个
+		while(true) {
+			var maxData = _datas[_topCellIndex];
+			if (maxData.cellPosY +maxData.cellHeight > maxY) {
+				break;
+			}
+			if (_topCellIndex-1<=0) {
+				break;
+			}
+			--_topCellIndex;
+		}
+
+		dm(_bottomCellIndex,_topCellIndex);
+
+		//移除画面范围之外的
+		var tempcells = %[];
+		(Dictionary.assignStruct incontextof tempcells)(_cells);
+		foreach(tempcells,function(key,value){
+		    if(key < _topCellIndex || key > _bottomCellIndex ){
+		    	_unusedCells.add(value);
+		    	delete _cells[key];
+		    }
+		} incontextof this);
+
+		//更新cell
+		for (var i = _topCellIndex; i <= _bottomCellIndex; i++) {
+			cellCreateAtIndex(i);
+		};
+	}
+
+	var _datas=[];
+	property datas{
+	    setter(v) {
+	    	//setter
+	    	if (v instanceof "Array") {
+	    		this._datas = v;
+	    		var lastY = 0;
+	    		for(var i=v.count-1; i>=0;--i) {
+	    			var cellData = v[i];
+	    			if (cellData instanceof "Dictionary") {
+	    				cellData.cellIndex = i;
+		    			cellData.cellPosY = lastY;
+		    			lastY += cellHeightAtIndex(i);
+		    			cellData.cellHeight = lastY - cellData.cellPosY;
+	    			}
+	    			else {
+	    				em("List.data 的元素应为字典");
+	    				return;
+	    			}
+	    		}
+	    		_contentLayer.setSize(_cellWidth,lastY);
+	    		_contentLayer.top = 0;
+	    	}
+	    	else {
+	    		em("List 只接受Array类型的数据");
+	    	}
+		}
+		getter {
+	    	//getter
+			return this._datas;
+		}
+	}
+
+
+	///delegate
+	function cellCreateAtIndex (index) 
+	{
+		if (index < 0 || index >= _datas.count) {
+			dm("cellCreateAtIndex index越界");
+			return;
+		}
+		var cell = _cells[index];
+		var cellData = _datas[index];
+		if (!cell) {
+			if (_unusedCells.count > 0) {
+			 	cell = _unusedCells[-1];
+			 	_unusedCells.erase(_unusedCells.count-1);
+			}
+			else {
+				cell = new MessageLayer(app,_contentLayer);
+			}
+			cell.setPosition(%[
+				// color:0x00ff00,
+				// opacity:128,
+				top:_contentLayer.height - (cellData.cellPosY+cellData.cellHeight),
+				width:_cellWidth,
+				height:cellData.cellHeight,
+				// margint:10,
+				// marginb:10,
+			]);
+			if (cellCreateHandler) {
+				cellCreateHandler(cell,cellData);
+			}
+		}
+	}
+
+	function cellHeightAtIndex (index) 
+	{
+		return _cellHeight;
+	}
+
+}

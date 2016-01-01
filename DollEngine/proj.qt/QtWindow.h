@@ -28,9 +28,11 @@ public:
     void stopTimer();
     void startTimer();
 public:
-    void keyReleaseEvent(QKeyEvent * event);
     void closeEvent(QCloseEvent *);
     void timerEvent(QTimerEvent *);
+private slots:
+    void on_actionRefresh_triggered();
+    
 private:
     Ui::QtWindow *ui;
     GLWidget* glWidget;

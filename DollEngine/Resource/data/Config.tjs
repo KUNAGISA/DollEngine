@@ -17,6 +17,7 @@
 		"system/core/ui/LayerColor.tjs",
 		"system/core/ui/Control.tjs",
 		"system/core/ui/Button.tjs",
+		"system/core/ui/List.tjs",
 		"system/core/ui/LinkButton.tjs",
 		"system/core/ui/CheckBox.tjs",
 		"system/core/ui/EditBox.tjs",

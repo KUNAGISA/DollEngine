@@ -42,7 +42,6 @@ INCLUDEPATH += \
 ../Classes/Lib/tjs2 \
 
 SOURCES += main.cpp\
-    QtConsole.cpp \
     ../Classes/Lib/msg/apple/MsgLoad.cpp \
     ../Classes/Lib/ncbind/ncbind.cpp \
     ../Classes/Lib/tjs2/tjs.cpp \
@@ -192,10 +191,10 @@ SOURCES += main.cpp\
     ../Classes/Core/Scripts/TjsBind/TjsClasses/TjsSystemDelegate.cpp \
     ../Classes/Core/Scripts/TjsBind/TjsClasses/TjsTransform.cpp \
     ../Classes/Core/Scripts/TjsBind/TjsClasses/TjsRTT.cpp \
-    ConsoleFind.cpp
+    ConsoleFind.cpp \
+    QtConsole.cpp
 
 HEADERS  += \
-    QtConsole.h \
     ../Classes/Lib/kazmath/include/kazmath/GL/mat4stack.h \
     ../Classes/Lib/kazmath/include/kazmath/GL/matrix.h \
     ../Classes/Lib/kazmath/include/kazmath/aabb.h \
@@ -320,11 +319,13 @@ HEADERS  += \
     ../Classes/Core/Scripts/TjsBind/TjsClasses/TjsSystemDelegate.h \
     ../Classes/Core/Scripts/TjsBind/TjsClasses/TjsTransform.h \
     ../Classes/Core/Scripts/TjsBind/TjsClasses/TjsRTT.h \
-    ConsoleFind.h
+    ConsoleFind.h \
+    QtConsole.h
 
-FORMS  += QtConsole.ui \
+FORMS  += \
     QtWindow.ui \
-    ConsoleFind.ui
+    ConsoleFind.ui \
+    QtConsole.ui
 
 RESOURCES +=
 

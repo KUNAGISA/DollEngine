@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>593</width>
-    <height>98</height>
+    <height>115</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -26,12 +26,18 @@
      <property name="text">
       <string>Find Previous</string>
      </property>
+     <property name="shortcut">
+      <string>Shift+Return</string>
+     </property>
     </widget>
    </item>
    <item row="2" column="2">
     <widget class="QPushButton" name="finddown">
      <property name="text">
       <string>Find Next</string>
+     </property>
+     <property name="shortcut">
+      <string>Ctrl+Return</string>
      </property>
     </widget>
    </item>

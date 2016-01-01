@@ -125,7 +125,7 @@ class KAG extends Application
 		if (this.status.uiPage == 'back') {
 			return void;
 		}
-		return getLayerByElm(%[layer:this.currentLayer]);
+		return current;
 	}
 
 	function getLayerByElm (elm) 
@@ -845,12 +845,13 @@ class KAG extends Application
 			if (elm.page == 'back') {
 				this.status.uiPage = 'back';
 				this.mergerBack('current',elm);
+				return;
 			}
 			else {
 				this.status.uiPage = 'fore';
 			}
 			this.currentLayer = elm.layer;
-			current = getCurrentLayer();
+			current = getLayerByElm(elm);
 		} incontextof this,
 
 		er : function (elm) 

@@ -6,7 +6,7 @@
 #include "ConsoleFind.h"
 
 QtConsole::QtConsole(QWidget *parent) :
-    QWidget(parent),
+    QMainWindow(parent),
     ui(new Ui::QtConsole)
 {
     ui->setupUi(this);
@@ -39,18 +39,6 @@ void QtConsole::Print(const tjs_char *msg)
         qDebug()<<dt;
     }
     ui->textEdit->append(dt);
-}
-
-void QtConsole::keyReleaseEvent(QKeyEvent * event)
-{
-    if(event->matches(QKeySequence::Refresh)) {
-        qApp->exit( 0x88ff );
-    }
-    else if(event->matches(QKeySequence::Find)) {
-        ConsoleFind::GetInstance(this)->show();
-        ConsoleFind::GetInstance(this)->focusEdit();
-        ConsoleFind::GetInstance(this)->raise();
-    }
 }
 
 void QtConsole::find(const QString& f,QTextDocument::FindFlags flag)
@@ -86,4 +74,16 @@ void QtConsole::on_pushButton_clicked()
 void QtConsole::on_pushButton_2_clicked()
 {
     ui->textEdit->setText("");
+}
+
+void QtConsole::on_actionFind_triggered()
+{
+    ConsoleFind::GetInstance(this)->show();
+    ConsoleFind::GetInstance(this)->focusEdit();
+    ConsoleFind::GetInstance(this)->raise();
+}
+
+void QtConsole::on_actionRefresh_triggered()
+{
+    qApp->exit( 0x88ff );
 }

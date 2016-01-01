@@ -154,13 +154,6 @@ void QtWindow::startTimer()
     }
 }
 
-void QtWindow::keyReleaseEvent(QKeyEvent * event)
-{
-    if(event->matches(QKeySequence::Refresh) || event->key() == Qt::Key_F5) {
-        qApp->exit( 0x88ff );
-    }
-}
-
 void QtWindow::closeEvent(QCloseEvent *)
 {
     qApp->exit( 0 );
@@ -172,3 +165,8 @@ void QtWindow::timerEvent(QTimerEvent *)
 }
 
 DE_END
+
+void DE::QtWindow::on_actionRefresh_triggered()
+{
+    qApp->exit( 0x88ff );
+}
