@@ -8,6 +8,7 @@ class GameObject
 	var app;
 	var enabled = true;//是否允许本层或子层接受点击
 	var swallow = true;//是否拦截点击
+	var scissor = false;//是否裁切画面
 	var name;
 	
 	//private
@@ -58,6 +59,10 @@ class GameObject
 		_transInWorld.transform(transform);
 		_transInWorld.width = transform.width;
 		_transInWorld.height = transform.height;
+		if (scissor) {
+			_transInWorld.setScissor(0,0,width,height);
+			_transInWorld.scissorBegin();
+		}
 	}
 
 	function visit () {
@@ -89,6 +94,9 @@ class GameObject
 				for (; i < count; ++i) {
 					children[i].visit();
 				}
+			}
+			if (scissor) {
+				_transInWorld.scissorEnd();
 			}
 		}
 	}

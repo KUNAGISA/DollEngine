@@ -15,6 +15,7 @@ class List extends Layer
 	function List (app,par) 
 	{
 		super.Layer(...);
+		scissor = true;
 		_contentLayer = new global.LayerColor(app,this);
 		_contentLayer.color = 0x00ff00;
 		_contentLayer.setAnchor(0,1);
@@ -24,19 +25,6 @@ class List extends Layer
 	{
 		_cellWidth = w if w !== void;
 		_cellHeight = h if h !== void;
-	}
-
-	function updateTransform () 
-	{
-		super.updateTransform();
-		_transInWorld.setScissor(0,0,width,height);
-		_transInWorld.scissorBegin();
-	}
-
-	function visit () 
-	{
-		super.visit();
-		_transInWorld.scissorEnd();
 	}
 
 	function updateContent () 
