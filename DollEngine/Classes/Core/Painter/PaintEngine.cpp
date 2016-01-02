@@ -647,15 +647,27 @@ void PaintEngine::drawElements(GLenum mode,GLsizei count,GLenum type,const GLvoi
     glDrawElements(mode,count,type,indices);
 }
 
-void PaintEngine::scissorBegin(int x,int y,int w,int h)
+void PaintEngine::scissorBegin(float x,float y,float w,float h)
 {
+    paint();
     glEnable(GL_SCISSOR_TEST);
     glScissor(x,y,w,h);
+    m_scissors.push_back(Rect(x,y,w,h));
+    CHECK_GL_ERROR
 }
 
 void PaintEngine::scissorEnd()
 {
-    glDisable(GL_SCISSOR_TEST);
+    paint();
+    m_scissors.pop_back();
+    if(m_scissors.size() == 0) {
+        glDisable(GL_SCISSOR_TEST);
+    }
+    else {
+        const Rect& v = m_scissors.back();
+        glScissor(v.x,v.y,v.width,v.height);
+    }
+    CHECK_GL_ERROR
 }
 
 void PaintEngine::checkError()

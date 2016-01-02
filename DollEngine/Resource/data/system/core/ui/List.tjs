@@ -15,7 +15,8 @@ class List extends Layer
 	function List (app,par) 
 	{
 		super.Layer(...);
-		_contentLayer = new global.Layer(app,this);
+		_contentLayer = new global.LayerColor(app,this);
+		_contentLayer.color = 0x00ff00;
 		_contentLayer.setAnchor(0,1);
 	}
 
@@ -23,6 +24,19 @@ class List extends Layer
 	{
 		_cellWidth = w if w !== void;
 		_cellHeight = h if h !== void;
+	}
+
+	function updateTransform () 
+	{
+		super.updateTransform();
+		_transInWorld.setScissor(0,0,width,height);
+		_transInWorld.scissorBegin();
+	}
+
+	function visit () 
+	{
+		super.visit();
+		_transInWorld.scissorEnd();
 	}
 
 	function updateContent () 
@@ -131,13 +145,9 @@ class List extends Layer
 				cell = new MessageLayer(app,_contentLayer);
 			}
 			cell.setPosition(%[
-				// color:0x00ff00,
-				// opacity:128,
 				top:_contentLayer.height - (cellData.cellPosY+cellData.cellHeight),
 				width:_cellWidth,
 				height:cellData.cellHeight,
-				// margint:10,
-				// marginb:10,
 			]);
 			if (cellCreateHandler) {
 				cellCreateHandler(cell,cellData);

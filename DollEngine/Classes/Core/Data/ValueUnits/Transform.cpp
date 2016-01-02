@@ -36,7 +36,6 @@ void Transform::assign(DE::Transform *src)
     m_width = src->m_width;
     m_height = src->m_height;
     m_matrix = src->m_matrix;
-    m_scissorRect = src->m_scissorRect;
     m_needFlush = true;
 }
 
@@ -47,19 +46,26 @@ void Transform::transform(DE::Transform *v)
 
 void Transform::setScissor(int x,int y,int w,int h)
 {
-    m_scissorRect.set(x,y,w,h);
+    GLV2F out;
+    transTo(x,y, &out);
+    GLV2F out2;
+    transTo(x+w,y+h, &out2);
+    m_scissorRect.set(out.v1,out.v2,out2.v1-out.v1,out2.v2-out.v2);
 }
 
 void Transform::scissorBegin()
 {
-    glEnable(GL_SCISSOR_TEST);
+    float x = m_scissorRect.x* PaintEngine::GetInstance()->getLayerZoom() + PaintEngine::GetInstance()->getLayerX();
+    float y = m_scissorRect.y* PaintEngine::GetInstance()->getLayerZoom() + PaintEngine::GetInstance()->getLayerY();
+    float w = m_scissorRect.width * PaintEngine::GetInstance()->getLayerZoom();
+    float h = m_scissorRect.height * PaintEngine::GetInstance()->getLayerZoom();
 //    float x = m_matrix.mat[];
-    glScissor(m_scissorRect.x,m_scissorRect.y,m_scissorRect.width,m_scissorRect.height);
+    PaintEngine::GetInstance()->scissorBegin(x,y,w,h);
 }
 
 void Transform::scissorEnd()
 {
-    glDisable(GL_SCISSOR_TEST);
+    PaintEngine::GetInstance()->scissorEnd();
 }
 
 void Transform::init()

@@ -91,7 +91,7 @@ public:
     
     void drawElements(GLenum mode,GLsizei count,GLenum type,const GLvoid *indices);
     
-    void scissorBegin(int x,int y,int w,int h);
+    void scissorBegin(float x,float y,float w,float h);
     void scissorEnd();
     
     void checkError();
@@ -118,7 +118,7 @@ protected:
     DrawTexId m_curTexture;
     DrawBlendId m_curBlendSrc;
     DrawBlendId m_curBlendDst;
-    
+    vector<Rect> m_scissors;
 };
 
 DE_END
