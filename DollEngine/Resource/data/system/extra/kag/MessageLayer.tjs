@@ -75,8 +75,6 @@ class MessageLayer extends Layer
 
 	function finalize () 
 	{
-		invalidate _sw1;
-		invalidate _sw2;
 		super.finalize();
 	}
 
@@ -378,6 +376,39 @@ class MessageLayer extends Layer
 		locateX = data.x;
 		locateY = data.y;
 		return data.changePage;
+	}
+
+	function addList (elm) 
+	{
+		if (elm.name == void) {
+			elm.name = "_num_"+uiIndex;
+		}
+		var node = new List(app,controlLayer);
+		node.name = elm.name;
+		node.issys = elm.issys===void?false:elm.issys;
+		if (node.issys) {
+			buttons[elm.name] = node;
+		}
+		else {
+			names[elm.name] = node;
+		}
+		node.setAnchor(0,1);
+		elm.x = locateX if elm.x === void;
+		elm.y = locateY if elm.y === void;
+		node.x = +elm.x;
+		node.y = node.parent.height-elm.y;
+		node.width = elm.width;
+		node.height = elm.height;
+		node.enabled = elm.enabled if elm.enabled!==void;
+		node.vertical = elm.vertical if elm.vertical!==void;
+		node.cellWidth = elm.cellWidth===void?elm.width:elm.cellWidth;
+		node.cellHeight = elm.cellHeight if elm.cellHeight!==void;
+		var handler = Scripts.eval(elm.create);
+		node.cellCreateHandler = handler if handler;
+		var datas = Scripts.eval(elm.datas);
+		node.datas = datas if datas;
+		++uiIndex;
+		saveCommand("addList",elm);
 	}
 
 	function addLink (elm) {

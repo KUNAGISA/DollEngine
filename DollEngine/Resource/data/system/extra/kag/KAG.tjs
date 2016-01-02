@@ -24,10 +24,6 @@ class KAG extends Application
 	var tagManager;
 	var moveWaits = [];//当前移动指令的timeline
 
-	//音频管理
-	var bgm = void;
-	var se = %[];
-
 	//状态数据
 	var allskip = 1;// 0 已读跳过 1 skip时全部跳过
 	var autoMode = false;
@@ -35,6 +31,7 @@ class KAG extends Application
 	var fullScreen = false;
 	var bookMarkDates = [];//存档日期
 	var bookMarkNames = [];//存档标题
+
 	var tempSaveData;//l或p所临时存储的界面
 	
 	function KAG () 
@@ -49,7 +46,7 @@ class KAG extends Application
 
 		tagManager = new TagManager(this);
 
-		history = new History();
+		history = new History(this);
 
 	}
 
@@ -95,27 +92,6 @@ class KAG extends Application
 	    	//getter
 			return history.enabled;
 		}
-	}
-
-	/*音频控制*/
-
-	function getBGM () 
-	{
-		if (this.bgm == void) {
-			this.bgm = new BGMBuffer();
-		}
-		return this.bgm;
-	}
-
-	function getSE (buf=0) 
-	{
-		var se = this.se[buf];
-		if (se == void) {
-			se = new SEBuffer();
-			se.buf = buf;
-			this.se[buf] = se;
-		}
-		return se;
 	}
 
 	/*图层管理*/
@@ -592,7 +568,7 @@ class KAG extends Application
 
 		history : function (elm) 
 		{
-			this.history.enabled = elm.enabled if elm.enabled !== void;
+			historyWriteEnabled = elm.output if elm.output !== void;
 		} incontextof this,
 
 		s : function (elm) 
@@ -688,9 +664,7 @@ class KAG extends Application
 		playse : function (elm) 
 		{
 			checkElm(elm,['storage']);
-			var se = this.getSE(elm.buf);
-			se.preload(elm.storage);
-			se.play(elm.loop,false);
+			playSe(elm.storage,elm.buf,elm.loop);
 		} incontextof this,
 
 		/*******存档读档*******/
@@ -943,8 +917,6 @@ class KAG extends Application
 				return;
 			}
 			elm.issys = false;
-			elm.x = lay.locateX;
-			elm.y = lay.locateY;
 			lay.addButton(elm);
 			if (this.status.nowait) {
 				return 0;
@@ -960,6 +932,7 @@ class KAG extends Application
 				return;
 			}
 			var changePage = lay.addText(elm.text);
+			history_push(elm.text);
 			if (changePage) {
 				this.status.waitClickMode = WAIT_CLICK_P;//点击等待换页
 				this.status.isClickSkip = false;
@@ -982,6 +955,21 @@ class KAG extends Application
 			lay.setFont(elm);
 		} incontextof this,
 
+		list : function (elm) 
+		{
+			this.checkElm(elm,['width','height','create']);
+			var lay = this.getCurrentLayer();
+			if(!lay) {
+				this.mergerBack('font',elm);
+				return;
+			}
+			lay.addList(elm);
+			if (this.status.nowait) {
+				return 0;
+			}
+			return this.status.delay;
+		} incontextof this,
+
 		slider : function (elm) 
 		{
 			var lay = this.getCurrentLayer();
@@ -990,8 +978,6 @@ class KAG extends Application
 				return;
 			}
 			elm.issys = false;
-			elm.x = lay.locateX;
-			elm.y = lay.locateY;
 			lay.addSlider(elm);
 			if (this.status.nowait) {
 				return 0;

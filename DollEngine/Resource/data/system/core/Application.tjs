@@ -17,6 +17,10 @@ class Application extends SystemDelegate
 		face : DEConfig.game.deffont.face,
 	]; //默认字体设置
 
+	//音频管理
+	var bgm = void;
+	var se = %[];
+
 	//property
 	var needRedraw;
 	var needRetouch;
@@ -100,6 +104,34 @@ class Application extends SystemDelegate
         _cacheData.sf = sf;
         (Dictionary.saveStruct incontextof _cacheData)("cache.db");
     }
+
+	/*音频控制*/
+
+	function getBGM () 
+	{
+		if (this.bgm == void) {
+			this.bgm = new BGMBuffer();
+		}
+		return this.bgm;
+	}
+
+	function getSE (buf=0) 
+	{
+		var se = this.se[buf];
+		if (se == void) {
+			se = new SEBuffer();
+			se.buf = buf;
+			this.se[buf] = se;
+		}
+		return se;
+	}
+
+	function playSe (storage, buf, loop=false) 
+	{
+		var se = this.getSE(buf);
+		se.preload(storage);
+		se.play(loop,false);
+	}
 
 	/*场景过渡效果*/
 	function sceneTransition (type, time, params*) {
@@ -224,6 +256,7 @@ class Application extends SystemDelegate
 						continue;
 					};
 					if (object.pointInside(x,y,outPos)) {
+						object.ignore = false;
 						var ret = object.onMouseDown(outPos.x,outPos.y);
 						if(ret || ret === void) {
 							_triggerTouches.add(object);
@@ -245,7 +278,7 @@ class Application extends SystemDelegate
 		if (_triggerTouches.count > 0) {
 			for (var i = 0; i < _triggerTouches.count; i++) {
 				var object = _triggerTouches[i];
-				if (!isvalid object) {
+				if (!isvalid object || object.ignore) {
 					continue;
 				};
 				object.pointInside(x,y,outPos);
@@ -262,7 +295,7 @@ class Application extends SystemDelegate
 			var outPos = %[];
 			for (var i = 0; i < _triggerTouches.count; i++) {
 				var object = _triggerTouches[i];
-				if (!isvalid object) {
+				if (!isvalid object || object.ignore) {
 					continue;
 				};
 				object.pointInside(x,y,outPos);
@@ -278,7 +311,7 @@ class Application extends SystemDelegate
 		if (_triggerTouches.count > 0) {
 			for (var i = 0; i < _triggerTouches.count; i++) {
 				var object = _triggerTouches[i];
-				if (!isvalid object) {
+				if (!isvalid object || object.ignore) {
 					continue;
 				};
 				object.pointInside(x,y,outPos);

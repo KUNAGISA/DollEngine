@@ -5,6 +5,14 @@ class SoundBuffer extends Audio
 	{
 		super.Audio();
 	}
+
+	function preload (str) 
+	{
+		if (str.indexOf(".") == -1) {
+			str+=".mp3";
+		}
+		super.preload(str);
+	}
 }
 
 class BGMBuffer extends SoundBuffer

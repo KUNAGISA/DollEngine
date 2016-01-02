@@ -3,8 +3,8 @@ class Button extends Control
 {
 	var clickData = %[
 		exp : "", //点击时执行的表达式
-		se : '', //点击时的音效
-		sebuf : '',//点击时的音效音轨的编号
+		se : void, //点击时的音效
+		sebuf : 0,//点击时的音效音轨的编号
 		storage : void, //跳转的脚本
 		target : void, //跳转的脚本的标签
 	];
@@ -152,6 +152,9 @@ class Button extends Control
 		if (this.clickData.exp) {
 			exp += this.clickData.exp;
 			exp += ";";
+		}
+		if (clickData.se&&clickData.se!="") {
+			exp += "app.playSe(\"%s\",%d,false);".sprintf(clickData.se,clickData.sebuf);
 		}
 		var needDisabled = false;
 		if (this.clickData.storage || this.clickData.target) {

@@ -58,7 +58,11 @@ class WordLayer extends Layer
 	function addText (text,locateX,locateY,_font) 
 	{
 		if (text == "") {
-			return;
+			return %[
+				x : locateX,
+				y : locateY,
+				changePage : false
+			];
 		}
 		var lastX = _curLabel?_curLabel.x+_curLabel.width:locateX;
 		if (_curLabel == void ||
@@ -73,7 +77,7 @@ class WordLayer extends Layer
 			node.setAnchor(0,1);
 			node.fontSize = _font.size;
 			node.x = lastX;
-			node.y = height-locateY;//-_font.lineSpacing;
+			node.y = height-locateY-_font.lineSpacing;
 			node.color = _font.color;
 			_curLine.add(node);
 			_curLabel = node;
@@ -84,7 +88,7 @@ class WordLayer extends Layer
 			_curLineHeight = Math.max(_curLineHeight,_curLabel.height);
 			for (var i = _curLine.count - 1; i >= 0; i--) {
 				var lb = _curLine[i];
-				lb.y = height - locateY - (_curLineHeight-lb.height);
+				lb.y = height - locateY-_font.lineSpacing - (_curLineHeight-lb.height);
 			};
 		};
 

@@ -75,13 +75,20 @@ class Timeline
 			};
 			setParamValue(param, ft, arr[2], arr[3]);
 		} incontextof this);
+		onTimelineUpdate();
 		if(currentTime >= duration) {
 			onTimelineFinished();
 			invalidate this;
 		}
 	}
 
-	function onTimelineFinished () {
+	function onTimelineUpdate () 
+	{
+		
+	}
+
+	function onTimelineFinished ()
+	{
 		
 	}
 
