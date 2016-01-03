@@ -26,6 +26,7 @@ class Application extends SystemDelegate
 	var needRetouch;
 
 	//private
+	var _tagActions;
 	var _enabledTimers;
 	var _lastSeconds;
 	var _transRTT;
@@ -47,6 +48,8 @@ class Application extends SystemDelegate
 		_enabledTimers = global.Timer.g_enabledTimers;
 		_allTimelines = new Set();
 		_allTouches.add(this);
+
+		_tagActions = new TagActions(this);
 
 		initStatus();
 

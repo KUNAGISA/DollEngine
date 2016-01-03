@@ -171,61 +171,10 @@ function asyncTrigger (func,elm,obj) {
     System.delegate._allAsyncTriggers.add([func,elm,obj]);
 }
 
-var action = %[];
-action.array = function (arr) 
-{
-    var count = arr.count;
-    var actarr = [];
-    for (var i = 0; i < count; i++) {
-        var act = arr[i];
-        if (typeof act == "Object") {
-            if (act instanceof "Function") {
-                actarr.add(new global.CallFunc(act));
-            }
-            else if(act instanceof "ActionBase"){
-                actarr.add(act);
-            }
-            else {
-                continue;
-            }
-        }
-        else {
-            if (+act != 0) {
-                var dt = new global.DelayTime(void,+act);
-                actarr.add(dt);
-            }
-            else {
-                continue;
-            }
-        }
-    }
-    return actarr;
-};
-
-action.seq = function(array) 
-{
-    var arr = global.action.array(array);
-    var seq = new global.Sequence(arr);
-    return seq;
-};
-
-action.spawn = function (array) 
-{
-    var arr = global.action.array(array);
-    var sp = new global.Spawn(arr);
-    return sp;
-};
-
-action.async = function (handler) 
-{
-    return global.action.delay(10,handler);
-};
-
-action.delay = function (time,handler) 
-{
-    var timer = new global.Timer(handler);
-    timer.interval = time;
-    timer.count = 1;
-    timer.enabled = true;
-};
-
+function delayTrigger (time,func,elm) {
+    var t = new Timer(func,elm);
+    t.interval = time;
+    t.count = 1;
+    t.enabled = true;
+    return t;
+}

@@ -1,9 +1,50 @@
 class History
 {
 	var app;
+	var readed;
 	function History (app) 
 	{
 		this.app = app;
+	}
+
+	//刷新已读的行数
+	function updateReadLine () {
+		if (readed == void) {
+			readed = %[];
+			sf.readHistory = readed;
+		}
+		var manager = app.tagManager;
+		var storage = readed[manager.curStorage];
+		if (!storage) {
+			storage = %[];
+			readed[manager.curStorage] = storage;
+		}
+		var target = manager.curTarget;
+		var curline = manager.curLine;
+		if (storage[target] === void ||
+			storage[target] < curline) {
+			storage[target] = curline;
+			return true;
+		}
+		return false;
+	}
+
+	//检查是否可以跳过，false是未读 true是已读
+	function checkReaded () {
+		var manager = app.tagManager;
+		var storage = readed[manager.curStorage];
+		if (!storage) {
+			return false;
+		}
+		var target = manager.curTarget;
+		var curline = manager.curLine;
+		if (storage[target] === void) {
+			return false;
+		}
+		if (storage[target] < curline) {
+			return false;
+		}
+		return true;
 	}
 
 	var _enabled = true;

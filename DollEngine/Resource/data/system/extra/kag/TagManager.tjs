@@ -3,13 +3,14 @@ class TagManager extends KAGController
 {
 	var macroParams = [];
 	var handlers;
-	var owner;
+	var app;
 	var _waitTimer;
 	var _waitClickStack = [];
+	var onWaitEnd;
 	function TagManager (app) 
 	{
 		super.KAGController();
-		owner = app;
+		this.app = app;
 		handlers = app.tagHandlers;
 	}
 
@@ -33,7 +34,7 @@ class TagManager extends KAGController
 	function callStorage (storage="",label="") 
 	{
 		if(stepInLabel(storage,label,true)) {
-			_waitClickStack.add(owner.status.waitClickMode);
+			_waitClickStack.add(app.status.waitClickMode);
 			asyncTrigger(execTags);
 			return true;
 		}
@@ -49,6 +50,7 @@ class TagManager extends KAGController
 			while(true){
 				try {
 					var time = doTag();
+					app.history.updateReadLine();
 					if (time < 0) {
 						// dm("停止，或等待点击，或跳转");
 						return;
@@ -73,10 +75,16 @@ class TagManager extends KAGController
 		// }
 	}
 
+	function skipReturnWaitClick () {
+		if (_waitClickStack.count > 0) {
+			_waitClickStack[-1] = WAIT_CLICK_NONE;
+		};
+	}
+
 	function onExecute (name,params) 
 	{
-		if (owner.status.isClickSkip && name != 'ch' && name != 'locate' && name != 'r') {
-			owner.status.isClickSkip = false;
+		if (app.status.isClickSkip && name != 'ch' && name != 'locate' && name != 'r') {
+			app.status.isClickSkip = false;
 		}
 		if (name == "return") {
 			if (params.storage != void || params.target != void) {
@@ -90,7 +98,7 @@ class TagManager extends KAGController
 					if (_waitClickStack[-1] == WAIT_CLICK_NONE) {
 						doNext();
 					}
-					owner.status.waitClickMode = _waitClickStack[-1];
+					app.status.waitClickMode = _waitClickStack[-1];
 					_waitClickStack.erase(_waitClickStack.count-1);
 				}
 				else {
@@ -105,7 +113,7 @@ class TagManager extends KAGController
 				if (_waitClickStack[-1] == WAIT_CLICK_NONE) {
 					doNext();
 				}
-				owner.status.waitClickMode = _waitClickStack[-1];
+				app.status.waitClickMode = _waitClickStack[-1];
 				_waitClickStack.erase(_waitClickStack.count-1);
 			}
 			else {
@@ -113,11 +121,11 @@ class TagManager extends KAGController
 			}
 			return -1;
 		}
-		owner.status.waitClickMode = WAIT_CLICK_NONE;
+		app.status.waitClickMode = WAIT_CLICK_NONE;
 		if(typeof handlers[name] != "undefined")
 		{
 			var time = handlers[name](params);
-			owner.status.clickToNext = false;
+			app.status.clickToNext = false;
 			if(time == void || time == 0) {
 				return 0;
 			}
@@ -129,7 +137,7 @@ class TagManager extends KAGController
 		{
 			if(stepInLabel("MACRO",name,true))
 			{
-				_waitClickStack.add(owner.status.waitClickMode);
+				_waitClickStack.add(app.status.waitClickMode);
 				macroParams.add(params);
 				asyncTrigger(execTags);
 				return -1; //即将jump
@@ -145,6 +153,10 @@ class TagManager extends KAGController
 	function doNext () 
 	{
 		_waitTimer.enabled = false;
+		if (onWaitEnd) {
+			onWaitEnd();
+			onWaitEnd = void;
+		};
 		stepNext();
 		asyncTrigger(execTags);
 	}
@@ -156,6 +168,12 @@ class TagManager extends KAGController
 		};
 		_waitTimer.interval = time;
 		_waitTimer.enabled = true;
+	}
+
+	function skipWaitTime () {
+		if (_waitTimer.enabled) {
+			doNext();
+		}
 	}
 
 	function getMacroParams () 

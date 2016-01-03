@@ -3,8 +3,8 @@ class Button extends Control
 {
 	var clickData = %[
 		exp : "", //点击时执行的表达式
-		se : void, //点击时的音效
-		sebuf : 0,//点击时的音效音轨的编号
+		clickse : void, //点击时的音效
+		clicksebuf : 0,//点击时的音效音轨的编号
 		storage : void, //跳转的脚本
 		target : void, //跳转的脚本的标签
 	];
@@ -142,30 +142,20 @@ class Button extends Control
 		this._normalImage.visible=true;
 		// _title.color = _titleColor;
 		if (x>=0 && y>=0 && x<=this.width&&y<=this.height) {
-			this.exception();
+			asyncTrigger(exception);
 		}
 	}
 
 	function exception () 
 	{
-		var exp = "";
+		if (clickData.clickse&&clickData.clickse!="") {
+			app.playSe(clickData.clickse,clickData.clicksebuf);
+		}
 		if (this.clickData.exp) {
-			exp += this.clickData.exp;
-			exp += ";";
+			Scripts.eval(clickData.exp);
 		}
-		if (clickData.se&&clickData.se!="") {
-			exp += "app.playSe(\"%s\",%d,false);".sprintf(clickData.se,clickData.sebuf);
-		}
-		var needDisabled = false;
-		if (this.clickData.storage || this.clickData.target) {
-			exp += "System.delegate.process(\"";
-			exp += this.clickData.storage;
-			exp += "\",\"";
-			exp += this.clickData.target;
-			exp += "\");";
-		}
-		if (exp != "") {
-			asyncTrigger(Scripts.eval,[exp]);
+		if (clickData.storage || clickData.target) {
+			asyncTrigger(app.process,[clickData.storage,clickData.target]);
 		}
 	}
 

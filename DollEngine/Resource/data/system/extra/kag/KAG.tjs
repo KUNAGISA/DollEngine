@@ -23,11 +23,12 @@ class KAG extends Application
 	//剧本控制
 	var tagManager;
 	var moveWaits = [];//当前移动指令的timeline
+	var actionWaits = [];//当前action指令的timeline
 
 	//状态数据
 	var allskip = 1;// 0 已读跳过 1 skip时全部跳过
-	var autoMode = false;
-	var skipMode = SKIP_NONE;
+	var autoMode = false;//是否自动前进
+	var skipMode = SKIP_NONE;//是否skip
 	var fullScreen = false;
 	var bookMarkDates = [];//存档日期
 	var bookMarkNames = [];//存档标题
@@ -47,11 +48,17 @@ class KAG extends Application
 		tagManager = new TagManager(this);
 
 		history = new History(this);
+		history.readed = sf.readHistory;
 
 	}
 
 	function initStatus () {
 		super.initStatus();
+
+		if (sf.readHistory == void) {
+			sf.readHistory = %[];
+		}
+
 		status.transReady = false; //是否进行过trans准备（backlay）
 
 		status.uiPage = 'fore', //UI控件将被创建在back层还是fore层
@@ -220,10 +227,49 @@ class KAG extends Application
 
 	/*TAG控制*/
 
+	function enterAutoMode () {
+		autoMode = true;
+	}
+
+	function cancelAutoMode () {
+		autoMode = false;
+	}
+
+	function skipToStop () {
+		skipMode = SKIP_STOP;
+	}
+
+	function cancelSkip () {
+		skipMode = SKIP_NONE;
+	}
+
+	function checkSkip () {
+		if (skipMode!=SKIP_NONE) {
+			this.status.waitClickMode = WAIT_CLICK_NONE;
+			if (allskip == 0) {
+				if(history.checkReaded()) {
+					return true;
+				}
+				else {
+					return false;
+				}
+			}
+			else  {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	function checkAuto () {
+		return autoMode;
+	}
+
 	function checkClickSkip () {
 		switch(this.status.waitClickMode) {
 			case WAIT_CLICK_NONE:
 			{
+				tagManager.skipWaitTime();
 			}
 			break;
 			case WAIT_CLICK_WORD:
@@ -235,16 +281,14 @@ class KAG extends Application
 			case WAIT_CLICK_MOVE:
 			{
 				//等待move
-				// for (var i = this.moveWaits.count - 1; i >= 0; i--) {
-				// 	var act = this.moveWaits[i];
-				// 	if (isvalid act) {
-				// 		act.update(1);
-				// 		act.onActionEnded();
-				// 		invalidate act;
-				// 	}
-				// }
-				// this.moveWaits.clear();
-				// this.tagManager.doNext();
+				for (var i = this.moveWaits.count - 1; i >= 0; i--) {
+					var act = this.moveWaits[i];
+					if (isvalid act) {
+						act.stop();
+					}
+				}
+				this.moveWaits.clear();
+				this.tagManager.doNext();
 			}
 			break;
 			case WAIT_CLICK_TRANS:
@@ -274,19 +318,27 @@ class KAG extends Application
 			case WAIT_CLICK_ACTION:
 			{
 				//等待动作结束
-				// for (var i = this.actionWaits.count - 1; i >= 0; i--) {
-				// 	var act = this.actionWaits[i];
-				// 	if (isvalid act) {
-				// 		act.update(1);
-				// 		act.onActionEnded();
-				// 		invalidate act;
-				// 	}
-				// }
-				// this.actionWaits.clear();
-				// this.tagManager.doNext();
+				for (var i = this.actionWaits.count - 1; i >= 0; i--) {
+					var act = this.actionWaits[i];
+					if (isvalid act) {
+						act.stop();
+					}
+				}
+				this.actionWaits.clear();
+				this.tagManager.doNext();
 			}
 			break;
 		}
+	}
+
+	function clickToClear () {
+		var lay = getCurrentLayer();
+		if (!lay) {
+			dm("指令p在点击时，当前图层应该是表层");
+			return;
+		}
+		lay.clearWord();
+		lay.setLocate(%[x:0,y:0]);
 	}
 
 	function clickToNext () 
@@ -307,16 +359,10 @@ class KAG extends Application
 
 	function clickToNextPage () 
 	{
-		var lay = getCurrentLayer();
-		if (!lay) {
-			dm("指令p在点击时，当前图层应该是表层");
-			return;
-		}
-		lay.clearWord();
-		lay.locateX = 0;
-		lay.locateY = 0;
+		clickToClear();
 		clickToNext();
 	}
+
 
 	function checkElm (elm,arr) 
 	{
@@ -601,6 +647,14 @@ class KAG extends Application
 			}
 			this.status.waitClickMode = WAIT_CLICK_L;
 			saveTempData();
+			if (checkSkip()) {
+				this.status.waitClickMode = WAIT_CLICK_NONE;
+				return 0;
+			}
+			if (checkAuto()) {
+				this.status.waitClickMode = WAIT_CLICK_NONE;
+				return 0;
+			}
 			return -1;
 		} incontextof this,
 
@@ -613,6 +667,16 @@ class KAG extends Application
 			}
 			this.status.waitClickMode = WAIT_CLICK_P;
 			saveTempData();
+			if (checkSkip()) {
+				this.status.waitClickMode = WAIT_CLICK_NONE;
+				tagManager.onWaitEnd = clickToClear;
+				return 200;
+			}
+			if (checkAuto()) {
+				this.status.waitClickMode = WAIT_CLICK_NONE;
+				tagManager.onWaitEnd = clickToClear;
+				return 200;
+			}
 			return -1;
 		} incontextof this,
 
@@ -650,14 +714,14 @@ class KAG extends Application
 			elm.time = 1000 if elm.time===void;
 			var bgm = this.getBGM();
 			bgm.preload(elm.storage);
-			bgm.fadeTime = elm.time/1000;
+			bgm.fadeTime = elm.time;
 			bgm.play(elm.loop,true);
 		} incontextof this,
 
 		fadeoutbgm : function (elm) 
 		{
 			checkElm(elm,['time']);
-			this.getBGM().fadeTime = elm.time/1000;
+			this.getBGM().fadeTime = elm.time;
 			this.getBGM().stop(true);
 		} incontextof this,
 
@@ -847,10 +911,13 @@ class KAG extends Application
 			}
 			var ret = lay.changeLine();
 			if (ret == -1) {
-				return -1;
+				return tagHandlers.p(%[]);
 			}
 			if (this.status.nowait) {
 				return 0;
+			}
+			if (checkSkip()) {
+				return 30;
 			}
 			return this.status.delay;
 		} incontextof this,
@@ -921,6 +988,9 @@ class KAG extends Application
 			if (this.status.nowait) {
 				return 0;
 			}
+			if (checkSkip()) {
+				return 0;
+			}
 			return this.status.delay;
 		} incontextof this,
 
@@ -936,9 +1006,12 @@ class KAG extends Application
 			if (changePage) {
 				this.status.waitClickMode = WAIT_CLICK_P;//点击等待换页
 				this.status.isClickSkip = false;
-				return -1;
+				return tagHandlers.p(%[]);
 			}
 			if (this.status.nowait || this.status.isClickSkip) {
+				return 0;
+			}
+			if (checkSkip()) {
 				return 0;
 			}
 			this.status.waitClickMode = WAIT_CLICK_WORD;
@@ -967,6 +1040,9 @@ class KAG extends Application
 			if (this.status.nowait) {
 				return 0;
 			}
+			if (checkSkip()) {
+				return 0;
+			}
 			return this.status.delay;
 		} incontextof this,
 
@@ -980,6 +1056,9 @@ class KAG extends Application
 			elm.issys = false;
 			lay.addSlider(elm);
 			if (this.status.nowait) {
+				return 0;
+			}
+			if (checkSkip()) {
 				return 0;
 			}
 			return this.status.delay;
@@ -1058,34 +1137,33 @@ class KAG extends Application
 			timeline.start();
 		} incontextof this,
 
-		// action : function (elm) 
-		// {
-		// 	this.checkElm(elm,['layer','module']);
-		// 	var lay = this.getLayerByElm(elm);
-		// 	if(!lay) {
-		// 		this.mergerBack('action',elm);
-		// 		return;
-		// 	}
-		// 	var time = 1;
-		// 	if (elm.time!==void) {
-		// 		time = elm.time/1000;
-		// 	}
-		// 	var act;
-		// 	if(TagActions[elm.module]){
-		// 		act = TagActions[elm.module](lay,time,elm);
-		// 	}
-		// 	else {
-		// 		dm("未实现的tag action",elm.module);
-		// 		return;
-		// 	}
-			// act.target = lay;
-			// act.onActionEnded = function () 
-			// {
-			// 	this[0].actionWaits.remove(this[1]);
-			// } incontextof [this,act];
-			// this.actionWaits.add(act);
-			// lay.runAction(act);
-		// } incontextof this,
+		action : function (elm) 
+		{
+			this.checkElm(elm,['layer','module']);
+			var lay = this.getLayerByElm(elm);
+			if(!lay) {
+				this.mergerBack('action',elm);
+				return;
+			}
+			var time = 1;
+			if (elm.time!==void) {
+				time = elm.time;
+			}
+			var act;
+			if(_tagActions[elm.module]){
+				act = _tagActions[elm.module](lay,time,elm);
+			}
+			else {
+				dm("未实现的tag action",elm.module);
+				return;
+			}
+
+			act.onTimelineFinished = function () 
+			{
+				this[0].actionWaits.remove(this[1]);
+			} incontextof [this,act];
+			this.actionWaits.add(act);
+		} incontextof this,
 
 		wact : function (elm) 
 		{
@@ -1095,22 +1173,22 @@ class KAG extends Application
 			else {
 				elm.page = "fore";
 				var lay = this.getLayerByElm(elm);
-				var act=void;
+				var timeline=void;
 				for (var i = 0; i < actionWaits.count; i++) {
-					if(actionWaits[i].target==lay){
-						act = actionWaits[i];
+					if(actionWaits[i].object==lay){
+						timeline = actionWaits[i];
 						break;
 					}
 				}
-				if (!act) {
+				if (!timeline) {
 					return 0;
 				}
-				if (!isvalid act) {
-					actionWaits.remove(act);
+				if (!isvalid timeline) {
+					actionWaits.remove(timeline);
 					return 0;
 				}
-				var t = Math.max(0,(act.duration - act.time));
-				this.actionWaits.remove(act);
+				var t = Math.max(0,(timeline.duration - timeline.currentTime));
+				this.actionWaits.remove(timeline);
 				this.status.waitClickMode = WAIT_CLICK_ACTION;
 				return t*1000;
 			}
@@ -1144,7 +1222,11 @@ class KAG extends Application
 				return;
 			}
 			checkClickSkip();
-		};
+		}
+		if (skipMode != SKIP_NONE) {
+			cancelSkip();
+		}
+		cancelAutoMode();
 	}
 
 	function addHook () {

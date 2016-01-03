@@ -21,8 +21,6 @@ class MessageLayer extends Layer
 	];
 
 	var _commands = [];//用于存档
-	var _curLinkButton = void;
-	var _curChLineHeight = 0;//当前行的高度
 
 	var uiIndex = 0;
 
@@ -90,7 +88,6 @@ class MessageLayer extends Layer
 
 	function clearWord () 
 	{
-		_curChLineHeight = 0;
 		chLayer.clearWord();
 	}
 
@@ -109,7 +106,6 @@ class MessageLayer extends Layer
 				invalidate control;
 			}
 		};
-		_curLinkButton = void;
 		names = %[];
 		links.clear();
 		uiIndex = 0;
@@ -299,16 +295,16 @@ class MessageLayer extends Layer
 		if (elm.disable) {
 			node.loadDisable(elm.disable);
 		};
-		if (elm.title) {
-			node.title = elm.title;
-			node.titleColor = elm.color if elm.color!==void;
-		}
 		node.setAnchor(0,1);
 		elm.x = locateX if elm.x === void;
 		elm.y = locateY if elm.y === void;
 		node.x = +elm.x;
 		node.y = node.parent.height-elm.y;
 		node.enabled = elm.enabled if elm.enabled!==void;
+
+		if (elm.x === void) {
+			locateX += node.width;
+		};
 
 		if (elm.animcount != void) {
 			if (elm.animtime == void) {
@@ -317,9 +313,16 @@ class MessageLayer extends Layer
 			node.setAnimation(elm.animcount, +elm.animtime);
 		};
 
+		if (elm.title != void && elm.title != "") {
+			node.title.fontSize = elm.titlesize===void?app.deffont.size:elm.titlesize;
+			node.title.color = elm.titlecolor===void?0xffffff:elm.titlecolor;
+			node.title.text = elm.title;
+			node.title.visible = true;
+		};
+
 		node.clickData.exp = elm.exp if elm.exp!==void;
-		node.clickData.se = elm.se if elm.se!==void;
-		node.clickData.sebuf = elm.sebuf if elm.sebuf!==void;
+		node.clickData.clickse = elm.clickse if elm.clickse!==void;
+		node.clickData.clicksebuf = elm.clicksebuf if elm.clicksebuf!==void;
 		node.clickData.callback = elm.callback if elm.callback!==void;
 		node.clickData.storage = elm.storage if elm.storage!==void;
 		node.clickData.target = elm.target if elm.target!==void;
@@ -431,6 +434,13 @@ class MessageLayer extends Layer
 		node.x=0;
 		node.y=0;
 		node.setAnchor(0,0);
+
+		node.clickData.exp = elm.exp if elm.exp!==void;
+		node.clickData.clickse = elm.clickse if elm.clickse!==void;
+		node.clickData.clicksebuf = elm.clicksebuf if elm.clicksebuf!==void;
+		node.clickData.callback = elm.callback if elm.callback!==void;
+		node.clickData.storage = elm.storage if elm.storage!==void;
+		node.clickData.target = elm.target if elm.target!==void;
 
 		++uiIndex;
 

@@ -24,7 +24,9 @@ class Control extends Layer
 			app.status.waitClickMode == WAIT_CLICK_MOVE ||
 			app.status.waitClickMode == WAIT_CLICK_TRANS ||
 			app.status.waitClickMode == WAIT_CLICK_TIME ||
-			app.status.waitClickMode == WAIT_CLICK_ACTION) {
+			app.status.waitClickMode == WAIT_CLICK_ACTION ||
+			app.autoMode ||
+			app.skipMode != SKIP_NONE) {
 			return false;
 		};
 		return true;

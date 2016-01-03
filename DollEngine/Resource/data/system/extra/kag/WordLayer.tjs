@@ -14,10 +14,13 @@ class WordLayer extends Layer
 
 	function clearWord () 
 	{
+		if (_curLinkButton) {
+			_curLinkButton.clearText();
+			_curLinkButton = void;
+		}
 		this.removeAllChildren();
 		_labels.clear();
 		_curLine.clear();
-		_curLinkButton = void;
 		_curLabel = void;
 		_curLineHeight = 0;
 	}

@@ -38,6 +38,14 @@ tTJSVariant getLastTargetTJS(){
     tTJSVariant ret = getLastTarget().c_wstr();
     return ret;
 }
+tTJSVariant getCurStorageTJS(){
+    tTJSVariant ret = getCurStorage().c_wstr();
+    return ret;
+}
+tTJSVariant getCurTargetTJS(){
+    tTJSVariant ret = getCurTarget().c_wstr();
+    return ret;
+}
 bool loadStack(tTJSVariant v);
 protected:
 vector<IF_KEY> m_ifKey;

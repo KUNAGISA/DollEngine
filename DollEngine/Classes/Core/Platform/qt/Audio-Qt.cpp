@@ -38,7 +38,9 @@ bool Audio::preload(const String& path)
     if(m_fullPath.empty()) {
         return false;
     }
-    AUDIO_OBJ->setMedia(QUrl::fromLocalFile(m_fullPath.c_nstr()));
+    QMediaPlaylist* list = new QMediaPlaylist();
+    list->addMedia(QUrl::fromLocalFile(m_fullPath.c_nstr()));
+    AUDIO_OBJ->setPlaylist(list);
     AUDIO_OBJ->stop();
     setVolume(m_volume);
     setMuted(m_muted);
@@ -50,6 +52,7 @@ void Audio::play(bool isloop,int fadeMS)
 {
     if(!m_object) return;
     setLoop(isloop);
+    AUDIO_OBJ->playlist()->setCurrentIndex(0);
     AUDIO_OBJ->play();
     onPlay();
 }
@@ -91,12 +94,12 @@ void Audio::setLoop(bool v)
 {
     m_loop = v;
     if(!m_object) return;
-//    if(v){
-//        AUDIO_OBJ->playlist()->setPlaybackMode(QMediaPlaylist::CurrentItemInLoop);
-//    }
-//    else {
-//        AUDIO_OBJ->playlist()->setPlaybackMode(QMediaPlaylist::CurrentItemOnce);
-//    }
+    if(v){
+        AUDIO_OBJ->playlist()->setPlaybackMode(QMediaPlaylist::CurrentItemInLoop);
+    }
+    else {
+        AUDIO_OBJ->playlist()->setPlaybackMode(QMediaPlaylist::CurrentItemOnce);
+    }
 }
 
 void Audio::setMuted(bool v)

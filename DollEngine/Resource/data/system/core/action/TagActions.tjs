@@ -1,10 +1,16 @@
 
-var TagActions = %[
-	LayerNormalZoomModule: function (obj,time,elm) 
-	{
-		var act = new Timeline(this,obj);
-		act.setKeyframe("scale",obj.scale,elm.zoom/100,time);
+class TagActions
+{
+	var app;
+	function TagActions (app) {
+		this.app = app;
+	}
+
+	//缩放
+	function LayerNormalZoomModule (obj,time,elm) {
+		var act = new Timeline(this.app,obj);
+		act.setKeyframe("scale",void,elm.zoom/100,time);
 		act.start();
 		return act;
 	}
-];
+}

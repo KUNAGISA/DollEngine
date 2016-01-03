@@ -295,4 +295,7 @@ NCB_REGISTER_CLASS_DIFFER(KAGController, TjsKAGController)
     NCB_METHOD(saveStack);
     NCB_METHOD(loadStack);
     NCB_PROPERTY_RO(lastTarget,getLastTargetTJS);
+    NCB_PROPERTY_RO(curTarget,getCurTargetTJS);
+    NCB_PROPERTY_RO(curStorage,getCurStorageTJS);
+    NCB_PROPERTY_RO(curLine,getCurLine);
 };

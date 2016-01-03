@@ -37,6 +37,17 @@ public:
     void printLabel();
     
     String getLastTarget(){return m_lastTarget;}
+    String getCurStorage(){return m_storage->fullPath;}
+    String getCurTarget(){return m_label->key;}
+    int getCurLine(){
+        KAGTag* tag = NULL;
+        if(m_label->allTags.size() > m_tagIndex) {
+            tag = m_label->allTags[m_tagIndex];
+            return tag->line;
+        }
+        EM(ERROR_KAG_UNKONW);
+        return -1;
+    }
     
 protected:
     KAGStorage* m_storage;
