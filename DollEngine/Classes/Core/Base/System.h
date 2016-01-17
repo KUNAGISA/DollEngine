@@ -36,6 +36,8 @@ public:
     static String GetKeyByFont(const String& str,const String& fontName,int fontSize,int outlineSize) {
         return str+L"_"+fontName+L"_"+String(fontSize)+L"_"+String(outlineSize);
     }
+
+    void openUrl(const String& url);
     
     int64_t getMilliSeconds();
     double getSeconds();

@@ -8,7 +8,23 @@
 #include <QFontDatabase>
 #include <QDesktopWidget>
 #include <QDir>
+#include <QDesktopServices>
+#include <QUrl>
+#include <QThread>
 #include "QtWindow.h"
+
+class OpenUrlThread : public QThread
+{
+protected:
+    void run() Q_DECL_OVERRIDE {
+        QDesktopServices::openUrl(_url);
+    }
+public:
+    void setUrl(const DE::String& url){
+        _url = QUrl(QString::fromStdWString(url));
+    }
+    QUrl _url;
+};
 
 DE_BEGIN
 
@@ -125,6 +141,16 @@ void System::removeFont(const String& fontName)
         QFontDatabase::removeApplicationFont((uintptr_t)iter->second);
         m_allFonts.erase(fontName);
     }
+}
+
+void System::openUrl(const String& url)
+{
+    OpenUrlThread *workerThread = new OpenUrlThread();
+    workerThread->connect(workerThread, &OpenUrlThread::finished, workerThread, &QObject::deleteLater);
+    workerThread->setUrl(url);
+    workerThread->start();
+    qDebug()<<url.c_nstr();
+//    
 }
 
 void System::stopMainLoop()

@@ -50,6 +50,21 @@ tTJSNC_System::tTJSNC_System() : inherited(TJS_W("System"))
         return TJS_S_OK;
     }
     TJS_END_NATIVE_STATIC_METHOD_DECL(/*func. name*/addFont)
+            
+    //----------------------------------------------------------------------
+    TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/openUrl)
+    {
+        if(numparams < 1) return TJS_E_BADPARAMCOUNT;
+        tTJSVariant* v = param[0];
+        DE::String url = v->AsString()->operator const tjs_char *();
+        if(url.empty()){
+            return TJS_S_OK;
+        }
+        DE::System::GetInstance()->openUrl(url);
+        return TJS_S_OK;
+    }
+    TJS_END_NATIVE_STATIC_METHOD_DECL(/*func. name*/openUrl)
+            
     //--property
     
     //----------------------------------------------------------------------
