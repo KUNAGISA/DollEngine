@@ -50,7 +50,6 @@ class TagManager extends KAGController
 			while(true){
 				try {
 					var time = doTag();
-					app.history.updateReadLine();
 					if (time < 0) {
 						// dm("停止，或等待点击，或跳转");
 						return;
@@ -60,7 +59,8 @@ class TagManager extends KAGController
 					// 	isjump = true;
 					// 	break;
 					// }
-					else if(time > 0){
+					app.history.updateReadLine();
+					if(time > 0){
 						waitTime(time);
 						return;
 					}

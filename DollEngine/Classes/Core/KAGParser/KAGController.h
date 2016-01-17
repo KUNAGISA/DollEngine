@@ -45,7 +45,7 @@ public:
             tag = m_label->allTags[m_tagIndex];
             return tag->line;
         }
-        EM(ERROR_KAG_UNKONW);
+        EM(ERROR_KAG_UNKONW,0);
         return -1;
     }
     

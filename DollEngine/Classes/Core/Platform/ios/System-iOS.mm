@@ -119,6 +119,13 @@ void System::removeFont(const String& fontName)
     }
 }
 
+void System::openUrl(const String& url)
+{
+    NSString *urlText = [ NSString stringWithUTF8String:url.c_nstr()];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlText]];
+    DM(url.c_wstr());
+}
+
 void System::startMainLoop()
 {
     iOSWindow::GetInstance()->mainLoopEnabled(true);

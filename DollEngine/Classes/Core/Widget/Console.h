@@ -50,7 +50,7 @@ public:
     void log(const String& text);
     void throwMsg(const String& v);
     void throwMsg(DEBUG_MSG msg,const String& v1);
-    void throwMsg(DEBUG_MSG msg,int v1,const String& v2);
+    void throwMsg(DEBUG_MSG msg,int v1,const String& v2=L"");
     virtual void ExceptionPrint(const tjs_char *msg){Print(msg);}
     virtual void Print(const tjs_char *msg){
         printf("%s\n",String(msg).c_nstr());
