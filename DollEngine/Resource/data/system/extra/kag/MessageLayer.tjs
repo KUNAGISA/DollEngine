@@ -176,6 +176,7 @@ class MessageLayer extends Layer
 	function setLocate (elm) {
 		locateX = +elm.x if elm.x !== void;
 		locateY = +elm.y if elm.y !== void;
+		chLayer.reLocate();
 		saveCommand("setLocate",elm);
 	}
 
@@ -301,6 +302,8 @@ class MessageLayer extends Layer
 		node.x = +elm.x;
 		node.y = node.parent.height-elm.y;
 		node.enabled = elm.enabled if elm.enabled!==void;
+		node.selectabled = elm.selectabled if elm.selectabled!==void;
+		node.selected = elm.selected if elm.selected!==void;
 
 		if (elm.x === void) {
 			locateX += node.width;

@@ -64,7 +64,15 @@ tTJSNC_System::tTJSNC_System() : inherited(TJS_W("System"))
         return TJS_S_OK;
     }
     TJS_END_NATIVE_STATIC_METHOD_DECL(/*func. name*/openUrl)
-            
+    
+    //----------------------------------------------------------------------
+    TJS_BEGIN_NATIVE_METHOD_DECL(/*func. name*/doCompact)
+    {
+        DE::System::GetInstance()->doCompact();
+        return TJS_S_OK;
+    }
+    TJS_END_NATIVE_STATIC_METHOD_DECL(/*func. name*/doCompact)
+    
     //--property
     
     //----------------------------------------------------------------------

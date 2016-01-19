@@ -62,10 +62,10 @@
 		"kag" => true, //kag模块是否开启
 	],
 	"game" => %[
-		"title" => "幽冥录贰-冯家二少 for DollEngine beta v0.0.1", //标题
+		"title" => "幽冥录贰-冯家二少 for DollEngine v1.0", //标题
 		"deffont" => %[ //默认字体设置
 			"face" => "DroidSansFallback.ttf", //默认字体
-			"size" => 22, //默认字体大小
+			"size" => 28, //默认字体大小
 		],
 		"saveThumbWidth" => 152, //-1表示不启用存档缩略图，否则为缩略图的宽度，高度将等比计算
 		"saveDataPath" => "bookmark_%d" //存档命名格式

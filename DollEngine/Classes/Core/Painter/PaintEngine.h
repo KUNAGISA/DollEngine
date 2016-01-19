@@ -51,6 +51,7 @@ public:
     Texture* addTexture(int r);//创建圆角矩形
     CharacterInfo* addText(const String& text,const String& fontName,int fontSize);//添加文字
     void removeTexture(Texture* tex);
+    void removeUnused();
 public:
     void blendFunc(DrawBlendId src,DrawBlendId dst);
     

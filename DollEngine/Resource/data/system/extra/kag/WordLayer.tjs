@@ -30,6 +30,13 @@ class WordLayer extends Layer
 		//根据界面大小重新刷新文字位置
 	}
 
+	function reLocate () 
+	{
+		_curLine.clear();
+		_curLabel = void;
+		_curLineHeight = 0;	
+	}
+
 	function startLink (link) {
 		if (_curLinkButton) {
 			dm("link未结束不可以增加新的link");

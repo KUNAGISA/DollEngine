@@ -40,6 +40,11 @@ void System::startup()
     TJS_CATCH
 }
 
+void System::doCompact()
+{
+    PaintEngine::GetInstance()->removeUnused();
+}
+
 int64_t System::getMilliSeconds()
 {
     struct timeval tv;

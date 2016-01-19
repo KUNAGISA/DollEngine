@@ -725,6 +725,15 @@ class KAG extends Application
 			this.getBGM().stop(true);
 		} incontextof this,
 
+		playbgm : function (elm) 
+		{
+			checkElm(elm,['storage']);
+			elm.loop = true if elm.loop===void;
+			var bgm = this.getBGM();
+			bgm.preload(elm.storage);
+			bgm.play(elm.loop,true);
+		} incontextof this,
+
 		playse : function (elm) 
 		{
 			checkElm(elm,['storage']);
@@ -1018,6 +1027,12 @@ class KAG extends Application
 			return this.status.delay;
 		} incontextof this,
 
+		emb : function (elm) 
+		{
+			var text = Scripts.eval(elm.exp);
+			return tagHandlers.ch(%[text:text]);
+		} incontextof this,
+
 		font : function (elm)
 		{
 			var lay = this.getCurrentLayer();
@@ -1026,6 +1041,16 @@ class KAG extends Application
 				return;
 			}
 			lay.setFont(elm);
+		} incontextof this,
+
+		resetfont : function (elm) 
+		{
+			var lay = this.getCurrentLayer();
+			if (!lay) {
+				this.mergerBack('resetfont',elm);
+				return;
+			}
+			lay.resetFont();
 		} incontextof this,
 
 		list : function (elm) 

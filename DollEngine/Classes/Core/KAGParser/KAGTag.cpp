@@ -89,39 +89,42 @@ void KAGTag::print(bool cond)
         label->isMacro) {
         return;
     }
-    String str = L"(#";
-    if (name == L"ch") {
-        str = L"";
-    }
-    else
-    {
-        str += String::fromFormat(L"%d",line);
-        str += L") @";
-        str += name;
-    }
-    if (name == L"iscript")
-    {
-        str += L"\n// some code...";
-    }
-    else
-    {
-        for(auto iter=params.begin();iter != params.end();++iter)
+    if(cond){
+        String str = L"(#";
+        if (name == L"ch") {
+            str = L"";
+        }
+        else
         {
-            if(name == L"ch" && (*iter).key==L"text") {
-                str = (*iter).value;
-            }
-            else {
-                str += L" ";
-                str += (*iter).key;
-                str += L"=";
-                str += (*iter).value;
+            str += String::fromFormat(L"%d",line);
+            str += L") @";
+            str += name;
+        }
+        
+        if (name == L"iscript")
+        {
+            str += L"\n// some code...";
+        }
+        else
+        {
+            for(auto iter=params.begin();iter != params.end();++iter)
+            {
+                if(name == L"ch" && (*iter).key==L"text") {
+                    str = (*iter).value;
+                }
+                else {
+                    str += L" ";
+                    str += (*iter).key;
+                    str += L"=";
+                    str += (*iter).value;
+                }
             }
         }
+        DE::Console::GetInstance()->log(str);
     }
-    if (!cond) {
-        str += L" [COND FALSE] ";
+    else {
+        DE::Console::GetInstance()->log(L"[COND FALSE] ");
     }
-    DE::Console::GetInstance()->log(str);
 }
 
 DE_END

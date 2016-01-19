@@ -138,8 +138,13 @@ class Button extends Control
 	function onMouseUp (x,y) 
 	{
 		super.onMouseUp(x,y);
-		this._selectImage.visible=false;
-		this._normalImage.visible=true;
+		if (selectabled) {
+			selected = !selected;
+		}
+		else {
+			this._selectImage.visible=false;
+			this._normalImage.visible=true;
+		}
 		// _title.color = _titleColor;
 		if (x>=0 && y>=0 && x<=this.width&&y<=this.height) {
 			asyncTrigger(exception);
@@ -156,6 +161,39 @@ class Button extends Control
 		}
 		if (clickData.storage || clickData.target) {
 			asyncTrigger(app.process,[clickData.storage,clickData.target]);
+		}
+	}
+
+	var _selectabled=false;
+	property selectabled{
+	    setter(v) {
+	    	//setter
+	    	this._selectabled = v;
+	    	selected = selected;
+		}
+		getter {
+	    	//getter
+			return this._selectabled;
+		}
+	}
+
+	var _selected=false;
+	property selected{
+	    setter(v) {
+	    	//setter
+	    	this._selected = v;
+			if (_selected) {
+				_selectImage.visible = true;
+				_normalImage.visible = false;
+			}
+			else {
+				_selectImage.visible = false;
+				_normalImage.visible = true;
+			}
+		}
+		getter {
+	    	//getter
+			return this._selected;
 		}
 	}
 

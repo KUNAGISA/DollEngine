@@ -25,11 +25,11 @@ enum IF_KEY {
 int doTag();
 bool stepInLabel(tTJSVariant storage, tTJSVariant label, bool iscall)
 {
-    wstring v1,v2;
-    const kagchar* v11 = storage.AsStringNoAddRef()->operator const wchar_t *();
-    if(v11)v1=v11;
-    const kagchar* v22 = label.AsStringNoAddRef()->operator const wchar_t *();
-    if(v22)v2=v22;
+    TJS_STRING(storage, v1);
+    TJS_STRING(label, v2);
+    if(!iscall&&m_ifKey.size()>0) {
+        m_ifKey.pop_back();
+    }
     return KAGController::stepInLabel(v1, v2, iscall);
 }
 

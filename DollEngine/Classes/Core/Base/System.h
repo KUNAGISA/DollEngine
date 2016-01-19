@@ -27,6 +27,7 @@ public:
     void startup(); //脚本入口
     void stopMainLoop();
     void startMainLoop();
+    void doCompact();
     
     String addFont(const String& filePath);
     void* getFont(const String& fontName);

@@ -69,6 +69,8 @@ static OpenGLController* s_instance=nil;
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, colorRenderbuffer_);
     glBindVertexArrayOES(0);
     CHECK_GL_ERROR;
+    
+    self.preferredFramesPerSecond = 30;//设置刷新率
 }
 
 - (void)tearDownGL
@@ -78,6 +80,7 @@ static OpenGLController* s_instance=nil;
     glDeleteBuffers(1, &defaultFramebuffer_);
     glDeleteBuffers(1, &colorRenderbuffer_);
     glDeleteVertexArraysOES(1,0);
+    DE::System::GetInstance()->doCompact();
 }
 
 - (void)dealloc
@@ -93,7 +96,7 @@ static OpenGLController* s_instance=nil;
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    
+    DE::System::GetInstance()->doCompact();
 //    if ([self isViewLoaded] && ([[self view] window] == nil)) {
 //        self.view = nil;
 //        

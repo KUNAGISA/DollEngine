@@ -240,6 +240,7 @@ CharacterInfo* PaintEngine::addText(const String& text,const String& fontName,in
     }
     else {
         fd = new FontData();
+        m_allFontDatas[key] = fd;
     }
     
     CharacterInfo* frame = new CharacterInfo();
@@ -267,7 +268,6 @@ CharacterInfo* PaintEngine::addText(const String& text,const String& fontName,in
             return NULL;
         }
         m_allTextures[key] = tex;
-        m_allFontDatas[key] = fd;
         tex->setCacheKey(key);
         tex->retain();
     }
@@ -280,7 +280,19 @@ CharacterInfo* PaintEngine::addText(const String& text,const String& fontName,in
 
 void PaintEngine::removeTexture(Texture* tex)
 {
-    m_allPrograms.erase(tex->getCacheKey());
+    m_allTextures.erase(tex->getCacheKey());
+}
+
+void PaintEngine::removeUnused()
+{
+    map<String,Texture*> tempTex = m_allTextures;
+    for (auto iter = tempTex.begin(); iter!=tempTex.end(); ++iter) {
+        if (iter->second->getRetainCount() <= 1) {
+            delete iter->second;
+            m_allTextures.erase(iter->first);
+            DM(L"Remove Unused %ls",iter->first.c_wstr());
+        }
+    }
 }
 
 void PaintEngine::preparePaint(PaintConfig& config)

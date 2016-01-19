@@ -163,6 +163,7 @@
 		B851246B1BE7B94300D94A06 /* WenQuanYiMicroHei.ttc in Resources */ = {isa = PBXBuildFile; fileRef = B85124681BE7B94300D94A06 /* WenQuanYiMicroHei.ttc */; };
 		B851246D1BE7BB9300D94A06 /* data in Resources */ = {isa = PBXBuildFile; fileRef = B851246C1BE7BB9300D94A06 /* data */; };
 		B85D35A31C13519F00DC5EC2 /* logo1136.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B85D35A21C13519F00DC5EC2 /* logo1136.jpg */; };
+		B8878F751C4E45CD009A179E /* LaunchScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = B8878F741C4E45CD009A179E /* LaunchScreen.m */; };
 		B89F267F1B5E87B40081CA6C /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B89F267E1B5E87B40081CA6C /* OpenGLES.framework */; };
 		B8A7BEC81C0DEFA100EC1256 /* TjsColorRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8A7BEC41C0DEFA100EC1256 /* TjsColorRect.cpp */; };
 		B8A7BEC91C0DEFA100EC1256 /* TjsRTT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8A7BEC61C0DEFA100EC1256 /* TjsRTT.cpp */; };
@@ -505,6 +506,8 @@
 		B85124681BE7B94300D94A06 /* WenQuanYiMicroHei.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = WenQuanYiMicroHei.ttc; sourceTree = "<group>"; };
 		B851246C1BE7BB9300D94A06 /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = data; sourceTree = "<group>"; };
 		B85D35A21C13519F00DC5EC2 /* logo1136.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = logo1136.jpg; sourceTree = "<group>"; };
+		B8878F731C4E45CD009A179E /* LaunchScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchScreen.h; sourceTree = "<group>"; };
+		B8878F741C4E45CD009A179E /* LaunchScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchScreen.m; sourceTree = "<group>"; };
 		B89F267E1B5E87B40081CA6C /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/System/Library/Frameworks/OpenGLES.framework; sourceTree = DEVELOPER_DIR; };
 		B8A7BEC41C0DEFA100EC1256 /* TjsColorRect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TjsColorRect.cpp; sourceTree = "<group>"; };
 		B8A7BEC51C0DEFA100EC1256 /* TjsColorRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsColorRect.h; sourceTree = "<group>"; };
@@ -1230,6 +1233,8 @@
 				B8F390E31BC68E6F002EB3CC /* Info.plist */,
 				B8F390E41BC68E6F002EB3CC /* LaunchScreen.xib */,
 				B8F390E51BC68E6F002EB3CC /* main.m */,
+				B8878F731C4E45CD009A179E /* LaunchScreen.h */,
+				B8878F741C4E45CD009A179E /* LaunchScreen.m */,
 			);
 			name = proj.ios;
 			sourceTree = "<group>";
@@ -1338,6 +1343,7 @@
 				B85124691BE7B94300D94A06 /* FileInfo.cpp in Sources */,
 				B851239F1BE7B0D000D94A06 /* cp1251.c in Sources */,
 				B85123A31BE7B0D000D94A06 /* gb18030.c in Sources */,
+				B8878F751C4E45CD009A179E /* LaunchScreen.m in Sources */,
 				B85123BC1BE7B0D000D94A06 /* utf8.c in Sources */,
 				B85123561BE7B0CF00D94A06 /* KAGStorage.cpp in Sources */,
 				B85123AF1BE7B0D000D94A06 /* iso8859_6.c in Sources */,
