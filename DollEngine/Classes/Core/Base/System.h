@@ -53,6 +53,7 @@ public:
     PROPERTY_CONST(String,PlatformName,m_platformName){m_platformName=v;}
     PROPERTY_CONST(String,AppPath,m_appPath){m_appPath=v;}
     PROPERTY_CONST(String,DataPath,m_dataPath){m_dataPath=v;}
+    PROPERTY_CONST(String,GamePath,m_gamePath){m_gamePath=v;}
     PROPERTY_CONST(String,SaveDataPath,m_saveDataPath){m_saveDataPath=v;}
     PROPERTY_CONST(String,PatchPath,m_patchPath){m_patchPath=v;}
     

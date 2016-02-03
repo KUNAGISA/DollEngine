@@ -1,14 +1,5 @@
 
-DollEngine/Resource/data/bgimage/
-DollEngine/Resource/data/bgm/
-DollEngine/Resource/data/fgimage/
-DollEngine/Resource/data/image/
-DollEngine/Resource/data/iosimage/
-DollEngine/Resource/data/scenario/
-DollEngine/Resource/data/sound/
-DollEngine/Resource/data/uicfg/
-DollEngine/Resource/data/others/
-DollEngine/DerivedData/
+DollEngine/Resource/game/
 
 DollEngine/build-DollEngine-Desktop_Qt_5_5_0_MinGW_32bit-Debug
 DollEngine/build-DollEngine-Desktop_Qt_5_5_0_MinGW_32bit-Release

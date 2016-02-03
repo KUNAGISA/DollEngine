@@ -1,55 +1,11 @@
 %[
-	"scripts" => [ //默认加载的脚本
-		"system/core/Functions.tjs",
-		"system/core/Application.tjs",
-		"system/core/EventCenter.tjs",
-		"system/core/HttpClient.tjs",
-		"system/core/Timer.tjs",
-		"system/core/Font.tjs",
-		"system/core/GameObject.tjs",
-		"system/core/SoundBuffer.tjs",
-		"system/core/action/TimeLine.tjs",
-		"system/core/action/TagActions.tjs",
-		"system/core/ui/Layer.tjs",
-		"system/core/ui/UILayer.tjs",
-		"system/core/ui/RTTLayer.tjs",
-		"system/core/ui/Label.tjs",
-		"system/core/ui/LayerColor.tjs",
-		"system/core/ui/Control.tjs",
-		"system/core/ui/Button.tjs",
-		"system/core/ui/List.tjs",
-		"system/core/ui/LinkButton.tjs",
-		"system/core/ui/CheckBox.tjs",
-		"system/core/ui/EditBox.tjs",
-		"system/core/ui/Page.tjs",
-		"system/core/ui/Particle.tjs",
-		"system/core/ui/ProgressBar.tjs",
-		"system/core/ui/RadioButton.tjs",
-		"system/core/ui/ScrollArea.tjs",
-		"system/core/ui/Slider.tjs",
-		"system/core/ui/Tab.tjs",
-		"system/extra/ui/UIAnimation.tjs",
-		"system/extra/ui/UICreator.tjs",
-		"system/extra/ui/UIReader.tjs",
-		"system/extra/kag/KAG.tjs",
-		"system/extra/kag/History.tjs",
-		"system/extra/kag/TagManager.tjs",
-		"system/extra/kag/BaseLayer.tjs",
-		"system/extra/kag/GraphicLayer.tjs",
-		"system/extra/kag/MessageLayer.tjs",
-		"system/extra/kag/WordLayer.tjs"
-	],
 	"autoPaths" => [ //自动搜索路径
 		"game",
 		"scenario",
-		"scenario/event",
-		"scenario/ui",
-		"uicfg",
 		"bgimage",
 		"bgm",
 		"fgimage",
 		"image",
-		"iosimage",
 		"sound"
 	],
 	"device" => %[
@@ -62,12 +18,12 @@
 		"kag" => true, //kag模块是否开启
 	],
 	"game" => %[
-		"title" => "幽冥录贰-冯家二少 for DollEngine v1.0", //标题
+		"title" => "DollEngine vbeta 0.2", //标题
 		"deffont" => %[ //默认字体设置
 			"face" => "DroidSansFallback.ttf", //默认字体
 			"size" => 28, //默认字体大小
 		],
-		"saveThumbWidth" => 152, //-1表示不启用存档缩略图，否则为缩略图的宽度，高度将等比计算
+		"saveThumbWidth" => -1, //-1表示不启用存档缩略图，否则为缩略图的宽度，高度将等比计算
 		"saveDataPath" => "bookmark_%d" //存档命名格式
 	]
 ]

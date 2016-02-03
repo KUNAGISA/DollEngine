@@ -266,6 +266,9 @@ class KAG extends Application
 	}
 
 	function checkClickSkip () {
+		if (status.clickskip == false && status.waitClickMode != WAIT_CLICK) {
+			return;
+		}
 		switch(this.status.waitClickMode) {
 			case WAIT_CLICK_NONE:
 			{
@@ -298,6 +301,7 @@ class KAG extends Application
 			}
 			break;
 			case WAIT_CLICK_TIME:
+			case WAIT_CLICK:
 			{
 				//等待时间
 				clickToNext();
@@ -599,7 +603,7 @@ class KAG extends Application
 
 		waitclick : function (elm) 
 		{
-			this.status.waitClickMode = WAIT_CLICK_TIME;
+			this.status.waitClickMode = WAIT_CLICK;
 			return -1;
 		} incontextof this,
 
@@ -625,7 +629,7 @@ class KAG extends Application
 
 		clickskip : function (elm) 
 		{
-			this.status.clickskip = elm.enabled if elm.enabled!==void;
+			this.status.clickskip = +elm.enabled if elm.enabled!==void;
 		} incontextof this,
 
 		locklink : function (elm) 

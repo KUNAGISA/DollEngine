@@ -86,6 +86,12 @@ String Storages::getFullPath(const String& storage)
             m_searchPathsCache[storage] = temp_path;
             return temp_path;
         }
+        temp_path = System::GetInstance()->getGamePath()+storage;
+        if (access(temp_path.c_nstr(),0) == 0)
+        {
+            m_searchPathsCache[storage] = temp_path;
+            return temp_path;
+        }
         temp_path = System::GetInstance()->getDataPath()+storage;
         if (access(temp_path.c_nstr(),0) == 0)
         {
@@ -112,6 +118,16 @@ String Storages::getFullPath(const String& storage)
         for (; auto_iter != m_autoPaths.end(); ++auto_iter)
         {
             temp_path = System::GetInstance()->getSaveDataPath()+(*auto_iter)+storage;
+            if (access(temp_path.c_nstr(),0) == 0)
+            {
+                m_searchPathsCache[storage] = temp_path;
+                return temp_path;
+            }
+        }
+        auto_iter = m_autoPaths.begin();
+        for (; auto_iter != m_autoPaths.end(); ++auto_iter)
+        {
+            temp_path = System::GetInstance()->getGamePath()+(*auto_iter)+storage;
             if (access(temp_path.c_nstr(),0) == 0)
             {
                 m_searchPathsCache[storage] = temp_path;

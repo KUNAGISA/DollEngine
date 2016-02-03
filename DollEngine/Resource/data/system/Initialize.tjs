@@ -11,9 +11,10 @@ System.debugMode = DEConfig.debugMode;
 System.addFont(DEConfig.game.deffont.face);
 
 {
-    var count = DEConfig.scripts.count;
+    var includes = Scripts.evalStorage("Includes.tjs");
+    var count = includes.count;
     for (var i = 0; i < count; i++) {
-        var file = DEConfig.scripts[i];
+        var file = includes[i];
         print("LOAD %s",file);
         Scripts.execStorage(file);
     };

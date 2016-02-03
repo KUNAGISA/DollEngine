@@ -167,6 +167,7 @@
 		B89F267F1B5E87B40081CA6C /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B89F267E1B5E87B40081CA6C /* OpenGLES.framework */; };
 		B8A7BEC81C0DEFA100EC1256 /* TjsColorRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8A7BEC41C0DEFA100EC1256 /* TjsColorRect.cpp */; };
 		B8A7BEC91C0DEFA100EC1256 /* TjsRTT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B8A7BEC61C0DEFA100EC1256 /* TjsRTT.cpp */; };
+		B8C229B11C6227E10094440C /* game in Resources */ = {isa = PBXBuildFile; fileRef = B8C229B01C6227E10094440C /* game */; };
 		B8D15A0D1BC94CD600D37D81 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B8D15A091BC811FC00D37D81 /* libz.dylib */; };
 		B8F393F61BC68E70002EB3CC /* AppDelegateIOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = B8F390DD1BC68E6F002EB3CC /* AppDelegateIOS.mm */; };
 		B8F393F71BC68E70002EB3CC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8F390E21BC68E6F002EB3CC /* Images.xcassets */; };
@@ -513,6 +514,7 @@
 		B8A7BEC51C0DEFA100EC1256 /* TjsColorRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsColorRect.h; sourceTree = "<group>"; };
 		B8A7BEC61C0DEFA100EC1256 /* TjsRTT.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TjsRTT.cpp; sourceTree = "<group>"; };
 		B8A7BEC71C0DEFA100EC1256 /* TjsRTT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TjsRTT.h; sourceTree = "<group>"; };
+		B8C229B01C6227E10094440C /* game */ = {isa = PBXFileReference; lastKnownFileType = folder; path = game; sourceTree = "<group>"; };
 		B8D15A091BC811FC00D37D81 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/usr/lib/libz.dylib; sourceTree = DEVELOPER_DIR; };
 		B8F390DC1BC68E6F002EB3CC /* AppDelegateIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegateIOS.h; sourceTree = "<group>"; };
 		B8F390DD1BC68E6F002EB3CC /* AppDelegateIOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegateIOS.mm; sourceTree = "<group>"; };
@@ -1171,6 +1173,7 @@
 		B85123F11BE7B0DD00D94A06 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				B8C229B01C6227E10094440C /* game */,
 				B851246C1BE7BB9300D94A06 /* data */,
 			);
 			name = Resource;
@@ -1299,6 +1302,7 @@
 			files = (
 				B851239B1BE7B0D000D94A06 /* readme.txt in Resources */,
 				B8F393F91BC68E70002EB3CC /* LaunchScreen.xib in Resources */,
+				B8C229B11C6227E10094440C /* game in Resources */,
 				B85123831BE7B0D000D94A06 /* ChangeLog in Resources */,
 				B851246D1BE7BB9300D94A06 /* data in Resources */,
 				B85123841BE7B0D000D94A06 /* CMakeLists.txt in Resources */,
