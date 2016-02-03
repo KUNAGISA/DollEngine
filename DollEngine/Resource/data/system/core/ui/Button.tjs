@@ -272,7 +272,6 @@ class Button extends Control
 }
 
 
-if(DEConfig.module.kag){
 class LinkButtonLayer extends Button
 {
 	function LinkButtonLayer (app,par) {
@@ -283,5 +282,4 @@ class LinkButtonLayer extends Button
 	function setPos (x,y) {
 		super.setPos(x,parent.height-y);
 	}
-}
 }

@@ -15,13 +15,17 @@ System.addFont(DEConfig.game.deffont.face);
     var count = includes.count;
     for (var i = 0; i < count; i++) {
         var file = includes[i];
-        print("LOAD %s",file);
-        Scripts.execStorage(file);
+        if (file != void) {
+            print("LOAD %s",file);
+            Scripts.execStorage(file);
+        }
     };
     count = DEConfig.autoPaths.count;
     for (var i = 0; i < count; i++) {
         var path = DEConfig.autoPaths[i];
-        Storages.addAutoPath(path);
+        if (path != void) {
+            Storages.addAutoPath(path);
+        }
     };
 }
 
@@ -31,16 +35,7 @@ var sf=%[];
 
 sf.DollEngine = true;
 
-var app;
-if(DEConfig.module.kag)
-{
-    app = new KAG();
-    global.kag = app;
-    app.process("first.ks");
-}
-else
-{
-    app = new Application();
-    Scripts.execStorage("main.tjs");
-}
+var app = new KAG();
+var kag = app;
+app.process("first.ks");
 
