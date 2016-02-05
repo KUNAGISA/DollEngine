@@ -9,6 +9,7 @@ class Application extends SystemDelegate
 	var swallow = true;
 	var visible = true;
 	var parent = void;
+	var primaryLayer;
 
 	var status = %[];
 	var deffont = %[
@@ -16,6 +17,14 @@ class Application extends SystemDelegate
 		color : 0xffffff,
 		face : DEConfig.game.deffont.face,
 	]; //默认字体设置
+
+	var defstyle = %[
+		align : 'left',
+		linespacing : 10,
+		pitch : 0,
+		linesize : 'default',
+		autoreturn : true
+	]; //默认的文字样式配置
 
 	//音频管理
 	var bgm = void;
@@ -65,6 +74,8 @@ class Application extends SystemDelegate
 		sysbase.setSize(window.layerWidth,window.layerHeight);
 		sysbase.name = "sysbase";
 		
+		primaryLayer = sysbase;
+
 		System.delegate = this;
 
 	}

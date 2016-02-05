@@ -24,6 +24,8 @@ class MessageLayer extends Layer
 
 	var uiIndex = 0;
 
+	var style = %[];
+
 	function MessageLayer (app,par) 
 	{
 		super.Layer(app,par);
@@ -205,6 +207,21 @@ class MessageLayer extends Layer
 		setFont(app.deffont);
 	}
 
+	function setStyle (elm) 
+	{
+		style.align = elm.align if elm.align !== void;
+		style.linespacing = elm.linespacing if elm.linespacing !== void;//行间距
+		style.pitch = elm.pitch if elm.pitch !== void;//字间距
+		style.linesize = elm.linesize if elm.linesize !== void;//行高
+		style.autoreturn = +elm.autoreturn if elm.autoreturn !== void;//是否自动换行
+		saveCommand("setStyle",elm);
+	}
+
+	function resetStyle () 
+	{
+		setFont(app.defstyle);
+	}
+
 	function locateChangeLine () 
 	{
 		var data = chLayer.changeLine(locateX,locateY,font);
@@ -280,7 +297,7 @@ class MessageLayer extends Layer
 		}
 		var node = new Button(app,controlLayer);
 		node.name = elm.name;
-		node.issys = elm.issys===void?false:elm.issys;
+		node.issys = elm.sys===void?false:elm.sys;
 		if (node.issys) {
 			buttons[elm.name] = node;
 		}

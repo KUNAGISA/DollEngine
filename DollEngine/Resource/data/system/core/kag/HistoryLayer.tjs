@@ -1,0 +1,12 @@
+class HistoryLayer extends Layer
+{
+	function HistoryLayer (win,par) 
+	{
+		super.Layer(...);
+	}
+
+	function clear () 
+	{
+		removeAllChildren();
+	}
+}

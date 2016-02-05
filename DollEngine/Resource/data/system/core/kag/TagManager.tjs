@@ -152,7 +152,9 @@ class TagManager extends KAGController
 
 	function doNext () 
 	{
-		_waitTimer.enabled = false;
+		if (_waitTimer) {
+			_waitTimer.enabled = false;
+		}
 		if (onWaitEnd) {
 			onWaitEnd();
 			onWaitEnd = void;

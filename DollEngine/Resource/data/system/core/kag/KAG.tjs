@@ -15,6 +15,7 @@ class KAG extends Application
 	var fore = %[];//表层
 	var back = [];//里层配置
 	var currentLayer = "message0";
+	var historyLayer;
 	var current;
 
 	//存档控制
@@ -49,6 +50,7 @@ class KAG extends Application
 
 		history = new History(this);
 		history.readed = sf.readHistory;
+		historyLayer = new HistoryLayer(this,sysbase);
 
 	}
 
@@ -560,6 +562,7 @@ class KAG extends Application
 		loadplugin : function () {print('失效的指令loadplugin');} incontextof this,
 		mappfont : function () {print('失效的指令mappfont');} incontextof this,
 		rclick : function () {print('失效的指令rclick');} incontextof this,
+		startanchor : function () {print('失效的指令startanchor');} incontextof this,
 
 		/*******系统操作*******/
 
@@ -742,6 +745,11 @@ class KAG extends Application
 		{
 			checkElm(elm,['storage']);
 			playSe(elm.storage,elm.buf,elm.loop);
+		} incontextof this,
+
+		se : function (elm) 
+		{
+			return tagHandlers.playse(elm);
 		} incontextof this,
 
 		/*******存档读档*******/
@@ -1007,6 +1015,12 @@ class KAG extends Application
 			return this.status.delay;
 		} incontextof this,
 
+		sysbutton : function (elm) 
+		{
+			elm.sys = true;
+			tagHandlers.button(elm);
+		} incontextof this,
+
 		ch : function (elm) 
 		{
 			var lay = this.getCurrentLayer();
@@ -1015,7 +1029,6 @@ class KAG extends Application
 				return;
 			}
 			var changePage = lay.addText(elm.text);
-			history_push(elm.text);
 			if (changePage) {
 				this.status.waitClickMode = WAIT_CLICK_P;//点击等待换页
 				this.status.isClickSkip = false;
@@ -1104,6 +1117,7 @@ class KAG extends Application
 		{
 			this.checkElm(elm,['method']);
 			elm.time = 1000 if elm.time===void;
+			elm.method = 'crossfade';//所有trans临时强制这么搞
 			this.transWithMethod(elm.method, elm.time);
 			this.status.waitClickMode = WAIT_CLICK_TRANS;
 			return -1;

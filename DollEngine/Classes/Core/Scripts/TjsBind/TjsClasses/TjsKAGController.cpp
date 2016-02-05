@@ -44,9 +44,9 @@ static void GetTagParamValue(KAGTagParamValue& kv, tTJSVariant &ret)
                 }
                 else {
                     v2 = kv.value.substr(p+1);
-                    tTJSVariant r2;
-                    ScriptEngine::Global()->EvalExpression( v2, &r2) ;
-                    ret = r2;
+//                    tTJSVariant r2;
+//                    ScriptEngine::Global()->EvalExpression( v2, &r2) ;
+                    ret = v2.c_str();
                 }
             }
             else {
