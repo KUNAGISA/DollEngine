@@ -1,5 +1,5 @@
 
-class MessageLayer extends Layer
+class MessageLayer extends KAGLayer
 {
 	var messageIndex = void;//在messages里的index
 	var frameImage = void;//message层的背景
@@ -20,15 +20,13 @@ class MessageLayer extends Layer
 		b : 0,
 	];
 
-	var _commands = [];//用于存档
-
 	var uiIndex = 0;
 
 	var style = %[];
 
 	function MessageLayer (app,par) 
 	{
-		super.Layer(app,par);
+		super.KAGLayer(app,par);
 		setAnchor(0,1);
 		frameImage = new global.Layer(app,this);
 		frameImage.visible = false;
@@ -76,16 +74,6 @@ class MessageLayer extends Layer
 	function finalize () 
 	{
 		super.finalize();
-	}
-
-	function saveCommand (name, elm) {
-		if (name == "addText") {
-			if (_commands.count > 0 && _commands[-1][0] == "addText") {
-				_commands[-1][1] += elm;
-				return;
-			};
-		};
-		_commands.add([name,elm]);
 	}
 
 	function clearWord () 

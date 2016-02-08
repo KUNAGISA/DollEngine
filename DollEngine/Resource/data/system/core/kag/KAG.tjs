@@ -832,16 +832,7 @@ class KAG extends Application
 				this.mergerBack('image',elm);
 				return;
 			}
-			if(!lay.loadImages(elm.storage)) {
-				dm("[image]加载资源"+elm.storage+"失败");
-			}
-			var x = elm.left;
-			var y = +lay.parent.height - elm.top;
-			lay.setPos(x,y);
-			lay.scale = 1;
-			lay.opacity = elm.opacity if elm.opacity!==void;
-			lay.visible = elm.visible if elm.visible!==void;
-			lay.absolute = elm.index if elm.index!==void;
+			lay.setImage(elm);
 		} incontextof this,
 
 		freeimage : function (elm) 
