@@ -157,7 +157,31 @@ class Layer extends GameObject
 
 class KAGLayer extends Layer
 {
+	var _commands = [];//用于存档
+
 	function KAGLayer (app,par) {
 		super.Layer(...);
+	}
+
+	function saveCommand (name, elm) {
+		if (name == "addText") {
+			if (_commands.count > 0 && _commands[-1][0] == "addText") {
+				_commands[-1][1] += elm;
+				return;
+			};
+		};
+		_commands.add([name,elm]);
+	}
+
+	function removeCommand (name,all=true) 
+	{
+		for (var i = _commands.count - 1; i >= 0; i--) {
+			if(_commands[i][0] == name) {
+				_commands.erase(i);
+				if (!all) {
+					break;
+				}
+			}
+		};
 	}
 }
